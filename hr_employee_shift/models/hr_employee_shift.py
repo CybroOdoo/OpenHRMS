@@ -51,11 +51,13 @@ class HrEmployeeShift(models.Model):
 
     @api.constrains('sequence')
     def validate_seq(self):
-        record = self.env['resource.calendar'].search([('hr_department', '=', self.hr_department.id),
-                                                       ('sequence', '=', self.sequence)
-                                                       ])
-        if len(record) > 1:
-            raise ValidationError("One record with same sequence is already active."
-                                  "You can't activate more than one record  at a time")
+        if self.hr_department.id:
+            record = self.env['resource.calendar'].search([('hr_department', '=', self.hr_department.id),
+                                                           ('sequence', '=', self.sequence),
+                                                           ('company_id', '=', self.company_id.id)
+                                                           ])
+            if len(record) > 1:
+                raise ValidationError("One record with same sequence is already active."
+                                      "You can't activate more than one record  at a time")
 
 
