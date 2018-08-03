@@ -25,7 +25,7 @@
     'version': '11.0.1.0.0',
     'summary': """Open HRMS Dashboard""",
     'description': """Open HRMS Dashboard""",
-    'category': 'Human Resource',
+    'category': 'Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
