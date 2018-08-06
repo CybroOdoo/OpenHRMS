@@ -1,5 +1,5 @@
-Open HRMS Dashboard v11
-=======================
+HR Dashboard v11
+================
 
 Keep your eyes on your whole Human resource analysis.
 
