@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+service,request_service,model_service_request,base.group_user,1,1,1,0
+execute_id,execute,model_service_execute,base.group_user,1,1,1,0
