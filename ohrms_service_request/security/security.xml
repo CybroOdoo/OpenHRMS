@@ -14,6 +14,7 @@
         <record id="service_group_executer" model="res.groups">
             <field name="name">Service Executer</field>
             <field name="category_id" ref="module_service_execute"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 </odoo>

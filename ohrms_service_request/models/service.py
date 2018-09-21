@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, api, models, _
+from odoo.exceptions import ValidationError
 
 
 class Service(models.Model):
@@ -61,6 +62,8 @@ class Service(models.Model):
     @api.multi
     def assign_executer(self):
         self.ensure_one()
+        if not self.service_executer:
+            raise ValidationError(_("Select Executer For the Requested Service"))
         self.write({
             'state': 'assign'
         })
