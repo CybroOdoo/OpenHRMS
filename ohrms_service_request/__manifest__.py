@@ -25,7 +25,7 @@
     'version': '11.0.1.0.0',
     'summary': """For Requesting Service""",
     'description': """Requesting Services""",
-    'category': 'Human Resource',
+    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
