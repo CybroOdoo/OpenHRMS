@@ -26,6 +26,7 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
+    'category': 'Generic Modules/Human Resources',
     'website': "https://www.cybrosys.com",
     'depends': ['base', 'hr_resignation','mail','hr_payroll'],
     'data': ['views/employee_gratuity_view.xml',
