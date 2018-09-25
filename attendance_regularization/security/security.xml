@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="employee_visibility" model="ir.rule">
+            <field name="name">Attendance Visibility</field>
+            <field ref="model_attendance_regular" name="model_id"/>
+            <field name="domain_force">[('employee.address_home_id.id','=',user.partner_id.id)]</field>
+            <field name="groups" eval="[(4, ref('hr_attendance.group_hr_attendance'))]"/>
+        </record>
+</odoo>
