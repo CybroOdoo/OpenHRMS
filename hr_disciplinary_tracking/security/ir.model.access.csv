@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+view_disciplinary_action,view.disciplinary.action,model_disciplinary_action,hr.group_hr_manager,1,1,1,1
+view_disciplinary_action_user,view.disciplinary.action.user,model_disciplinary_action,base.group_user,1,1,0,0
+
+
+
