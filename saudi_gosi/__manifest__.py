@@ -13,6 +13,7 @@
              'views/gosi_view.xml',
              'views/sequence.xml',
              'data/rule.xml',
+	     'security/ir.model.access.csv',
             ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
