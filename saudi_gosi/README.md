@@ -1,5 +1,5 @@
 Open HRMS Saudi GOSI Contribution
-=================================
+=========================
 
 When HR Manager will generate payslip system will automatic calculate GOSI if GOSI detail exist on employee personal information.And 
 also allows to print the pdf reports of those Contribution registers.

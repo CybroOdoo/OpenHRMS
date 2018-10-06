@@ -12,10 +12,10 @@ class Saudi(models.Model):
     department = fields.Char(string="Department", required=True)
     position = fields.Char(string='Job Position', required=True)
     nationality = fields.Char(string='Nationality', required=True)
-    type_gosi = fields.Char(string='Type', required=True, track_visibility='onchange')
-    dob = fields.Char(string='Date Of Birth', required=True)
-    gos_numb = fields.Char(string='GOSI Number', required=True, track_visibility='onchange')
-    issued_dat = fields.Char(string='Issued Date', required=True, track_visibility='onchange')
+    type_gosi =fields.Char(string='Type',required=True,track_visibility='onchange')
+    dob = fields.Char(string='Date Of Birth',required=True)
+    gos_numb = fields.Char(string='GOSI Number',required=True,track_visibility='onchange')
+    issued_dat =fields.Char(string='Issued Date',required=True,track_visibility='onchange')
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
 
@@ -26,32 +26,35 @@ class Saudi(models.Model):
 
     @api.onchange('employee')
     def onchange_employee(self):
-        department = self.env['hr.employee'].search([('name', '=', self.employee.name)])
-        self.department = department.department_id.name
-        self.position = department.job_id.name
-        self.nationality = department.country_id.name
-        self.type_gosi = department.type
-        self.dob = department.birthday
-        self.gos_numb = department.gosi_number
-        self.issued_dat = department.issue_date
+        for rec in self:
+            if rec.employee:
+                department = rec.employee
+                rec.department = department.department_id.name if department.department_id else False
+                rec.position = department.job_id.name
+                rec.nationality = department.country_id.name
+                rec.type_gosi = department.type
+                rec.dob = department.birthday
+                rec.gos_numb = department.gosi_number
+                rec.issued_dat = department.issue_date
 
 
 class Gosi(models.Model):
 
     _inherit = 'hr.employee'
 
-    type = fields.Selection([('saudi', 'Saudi')], string='Type')
+    type = fields.Selection([('saudi','Saudi')],string='Type')
     gosi_number = fields.Char(string='GOSI Number')
     issue_date = fields.Date(string='Issued Date')
-    age = fields.Char(string='AGE', required=True)
+    age = fields.Char(string='AGE',required=True)
     limit = fields.Boolean(string='Eligible For GOSI',compute='compute_age',default=False)
 
     def compute_age(self):
-        self.ensure_one()
-        if int(self.age) <= 60 and int(self.age)>=18:
-            self.limit = True
-        else:
-            self.limit = False
+        for re in self:
+            if int(re.age) <= 60 and int(re.age)>=18:
+                re.limit = True
+            else:
+                re.limit = False
+
 
 
 class Pay(models.Model):
