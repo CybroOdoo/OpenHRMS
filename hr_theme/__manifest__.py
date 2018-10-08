@@ -30,7 +30,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['web'],
+    'depends': ['web', 'web_responsive'],
     'data': [
         'views/open_hrms_theme.xml',
     ],
