@@ -70,11 +70,14 @@
                 <form string="Custody">
                     <header>
                         <button string="Send For Approval"  type="object" name="sent"
+                                class="oe_highlight"
                                 attrs="{'invisible': [('state','not in',('draft'))]}"/>
                         <button string="Approve"  groups="hr.group_hr_manager" type="object" name="approve"
+                                class="oe_highlight"
                                 attrs="{'invisible': ['|',('state','not in',('to_approve')),
                                 ('renew_return_date','=',True)]}"/>
                         <button string="Renewal Approval"  groups="hr.group_hr_manager" type="object" name="renew_approve"
+                                class="oe_highlight"
                                 attrs="{'invisible': ['|',('state','not in',('to_approve')),
                                 ('renew_return_date','=',False)]}"/>
                         <button string="Refuse" groups="hr.group_hr_manager" type="action" name="%(hr_custody.wizard_reason_act)d"
@@ -92,7 +95,7 @@
                         <button string="Send Mail" type="object" class="oe_highlight" name="send_mail" groups="hr.group_hr_manager"
                                 attrs="{'invisible': ['|',('mail_send', '=', True),('state','not in',('approved'))]}"/>
                         <button string="Renew" type="action" name="%(wizard_return_date_act)d"
-                                context="{'custody_id':id}"
+                                context="{'custody_id':id}" class="oe_highlight"
                                 attrs="{'invisible': ['|',('state','not in',('approved')),
                                                       ('renew_return_date','=',True)]}"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,returned"/>
@@ -210,7 +213,11 @@
             </field>
         </record>
 
-        <menuitem id="hr_custody_main_menu" parent="hr.menu_hr_root"
+        <menuitem id="hr_custody_main_menu"
+                  web_icon="hr_custody,static/description/custody_icon.png"
+                  name="Custody" sequence="20"/>
+
+        <menuitem id="hr_custody_menu" parent="hr_custody_main_menu"
                   name="Custody Management" sequence="20"/>
 
         <menuitem action="action_hr_custody" id="hr_custody_menu" parent="hr_custody.hr_custody_main_menu"

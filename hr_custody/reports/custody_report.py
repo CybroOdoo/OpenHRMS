@@ -32,7 +32,7 @@ class CustodyHistory(models.Model):
     date_request = fields.Date(string='Requested Date')
     employee = fields.Many2one('hr.employee', string='Employee')
     purpose = fields.Char(string='Reason')
-    custody_name = fields.Many2one('custody.property', string='Custody Name')
+    custody_name = fields.Many2one('custody.property', string='Property Name')
     return_date = fields.Date(string='Return Date')
     renew_date = fields.Date(string='Renewal Return Date')
     renew_return_date = fields.Boolean(string='Renewal Return Date')

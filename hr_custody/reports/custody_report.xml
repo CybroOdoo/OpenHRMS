@@ -20,8 +20,12 @@
             <field name="help">This report allows you to analyse all Custody Requests. </field>
         </record>
 
+        <menuitem name="Report" id="menu_custody_report"
+                  groups="hr.group_hr_manager"
+                  parent="hr_custody_main_menu" sequence="1"/>
+
         <menuitem name="Custody Analysis" action="action_report_custody" id="menu_custody_analysis"
                   groups="hr.group_hr_manager"
-                  parent="hr_employee_updation.employee_report_menu" sequence="1"/>
+                  parent="menu_custody_report" sequence="1"/>
     </data>
 </odoo>

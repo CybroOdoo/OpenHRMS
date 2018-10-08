@@ -129,7 +129,7 @@ class HrCustody(models.Model):
     rejected_reason = fields.Text(string='Rejected Reason', copy=False, readonly=1)
     renew_rejected_reason = fields.Text(string='Renew Rejected Reason', copy=False, readonly=1)
     date_request = fields.Date(string='Requested Date', required=True, track_visibility='always', readonly=True,
-                               states={'draft': [('readonly', False)]})
+                               states={'draft': [('readonly', False)]}, default=datetime.now().strftime('%Y-%m-%d'))
     employee = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True,
                                states={'draft': [('readonly', False)]})
     purpose = fields.Char(string='Reason', track_visibility='always', required=True, readonly=True,
