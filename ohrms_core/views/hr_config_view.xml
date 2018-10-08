@@ -161,9 +161,4 @@
         <field name="context">{'module' : 'ohrms_core'}</field>
     </record>
 
-    <menuitem id="menu_hr_general_config"
-            name="General Settings"
-            parent="hr.menu_human_resources_configuration"
-            sequence="-1"
-            action="action_hr_general_config"/>
 </odoo>

@@ -40,11 +40,6 @@ class HrSchedule(models.Model):
     end_date = fields.Date(string="Date To", required=True)
     rel_hr_schedule = fields.Many2one('hr.contract')
     hr_shift = fields.Many2one('resource.calendar', string="Shift", required=True)
-    company_id = fields.Many2one(
-        'res.company',
-        'Company',
-        default=lambda self: self.env.user.company_id
-    )
 
     @api.onchange('start_date', 'end_date')
     def get_department(self):

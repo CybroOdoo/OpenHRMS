@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_appstore_form" model="ir.ui.view">
+            <field name="name">oh.app.store.form</field>
+            <field name="model">oh.app.store</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form id="app_store_form">
+                    <div id="container_appstore">
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/employee_shift.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Employee Shift</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_employee_shift/11.0.1.0.0/4qImF5FPFCcmsD3h8ZVtz1.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_vacation_mgmnt.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Vacation Management</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_vacation_mngmt/11.0.1.0.0/7JXVZQUYK8qoKaAyGOehZo.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/employee_checklist.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Employee Checklist</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/oh_employee_check_list/11.0.1.0.0/6KKFPUcuy2ZWLyl3q3kKsG.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_loan.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Loan Management</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/ohrms_loan/11.0.1.0.0/1BXovNinoex0fPp8K4AWMw.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/employee_transfer.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Branch Transfer</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_employee_transfer/11.0.1.0.0/3g9XjT6k4ivtrjbncRwdyJ.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_insurance.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Employee Insurance</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_insurance/11.0.1.0.0/1VBB0dkxWTyU245ZTkGbqu.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/employee_resignation.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Resignation</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_resignation/11.0.1.0.0/5BWnWGtFzjxZDycaV5BYuO.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_custody.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Custody</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_custody/11.0.1.0.0/4eBn4Za7aVjn6MZmjrBrtJ.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_lawsuit.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Legal Actions</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/oh_hr_lawsuit_management/11.0.1.0.0/4qfFx2JulBthJ5PYz3DdEd.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_service_request.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Service Request</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/ohrms_service_request/11.0.1.0.0/m9O6R4TJ3ePozkFhUpvwe.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/uae_wps.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>WPS Report Generation for UAE</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/uae_wps_report/11.0.1.0.0/38zZQZmLrsfD5UJjeP2kOM.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_gratuity.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Gratuity Settlement</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_gratuity_settlement/11.0.1.0.0/6nUbwdD2pFxi9cxIBtYuyX.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/attendance_regularization.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Attendance Regularization</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/attendance_regularization/11.0.1.0.0/48WhLu877VecIRJKqWpXc.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loempia_app_entry open_app loempia_app_card col-sm-6 col-md-3 ">
+                            <div class="loempia_app_entry_top loempia_cover">
+                                <img class="img img-responsive" src="ohrms_core/static/description/hr_disciplinary_tracking.jpg">
+                                </img>
+                            </div>
+                            <div class="loempia_app_entry_bottom">
+                                <div><h5><b>Open HRMS Disciplinary Tracking</b></h5></div>
+                                <div class="row">
+                                    <div class="col-xs-12 loempia_panel_author">
+                                        <b>Cybrosys Techno Solutions</b>
+                                    </div>
+                                    <div class="col-xs-12 loempia_panel_price text-right">
+                                        <button class="btn btn-primary"
+                                                zip_loc="https://apps.odoo.com/loempia/download/hr_disciplinary_tracking/11.0.1.0.0/6tvrCEd2f16yPMl07TQcgK.zip?deps" custom="button" >Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_app_store">
+            <field name="name">Open HRMS Apps</field>
+            <field name="res_model">oh.app.store</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="base.module_mi" action="action_view_app_store" name="Open HRMS Apps" parent="base.menu_management"/>
+
+        <template id="ohrms_apps" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="ohrms_core/static/src/js/appStore.js"></script>
+            </xpath>
+        </template>
+        <template id="ohrms_apps_css" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <style type="style/css" >
+                    .open_app {
+                        width: 26%;
+                        height: 260px;
+                        margin-left: 4%;
+                        margin-top: 1%;
+                        margin-bottom: 1%;
+                        padding: 2% 2% 2% 2%;
+                        background-color: #f0f0f0;
+                        border-radius: 10px;
+                        resize: none;
+                    }
+                    button[custom=button]{
+                        margin-top:7px;
+                    }
+                    .loempia_app_entry_bottom h5{
+                        height:33px;
+                    }
+                </style>
+            </xpath>
+        </template>
+    </data>
+</odoo>

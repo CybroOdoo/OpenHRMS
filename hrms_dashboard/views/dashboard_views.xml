@@ -8,13 +8,16 @@
         <menuitem id="menu_hrms_dashboard"
                   name="Dashboard"
                   action="hr_action_dashboard"
-                  parent="hr.menu_hr_root"
-                  sequence="-1"/>
+                  web_icon="hrms_dashboard,static/description/dashboard_icon.png"
+                  sequence="-1" groups="hr.group_hr_user"/>
     </data>
     <template id="assets_backend" name="Hr Dashboard assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/hrms_dashboard/static/src/js/hrms_dashboard.js"/>
             <link rel="stylesheet" href="/hrms_dashboard/static/src/css/hrms_dashboard.css"/>
+            <script src="/web/static/lib/nvd3/d3.v3.js"></script>
+            <script src="/web/static/lib/nvd3/nv.d3.js"></script>
+            <link href="/web/static/lib/nvd3/nv.d3.css" rel="stylesheet" type="text/css"></link>
         </xpath>
     </template>
 </odoo>

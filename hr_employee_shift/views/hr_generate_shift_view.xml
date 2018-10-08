@@ -43,8 +43,12 @@
     </record>
 
     <!-- menu item -->
-    <menuitem name="Employee Shift" id="menu_shift_schedule_generate_id_menu" parent="hr.menu_hr_root" action="hr_employee_shift.generate_schedule_action_window" groups="hr.group_hr_manager"/>
-    <menuitem name="Generate Schedule" id="hr_employee_shift.menu_shift_schedule_generate_id" parent="menu_shift_schedule_generate_id_menu" action="hr_employee_shift.generate_schedule_action_window" groups="hr.group_hr_manager"/>
+    <menuitem name="Shift" id="menu_shift_schedule_generate_id_menu" parent="menu_shift" groups="hr.group_hr_manager"/>
+    <menuitem name="Generate Schedule"
+              id="hr_employee_shift.menu_shift_schedule_generate_id"
+              parent="menu_shift_schedule_generate_id_menu"
+              action="hr_employee_shift.generate_schedule_action_window"
+              groups="hr.group_hr_manager"/>
 
   </data>
 </odoo>

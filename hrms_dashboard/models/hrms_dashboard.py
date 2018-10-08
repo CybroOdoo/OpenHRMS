@@ -20,8 +20,12 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
-from odoo import models, api, _
+from datetime import timedelta, datetime
+from dateutil.relativedelta import relativedelta
+import pandas as pd
+from odoo import models, fields, api, _
 from odoo.http import request
+from odoo.tools import float_utils
 
 
 class Employee(models.Model):
@@ -40,12 +44,121 @@ class Employee(models.Model):
         timesheet_view_id = self.env.ref('hr_timesheet.hr_timesheet_line_search')
         job_applications = self.env['hr.applicant'].sudo().search_count([])
         if employee:
-            data = {
-                'leaves_to_approve': leaves_to_approve,
-                'leaves_alloc_req': leaves_alloc_req,
-                'emp_timesheets': timesheet_count,
-                'job_applications': job_applications,
-                'timesheet_view_id': timesheet_view_id
+            sql = """select broad_factor from hr_employee_broad_factor where id =%s"""
+            self.env.cr.execute(sql, (employee[0]['id'],))
+            result = self.env.cr.dictfetchall()
+            broad_factor = result[0]['broad_factor']
+            if employee:
+                data = {
+                    'broad_factor': broad_factor,
+                    'leaves_to_approve': leaves_to_approve,
+                    'leaves_alloc_req': leaves_alloc_req,
+                    'emp_timesheets': timesheet_count,
+                    'job_applications': job_applications,
+                    'timesheet_view_id': timesheet_view_id
+                }
+                employee[0].update(data)
+            return employee
+        else:
+            return False
+
+    @api.model
+    def get_dept_employee(self):
+        cr = self._cr
+        cr.execute(
+            'select department_id, hr_department.name,count(*) from hr_employee join hr_department on hr_department.id=hr_employee.department_id group by hr_employee.department_id,hr_department.name')
+        dat = cr.fetchall()
+        data = []
+        for i in range(0, len(dat)):
+            data.append({'label': dat[i][1], 'value': dat[i][2]})
+        return data
+
+    @api.model
+    def get_broad_factor(self):
+        emp_broad_factor = []
+        sql = """select * from hr_employee_broad_factor"""
+        self.env.cr.execute(sql)
+        results = self.env.cr.dictfetchall()
+        for data in results:
+            broad_factor = data['broad_factor'] if data['broad_factor'] else 0
+            vals = {
+                'id': data['id'],
+                'name': data['name'],
+                'broad_factor': broad_factor
             }
-            employee[0].update(data)
-        return employee
+            emp_broad_factor.append(vals)
+        return emp_broad_factor
+
+    @api.model
+    def get_department_leave(self):
+        month_list = []
+        graph_result = []
+        for i in range(6):
+            last_month = datetime.now() - relativedelta(months=i)
+            text = format(last_month, '%B %Y')
+            month_list.append(text)
+        self.env.cr.execute("""select id, name from hr_department""")
+        departments = self.env.cr.dictfetchall()
+        department_list = [x['name'] for x in departments]
+        for month in month_list:
+            leave = {}
+            for dept in departments:
+                leave[dept['name']] = 0
+            vals = {
+                'month': month,
+                'leave': leave
+            }
+            graph_result.append(vals)
+        sql = """
+        SELECT h.id, h.employee_id,h.department_id
+             , extract('month' FROM y)::int AS month
+             , to_char(y, 'Month YYYY') as month_year
+             , GREATEST(y                    , h.date_from) AS date_from
+             , LEAST   (y + interval '1 month', h.date_to)   AS date_to
+        FROM  (select * from hr_holidays where type = 'remove' and state = 'validate') h
+             , generate_series(date_trunc('month', date_from::timestamp)
+                             , date_trunc('month', date_to::timestamp)
+                             , interval '1 month') y
+        where date_trunc('month', GREATEST(y , h.date_from)) >= date_trunc('month', now()) - interval '6 month' and
+        date_trunc('month', GREATEST(y , h.date_from)) <= date_trunc('month', now()) 
+        and h.department_id is not null
+        """
+        self.env.cr.execute(sql)
+        results = self.env.cr.dictfetchall()
+        leave_lines = []
+        for line in results:
+            employee = self.browse(line['employee_id'])
+            from_dt = fields.Datetime.from_string(line['date_from'])
+            to_dt = fields.Datetime.from_string(line['date_to'])
+            days = employee.get_work_days_dashboard(from_dt, to_dt)
+            line['days'] = days
+            vals = {
+                'department': line['department_id'],
+                'month': line['month_year'],
+                'days': days
+            }
+            leave_lines.append(vals)
+        df = pd.DataFrame(leave_lines)
+        rf = df.groupby(['month', 'department']).sum()
+        result_lines = rf.to_dict('index')
+        for month in month_list:
+            for line in result_lines:
+                if month.replace(' ', '') == line[0].replace(' ', ''):
+                    match = list(filter(lambda d: d['month'] in [month], graph_result))[0]['leave']
+                    dept_name = self.env['hr.department'].browse(line[1]).name
+                    match[dept_name] = result_lines[line]['days']
+        return graph_result, department_list
+
+    def get_work_days_dashboard(self, from_datetime, to_datetime, calendar=None):
+        days_count = 0.0
+        total_work_time = timedelta()
+        calendar = calendar or self.resource_calendar_id
+        for day_intervals in calendar._iter_work_intervals(
+                from_datetime, to_datetime, self.resource_id.id,
+                compute_leaves=False):
+            theoric_hours = self.get_day_work_hours_count(day_intervals[0][0].date(), calendar=calendar)
+            work_time = sum((interval[1] - interval[0] for interval in day_intervals), timedelta())
+            total_work_time += work_time
+            if theoric_hours:
+                days_count += float_utils.round((work_time.total_seconds() / 3600 / theoric_hours) * 4) / 4
+        return days_count

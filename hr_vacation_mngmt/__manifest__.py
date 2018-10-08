@@ -29,7 +29,7 @@
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'category': 'Generic Modules/Human Resources',
-    'depends': ['hr_leave_request_aliasing','project', 'hr_payroll', 'account'],
+    'depends': ['hr_leave_request_aliasing', 'project', 'hr_payroll', 'account'],
     'data': [
         'security/hr_vacation_security.xml',
         'security/ir.model.access.csv',

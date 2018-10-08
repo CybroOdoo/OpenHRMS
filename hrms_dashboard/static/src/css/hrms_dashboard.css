@@ -2,6 +2,7 @@
     padding-top :15px;
     background-color: #f8faff !important;
 }
+
 .social-box {
   min-height: 160px;
   margin-bottom: 1.5rem;
@@ -572,4 +573,88 @@
 }
 body .text-color {
     color: #00438b;
+}
+.slice {
+    stroke: #fff;
+    stroke-width: 0px;
+}
+
+/* Leave graph */
+
+path {  stroke: #fff; }
+path:hover {  opacity:0.9; }
+rect:hover {  fill:blue; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    margin-bottom:76px;
+    display:inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+.legend td{
+    padding:4px 5px;
+    vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+    align:right;
+    width:50px;
+}
+
+/* Leave broadfactor graph */
+
+.broad_factor_graph .axis path,
+.broad_factor_graph .axis line {
+	fill: none;
+	stroke: black;
+	shape-rendering: crispEdges;
+}
+.broad_factor_graph .axis text {
+	font-family: sans-serif;
+	font-size: 11px;
+}
+
+.broad_factor_graph rect {
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+.broad_factor_graph rect:hover{
+	fill: orange;
+}
+
+#broad_factor_pdf {
+    background-color: #ffffff;
+    border: 0;
+    color : #000000;
+    float: right;
+}
+#broad_factor_pdf i {
+    color: red;
+}
+
+.leave_broad_factor{
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    height: auto;
+}
+.stat-head{
+    text-align: center !important;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+.emp_graph{
+    text-align: center !important;
 }

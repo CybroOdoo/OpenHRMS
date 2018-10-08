@@ -31,7 +31,13 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['hr', 'hr_holidays', 'hr_timesheet', 'hr_payroll', 'hr_attendance','hr_timesheet_attendance','hr_recruitment'],
-    'data': ['views/dashboard_views.xml'],
+    'external_dependencies': {
+        'python': ['pandas'],
+    },
+    'data': [
+        'security/ir.model.access.csv',
+        'report/broadfactor.xml',
+        'views/dashboard_views.xml'],
     'qweb': ["static/src/xml/hrms_dashboard.xml"],
     'images': ["static/description/banner.jpg"],
     'license': "AGPL-3",

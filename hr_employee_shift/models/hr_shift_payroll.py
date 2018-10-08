@@ -37,7 +37,7 @@ class HrPayroll(models.Model):
         def was_on_leave_interval(employee_id, date_from, date_to):
             date_from = fields.Datetime.to_string(date_from)
             date_to = fields.Datetime.to_string(date_to)
-            return self.env['hr.leave'].search([
+            return self.env['hr.holidays'].search([
                 ('state', '=', 'validate'),
                 ('employee_id', '=', employee_id),
                 ('type', '=', 'remove'),
@@ -52,7 +52,7 @@ class HrPayroll(models.Model):
             uom_hour = contract.employee_id.resource_id.calendar_id.uom_id or self.env.ref('product.product_uom_hour',
                                                                                            raise_if_not_found=False)
             interval_data = []
-            holidays = self.env['hr.leave']
+            holidays = self.env['hr.holidays']
             attendances = {
                 'name': _("Normal Working Days paid at 100%"),
                 'sequence': 1,

@@ -15,7 +15,8 @@
             <field name="arch" type="xml">
                 <form string="Announcements">
                     <header>
-                        <button string="Send For Approval"  type="object" name="sent" groups="hr.group_hr_user"
+                        <button string="Send For Approval"  type="object" name="sent"
+                                groups="hr.group_hr_user" class="oe_highlight"
                                 attrs="{'invisible': [('state','not in',('draft'))]}"/>
                         <button string="Approve"  groups="hr.group_hr_manager" type="object" name="approve"
                                 attrs="{'invisible': [('state','not in',('to_approve'))]}"/>
@@ -111,9 +112,15 @@
         </record>
 
         <menuitem id="hr_announcement"
+                  name="Announcements"
+                  groups="hr.group_hr_user,hr.group_hr_manager"
+                  web_icon="hr_reward_warning,static/description/announcement_icon.png"
+                  sequence="15"/>
+
+        <menuitem id="hr_official_announcement"
                   name="Official Announcements"
                   groups="hr.group_hr_user,hr.group_hr_manager"
-                  parent="hr.menu_hr_root"
+                  parent="hr_announcement"
                   sequence="15"/>
         <menuitem id="hr_announcement_sub_menu"
                   name="Announcements"

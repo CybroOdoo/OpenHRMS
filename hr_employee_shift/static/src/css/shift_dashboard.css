@@ -5,9 +5,3 @@
     text-align: center;
     padding: 10px 0px 2px 3px;
 }
-.oe_kanban_card.oe_kanban_global_click.o_kanban_record{
-    display:inline-block;
-    width:30%;
-    height:15vh;
-    padding-left:5%;
-}

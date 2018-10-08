@@ -84,7 +84,11 @@
             </field>
         </record>
 
-        <menuitem name="Shifts" id="hr_employee_shift.menu_shift" parent="hr.menu_human_resources_configuration"
+        <menuitem name="Shifts" id="menu_shift"
+                  groups="hr.group_hr_manager"
+                  web_icon="hr_employee_shift,static/description/shift_icon.png"/>
+        <menuitem name="Configuration" id="shift_configuration" parent="hr_employee_shift.menu_shift"/>
+        <menuitem name="Shifts" id="menu_conf_shift" parent="shift_configuration"
               action="resource.action_resource_calendar_form"/>
 
     </data>
