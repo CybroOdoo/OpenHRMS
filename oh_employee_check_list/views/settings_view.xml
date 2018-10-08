@@ -26,12 +26,9 @@
             <field name="target">inline</field>
         </record>
 
-        <menuitem id="checklist_settings" parent="hr.menu_human_resources_configuration"
-                  groups="hr.group_hr_manager"
-                  sequence="10" name="Checklist Config"/>
 
-        <menuitem action="action_hr_settings" id="menu_settings" parent="checklist_settings"
+        <menuitem action="action_hr_settings" id="menu_settings" parent="hr.menu_human_resources_configuration"
                   groups="hr.group_hr_manager"
-                  sequence="1" name="Settings"/>
+                  sequence="1" name="Checklist Settings"/>
     </data>
 </odoo>
