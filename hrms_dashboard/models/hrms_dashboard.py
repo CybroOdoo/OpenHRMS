@@ -50,7 +50,7 @@ class Employee(models.Model):
             broad_factor = result[0]['broad_factor']
             if employee:
                 data = {
-                    'broad_factor': broad_factor,
+                    'broad_factor': broad_factor if broad_factor else 0,
                     'leaves_to_approve': leaves_to_approve,
                     'leaves_alloc_req': leaves_alloc_req,
                     'emp_timesheets': timesheet_count,
@@ -105,13 +105,13 @@ class Employee(models.Model):
             for dept in departments:
                 leave[dept['name']] = 0
             vals = {
-                'month': month,
+                'l_month': month,
                 'leave': leave
             }
             graph_result.append(vals)
         sql = """
         SELECT h.id, h.employee_id,h.department_id
-             , extract('month' FROM y)::int AS month
+             , extract('month' FROM y)::int AS leave_month
              , to_char(y, 'Month YYYY') as month_year
              , GREATEST(y                    , h.date_from) AS date_from
              , LEAST   (y + interval '1 month', h.date_to)   AS date_to
@@ -134,19 +134,20 @@ class Employee(models.Model):
             line['days'] = days
             vals = {
                 'department': line['department_id'],
-                'month': line['month_year'],
+                'l_month': line['month_year'],
                 'days': days
             }
             leave_lines.append(vals)
-        df = pd.DataFrame(leave_lines)
-        rf = df.groupby(['month', 'department']).sum()
-        result_lines = rf.to_dict('index')
-        for month in month_list:
-            for line in result_lines:
-                if month.replace(' ', '') == line[0].replace(' ', ''):
-                    match = list(filter(lambda d: d['month'] in [month], graph_result))[0]['leave']
-                    dept_name = self.env['hr.department'].browse(line[1]).name
-                    match[dept_name] = result_lines[line]['days']
+        if leave_lines:
+            df = pd.DataFrame(leave_lines)
+            rf = df.groupby(['l_month', 'department']).sum()
+            result_lines = rf.to_dict('index')
+            for month in month_list:
+                for line in result_lines:
+                    if month.replace(' ', '') == line[0].replace(' ', ''):
+                        match = list(filter(lambda d: d['l_month'] in [month], graph_result))[0]['leave']
+                        dept_name = self.env['hr.department'].browse(line[1]).name
+                        match[dept_name] = result_lines[line]['days']
         return graph_result, department_list
 
     def get_work_days_dashboard(self, from_datetime, to_datetime, calendar=None):

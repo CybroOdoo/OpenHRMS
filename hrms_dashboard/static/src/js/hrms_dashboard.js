@@ -141,6 +141,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
+            domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
         })
     },
@@ -156,6 +157,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
+            domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
         })
     },
@@ -241,10 +243,9 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             view_type: 'form',
             views: [[false, 'list'], [false, 'form']],
             context: {
-                'search_default_employee_id': [self.login_employee.id],
                 'search_default_month': true,
             },
-            domain: [['project_id', '!=', false]],
+            domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
         })
     },
@@ -478,7 +479,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
 
                     function mouseover(d){  // utility function to be called on mouseover.
                         // filter for selected state.
-                        var st = fData.filter(function(s){ return s.month == d[0];})[0],
+                        var st = fData.filter(function(s){ return s.l_month == d[0];})[0],
                             nD = d3.keys(st.leave).map(function(s){ return {type:s, leave:st.leave[s]};});
 
                         // call update functions of pie-chart and legend.
@@ -545,13 +546,13 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                     function mouseover(d, i){
                         // call the update function of histogram with new data.
                         hG.update(fData.map(function(v){
-                            return [v.month,v.leave[d.data.type]];}),color(i));
+                            return [v.l_month,v.leave[d.data.type]];}),color(i));
                     }
                     //Utility function to be called on mouseout a pie slice.
                     function mouseout(d){
                         // call the update function of histogram with all data.
                         hG.update(fData.map(function(v){
-                            return [v.month,v.total];}), barColor);
+                            return [v.l_month,v.total];}), barColor);
                     }
                     // Animating the pie-slice requiring a custom function which specifies
                     // how the intermediate paths should be drawn.
@@ -583,7 +584,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
 
                     // create the third column for each segment.
                     tr.append("td").attr("class",'legendFreq')
-                        .text(function(d){ return d.month;});
+                        .text(function(d){ return d.l_month;});
 
                     // create the fourth column for each segment.
                     tr.append("td").attr("class",'legendPerc')
@@ -602,7 +603,13 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                     }
 
                     function getLegend(d,aD){ // Utility function to compute percentage.
-                        return d3.format("%")(d.leave/d3.sum(aD.map(function(v){ return v.leave; })));
+                        var perc = (d.leave/d3.sum(aD.map(function(v){ return v.leave; })));
+                        if (isNaN(perc)){
+                            return d3.format("%")(0);
+                            }
+                        else{
+                            return d3.format("%")(d.leave/d3.sum(aD.map(function(v){ return v.leave; })));
+                            }
                     }
 
                     return leg;
@@ -613,7 +620,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 });
 
                 // calculate total frequency by state for all segment.
-                var sF = fData.map(function(d){return [d.month,d.total];});
+                var sF = fData.map(function(d){return [d.l_month,d.total];});
 
                 var hG = histoGram(sF), // create the histogram.
                     pC = pieChart(tF), // create the pie-chart.

@@ -10,17 +10,7 @@
 
     <t t-name="ManagerDashboard">
         <div class="employee_dashboard_main">
-            <div class="col-sm-12 col-lg-12  monthly_leave_graph_view">
-                <div class="card text-color">
-                    <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                        </h4>
-                        <p class="stat-head" style="padding : 0px;">Monthly Leave Analysis</p>
 
-                    </div>
-                    <div class="leave_graph" style="padding-left:10px;height:300px;"/>
-                </div>
-            </div>
             <div class="col-sm-4 col-lg-4 " style="padding:0 !important;">
                 <div class="col-sm-6 col-lg-6 leaves_request" >
                     <div class="card text-color"  style="height: 219px;padding-top: 21%;">
@@ -91,6 +81,18 @@
                 </div>
             </div>
 
+            <div class="col-sm-12 col-lg-12  monthly_leave_graph_view">
+                <div class="card text-color">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                        </h4>
+                        <p class="stat-head" style="padding : 0px;">Monthly Leave Analysis</p>
+
+                    </div>
+                    <div class="leave_graph" style="padding-left:10px;height:300px;"/>
+                </div>
+            </div>
+
             <div class="col-sm-12 col-lg-12  broad_factor_graph">
                 <div class="card text-color">
                     <div class="card-body pb-0">
@@ -139,7 +141,7 @@
 
     <t t-name="LoginEmployeeDetails">
         <div class="col-xs-12 o_box" style="padding: 0px!important;">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-10 col-sm-10">
                 <div class="card">
                 <div>
                 <div class="media">
@@ -151,6 +153,31 @@
                 <h2 class="text-color display-6"><t t-esc="widget.login_employee['name']"/> </h2>
                 <p class="text-light"><t t-esc="widget.login_employee['job_id'][1]"/></p>
                 </div></div></div></div>
+            </div>
+
+            <div class="col-md-2 col-sm-2 hr_attendance_login">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <t t-if="widget.login_employee['attendance_state'] =='checked_out'">
+                                <div class="stat-icon dib hr_attendance_btn">
+                                    <i class="fa fa-sign-in o_hr_attendance_sign_in_out_icon"/>
+                                </div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Check In</div>
+                                </div>
+                            </t>
+                            <t t-if="widget.login_employee['attendance_state'] =='checked_in'">
+                                <div class="stat-icon dib hr_attendance_btn">
+                                    <i class="fa fa-sign-out o_hr_attendance_sign_in_out_icon"/>
+                                </div>
+                                <div class="stat-content dib">
+                                    <div class="stat-text">Check out</div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-2 col-sm-6 hr_payslip">
@@ -209,31 +236,6 @@
                 </div>
             </div>
 
-
-            <div class="col-md-2 col-sm-2 hr_attendance_login">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <t t-if="widget.login_employee['attendance_state'] =='checked_out'">
-                                <div class="stat-icon dib hr_attendance_btn">
-                                    <i class="fa fa-sign-in o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Check In</div>
-                                </div>
-                            </t>
-                            <t t-if="widget.login_employee['attendance_state'] =='checked_in'">
-                                <div class="stat-icon dib hr_attendance_btn">
-                                    <i class="fa fa-sign-out o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Check out</div>
-                                </div>
-                            </t>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </t>
