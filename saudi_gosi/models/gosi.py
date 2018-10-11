@@ -26,14 +26,16 @@ class Saudi(models.Model):
 
     @api.onchange('employee')
     def onchange_employee(self):
-        department = self.env['hr.employee'].search([('name', '=', self.employee.name)])
-        self.department = department.department_id.name
-        self.position = department.job_id.name
-        self.nationality = department.country_id.name
-        self.type_gosi = department.type
-        self.dob = department.birthday
-        self.gos_numb = department.gosi_number
-        self.issued_dat = department.issue_date
+        for rec in self:
+            if rec.employee:
+                department = rec.employee
+                rec.department = department.department_id.name if department.department_id else False
+                rec.position = department.job_id.name
+                rec.nationality = department.country_id.name
+                rec.type_gosi = department.type
+                rec.dob = department.birthday
+                rec.gos_numb = department.gosi_number
+                rec.issued_dat = department.issue_date
 
 
 class Gosi(models.Model):
@@ -47,11 +49,11 @@ class Gosi(models.Model):
     limit = fields.Boolean(string='Eligible For GOSI',compute='compute_age',default=False)
 
     def compute_age(self):
-        self.ensure_one()
-        if int(self.age) <= 60 and int(self.age)>=18:
-            self.limit = True
-        else:
-            self.limit = False
+        for re in self:
+            if int(re.age) <= 60 and int(re.age)>=18:
+                re.limit = True
+            else:
+                re.limit = False
 
 
 
