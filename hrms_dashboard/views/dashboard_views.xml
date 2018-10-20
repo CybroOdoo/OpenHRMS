@@ -9,7 +9,7 @@
                   name="Dashboard"
                   action="hr_action_dashboard"
                   web_icon="hrms_dashboard,static/description/dashboard_icon.png"
-                  sequence="-1" groups="hr.group_hr_user"/>
+                  sequence="-10" groups="hr.group_hr_user"/>
     </data>
     <template id="assets_backend" name="Hr Dashboard assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">

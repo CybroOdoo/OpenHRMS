@@ -50,7 +50,7 @@
                 'hrms_dashboard',
                 'hr_theme'],
     'data': [
-        # 'views/menu_arrangement_view.xml',
+        'views/menu_arrangement_view.xml',
         # 'views/hr_config_view.xml',
         'views/view.xml',
     ],

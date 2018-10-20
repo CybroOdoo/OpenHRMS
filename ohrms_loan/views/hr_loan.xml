@@ -101,9 +101,9 @@
 
     <!--loan menu-->
     <menuitem name="Loans And Advance"
-        id="menu_hr_loans_and_advances" web_icon="ohrms_loan,static/description/loan_web.png"></menuitem>
-              <!--parent="hr.menu_hr_root"-->
-        <!--sequence="20"/>-->
+        id="menu_hr_loans_and_advances"
+              sequence="-7"
+              web_icon="ohrms_loan,static/description/loan_web.png"></menuitem>
 
     <record id="action_hr_loan_request" model="ir.actions.act_window">
         <field name="name">Loan Requests</field>
