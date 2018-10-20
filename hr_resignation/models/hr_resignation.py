@@ -115,6 +115,16 @@ class HrResignation(models.Model):
                 rec.state = 'approved'
                 rec.employee_id.active = False
 
+    @api.multi
+    def update_employee_status(self):
+        resignation = self.env['hr.resignation'].search([('state', '=', 'approved')])
+        for rec in resignation:
+            if rec.approved_revealing_date <= fields.Date.today() and rec.employee_id.active:
+                rec.employee_id.active = False
+                rec.employee_id.resign_date = rec.approved_revealing_date
 
 
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
 
+    resign_date = fields.Date('Resign Date', readonly=True)
