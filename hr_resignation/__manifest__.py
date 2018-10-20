@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Resignation',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.0.1',
     'summary': 'Handle the resignation process of the employee',
     'author': 'Cybrosys Techno solutions',
     'company': 'Cybrosys Techno Solutions',
@@ -32,11 +32,11 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'demo': [],
     'data': [
+		'security/security.xml',
+        'security/ir.model.access.csv',
         'views/resignation_view.xml',
         'views/approved_resignation.xml',
         'views/resignation_sequence.xml',
-        'security/security.xml',
-        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': False,
