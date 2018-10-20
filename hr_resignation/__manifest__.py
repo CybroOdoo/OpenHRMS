@@ -32,7 +32,7 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'demo': [],
     'data': [
-		'security/security.xml',
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/resignation_view.xml',
         'views/approved_resignation.xml',
