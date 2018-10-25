@@ -15,3 +15,8 @@
 #### Version 11.0.1.0.1
 ##### ADD
 - Fix key Error 'month'
+
+#### 25.10.2018
+#### Version 11.0.2.0.0
+##### UPDT
+- Modify dashboard template view

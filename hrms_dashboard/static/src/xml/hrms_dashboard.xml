@@ -4,183 +4,95 @@
         <div class="o_dashboards">
             <div class="container-fluid o_hr_dashboard">
             </div>
-            <div class="o_hr_birthday_reminder"></div>
+            <!--<div class="o_hr_birthday_reminder"></div>-->
         </div>
     </t>
-
-    <t t-name="ManagerDashboard">
-        <div class="employee_dashboard_main">
-
-            <div class="col-sm-4 col-lg-4 " style="padding:0 !important;">
-                <div class="col-sm-6 col-lg-6 leaves_request" >
-                    <div class="card text-color"  style="height: 219px;padding-top: 21%;">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_to_approve"/></p>
-
-                            </h4>
-                            <p class="stat-title">Leave Request</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6 leaves_request_month">
-                    <div class="card text-color" style="height: 102px;">
-                        <div class="card-body">
-                            <h4 class="mb-0">
-                            <p class="stat-count"><t t-esc="widget.login_employee.leaves_to_approve"/></p>
-                            </h4>
-                            <p class="stat-title">This Month</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6 hr_leave_request_approve">
-                    <div class="card text-color" style="height: 102px;">
-                        <div class="card-body">
-                            <h4 class="mb-0">
-                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_to_approve"/></p>
-                            </h4>
-                            <p class="stat-title">To Approve</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-6 hr_leave_allocations_approve">
-                    <div class="card text-color" style="height: 149px;">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_alloc_req"/></p>
-                            </h4>
-                            <p class="stat-title">Leave Allocations</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-lg-6 hr_job_application_approve">
-                    <div class="card text-color" style="height: 149px;">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                                <p class="stat-count"><t t-esc="widget.login_employee.job_applications"/></p>
-                            </h4>
-                            <p class="stat-title">Job Applications</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-8 col-lg-8 ">
-                <div class="col-sm-12 col-lg-12  graph_view" style="padding:0">
-                    <div class="card text-color">
-                        <div class="card-body pb-0">
-                            <h4 class="mb-0">
-                            </h4>
-                            <p class="stat-head" style="padding : 0px;">Department Employees</p>
-
-                        </div>
-                        <div class="emp_graph" style="padding-left:90px;height:300px;"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-lg-12  monthly_leave_graph_view">
-                <div class="card text-color">
-                    <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                        </h4>
-                        <p class="stat-head" style="padding : 0px;">Monthly Leave Analysis</p>
-
-                    </div>
-                    <div class="leave_graph" style="padding-left:10px;height:300px;"/>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-lg-12  broad_factor_graph">
-                <div class="card text-color">
-                    <div class="card-body pb-0">
-                        <h4 class="mb-0">
-                        </h4>
-                        <p class="stat-head" style="padding : 0px;">Leave Broad-Factor
-                        <button id="broad_factor_pdf" class="btn btn-default"
-                            data-placement="bottom" title="Download Pdf!">
-                            <i class="fa fa-2x fa-file-pdf-o"/> Download
-                        </button>
-                        </p>
-                    </div>
-                    <div class="leave_broad_factor" style="padding-left:10px;height:300px;"/>
-                </div>
-            </div>
-
-        </div>
-    </t>
-
-    <t t-name="BirthdayEventDashboard">
-        <t t-if="widget.employee_birthday">
-            <div class="col-xs-12">
-                <div class="hr_birthday">
-                    Upcoming Birthdays
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <t t-foreach="widget.employee_birthday" t-as="employee">
-                <div class="col-sm-6 col-lg-3 hr_leave_request_approve">
-                    <div class="card text-color">
-                        <div class="">
-                        <div class="media">
-                        <a href="#" style="float: left;padding-right: 6%;">
-                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
-                            t-att-src="'data:image/png;base64,'+employee['image']"/>
-                        </a>
-                        <div class="media-body">
-                        <h2 class="text-color display-6" style="font-size: 15px;"><t t-esc="employee['name']"/> </h2>
-                        <p class="text-light"><t t-esc="employee['birthday']"/></p>
-                        </div></div></div></div>
-                    </div>
-                </t>
-            </div>
-        </t>
-    </t>
-
     <t t-name="LoginEmployeeDetails">
-        <div class="col-xs-12 o_box" style="padding: 0px!important;">
-            <div class="col-md-10 col-sm-10">
+            <div class="col-md-2 col-sm-2 dummy"></div>
+            <div class="col-md-2 col-sm-2 employee-prof">
                 <div class="card">
                 <div>
                 <div class="media">
-                <a href="#" style="float: left;padding-right: 7%;">
-                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
+                <div class="employee-icon">
+                <img class="align-self-center rounded-circle mr-3" alt=""
                     t-att-src="'data:image/png;base64,'+widget.login_employee['image']"/>
-                </a>
-                <div class="media-body">
+                </div>
+                <div class="media-body employee-name">
                 <h2 class="text-color display-6"><t t-esc="widget.login_employee['name']"/> </h2>
-                <p class="text-light"><t t-esc="widget.login_employee['job_id'][1]"/></p>
-                </div></div></div></div>
-            </div>
 
-            <div class="col-md-2 col-sm-2 hr_attendance_login">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="stat-widget-one">
-                            <t t-if="widget.login_employee['attendance_state'] =='checked_out'">
-                                <div class="stat-icon dib hr_attendance_btn">
-                                    <i class="fa fa-sign-in o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Check In</div>
-                                </div>
-                            </t>
-                            <t t-if="widget.login_employee['attendance_state'] =='checked_in'">
-                                <div class="stat-icon dib hr_attendance_btn">
-                                    <i class="fa fa-sign-out o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content dib">
-                                    <div class="stat-text">Check out</div>
-                                </div>
-                            </t>
-                        </div>
+                <t t-if="widget.login_employee['job_id']">
+                    <p class="text-light"><t t-esc="widget.login_employee['job_id'][1]"/></p>
+                </t>
+                    <t t-if="!widget.login_employee['job_id']">
+                        <p class="text-light" style="color:#b6b6b6 !important">Add job title</p>
+                    </t>
+                </div>
+                <div class="employee-details">
+                    <!--<div class="employee-gender">-->
+                        <!--<t t-if="widget.login_employee['gender'] == 'male'">-->
+                            <!--<p><i class="fa fa-mars"></i></p>-->
+                            <!--<p class="text-light">Male</p>-->
+                        <!--</t>-->
+                        <!--<t t-if="widget.login_employee['gender'] == 'female'">-->
+                            <!--<p><i class="fa fa-venus"></i></p>-->
+                            <!--<p class="text-light">Female</p>-->
+                        <!--</t>-->
+                        <!--<t t-if="widget.login_employee['gender'] == 'other'">-->
+                            <!--Other-->
+                            <!--<p class="text-light">Other</p>-->
+                        <!--</t>-->
+                        <!--<t t-if="!widget.login_employee['gender']">-->
+                            <!--<p class="text-light" style="color:#b6b6b6 !important">Add</p>-->
+                            <!--<p class="text-light" style="color:#b6b6b6 !important">gender</p>-->
+                        <!--</t>-->
+
+                    <!--</div>-->
+                    <!--<div class="employee-age">-->
+                        <!--<t t-if="widget.login_employee['age']">-->
+                            <!--<p class="text-light"><t t-esc="widget.login_employee['age']"/></p>-->
+                            <!--<p>Age</p>-->
+                        <!--</t>-->
+                        <!--<t t-if="!widget.login_employee['age']">-->
+                            <!--<p class="text-light" style="color:#b6b6b6 !important">Add</p>-->
+                            <!--<p style="color:#b6b6b6 !important">DOB</p>-->
+                        <!--</t>-->
+                    <!--</div>-->
+                    <div class="employee-experience">
+                        <t t-if="widget.login_employee['experience']">
+                            <p class="text-light">Joined </p>
+                            <p><t t-esc="widget.login_employee['experience']"/></p>
+                            <p>Ago</p>
+                        </t>
+                        <t t-if="!widget.login_employee['experience']">
+                            <p class="text-light" style="color:#b6b6b6 !important">Add</p>
+                            <p class="text-light" style="color:#b6b6b6 !important">joined</p>
+                            <p class="text-light" style="color:#b6b6b6 !important">date</p>
+                        </t>
+                    </div>
+                    <div class="employee-country">
+                        <t t-if="widget.login_employee['country_id']">
+                            <p class="text-light"><t t-esc="widget.login_employee['country_id'][1]"/></p>
+                            <p class="text-light">Nationality</p>
+                        </t>
+                        <t t-if="!widget.login_employee['country_id']">
+                            <p class="text-light" style="color:#b6b6b6 !important">Add</p>
+                            <p style="color:#b6b6b6 !important">nationality</p>
+                        </t>
+                    </div>
+                    <div class="employee-mobile">
+                        <t t-if="widget.login_employee['personal_mobile']">
+                            <p class="text-light"><t t-esc="widget.login_employee['personal_mobile']"/></p>
+                            <p>Mobile</p>
+                        </t>
+                        <t t-if="!widget.login_employee['personal_mobile']">
+                            <p class="text-light" style="color:#b6b6b6 !important">Add</p>
+                            <p style="color:#b6b6b6 !important">Mobile</p>
+                        </t>
                     </div>
                 </div>
+                </div></div></div>
             </div>
-
-            <div class="col-md-2 col-sm-6 hr_payslip">
+            <div class="col-md-2 col-sm-6 hr_payslip oh-payslip">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
@@ -193,8 +105,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2 col-sm-6 hr_timesheets">
+            <div class="col-md-2 col-sm-6 hr_timesheets oh-payslip oh-timesheets">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
@@ -207,8 +118,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2 col-sm-6 hr_contract">
+            <div class="col-md-2 col-sm-6 hr_contract oh-payslip oh-contracts">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
@@ -221,12 +131,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2 col-sm-6 login_broad_factor">
+            <div class="col-md-2 col-sm-6 login_broad_factor oh-payslip oh-broad-factor">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-one">
-                            <div class="stat-icon dib"><i class="fa fa-fw fa-book"/></div>
+                            <div class="stat-icon dib"><i class="fa fa-bar-chart"/></div>
                             <div class="stat-content dib">
                                 <div class="stat-text">Broad Factor</div>
                                 <div class="stat-digit"><t t-esc="widget.login_employee['broad_factor']"/></div>
@@ -235,8 +144,204 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-2 col-sm-2 hr_attendance_login">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-one">
+                                <t t-if="widget.login_employee['attendance_state'] =='checked_out'">
+                                    <div class="stat-icon dib hr_attendance_btn">
+                                        <i class="fa fa-sign-in o_hr_attendance_sign_in_out_icon"/>
+                                    </div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Check In</div>
+                                    </div>
+                                </t>
+                                <t t-if="widget.login_employee['attendance_state'] =='checked_in'">
+                                    <div class="stat-icon dib hr_attendance_btn">
+                                        <i class="fa fa-sign-out o_hr_attendance_sign_in_out_icon"/>
+                                    </div>
+                                    <div class="stat-content dib">
+                                        <div class="stat-text">Check out</div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </t>
+    <t t-name="ManagerDashboard">
+        <div class="employee_dashboard_main">
+            <div class="col-sm-3 col-lg-3" style="padding-left: 0px;">
+            <div class="col-sm-12 col-lg-12 leave-manager">
+                <div class="col-sm-6 col-lg-6 hr_leave_request_approve" >
+                    <div class=" text-color">
+                        <div class="card-body pb-0">
+                            <p class="stat-title">Leave Requests</p>
+                            <h4 class="mb-0">
+                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_to_approve"/></p>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-6" style="padding:0px">
+                    <div class="col-sm-12 col-lg-12 leaves_request_today">
+                        <div class=" text-color">
+                            <div class="card-body">
+                                 <p class="stat-title">Today</p>
+                                <h4 class="mb-0">
+                                    <p class="stat-count"><t t-esc="widget.login_employee.leaves_today"/></p>
+                                </h4>
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-12 leaves_request_month">
+                        <div class=" text-color">
+                            <div class="card-body">
+                                <p class="stat-title">This Month</p>
+                                <h4 class="mb-0">
+
+                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_this_month"/></p>
+                                </h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-12" style="padding-right: 0;">
+            <div class="col-sm-12 col-lg-12 hr_leave_allocations_approve">
+                    <div class="card text-color">
+                        <div class="card-body pb-0">
+                            <p class="stat-title">Leave Allocation Requests</p>
+                             <h4 class="mb-0">
+                                <p class="stat-count"><t t-esc="widget.login_employee.leaves_alloc_req"/></p>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+             <div class="col-sm-12 col-lg-12 hr_job_application_approve">
+                    <div class="card text-color">
+                        <div class="card-body pb-0">
+                            <p class="stat-title">Job Applications</p>
+                            <h4 class="mb-0">
+                                <p class="stat-count"><t t-esc="widget.login_employee.job_applications"/></p>
+                            </h4>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+</div>
+            <div class="col-sm-7 col-lg-7">
+                <div class="col-sm-12 col-lg-12  graph_view" style="padding:0">
+                    <div class="text-color hr-chart-1">
+                        <div class="card-body pb-0">
+                            <h4 class="mb-0">
+                            </h4>
+                            <p class="stat-head" style="padding : 0px;">Department Employees</p>
+
+                        </div>
+                        <div class="emp_graph"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-10 col-lg-10  monthly_leave_graph_view">
+                <div class="card text-color">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                        </h4>
+                        <p class="stat-head" style="padding : 0px;">Monthly Leave Analysis</p>
+
+                    </div>
+                    <div class="leave_graph" />
+                </div>
+            </div>
+
+            <!--<div class="col-sm-10 col-lg-10  broad_factor_graph">-->
+                <!--<div class="card text-color">-->
+                    <!--<div class="card-body pb-0">-->
+                        <!--<h4 class="mb-0">-->
+                        <!--</h4>-->
+                        <!--<p class="stat-head" style="padding : 0px;">Leave Broad-Factor-->
+                        <!--<button id="broad_factor_pdf" class="btn btn-default"-->
+                            <!--data-placement="bottom" title="Download Pdf!">-->
+                             <!--Download PDF-->
+                        <!--</button>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                    <!--<div class="leave_broad_factor" style="padding-left:10px;height:300px;"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-10 col-lg-10" >-->
+                <!--<div class="col-sm-6 col-lg-6  monthly_join_resign_trends">-->
+                    <!--<div class="card text-color">-->
+                        <!--<div class="card-body pb-0">-->
+                            <!--<h4 class="mb-0">-->
+                            <!--</h4>-->
+                            <!--<p class="stat-head" style="padding : 0px;">Monthly Join and Resign</p>-->
+
+                        <!--</div>-->
+                        <!--<div class="join_resign_trends" />-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
     </t>
+    <t t-name="EmployeeDashboard">
+        <!--<t t-if="widget.employee_birthday">-->
+        <div class="col-md-4 col-lg-3">
+             <div class="col-xs-12  employee-birthday" style="padding: 0;">
+            <div class="col-xs-12" style="padding:0;">
+                <div class="hr_birthday">
+                    Upcoming Birthdays
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <t t-foreach="widget.employee_birthday" t-as="employee">
+                <div class="col-sm-12 col-lg-12" style="padding:0;">
+                    <div class="text-color">
+                        <div class="">
+                        <div class="media">
+                        <a href="#" style="float: left;padding-right: 6%;">
+                        <img class="align-self-center rounded-circle mr-3" alt=""
+                            t-att-src="'data:image/png;base64,'+employee['image']"/>
+                        </a>
+                        <div class="media-body">
+                        <h2 class="text-color display-6" style="font-size: 15px;"><t t-esc="employee['name']"/> </h2>
+                        <p><t t-esc="employee['job_id'][1]"/></p>
+                        <p class="text-light"><t t-esc="employee['birthday']"/></p>
+                        </div></div></div></div>
+                    </div>
+                </t>
+            </div>
+                 </div>
+        </div>
+        <!--</t>-->
+        <div class="col-md-7 col-lg-7" >
+            <div class="col-xs-12 monthly_leave_trend" style="padding:0px;">
+                <div class="card text-color">
+                    <div class="card-body pb-0">
+                        <h4 class="mb-0">
+                        </h4>
+                        <p class="stat-head" style="padding : 0px;">My Leave Analysis</p>
+
+                    </div>
+                    <div class="leave_trend" />
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="EmployeeWarning">
+        <div>
+            <p>Error : Could not find employee linked to user</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+
 </templates>

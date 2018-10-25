@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': "Open HRMS - HR Dashboard",
-    'version': '11.0.1.0.1',
+    'version': '11.0.2.0.0',
     'summary': """Open HRMS - HR Dashboard""",
     'description': """Open HRMS - HR Dashboard""",
     'category': 'Human Resources',
@@ -30,7 +30,8 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['hr', 'hr_holidays', 'hr_timesheet', 'hr_payroll', 'hr_attendance','hr_timesheet_attendance','hr_recruitment'],
+    'depends': ['hr', 'hr_holidays', 'hr_timesheet', 'hr_payroll', 'hr_attendance','hr_timesheet_attendance',
+                'hr_recruitment', 'hr_resignation'],
     'external_dependencies': {
         'python': ['pandas'],
     },

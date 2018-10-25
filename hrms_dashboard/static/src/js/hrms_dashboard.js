@@ -20,11 +20,11 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         'click .hr_leave_allocations_approve': 'leave_allocations_to_approve',
         'click .hr_timesheets': 'hr_timesheets',
         'click .hr_job_application_approve': 'job_applications_to_approve',
-        'click .hr_payslip':'hr_payslip',
-        'click .hr_contract':'hr_contract',
+//        'click .hr_payslip':'hr_payslip',
+//        'click .hr_contract':'hr_contract',
         'click .hr_employee':'hr_employee',
         'click .leaves_request_month':'leaves_request_month',
-        'click .leaves_request':'leaves_request',
+        'click .leaves_request_today':'leaves_request_today',
         "click .o_hr_attendance_sign_in_out_icon": function() {
             this.$('.o_hr_attendance_sign_in_out_icon').attr("disabled", "disabled");
             this.update_attendance();
@@ -34,8 +34,9 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
 
     init: function(parent, context) {
         this._super(parent, context);
-        this.login_employee = true;
+        this.login_employee = false;
         this.employee_birthday = [];
+        this.action_id = context.id;
         this._super(parent,context);
 
     },
@@ -56,7 +57,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 var manager_view = $('.o_hr_dashboard').html(QWeb.render('ManagerDashboard', {widget: self}));
                 self.render_graph();
                 self.render_leave_graph();
-                self.render_leave_broad_factor();
+//                self.render_leave_broad_factor();
                 $('.o_hr_dashboard').prepend(QWeb.render('LoginEmployeeDetails', {widget: self}));
                 /*need to check user access levels*/
                 session.user_has_group('hr.group_hr_manager').then(function(has_group){
@@ -64,45 +65,46 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                         $('.employee_dashboard_main').css("display", "none");
                     }
                 });
+
+                /*Upcoming Birthdays*/
+                var today = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+                rpc.query({
+                    model: "hr.employee",
+                    method: "search_read",
+                    args: [
+                        [['birthday', '!=', false]],
+                        ['name', 'birthday','image', 'job_id']
+                    ],
+                })
+                .then(function (res) {
+                    for (var i = 0; i < res.length; i++) {
+                        var bday_dt = new Date(res[i]['birthday']);
+                        var bday_month = bday_dt.getMonth();
+                        var bday_day = bday_dt.getDate();
+                        var today_dt = new Date( today);
+                        var today_month = today_dt.getMonth();
+                        var today_day = today_dt.getDate();
+                        var day = new Date();
+                        var next_day = new Date(day.setDate(day.getDate() + 7));
+                        var next_week = next_day.toJSON().slice(0,10).replace(/-/g,'/');
+                        var bday_date = bday_dt.toJSON().slice(0,10).replace(/-/g,'/');
+                        if (bday_month == today_month  && bday_day >= today_day && next_week >= bday_date){
+                            self.employee_birthday.push(res[i]);
+                            var flag = 1;
+                        }
+                    }
+                        if (flag !=1){
+                            self.employee_birthday = false;
+                        }
+                    $('.o_hr_dashboard').append(QWeb.render('EmployeeDashboard', {widget: self}));
+                    self.update_leave_trend();
+                });
+
              }
             else{
-                $('.o_hr_dashboard').prepend(_t("Error : Could not find employee linked to user"));
-                        return;
+                $('.o_hr_dashboard').prepend(QWeb.render('EmployeeWarning', {widget: self}));
+                return;
             }
-        });
-        var today = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-        rpc.query({
-            model: "hr.employee",
-            method: "search_read",
-            args: [
-                [['birthday', '!=', false]],
-                ['name', 'birthday','image']
-            ],
-        })
-        .then(function (res) {
-            for (var i = 0; i < res.length; i++) {
-                var bday_dt = new Date(res[i]['birthday']);
-                var bday_month = bday_dt.getMonth();
-                var bday_day = bday_dt.getDate();
-                var today_dt = new Date( today);
-                var today_month = today_dt.getMonth();
-                var today_day = today_dt.getDate();
-                var day = new Date();
-                var next_day = new Date(day.setDate(day.getDate() + 7));
-                var next_week = next_day.toJSON().slice(0,10).replace(/-/g,'/');
-                var bday_date = bday_dt.toJSON().slice(0,10).replace(/-/g,'/');
-                if (bday_month == today_month  && bday_day >= today_day && next_week >= bday_date){
-                    self.employee_birthday.push(res[i]);
-                    var flag = 1;
-                }
-            }
-                if (flag !=1){
-                    self.employee_birthday = false;
-                }
-            $('.o_hr_birthday_reminder').html(QWeb.render('BirthdayEventDashboard', {widget: self}));
-        });
-        return this._super().then(function() {
-            self.$el.parent().addClass('oe_background_grey');
         });
     },
 
@@ -130,10 +132,18 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             });
     },
 
+    on_reverse_breadcrumb: function() {
+        this.update_control_panel({clear: true});
+        web_client.do_push_state({action: this.action_id});
+    },
+
     hr_payslip: function(e){
         var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Employee Payslips"),
             type: 'ir.actions.act_window',
@@ -143,13 +153,16 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             views: [[false, 'list'],[false, 'form']],
             domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
-        })
+        }, options)
     },
 
     hr_contract: function(e){
         var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Contracts"),
             type: 'ir.actions.act_window',
@@ -159,49 +172,59 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             views: [[false, 'list'],[false, 'form']],
             domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
-        })
+        }, options)
     },
 
     leaves_request_month: function(e) {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         var fday = firstDay.toJSON().slice(0,10).replace(/-/g,'-');
         var lday = lastDay.toJSON().slice(0,10).replace(/-/g,'-');
         this.do_action({
-            name: _t("Leave Request"),
+            name: _t("This Month Leaves"),
             type: 'ir.actions.act_window',
             res_model: 'hr.holidays',
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
-            domain: [['date_from','>', fday],['state','=','confirm'],['date_from','<', lday]],
+            domain: [['date_from','>', fday],['state','=','validate'],['date_from','<', lday], ['type','=','remove']],
             target: 'current'
-        })
+        }, options)
     },
 
-    leaves_request: function(e) {
+    leaves_request_today: function(e) {
         var self = this;
+        var date = new Date();
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
-            name: _t("Leave Request"),
+            name: _t("Leaves Today"),
             type: 'ir.actions.act_window',
             res_model: 'hr.holidays',
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
-            domain: [['type','=','add']],
+            domain: [['type','=','remove'], ['date_from','<=', date], ['date_to', '>=', date], ['state','=','validate']],
             target: 'current'
-        })
+        }, options)
     },
     leaves_to_approve: function(e) {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Leave Request"),
             type: 'ir.actions.act_window',
@@ -209,15 +232,17 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
-            context: {'search_default_approve': true},
-            domain: [['type','=','remove'],],
+            domain: [['type','=','remove'], ['state','in',['confirm','validate1']]],
             target: 'current'
-        })
+        }, options)
     },
     leave_allocations_to_approve: function(e) {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Leave Allocation Request"),
             type: 'ir.actions.act_window',
@@ -225,16 +250,18 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             view_mode: 'tree,form,calendar',
             view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
-            context: {'search_default_approve': true},
-            domain: [['type','=','add'],],
+            domain: [['type','=','add'],['state','in',['confirm', 'validate1']]],
             target: 'current'
-        })
+        }, options)
     },
 
     hr_timesheets: function(e) {
          var self = this;
         e.stopPropagation();
         e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Timesheets"),
             type: 'ir.actions.act_window',
@@ -247,12 +274,15 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
             },
             domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
-        })
+        }, options)
     },
     job_applications_to_approve: function(event){
         var self = this;
         event.stopPropagation();
         event.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
         this.do_action({
             name: _t("Applications"),
             type: 'ir.actions.act_window',
@@ -263,7 +293,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                     [false, 'pivot'],[false, 'graph'],[false, 'calendar']],
             context: {},
             target: 'current'
-        })
+        }, options)
     },
 
     render_leave_broad_factor:function(){
@@ -278,7 +308,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         }).then(function (dataset) {
             var data = dataset;
             var margin = {top: 10, right: 20, bottom: 50, left: 40},
-                width = 1100 - margin.left - margin.right,
+                width = 1000 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
 
             var formatPercent = d3.format("0");
@@ -336,7 +366,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 .attr("width", x.rangeBand())
                 .attr("y", function(d) { return y(d.broad_factor); })
                 .attr("height", function(d) { return height - y(d.broad_factor); })
-                .attr("fill", function(d) {return "rgb(0, 0, " + (d.broad_factor * 10) + ")";})
+                .attr("fill", function(d) {return "#934da5";})
                 .on("mouseover", function() { tooltip.style("display", null); })
                 .on("mouseout", function() { tooltip.style("display", "none");})
                 .on("mousemove", function(d) {
@@ -367,11 +397,14 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
 
     render_graph:function(){
         var self = this;
-        var w = 300;
-        var h = 300;
+        var w = 200;
+        var h = 200;
         var r = h/2;
         var elem = this.$('.emp_graph');
-        var color = d3.scale.category10();
+//        var colors = ['#ff8762', '#5ebade', '#b298e1', '#70cac1', '#cf2030'];
+        var colors = ['#70cac1', '#659d4e', '#208cc2', '#4d6cb1', '#584999', '#8e559e', '#cf3650', '#f65337', '#fe7139',
+        '#ffa433', '#ffc25b', '#f8e54b'];
+        var color = d3.scale.ordinal().range(colors);
         rpc.query({
             model: "hr.employee",
             method: "get_dept_employee",
@@ -414,7 +447,10 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
 
     render_leave_graph:function(){
         var self = this;
-        var color = d3.scale.category10();
+//        var color = d3.scale.category10();
+        var colors = ['#70cac1', '#659d4e', '#208cc2', '#4d6cb1', '#584999', '#8e559e', '#cf3650', '#f65337', '#fe7139',
+        '#ffa433', '#ffc25b', '#f8e54b'];
+        var color = d3.scale.ordinal().range(colors);
         rpc.query({
                 model: "hr.employee",
                 method: "get_department_leave",
@@ -422,7 +458,7 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 var fData = data[0];
                 var dept = data[1];
                 var id = self.$('.leave_graph')[0];
-                var barColor = 'steelblue';
+                var barColor = '#ff618a';
                 // compute total for each state.
                 fData.forEach(function(d){
                     var total = 0;
@@ -435,8 +471,8 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 // function to handle histogram.
                 function histoGram(fD){
                     var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-                    hGDim.w = 450 - hGDim.l - hGDim.r,
-                    hGDim.h = 300 - hGDim.t - hGDim.b;
+                    hGDim.w = 350 - hGDim.l - hGDim.r,
+                    hGDim.h = 200 - hGDim.t - hGDim.b;
 
                     //create svg for histogram.
                     var hGsvg = d3.select(id).append("svg")
@@ -625,6 +661,102 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 var hG = histoGram(sF), // create the histogram.
                     pC = pieChart(tF), // create the pie-chart.
                     leg= legend(tF);  // create the legend.
+        });
+    },
+
+    update_leave_trend: function(){
+        var self = this;
+        rpc.query({
+            model: "hr.employee",
+            method: "employee_leave_trend",
+        }).then(function (data) {
+            var elem = self.$('.leave_trend');
+            var margin = {top: 30, right: 20, bottom: 30, left: 80},
+                width = 500 - margin.left - margin.right,
+                height = 250 - margin.top - margin.bottom;
+
+            // Set the ranges
+            var x = d3.scale.ordinal()
+                .rangeRoundBands([0, width], 1);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            // Define the axes
+            var xAxis = d3.svg.axis().scale(x)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y)
+                .orient("left").ticks(5);
+
+            var valueline = d3.svg.line()
+                .x(function(d) { return x(d.l_month); })
+                .y(function(d) { return y(d.leave); });
+
+
+            var svg = d3.select(elem[0]).append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            x.domain(data.map(function(d) { return d.l_month; }));
+            y.domain([0, d3.max(data, function(d) { return d.leave; })]);
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            // Add the Y Axis
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            svg.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(data));
+
+            // Add the scatterplot
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("r", 3)
+                .attr("cx", function(d) { return x(d.l_month); })
+                .attr("cy", function(d) { return y(d.leave); })
+//                .on('mouseover', function() { d3.select(this).transition().duration(500).ease("elastic").attr('r', 3 * 2) })
+//                .on('mouseout', function() { d3.select(this).transition().duration(500).ease("in-out").attr('r', 3) });
+                .on("mouseover", function() { tooltip.style("display", null);
+                    d3.select(this).transition().duration(500).ease("elastic").attr('r', 3 * 2)
+                 })
+                .on("mouseout", function() { tooltip.style("display", "none");
+                    d3.select(this).transition().duration(500).ease("in-out").attr('r', 3)
+                })
+                .on("mousemove", function(d) {
+                    var xPosition = d3.mouse(this)[0] - 15;
+                    var yPosition = d3.mouse(this)[1] - 25;
+                    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                    tooltip.select("text").text(d.leave);
+                });
+
+            var tooltip = svg.append("g")
+                  .attr("class", "tooltip")
+                  .style("display", "none");
+
+                tooltip.append("rect")
+                  .attr("width", 30)
+                  .attr("height", 20)
+                  .attr("fill", "black")
+                  .style("opacity", 0.5);
+
+                tooltip.append("text")
+                  .attr("x", 15)
+                  .attr("dy", "1.2em")
+                  .style("text-anchor", "middle")
+                  .attr("font-size", "12px")
+                  .attr("font-weight", "bold");
+
         });
     },
 
