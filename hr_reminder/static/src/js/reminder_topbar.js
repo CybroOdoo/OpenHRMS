@@ -8,7 +8,7 @@ var QWeb = core.qweb;
 var ajax = require('web.ajax');
 
 var reminder_menu = Widget.extend({
-    template:'reminder_menu',
+    template:'hr_reminder.reminder_menu',
 
     events: {
         "click .dropdown-toggle": "on_click_reminder",
@@ -21,7 +21,7 @@ var reminder_menu = Widget.extend({
          ajax.jsonRpc("/hr_reminder/all_reminder", 'call',{}
         ).then(function(all_reminder){
         self.all_reminder = all_reminder
-        self.$('.o_mail_navbar_dropdown_top').html(QWeb.render('reminder_menu',{
+        self.$('.o_mail_navbar_dropdown_top').html(QWeb.render('hr_reminder.reminder_menu',{
                 values: self.all_reminder
             }));
         })
@@ -37,7 +37,6 @@ var reminder_menu = Widget.extend({
              for (var i=0;i<1;i++){
                     var model = self.reminder[i]
                     var date = self.reminder[i+1]
-                    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDd",date,new Date())
                     if (self.reminder[i+2] == 'today'){
 
                         return self.do_action({
