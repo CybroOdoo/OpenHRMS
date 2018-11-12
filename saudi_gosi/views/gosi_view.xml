@@ -57,7 +57,7 @@
             </field>
         </record>
         <menuitem id="gosi_employee" name="GOSI Register" parent="hr.menu_hr_root"
-                  action="action_view_employee_gosi" groups="hr.group_hr_manager"/>
+                  action="action_view_employee_gosi" sequence="2"/>
 
          <record model="ir.ui.view" id="hr_employee_inherited_form_view">
             <field name="name">hr.employees.form.view</field>

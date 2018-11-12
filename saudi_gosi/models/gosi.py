@@ -49,12 +49,11 @@ class Gosi(models.Model):
     limit = fields.Boolean(string='Eligible For GOSI',compute='compute_age',default=False)
 
     def compute_age(self):
-        for re in self:
-            if int(re.age) <= 60 and int(re.age)>=18:
-                re.limit = True
+        for res in self:
+            if int(res.age) <= 60 and int(res.age) >= 18:
+                res.limit = True
             else:
-                re.limit = False
-
+                res.limit = False
 
 
 class Pay(models.Model):
