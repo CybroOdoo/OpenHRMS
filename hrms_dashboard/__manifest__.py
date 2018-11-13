@@ -40,7 +40,7 @@
         'report/broadfactor.xml',
         'views/dashboard_views.xml'],
     'qweb': ["static/src/xml/hrms_dashboard.xml"],
-    'images': ["static/description/banner.jpg"],
+    'images': ["static/description/banner.gif"],
     'license': "AGPL-3",
     'installable': True,
     'application': True,
