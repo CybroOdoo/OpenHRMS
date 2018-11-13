@@ -78,7 +78,7 @@
                    web_icon="hr_reminder,static/description/reminder_icon.png"
                    sequence="8"/>
          <menuitem name ="Reminder"
-                   id="reminder_menu"
+                   id="reminder_menu_2"
                    parent="hr_reminder_menu"
                    action="action_hr_reminder"/>
 </data>
