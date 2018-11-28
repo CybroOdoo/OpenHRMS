@@ -45,12 +45,12 @@
             <field name="company_id" ref="base.main_company"/>
         </record>
 
-        <record id="hr_payroll.structure_base1" model="hr.payroll.structure">
-            <field name="code">BASE</field>
-            <field name="name">Base Salary Structure For Overseas Workers</field>
-            <field eval="[(6, 0, [ref('hr_payroll.hr_rule_basic'),ref('hr_payroll.hr_rule_net')
-            ,ref('hr_payroll.hr_rule_taxable')])]" name="rule_ids"/>
+        <record id="structure_1717" model="hr.payroll.structure">
+            <field name="code">BSOW</field>
+            <field name="name">Base Salary For Overseas Workers</field>
+            <field eval="[(6, 0, [ref('hr_payroll.hr_rule_basic'), ref('hr_payroll.hr_rule_net'),ref('hr_payroll.hr_rule_taxable')])]" name="rule_ids"/>
             <field name="company_id" ref="base.main_company"/>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
         </record>
     </data>
 </odoo>
