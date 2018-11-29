@@ -25,7 +25,7 @@
     'version': '12.0.1.0.0',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
     'description': 'Main module of Open HRMS. It brings all others into a single module',
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
