@@ -23,7 +23,7 @@
 {
     'name': 'Open HRMS Reminders Todo',
     'version': '12.0.1.0.0',
-    'category': 'Extra Tools',
+    'category': 'Generic Modules/Human Resources',
     'summary': 'HR Reminder For OHRMS',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
