@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+          <record id="category_onsight" model="reg.categories">
+              <field name="type">Onsite</field>
+          </record>
+
+          <record id="category_home" model="reg.categories">
+              <field name="type">Work At Home</field>
+          </record>
+
+          <record id="category_toor" model="reg.categories">
+              <field name="type">Company Toor</field>
+          </record>
+    </data>
+</odoo>

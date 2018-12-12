@@ -1,7 +1,7 @@
 Open HRMS Attendance Regularization
 ===================================
 
-Manage Attendances for Onsight Jobs.
+Manage Attendances for Onsite Jobs.
 
 
 Installation
