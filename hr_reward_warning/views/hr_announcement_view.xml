@@ -115,7 +115,7 @@
                   name="Announcements"
                   groups="hr.group_hr_user,hr.group_hr_manager"
                   web_icon="hr_reward_warning,static/description/announcement_icon.png"
-                  sequence="15"/>
+                  sequence="-6"/>
 
         <menuitem id="hr_official_announcement"
                   name="Official Announcements"

@@ -77,7 +77,7 @@
 
     <menuitem id="menu_transfer"
               name="Transfer"
-              sequence="3"
+              sequence="-5"
               web_icon="hr_employee_transfer,static/description/transfer_icon.png"
               groups="hr.group_hr_manager"/>
 

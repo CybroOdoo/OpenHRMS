@@ -73,13 +73,15 @@
             </field>
         </record>
 
-         <menuitem name ="Reminder"
-                   id="hr_reminder_menu"
-                   web_icon="hr_reminder,static/description/reminder_icon.png"
-                   sequence="8"/>
-         <menuitem name ="Reminder"
-                   id="reminder_menu_2"
-                   parent="hr_reminder_menu"
-                   action="action_hr_reminder"/>
+        <menuitem
+                name ="Reminder"
+                id="hr_reminder_menu"
+                web_icon="hr_reminder,static/description/reminder_icon.png"
+                sequence="-5"/>
+        <menuitem
+                name ="Reminder"
+                id="reminder_menu_2"
+                parent="hr_reminder_menu"
+                action="action_hr_reminder"/>
 </data>
 </openerp>
