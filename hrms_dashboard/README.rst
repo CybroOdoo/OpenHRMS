@@ -30,7 +30,6 @@ Credits
 Author
 ------
 
-Developer: Saritha Sahadevan, saritha@cybrosys.in
 Developer: Aswani PC, aswani@cybrosys.in
 
 Maintainer

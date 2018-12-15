@@ -9,7 +9,6 @@ var rpc = require('web.rpc');
 var utils = require('web.utils');
 var web_client = require('web.web_client');
 var Widget = require('web.Widget');
-var session = require('web.session');
 var _t = core._t;
 var QWeb = core.qweb;
 
@@ -20,8 +19,8 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         'click .hr_leave_allocations_approve': 'leave_allocations_to_approve',
         'click .hr_timesheets': 'hr_timesheets',
         'click .hr_job_application_approve': 'job_applications_to_approve',
-//        'click .hr_payslip':'hr_payslip',
-//        'click .hr_contract':'hr_contract',
+        'click .hr_payslip':'hr_payslip',
+        'click .hr_contract':'hr_contract',
         'click .hr_employee':'hr_employee',
         'click .leaves_request_month':'leaves_request_month',
         'click .leaves_request_today':'leaves_request_today',
@@ -36,6 +35,8 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         this._super(parent, context);
         this.login_employee = false;
         this.employee_birthday = [];
+        this.upcoming_events = [];
+        this.announcements = [];
         this.action_id = context.id;
         this._super(parent,context);
 
@@ -57,6 +58,8 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                 var manager_view = $('.o_hr_dashboard').html(QWeb.render('ManagerDashboard', {widget: self}));
                 self.render_graph();
                 self.render_leave_graph();
+                self.update_join_resign_trends();
+                self.update_monthly_attrition();
 //                self.render_leave_broad_factor();
                 $('.o_hr_dashboard').prepend(QWeb.render('LoginEmployeeDetails', {widget: self}));
                 /*need to check user access levels*/
@@ -66,46 +69,29 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
                     }
                 });
 
-                /*Upcoming Birthdays*/
+                /*Upcoming Birthdays, Events and Announcements*/
                 var today = new Date().toJSON().slice(0,10).replace(/-/g,'/');
                 rpc.query({
                     model: "hr.employee",
-                    method: "search_read",
-                    args: [
-                        [['birthday', '!=', false]],
-                        ['name', 'birthday','image', 'job_id']
-                    ],
+                    method: "get_upcoming",
                 })
                 .then(function (res) {
-                    for (var i = 0; i < res.length; i++) {
-                        var bday_dt = new Date(res[i]['birthday']);
-                        var bday_month = bday_dt.getMonth();
-                        var bday_day = bday_dt.getDate();
-                        var today_dt = new Date( today);
-                        var today_month = today_dt.getMonth();
-                        var today_day = today_dt.getDate();
-                        var day = new Date();
-                        var next_day = new Date(day.setDate(day.getDate() + 7));
-                        var next_week = next_day.toJSON().slice(0,10).replace(/-/g,'/');
-                        var bday_date = bday_dt.toJSON().slice(0,10).replace(/-/g,'/');
-                        if (bday_month == today_month  && bday_day >= today_day && next_week >= bday_date){
-                            self.employee_birthday.push(res[i]);
-                            var flag = 1;
-                        }
-                    }
-                        if (flag !=1){
-                            self.employee_birthday = false;
-                        }
-                    $('.o_hr_dashboard').append(QWeb.render('EmployeeDashboard', {widget: self}));
-                    self.update_leave_trend();
-                });
-
+                    self.employee_birthday = res['birthday'];
+                    self.upcoming_events = res['event'];
+                    self.announcements = res['announcement'];
+                        $('.o_hr_dashboard').append(QWeb.render('EmployeeDashboard', {widget: self}));
+                        self.update_leave_trend();
+                    });
              }
             else{
-                $('.o_hr_dashboard').prepend(QWeb.render('EmployeeWarning', {widget: self}));
+                $('.o_hr_dashboard').html(QWeb.render('EmployeeWarning', {widget: self}));
                 return;
             }
         });
+    },
+
+    get_emp_image_url: function(employee){
+        return window.location.origin + '/web/image?model=hr.employee&field=image&id='+employee;
     },
 
     generate_broad_factor_report: function(){
@@ -160,19 +146,26 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
-        var options = {
-            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
-        };
-        this.do_action({
-            name: _t("Contracts"),
-            type: 'ir.actions.act_window',
-            res_model: 'hr.contract',
-            view_mode: 'tree,form,calendar',
-            view_type: 'form',
-            views: [[false, 'list'],[false, 'form']],
-            domain: [['employee_id','=', this.login_employee.id]],
-            target: 'current'
-        }, options)
+        session.user_has_group('hr.group_hr_user').then(function(has_group){
+            if(has_group){
+                var options = {
+                    on_reverse_breadcrumb: self.on_reverse_breadcrumb,
+                };
+                self.do_action({
+                    name: _t("Contracts"),
+                    type: 'ir.actions.act_window',
+                    res_model: 'hr.contract',
+                    view_mode: 'tree,form,calendar',
+                    view_type: 'form',
+                    views: [[false, 'list'],[false, 'form']],
+                    context: {
+                        'search_default_employee_id': self.login_employee.id,
+                    },
+                    target: 'current'
+                }, options)
+            }
+        });
+
     },
 
     leaves_request_month: function(e) {
@@ -760,7 +753,196 @@ var HrDashboard = Widget.extend(ControlPanelMixin, {
         });
     },
 
+    update_join_resign_trends: function(){
+        var elem = $('.join_resign_trend');
+        var colors = ['#70cac1', '#659d4e', '#208cc2', '#4d6cb1', '#584999', '#8e559e', '#cf3650', '#f65337', '#fe7139',
+        '#ffa433', '#ffc25b', '#f8e54b'];
+        var color = d3.scale.ordinal().range(colors);
+        rpc.query({
+            model: "hr.employee",
+            method: "join_resign_trends",
+        }).then(function (data) {
+            data.forEach(function(d) {
+              d.values.forEach(function(d) {
+                d.l_month = d.l_month;
+                d.count = +d.count;
+              });
+            });
+            var margin = {top: 30, right: 20, bottom: 30, left: 30},
+                width = 400 - margin.left - margin.right,
+                height = 250 - margin.top - margin.bottom;
 
+            // Set the ranges
+            var x = d3.scale.ordinal()
+                .rangeRoundBands([0, width], 1);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            // Define the axes
+            var xAxis = d3.svg.axis().scale(x)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y)
+                .orient("left").ticks(5);
+
+            x.domain(data[0].values.map(function(d) { return d.l_month; }));
+            y.domain([0, d3.max(data[0].values, d => d.count)])
+
+            var svg = d3.select(elem[0]).append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            // Add the Y Axis
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+
+            var line = d3.svg.line()
+                .x(function(d) {return x(d.l_month); })
+                .y(function(d) {return y(d.count); });
+
+            let lines = svg.append('g')
+              .attr('class', 'lines');
+
+            lines.selectAll('.line-group')
+                .data(data).enter()
+                .append('g')
+                .attr('class', 'line-group')
+                .append('path')
+                .attr('class', 'line')
+                .attr('d', function(d) { return line(d.values); })
+                .style('stroke', (d, i) => color(i));
+
+            lines.selectAll("circle-group")
+                .data(data).enter()
+                .append("g")
+                .selectAll("circle")
+                .data(function(d) { return d.values;}).enter()
+                .append("g")
+                .attr("class", "circle")
+                .append("circle")
+                .attr("cx", function(d) { return x(d.l_month)})
+                .attr("cy", function(d) { return y(d.count)})
+                .attr("r", 3);
+
+            var legend = d3.select(elem[0]).append("table").attr('class','legend');
+
+            var tr = legend.append("tbody").selectAll("tr").data(data).enter().append("tr");
+
+            tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
+                .attr("width", '16').attr("height", '16')
+                .attr("fill",function(d, i){ return color(i) });
+
+            tr.append("td").text(function(d){ return d.name;});
+        });
+    },
+
+    update_monthly_attrition: function(){
+        var elem = $('.attrition_rate');
+        var colors = ['#70cac1', '#659d4e', '#208cc2', '#4d6cb1', '#584999', '#8e559e', '#cf3650', '#f65337', '#fe7139',
+        '#ffa433', '#ffc25b', '#f8e54b'];
+        var color = d3.scale.ordinal().range(colors);
+        rpc.query({
+            model: "hr.employee",
+            method: "get_attrition_rate",
+        }).then(function (data) {
+            var margin = {top: 30, right: 20, bottom: 30, left: 80},
+                width = 500 - margin.left - margin.right,
+                height = 250 - margin.top - margin.bottom;
+
+            // Set the ranges
+            var x = d3.scale.ordinal()
+                .rangeRoundBands([0, width], 1);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            // Define the axes
+            var xAxis = d3.svg.axis().scale(x)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis().scale(y)
+                .orient("left").ticks(5);
+
+            var valueline = d3.svg.line()
+                .x(function(d) { return x(d.month); })
+                .y(function(d) { return y(d.attrition_rate); });
+
+
+            var svg = d3.select(elem[0]).append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            x.domain(data.map(function(d) { return d.month; }));
+            y.domain([0, d3.max(data, function(d) { return d.attrition_rate; })]);
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            // Add the Y Axis
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            svg.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(data));
+
+            // Add the scatterplot
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("r", 3)
+                .attr("cx", function(d) { return x(d.month); })
+                .attr("cy", function(d) { return y(d.attrition_rate); })
+                .on("mouseover", function() { tooltip.style("display", null);
+                    d3.select(this).transition().duration(500).ease("elastic").attr('r', 3 * 2)
+                 })
+                .on("mouseout", function() { tooltip.style("display", "none");
+                    d3.select(this).transition().duration(500).ease("in-out").attr('r', 3)
+                })
+                .on("mousemove", function(d) {
+                    var xPosition = d3.mouse(this)[0] - 15;
+                    var yPosition = d3.mouse(this)[1] - 25;
+                    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                    tooltip.select("text").text(d.attrition_rate);
+                });
+
+            var tooltip = svg.append("g")
+                  .attr("class", "tooltip")
+                  .style("display", "none");
+
+                tooltip.append("rect")
+                  .attr("width", 30)
+                  .attr("height", 20)
+                  .attr("fill", "black")
+                  .style("opacity", 0.5);
+
+                tooltip.append("text")
+                  .attr("x", 15)
+                  .attr("dy", "1.2em")
+                  .style("text-anchor", "middle")
+                  .attr("font-size", "12px")
+                  .attr("font-weight", "bold");
+
+        });
+
+    }
 });
 
 core.action_registry.add('hr_dashboard', HrDashboard);

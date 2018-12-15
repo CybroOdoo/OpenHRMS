@@ -522,8 +522,10 @@
   color: #01c490;}
 
 .stat-widget-one .stat-text {
-  font-size: 14px;
-  color: #868e96; }
+    font-size: 14px;
+    color: #868e96;
+    font-weight: bold;
+}
 
 .stat-widget-one .stat-digit {
   font-size: 24px;
@@ -676,7 +678,7 @@ rect:hover {  fill:#934da5; }
 .employee-prof {
 
     padding: 0px;
-    height: 100vh;
+    height: 100%;
     background-color: #3e6282;
     /*background-image: linear-gradient(180deg, #3e6282, #41666f);*/
     position: fixed;
@@ -689,9 +691,9 @@ rect:hover {  fill:#934da5; }
 
 }
 
-.dummy{
+/*.dummy{
     height:130vh;
-}
+}*/
 .card {
 
     padding-top: 0px;
@@ -792,7 +794,7 @@ rect:hover {  fill:#934da5; }
 .employee-country {
     width: 40%;
     margin-left: 10%;
-    padding: 9% 10% 4%;
+    padding: 9% 0% 4%;
     text-align: center;
     border-right: 1px solid #4d769b;
     margin-top: 2%;
@@ -939,7 +941,6 @@ rect:hover {  fill:#934da5; }
     box-shadow: 0 10px 10px 0 rgba(62, 57, 107, 0.12), 0 0 0 transparent !important;
 }
 .hr_leave_request_approve p {
-
     font-size: 14px;
     color: #ff8762;
     margin-top: 5rem;
@@ -948,7 +949,7 @@ rect:hover {  fill:#934da5; }
     text-align: left;
     width: 70%;
     float: left;
-
+    font-weight: bold;
 }
 .leaves_request_today p {
     font-size: 14px;
@@ -959,6 +960,7 @@ rect:hover {  fill:#934da5; }
     text-align: left;
     width:70%;
     float:left;
+    font-weight: bold;
 }
 .leaves_request_month p{
     font-size: 14px;
@@ -969,7 +971,7 @@ rect:hover {  fill:#934da5; }
     text-align: left;
     width:70%;
     float:left;
-
+    font-weight: bold;
 }
 h4 .stat-count {
     font-size: 17px;
@@ -1045,7 +1047,6 @@ h4 .stat-count {
     padding-bottom: 31px;
 }
 .hr_leave_allocations_approve p {
-
     font-size: 14px;
     color: #ff8762;
     margin-top: 2.5rem;
@@ -1054,9 +1055,9 @@ h4 .stat-count {
     text-align: left;
     width: 70%;
     float: left;
-
+    font-weight: bold;
 }
-.col-sm-12.col-lg-12.hr_leave_allocations_approve h4 {
+.hr_leave_allocations_approve h4 {
 
     padding: 2.5rem 0;
     margin: 0;
@@ -1084,6 +1085,7 @@ h4 .stat-count {
     padding-bottom: 0px;
     padding-bottom: 0em;
     padding-top: 0em;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     will-change: transform, box-shadow;
     background: #fff;
@@ -1107,8 +1109,7 @@ h4 .stat-count {
     padding: 0;
 
 }
-.col-sm-12.col-lg-12.hr_job_application_approve {
-
+.hr_job_application_approve {
     padding: 0;
         padding-top: 0px;
         padding-bottom: 0px;
@@ -1118,14 +1119,14 @@ h4 .stat-count {
     padding-bottom: 0px;
     padding-bottom: 0em;
     padding-top: 0em;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     will-change: transform, box-shadow;
     background: #fff;
     margin-top: 15px;
 
 }
-.col-sm-12.col-lg-12.hr_job_application_approve p {
-
+.hr_job_application_approve p {
     font-size: 14px;
     color: #70cac1;
     margin-top: 2.5rem;
@@ -1134,7 +1135,7 @@ h4 .stat-count {
     text-align: left;
     width: 70%;
     float: left;
-
+    font-weight: bold;
 }
 .col-sm-12.col-lg-12.hr_job_application_approve h4 {
 
@@ -1199,17 +1200,17 @@ h4 .stat-count {
     margin: 0px;
     box-shadow: none;
 }
-.col-md-2.col-sm-2.hr_attendance_login {
+.hr_attendance_login {
     margin-top: 1.5%;
 }
-.col-sm-10.col-lg-10.monthly_leave_graph_view .card {
+.monthly_leave_graph_view .card {
     background: #fff;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     will-change: transform, box-shadow;
     box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
     padding: 15px;
 }
-.col-sm-10.col-lg-10.broad_factor_graph .card {
+.broad_factor_graph .card {
     padding: 15px !important;
     background: #fff;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1249,34 +1250,35 @@ h4 .stat-count {
     color: #00438b;
     font-weight: 300;
 }
-.employee-birthday img {
+.hr_notification img {
     width: 40px;
     height: 40px;
     border-radius: 100%;
 }
-.employee-birthday {
+.hr_notification {
     background: #fff;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     will-change: transform, box-shadow;
     box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
     height: 316px;
     overflow-y: scroll;
+    margin-bottom: 15px;
 }
-.employee-birthday .media {
+.hr_notification .media {
     border-bottom: 1px solid #e6e6e6;
     padding-bottom: 6px;
     margin-bottom: 10px;
 }
-.employee-birthday .text-color.display-6 {
+.hr_notification .text-color.display-6 {
     margin: 0px 0 3px;
     color: #2d2d2d;
 }
-.employee-birthday p {
+.hr_notification p {
     margin: 0 0 1px;
     color: #666;
     font-size: 10px;
 }
-.hr_birthday {
+.hr_notification_head {
     font-size: 17px;
     text-align: center;
     padding: 12px 0;
@@ -1331,3 +1333,80 @@ h4 .stat-count {
     transform: translateY(-2px) translateZ(0) !important;
     box-shadow: 0 10px 10px 0 rgba(62, 57, 107, 0.12), 0 0 0 transparent !important;
 }
+
+
+/*----------------------*/
+
+.monthly_join_resign_trend .card {
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+    padding: 15px;
+}
+
+.monthly_join_resign_trend .axis path,
+.monthly_join_resign_trend .axis line {
+      fill: none;
+      shape-rendering: crispEdges;
+    }
+
+.monthly_join_resign_trend .line {
+      fill: none;
+      stroke-width: 3px;
+
+    }
+
+.monthly_join_resign_trend .area {
+      fill: steelblue;
+      opacity: 0.5;
+    }
+
+.monthly_join_resign_trend .dot {
+      fill: steelblue;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+/*----------------------------------------*/
+
+
+.monthly_attrition_rate path {
+    stroke: #70cac1;
+    stroke-width: 2;
+    fill: none;
+}
+
+.monthly_attrition_rate .axis path,
+.monthly_attrition_rate .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+.monthly_attrition_rate circle{
+    fill: #ffffff;
+    stroke: #44b7ac;
+    stroke-width: 1.5;
+}
+
+.monthly_attrition_rate .card {
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+    padding: 15px;
+}
+
+.monthly_attrition_rate .card:hover{
+    transform: translateY(-2px) translateZ(0) !important;
+    box-shadow: 0 10px 10px 0 rgba(62, 57, 107, 0.12), 0 0 0 transparent !important;
+}
+
+
+.row.main-section {
+    margin-right: 0px; !important;
+}
+
+
+
