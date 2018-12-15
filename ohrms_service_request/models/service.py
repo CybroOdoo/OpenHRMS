@@ -4,7 +4,6 @@ from odoo.exceptions import ValidationError
 
 
 class Service(models.Model):
-
     _name = 'service.request'
     _rec_name = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin']

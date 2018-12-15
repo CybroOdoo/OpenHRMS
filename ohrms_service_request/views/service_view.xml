@@ -84,8 +84,7 @@
                 </p>
             </field>
         </record>
-        <menuitem id="service_root" name="Services"
-                  web_icon="ohrms_service_request,static/description/service_web.png"/>
+        <menuitem id="service_root" name="Services" parent="hr.menu_hr_root"/>
         <menuitem id="service_requests" name="Request Service" parent="service_root"
                   action="action_view_service_requests" groups="base.group_user"/>
         <menuitem id="service_approve" name="Service Approval" parent="service_root"
