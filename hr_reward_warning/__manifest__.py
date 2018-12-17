@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Official Announcements',
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.0',
     'summary': """Managing Official Announcements""",
     'description': 'This module helps you to manage hr official announcements',
     'category': 'Generic Modules/Human Resources',
