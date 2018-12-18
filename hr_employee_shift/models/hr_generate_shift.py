@@ -29,6 +29,7 @@ class HrGenerateShift(models.Model):
     hr_department = fields.Many2one('hr.department', string="Department")
     start_date = fields.Date(string="Start Date", required=True)
     end_date = fields.Date(string="End Date", required=True)
+    company_id = fields.Many2one('res.company', string='Company')
 
     def action_schedule_shift(self):
         """Create mass schedule for all departments based on the shift scheduled in corresponding employee's contract"""

@@ -22,6 +22,9 @@
 ###################################################################################
 from datetime import datetime, timedelta
 from odoo import models, fields, api, _, tools
+from datetime import datetime
+# import pytz
+# from operator import itemgetter
 
 
 class HrPayroll(models.Model):
@@ -33,7 +36,6 @@ class HrPayroll(models.Model):
         @param contract_ids: list of contract id
         @return: returns a list of dict containing the input that should be applied for the given contract between date_from and date_to
         """
-
         def was_on_leave_interval(employee_id, date_from, date_to):
             date_from = fields.Datetime.to_string(date_from)
             date_to = fields.Datetime.to_string(date_to)
@@ -48,9 +50,8 @@ class HrPayroll(models.Model):
         res = []
         # fill only if the contract as a working schedule linked
         uom_day = self.env.ref('product.product_uom_day', raise_if_not_found=False)
-        for contract in self.env['hr.contract'].browse(contract_ids).filtered(lambda contract: contract):
-            uom_hour = contract.employee_id.resource_id.calendar_id.uom_id or self.env.ref('product.product_uom_hour',
-                                                                                           raise_if_not_found=False)
+        for contract in contract_ids:
+            uom_hour = self.env.ref('product.product_uom_hour', raise_if_not_found=False)
             interval_data = []
             holidays = self.env['hr.holidays']
             attendances = {
@@ -70,9 +71,8 @@ class HrPayroll(models.Model):
 
                 nb_of_days = (end_date - start_date).days + 1
                 for day in range(0, nb_of_days):
-
-                    working_intervals_on_day = days.hr_shift.get_working_intervals_of_day(
-                        start_dt=start_date + timedelta(days=day))
+                    working_intervals_on_day = days.hr_shift._get_day_work_intervals(
+                        start_date + timedelta(days=day))
                     for interval in working_intervals_on_day:
                         interval_data.append(
                             (interval, was_on_leave_interval(contract.employee_id.id, interval[0], interval[1])))
@@ -107,3 +107,5 @@ class HrPayroll(models.Model):
                     else data['number_of_hours'] / 8.0
                 res.append(data)
         return res
+
+
