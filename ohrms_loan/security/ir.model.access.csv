@@ -15,3 +15,6 @@ acces_account_move_line_manager,account.move.line,account.model_account_move_lin
 acces_ account_account_type_manager, account.account.type,account.model_account_account_type,hr.group_hr_manager,1,1,1,1
 access_hr_loan_accountant,hr.loan,model_hr_loan,account.group_account_user,1,1,1,0
 access_hr_loan_line_accountant,hr.loan.line,model_hr_loan_line,account.group_account_user,1,1,1,0
+access_hr_job_user,hr.job.group_user,hr.model_hr_job,base.group_user,1,1,0,0
+account_partial_reconcile_user,account.account_partial.reconcile_user,account.model_account_partial_reconcile,base.group_user,1,1,0,0
+account_analytic_line_user,account.analytic.line.user,account.model_account_analytic_line,base.group_user,1,1,0,0
