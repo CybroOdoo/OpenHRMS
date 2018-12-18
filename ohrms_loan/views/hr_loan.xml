@@ -28,7 +28,7 @@
                     <button name="action_approve" type="object" string="Approve" states="waiting_approval_1" class="oe_highlight" groups="hr.group_hr_manager,hr.group_hr_user"/>
                     <button name="action_double_approve" type="object" string="Approve" states="waiting_approval_2" class="oe_highlight" groups="account.group_account_user,account.group_account_manager"/>
                     <button name="action_refuse" type="object" string="Refuse" states="draft,waiting_approval_1,waiting_approval_2" class="oe_highlight" groups="hr.group_hr_manager,hr.group_hr_user"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval_1,waiting_approval_2,approve,cancel" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval_1,approve" />
                 </header>
 
                 <sheet>
@@ -87,11 +87,13 @@
         <field name="name">hr.loan.search.form</field>
         <field name="model">hr.loan</field>
         <field name="arch" type="xml">
-           <search string="Tasks">
+           <search string="Loan">
+               <filter string="My Loans" name="myloan" domain="[('employee_id.user_id.id', '=', uid)]" />
                 <field name="employee_id" string="Employee"/>
                 <field name="department_id" string="Department"/>
                     <filter string="Employee" name="employee_id" context="{'group_by':'employee_id'}"/>
                     <filter string="Department" name="department_id" context="{'group_by':'department_id'}"/>
+                    <filter string="Status" name="status" context="{'group_by':'state'}"/>
             </search>
         </field>
     </record>
@@ -106,6 +108,7 @@
         <field name="name">Loan Requests</field>
         <field name="res_model">hr.loan</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_myloan': 1}</field>
         <field name="search_view_id" ref="view_loan_request_search_form"/>
          <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -134,8 +137,7 @@
         <field name="src_model">hr.employee</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_employee_id': [active_id], 'default_employee_id': active_id}</field>
-        <field name="domain">[('employee_id','=',active_id)]</field>
+        <field name="context">{'search_default_myloan': 1}</field>
         <field name="view_id" eval="hr_loan_tree_view"/>
     </record>
 

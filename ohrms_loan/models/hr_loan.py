@@ -1,15 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import except_orm
+from odoo.exceptions import ValidationError, UserError
 
 
 class HrLoan(models.Model):
     _name = 'hr.loan'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Loan Request"
+
+    @api.model
+    def default_get(self, field_list):
+        result = super(HrLoan, self).default_get(field_list)
+        if result.get('user_id'):
+            ts_user_id = result['user_id']
+        else:
+            ts_user_id = self.env.context.get('user_id', self.env.user.id)
+            result['employee_id'] = self.env['hr.employee'].search([('user_id', '=', ts_user_id)], limit=1).id
+        return result
 
     @api.one
     def _compute_loan_amount(self):
@@ -59,7 +69,7 @@ class HrLoan(models.Model):
         loan_count = self.env['hr.loan'].search_count([('employee_id', '=', values['employee_id']), ('state', '=', 'approve'),
                                                        ('balance_amount', '!=', 0)])
         if loan_count:
-            raise except_orm('Error!', 'The employee has already a pending installment')
+            raise ValidationError(_("The employee has already a pending installment"))
         else:
             values['name'] = self.env['ir.sequence'].get('hr.loan.seq') or ' '
             res = super(HrLoan, self).create(values)
@@ -81,9 +91,17 @@ class HrLoan(models.Model):
     def action_approve(self):
         for data in self:
             if not data.loan_lines:
-                raise except_orm('Error!', 'Please Compute installment')
+                raise ValidationError(_("Please Compute installment"))
             else:
                 self.write({'state': 'approve'})
+
+    @api.multi
+    def unlink(self):
+        for loan in self:
+            if loan.state not in ('draft', 'cancel'):
+                raise UserError(
+                    'You cannot delete a loan which is not in draft or cancelled state')
+        return super(HrLoan, self).unlink()
 
     @api.multi
     def compute_installment(self):
@@ -91,6 +109,7 @@ class HrLoan(models.Model):
         company based on payment start date and the no of installments.
             """
         for loan in self:
+            loan.loan_lines.unlink()
             date_start = datetime.strptime(str(loan.payment_date), '%Y-%m-%d')
             amount = loan.loan_amount / loan.installment
             for i in range(1, loan.installment + 1):

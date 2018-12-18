@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from odoo import models, api
-from odoo.exceptions import except_orm
+from odoo.exceptions import UserError
 
 
 class HrLoanAcc(models.Model):
@@ -14,17 +14,16 @@ class HrLoanAcc(models.Model):
         loan_approve = self.env['ir.config_parameter'].sudo().get_param('account.loan_approve')
         contract_obj = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)])
         if not contract_obj:
-            raise except_orm('Warning', 'You must Define a contract for employee')
+            raise UserError('You must Define a contract for employee')
         if not self.loan_lines:
-            raise except_orm('Warning', 'You must compute installment before Approved')
+            raise UserError('You must compute installment before Approved')
         if loan_approve:
             self.write({'state': 'waiting_approval_2'})
         else:
             if not self.emp_account_id or not self.treasury_account_id or not self.journal_id:
-                raise except_orm('Warning',
-                                 "You must enter employee account & Treasury account and journal to approve ")
+                raise UserError("You must enter employee account & Treasury account and journal to approve ")
             if not self.loan_lines:
-                raise except_orm('Warning', 'You must compute Loan Request before Approved')
+                raise UserError('You must compute Loan Request before Approved')
             timenow = time.strftime('%Y-%m-%d')
             for loan in self:
                 amount = loan.loan_amount
@@ -69,9 +68,9 @@ class HrLoanAcc(models.Model):
         """This create account move for request in case of double approval.
             """
         if not self.emp_account_id or not self.treasury_account_id or not self.journal_id:
-            raise except_orm('Warning', "You must enter employee account & Treasury account and journal to approve ")
+            raise UserError("You must enter employee account & Treasury account and journal to approve ")
         if not self.loan_lines:
-            raise except_orm('Warning', 'You must compute Loan Request before Approved')
+            raise UserError('You must compute Loan Request before Approved')
         timenow = time.strftime('%Y-%m-%d')
         for loan in self:
             amount = loan.loan_amount
@@ -122,7 +121,7 @@ class HrLoanLineAcc(models.Model):
         timenow = time.strftime('%Y-%m-%d')
         for line in self:
             if line.loan_id.state != 'approve':
-                raise except_orm('Warning', "Loan Request must be approved")
+                raise UserError("Loan Request must be approved")
             amount = line.amount
             loan_name = line.employee_id.name
             reference = line.loan_id.name
