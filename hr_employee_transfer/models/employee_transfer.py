@@ -2,7 +2,7 @@
 from datetime import date
 from odoo import models, fields, api, _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
-from odoo.exceptions import Warning
+from odoo.exceptions import Warning, UserError
 
 
 class EmployeeTransfer(models.Model):
@@ -15,13 +15,13 @@ class EmployeeTransfer(models.Model):
         return emp_ids and emp_ids[0] or False
 
     name = fields.Char(string='Name', help='Give a name to the Transfer', copy=False, default="/", readonly=True)
-    employee_id = fields.Many2one('hr.employee', string='Employee', required=True,
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True, copy=True,
                                   help='Select the employee you are going to transfer')
     date = fields.Date(string='Date', default=fields.Date.today())
     branch = fields.Many2one('transfer.company', string='Transfer Branch', requried=True, copy=False,
                              help='The Branch/Company which the employee is transferred')
     state = fields.Selection(
-        [('draft', 'New'), ('cancel', 'Cancelled'), ('transfer', 'Transferred'), ('done', 'Done')],
+        [('draft', 'New'), ('transfer', 'Transferred'), ('done', 'Done'), ('cancel', 'Cancelled')],
         string='Status', readonly=True, copy=False, default='draft',
         help=" * The 'Draft' status is used when a transfer is created and unconfirmed Transfer.\n"
              " * The 'Transferred' status is used when the user confirm the transfer. It stays in the open status till the other branch/company receive the employee.\n"
@@ -42,6 +42,9 @@ class EmployeeTransfer(models.Model):
         if not self.branch:
             raise Warning(_(
                 'You should select the transfer branch/company.'))
+        if self.branch.company_id == self.company_id.id:
+            raise Warning(_(
+                'You cant transfer to same company.'))
         for this in self:
             emp = {
                 'name': self.employee_id.name,
@@ -104,3 +107,10 @@ class EmployeeTransfer(models.Model):
         vals['name'] = "Transfer Of " + self.env['hr.employee'].browse(vals['employee_id']).name
         res = super(EmployeeTransfer, self).create(vals)
         return res
+
+    @api.multi
+    def unlink(self):
+        for rec in self:
+            if rec.state in ('transfer', 'done'):
+                raise UserError(_("You can not delete a transfer"))
+        return super(EmployeeTransfer, self).unlink()

@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <record id="view_employee_transfer_filter" model="ir.ui.view">
+        <field name="name">Employee Transfer</field>
+        <field name="model">employee.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Employee Transfer">
+                <field name="name" string="Incentive" filter_domain="['|','|', ('name','ilike',self), ('name', 'ilike', self), ('employee_id', 'child_of', self)]"/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="transfer" string="Transferred" domain="[('state', '=', 'transfer')]"/>
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <field name="employee_id" string="Employee"/>
+                <separator/>
+                <separator/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" context="{'group_by':'employee_id'}"/>
+                    <filter name="status" string="Status" context="{'group_by':'state'}"/>
+                    <separator/>
+                </group>
+           </search>
+        </field>
+    </record>
+
     <record id="employee_transfer" model="ir.ui.view">
         <field name="name">Employee Transfer</field>
         <field name="model">employee.transfer</field>
@@ -50,7 +73,6 @@
                 <field name="employee_id"/>
                 <field name="date"/>
                 <field name="branch" groups="base.group_multi_company"/>
-                <!--<field name="amount_total" sum="Amount total" widget="monetary"/>-->
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="state"/>
             </tree>
@@ -74,16 +96,6 @@
             </p>
         </field>
     </record>
-
-    <menuitem id="menu_transfer"
-              name="Transfer"
-              sequence="-5"
-              web_icon="hr_employee_transfer,static/description/transfer_icon.png"
-              groups="hr.group_hr_manager"/>
-
-    <menuitem id="menu_employee_transfer"
-              name="Employee Transfer"
-              parent="menu_transfer"
-              sequence="3"
+    <menuitem id="menu_employee_transfer" name="Employee Transfer" parent="hr_employee_updation.menu_hr_management" sequence="3"
               action="action_employee_transfer" groups="hr.group_hr_manager"/>
 </odoo>

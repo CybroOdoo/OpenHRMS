@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Branch Transfer',
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.0',
     'summary': 'Employee transfer between branches',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions',
