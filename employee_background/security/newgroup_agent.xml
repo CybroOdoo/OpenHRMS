@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_hr_agent" model="res.groups">
+            <field name="name">Verification Agent</field>
+            <!--<field name="category_id" ref="base.module_category_hidden"/>-->
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+    </data>
+</odoo>

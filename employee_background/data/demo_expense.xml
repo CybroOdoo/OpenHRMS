@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="verification_cost" model="product.product">
+            <field name="list_price">1000.0</field>
+            <field name="standard_price">1000.0</field>
+            <field name="type">service</field>
+            <field name="name">Verification Cost</field>
+            <field name="default_code">Veri Cost</field>
+            <field name="uom_id" ref="product.product_uom_day"/>
+            <field name="uom_po_id" ref="product.product_uom_day"/>
+            <field name="categ_id" ref="hr_expense.cat_expense"/>
+            <field name="can_be_expensed" eval="1"/>
+        </record>
+    </data>
+</odoo>
