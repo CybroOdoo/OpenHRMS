@@ -12,10 +12,10 @@
             <field name="name">Loan Forms 4</field>
             <field name="model_id" ref="model_hr_loan"/>
             <field name="groups" eval="[(4, ref('hr.group_hr_user')),(4, ref('account.group_account_user'))]"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
         </record>
 
 
@@ -25,10 +25,10 @@
             <field name="global" eval="True"/>
             <field name="model_id" ref="model_hr_loan"/>
             <field name="groups" eval="[(4,ref('base.group_user'))]"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="True"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
         </record>
 
     </data>
