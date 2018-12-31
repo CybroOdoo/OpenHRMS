@@ -22,20 +22,51 @@
             <field name="arch" type="xml">
                <form string="Service Execute">
                    <sheet>
-                       <group col="4" colspan="4">
-                    <group string="Employee Details" col="2" colspan="2">
-                        <field name="employee"/>
-                        <field name="department"/>
-                        <field name="position"/>
-                        <field name="nationality"/>
-                    </group>
-                    <group string="GOSI Details" col="2" colspan="2">
-                        <field name="type_gosi"/>
-                        <field name="dob"/>
-                        <field name="gos_numb"/>
-                        <field name="issued_dat"/>
-                    </group>
-                       </group>
+                       <div id="o_employee_container"><div id="o_employee_main">
+                        <field name="img_view" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="employee" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employee" required="True"/>
+                            </h1>
+                        </div>
+                        </div>
+                       </div>
+                       <notebook>
+                            <page string="Employee Details">
+                                <group col="2" colspan="2">
+                                    <field name="employee" invisible="True"/>
+                                    <field name="department"/>
+                                    <field name="position"/>
+                                    <field name="nationality"/>
+                                </group>
+                            </page>
+                            <page string="GOSI Details">
+                                <group col="2" colspan="2">
+                                    <field name="type_gosi"/>
+                                    <field name="dob"/>
+                                    <field name="gos_numb"/>
+                                    <field name="issued_dat"/>
+                                </group>
+                            </page>
+                           <page string="Payslips">
+                               <field name="gosi_line" mode="tree">
+                                    <form string="Internal Notes">
+                                        <group>
+                                            <field name="gosi_description"/>
+                                            <field name="start_date"/>
+                                            <field name="gosi_amount"/>
+                                            <field name="connect_id1" invisible="1"/>
+                                        </group>
+                                    </form>
+                                    <tree string="Internal Notes" editable="bottom">
+                                        <field name="gosi_description"/>
+                                        <field name="start_date"/>
+                                        <field name="gosi_amount"/>
+                                    </tree>
+                                </field>
+                           </page>
+                       </notebook>
                    </sheet>
                    <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
