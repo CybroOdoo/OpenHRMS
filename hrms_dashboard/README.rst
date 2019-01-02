@@ -15,6 +15,12 @@ Tech
 Installation
 ============
 - www.odoo.com/documentation/11.0/setup/install.html
+- Install the dependency package Pandas using the following commands
+
+	* sudo pip3 install pandas
+				or
+	* sudo apt-get install pandas
+
 - Install our custom addon
 
 
