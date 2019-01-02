@@ -28,7 +28,7 @@
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'depends': ['hr_employee_updation', 'mail'],
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'maintainer': 'Cybrosys Techno Solutions',
     'demo': [],
     'data': [
