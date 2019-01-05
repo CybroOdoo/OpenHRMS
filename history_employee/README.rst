@@ -31,7 +31,7 @@ Credits
 Author
 ------
 
-Developer: Binu M Baiju @ cybrosys, binu@cybrosys.in
+Developer: Binu M Baiju @ cybrosys, odoo@cybrosys.com
 
 Maintainer
 ----------
