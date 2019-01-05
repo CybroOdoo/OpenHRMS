@@ -27,7 +27,7 @@
     'description': """
         Create accounting entries for loan requests.
         """,
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'author': "Cybrosys Techno Solutions",
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
