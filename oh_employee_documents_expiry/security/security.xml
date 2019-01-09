@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Security Rules for Confidential Documents-->
+        <record id="hr_employee_document_confidential_rule_manager" model="ir.rule">
+            <field name="name">HR Manager can see confidential documents</field>
+            <field name="model_id" ref="model_hr_employee_document"/>
+            <field name="domain_force">[('confidential', '=', True)]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
+        </record>
+        <record id="hr_employee_document_confidential_rule_user" model="ir.rule">
+            <field name="name">HR User cannot see confidential documents</field>
+            <field name="model_id" ref="model_hr_employee_document"/>
+            <field name="domain_force">[('confidential', '=', False)]</field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+        </record>
+    </data>
+</odoo>

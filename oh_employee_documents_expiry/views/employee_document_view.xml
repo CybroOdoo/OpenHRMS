@@ -26,6 +26,7 @@
                         <group>
                             <field name="issue_date"/>
                             <field name="expiry_date"/>
+                            <field name="confidential"/>
                         </group>
                     </group>
                     <notebook>
