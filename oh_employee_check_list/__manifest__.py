@@ -22,9 +22,9 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employee Checklist',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': """Manages Employee's Entry & Exit Process""",
-    'description': """This module is a part of OH project, used to remembering the 
+    'description': """This module is a part of OH project, used to remembering the
                       employee's entry and exit progress.""",
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',

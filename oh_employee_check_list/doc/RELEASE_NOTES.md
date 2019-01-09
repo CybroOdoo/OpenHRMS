@@ -1,6 +1,6 @@
 ## Module 'oh_employee_check_list'
 
-#### 21.04.2018
-#### Version 11.0.1.0.0
+#### 09.01.2019
+#### Version 12.0.1.0.0
 ##### ADD
 - Initial commit for Open HRMS Project
