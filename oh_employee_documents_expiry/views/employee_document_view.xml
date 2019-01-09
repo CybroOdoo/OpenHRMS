@@ -17,6 +17,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>
@@ -47,6 +52,16 @@
                 <field name="issue_date"/>
                 <field name="expiry_date"/>
             </tree>
+        </field>
+    </record>
+
+    <record id="employee_document_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.document.tree</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <search string="Search Employee Documents">
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
         </field>
     </record>
 
