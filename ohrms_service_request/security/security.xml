@@ -3,7 +3,7 @@
     <record id="request_visibility" model="ir.rule">
             <field name="name">Request Visibility</field>
             <field ref="model_service_request" name="model_id"/>
-            <field name="domain_force">[('employee.address_home_id.id','=',user.partner_id.id)]</field>
+            <field name="domain_force">['|', ('employee.address_home_id.id','=',user.partner_id.id), ('employee.address_home_id','=',False)]</field>
             <field name="groups" eval="[(4, ref('project.group_project_user'))]"/>
         </record>
         <record id="module_service_execute" model="ir.module.category">
