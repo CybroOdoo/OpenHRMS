@@ -23,7 +23,7 @@
     'name': 'Open HRMS Employee Background Verification',
     'version': '11.0.1.0.0',
     'summary': """Verify the background details of an Employee """,
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'description': 'Manage the Employees Background Verification Process',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
