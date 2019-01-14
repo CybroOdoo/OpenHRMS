@@ -25,7 +25,7 @@
     'version': '10.0.1.2.0',
     'summary': """Roll out appraisal plans and get the best of your workforce""",
     'description': """Roll out appraisal plans and get the best of your workforce""",
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
