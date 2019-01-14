@@ -27,7 +27,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'category': 'Generic Modules/Human Resources',
-    'website': "https://www.cybrosys.com",
+    'website': "https://www.openhrms.com",
     'depends': ['base', 'mail', 'oh_employee_creation_from_user'],
     'data': ['views/disciplinary_action.xml',
              'views/disciplinary_sequence.xml',

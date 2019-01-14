@@ -26,7 +26,7 @@
     'version': '11.0.1.0.0',
     'summary': """Employee Insurance Management for Open HRMS.""",
     'description': """Manages insurance amounts for employees to be deducted from salary""",
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',

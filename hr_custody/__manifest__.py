@@ -25,7 +25,7 @@
     'version': '11.0.1.0.0',
     'summary': """Manage the company properties when it is in the custody of an employee""",
     'description': 'Manage the company properties when it is in the custody of an employee',
-    'category': 'Human Resources',
+    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
