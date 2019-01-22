@@ -33,7 +33,7 @@ class Service(models.Model):
                                      ('adjust', 'Adjustment'),
                                      ('other', 'Other')],
                                     string='Type Of Service', required=True)
-    service_product = fields.Many2one('product.product', string='Item For Service', required=True)
+    service_product = fields.Many2one('account.asset.asset', string='Item For Service', required=True)
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
 
@@ -92,7 +92,7 @@ class Service(models.Model):
     @api.multi
     def service_rejection(self):
         self.write({
-            'state': 'rejected'
+            'state': 'reject'
         })
         return
 
@@ -123,3 +123,4 @@ class Executer(models.Model):
             'state_execute': 'check'
         })
         return
+

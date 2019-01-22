@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Sayooj(<https://www.cybrosys.com>)
+#    Author: Sayooj A O(<https://www.cybrosys.com>)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': "Open HRMS Service Request",
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.0',
     'summary': """For Requesting Service""",
     'description': """Requesting Services""",
     'category': 'Human Resource',
@@ -30,7 +30,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['base', 'hr', 'stock','oh_employee_creation_from_user','project','hr_attendance'],
+    'depends': ['base', 'hr','oh_employee_creation_from_user','project','hr_attendance','account_invoicing','account_asset'],
     'data': [
              'security/ir.model.access.csv',
              'security/security.xml',

@@ -9,12 +9,14 @@
                 <tree string="Service Request">
                     <field name="service_name"/>
                     <field name="employee"/>
+                    <field name="service_product"/>
                     <field name="service_date"/>
                     <field name="service_type"/>
-                    <field name="service_product"/>
                 </tree>
             </field>
         </record>
+
+
 
         <record id="service_request11" model="ir.ui.view">
             <field name="name">request.service</field>
@@ -84,6 +86,7 @@
                 </p>
             </field>
         </record>
+
         <menuitem id="service_root" name="Services" parent="hr.menu_hr_root"/>
         <menuitem id="service_requests" name="Request Service" parent="service_root"
                   action="action_view_service_requests" groups="base.group_user"/>
@@ -154,15 +157,17 @@
         </record>
         <menuitem id="execute_service" name="Service Execution" parent="service_root"
                   action="action_view_service_check" groups="ohrms_service_request.service_group_executer"/>
-
-
-        <record id="projection_view_pivot" model="ir.ui.view">
+         <record id="projection_view_pivot" model="ir.ui.view">
             <field name="name">pivot</field>
             <field name="model">service.request</field>
             <field name="type">pivot</field>
             <field name="arch" type="xml">
                 <pivot string="Pivot View">
-                     <field name="service_product" type="measure"/>
+                     <field name="service_product" type="row"/>
+                     <field name="employee" type="row"/>
+                     <field name="service_executer" type="row"/>
+                     <field name="service_type" type="row"/>
+                     <field name="service_type" type="row"/>
                 </pivot>
          </field>
         </record>
@@ -181,5 +186,6 @@
         <menuitem id="service_report" name="Reporting" parent="service_root" groups="project.group_project_manager"/>
         <menuitem id="service_pivot" name="Service Reporting" parent="service_report"
                   action="action_view_pivot" groups="project.group_project_manager"/>
+
     </data>
 </odoo>

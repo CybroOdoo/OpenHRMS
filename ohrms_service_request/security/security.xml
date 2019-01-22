@@ -8,6 +8,13 @@
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
     </record>
 
+    <record id="execute_visibility" model="ir.rule">
+        <field name="name">Execute Visibility</field>
+        <field ref="model_service_execute" name="model_id"/>
+        <field name="domain_force">['|', ('executer.address_home_id.id','=',user.partner_id.id), ('executer.address_home_id','=',False)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
     <record id="module_service_execute" model="ir.module.category">
         <field name="name">Service</field>
         <field name="sequence">5</field>
