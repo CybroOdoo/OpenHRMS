@@ -106,14 +106,17 @@ class Employee(models.Model):
         uid = request.session.uid
         employee = self.env['hr.employee'].search([('user_id', '=', uid)], limit=1)
         department = employee.department_id
-        cr.execute("""SELECT he.id, he.name, to_char(he.birthday, 'Month dd') as birthday, 
-        hj.name as job_id , he.birthday as dob
+        cr.execute("""select *, 
+        (to_char(dob,'ddd')::int-to_char(now(),'ddd')::int+total_days)%total_days as dif
+        from (select he.id, he.name, to_char(he.birthday, 'Month dd') as birthday,
+        hj.name as job_id , he.birthday as dob,
+        (to_char((to_char(now(),'yyyy')||'-12-31')::date,'ddd')::int) as total_days
         FROM hr_employee he
         join hr_job hj
         on hj.id = he.job_id
-        where to_char(he.birthday, 'mm-dd') >= to_char(now(), 'mm-dd') 
-        and to_char(he.birthday, 'mm-dd') <= to_char((now() + interval '15 day' ), 'mm-dd')
-        order by dob""")
+        ) birth
+        where (to_char(dob,'ddd')::int-to_char(now(),'DDD')::int+total_days)%total_days between 0 and 15
+        order by dif;""")
         birthday = cr.fetchall()
         cr.execute("""select e.name, e.date_begin, e.date_end, rc.name as location , e.is_online 
         from event_event e
@@ -338,13 +341,13 @@ class Employee(models.Model):
             }
             resign_trend.append(vals)
         cr.execute('''select to_char(joining_date, 'Month YYYY') as l_month, count(id) from hr_employee 
-        WHERE joining_date BETWEEN (date_trunc('month', CURRENT_DATE) - INTERVAL '12 months')::date
-        AND (date_trunc('month', CURRENT_DATE) + interval '1 month - 1 day')::date
+        WHERE joining_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
+        AND CURRENT_DATE + interval '1 month - 1 day'
         group by l_month;''')
         join_data = cr.fetchall()
         cr.execute('''select to_char(resign_date, 'Month YYYY') as l_month, count(id) from hr_employee 
-        WHERE resign_date BETWEEN (date_trunc('month', CURRENT_DATE) - INTERVAL '12 months')::date
-        AND (date_trunc('month', CURRENT_DATE) + interval '1 month - 1 day')::date
+        WHERE resign_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
+        AND CURRENT_DATE + interval '1 month - 1 day'
         group by l_month;''')
         resign_data = cr.fetchall()
 

@@ -20,3 +20,8 @@
 #### Version 11.0.2.0.0
 ##### UPDT
 - Modify dashboard template view
+
+#### 22.01.2019
+#### Version 11.0.2.0.0
+##### FIX
+- Graph data issues (Birthday,Joining and resigning Trend and Attrition rate)
