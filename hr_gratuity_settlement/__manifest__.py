@@ -3,7 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2017-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Ajmal JK(<https://www.cybrosys.com>)
+#    Author: Ajmal JK(odoo@cybrosys.com)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -21,7 +21,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Gratuity Settlement',
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.0',
     'summary': """Employee Gratuity Settlement During Resignation """,
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
@@ -32,6 +32,7 @@
     'data': ['views/employee_gratuity_view.xml',
              'views/gratuity_sequence.xml',
              'views/other_settlements.xml',
+             'data/settlement_reasons.xml',
              'security/ir.model.access.csv'],
     'demo': [],
     'images': ['static/description/banner.jpg'],

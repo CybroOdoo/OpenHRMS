@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <record id="settlement_reason_form" model="ir.ui.view">
+            <field name="name">settlement.reason.form</field>
+            <field name="model">settlement.reason</field>
+            <field name="arch" type="xml">
+                <form string="Settlement Reasons">
+                        <group>
+                            <group>
+                              <field name="settlement_reason"/>
+                              <field name="description"/>
+                            </group>
+                        </group>
+                </form>
+            </field>
+        </record>
         <record id="other_settlements_tree" model="ir.ui.view">
             <field name="name">other.settlements.tree</field>
             <field name="model">other.settlements</field>
             <field name="arch" type="xml">
-                <tree string="Employee Gratuity">
+                <tree string="Employee Settlements">
                     <field name ="name"/>
                     <field name ="employee_name"/>
                     <field name ="gratuity_amount" sum="Total" widget="monetary" />
@@ -22,7 +37,7 @@
                 <form string="Employee Settlements">
                     <header>
                          <button name="validate_function" type="object" string="Validate" class="oe_highlight" states="draft"/>
-                         <button name="approve_function" type="object" string="Confirm" class="oe_highlight" states="validate"/>
+                         <button name="approve_function" type="object" string="Calculate" class="oe_highlight" states="validate"/>
                          <button name="cancel_function" type="object" string="Cancel" states="draft,validate"/>
                         <button name="draft_function" type="object" string="Set to Draft" states="cancel"/>
 
@@ -54,7 +69,7 @@
                                     </group>
                                     <group>
                                         <field name="last_month_salary"  states="validate,approve" attrs="{'readonly': [('state','=','approve')]}"/>
-                                        <field name="gratuity_amount" states="approve" readonly="True"/>
+                                        <field name="gratuity_amount" string="Settlement Amount" states="approve" readonly="True"/>
                                     </group>
 
                                 </group>
@@ -68,6 +83,19 @@
             </field>
         </record>
 
+        <record id="settlement_view_pivot" model="ir.ui.view">
+            <field name="name">Settlement Analysis</field>
+            <field name="model">other.settlements</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot View">
+                     <field name="employee_name" type="row"/>
+                     <field name="last_month_salary" type="measure"/>
+                     <field name="worked_years" type="measure"/>
+                     <field name="gratuity_amount" type="measure"/>
+                </pivot>
+         </field>
+        </record>
 
 
         <record id="action_other_settlements" model="ir.actions.act_window">
@@ -77,8 +105,20 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="other_settlements" name="Other Settlements" parent="employee_gratuity"
-                  action="action_other_settlements" sequence="2" />
+        <record id="action_view_pivot" model="ir.actions.act_window">
+            <field name="name">Settlement Analysis</field>
+            <field name="res_model">other.settlements</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="employee_settlement" name="Employee Settlements" parent="hr.menu_hr_root"
+                   sequence="10" groups="hr.group_hr_manager"/>
+        <menuitem id="settlement_creation" name="Other Settlements" parent="employee_settlement"
+                  action="action_other_settlements"  sequence="1"/>
+        <menuitem id="settlement_pivot" name="Report" parent="employee_settlement"
+                  action="action_view_pivot" groups="hr.group_hr_manager"/>
 
     </data>
 </odoo>
