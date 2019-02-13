@@ -51,9 +51,11 @@
     'data': [
         'views/menu_arrangement_view.xml',
         'views/hr_config_view.xml',
+	    'views/template_view.xml',
     ],
     'demo': [],
     'images': ['static/description/banner.gif'],
+    'qweb': ["static/src/xml/link_view.xml"],
     'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,

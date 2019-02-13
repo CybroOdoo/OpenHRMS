@@ -18,8 +18,8 @@ class EmployeeTransfer(models.Model):
     employee_id = fields.Many2one('hr.employee', string='Employee', required=True,
                                   help='Select the employee you are going to transfer')
     date = fields.Date(string='Date', default=fields.Date.today())
-    branch = fields.Many2one('transfer.company', string='Transfer Branch', requried=True, copy=False,
-                             help='The Branch/Company which the employee is transferred')
+    branch = fields.Many2one('transfer.company', string='Transfer Branch',  copy=False,required=True)
+
     state = fields.Selection(
         [('draft', 'New'), ('cancel', 'Cancelled'), ('transfer', 'Transferred'), ('done', 'Done')],
         string='Status', readonly=True, copy=False, default='draft',
@@ -30,10 +30,19 @@ class EmployeeTransfer(models.Model):
     )
     sequence_number = fields.Integer(string='Sequence Number', help='A unique sequence number for the Transfer',
                                      default=1, copy=False)
-    company_id = fields.Many2one('res.company', string='Company', required=True,
-                                 related='employee_id.company_id', store=True)
+    company_id = fields.Many2one('res.company', string='Company',
+                                 related='employee_id.company_id')
     note = fields.Text(string='Internal Notes')
+    transferred = fields.Boolean(string='Transferred', copy=False, default=False, compute='_get_transferred')
     responsible = fields.Many2one('hr.employee', string='Responsible', default=_default_employee, readonly=True)
+
+    def _get_transferred(self):
+        print("compute")
+        if self:
+            print("self", self.branch.company_id)
+            print("self", self.env.user.company_id.id)
+            if self.branch.company_id == self.env.user.company_id.id:
+                self.transferred = True
 
     @api.one
     def transfer(self):
@@ -42,13 +51,16 @@ class EmployeeTransfer(models.Model):
         if not self.branch:
             raise Warning(_(
                 'You should select the transfer branch/company.'))
+        if self.branch.company_id == self.company_id.id:
+            raise Warning(_(
+                'You cant transfer to same company.'))
         for this in self:
             emp = {
                 'name': self.employee_id.name,
-                'company_id': self.branch.company_id,
+                'company_id': self.branch.company_id
 
             }
-        new_emp = self.env['hr.employee'].create(emp)
+        new_emp = self.env['hr.employee'].sudo().create(emp)
         if obj_emp.address_home_id:
             obj_emp.address_home_id.active = False
         for obj_contract in self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)]):
