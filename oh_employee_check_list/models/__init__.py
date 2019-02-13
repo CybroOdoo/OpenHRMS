@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 ###################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Nilmar Shereef (<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions (<https://www.cybrosys.com>)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -20,10 +19,6 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
-from . import employee_entry_exit_check_list
+
 from . import employee_master_inherit
 from . import settings
-
-
-
-

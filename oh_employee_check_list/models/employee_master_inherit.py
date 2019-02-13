@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 ###################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Nilmar Shereef (<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions (<https://www.cybrosys.com>)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -20,8 +19,38 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
+
+
 from odoo import models, fields, api
 
+class EmployeeEntryDocuments(models.Model):
+    _name = 'employee.checklist'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _description = "Employee Documents"
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for each in self:
+            if each.document_type == 'entry':
+                name = each.name + '_en'
+            elif each.document_type == 'exit':
+                name = each.name + '_ex'
+            elif each.document_type == 'other':
+                name = each.name + '_ot'
+            result.append((each.id, name))
+        return result
+
+    name = fields.Char(string='Name', copy=False, required=1)
+    document_type = fields.Selection([('entry', 'Entry Process'),
+                                      ('exit', 'Exit Process'),
+                                      ('other', 'Other')], string='Checklist Type', help='Type of Checklist', readonly=1, required=1)
+
+
+class HrEmployeeDocumentInherit(models.Model):
+    _inherit = 'hr.employee.document'
+
+    document_name = fields.Many2one('employee.checklist', string='Document', help='Type of Document', required=True)
 
 class EmployeeMasterInherit(models.Model):
     _inherit = 'hr.employee'
@@ -68,7 +97,6 @@ class EmployeeDocumentInherit(models.Model):
 
     @api.multi
     def unlink(self):
-        """This method is used to unlink the checklist according to the documents"""
         for result in self:
             if result.document_name.document_type == 'entry':
                 result.employee_ref.write({'entry_checklist': [(5, result.document_name.id)]})
@@ -85,3 +113,4 @@ class EmployeeChecklistInherit(models.Model):
                                  invisible=1)
     exit_obj = fields.Many2many('hr.employee', 'exit_checklist', 'hr_exit_rel', 'exit_hr_rel',
                                 invisible=1)
+

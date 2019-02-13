@@ -33,8 +33,13 @@ class EmployeeTransfer(models.Model):
     company_id = fields.Many2one('res.company', string='Company', required=True,
                                  related='employee_id.company_id', store=True)
     note = fields.Text(string='Internal Notes')
-    responsible = fields.Many2one('hr.employee', string='Responsible', default=_default_employee, readonly=True)
+    transferred = fields.Boolean(string='Transferred', copy=False, default=False, compute='_get_transferred')
+    responsible = fields.Many2one('hr.employee', string='Responsible',default=_default_employee, readonly=True)
 
+    def _get_transferred(self):
+        if self:
+            if self.branch.company_id == self.env.user.company_id.id:
+                self.transferred = True
     @api.one
     def transfer(self):
         obj_emp = self.env['hr.employee'].browse(self.employee_id.id)
@@ -60,6 +65,13 @@ class EmployeeTransfer(models.Model):
             if not obj_contract.date_end:
                 obj_contract.write({'date_end': date.today().strftime(DEFAULT_SERVER_DATE_FORMAT)})
                 self.wage = obj_contract.wage
+        print("self", self)
+        # self.write({
+        #     'state': 'transfer',
+        #     'employee_id': new_emp,
+        #     'transferred': True,
+        # })
+        print("after write")
         self.state = 'transfer'
         self.employee_id = new_emp
         obj_emp.write({'active': False})

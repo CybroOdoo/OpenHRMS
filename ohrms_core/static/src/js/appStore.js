@@ -6,6 +6,7 @@ odoo.define('ohrms.ohrms_apps', function (require) {
     var framework = require('web.framework');
     var Dialog = require('web.Dialog');
     var _t = core._t;
+    var page=require('web.UserMenu');
     $(document).ready(function(){
         form_widget.include({
         _addOnClickAction: function ($el, node) {
@@ -57,5 +58,13 @@ odoo.define('ohrms.ohrms_apps', function (require) {
     },
     });
     });
+
+    //change support link to openHrms.....
+    var usepage=page.include({
+
+    _onMenuSupport: function () {
+            window.open('https://www.openhrms.com', '_blank');
+        },
+    })
 
 });

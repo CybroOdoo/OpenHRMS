@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 ###################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Nilmar Shereef (<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions (<https://www.cybrosys.com>)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -20,21 +19,32 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
+
 from odoo import models, fields, api
 
 
-class MenuThemes(models.Model):
-    _name = 'hr.settings'
+class HRSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    enable_checklist = fields.Boolean(string='Enable Checklist Progress in Kanban?')
+    enable_checklist = fields.Boolean(string='Enable Checklist Progress in Kanban?', default=False)
+
+    @api.model
+    def get_values(self):
+        res = super(HRSettings, self).get_values()
+        config = self.env['ir.config_parameter'].sudo()
+        enable_checklist = config.get_param('employee_check_list.enable_checklist', default=False)
+        res.update(
+            enable_checklist=enable_checklist
+        )
+        return res
 
     @api.multi
-    def set_enable_checklist(self):
-        ir_values = self.env['ir.values']
-        enable_checklist = self.enable_checklist
-        ir_values.set_default('hr.settings', 'enable_checklist', enable_checklist)
-        emp_obj = self.env['hr.employee'].sudo().search([])
-        for each in emp_obj:
-            each.write({'check_list_enable': enable_checklist})
+    def set_values(self):
+        super(HRSettings, self).set_values()
+        self.env['ir.config_parameter'].sudo().set_param('employee_check_list.enable_checklist',
+                                                         self.enable_checklist)
+        emp_obj = self.env['hr.employee'].search([])
+        for rec in emp_obj:
+            rec.write({'check_list_enable': self.enable_checklist})
+
 

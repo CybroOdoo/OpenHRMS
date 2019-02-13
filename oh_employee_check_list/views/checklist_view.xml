@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="action_entry_checklist" model="ir.actions.act_window">
         <field name="name">Entry Checklist</field>
         <field name="type">ir.actions.act_window</field>

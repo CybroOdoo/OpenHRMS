@@ -49,6 +49,14 @@ class HrEmployeeDocument(models.Model):
                     }
                     self.env['mail.mail'].create(main_content).send()
 
+    @api.onchange('expiry_date','issue_date')
+    def check_date(self):
+        exp_date = fields.Date.from_string(self.expiry_date)
+        iss_date = fields.Date.from_string(self.issue_date)
+        if iss_date and exp_date:
+            if iss_date > exp_date:
+                raise Warning('Issue date must be less than expiry date')
+
     @api.constrains('expiry_date')
     def check_expr_date(self):
         for each in self:

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record model="ir.ui.view" id="hr_employee_inherit_form_view">
         <field name="name">hr.employee.form.view</field>
         <field name="model">hr.employee</field>
@@ -12,7 +13,7 @@
                 </div>
             </field>
             <page name="hr_settings" position="after">
-                <page name="checklist" string="Checklist" groups="hr.group_hr_manager">
+                <page name="checklist" string="Checklist">
                     <group>
                         <group name="entry_checklist" string="Entry Checklist">
                             <field name="entry_checklist" widget="many2many_checkboxes"/>
@@ -49,7 +50,7 @@
                 <field name="check_list_enable" invisible="1"/>
             </xpath>
 
-            <xpath expr="//ul/li[last()]" position="after">
+            <xpath expr="//ul/li[5]" position="after">
                 <li t-if="record.check_list_enable.raw_value==1">
                     <field name="entry_progress" widget="gauge" style="width:120px;height:90px;cursor:pointer;"
                            options="{'max_field': 'maximum_rate'}">
@@ -59,4 +60,5 @@
             </xpath>
         </field>
     </record>
+
 </odoo>
