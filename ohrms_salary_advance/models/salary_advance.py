@@ -84,7 +84,7 @@ class SalaryAdvancePayment(models.Model):
                                              ('state', '=', 'approve')])
         current_month = datetime.strptime(str(self.date), '%Y-%m-%d').date().month
         for each_advance in salary_advance_search:
-            existing_month = datetime.strptime(each_advance.date, '%Y-%m-%d').date().month
+            existing_month = datetime.strptime(str(each_advance.date), '%Y-%m-%d').date().month
             if current_month == existing_month:
                 raise except_orm('Error!', 'Advance can be requested once in a month')
         if not self.employee_contract_id:
@@ -106,10 +106,10 @@ class SalaryAdvancePayment(models.Model):
             raise except_orm('Warning', "This month salary already calculated")
 
         for slip in self.env['hr.payslip'].search([('employee_id', '=', self.employee_id.id)]):
-            slip_moth = datetime.strptime(slip.date_from, '%Y-%m-%d').date().month
+            slip_moth = datetime.strptime(str(slip.date_from), '%Y-%m-%d').date().month
             if current_month == slip_moth + 1:
-                slip_day = datetime.strptime(slip.date_from, '%Y-%m-%d').date().day
-                current_day = datetime.strptime(self.date, '%Y-%m-%d').date().day
+                slip_day = datetime.strptime(str(slip.date_from), '%Y-%m-%d').date().day
+                current_day = datetime.strptime(str(self.date), '%Y-%m-%d').date().day
                 if current_day - slip_day < struct_id.advance_date:
                     raise exceptions.Warning(
                         _('Request can be done after "%s" Days From prevoius month salary') % struct_id.advance_date)
@@ -121,9 +121,9 @@ class SalaryAdvancePayment(models.Model):
                    """
         salary_advance_search = self.search([('employee_id', '=', self.employee_id.id), ('id', '!=', self.id),
                                              ('state', '=', 'approve')])
-        current_month = datetime.strptime(self.date, '%Y-%m-%d').date().month
+        current_month = datetime.strptime(str(self.date), '%Y-%m-%d').date().month
         for each_advance in salary_advance_search:
-            existing_month = datetime.strptime(each_advance.date, '%Y-%m-%d').date().month
+            existing_month = datetime.strptime(strt(each_advance.date), '%Y-%m-%d').date().month
             if current_month == existing_month:
                 raise except_orm('Error!', 'Advance can be requested once in a month')
         if not self.debit or not self.credit or not self.journal:
