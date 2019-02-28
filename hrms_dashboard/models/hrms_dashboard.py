@@ -106,6 +106,7 @@ class Employee(models.Model):
         uid = request.session.uid
         employee = self.env['hr.employee'].search([('user_id', '=', uid)], limit=1)
         department = employee.department_id
+        job_id = employee.job_id
         cr.execute("""select *, 
         (to_char(dob,'ddd')::int-to_char(now(),'ddd')::int+total_days)%total_days as dif
         from (select he.id, he.name, to_char(he.birthday, 'Month dd') as birthday,
@@ -137,6 +138,8 @@ class Employee(models.Model):
         on hea.announcement = ha.id
         left join hr_department_announcements hda
         on hda.announcement = ha.id
+        left join hr_job_position_announcements hpa
+        on hpa.announcement = ha.id
         where ha.state = 'approved' and 
         ha.date_start <= now()::date and
         ha.date_end >= now()::date and
@@ -149,6 +152,11 @@ class Employee(models.Model):
             (ha.is_announcement = False and
             ha.announcement_type = 'department'
             and hda.department = %s)""" % department.id
+        if job_id:
+            sql += """ or
+            (ha.is_announcement = False and
+            ha.announcement_type = 'job_position'
+            and hpa.job_position = %s)""" % job_id.id
         sql += ')'
         cr.execute(sql)
         announcement = cr.fetchall()

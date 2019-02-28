@@ -41,6 +41,7 @@ class HrAnnouncements(models.Model):
             ann_ids = []
             for each in ann_obj:
                 ann_ids.append(each.id)
+
             view_id = self.env.ref('hr_reward_warning.view_hr_announcement_form').id
             if ann_ids:
                 if len(ann_ids) > 1:
