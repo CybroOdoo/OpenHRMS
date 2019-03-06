@@ -27,13 +27,13 @@
                            <button name="submit_reg" string="Submit" type="object" class="btn-primary"
                            attrs="{'invisible': [('state','not in','draft')]}" groups="base.group_user"/>
                            <button name="service_approval" type="object" string="Approve" class="oe_highlight"
-                                   groups="hr_attendance.group_hr_attendance"
+                                   groups="base.group_user"
                            attrs="{'invisible': [('state','not in','check')]}"/>
                            <button name="assign_executer" type="object" string="Assign" class="oe_highlight"
-                                   groups="hr_attendance.group_hr_attendance_manager"
+                                   groups="hr.group_hr_manager"
                            attrs="{'invisible': [('state','not in','requested')]}"/>
                            <button name="service_rejection" type="object" string="Reject" class="oe_highlight"
-                                   groups="hr_attendance.group_hr_attendance"
+                                   groups="base.group_user"
                            attrs="{'invisible': [('state','not in','check')]}"/>
                            <field name="state" widget="statusbar" statusbar_visible="draft,requested,approved"/>
                    </header>
@@ -91,7 +91,7 @@
         <menuitem id="service_requests" name="Request Service" parent="service_root"
                   action="action_view_service_requests" groups="base.group_user"/>
         <menuitem id="service_approve" name="Service Approval" parent="service_root"
-                  action="action_view_service_approve" groups="hr_attendance.group_hr_attendance_manager"/>
+                  action="action_view_service_approve" groups="hr.group_hr_manager"/>
 
 
         <record id="view_execute_tree1" model="ir.ui.view">
@@ -167,7 +167,6 @@
                      <field name="employee" type="row"/>
                      <field name="service_executer" type="row"/>
                      <field name="service_type" type="row"/>
-                     <field name="service_type" type="row"/>
                 </pivot>
          </field>
         </record>
@@ -183,9 +182,9 @@
                 </p>
             </field>
         </record>
-        <menuitem id="service_report" name="Reporting" parent="service_root" groups="project.group_project_manager"/>
+        <menuitem id="service_report" name="Reporting" parent="service_root" groups="hr.group_hr_manager"/>
         <menuitem id="service_pivot" name="Service Reporting" parent="service_report"
-                  action="action_view_pivot" groups="project.group_project_manager"/>
+                  action="action_view_pivot" groups="hr.group_hr_manager"/>
 
     </data>
 </odoo>

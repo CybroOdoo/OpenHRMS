@@ -45,7 +45,7 @@ class Service(models.Model):
     @api.depends('read_only')
     def get_user(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
-        if res_user.has_group('project.group_project_manager'):
+        if res_user.has_group('hr.group_hr_manager'):
             self.read_only = True
         else:
             self.read_only = False
