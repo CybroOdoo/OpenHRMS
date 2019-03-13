@@ -1,12 +1,11 @@
-OHRMS Employee Resignation v12
-==============================
+HR Dashboard v12
+================
 
-Employee Resignation Process.
+Keep your eyes on your whole Human resource analysis.
 
 Depends
 =======
-[hr_employee_updation] addon Open HRMS
-[mail] addon Odoo
+[hr] addon Odoo
 
 Tech
 ====
@@ -16,7 +15,14 @@ Tech
 Installation
 ============
 - www.odoo.com/documentation/12.0/setup/install.html
+- Install the dependency package Pandas using the following commands
+
+	* sudo pip3 install pandas
+				or
+	* sudo apt-get install pandas
+
 - Install our custom addon
+
 
 
 Bug Tracker
@@ -30,11 +36,12 @@ Credits
 Author
 ------
 
-Developer: Niyas Raphy @ cybrosys, odoo@cybrosys.com
+Developer: Aswani PC, odoo@cybrosys.com
 
 Maintainer
 ----------
 
 This module is maintained by Cybrosys Technologies.
 
-For support and more information, please visit https://www.cybrosys.com.
+For support and more information, please visit https://www.openhrms.com
+

@@ -32,8 +32,7 @@ class HrAnnouncementTable(models.Model):
     name = fields.Char(string='Code No:')
     announcement_reason = fields.Text(string='Title', states={'draft': [('readonly', False)]}, required=True, readonly=True)
     state = fields.Selection([('draft', 'Draft'), ('to_approve', 'Waiting For Approval'),
-                              ('approved', 'Approved'),
-                              ('done', 'Done'), ('rejected', 'Refused')],
+                              ('approved', 'Approved'), ('rejected', 'Refused')],
                              string='Status',  default='draft',
                              track_visibility='always')
     requested_date = fields.Date(string='Requested Date', default=datetime.now().strftime('%Y-%m-%d'))
@@ -42,7 +41,16 @@ class HrAnnouncementTable(models.Model):
     company_id = fields.Many2one('res.company', string='Company',
                                  default=lambda self: self.env.user.company_id, readonly=True,)
     is_announcement = fields.Boolean(string='Is general Announcement?')
+    announcement_type = fields.Selection([('employee', 'By Employee'), ('department', 'By Department'), ('job_position', 'By Job Position')])
+    employee_ids = fields.Many2many('hr.employee', 'hr_employee_announcements', 'announcement', 'employee',
+                                    string='Employees')
+    department_ids = fields.Many2many('hr.department', 'hr_department_announcements', 'announcement', 'department',
+                                      string='Departments')
+    position_ids = fields.Many2many('hr.job', 'hr_job_position_announcements', 'announcement', 'job_position',
+                                    string='Job Positions')
     announcement = fields.Html(string='Letter', states={'draft': [('readonly', False)]}, readonly=True)
+    date_start = fields.Date(string='Start Date', default=fields.Date.today(), required=True)
+    date_end = fields.Date(string='End Date', default=fields.Date.today(), required=True)
 
     @api.multi
     def reject(self):
@@ -53,15 +61,18 @@ class HrAnnouncementTable(models.Model):
         self.state = 'approved'
 
     @api.multi
-    def set_to_done(self):
-        self.state = 'done'
-
-    @api.multi
     def sent(self):
         self.state = 'to_approve'
+
+    @api.constrains('date_start', 'date_end')
+    def validation(self):
+        if self.date_start > self.date_end:
+            raise ValidationError("Start date must be less than End Date")
 
     @api.model
     def create(self, vals):
         if vals.get('is_announcement'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('hr.announcement.general')
+        else:
             vals['name'] = self.env['ir.sequence'].next_by_code('hr.announcement')
         return super(HrAnnouncementTable, self).create(vals)
