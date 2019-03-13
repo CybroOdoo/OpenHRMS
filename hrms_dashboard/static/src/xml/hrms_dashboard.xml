@@ -249,8 +249,7 @@
                             <div class="oh-card-body pb-0">
                                 <h4 class="mb-0">
                                 </h4>
-                                <p class="stat-head" style="padding : 0px;">Department Employees</p>
-
+                                <div class="oh-ribbon"><span>Department Employees</span></div>
                             </div>
                             <div class="emp_graph"/>
                         </div>

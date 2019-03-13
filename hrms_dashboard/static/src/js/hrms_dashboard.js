@@ -91,18 +91,25 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
 
     render_dashboards: function() {
         var self = this;
-        _.each(this.dashboards_templates, function(template) {
-            self.$('.o_hr_dashboard').append(QWeb.render(template, {widget: self}));
-        });
+        if (this.login_employee){
+            _.each(this.dashboards_templates, function(template) {
+                self.$('.o_hr_dashboard').append(QWeb.render(template, {widget: self}));
+            });
+            }
+        else{
+            self.$('.o_hr_dashboard').append(QWeb.render('EmployeeWarning', {widget: self}));
+            }
     },
 
     render_graphs: function(){
         var self = this;
-        self.render_department_employee();
-        self.render_leave_graph();
-        self.update_join_resign_trends();
-        self.update_monthly_attrition();
-        self.update_leave_trend();
+        if (this.login_employee){
+            self.render_department_employee();
+            self.render_leave_graph();
+            self.update_join_resign_trends();
+            self.update_monthly_attrition();
+            self.update_leave_trend();
+        }
     },
 
     on_reverse_breadcrumb: function() {

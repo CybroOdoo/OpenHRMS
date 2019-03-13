@@ -86,8 +86,7 @@ class Employee(models.Model):
         cr = self._cr
         uid = request.session.uid
         employee = self.env['hr.employee'].search([('user_id', '=', uid)], limit=1)
-        department = employee.department_id
-        job_id = employee.job_id
+
         cr.execute("""select *, 
         (to_char(dob,'ddd')::int-to_char(now(),'ddd')::int+total_days)%total_days as dif
         from (select he.id, he.name, to_char(he.birthday, 'Month dd') as birthday,
@@ -113,34 +112,38 @@ class Employee(models.Model):
         and e.date_end <= now() + interval '15 day')
         order by e.date_begin """)
         event = cr.fetchall()
-        sql = """select ha.name, ha.announcement_reason
-        from hr_announcement ha
-        left join hr_employee_announcements hea
-        on hea.announcement = ha.id
-        left join hr_department_announcements hda
-        on hda.announcement = ha.id
-        left join hr_job_position_announcements hpa
-        on hpa.announcement = ha.id
-        where ha.state = 'approved' and 
-        ha.date_start <= now()::date and
-        ha.date_end >= now()::date and
-        (ha.is_announcement = True or
-        (ha.is_announcement = False
-        and ha.announcement_type = 'employee'
-        and hea.employee = %s)""" % employee.id
-        if department:
-            sql += """ or
-            (ha.is_announcement = False and
-            ha.announcement_type = 'department'
-            and hda.department = %s)""" % department.id
-        if job_id:
-            sql += """ or
-            (ha.is_announcement = False and
-            ha.announcement_type = 'job_position'
-            and hpa.job_position = %s)""" % job_id.id
-        sql += ')'
-        cr.execute(sql)
-        announcement = cr.fetchall()
+        announcement = []
+        if employee:
+            department = employee.department_id
+            job_id = employee.job_id
+            sql = """select ha.name, ha.announcement_reason
+            from hr_announcement ha
+            left join hr_employee_announcements hea
+            on hea.announcement = ha.id
+            left join hr_department_announcements hda
+            on hda.announcement = ha.id
+            left join hr_job_position_announcements hpa
+            on hpa.announcement = ha.id
+            where ha.state = 'approved' and 
+            ha.date_start <= now()::date and
+            ha.date_end >= now()::date and
+            (ha.is_announcement = True or
+            (ha.is_announcement = False
+            and ha.announcement_type = 'employee'
+            and hea.employee = %s)""" % employee.id
+            if department:
+                sql += """ or
+                (ha.is_announcement = False and
+                ha.announcement_type = 'department'
+                and hda.department = %s)""" % department.id
+            if job_id:
+                sql += """ or
+                (ha.is_announcement = False and
+                ha.announcement_type = 'job_position'
+                and hpa.job_position = %s)""" % job_id.id
+            sql += ')'
+            cr.execute(sql)
+            announcement = cr.fetchall()
         return {
             'birthday': birthday,
             'event': event,

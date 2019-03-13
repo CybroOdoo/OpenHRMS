@@ -112,7 +112,6 @@ class HrResignation(models.Model):
                 if rec.approved_revealing_date <= rec.resign_confirm_date:
                     raise ValidationError(_('Approved relieving date must be anterior to confirmed date'))
                 rec.state = 'approved'
-                rec.employee_id.active = False
 
     @api.multi
     def update_employee_status(self):
