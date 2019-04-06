@@ -29,7 +29,7 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    'depends': ['base', 'employee_documents_expiry'],
+    'depends': ['base', 'oh_employee_documents_expiry'],
     'data': [
         'views/employee_form_inherit_view.xml',
         'views/checklist_view.xml',
