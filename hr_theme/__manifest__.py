@@ -25,7 +25,7 @@
     'version': '12.0.1.0.0',
     'summary': """Curtain Raiser of Open HRMS.""",
     'description': """Open HRMS all set in new colour theme of blues and whites totaling to a new experience""",
-    'category': 'Theme',
+    'category': 'Themes',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
