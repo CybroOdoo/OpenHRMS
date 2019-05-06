@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="employee_number_view" model="ir.ui.view">
+            <field name="name">employee.number</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_ids']" position="after">
+                  <group>
+                      <group>
+                        <field name="labour_card_number"/>
+                      </group>
+                      <group>
+                          <field name="salary_card_number"/>
+                      </group>
+                      <group>
+                          <field name="agent_id"/>
+                      </group>
+                  </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="bank_route_view" model="ir.ui.view">
+            <field name="name">bank.rout</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='bic']" position="after">
+                    <group><field name="routing_code"/> </group>
+                </xpath>
+            </field>
+        </record>
+        <record id="company_employer_view" model="ir.ui.view">
+            <field name="name">company.employer</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_registry']" position="after">
+                    <field name="employer_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
