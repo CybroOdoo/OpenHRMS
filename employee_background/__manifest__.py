@@ -3,8 +3,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #    Copyright (C) 2017-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    Author: Binu M Baiju(<https://www.cybrosys.com>)
-#
+#    Author: Binu M Baiju, Tintuk Tomin(<https://www.cybrosys.com>)
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
 #    published by the Free Software Foundation, either version 3 of the
@@ -21,22 +20,21 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employee Background Verification',
-    'version': '11.0.1.0.0',
+    'version': '11.0.2.0.0',
     'summary': """Verify the background details of an Employee """,
     'category': 'Generic Modules/Human Resources',
-    'description': 'Manage the Employees Background Verification Process',
+    'description': 'Manage the employees background verification Process employee varification ',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    'depends': ['base', 'hr', 'report_xlsx', 'hr_recruitment', 'mail', 'hr_expense'],
+    'depends': ['base', 'hr', 'hr_recruitment', 'mail', 'contacts','portal', 'website'],
     'data': [
-             'security/newgroup_agent.xml',
              'security/verification_security.xml',
              'security/ir.model.access.csv',
              'views/view_verification.xml',
-             'views/default_xml_template.xml',
-             'data/demo_expense.xml',
+             'views/res_partner_agent_view.xml',
+             'views/agent_portal_templates.xml',
              'data/default_mail.xml'
              ],
     'demo': [],

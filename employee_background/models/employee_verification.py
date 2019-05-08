@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+
+from datetime import date
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+import requests
 
 
 class EmployeeVerification(models.Model):
@@ -11,71 +14,44 @@ class EmployeeVerification(models.Model):
     employee = fields.Many2one('hr.employee', string='Employee', required=True, help='You can choose the employee for background verification')
     address = fields.Many2one(related='employee.address_home_id', string='Address')
     assigned_by = fields.Many2one('res.users', string='Assigned By', readonly=1, default=lambda self: self.env.uid)
-    agency = fields.Many2one('res.users', string='Agency', domain=[['groups_id', 'ilike', 'agent']], help='You can choose a Verification Agent')
-    resume_applicant = fields.Binary(compute='get_attachment', string='Resume of Applicant', readonly=True)
-    required_details = fields.Binary(compute='get_details', string='Required Details')
-    upload_result = fields.Many2many('ir.attachment', string='Collected Details', required=True, help='You can upload the Collected details')
+    agency = fields.Many2one('res.partner', string='Agency', domain=[('verification_agent', '=', True)], help='You can choose a Verification Agent')
+    resume_uploaded = fields.Many2many('ir.attachment', string="Resume of Applicant",
+                                         help='You can attach the copy of your document', copy=False)
+    description_by_agency = fields.Char(string='Description', readonly=True)
+    agency_attachment_id = fields.Many2one('ir.attachment', string='Attachment',help='Attachment from Agency')
     field_check = fields.Boolean(string='Check', invisible=True)
+    assigned_date = fields.Date(string="Assigned Date", readonly=True, default=date.today())
+    expected_date = fields.Date(state='Expected Date', help='Expected date of completion of background varification')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('assign', 'Assigned'),
-        ('ready', 'Upload Details'),
-        ('submit', 'Submitted'),
-        ('approve', 'Approved'),
-        ('refuse', 'Refused'),
+        ('submit', 'Varification Completed'),
     ], string='Status', default='draft')
 
-    # state changes and functions
     @api.multi
-    def submit_statusbar(self):
-        self.write({
-            'state': 'submit',
-        })
-
-    @api.multi
-    def approve_statusbar(self):
-        self.write({
-            'state': 'approve',
-        })
-
-    @api.multi
-    def refused_statusbar(self):
-        self.write({
-            'state': 'refuse',
-        })
+    def download_attachment(self):
+        print('In download attachment')
+        if self.agency_attachment_id:
+            print(self.agency_attachment_id)
+            return {
+                'type': 'ir.actions.act_url',
+                'url': '/web/binary/image?model=ir.attachment&field=datas&id=%s&filename=%s' % (self.agency_attachment_id.id,self.agency_attachment_id.name),
+                'target': 'new',
+            }
+        else:
+            raise UserError(_("No attachments available."))
 
     @api.multi
     def assign_statusbar(self):
-        self.state = 'assign'
-        template = self.env.ref('employee_background.assign_agency_email_template')
-        self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
-
-    @api.multi
-    def upload_statusbar(self):
-        self.write({
-            'state': 'ready',
-        })
-
-    @api.multi
-    def create_invoice_agency(self):
-        self.write({
-            'state': 'submit',
-        })
-        formview_ref = self.env.ref('hr_expense.hr_expense_form_view', False)
-        return {
-            'name': "Expense for Verification",
-            'view_mode': 'tree, form',
-            'view_id': False,
-            'view_type': 'form',
-            'res_model': 'hr.expense',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-            'domain': "",
-            'views': [
-                      (formview_ref and formview_ref.id or False, 'form')],
-            'context': {
-            }
-        }
+        if self.agency:
+            if self.address or self.resume_uploaded:
+                self.state = 'assign'
+                template = self.env.ref('employee_background.assign_agency_email_template')
+                self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
+            else:
+                raise UserError(_("There should be atleast address or resume of the employee."))
+        else:
+            raise UserError(_("Agency is not assigned. Please select one of the Agency."))
 
     # sequence generation for employee verification
     @api.model
@@ -83,31 +59,6 @@ class EmployeeVerification(models.Model):
         seq = self.env['ir.sequence'].next_by_code('res.users') or '/'
         vals['verification_id'] = seq
         return super(EmployeeVerification, self).create(vals)
-
-    # for getting the applicant's attachment
-    def get_attachment(self):
-        temp = self.env['hr.applicant'].search([('emp_id', '=', self.employee.id)])
-        tempo = self.env['ir.attachment'].search([('res_id', '=', temp.id)], limit=1)
-        self.resume_applicant = tempo.datas
-
-    @api.multi
-    def send_mail(self):
-        self.field_check = True
-        template = self.env.ref('employee_background.approved_email_template')
-        self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
-
-    @api.multi
-    def reject_mail(self):
-        self.field_check = True
-        template = self.env.ref('employee_background.refused_email_template')
-        self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
-
-    def get_details(self):
-        data = {'vid': self.verification_id,
-                'applicant': self.employee.name,
-                }
-        return self.env.ref('employee_background.employee_verification_defaultxlsx'). \
-            with_context(landscape=False).report_action(self, data=data)
 
     @api.multi
     def unlink(self):

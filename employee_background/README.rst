@@ -14,9 +14,9 @@ Features
 Depends
 =======
 [hr] addon Odoo
-[hr_expense] addon Odoo
 [hr_recruitment] addon Odoo
-[report_xlsx] addon OCA
+[portal] addon Odoo
+[website] addon Odoo
 
 Tech
 ====
@@ -40,7 +40,8 @@ Credits
 Author
 ------
 
-Developer: Binu M Baiju @ cybrosys, binu@cybrosys.in
+Developer: Binu M Baiju @ cybrosys, odoo@cybrosys.in
+Developer: Tintuk Tomin @ cybrosys. odoo@cybrosys.in
 
 Maintainer
 ----------

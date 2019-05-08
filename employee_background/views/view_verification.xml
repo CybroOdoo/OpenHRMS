@@ -9,6 +9,7 @@
                     <field name ="verification_id"/>
                     <field name ="employee"/>
                     <field name ="agency"/>
+                    <field name="state" />
                 </tree>
             </field>
         </record>
@@ -20,35 +21,69 @@
                 <form string="Employee Verification">
                      <header>
                          <field name="state" widget="statusbar"/>
-                         <button string="Assign to agency" groups="hr.group_hr_manager" type="object" name="assign_statusbar" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                         <button string="Approve" groups="hr.group_hr_manager" type="object" name="approve_statusbar" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
-                         <button string="Refuse" groups="hr.group_hr_manager" type="object" name="refused_statusbar" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
-                         <button string="Upload Details" groups="employee_background.group_hr_agent" type="object" name="upload_statusbar" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'assign')]}"/>
-                         <button string="Submit to Manager" groups="employee_background.group_hr_agent"  type="object" name="submit_statusbar" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'ready')]}"/>
-                         <button string="Submit Expense" groups="employee_background.group_hr_agent" type="object" name="create_invoice_agency" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
-                         <button string="Send Email" name="send_mail" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state','!=','approve'),('field_check','!=',False)]}"/>
-                         <button string="Send Email" name="reject_mail" type="object" class="oe_highlight" attrs="{'invisible': ['|',('state','!=','refuse'),('field_check','!=',False)]}"/>
-
+                         <button string="Assign to agency"
+                                 groups="hr.group_hr_manager"
+                                 type="object" name="assign_statusbar"
+                                 class="oe_highlight"
+                                 attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                      </header>
                     <sheet>
-                        <group>
-                            <field name ="verification_id"/>
-                            <field name ="employee"/>
-                            <field name ="address"/>
-                            <field name ="agency"/>
-                            <field name="assigned_by"/>
-                            <field name ="required_details" invisible="1"/>
-                            <field name ="resume_applicant" attrs="{'invisible': ['&amp;',('state','=','ready'), ('state','=','submit')]}"/>
-                            <field name ="upload_result" widget="many2many_binary" class="oe_inline" attrs="{'invisible': ['|',('state','=','draft'),('state','=','assign')]}"/>
-                            <field name ="field_check" invisible="1"/>
+                        <div class="oe_title">
+                        <h1>
+                            <field name="verification_id" readonly="1"/>
+                        </h1>
+                        </div>
+                        <group col="2">
+                            <group>
+                                <field name ="employee"/>
+                                <field name ="address"/>
+                                <field name ="assigned_date"/>
+                                <field name ="expected_date"/>
+                            </group>
+                            <group>
+                                <field name ="agency"/>
+                                <field name="assigned_by"/>
+                                <field name="resume_uploaded" widget="many2many_binary" class="oe_inline"/>
+                                <field name ="field_check" invisible="1"/>
+                            </group>
                         </group>
+                        <notebook attrs="{'invisible': [('state', '!=', 'submit')]}" >
+                            <page name="agent" string="Information from Agency" >
+                                <group>
+                                    <button string="Attachment"
+                                        groups="hr.group_hr_manager"
+                                        type="object"
+                                        name="download_attachment"
+                                        class="fa fa-download"/>
+                                </group>
+                                <group>
+                                    <field name="description_by_agency"/>
+                                </group>
+
+                            </page>
+                        </notebook>
                     </sheet>
 
                 </form>
             </field>
         </record>
 
-
+        <record id="search_view_employee" model="ir.ui.view">
+            <field name="name">employee.background.search</field>
+            <field name="model">employee.verification</field>
+            <field name="arch" type="xml">
+                <search string="Varification">
+                    <field name="state" string="State"/>
+                    <filter domain="[('state','=','draft')]" string="Draft"/>
+                    <filter domain="[('state','=','assign')]" string="Assigned" name="Assigned"/>
+                    <filter domain="[('state','=','submit')]" string="Completed" name="Completed"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
 
         <!--Sequence id for employee verification-->
         <record id="seq_ver_employee" model="ir.sequence">
@@ -64,7 +99,14 @@
            <field name="res_model">employee.verification</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[['state','=','draft']]</field>
+<!--            <field name="domain">[['state','=','draft']]</field>-->
+            <field name="search_view_id" ref="search_view_employee"/>
+<!--            <field name="context">{"search_default_Current":1}</field>-->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new Employee varification.
+              </p>
+            </field>
         </record>
 
         <record id="assigned_employee_verification" model="ir.actions.act_window">
@@ -100,17 +142,17 @@
         </record>
 
         <!--Different menu item for employee verification-->
-         <menuitem id="employee_verification_menu" name="Employee Verification" parent="hr.menu_hr_root"
+         <menuitem id="employee_verification_menu" action="action_employee_verification" name="Employee Verification" parent="hr.menu_hr_root"
                     sequence=""/>
-         <menuitem id="employee_verification_create" action="action_employee_verification"  groups="hr.group_hr_manager" name="Create verification" parent="employee_verification_menu"
-                    sequence=""/>
-         <menuitem id="employee_verification_assign" action="assigned_employee_verification"  groups="employee_background.group_hr_agent,hr.group_hr_manager" name="Assigned verifications" parent="employee_verification_menu"
-                    sequence=""/>
-         <menuitem id="employee_verification_submit" action="submitted_employee_verification"  groups="employee_background.group_hr_agent,hr.group_hr_manager" name="Submitted verifications" parent="employee_verification_menu"
-                    sequence=""/>
-         <menuitem id="employee_verification_approve" action="approved_employee_verification"  groups="hr.group_hr_manager" name="Approved verifications" parent="employee_verification_menu"
-                    sequence=""/>
-         <menuitem id="employee_verification_refuse" action="refused_employee_verification"  groups="hr.group_hr_manager" name="Refused verifications" parent="employee_verification_menu"
-                    sequence=""/>
+<!--         <menuitem id="employee_verification_create" action="action_employee_verification"  groups="hr.group_hr_manager" name="Create verification" parent="employee_verification_menu"-->
+<!--                    sequence=""/>-->
+<!--         <menuitem id="employee_verification_assign" action="assigned_employee_verification"  groups="employee_background.group_hr_agent,hr.group_hr_manager" name="Assigned verifications" parent="employee_verification_menu"-->
+<!--                    sequence=""/>-->
+<!--         <menuitem id="employee_verification_submit" action="submitted_employee_verification"  groups="employee_background.group_hr_agent,hr.group_hr_manager" name="Submitted verifications" parent="employee_verification_menu"-->
+<!--                    sequence=""/>-->
+<!--         <menuitem id="employee_verification_approve" action="approved_employee_verification"  groups="hr.group_hr_manager" name="Approved verifications" parent="employee_verification_menu"-->
+<!--                    sequence=""/>-->
+<!--         <menuitem id="employee_verification_refuse" action="refused_employee_verification"  groups="hr.group_hr_manager" name="Refused verifications" parent="employee_verification_menu"-->
+<!--                    sequence=""/>-->
     </data>
 </odoo>
