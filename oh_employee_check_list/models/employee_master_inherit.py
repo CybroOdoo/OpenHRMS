@@ -20,8 +20,8 @@
 #
 ###################################################################################
 
-from odoo import models, fields, api
 
+from odoo import models, fields, api
 
 class EmployeeEntryDocuments(models.Model):
     _name = 'employee.checklist'
@@ -51,7 +51,6 @@ class HrEmployeeDocumentInherit(models.Model):
     _inherit = 'hr.employee.document'
 
     document_name = fields.Many2one('employee.checklist', string='Document', help='Type of Document', required=True)
-
 
 class EmployeeMasterInherit(models.Model):
     _inherit = 'hr.employee'
@@ -114,3 +113,4 @@ class EmployeeChecklistInherit(models.Model):
                                  invisible=1)
     exit_obj = fields.Many2many('hr.employee', 'exit_checklist', 'hr_exit_rel', 'exit_hr_rel',
                                 invisible=1)
+

@@ -51,3 +51,4 @@ class HrEmployeeDocumentInherit(models.Model):
     _inherit = 'hr.employee.document'
 
     document_name = fields.Many2one('employee.checklist', string='Document', help='Type of Document', required=True)
+

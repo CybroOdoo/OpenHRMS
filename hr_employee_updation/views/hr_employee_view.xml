@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <menuitem id="employee_report_menu" name="Reports" sequence="30"
+        <menuitem id="employee_report_menu" name="Reports" parent="hr.menu_hr_root" sequence="30"
                   groups="hr.group_hr_manager,hr.group_hr_user"/>
         <menuitem id="menu_hr_management" name="HR Management" parent="hr.menu_hr_root" sequence="5"
                   groups="hr.group_hr_manager,hr.group_hr_user"/>
         <record model="ir.ui.view" id="hr_employee_inherit_form_view">
-
             <field name="name">hr.employee.form.view</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//page[@name='personal_information']/group" position="after">
-                    <group name="emergency_contact" colspan="4" string="Emergency Contacts">
-                        <field name="emergency_contacts">
+                <xpath expr="//page[@name='personal_information']/group" position="inside">
+                    <group name="emergency_contact" colspan="4" string="Emergency Contact">
+                        <field name="emergency_contact">
                             <tree editable="bottom">
                                 <field name="number"/>
                                 <field name="relation"/>
@@ -21,6 +20,9 @@
                         </field>
                     </group>
                 </xpath>
+                <field name="address_home_id" position="after">
+                    <field name="personal_mobile"/>
+                </field>
                 <field name="user_id" position="after">
                     <field name="joining_date"/>
                 </field>
@@ -40,7 +42,7 @@
                 </xpath>
 
                 <page name="hr_settings" position="after">
-                    <page name="family_info" string="Family Information">
+                    <page name="family_info" string="Family Information" groups="hr.group_hr_user">
                         <group string="Family">
                             <field name="fam_ids" nolabel="1">
                                 <tree editable="bottom">
@@ -52,7 +54,6 @@
                         </group>
                     </page>
                 </page>
-
             </field>
         </record>
 
@@ -79,6 +80,5 @@
                 </xpath>
             </field>
         </record>
-
     </data>
 </odoo>
