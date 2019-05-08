@@ -100,7 +100,7 @@
     <menuitem id="menu_employee_transfer"
               name="Employee Transfer"
               parent="hr_employee_updation.menu_hr_management"
-              sequence="3"
+              sequence="2"
               action="action_employee_transfer"
               web_icon="hr_employee_transfer,static/description/transfer_icon.pngg"
               groups="hr.group_hr_manager"/>

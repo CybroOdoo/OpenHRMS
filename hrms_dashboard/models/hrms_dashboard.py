@@ -105,7 +105,7 @@ class Employee(models.Model):
         on e.address_id = rp.id
         left join res_country rc
         on rc.id = rp.country_id
-        where e.state ='confirm'
+        where state ='confirm'
         and (e.date_begin >= now()
         and e.date_begin <= now() + interval '15 day')
         or (e.date_end >= now()

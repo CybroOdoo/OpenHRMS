@@ -22,3 +22,4 @@
 
 from . import employee_master_inherit
 from . import settings
+from . import employee_entry_exit_check_list

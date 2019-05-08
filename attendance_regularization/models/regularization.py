@@ -12,7 +12,7 @@ class Regular(models.Model):
         employee_rec = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
         return employee_rec.id
 
-    reg_category = fields.Selection([('onsight','On Sight Job')],string='Regularization Category', required=True)
+    reg_category = fields.Many2one('reg.categories', string='Regularization Category', required=True)
     from_date = fields.Datetime(string='From Date', required=True)
     to_date = fields.Datetime(string='To Date', required=True)
     reg_reason = fields.Text(string='Reason', required=True)
@@ -51,6 +51,11 @@ class Regular(models.Model):
         })
         return
 
+class Category(models.Model):
 
+    _name = 'reg.categories'
+    _rec_name = 'type'
+
+    type = fields.Char(string='Category')
 
 

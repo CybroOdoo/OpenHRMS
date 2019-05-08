@@ -12,11 +12,3 @@
 #### Version 12.0.1.0.1
 ##### FIX
 - Salary Structure Issue
-
-
-## Module <saudi_gosi>
-
-#### 04.05.2019
-#### Version 12.0.2.0.1
-##### FIX
-- Solved issue while creating batch payslips

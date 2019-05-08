@@ -48,7 +48,7 @@
             <field name="context">{'module' : 'hr_leave_request_aliasing'}</field>
         </record>
 
-        <menuitem id="menu_hr_leave_global_settings" name="Leaves Config"
-            parent="hr_holidays.menu_hr_holidays_root" sequence="96" action="action_hr_general_config" groups="base.group_system"/>
+        <menuitem id="menu_hr_leave_global_settings" name="Settings"
+            parent="hr_holidays.menu_hr_holidays_configuration" sequence="96" action="action_hr_general_config" groups="base.group_system"/>
     </data>
 </odoo>

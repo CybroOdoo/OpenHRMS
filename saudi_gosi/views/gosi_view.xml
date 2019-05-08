@@ -56,8 +56,6 @@
                 </p>
             </field>
         </record>
-        <menuitem id="gosi_employee" name="GOSI Register" parent="hr.menu_hr_root"
-                  action="action_view_employee_gosi" sequence="2"/>
 
          <record model="ir.ui.view" id="hr_employee_inherited_form_view">
             <field name="name">hr.employees.form.view</field>
@@ -92,5 +90,10 @@
                      </xpath>
             </field>
          </record>
+
+        <menuitem id="gosi_employee"
+                  name="GOSI Register"
+                  parent="hr_employee_updation.menu_hr_management"
+                  action="action_view_employee_gosi" sequence="10"/>
     </data>
 </odoo>

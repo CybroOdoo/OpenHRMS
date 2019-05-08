@@ -47,8 +47,8 @@
         </record>
         <menuitem
                 id="policy_management_menu"
-                name="Policy"
-                parent="hr_insurance_main_menu"
+                name="Insurance Policy"
+                parent="hr.menu_human_resources_configuration"
                 action="action_insurance_policy_management"/>
     </data>
 </odoo>

@@ -20,7 +20,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning, UserError
 from odoo.tools import image_resize_images
@@ -115,7 +115,7 @@ class HrCustody(models.Model):
     @api.multi
     def set_to_return(self):
         self.state = 'returned'
-        self.return_date = fields.datetime.now()
+        self.return_date = date.today()
 
     # return date validation
     @api.constrains('return_date')
