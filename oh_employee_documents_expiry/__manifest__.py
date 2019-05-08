@@ -33,6 +33,7 @@
     'depends': ['base', 'hr'],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/employee_document_view.xml',
     ],
     'images': ['static/description/banner.jpg'],

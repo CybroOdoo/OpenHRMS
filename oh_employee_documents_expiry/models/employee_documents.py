@@ -65,6 +65,7 @@ class HrEmployeeDocument(models.Model):
     doc_attachment_id = fields.Many2many('ir.attachment', 'doc_attach_rel', 'doc_id', 'attach_id3', string="Attachment",
                                          help='You can attach the copy of your document', copy=False)
     issue_date = fields.Char(string='Issue Date', default=fields.datetime.now(), copy=False)
+    confidential = fields.Boolean(string='Confidential', help='Tick this if the document is confidential')
 
 
 class HrEmployee(models.Model):
