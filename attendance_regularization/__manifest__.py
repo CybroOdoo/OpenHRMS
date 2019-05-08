@@ -12,6 +12,7 @@
     'data': [
             'security/ir.model.access.csv',
              'security/security.xml',
+             'views/category.xml',
              'views/regularization_views.xml',
             ],
     'demo': [],

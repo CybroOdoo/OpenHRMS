@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+          <record id="job_cate" model="ir.ui.view">
+                <field name="name">job.cate</field>
+                <field name="model">reg.categories</field>
+                <field name="arch" type="xml">
+                    <tree string="Regularization Category">
+                        <field name="type"/>
+                    </tree>
+                </field>
+          </record>
+
+          <record id="view_job_cate11" model="ir.ui.view">
+                <field name="name">job.cater</field>
+                <field name="model">reg.categories</field>
+                <field name="arch" type="xml">
+                    <form string="Regularization Category">
+                        <group>
+                            <field name="type"/>
+                        </group>
+                    </form>
+                </field>
+          </record>
+
+        <record model="ir.actions.act_window" id="action_view_job_cats">
+            <field name="name">Regularization Category</field>
+            <field name="res_model">reg.categories</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_no_content_create">Create new record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="jobs_catagories" name="Regularization Category" parent="hr_attendance.menu_hr_attendance_settings"
+                  action="action_view_job_cats"/>
+    </data>
+</odoo>

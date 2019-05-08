@@ -162,7 +162,7 @@
     </record>
 
     <menuitem id="menu_hr_general_config"
-            name="General Settings"
+            name="HRMS Settings"
             parent="hr.menu_human_resources_configuration"
             sequence="-1"
             action="action_hr_general_config"/>

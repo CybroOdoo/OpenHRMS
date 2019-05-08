@@ -47,4 +47,3 @@ class HRSettings(models.TransientModel):
         for rec in emp_obj:
             rec.write({'check_list_enable': self.enable_checklist})
 
-

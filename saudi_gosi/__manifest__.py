@@ -1,6 +1,6 @@
 {
     'name': "Open HRMS GOSI",
-    'version': '12.0.2.0.1',
+    'version': '12.0.1.0.0',
     'summary': """GOSI Contribution for Saudi Government""",
     'description': """GOSI Contribution for Saudu Government From Employee and Company""",
     'category': 'Human Resource',

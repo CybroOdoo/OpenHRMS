@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+             <!--Settlement Reasons Creation-->
+
+        <record id="settlement_reason_death" model="settlement.reason">
+            <field name="settlement_reason">Case of Death</field>
+            <field name="description">Employee passed away</field>
+        </record>
+        <record id="settlement_reason_disabled" model="settlement.reason">
+            <field name="settlement_reason">Disabled due to Sick or Accident</field>
+            <field name="description">Employee physically disabled due to sick or accident</field>
+        </record>
+
+    </data>
+</odoo>

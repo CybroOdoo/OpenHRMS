@@ -12,13 +12,13 @@
             </xpath>
         </template>
 
-        <!--<template id="hr_theme.layout_footer" inherit_id="web.menu_secondary" name="Footer Submenu">-->
-            <!--<xpath expr="//div[@class='o_sub_menu_footer']" position="replace">-->
-                <!--<div class="o_sub_menu_footer">-->
-                    <!--<a href="https://www.cybrosys.com" target="_blank"><img src="/hr_theme/static/src/img/powered_by.png" width="20%"/></a>-->
-                <!--</div>-->
-            <!--</xpath>-->
-        <!--</template>-->
+<!--        <template id="hr_theme.layout_footer" inherit_id="web.menu_secondary" name="Footer Submenu">-->
+<!--            <xpath expr="//div[@class='o_sub_menu_footer']" position="replace">-->
+<!--                <div class="o_sub_menu_footer">-->
+<!--                    <a href="https://www.cybrosys.com" target="_blank"><img src="/hr_theme/static/src/img/powered_by.png" width="20%"/></a>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--        </template>-->
 
         <template id="hrms_layout" inherit_id="web.layout" name="HRMS layout" priority="17">
             <xpath expr="//link[@rel='shortcut icon']" position="replace">

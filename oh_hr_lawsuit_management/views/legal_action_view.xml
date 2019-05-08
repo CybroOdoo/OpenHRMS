@@ -73,14 +73,10 @@
             </field>
         </record>
 
-        <record model='ir.ui.view' id='hr_lawsuit_search_view'>
+        <record  id='hr_lawsuit_search_view' model='ir.ui.view'>
             <field name="name">hr.lawsuit.search</field>
             <field name="model">hr.lawsuit</field>
             <field name="arch" type="xml">
-                <group expand="0" string="Group By">
-                    <filter string="Status" context="{'group_by':'state'}"/>
-                    <filter string="Employee" context="{'group_by':'employee_id'}"/>
-                </group>
                 <search string="Legal Actions">
                     <field name="name"/>
                     <field name="party1"/>
@@ -90,9 +86,14 @@
                     <field name="lawyer"/>
                     <field name="requested_date"/>
                     <field name="state"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="Status" context="{'group_by':'state'}"/>
+                        <filter string="Employee" name="Employee"  context="{'group_by':'employee_id'}"/>
+                    </group>
                 </search>
             </field>
         </record>
+
 
         <record id="action_hr_lawsuit" model="ir.actions.act_window">
             <field name="name">Legal Management</field>
@@ -120,10 +121,10 @@
             </field>
         </record>
 
-        <menuitem id="hr_lawsuit_menu"
-                  name="Legal Department" parent="hr.menu_hr_root" sequence="17" groups="lawsuit_group_manager"/>
+<!--        <menuitem id="hr_lawsuit_menu"-->
+<!--                  name="Legal Department" sequence="200" groups="lawsuit_group_manager"/>-->
 
-        <menuitem id="hr_lawsuit_sub_menu" parent="hr_lawsuit_menu" action="action_hr_lawsuit"
+        <menuitem id="hr_lawsuit_sub_menu" parent="hr_employee_updation.menu_hr_management" action="action_hr_lawsuit"
                   name="Legal Actions" sequence="1" groups="lawsuit_group_manager"/>
     </data>
 </odoo>

@@ -63,7 +63,8 @@ class Pay(models.Model):
     gosi_no = fields.Many2one('gosi.payslip', string='GOSI Reference',readonly=True)
 
     @api.onchange('employee_id')
-    def onchange_employee_ref(self):
+    @api.depends('employee_id')
+    def onchange_employee_id(self):
         for rec in self:
-            gosi_no = rec.env['gosi.payslip'].search([('employee', '=', rec.employee_id.id)])
+            gosi_no = rec.env['gosi.payslip'].search([('employee', '=', rec.employee_id.name)])
             rec.gosi_no=gosi_no.id

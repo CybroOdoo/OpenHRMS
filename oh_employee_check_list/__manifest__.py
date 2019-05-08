@@ -21,7 +21,7 @@
 ###################################################################################
 
 {
-    'name': 'Employee Checklist',
+    'name': 'Open HRMS Employee Checklist',
     'version': '12.0.1.0.0',
     'summary': """Manages Employee's Entry & Exit Process""",
     'description': """This module is used to remembering the employee's entry and exit progress.""",
@@ -31,8 +31,10 @@
     'website': "https://www.cybrosys.com",
     'depends': ['base', 'oh_employee_documents_expiry'],
     'data': [
+        'security/ir.model.access.csv',
         'views/employee_form_inherit_view.xml',
         'views/checklist_view.xml',
+        'views/employee_check_list_view.xml',
         'views/settings_view.xml',
     ],
     'demo': [],

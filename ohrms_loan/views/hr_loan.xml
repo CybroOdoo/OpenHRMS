@@ -101,7 +101,7 @@
 
     <!--loan menu-->
     <menuitem name="Loans And Salary Advance"
-        id="menu_hr_loans_and_advances" parent="hr.menu_hr_root"
+        id="menu_hr_loans_and_advances" web_icon="ohrms_loan,static/description/loan_web.png"
         sequence="20"/>
 
     <record id="action_hr_loan_request" model="ir.actions.act_window">

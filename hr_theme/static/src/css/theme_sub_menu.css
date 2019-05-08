@@ -283,7 +283,7 @@
     border-right-color: #00438b;
 }
 .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a, .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
-    color: #01448b !important;
+    color: #9ea2a7 !important;
 }
 .o_progressbar .o_progress .o_progressbar_complete {
     background-color: #01448b !important;

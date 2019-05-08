@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="settlement_reason_form" model="ir.ui.view">
+            <field name="name">settlement.reason.form</field>
+            <field name="model">settlement.reason</field>
+            <field name="arch" type="xml">
+                <form string="Settlement Reasons">
+                        <group>
+                            <group>
+                              <field name="settlement_reason"/>
+                              <field name="description"/>
+                            </group>
+                        </group>
+                </form>
+            </field>
+        </record>
+
         <record id="other_settlements_tree" model="ir.ui.view">
             <field name="name">other.settlements.tree</field>
             <field name="model">other.settlements</field>
@@ -68,6 +83,19 @@
             </field>
         </record>
 
+        <record id="settlement_view_pivot" model="ir.ui.view">
+            <field name="name">Settlement Analysis</field>
+            <field name="model">other.settlements</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot View">
+                     <field name="employee_name" type="row"/>
+                     <field name="last_month_salary" type="measure"/>
+                     <field name="worked_years" type="measure"/>
+                     <field name="gratuity_amount" type="measure"/>
+                </pivot>
+         </field>
+        </record>
 
 
         <record id="action_other_settlements" model="ir.actions.act_window">
@@ -77,7 +105,7 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="other_settlements" name="Other Settlements" parent="employee_gratuity"
+        <menuitem id="other_settlements" name="Settlements" parent="hr_employee_updation.menu_hr_management"
                   action="action_other_settlements" sequence="2" />
 
     </data>

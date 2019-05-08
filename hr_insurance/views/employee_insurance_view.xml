@@ -90,15 +90,15 @@
             </field>
         </record>
 
-        <menuitem
-                id="hr_insurance_main_menu"
-                parent ="hr.menu_hr_root"
-                name="HR Insurance"/>
+<!--        <menuitem-->
+<!--                id="hr_insurance_main_menu"-->
+<!--                parent ="hr.menu_hr_root"-->
+<!--                name="HR Insurance"/>-->
 
         <menuitem
                 id="hr_employee_insurance_menu"
-                name="Employee Insurance"
-                parent="hr_insurance_main_menu"
+                name="Insurance"
+                parent="hr_employee_updation.menu_hr_management"
                 action="action_employee_insurance_details"/>
     </data>
 </odoo>

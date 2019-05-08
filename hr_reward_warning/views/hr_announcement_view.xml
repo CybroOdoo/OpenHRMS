@@ -128,10 +128,11 @@
         </record>
 
         <menuitem id="hr_announcement"
-                  name="Official Announcements"
+                  name="Announcements"
                   groups="hr.group_hr_user,hr.group_hr_manager"
-                  parent="hr.menu_hr_root"
-                  sequence="15"/>
+                  web_icon="hr_reward_warning,static/description/announcement_icon.png"
+                  sequence="-6"/>
+
         <menuitem id="hr_announcement_sub_menu"
                   name="Announcements"
                   action="action_hr_announcement"

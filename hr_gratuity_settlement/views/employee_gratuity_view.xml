@@ -68,6 +68,19 @@
             </field>
         </record>
 
+        <record id="gratuity_view_pivot" model="ir.ui.view">
+            <field name="name">Gratuity Analysis</field>
+            <field name="model">hr.gratuity</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot View">
+                     <field name="employee_name" type="row"/>
+                     <field name="last_month_salary" type="measure"/>
+                     <field name="worked_years" type="measure"/>
+                     <field name="gratuity_amount" type="measure"/>
+                </pivot>
+         </field>
+        </record>
 
         <record id="action_employee_gratuity" model="ir.actions.act_window">
            <field name="name">Gratuity Settlement</field>
@@ -76,12 +89,20 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record id="action_view_pivot_gratuity" model="ir.actions.act_window">
+            <field name="name">Gratuity Analysis</field>
+            <field name="res_model">hr.gratuity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+            <field name="domain">[]</field>
+        </record>
 
-        <menuitem id="employee_gratuity" name="Employee Settlement" parent="hr.menu_hr_root"
+        <menuitem id="employee_gratuity" name="Employee Settlement" parent="hr_resignation.employee_resignation"
                    sequence="21" groups="hr.group_hr_manager"/>
         <menuitem id="gratuity_creation" name="Gratuity" parent="employee_gratuity"
                   action="action_employee_gratuity"  sequence="1"/>
-
+        <menuitem id="gratuity_pivot" name="Report" parent="employee_gratuity"
+                  action="action_view_pivot_gratuity" groups="hr.group_hr_manager"/>
 
 
     </data>

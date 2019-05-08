@@ -45,19 +45,17 @@ class HrEmployeeFamilyInfo(models.Model):
     _name = 'hr.employee.family'
     _description = 'HR Employee Family'
 
-    member_name = fields.Char(string='Name', related='employee_ref.name', store=True)
-    employee_ref = fields.Many2one(string="Is Employee",
-                                   help='If family member currently is an employee of same company, '
-                                        'then please tick this field',
-                                   comodel_name='hr.employee')
-    employee_id = fields.Many2one(string="Employee", help='Select corresponding Employee', comodel_name='hr.employee',
+
+    employee_id = fields.Many2one('hr.employee', string="Employee", help='Select corresponding Employee',
                                   invisible=1)
+
+    member_name = fields.Char(string='Name')
     relation = fields.Selection([('father', 'Father'),
                                  ('mother', 'Mother'),
                                  ('daughter', 'Daughter'),
                                  ('son', 'Son'),
                                  ('wife', 'Wife')], string='Relationship', help='Relation with employee')
-    member_contact = fields.Char(string='Contact No', related='employee_ref.personal_mobile', store=True)
+    member_contact = fields.Char(string='Contact No')
 
 
 class HrEmployee(models.Model):
@@ -97,7 +95,6 @@ class HrEmployee(models.Model):
                     }
                     self.env['mail.mail'].sudo().create(main_content).send()
     personal_mobile = fields.Char(string='Mobile', related='address_home_id.mobile', store=True)
-    emergency_contact = fields.One2many('hr.emergency.contact', 'employee_obj', string='Emergency Contact')
     joining_date = fields.Date(string='Joining Date')
     id_expiry_date = fields.Date(string='Expiry Date', help='Expiry date of Identification ID')
     passport_expiry_date = fields.Date(string='Expiry Date', help='Expiry date of Passport ID')
@@ -107,6 +104,7 @@ class HrEmployee(models.Model):
                                               string="Attachment",
                                               help='You can attach the copy of Passport')
     fam_ids = fields.One2many('hr.employee.family', 'employee_id', string='Family', help='Family Information')
+    emergency_contacts = fields.One2many('hr.emergency.contact', 'employee_obj', string='Emergency Contact')
 
 
 

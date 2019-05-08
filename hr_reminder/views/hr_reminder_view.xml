@@ -73,7 +73,8 @@
             </field>
         </record>
 
-         <menuitem name ="Hr Reminder" id="hr_reminder_menu" parent="hr.menu_hr_root" sequence="8"/>
+         <menuitem name ="Hr Reminder" id="hr_reminder_menu" web_icon="hr_reminder,static/description/reminder_icon.png"
+                   sequence="8"/>
          <menuitem name ="Reminder" id="reminder_menu" parent="hr_reminder_menu" action="action_hr_reminder"/>
 </data>
 </openerp>
