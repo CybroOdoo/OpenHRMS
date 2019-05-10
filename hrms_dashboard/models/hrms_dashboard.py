@@ -20,12 +20,19 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 ###################################################################################
+import logging
 from datetime import timedelta, datetime, date
 from dateutil.relativedelta import relativedelta
-import pandas as pd
 from odoo import models, fields, api, _
 from odoo.http import request
 from odoo.tools import float_utils
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import pandas as pd
+except ImportError:
+    _logger.warning("The `pandas` Python module is not installed. Please install the `pandas` Python module")
 
 
 class Employee(models.Model):
@@ -252,7 +259,8 @@ class Employee(models.Model):
                     if month.replace(' ', '') == line[0].replace(' ', ''):
                         match = list(filter(lambda d: d['l_month'] in [month], graph_result))[0]['leave']
                         dept_name = self.env['hr.department'].browse(line[1]).name
-                        match[dept_name] = result_lines[line]['days']
+                        if match:
+                            match[dept_name] = result_lines[line]['days']
         for result in graph_result:
             result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + result['l_month'].split(' ')[1:2][0]
         return graph_result, department_list
@@ -321,7 +329,8 @@ class Employee(models.Model):
             result_lines = rf.to_dict('index')
             for line in result_lines:
                 match = list(filter(lambda d: d['l_month'].replace(' ', '') == line.replace(' ', ''), graph_result))
-                match[0]['leave'] = result_lines[line]['days']
+                if match:
+                    match[0]['leave'] = result_lines[line]['days']
         for result in graph_result:
             result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + result['l_month'].split(' ')[1:2][0]
         return graph_result
@@ -361,10 +370,12 @@ class Employee(models.Model):
 
         for line in join_data:
             match = list(filter(lambda d: d['l_month'].replace(' ', '') == line[0].replace(' ', ''), join_trend))
-            match[0]['count'] = line[1]
+            if match:
+                match[0]['count'] = line[1]
         for line in resign_data:
             match = list(filter(lambda d: d['l_month'].replace(' ', '') == line[0].replace(' ', ''), resign_trend))
-            match[0]['count'] = line[1]
+            if match:
+                match[0]['count'] = line[1]
         for join in join_trend:
             join['l_month'] = join['l_month'].split(' ')[:1][0].strip()[:3]
         for resign in resign_trend:
