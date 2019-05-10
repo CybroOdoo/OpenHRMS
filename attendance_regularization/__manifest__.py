@@ -25,7 +25,7 @@
     'version': '11.0.1.0.0',
     'summary': """Assigning Attendance for the Employees with Onsite Jobs""",
     'description': """Assigning Attendance for the Employees with Onsite Jobs through the requests by Employees """,
-    'category': 'Human Resource',
+    'category': 'Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
