@@ -3,7 +3,7 @@
     'version': '12.0.1.0.0',
     'summary': """Assigning Attendance for the Employees with Onsight Jobs""",
     'description': """Assigning Attendance for the Employees with Onsight Jobs through the requests by Employees """,
-    'category': 'Human Resource',
+    'category': 'Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
