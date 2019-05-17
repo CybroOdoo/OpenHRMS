@@ -28,7 +28,7 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'category': 'Generic Modules/Human Resources',
     'website': "https://www.openhrms.com",
-    'depends': ['base', 'hr_resignation','mail','hr_payroll'],
+    'depends': ['base', 'hr_resignation','mail','hr_employee_updation'],
     'data': ['views/employee_gratuity_view.xml',
              'views/gratuity_sequence.xml',
              'views/other_settlements.xml',
