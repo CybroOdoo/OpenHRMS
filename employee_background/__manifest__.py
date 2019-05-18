@@ -30,7 +30,6 @@
     'website': "https://www.cybrosys.com",
     'depends': ['base', 'hr', 'hr_recruitment', 'mail', 'contacts','portal', 'website'],
     'data': [
-             'security/verification_security.xml',
              'security/ir.model.access.csv',
              'views/view_verification.xml',
              'views/res_partner_agent_view.xml',

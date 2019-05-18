@@ -1,4 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-agent_view_verification,view_verification_for_agent,model_employee_verification,group_hr_agent,1,1,1,1
-agent_view_details,view_details_for_agent,hr_recruitment.model_hr_applicant,group_hr_agent,1,0,0,1
 manager_view_verification,view_verification_for_manager,model_employee_verification,hr.group_hr_manager,1,1,1,1

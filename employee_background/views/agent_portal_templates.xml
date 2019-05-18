@@ -17,6 +17,8 @@
             </li>
             <li t-if="page_name == 'employee_details'">
                 <a t-if='records'>
+                    <a t-attf-href="/my/records?{{ keep_query() }}"><span style="padding-left:8px;">Employees</span></a>
+                    <span style="padding-left:8px;"></span>
                     <t t-esc="records.employee.name"/>
                 </a>
                 <t t-else="">Employees</t>
@@ -91,7 +93,10 @@
                         <td>Address</td>
                         <td>
                             <t t-if="records.address">
-                                <t t-esc="record.address.street"/>
+                                <t t-esc="record.address.street"/><br/>
+                                <t t-esc="record.address.street2"/><br/>
+                                <t t-esc="record.address.city"/><br/>
+                                <t t-esc="record.address.state_id.name"/><br/>
                             </t>
                         </td>
                     </tr>
@@ -107,7 +112,7 @@
                         <td>Private details</td>
                             <td>
                                 <a class="btn btn-info" target="_blank" t-attf-href="/web/content/#{record.resume_uploaded.id}?download=true">
-                                    <i class="fa fa-download fa-2x"></i> <h4>Download</h4>
+                                    <i class="fa fa-download btn btn-primary"></i> <h4>Download</h4>
                                 </a>
                             </td>
                     </tr>
@@ -139,7 +144,7 @@
                            lass="file"
                            id="records.id"/>
 <!--                    <button type="submit" name="redirect" class="btn btn-link btn-sm btn-block cybro-super-btn" style="margin-top:20px;">Submit</button>-->
-                    <button type="submit" name="Upload" style="margin-top:20px;" class="fa fa-upload">
+                    <button type="submit" name="Upload" style="margin-top:20px;" class="fa fa-upload btn btn-secondary">
                                     Upload
                     </button>
                 </div>
