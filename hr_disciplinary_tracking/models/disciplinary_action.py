@@ -5,9 +5,6 @@ from odoo.exceptions import ValidationError,UserError
 date_format = "%Y-%m-%d"
 
 
-class InheritEmpoyee(models.Model):
-    _inherit = 'hr.employee'
-
 class CategoryDiscipline(models.Model):
 
 
