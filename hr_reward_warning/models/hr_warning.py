@@ -22,6 +22,7 @@
 ###################################################################################
 from datetime import datetime
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class HrAnnouncementTable(models.Model):
