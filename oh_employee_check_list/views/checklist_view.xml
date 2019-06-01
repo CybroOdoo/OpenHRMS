@@ -30,8 +30,8 @@
         </field>
     </record>
 
-    <menuitem id="employee_entry_checklist_menu" name="Entry Checklist" parent="hr.menu_human_resources_configuration" sequence="3"
+    <menuitem id="employee_entry_checklist_menu" name="Entry Checklist" parent="checklist_settings" sequence="3"
               action="action_entry_checklist"/>
-    <menuitem id="employee_exit_checklist_menu" name="Exit Checklist" parent="hr.menu_human_resources_configuration" sequence="4"
+    <menuitem id="employee_exit_checklist_menu" name="Exit Checklist" parent="checklist_settings" sequence="4"
               action="action_exit_checklist"/>
 </odoo>

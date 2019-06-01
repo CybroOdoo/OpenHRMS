@@ -25,13 +25,7 @@ class EmployeeTransfer(models.Model):
     company_id = fields.Many2one('res.company', string='Company', required=True,
                                  related='employee_id.company_id', store=True)
     note = fields.Text(string='Internal Notes')
-    transferred = fields.Boolean(string='Transferred', copy=False, default=False, compute='_get_transferred')
     responsible = fields.Many2one('hr.employee', string='Responsible', default=_default_employee, readonly=True)
-
-    def _get_transferred(self):
-        if self:
-            if self.branch.company_id == self.env.user.company_id.id:
-                self.transferred = True
 
     @api.one
     def transfer(self):

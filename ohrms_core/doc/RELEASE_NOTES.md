@@ -1,10 +1,5 @@
 ## Module <ohrms_core>
 
-#### 01.02.2019
-#### Version 10.0.4.0.0
-##### ADD
-- Added Hrms link.
-
 #### 09.04.2018
 #### Version 10.0.3.0.0
 ##### ADD

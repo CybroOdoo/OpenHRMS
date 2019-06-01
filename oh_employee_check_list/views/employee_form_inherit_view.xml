@@ -12,7 +12,7 @@
                 </div>
             </field>
             <page name="hr_settings" position="after">
-                <page name="checklist" string="Checklist">
+                <page name="checklist" string="Checklist" groups="hr.group_hr_manager">
                     <group>
                         <group name="entry_checklist" string="Entry Checklist">
                             <field name="entry_checklist" widget="many2many_checkboxes"/>

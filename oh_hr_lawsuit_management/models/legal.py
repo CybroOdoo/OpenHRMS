@@ -27,7 +27,7 @@ from odoo import models, fields, api, _
 class HrLawsuit(models.Model):
     _name = 'hr.lawsuit'
     _description = 'Hr Lawsuit Management'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'ir.needaction_mixin']
 
     @api.model
     def create(self, vals):
@@ -62,9 +62,9 @@ class HrLawsuit(models.Model):
     requested_date = fields.Date(string='Date', copy=False, readonly=1, default=datetime.now(),
                                  states={'draft': [('readonly', False)]})
     court_name = fields.Char(string='Court Name', track_visibility='always',
-                             states={'won': [('readonly', True)],'fail':[('readonly', True)]})
-    judge = fields.Char(string='Judge', track_visibility='always', states={'won': [('readonly', True)],'fail':[('readonly', True)]})
-    lawyer = fields.Char(string='Lawyer', track_visibility='always', states={'won': [('readonly', True)],'fail':[('readonly', True)]})
+                             states={'won': [('readonly', True)]})
+    judge = fields.Char(string='Judge', track_visibility='always', states={'won': [('readonly', True)]})
+    lawyer = fields.Char(string='Lawyer', track_visibility='always', states={'won': [('readonly', True)]})
     party1 = fields.Many2one('res.company', string='Party 1', required=1, readonly=1,
                              states={'draft': [('readonly', False)]})
     party2 = fields.Selection([('employee', 'Employee')], default='employee',
@@ -72,7 +72,7 @@ class HrLawsuit(models.Model):
     employee_id = fields.Many2one('hr.employee', string='Employee', copy=False,
                                   readonly=1, states={'draft': [('readonly', False)]})
     party2_name = fields.Char(compute='set_party2', string='Name', store=True)
-    case_details = fields.Html(string='Case Details', copy=False, track_visibility='always',states={'won': [('readonly', True)],'fail':[('readonly', True)]})
+    case_details = fields.Html(string='Case Details', copy=False, track_visibility='always')
     state = fields.Selection([('draft', 'Draft'),
                               ('running', 'Running'),
                               ('cancel', 'Cancelled'),
