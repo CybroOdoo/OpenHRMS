@@ -28,7 +28,7 @@
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
-    'website': "https://www.cybrosys.com",
+    'website': "https://www.openhrms.com",
     'depends': ['base', 'oh_employee_documents_expiry'],
     'data': [
         'views/employee_form_inherit_view.xml',

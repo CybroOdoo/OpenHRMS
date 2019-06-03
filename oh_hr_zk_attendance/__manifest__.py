@@ -27,7 +27,7 @@
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions, Mostafa Shokiel',
     'company': 'Cybrosys Techno Solutions',
-    'website': "http://www.openhrms.com",
+    'website': "https://www.openhrms.com",
     'depends': ['base_setup', 'hr_attendance'],
     'data': [
         'security/ir.model.access.csv',

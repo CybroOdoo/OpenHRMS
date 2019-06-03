@@ -27,7 +27,7 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
-    'website': "https://www.cybrosys.com",
+    'website': "https://www.openhrms.com",
     'depends': ['base', 'hr', 'hr_recruitment', 'mail', 'contacts','portal', 'website'],
     'data': [
              'security/ir.model.access.csv',
