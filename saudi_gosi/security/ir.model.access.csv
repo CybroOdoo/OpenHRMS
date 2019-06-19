@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+adminzz_id,adminzz_name,model_gosi_payslip,hr.group_hr_manager,1,1,1,1
+userzz_id,userzz_name,hr.model_hr_employee,hr.group_hr_manager,1,1,1,0

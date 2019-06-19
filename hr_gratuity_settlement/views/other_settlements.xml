@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="settlement_reason_form" model="ir.ui.view">
+            <field name="name">settlement.reason.form</field>
+            <field name="model">settlement.reason</field>
+            <field name="arch" type="xml">
+                <form string="Settlement Reasons">
+                        <group>
+                            <group>
+                              <field name="settlement_reason"/>
+                              <field name="description"/>
+                            </group>
+                        </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="other_settlements_tree" model="ir.ui.view">
+            <field name="name">other.settlements.tree</field>
+            <field name="model">other.settlements</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Gratuity">
+                    <field name ="name"/>
+                    <field name ="employee_name"/>
+                    <field name ="gratuity_amount" sum="Total" widget="monetary" />
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name ="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="other_settlements_form" model="ir.ui.view">
+            <field name="name">other.settlements.form</field>
+            <field name="model">other.settlements</field>
+            <field name="arch" type="xml">
+                <form string="Employee Settlements">
+                    <header>
+                         <button name="validate_function" type="object" string="Validate" class="oe_highlight" states="draft"/>
+                         <button name="approve_function" type="object" string="Confirm" class="oe_highlight" states="validate"/>
+                         <button name="cancel_function" type="object" string="Cancel" states="draft,validate"/>
+                        <button name="draft_function" type="object" string="Set to Draft" states="cancel"/>
+
+                         <field name="state" widget="statusbar"   statusbar_visible="draft,validate,approve"/>
+                    </header>
+                        <sheet>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                </h1>
+                            </div>
+                                <table>
+                                        <tr>
+                                            <h2>
+                                                <td>
+                                                    <group>
+                                                        <field name ="employee_name"  string="Employee" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                                    </group>
+                                                </td>
+                                            </h2>
+                                        </tr>
+                                </table>
+                                <group>
+                                    <group>
+                                        <field name="reason" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                        <field name="joined_date" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                        <field name="worked_years"  required="True" readonly="True"/>
+                                        <field name="allowance" states="validate,approve" attrs="{'readonly': [('state','=','approve')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="last_month_salary"  states="validate,approve" attrs="{'readonly': [('state','=','approve')]}"/>
+                                        <field name="gratuity_amount" states="approve" readonly="True"/>
+                                    </group>
+
+                                </group>
+                        </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="settlement_view_pivot" model="ir.ui.view">
+            <field name="name">Settlement Analysis</field>
+            <field name="model">other.settlements</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot View">
+                     <field name="employee_name" type="row"/>
+                     <field name="last_month_salary" type="measure"/>
+                     <field name="worked_years" type="measure"/>
+                     <field name="gratuity_amount" type="measure"/>
+                </pivot>
+         </field>
+        </record>
+
+
+        <record id="action_other_settlements" model="ir.actions.act_window">
+           <field name="name">Settlements</field>
+           <field name="res_model">other.settlements</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="other_settlements" name="Settlements" parent="hr_employee_updation.menu_hr_management"
+                  action="action_other_settlements" sequence="2" />
+
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_gosi_sequence" model="ir.sequence">
+            <field name="name">Open HRMS Saudi Gosi</field>
+            <field name="code">gosi.payslip</field>
+            <field name="prefix">EG</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

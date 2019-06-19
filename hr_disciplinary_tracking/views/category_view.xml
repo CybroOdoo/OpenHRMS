@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+             <!--Discipline Category Creation-->
+
+        <record id="discipline_category_care" model="discipline.category">
+            <field name="code">RULES</field>
+            <field name="name">Violation of Company Rules</field>
+        </record>
+        <record id="discipline_category_behave" model="discipline.category">
+            <field name="code">BEHAVE</field>
+            <field name="name">Misbehaviour to Co-workers</field>
+        </record>
+        <record id="discipline_category_damage" model="discipline.category">
+            <field name="code">DAMAGE</field>
+            <field name="name">Damage to Company Properties</field>
+        </record>
+        <record id="discipline_category_instruction" model="discipline.category">
+            <field name="code">INSTRUCTION</field>
+            <field name="name">Not Follow Management Instructions</field>
+        </record>
+         <record id="discipline_category_performence" model="discipline.category">
+            <field name="code">INSTRUCTION</field>
+            <field name="name">Work Performance Issues</field>
+        </record>
+
+                <!--Action Category Creation-->
+
+        <record id="action_category_noact" model="action.category">
+            <field name="code">NOACTION</field>
+            <field name="name">No Action</field>
+        </record>
+
+        <record id="action_category_verb" model="action.category">
+            <field name="code">VERBAL</field>
+            <field name="name">Verbal Warning</field>
+        </record>
+
+
+        <record id="action_category_wrt" model="action.category">
+            <field name="code">WRITTEN</field>
+            <field name="name">Written Warning</field>
+        </record>
+
+        <record id="action_category_meet" model="action.category">
+            <field name="code">MEET</field>
+            <field name="name">Meet the Manager</field>
+        </record>
+
+        <record id="action_category_susp" model="action.category">
+            <field name="code">SUSPENSION</field>
+            <field name="name">Suspend the Employee</field>
+            <field name="name">Suspend the Employee for one Week</field>
+        </record>
+
+        <record id="action_category_term" model="action.category">
+            <field name="code">TERMINATE</field>
+            <field name="name">Terminate the Employee</field>
+        </record>
+
+		    <!--Discipline Category View-->
+
+	<record id="disciplinary_category_view_tree" model="ir.ui.view">
+            <field name="name">discipline.category.tree</field>
+            <field name="model">discipline.category</field>
+            <field name="arch" type="xml">
+                <tree string="Discipline Categories">
+                   <field name="name"/>		    
+                </tree>
+            </field>
+        </record>
+	
+        
+        <record id="disciplinary_category_view_form" model="ir.ui.view">
+            <field name="name">discipline.category.form</field>
+            <field name="model">discipline.category</field>
+            <field name="arch" type="xml">
+                <form string="Discipline Category">
+                    <sheet>
+                        <group>
+                        <field name="name" required="True"/>
+                        <field name="code" required="True"/>
+			            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+		  
+               <!--Action Category View-->
+
+	<record id="category_action_view_tree" model="ir.ui.view">
+            <field name="name">action.category.tree</field>
+            <field name="model">action.category</field>
+            <field name="arch" type="xml">
+                <tree string="Action Categories">
+                   <field name="name"/>		    
+                </tree>
+            </field>
+        </record>
+        
+        <record id="category_action_view_form" model="ir.ui.view">
+            <field name="name">action.category.form</field>
+            <field name="model">action.category</field>
+            <field name="arch" type="xml">
+                <form string="Action Category">
+                    <sheet>
+                        <group>
+                        <field name="name" required="True"/>
+                        <field name="code" required="True"/>
+                        <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+	<record id="action_disciplinary_category_view" model="ir.actions.act_window">
+            <field name="name">Discipline Categories</field>
+            <field name="res_model">discipline.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+	<record id="action_category_action_view" model="ir.actions.act_window">
+            <field name="name">Action Categories</field>
+            <field name="res_model">action.category</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+	<menuitem id="disciplinary_category_view" action="action_disciplinary_category_view"  groups="hr.group_hr_manager" name="Discipline Category" parent="disciplinary_action"
+                    sequence="3"/>
+
+	<menuitem id="action_category_view" action="action_category_action_view" name="Action Category"  groups="hr.group_hr_manager" parent="disciplinary_action"
+                    sequence="4"/>
+
+
+    </data>
+</odoo>

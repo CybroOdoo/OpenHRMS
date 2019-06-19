@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_gratuity_tree" model="ir.ui.view">
+            <field name="name">hr.gratuity.tree</field>
+            <field name="model">hr.gratuity</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Gratuity">
+                    <field name ="name"/>
+                    <field name ="employee_name"/>
+                    <field name ="gratuity_amount"   sum="Total amount"  widget="monetary" />
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name ="state"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="employee_gratuity_form" model="ir.ui.view">
+            <field name="name">hr.gratuity.form</field>
+            <field name="model">hr.gratuity</field>
+            <field name="arch" type="xml">
+                <form string="Employee Gratuity">
+                    <header>
+                         <button name="validate_function" type="object" string="Validate" class="oe_highlight" states="draft"/>
+                         <button name="approve_function" type="object" string="Confirm" class="oe_highlight" states="validate"/>
+                         <button name="cancel_function" type="object" string="Cancel" states="draft,validate"/>
+                         <button name="draft_function" type="object" string="Set to Draft" states="cancel"/>
+
+                         <field name="state" widget="statusbar"   statusbar_visible="draft,validate,approve"/>
+                    </header>
+                        <sheet>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                </h1>
+                            </div>
+                                <table>
+                                        <tr>
+                                            <h2>
+                                                <td>
+                                                    <group>
+                                                        <field name ="employee_name"  string="Employee" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                                    </group>
+                                                </td>
+                                            </h2>
+                                        </tr>
+                                </table>
+                                <group>
+                                    <group>
+                                        <field name="joined_date" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                        <field name="worked_years"  required="True" readonly="True"/>
+                                        <field name="allowance" states="validate,approve" attrs="{'readonly': [('state','=','approve')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="last_month_salary"  states="validate,approve" attrs="{'readonly': [('state','=','approve')]}"/>
+                                        <field name="gratuity_amount"  states="approve" readonly="True"/>
+                                    </group>
+
+                                </group>
+                        </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="gratuity_view_pivot" model="ir.ui.view">
+            <field name="name">Gratuity Analysis</field>
+            <field name="model">hr.gratuity</field>
+            <field name="type">pivot</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot View">
+                     <field name="employee_name" type="row"/>
+                     <field name="last_month_salary" type="measure"/>
+                     <field name="worked_years" type="measure"/>
+                     <field name="gratuity_amount" type="measure"/>
+                </pivot>
+         </field>
+        </record>
+
+        <record id="action_employee_gratuity" model="ir.actions.act_window">
+           <field name="name">Gratuity Settlement</field>
+           <field name="res_model">hr.gratuity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_view_pivot_gratuity" model="ir.actions.act_window">
+            <field name="name">Gratuity Analysis</field>
+            <field name="res_model">hr.gratuity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem id="employee_gratuity" name="Employee Settlement" parent="hr_resignation.employee_resignation"
+                   sequence="21" groups="hr.group_hr_manager"/>
+        <menuitem id="gratuity_creation" name="Gratuity" parent="employee_gratuity"
+                  action="action_employee_gratuity"  sequence="1"/>
+        <menuitem id="gratuity_pivot" name="Report" parent="employee_gratuity"
+                  action="action_view_pivot_gratuity" groups="hr.group_hr_manager"/>
+
+
+    </data>
+</odoo>
