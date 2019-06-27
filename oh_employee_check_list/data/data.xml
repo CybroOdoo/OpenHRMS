@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="1">
     <record id="entry_document1" model="employee.checklist">
         <field name="name">Education Certificate</field>
         <field name="document_type">entry</field>

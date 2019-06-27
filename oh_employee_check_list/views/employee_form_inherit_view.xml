@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <field name="category_ids" position="after">
                 <div>
-                    <field name="entry_progress" widget="percentpie"/>
+                    <field name="entry_progress" widget="percentpie" class="oe_inline"/>
                     <field name="exit_progress" widget="percentpie" class="oe_inline"/>
                 </div>
             </field>

@@ -44,7 +44,8 @@ class EmployeeEntryDocuments(models.Model):
     name = fields.Char(string='Name', copy=False, required=1)
     document_type = fields.Selection([('entry', 'Entry Process'),
                                       ('exit', 'Exit Process'),
-                                      ('other', 'Other')], string='Checklist Type', help='Type of Checklist', readonly=1, required=1)
+                                      ('other', 'Other')], string='Checklist Type',
+                                     help='Type of Checklist', readonly=1, required=1)
 
 
 class HrEmployeeDocumentInherit(models.Model):
@@ -63,6 +64,7 @@ class EmployeeMasterInherit(models.Model):
             entry_len = len(each.exit_checklist)
             if total_len != 0:
                 each.exit_progress = (entry_len * 100) / total_len
+                print(total_len)
 
     @api.depends('entry_checklist')
     def entry_progress(self):
@@ -87,6 +89,7 @@ class EmployeeMasterInherit(models.Model):
 class EmployeeDocumentInherit(models.Model):
     _inherit = 'hr.employee.document'
 
+
     @api.model
     def create(self, vals):
         result = super(EmployeeDocumentInherit, self).create(vals)
@@ -100,9 +103,9 @@ class EmployeeDocumentInherit(models.Model):
     def unlink(self):
         for result in self:
             if result.document_name.document_type == 'entry':
-                result.employee_ref.write({'entry_checklist': [(5, result.document_name.id)]})
+                result.employee_ref.write({'entry_checklist': [(3, result.document_name.id)]})
             if result.document_name.document_type == 'exit':
-                result.employee_ref.write({'exit_checklist': [(5, result.document_name.id)]})
+                result.employee_ref.write({'exit_checklist': [(3, result.document_name.id)]})
         res = super(EmployeeDocumentInherit, self).unlink()
         return res
 
