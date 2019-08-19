@@ -35,7 +35,8 @@ class ResUsersInherit(models.Model):
         """This code is to create an employee while creating an user."""
 
         result = super(ResUsersInherit, self).create(vals)
-        result['employee_id'] = self.env['hr.employee'].sudo().create({'name': result['name'],
+        if not result['employee_id'] :
+            result['employee_id'] = self.env['hr.employee'].sudo().create({'name': result['name'],
                                                                        'user_id': result['id'],
                                                                        'address_home_id': result['partner_id'].id})
         return result
