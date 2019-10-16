@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api,_
+from odoo import models, fields, api, _
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from odoo.exceptions import ValidationError, UserError
@@ -100,7 +100,7 @@ class HrLoan(models.Model):
         for loan in self:
             if loan.state not in ('draft', 'cancel'):
                 raise UserError(
-                    'You cannot delete a loan which is not in draft or cancelled state')
+                    _('You cannot delete a loan which is not in draft or cancelled state'))
         return super(HrLoan, self).unlink()
 
     @api.multi
