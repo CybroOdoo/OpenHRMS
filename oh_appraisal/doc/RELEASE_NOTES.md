@@ -9,3 +9,8 @@
 #### Version 12.0.1.0.1
 ##### FIX
 - Fixed TypeError Git Issue #15
+
+#### 22/10/2019
+#### Version 12.0.1.1.1
+##### FIX
+- Access Right Issue
