@@ -54,7 +54,7 @@
 	    'views/template_view.xml',
     ],
     'demo': [],
-    'images': ['static/description/banner.gif'],
+    'images': ['static/description/banner.jpg'],
     'qweb': ["static/src/xml/link_view.xml"],
     'license': 'AGPL-3',
     'installable': True,
