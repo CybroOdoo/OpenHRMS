@@ -1,13 +1,26 @@
 # -*- coding: utf-8 -*-
 import time
-from odoo import models, api
+from odoo import models, api,fields
 from odoo.exceptions import UserError
 
 
 class HrLoanAcc(models.Model):
     _inherit = 'hr.loan'
 
-    @api.multi
+    employee_account_id = fields.Many2one('account.account', string="Loan Account")
+    treasury_account_id = fields.Many2one('account.account', string="Treasury Account")
+    journal_id = fields.Many2one('account.journal', string="Journal")
+
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('waiting_approval_1', 'Submitted'),
+        ('waiting_approval_2', 'Waiting Approval'),
+        ('approve', 'Approved'),
+        ('refuse', 'Refused'),
+        ('cancel', 'Canceled'),
+    ], string="State", default='draft', track_visibility='onchange', copy=False, )
+
+    
     def action_approve(self):
         """This create account move for request.
             """
@@ -20,7 +33,7 @@ class HrLoanAcc(models.Model):
         if loan_approve:
             self.write({'state': 'waiting_approval_2'})
         else:
-            if not self.emp_account_id or not self.treasury_account_id or not self.journal_id:
+            if not self.employee_account_id or not self.treasury_account_id or not self.journal_id:
                 raise UserError("You must enter employee account & Treasury account and journal to approve ")
             if not self.loan_lines:
                 raise UserError('You must compute Loan Request before Approved')
@@ -31,7 +44,7 @@ class HrLoanAcc(models.Model):
                 reference = loan.name
                 journal_id = loan.journal_id.id
                 debit_account_id = loan.treasury_account_id.id
-                credit_account_id = loan.emp_account_id.id
+                credit_account_id = loan.employee_account_id.id
                 debit_vals = {
                     'name': loan_name,
                     'account_id': debit_account_id,
@@ -63,11 +76,11 @@ class HrLoanAcc(models.Model):
             self.write({'state': 'approve'})
         return True
 
-    @api.multi
+    
     def action_double_approve(self):
         """This create account move for request in case of double approval.
             """
-        if not self.emp_account_id or not self.treasury_account_id or not self.journal_id:
+        if not self.employee_account_id or not self.treasury_account_id or not self.journal_id:
             raise UserError("You must enter employee account & Treasury account and journal to approve ")
         if not self.loan_lines:
             raise UserError('You must compute Loan Request before Approved')
@@ -78,7 +91,7 @@ class HrLoanAcc(models.Model):
             reference = loan.name
             journal_id = loan.journal_id.id
             debit_account_id = loan.treasury_account_id.id
-            credit_account_id = loan.emp_account_id.id
+            credit_account_id = loan.employee_account_id.id
             debit_vals = {
                 'name': loan_name,
                 'account_id': debit_account_id,
@@ -114,7 +127,7 @@ class HrLoanAcc(models.Model):
 class HrLoanLineAcc(models.Model):
     _inherit = "hr.loan.line"
 
-    @api.one
+
     def action_paid_amount(self):
         """This create the account move line for payment of each installment.
             """
@@ -126,7 +139,7 @@ class HrLoanLineAcc(models.Model):
             loan_name = line.employee_id.name
             reference = line.loan_id.name
             journal_id = line.loan_id.journal_id.id
-            debit_account_id = line.loan_id.emp_account_id.id
+            debit_account_id = line.loan_id.employee_account_id.id
             credit_account_id = line.loan_id.treasury_account_id.id
             debit_vals = {
                 'name': loan_name,
@@ -160,7 +173,7 @@ class HrLoanLineAcc(models.Model):
 class HrPayslipAcc(models.Model):
     _inherit = 'hr.payslip'
 
-    @api.multi
+    
     def action_payslip_done(self):
         for line in self.input_line_ids:
             if line.loan_line_id:

@@ -9,10 +9,10 @@ class DepartmentDetails(models.Model):
 
     @api.onchange('department_id')
     def _onchange_department(self):
-        emp_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
+        employee_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
         vals = {
-            'emp_id': self._origin.id,
-            'employee_name': emp_id.name,
+            'employee_id': self._origin.id,
+            'employee_name': employee_id.name,
             'updated_date': datetime.now(),
             'changed_field': 'Department',
             'current_value': self.department_id.name
@@ -22,10 +22,10 @@ class DepartmentDetails(models.Model):
 
     @api.onchange('job_id')
     def onchange_job_id(self):
-        emp_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
+        employee_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
         vals = {
-            'emp_id': self._origin.id,
-            'employee_name': emp_id.name,
+            'employee_id': self._origin.id,
+            'employee_name': employee_id.name,
             'updated_date': datetime.today(),
             'changed_field': 'Job Position',
             'current_value': self.job_id.name
@@ -35,16 +35,16 @@ class DepartmentDetails(models.Model):
 
     @api.onchange('timesheet_cost')
     def _onchange_timesheet_cost(self):
-        emp_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
+        employee_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
         vals = {
-            'emp_id': self._origin.id,
-            'employee_name': emp_id.name,
+            'employee_id': self._origin.id,
+            'employee_name': employee_id.name,
             'updated_date': datetime.now(),
             'current_value': self.timesheet_cost
         }
         self.env['timesheet.cost'].sudo().create(vals)
 
-    @api.multi
+    
     def department_details(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -55,7 +55,7 @@ class DepartmentDetails(models.Model):
                 'res_model': 'department.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
-                'domain': [('emp_id', '=', self.id)],
+                'domain': [('employee_id', '=', self.id)],
             }
         elif self.id == self.env.user.employee_id.id:
             return {
@@ -69,7 +69,7 @@ class DepartmentDetails(models.Model):
         else:
             raise UserError('You cannot access this field!!!!')
 
-    @api.multi
+    
     def time_sheet(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -80,7 +80,7 @@ class DepartmentDetails(models.Model):
                 'res_model': 'timesheet.cost',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
-                'domain': [('emp_id', '=', self.id)]
+                'domain': [('employee_id', '=', self.id)]
             }
         elif self.id == self.env.user.employee_id.id:
             return {
@@ -94,7 +94,7 @@ class DepartmentDetails(models.Model):
         else:
             raise UserError('You cannot access this field!!!!')
 
-    @api.multi
+    
     def salary_history(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -105,7 +105,7 @@ class DepartmentDetails(models.Model):
                 'res_model': 'salary.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
-                'domain': [('emp_id', '=', self.id)]
+                'domain': [('employee_id', '=', self.id)]
             }
         elif self.id == self.env.user.employee_id.id:
             return {
@@ -119,7 +119,7 @@ class DepartmentDetails(models.Model):
         else:
             raise UserError('You cannot access this field!!!!')
 
-    @api.multi
+    
     def contract_history(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -130,7 +130,7 @@ class DepartmentDetails(models.Model):
                 'res_model': 'contract.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
-                'domain': [('emp_id', '=', self.id)]
+                'domain': [('employee_id', '=', self.id)]
             }
         if self.id == self.env.user.employee_id.id:
             return {
@@ -151,7 +151,7 @@ class WageDetails(models.Model):
     @api.onchange('wage')
     def onchange_wage(self):
         vals = {
-            'emp_id': self.employee_id.id,
+            'employee_id': self.employee_id.id,
             'employee_name': self.employee_id,
             'updated_date': datetime.today(),
             'current_value': self.wage,
@@ -162,7 +162,7 @@ class WageDetails(models.Model):
     @api.onchange('name')
     def onchange_name(self):
         vals = {
-            'emp_id': self.employee_id.id,
+            'employee_id': self.employee_id.id,
             'employee_name': self.employee_id,
             'updated_date': datetime.today(),
             'changed_field': 'Contract Reference',
@@ -174,7 +174,7 @@ class WageDetails(models.Model):
     @api.onchange('date_start')
     def onchange_datestart(self):
         vals = {
-            'emp_id': self.employee_id.id,
+            'employee_id': self.employee_id.id,
             'employee_name': self.employee_id,
             'updated_date': datetime.today(),
             'changed_field': 'Start Date',
@@ -186,7 +186,7 @@ class WageDetails(models.Model):
     @api.onchange('date_end')
     def onchange_dateend(self):
         vals = {
-            'emp_id': self.employee_id.id,
+            'employee_id': self.employee_id.id,
             'employee_name': self.employee_id,
             'updated_date': datetime.today(),
             'changed_field': 'End Date',
@@ -199,7 +199,7 @@ class WageDetails(models.Model):
 class DepartmentHistory(models.Model):
     _name = 'department.history'
 
-    emp_id = fields.Char(string='Employee Id')
+    employee_id = fields.Char(string='Employee Id')
     employee_name = fields.Char(string='Employee Name')
     changed_field = fields.Char(string='Changed Field')
     updated_date = fields.Date(string='Updated On')
@@ -209,7 +209,7 @@ class DepartmentHistory(models.Model):
 class TimesheetCost(models.Model):
     _name = 'timesheet.cost'
 
-    emp_id = fields.Char(string='Employee Id')
+    employee_id = fields.Char(string='Employee Id')
     employee_name = fields.Char(string='Employee Name')
     updated_date = fields.Date(string='Updated On')
     current_value = fields.Char(string='Current Value')
@@ -218,7 +218,7 @@ class TimesheetCost(models.Model):
 class SalaryHistory(models.Model):
     _name = 'salary.history'
 
-    emp_id = fields.Char(string='Employee Id')
+    employee_id = fields.Char(string='Employee Id')
     employee_name = fields.Char(string='Employee Name')
     updated_date = fields.Date(string='Updated On')
     current_value = fields.Char(string='Current Value')
@@ -227,7 +227,7 @@ class SalaryHistory(models.Model):
 class ContractHistory(models.Model):
     _name = 'contract.history'
 
-    emp_id = fields.Char(string='Employee Id')
+    employee_id = fields.Char(string='Employee Id')
     employee_name = fields.Char(string='Employee Name')
     updated_date = fields.Date(string='Updated On')
     changed_field = fields.Char(string='Changed Field')

@@ -68,13 +68,12 @@
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                Click here to create new reminder.
+                Click here to configure new periodic reminder.
               </p>
             </field>
         </record>
 
-         <menuitem name ="Hr Reminder" id="hr_reminder_menu" web_icon="hr_reminder,static/description/reminder_icon.png"
-                   sequence="8"/>
-         <menuitem name ="Reminder" id="reminder_menu" parent="hr_reminder_menu" action="action_hr_reminder"/>
+         <menuitem name ="Reminders" id="hr_reminder_menu" web_icon="hr_reminder,static/description/reminder_icon.png"
+		action="action_hr_reminder" sequence="8"/>
 </data>
 </openerp>

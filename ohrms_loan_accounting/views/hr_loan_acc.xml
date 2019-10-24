@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <record id="hr_loan_inherited" model="ir.ui.view">
-        <field name="name">HR LOAN</field>
-        <field name="model">hr.loan</field>
-        <field name="inherit_id" ref="ohrms_loan.hr_loan_form_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='emp_account_id']" position="attributes">
-                    <attribute name="invisible">0</attribute>
-            </xpath>
-            <xpath expr="//field[@name='treasury_account_id']" position="attributes">
-                    <attribute name="invisible">0</attribute>
-            </xpath>
-            <xpath expr="//field[@name='journal_id']" position="attributes">
-                    <attribute name="invisible">0</attribute>
-            </xpath>
-        </field>
-    </record>
-
+    <data>
+        <record id="hr_loan_inherited" model="ir.ui.view">
+            <field name="name">HR LOAN</field>
+            <field name="model">hr.loan</field>
+            <field name="inherit_id" ref="ohrms_loan.hr_loan_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="replace">
+                   <header>
+                        <button name="action_submit" type="object" string="Submit" states="draft" class="oe_highlight"/>
+                        <button name="action_cancel" type="object" string="Cancel" states="draft" />
+                        <button name="action_approve" type="object" string="Approve" states="waiting_approval_1" class="oe_highlight" groups="hr.group_hr_manager,hr.group_hr_user"/>
+                        <button name="action_double_approve" type="object" string="Approve" states="waiting_approval_2" class="oe_highlight" groups="account.group_account_user,account.group_account_manager"/>
+                        <button name="action_refuse" type="object" string="Refuse" states="waiting_approval_1,waiting_approval_2" class="oe_highlight" groups="hr.group_hr_manager,hr.group_hr_user"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval_1,approve" />
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='loan_amount']" position="after">
+                    <field name="employee_account_id"  attrs="{'invisible':['|',('state', '=','draft'),('state', '=','waiting_approval_1')]}"/>
+                    <field name="treasury_account_id"  attrs="{'invisible':['|',('state', '=','draft'),('state', '=','waiting_approval_1')]}"/>
+                    <field name="journal_id"  attrs="{'invisible':['|',('state', '=','draft'),('state', '=','waiting_approval_1')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
 </odoo>

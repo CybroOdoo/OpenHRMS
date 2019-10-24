@@ -81,7 +81,6 @@
             <field name="name">Salary Advance</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">salary.advance</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_salary_advance_filter"/>
             <field name="context">{'search_default_my_requests_filter':1}</field>
@@ -97,7 +96,6 @@
             <field name="name">Salary Advance</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">salary.advance</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_salary_advance_filter"/>
             <field name="context">{'search_default_approved':1}</field>
@@ -113,7 +111,6 @@
             <field name="name">Salary Advance</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">salary.advance</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_salary_advance_filter"/>
             <field name="context">{'search_default_submitted': 1}</field>

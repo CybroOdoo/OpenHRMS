@@ -3,12 +3,12 @@
     <data noupdate="1">
         <record id="contribution_register_gosi" model="hr.contribution.register">
             <field name="name">GOSI Contribution For Saudi Employee</field>
-            <field name="partner_id" eval="False"></field>
+            <field name="partner_id" eval="False"/>
         </record>
 
         <record id="contribution_register_gosicompany" model="hr.contribution.register">
             <field name="name">GOSI Company Contribution For Saudi Employee</field>
-            <field name="partner_id" eval="False"></field>
+            <field name="partner_id" eval="False"/>
         </record>
         <record id="GOSI" model="hr.salary.rule.category">
             <field name="name">GOSI</field>
@@ -23,8 +23,9 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = ((contract.wage+(contract.wage*3/12))*9/100)</field>
-            <field name="register_id" ref="contribution_register_gosi"></field>
+            <field name="register_id" ref="contribution_register_gosi"/>
         </record>
+
 
         <record id="hr_rule_gosi_comp" model="hr.salary.rule">
             <field name="name">GOSI Company Contribution For Saudi Employee</field>
@@ -34,7 +35,7 @@
             <field name="condition_select">none</field>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = (((contract.wage+(contract.wage*3/12))*9/100)+(contract.wage*2/100))</field>
-            <field name="register_id" ref="contribution_register_gosicompany"></field>
+            <field name="register_id" ref="contribution_register_gosicompany"/>
         </record>
 
         <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">

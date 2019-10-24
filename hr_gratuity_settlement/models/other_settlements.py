@@ -19,7 +19,7 @@ class OtherSettlements(models.Model):
 
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
-    employee_name = fields.Many2one('hr.employee', string='Employee', required=True)
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
     joined_date = fields.Date(string="Joined Date")
     worked_years = fields.Integer(string="Total Work Years")
     last_month_salary = fields.Integer(string="Last Salary", required=True, default=0)
@@ -38,19 +38,19 @@ class OtherSettlements(models.Model):
         return super(OtherSettlements, self).create(vals)
 
     # Check whether any Settlement request already exists
-    @api.onchange('employee_name')
-    @api.depends('employee_name')
+    @api.onchange('employee_id')
+    @api.depends('employee_id')
     def check_request_existence(self):
         for rec in self:
-            if rec.employee_name:
-                settlement_request = self.env['other.settlements'].search([('employee_name', '=', rec.employee_name.id),
+            if rec.employee_id:
+                settlement_request = self.env['other.settlements'].search([('employee_id', '=', rec.employee_id.id),
                                                                            ('state', 'in', ['draft', 'validate', 'approve'])])
                 if settlement_request:
 
                     raise ValidationError(_('A Settlement request is already processed'
                                                 ' for this employee'))
 
-    @api.multi
+    
     def validate_function(self):
         # calculating the years of work by the employee
         worked_years = int(datetime.datetime.now().year) - int(str(self.joined_date).split('-')[0])
@@ -62,7 +62,7 @@ class OtherSettlements(models.Model):
             cr = self._cr  # find out the correct  date of last salary of  employee
             query = """select amount from hr_payslip_line psl 
                        inner join hr_payslip ps on ps.id=psl.slip_id
-                       where ps.employee_id="""+str(self.employee_name.id)+\
+                       where ps.employee_id="""+str(self.employee_id.id)+\
                        """and ps.state='done' and psl.code='NET' 
                        order by ps.date_from desc limit 1"""
 

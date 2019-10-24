@@ -62,21 +62,16 @@ class HrPayslip(models.Model):
         contract_obj = self.env['hr.contract']
         emp_id = contract_obj.browse(contract_ids[0].id).employee_id
         lon_obj = self.env['hr.loan'].search([('employee_id', '=', emp_id.id), ('state', '=', 'approve')])
-        print(lon_obj)
         for loan in lon_obj:
-            print(loan.loan_lines)
             for loan_line in loan.loan_lines:
-                print(loan_line)
                 if date_from <= loan_line.date <= date_to and not loan_line.paid:
                     for result in res:
-                        print(result.get('code'))
                         if result.get('code') == 'LO':
                             result['amount'] = loan_line.amount
                             result['loan_line_id'] = loan_line.id
-        print(res)
         return res
 
-    @api.multi
+    
     def action_payslip_done(self):
         for line in self.input_line_ids:
             if line.loan_line_id:

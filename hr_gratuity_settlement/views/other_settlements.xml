@@ -22,7 +22,7 @@
             <field name="arch" type="xml">
                 <tree string="Employee Gratuity">
                     <field name ="name"/>
-                    <field name ="employee_name"/>
+                    <field name ="employee_id"/>
                     <field name ="gratuity_amount" sum="Total" widget="monetary" />
                     <field name="currency_id" invisible="1"/>
                     <field name="company_id" invisible="1"/>
@@ -54,7 +54,7 @@
                                             <h2>
                                                 <td>
                                                     <group>
-                                                        <field name ="employee_name"  string="Employee" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
+                                                        <field name ="employee_id"  string="Employee" required="True" attrs="{'readonly': [('state','=','approve')]}"/>
                                                     </group>
                                                 </td>
                                             </h2>
@@ -89,7 +89,7 @@
             <field name="type">pivot</field>
             <field name="arch" type="xml">
                 <pivot string="Pivot View">
-                     <field name="employee_name" type="row"/>
+                     <field name="employee_id" type="row"/>
                      <field name="last_month_salary" type="measure"/>
                      <field name="worked_years" type="measure"/>
                      <field name="gratuity_amount" type="measure"/>
@@ -101,12 +101,11 @@
         <record id="action_other_settlements" model="ir.actions.act_window">
            <field name="name">Settlements</field>
            <field name="res_model">other.settlements</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="other_settlements" name="Settlements" parent="hr_employee_updation.menu_hr_management"
-                  action="action_other_settlements" sequence="2" />
+        <menuitem id="other_settlements" name="Settlements" parent="hr.menu_hr_root"
+                  action="action_other_settlements" sequence="6" />
 
     </data>
 </odoo>

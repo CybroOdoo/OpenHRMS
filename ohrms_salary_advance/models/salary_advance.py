@@ -54,15 +54,12 @@ class SalaryAdvancePayment(models.Model):
         }
         return result
 
-    @api.one
     def submit_to_manager(self):
         self.state = 'submit'
 
-    @api.one
     def cancel(self):
         self.state = 'cancel'
 
-    @api.one
     def reject(self):
         self.state = 'reject'
 
@@ -72,10 +69,10 @@ class SalaryAdvancePayment(models.Model):
         res_id = super(SalaryAdvancePayment, self).create(vals)
         return res_id
 
-    @api.one
     def approve_request(self):
         """This Approve the employee salary advance request.
                    """
+        print("self",self)
         emp_obj = self.env['hr.employee']
         print (self)
         address = emp_obj.browse([self.employee_id.id]).address_home_id
@@ -116,7 +113,6 @@ class SalaryAdvancePayment(models.Model):
                         _('Request can be done after "%s" Days From prevoius month salary') % struct_id.advance_date)
         self.state = 'waiting_approval'
 
-    @api.one
     def approve_request_acc_dept(self):
         """This Approve the employee salary advance request from accounting department.
                    """
@@ -124,7 +120,7 @@ class SalaryAdvancePayment(models.Model):
                                              ('state', '=', 'approve')])
         current_month = datetime.strptime(str(self.date), '%Y-%m-%d').date().month
         for each_advance in salary_advance_search:
-            existing_month = datetime.strptime(strt(each_advance.date), '%Y-%m-%d').date().month
+            existing_month = datetime.strptime(str(each_advance.date), '%Y-%m-%d').date().month
             if current_month == existing_month:
                 raise except_orm('Error!', 'Advance can be requested once in a month')
         if not self.debit or not self.credit or not self.journal:
@@ -133,6 +129,7 @@ class SalaryAdvancePayment(models.Model):
             raise except_orm('Warning', 'You must Enter the Salary Advance amount')
 
         move_obj = self.env['account.move']
+        print("move_obj",move_obj)
         timenow = time.strftime('%Y-%m-%d')
         line_ids = []
         debit_sum = 0.0
@@ -147,7 +144,6 @@ class SalaryAdvancePayment(models.Model):
                 'ref': reference,
                 'journal_id': journal_id,
                 'date': timenow,
-                'state': 'posted',
             }
 
             debit_account_id = request.debit.id
@@ -161,7 +157,6 @@ class SalaryAdvancePayment(models.Model):
                     'date': timenow,
                     'debit': amount > 0.0 and amount or 0.0,
                     'credit': amount < 0.0 and -amount or 0.0,
-                    'currency_id': self.currency_id.id,
                 })
                 line_ids.append(debit_line)
                 debit_sum += debit_line[2]['debit'] - debit_line[2]['credit']
@@ -174,12 +169,14 @@ class SalaryAdvancePayment(models.Model):
                     'date': timenow,
                     'debit': amount < 0.0 and -amount or 0.0,
                     'credit': amount > 0.0 and amount or 0.0,
-                    'currency_id': self.currency_id.id,
                 })
                 line_ids.append(credit_line)
                 credit_sum += credit_line[2]['credit'] - credit_line[2]['debit']
-
+            print(line_ids,"line_ids")
             move.update({'line_ids': line_ids})
-            move_obj.create(move)
+            print("move.update({'line_ids': line_ids})",move.update({'invoice_line_ids': line_ids}))
+            draft = move_obj.create(move)
+            print(draft)
+            draft.post()
             self.state = 'approve'
             return True

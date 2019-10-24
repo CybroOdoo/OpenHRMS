@@ -7,10 +7,10 @@
         </record>
 
         <record id="lawsuit_group_manager" model="res.groups">
-            <field name="name">Lawsuit Manager</field>
+            <field name="name">Manager</field>
             <field name="category_id" ref="module_lawsuit_category"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
         <record model="ir.rule" id="lawsuit_comp_rule">

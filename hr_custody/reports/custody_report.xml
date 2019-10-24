@@ -14,7 +14,6 @@
         <record id="action_report_custody" model="ir.actions.act_window">
             <field name="name">Custody Analysis</field>
             <field name="res_model">report.custody</field>
-            <field name="view_type">form</field>
             <field name="view_mode">pivot</field>
             <field name="context">{'group_by_no_leaf':1,'group_by':[]}</field>
             <field name="help">This report allows you to analyse all Custody Requests. </field>

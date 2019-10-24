@@ -30,6 +30,8 @@
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'depends': ['base',
+                'hr',
+                'hr_contract',
                 'hr_employee_updation'
                 ],
     'data': [

@@ -14,7 +14,6 @@ class EmployeeBroadFactor(models.Model):
     no_of_days = fields.Integer()
     broad_factor = fields.Integer()
 
-    @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self._cr, 'hr_employee_broad_factor')
         self._cr.execute("""

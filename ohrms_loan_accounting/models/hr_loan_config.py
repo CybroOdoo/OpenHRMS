@@ -15,7 +15,7 @@ class AccConfig(models.TransientModel):
         )
         return res
 
-    @api.multi
+    
     def set_values(self):
         super(AccConfig, self).set_values()
         self.env['ir.config_parameter'].sudo().set_param('account.loan_approve', self.loan_approve)

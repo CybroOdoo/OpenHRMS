@@ -43,9 +43,11 @@ class EmployeeTransfer(models.Model):
             print("self", self.env.user.company_id.id)
             if self.branch.company_id == self.env.user.company_id.id:
                 self.transferred = True
+            else:
+                self.transferred = False
 
-    @api.one
     def transfer(self):
+        print("Transfer function")
         obj_emp = self.env['hr.employee'].browse(self.employee_id.id)
         emp = {}
         if not self.branch:
@@ -73,7 +75,7 @@ class EmployeeTransfer(models.Model):
         self.employee_id = new_emp
         obj_emp.write({'active': False})
 
-    @api.multi
+    
     def receive_employee(self):
         for this in self:
             if this._context is None:
@@ -88,7 +90,6 @@ class EmployeeTransfer(models.Model):
             self.env['hr.employee'].browse(this.employee_id.id).write({'address_home_id': partner_created.id})
             return {
                 'name': _('Contract'),
-                'view_type': 'form',
                 'view_mode': 'form',
                 'res_model': 'hr.contract',
                 'type': 'ir.actions.act_window',
@@ -99,7 +100,7 @@ class EmployeeTransfer(models.Model):
                             },
             }
 
-    @api.one
+
     def cancel_transfer(self):
         obj_emp = self.env['hr.employee'].browse(self.employee_id.id)
         emp = {

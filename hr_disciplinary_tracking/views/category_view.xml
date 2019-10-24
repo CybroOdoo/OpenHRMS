@@ -120,14 +120,12 @@
 	<record id="action_disciplinary_category_view" model="ir.actions.act_window">
             <field name="name">Discipline Categories</field>
             <field name="res_model">discipline.category</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
 	<record id="action_category_action_view" model="ir.actions.act_window">
             <field name="name">Action Categories</field>
             <field name="res_model">action.category</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 

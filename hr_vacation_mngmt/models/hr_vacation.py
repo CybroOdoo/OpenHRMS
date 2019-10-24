@@ -19,7 +19,6 @@ class HrLeaveRequest(models.Model):
     leave_salary = fields.Selection([('0', 'Basic'), ('1', 'Gross')], string='Leave Salary')
 
 
-    @api.one
     def get_overlapping_leaves(self):
         if self.date_from and self.date_to:
             overlap_leaves = []
@@ -39,7 +38,6 @@ class HrLeaveRequest(models.Model):
                     overlap_leaves.append(leave.id)
             self.update({'overlapping_leaves': [(6, 0, overlap_leaves)]})
 
-    @api.multi
     def action_approve(self):
         if not self.env.user.has_group('hr_holidays.group_hr_holidays_user'):
             raise UserError(_('Only an HR Officer or Manager can approve leave requests.'))
@@ -65,10 +63,11 @@ class HrLeaveRequest(models.Model):
                         'context': ctx,
                     }
             else:
-                if holiday.double_validation:
-                    return holiday.write({'state': 'validate1', 'manager_id': manager.id if manager else False})
-                else:
-                    holiday.action_validate()
+                print(holiday)
+                # if holiday.double_validation:
+                #     return holiday.write({'state': 'validate1', 'manager_id': manager.id if manager else False})
+                # else:
+                holiday.action_validate()
 
     def book_ticket(self):
         if not self.env.user.has_group('hr_holidays.group_hr_holidays_user'):
@@ -89,7 +88,6 @@ class HrLeaveRequest(models.Model):
             'context': ctx,
         }
 
-    @api.one
     def get_hr_holiday_managers(self):
         self.holiday_managers = self.env.ref('hr_holidays.group_hr_holidays_manager').users
 
@@ -142,7 +140,6 @@ class PendingTask(models.Model):
     unavailable_employee = fields.Many2many('hr.employee', string='Unavailable Employees',
                                             compute='get_unavailable_employee')
 
-    @api.one
     def get_unavailable_employee(self):
         unavail_emp = []
         for leave in self.leave_id.overlapping_leaves:

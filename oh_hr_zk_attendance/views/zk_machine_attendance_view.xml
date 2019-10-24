@@ -61,7 +61,6 @@
     <record id="action_zk_report_daily_attendance" model="ir.actions.act_window">
         <field name="name">Attendance Analysis</field>
         <field name="res_model">zk.report.daily.attendance</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree</field>
         <field name="context">{'search_default_my_attendance':1}</field>
         <field name="search_view_id" ref="view_zk_report_daily_attendance_search" />

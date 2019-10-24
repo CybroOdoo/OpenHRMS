@@ -162,23 +162,6 @@ group by hr_employee.department_id,hr_department.name""")
             data.append({'label': dat[i][1], 'value': dat[i][2]})
         return data
 
-    # @api.model
-    # def get_broad_factor(self):
-    #     emp_broad_factor = []
-    #     sql = """select * from hr_employee_broad_factor"""
-    #     self.env.cr.execute(sql)
-    #     results = self.env.cr.dictfetchall()
-    #     for data in results:
-    #         broad_factor = data['broad_factor'] if data['broad_factor'] else 0
-    #         if data['broad_factor']:
-    #             vals = {
-    #                 'id': data['id'],
-    #                 'name': data['name'],
-    #                 'broad_factor': broad_factor
-    #             }
-    #             emp_broad_factor.append(vals)
-    #     return emp_broad_factor
-
     @api.model
     def get_department_leave(self):
         month_list = []

@@ -18,10 +18,10 @@ class HrLoan(models.Model):
             ts_user_id = result['user_id']
         else:
             ts_user_id = self.env.context.get('user_id', self.env.user.id)
-            result['employee_id'] = self.env['hr.employee'].search([('user_id', '=', ts_user_id)], limit=1).id
+        result['employee_id'] = self.env['hr.employee'].search([('user_id', '=', ts_user_id)], limit=1).id
         return result
 
-    @api.one
+
     def _compute_loan_amount(self):
         total_paid = 0.0
         for loan in self:
@@ -41,9 +41,6 @@ class HrLoan(models.Model):
     installment = fields.Integer(string="No Of Installments", default=1)
     payment_date = fields.Date(string="Payment Start Date", required=True, default=fields.Date.today())
     loan_lines = fields.One2many('hr.loan.line', 'loan_id', string="Loan Line", index=True)
-    emp_account_id = fields.Many2one('account.account', string="Loan Account")
-    treasury_account_id = fields.Many2one('account.account', string="Treasury Account")
-    journal_id = fields.Many2one('account.journal', string="Journal")
     company_id = fields.Many2one('res.company', 'Company', readonly=True,
                                  default=lambda self: self.env.user.company_id,
                                  states={'draft': [('readonly', False)]})
@@ -58,7 +55,6 @@ class HrLoan(models.Model):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('waiting_approval_1', 'Submitted'),
-        ('waiting_approval_2', 'Waiting Approval'),
         ('approve', 'Approved'),
         ('refuse', 'Refused'),
         ('cancel', 'Canceled'),
@@ -75,19 +71,19 @@ class HrLoan(models.Model):
             res = super(HrLoan, self).create(values)
             return res
 
-    @api.multi
+    
     def action_refuse(self):
         return self.write({'state': 'refuse'})
 
-    @api.multi
+    
     def action_submit(self):
         self.write({'state': 'waiting_approval_1'})
 
-    @api.multi
+    
     def action_cancel(self):
         self.write({'state': 'cancel'})
 
-    @api.multi
+    
     def action_approve(self):
         for data in self:
             if not data.loan_lines:
@@ -95,7 +91,7 @@ class HrLoan(models.Model):
             else:
                 self.write({'state': 'approve'})
 
-    @api.multi
+    
     def unlink(self):
         for loan in self:
             if loan.state not in ('draft', 'cancel'):
@@ -103,7 +99,7 @@ class HrLoan(models.Model):
                     'You cannot delete a loan which is not in draft or cancelled state')
         return super(HrLoan, self).unlink()
 
-    @api.multi
+    
     def compute_installment(self):
         """This automatically create the installment the employee need to pay to
         company based on payment start date and the no of installments.
@@ -137,7 +133,7 @@ class InstallmentLine(models.Model):
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    @api.one
+
     def _compute_employee_loans(self):
         """This compute the loan amount and total loans count of an employee.
             """

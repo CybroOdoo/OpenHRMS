@@ -14,7 +14,7 @@
                 <div class="oh-media">
                 <div class="employee-icon">
                     <img class="align-self-center mr-3" alt=""
-                        t-att-src="'data:image/png;base64,'+widget.login_employee['image']"/>
+                        t-att-src="'data:image/png;base64,'+widget.login_employee['image_1920']"/>
                 </div>
                 <div class="media-body employee-name">
                 <h2 class="text-color display-6"><t t-esc="widget.login_employee['name']"/> </h2>

@@ -6,7 +6,7 @@
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <li class="list-group-item">
                 <span class="badge" t-esc="quotation_count"/>
-                <a href="/my/records"> Varification</a>
+                <a href="/my/records">Employee Verification</a>
             </li>
         </xpath>
     </template>
@@ -141,9 +141,10 @@
                            data-show-preview="true"
                            lass="file"
                            id="records.id"/>
+<!--                    <button type="submit" name="redirect" class="btn btn-link btn-sm btn-block cybro-super-btn" style="margin-top:20px;">Submit</button>-->
+
                 </div>
-                <br/>
-                <button type="submit" name="Upload" class="fa fa-upload btn btn-secondary">
+                <button type="submit" name="Upload" style="margin-top:20px;" class="fa fa-upload btn btn-secondary">
                                     Upload
                     </button>
             </div>

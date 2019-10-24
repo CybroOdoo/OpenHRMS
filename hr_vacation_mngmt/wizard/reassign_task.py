@@ -10,7 +10,6 @@ class ReAssignTask(models.TransientModel):
     pending_tasks = fields.One2many('pending.task', related='leave_req_id.pending_tasks', string='Pending Tasks', readonly=False)
     leave_req_id = fields.Many2one('hr.leave', string='Leave Request')
 
-    @api.multi
     def action_approve(self):
         task_pending = False
         e_unavail = False
@@ -52,7 +51,6 @@ class ReAssignTask(models.TransientModel):
             else:
                 holiday.action_validate()
 
-    @api.multi
     def cancel(self):
         for task in self.pending_tasks:
             task.update({'assigned_to': False})

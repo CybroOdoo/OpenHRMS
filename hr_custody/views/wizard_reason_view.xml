@@ -21,7 +21,6 @@
         <record model='ir.actions.act_window' id='wizard_reason_act'>
             <field name="name">Update Reason</field>
             <field name="res_model">wizard.reason</field>
-            <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="wizard_reason_form"/>
             <field name="target">new</field>

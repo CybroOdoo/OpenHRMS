@@ -1,24 +1,4 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Cybrosys Techno Solutions (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
 
 from odoo import models, fields, api
 
@@ -28,7 +8,7 @@ class EmployeeEntryDocuments(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Employee Documents"
 
-    @api.multi
+    
     def name_get(self):
         result = []
         for each in self:
@@ -44,7 +24,8 @@ class EmployeeEntryDocuments(models.Model):
     name = fields.Char(string='Name', copy=False, required=1)
     document_type = fields.Selection([('entry', 'Entry Process'),
                                       ('exit', 'Exit Process'),
-                                      ('other', 'Other')], string='Checklist Type', help='Type of Checklist', readonly=1, required=1)
+                                      ('other', 'Other')], string='Checklist Type', help='Type of Checklist',
+                                     readonly=1, required=1)
 
 
 class HrEmployeeDocumentInherit(models.Model):
@@ -70,7 +51,7 @@ class EmployeeMasterInherit(models.Model):
             total_len = self.env['employee.checklist'].search_count([('document_type', '=', 'entry')])
             entry_len = len(each.entry_checklist)
             if total_len != 0:
-                each.entry_progress = (entry_len*100) / total_len
+                each.entry_progress = (entry_len * 100) / total_len
 
     entry_checklist = fields.Many2many('employee.checklist', 'entry_obj', 'check_hr_rel', 'hr_check_rel',
                                        string='Entry Process',
@@ -96,7 +77,7 @@ class EmployeeDocumentInherit(models.Model):
             result.employee_ref.write({'exit_checklist': [(4, result.document_name.id)]})
         return result
 
-    @api.multi
+    
     def unlink(self):
         for result in self:
             if result.document_name.document_type == 'entry':

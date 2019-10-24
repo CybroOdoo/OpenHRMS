@@ -15,7 +15,7 @@ class Service(models.Model):
         return employee_rec.id
 
     service_name = fields.Char(required=True, string="Reason For Service")
-    employee = fields.Many2one('hr.employee', string="Employee", default=_get_employee_id, readonly=True, required=True)
+    employee_id = fields.Many2one('hr.employee', string="Employee", default=_get_employee_id, readonly=True, required=True)
     service_date = fields.Datetime(string="date", required=True)
     state = fields.Selection([('draft', 'Draft'),
                               ('requested', 'Requested'),
@@ -51,7 +51,7 @@ class Service(models.Model):
         else:
             self.read_only = False
 
-    @api.multi
+    
     def submit_reg(self):
         self.ensure_one()
         self.sudo().write({
@@ -59,7 +59,7 @@ class Service(models.Model):
         })
         return
 
-    @api.multi
+    
     def assign_executer(self):
         self.ensure_one()
         if not self.service_executer:
@@ -70,7 +70,7 @@ class Service(models.Model):
         vals = {
             'issue': self.service_name,
             'executer': self.service_executer.id,
-            'client': self.employee.id,
+            'client': self.employee_id.id,
             'executer_product': self.service_product.name,
             'type_service': self.service_type,
             'execute_date': self.service_date,
@@ -81,7 +81,7 @@ class Service(models.Model):
         approve = self.env['service.execute'].sudo().create(vals)
         return
 
-    @api.multi
+    
     def service_approval(self):
         for record in self:
             record.tester.sudo().state_execute = 'approved'
@@ -90,7 +90,7 @@ class Service(models.Model):
             })
         return
 
-    @api.multi
+    
     def service_rejection(self):
         self.write({
             'state': 'rejected'
@@ -117,7 +117,7 @@ class Executer(models.Model):
     executer_product = fields.Char(string='Service Item')
     type_service = fields.Char(string='Service Type')
 
-    @api.multi
+    
     def service_check(self):
         self.test.sudo().state = 'check'
         self.write({

@@ -22,6 +22,7 @@
 ###################################################################################
 from datetime import datetime
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class HrAnnouncementTable(models.Model):
@@ -52,15 +53,12 @@ class HrAnnouncementTable(models.Model):
     date_start = fields.Date(string='Start Date', default=fields.Date.today(), required=True)
     date_end = fields.Date(string='End Date', default=fields.Date.today(), required=True)
 
-    @api.multi
     def reject(self):
         self.state = 'rejected'
 
-    @api.multi
     def approve(self):
         self.state = 'approved'
 
-    @api.multi
     def sent(self):
         self.state = 'to_approve'
 

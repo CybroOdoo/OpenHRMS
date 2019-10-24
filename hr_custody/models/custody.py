@@ -1,29 +1,9 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2019-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Authors: Avinash Nk, Jesni Banu (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
+
 from datetime import date, datetime, timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning, UserError
-from odoo.tools import image_resize_images
+# from odoo.tools import image_resize_images
 
 
 class HrCustody(models.Model):
@@ -74,21 +54,21 @@ class HrCustody(models.Model):
         vals['name'] = self.env['ir.sequence'].next_by_code('hr.custody')
         return super(HrCustody, self).create(vals)
 
-    @api.multi
+    
     def sent(self):
         self.state = 'to_approve'
 
-    @api.multi
+    
     def send_mail(self):
         template = self.env.ref('hr_custody.custody_email_notification_template')
         self.env['mail.template'].browse(template.id).send_mail(self.id)
         self.mail_send = True
 
-    @api.multi
+    
     def set_to_draft(self):
         self.state = 'draft'
 
-    @api.multi
+    
     def renew_approve(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
@@ -97,7 +77,7 @@ class HrCustody(models.Model):
         self.renew_date = ''
         self.state = 'approved'
 
-    @api.multi
+    
     def renew_refuse(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
@@ -105,14 +85,14 @@ class HrCustody(models.Model):
         self.renew_date = ''
         self.state = 'approved'
 
-    @api.multi
+    
     def approve(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
                 raise UserError(_("Custody is not available now"))
         self.state = 'approved'
 
-    @api.multi
+    
     def set_to_return(self):
         self.state = 'returned'
         self.return_date = date.today()
@@ -156,8 +136,7 @@ class HrPropertyName(models.Model):
     _description = 'Property Name'
 
     name = fields.Char(string='Property Name', required=True)
-    image = fields.Binary(
-        "Image", attachment=True,
+    image = fields.Image(string="Image",
         help="This field holds the image used for this provider, limited to 1024x1024px")
     image_medium = fields.Binary(
         "Medium-sized image", attachment=True,
@@ -172,16 +151,6 @@ class HrPropertyName(models.Model):
     desc = fields.Html(string='Description')
     company_id = fields.Many2one('res.company', 'Company',
                                  default=lambda self: self.env.user.company_id)
-
-    @api.model
-    def create(self, vals):
-        image_resize_images(vals)
-        return super(HrPropertyName, self).create(vals)
-
-    @api.multi
-    def write(self, vals):
-        image_resize_images(vals)
-        return super(HrPropertyName, self).write(vals)
 
 
 class HrReturnDate(models.TransientModel):
@@ -199,7 +168,7 @@ class HrReturnDate(models.TransientModel):
         if self.returned_date <= custody_obj.date_request:
             raise Warning('Please Give Valid Renewal Date')
 
-    @api.multi
+    
     def proceed(self):
         context = self._context
         custody_obj = self.env['hr.custody'].search([('id', '=', context.get('custody_id'))])

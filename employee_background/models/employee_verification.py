@@ -27,12 +27,13 @@ class EmployeeVerification(models.Model):
         ('assign', 'Assigned'),
         ('submit', 'Varification Completed'),
     ], string='Status', default='draft')
+    company_id = fields.Many2one('res.company', 'Company',
+                                 default=lambda self: self.env['res.company'].browse(1))
 
-    @api.multi
+
+    
     def download_attachment(self):
-        print('In download attachment')
         if self.agency_attachment_id:
-            print(self.agency_attachment_id)
             return {
                 'type': 'ir.actions.act_url',
                 'url': '/web/binary/image?model=ir.attachment&field=datas&id=%s&filename=%s' % (self.agency_attachment_id.id,self.agency_attachment_id.name),
@@ -41,7 +42,7 @@ class EmployeeVerification(models.Model):
         else:
             raise UserError(_("No attachments available."))
 
-    @api.multi
+    
     def assign_statusbar(self):
         if self.agency:
             if self.address or self.resume_uploaded:
@@ -49,7 +50,7 @@ class EmployeeVerification(models.Model):
                 template = self.env.ref('employee_background.assign_agency_email_template')
                 self.env['mail.template'].browse(template.id).send_mail(self.id, force_send=True)
             else:
-                raise UserError(_("There should be atleast address or resume of the employee."))
+                raise UserError(_("There should be at least address or resume of the employee."))
         else:
             raise UserError(_("Agency is not assigned. Please select one of the Agency."))
 
@@ -60,7 +61,7 @@ class EmployeeVerification(models.Model):
         vals['verification_id'] = seq
         return super(EmployeeVerification, self).create(vals)
 
-    @api.multi
+    
     def unlink(self):
         if self.state not in 'draft':
             raise UserError(_('You cannot delete the verification created.'))

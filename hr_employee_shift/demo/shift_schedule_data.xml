@@ -4,8 +4,8 @@
     <data>
         <delete model="resource.calendar" search="[('id', '=', ref('resource.resource_calendar_std_35h'))]"/>
         <delete model="resource.calendar" search="[('id', '=', ref('resource.resource_calendar_std_38h'))]"/>
-        <delete model="hr.contract" search="[('id', '=', ref('hr_payroll.hr_contract_firstcontract1'))]"/>
-        <delete model="hr.contract" search="[('id', '=', ref('hr_payroll.hr_contract_gilles_gravie'))]"/>
+        <delete model="hr.contract" search="[('id', '=', ref('hr_payroll_community.hr_contract_firstcontract1'))]"/>
+        <delete model="hr.contract" search="[('id', '=', ref('hr_payroll_community.hr_contract_gilles_gravie'))]"/>
 
         <record id="resource_calendar_std_35h" model="resource.calendar">
             <field name="name">Morning</field>

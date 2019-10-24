@@ -29,7 +29,7 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['base_setup', 'hr_holidays'],
+    'depends': ['base_setup', 'hr','hr_holidays'],
     'data': [
         # 'data/web_planner_data.xml',
         'views/hr_leave_template.xml',

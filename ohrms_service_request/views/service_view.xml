@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <tree string="Service Request">
                     <field name="service_name"/>
-                    <field name="employee"/>
+                    <field name="employee_id"/>
                     <field name="service_date"/>
                     <field name="service_type"/>
                     <field name="service_product"/>
@@ -38,7 +38,7 @@
                    <sheet>
                        <group col="4" colspan="4">
                            <field name="service_name" placeholder="Title For Service"/>
-                           <field name="employee"/>
+                           <field name="employee_id"/>
                            <field name="service_type"/>
                            <field name="service_product"/>
                            <field name="service_date"/>
@@ -64,7 +64,6 @@
         <record model="ir.actions.act_window" id="action_view_service_requests">
             <field name="name">Service Request</field>
             <field name="res_model">service.request</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
             <field name="help" type="html">
@@ -76,7 +75,6 @@
         <record model="ir.actions.act_window" id="action_view_service_approve">
             <field name="name">Service Approval</field>
             <field name="res_model">service.request</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[['state', '=','requested']]</field>
             <field name="help" type="html">
@@ -144,7 +142,6 @@
         <record model="ir.actions.act_window" id="action_view_service_check">
             <field name="name">Service Check</field>
             <field name="res_model">service.execute</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
             <field name="help" type="html">
@@ -170,7 +167,6 @@
         <record id="action_view_pivot" model="ir.actions.act_window">
             <field name="name">View Pivot</field>
             <field name="res_model">service.request</field>
-            <field name="view_type">form</field>
             <field name="view_mode">pivot</field>
             <field name="domain">[]</field>
             <field name="help" type="html">

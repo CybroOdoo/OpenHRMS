@@ -24,11 +24,10 @@ class HrFlightTicket(models.Model):
     return_flight_details = fields.Text(string='Return Flight Details')
     state = fields.Selection([('booked', 'Booked'), ('confirmed', 'Confirmed'), ('started', 'Started'),
                               ('completed', 'Completed'), ('canceled', 'Canceled')], string='Status', default='booked')
-    invoice_id = fields.Many2one('account.invoice', string='Invoice')
+    invoice_id = fields.Many2one('account.move', string='Invoice')
     leave_id = fields.Many2one('hr.leave', string='Leave')
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id)
 
-    @api.multi
     def name_get(self):
         res = []
         for ticket in self:
@@ -47,8 +46,9 @@ class HrFlightTicket(models.Model):
     def confirm_ticket(self):
         if self.ticket_fare <= 0:
             raise UserError(_('Please add ticket fare.'))
-        inv_obj = self.env['account.invoice'].sudo()
+        inv_obj = self.env['account.move']
         expense_account = self.env['ir.config_parameter'].sudo().get_param('travel_expense_account')
+        print(type(expense_account))
         if not expense_account:
             raise UserError(_('Please select expense account for the flight tickets.'))
         domain = [
@@ -65,25 +65,40 @@ class HrFlightTicket(models.Model):
                 pterm.with_context(currency_id=self.env.user.company_id.id).compute(
                     value=1, date_ref=fields.Date.context_today(self))[0]
             date_due = max(line[0] for line in pterm_list)
-        inv_data = {
-            'name': '',
-            'origin': 'Flight Ticket',
+        abc = {'name': '/',
+               'invoice_origin': 'Flight Ticket',
+               'type': 'in_invoice',
+               'journal_id': journal_id.id,
+               'invoice_payment_term_id': partner.property_payment_term_id.id,
+               'invoice_date_due': date_due,
+               'ref': False,
+               'partner_id': partner.id,
+               'invoice_partner_bank_id': partner.property_account_payable_id.id,
+               'state': 'draft',
+               'invoice_line_ids': [(0, 0, {
+                   'name': 'Flight Ticket',
+                   'price_unit': self.ticket_fare,
+                   'quantity': 1.0,
+                   'account_id': expense_account,
+               })]
+               }
+        inv_id = self.env['account.move'].create({
+            'name': '/',
+            'invoice_origin': 'Flight Ticket',
             'type': 'in_invoice',
             'journal_id': journal_id.id,
-            'payment_term_id': partner.property_payment_term_id.id,
-            'date_due': date_due,
-            'reference': False,
+            'invoice_date_due': date_due,
+            'ref': False,
             'partner_id': partner.id,
-            'account_id': partner.property_account_payable_id.id,
-            'invoice_line_ids': [(0, 0, {
+            'state': 'draft',
+            'default_invoice_line_ids': [(0, 0, {
                 'name': 'Flight Ticket',
                 'price_unit': self.ticket_fare,
                 'quantity': 1.0,
-                'account_id': expense_account,
+                'account_id': int(expense_account),
             })],
-        }
-        inv_id = inv_obj.create(inv_data)
-        inv_id.action_invoice_open()
+        })
+        # inv_id.action_invoice_open()
         self.write({'state': 'confirmed', 'invoice_id': inv_id.id})
 
     def cancel_ticket(self):
@@ -107,13 +122,12 @@ class HrFlightTicket(models.Model):
         for ticket in confirmed_tickets:
             ticket.write({'state': 'started'})
 
-    @api.multi
     def action_view_invoice(self):
         return {
             'name': _('Flight Ticket Invoice'),
             'view_mode': 'form',
-            'view_id': self.env.ref('account.invoice_supplier_form').id,
-            'res_model': 'account.invoice',
+            'view_id': self.env.ref('account.view_move_form').id,
+            'res_model': 'account.move',
             'context': "{'type':'in_invoice'}",
             'type': 'ir.actions.act_window',
             'res_id': self.invoice_id.id,

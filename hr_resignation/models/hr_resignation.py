@@ -29,7 +29,7 @@ class HrResignation(models.Model):
     resign_confirm_date = fields.Date(string="Resign confirm date", help='Date on which the request is confirmed')
     approved_revealing_date = fields.Date(string="Approved Date", help='The date approved for the relieving')
     reason = fields.Text(string="Reason", help='Specify reason for leaving the company')
-    notice_period = fields.Char(string="Notice Period", compute='_notice_period')
+    notice_period = fields.Char(string="Notice Period", compute='_compute_notice_period')
     state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Cancel')],
                              string='Status', default='draft')
 
@@ -65,8 +65,8 @@ class HrResignation(models.Model):
                     raise ValidationError(_('There is a resignation request in confirmed or'
                                             ' approved state for this employee'))
 
-    @api.multi
-    def _notice_period(self):
+    
+    def _compute_notice_period(self):
         # calculating the notice period for the employee
         for rec in self:
             if rec.approved_revealing_date and rec.resign_confirm_date:
@@ -74,6 +74,8 @@ class HrResignation(models.Model):
                 confirmed_date = datetime.strptime(str(rec.resign_confirm_date), date_format)
                 notice_period = approved_date - confirmed_date
                 rec.notice_period = notice_period.days
+            else:
+                rec.notice_period = ''
 
     @api.constrains('joined_date', 'expected_revealing_date')
     def _check_dates(self):
@@ -87,23 +89,23 @@ class HrResignation(models.Model):
             if rec.joined_date >= rec.expected_revealing_date:
                 raise ValidationError(_('Relieving date must be anterior to joining date'))
 
-    @api.multi
+    
     def confirm_resignation(self):
         for rec in self:
             rec.state = 'confirm'
             rec.resign_confirm_date = str(datetime.now())
 
-    @api.multi
+    
     def cancel_resignation(self):
         for rec in self:
             rec.state = 'cancel'
 
-    @api.multi
+    
     def reject_resignation(self):
         for rec in self:
             rec.state = 'rejected'
 
-    @api.multi
+    
     def approve_resignation(self):
         for rec in self:
             if not rec.approved_revealing_date:
@@ -113,7 +115,7 @@ class HrResignation(models.Model):
                     raise ValidationError(_('Approved relieving date must be anterior to confirmed date'))
                 rec.state = 'approved'
 
-    @api.multi
+    
     def update_employee_status(self):
         resignation = self.env['hr.resignation'].search([('state', '=', 'approved')])
         for rec in resignation:

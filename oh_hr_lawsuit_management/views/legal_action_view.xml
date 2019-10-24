@@ -43,7 +43,7 @@
                         </group>
                         <notebook>
                             <page name="case_desc" string="Case Details">
-                                <field name="case_details" type="html"/>
+                                <field name="case_details"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -94,11 +94,9 @@
             </field>
         </record>
 
-
         <record id="action_hr_lawsuit" model="ir.actions.act_window">
             <field name="name">Legal Management</field>
             <field name="res_model">hr.lawsuit</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="hr_lawsuit_search_view"/>
             <field name="help" type="html">
@@ -108,8 +106,8 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="legal_hr_employee_inherit_form_view">
-            <field name="name">hr.employee.form.inherit.view</field>
+        <record id="legal_hr_employee_inherit_form_view" model="ir.ui.view" >
+            <field name="name">hr.employee.form.legal</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
@@ -121,10 +119,7 @@
             </field>
         </record>
 
-<!--        <menuitem id="hr_lawsuit_menu"-->
-<!--                  name="Legal Department" sequence="200" groups="lawsuit_group_manager"/>-->
-
-        <menuitem id="hr_lawsuit_sub_menu" action="action_hr_lawsuit"
-                  name="Legal Actions" sequence="1" groups="lawsuit_group_manager"/>
+        <menuitem id="hr_lawsuit_sub_menu" parent="hr.menu_hr_root" action="action_hr_lawsuit"
+                  name="Legal Actions" sequence="10" groups="lawsuit_group_manager"/>
     </data>
 </odoo>

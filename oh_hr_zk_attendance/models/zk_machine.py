@@ -1,24 +1,4 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2018-TODAY Cybrosys Technologies(<http://www.cybrosys.com>).
-#    Author: cybrosys(<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
 import pytz
 import sys
 import datetime
@@ -49,7 +29,7 @@ class ZkMachine(models.Model):
     address_id = fields.Many2one('res.partner', string='Working Address')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id.id)
 
-    @api.multi
+    
     def device_connect(self, zk):
         command = CMD_CONNECT
         command_string = ''
@@ -71,7 +51,7 @@ class ZkMachine(models.Model):
             conn = False
         return conn
     
-    @api.multi
+    
     def clear_attendance(self):
         for info in self:
             try:
@@ -106,7 +86,6 @@ class ZkMachine(models.Model):
 
     def zkgetuser(self, zk):
         """Start a connection with the time clock"""
-        print("START FUNCTION")
         command = CMD_USERTEMP_RRQ
         command_string = '\x05'
         chksum = 0
@@ -130,44 +109,25 @@ class ZkMachine(models.Model):
                 data_recv = zk.zkclient.recvfrom(8)
 
             users = {}
-            print("FULL",zk.userdata)
-            print(zk.userdata[0])
-            print(zk.userdata[1])
-            print("++++++++++")
             if len(zk.userdata) > 0:
                 userdata = zk.userdata[0]
-                print("11111", len(userdata),userdata)
                 userdata = userdata[11:]
-                print("22222", len(userdata),userdata)
-                count = 1
                 while len(userdata) > 72:
-                    count +=1
                     uid, role, password, name, userid = unpack('2s2s8s28sx31s', userdata.ljust(72)[:72])
-                    # print("*****")
-                    # print(uid)
-                    # print(role)
-                    # print(password)
-                    # print(name)
-                    # print(userid)
                     uid = int(binascii.hexlify(uid), 16)
                     # Clean up some messy characters from the user name
                     password = password.split(b'\x00', 1)[0]
                     password = str(password.strip(b'\x00|\x01\x10x|\x000').decode('utf-8'))
                     # uid = uid.split('\x00', 1)[0]
                     userid = str(userid.strip(b'\x00|\x01\x10x|\x000|\x9aC').decode('utf-8'))
-
                     name = name.split(b'\x00', 1)[0].decode('utf-8')
-                    print(name)
                     if name.strip() == "":
                         name = uid
                     users[uid] = (userid, name, int(binascii.hexlify(role), 16), password)
                     userdata = userdata[72:]
-                print (count,"count")
-            print("END FUNCTION")
             return users
         except:
             return False
-
 
     @api.model
     def cron_download(self):
@@ -175,7 +135,7 @@ class ZkMachine(models.Model):
         for machine in machines :
             machine.download_attendance()
         
-    @api.multi
+    
     def download_attendance(self):
         _logger.info("++++++++++++Cron Executed++++++++++++++++++++++")
         zk_attendance = self.env['zk.machine.attendance']
@@ -188,7 +148,6 @@ class ZkMachine(models.Model):
             if conn:
                 zk.enableDevice()
                 user = self.zkgetuser(zk)
-                print("user", user)
                 command = CMD_ATTLOG_RRQ
                 command_string = ''
                 chksum = 0
@@ -220,7 +179,7 @@ class ZkMachine(models.Model):
                             if x > 0:
                                 zk.attendancedata[x] = zk.attendancedata[x][8:]
                         attendancedata = b''.join(zk.attendancedata) 
-                        attendancedata = attendancedata[14:]
+                        attendancedata = attendancedata[14:] 
                         while len(attendancedata) > 0:
                             uid, state, timestamp, space = unpack('24s1s4s11s', attendancedata.ljust(40)[:40])
                             pls = unpack('c', attendancedata[29:30])
@@ -236,10 +195,7 @@ class ZkMachine(models.Model):
                     _logger.info("++++++++++++Exception++++++++++++++++++++++", e)
                     attendance = False
                 if attendance:
-                    for a in attendance:
-                        print(a)
                     for each in attendance:
-                        # print(each)
                         atten_time = each[2]
                         atten_time = datetime.strptime(
                             atten_time.strftime('%Y-%m-%d %H:%M:%S'), '%Y-%m-%d %H:%M:%S')
@@ -254,7 +210,6 @@ class ZkMachine(models.Model):
                         if user:
                             for uid in user:
                                 if user[uid][0] == str(each[0]):
-                                    print(user[uid][0], str(each[0]))
                                     get_user_id = self.env['hr.employee'].search(
                                         [('device_id', '=', str(each[0]))])
                                     if get_user_id:

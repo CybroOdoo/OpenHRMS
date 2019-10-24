@@ -2,7 +2,6 @@
 <odoo>
     <data>
 
-
         <record id="employee_disciplinary_tree" model="ir.ui.view">
             <field name="name">disciplinary.action.tree</field>
             <field name="model">disciplinary.action</field>
@@ -37,7 +36,7 @@
                             </div>
                             <h2>
                                 <group colspan="4" >
-                                    <field name ="employee_name"  string="Employee" required="True"  attrs="{'readonly': [('read_only','!=',True)]}"/>
+                                    <field name ="employee_name"  string="Employee" required="True"  attrs="{'readonly': ['|',('read_only','!=',True),('state','=','action')]}"/>
                                 </group>
                             </h2>
                             <group>
@@ -92,50 +91,51 @@
 
 
         <record id="action_disciplinary_action" model="ir.actions.act_window">
-           <field name="name">Disciplinary Action Creation</field>
-           <field name="res_model">disciplinary.action</field>
-            <field name="view_type">form</field>
+            <field name="name">Disciplinary Action</field>
+            <field name="res_model">disciplinary.action</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state','!=','action')]</field>
+            <field name="domain">[('state','=','draft')]</field>
         </record>
 
-         <record id="action_disciplinary_action_view" model="ir.actions.act_window">
-           <field name="name">Disciplinary Action View</field>
+        <record id="disciplinary_action_details" model="ir.actions.act_window">
+           <field name="name">Disciplinary Actions</field>
            <field name="res_model">disciplinary.action</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','action'),('employee_name.id', '=', active_id)]</field>
         </record>
 
+        <record id="disciplinary_action_details_view" model="ir.actions.act_window">
+           <field name="name">Disciplinary Action Details</field>
+           <field name="res_model">disciplinary.action</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','draft')]</field>
+        </record>
 
-        <record id="inherit_employee_form" model="ir.ui.view">
+        <record id="employee_form_inherit_disciplinary" model="ir.ui.view">
             <field name="name">inherit.employee.form.view</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                 <!--Add Discipline button in the Employee Form-->
                 <xpath expr="//div[@name='button_box']" position="inside">
-                        <button name="%(action_disciplinary_action_view)d"
-                            class="oe_stat_button"
-                            string="Discipline"
-                            icon="fa-info-circle"
-                            type="action"
-                            >
-                        </button>
+                    <button name="%(disciplinary_action_details)d"
+                        class="oe_stat_button"
+                        icon="fa-info-circle"
+                        type="action"
+                        >
+                        <field string="Disciplinary Action" name="discipline_count" widget="statinfo"/>
+                    </button>
                 </xpath>
             </field>
         </record>
 
 
-
-
         <menuitem id="disciplinary_action" name="Disciplinary Actions" parent="hr.menu_hr_root"
                     sequence="23"/>
-        <menuitem id="disciplinary_action_create" action="action_disciplinary_action"  groups="hr.group_hr_manager" name="Disciplinary Action" parent="disciplinary_action"
+        <menuitem id="disciplinary_action_create" action="action_disciplinary_action"  groups="hr.group_hr_manager" name="Create Action" parent="disciplinary_action"
                     sequence="1"/>
-        <menuitem id="disciplinary_action_view" action="action_disciplinary_action_view" name="Action Details" parent="disciplinary_action"
+        <menuitem id="disciplinary_action_view" action="disciplinary_action_details_view" name="Action Details" parent="disciplinary_action"
                     sequence="2"/>
-
-
 
 
     </data>

@@ -1,25 +1,4 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#    A part of OpenHrms Project <https://www.openhrms.com>
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Saritha Sahadevan (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
 from datetime import timedelta
 from odoo import models, fields, api, _, tools
 from datetime import datetime, time
@@ -132,7 +111,7 @@ class Calendar(models.Model):
         kw.setdefault('leaves', self.env['resource.calendar.leaves'])
         return self._interval_obj(start_datetime, end_datetime, kw)
 
-    @api.multi
+    
     def _get_day_work_intervals(self, day_date, start_time=None, end_time=None, compute_leaves=False,
                                 resource_id=None):
         self.ensure_one()
@@ -162,7 +141,7 @@ class Calendar(models.Model):
             self.string_to_datetime(interval[1]),
             interval[2]) for interval in working_intervals]
 
-    @api.multi
+    
     def _get_day_attendances(self, day_date, start_time, end_time):
         """ Given a day date, return matching attendances. Those can be limited
         by starting and ending time objects. """

@@ -26,14 +26,12 @@ from odoo import models, fields, api, _
 class HrAnnouncements(models.Model):
     _inherit = 'hr.employee'
 
-    @api.multi
     def _announcement_count(self):
         for obj in self:
             announcement_ids = self.env['hr.announcement'].sudo().search([('is_announcement', '=', True),
                                                                           ('state', 'in', ('approved', 'done'))])
             obj.announcement_count = len(announcement_ids)
 
-    @api.multi
     def announcement_view(self):
         for obj in self:
             ann_obj = self.env['hr.announcement'].sudo().search([('is_announcement', '=', True),

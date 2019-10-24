@@ -1,25 +1,5 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2018-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Author: Jesni Banu (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
+
 from datetime import datetime
 from odoo import models, fields, api, _
 
@@ -34,19 +14,19 @@ class HrLawsuit(models.Model):
         vals['name'] = self.env['ir.sequence'].next_by_code('hr.lawsuit')
         return super(HrLawsuit, self).create(vals)
 
-    @api.multi
+    
     def won(self):
         self.state = 'won'
 
-    @api.multi
+    
     def cancel(self):
         self.state = 'cancel'
 
-    @api.multi
+    
     def loss(self):
         self.state = 'fail'
 
-    @api.multi
+    
     def process(self):
         self.state = 'running'
 
@@ -72,7 +52,7 @@ class HrLawsuit(models.Model):
     employee_id = fields.Many2one('hr.employee', string='Employee', copy=False,
                                   readonly=1, states={'draft': [('readonly', False)]})
     party2_name = fields.Char(compute='set_party2', string='Name', store=True)
-    case_details = fields.Html(string='Case Details', copy=False)
+    case_details = fields.Html(string='Case Details', copy=False, track_visibility='always')
     state = fields.Selection([('draft', 'Draft'),
                               ('running', 'Running'),
                               ('cancel', 'Cancelled'),
@@ -86,13 +66,13 @@ class HrLegalEmployeeMaster(models.Model):
 
     legal_count = fields.Integer(compute='_legal_count', string='# Legal Actions')
 
-    @api.multi
+    
     def _legal_count(self):
         for each in self:
             legal_ids = self.env['hr.lawsuit'].search([('employee_id', '=', each.id)])
             each.legal_count = len(legal_ids)
 
-    @api.multi
+    
     def legal_view(self):
         for each1 in self:
             legal_obj = self.env['hr.lawsuit'].sudo().search([('employee_id', '=', each1.id)])

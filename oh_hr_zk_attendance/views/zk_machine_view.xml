@@ -48,7 +48,6 @@
     <record id="zk_machine_action" model="ir.actions.act_window">
         <field name="name">Attendances</field>
         <field name="res_model">zk.machine</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
 

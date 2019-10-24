@@ -11,7 +11,7 @@
                     <field name="from_date"/>
                     <field name="reg_reason"/>
                     <field name="to_date"/>
-                    <field name="employee"/>
+                    <field name="employee_id"/>
                 </tree>
             </field>
         </record>
@@ -19,7 +19,6 @@
        <record model="ir.actions.act_window" id="action_view_regularization1">
             <field name="name">Attendance Regularization Request</field>
             <field name="res_model">attendance.regular</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
             <field name="help" type="html">
@@ -42,7 +41,7 @@
                     <field name="from_date"/>
                     <field name="reg_reason"/>
                     <field name="to_date"/>
-                    <field name="employee"/>
+                    <field name="employee_id"/>
                 </tree>
             </field>
         </record>
@@ -69,7 +68,7 @@
                            <field name="from_date"/>
                            <field name="reg_reason"/>
                            <field name="to_date"/>
-                           <field name="employee"/>
+                           <field name="employee_id"/>
                        </group>
                    </sheet>
                  <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
@@ -81,7 +80,6 @@
           <record model="ir.actions.act_window" id="action_view_request_regularization">
             <field name="name">Attendance Regularization Approval</field>
             <field name="res_model">attendance.regular</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state_select','!=','approved'),('state_select','!=','reject')]</field>
             <field name="help" type="html">

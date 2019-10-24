@@ -1,25 +1,5 @@
 # -*- coding: utf-8 -*-
-###################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2019-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
-#    Authors: Avinash Nk, Jesni Banu (<https://www.cybrosys.com>)
-#
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-###################################################################################
+
 from odoo import models, fields, api, _
 
 
@@ -30,14 +10,14 @@ class HrCustody(models.Model):
     equipment_count = fields.Integer(compute='_equipment_count', string='# Equipments')
 
     # count of all custody contracts
-    @api.multi
+    
     def _custody_count(self):
         for each in self:
             custody_ids = self.env['hr.custody'].search([('employee', '=', each.id)])
             each.custody_count = len(custody_ids)
 
     # count of all custody contracts that are in approved state
-    @api.multi
+    
     def _equipment_count(self):
         for each in self:
             equipment_obj = self.env['hr.custody'].search([('employee', '=', each.id), ('state', '=', 'approved')])
@@ -48,7 +28,7 @@ class HrCustody(models.Model):
             each.equipment_count = len(equipment_ids)
 
     # smart button action for returning the view of all custody contracts related to the current employee
-    @api.multi
+    
     def custody_view(self):
         for each1 in self:
             custody_obj = self.env['hr.custody'].search([('employee', '=', each1.id)])
@@ -83,7 +63,7 @@ class HrCustody(models.Model):
 
     # smart button action for returning the view of all custody contracts that are in approved state,
     # related to the current employee
-    @api.multi
+    
     def equipment_view(self):
         for each1 in self:
             equipment_obj = self.env['hr.custody'].search([('employee', '=', each1.id), ('state', '=', 'approved')])

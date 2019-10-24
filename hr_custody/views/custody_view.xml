@@ -34,7 +34,7 @@
             <field name="arch" type="xml">
                 <form string="Equipments">
                     <sheet>
-                        <field name="image" widget='image' class="oe_avatar" options='{"preview_image": "image_medium"}'/>
+                        <field name="image" widget='image' class="oe_avatar"/>
                         <div class="oe_title">
                             <h1><field name="name" placeholder="Name"/></h1>
                         </div>
@@ -57,7 +57,6 @@
         <record model='ir.actions.act_window' id='wizard_return_date_act'>
             <field name="name">Custody Request</field>
             <field name="res_model">wizard.return.date</field>
-            <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="wizard_return_date_form"/>
             <field name="target">new</field>
@@ -192,7 +191,6 @@
         <record id="action_hr_custody" model="ir.actions.act_window">
             <field name="name">Custody</field>
             <field name="res_model">hr.custody</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="hr_custody_search_view"/>
             <field name="help" type="html">
@@ -205,7 +203,6 @@
         <record id="action_hr_property" model="ir.actions.act_window">
             <field name="name">Property</field>
             <field name="res_model">custody.property</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -221,9 +218,7 @@
         <menuitem id="hr_custody_menu" parent="hr_custody_main_menu"
                   name="Custody Management" sequence="20"/>
 
-        <menuitem action="action_hr_custody"
-                  id="hr_custody_menu"
-                  parent="hr_custody.hr_custody_main_menu"
+        <menuitem action="action_hr_custody" id="hr_custody_menu" parent="hr_custody.hr_custody_main_menu"
                   name="Custody Request" sequence="1"/>
 
         <menuitem action="action_hr_property" id="hr_property_menu" parent="hr_custody.hr_custody_main_menu"

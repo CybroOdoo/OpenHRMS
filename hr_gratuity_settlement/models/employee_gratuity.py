@@ -18,7 +18,7 @@ class EmployeeGratuity(models.Model):
         default='draft', track_visibility='onchange')
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
-    employee_name = fields.Many2one('hr.resignation', string='Employee', required=True,
+    employee_id = fields.Many2one('hr.resignation', string='Employee', required=True,
                                     domain="[('state', '=', 'approved')]")
     joined_date = fields.Date(string="Joined Date", readonly=True)
     worked_years = fields.Integer(string="Total Work Years", readonly=True)
@@ -38,19 +38,19 @@ class EmployeeGratuity(models.Model):
         return super(EmployeeGratuity, self).create(vals)
 
     # Check whether any Gratuity request already exists
-    @api.onchange('employee_name')
-    @api.depends('employee_name')
+    @api.onchange('employee_id')
+    @api.depends('employee_id')
     def check_request_existence(self):
         for rec in self:
-            if rec.employee_name:
+            if rec.employee_id:
 
-                gratuity_request = self.env['hr.gratuity'].search([('employee_name', '=', rec.employee_name.id),
+                gratuity_request = self.env['hr.gratuity'].search([('employee_id', '=', rec.employee_id.id),
                                                                    ('state', 'in', ['draft', 'validate', 'approve', 'cancel'])])
                 if gratuity_request:
                     raise ValidationError(_('A Settlement request is already processed'
                                             ' for this employee'))
 
-    @api.multi
+    
     def validate_function(self):
         # calculating the years of work by the employee
         worked_years = int(datetime.datetime.now().year) - int(str(self.joined_date).split('-')[0])
@@ -74,7 +74,7 @@ class EmployeeGratuity(models.Model):
 
             query = """select amount from hr_payslip_line psl 
                        inner join hr_payslip ps on ps.id=psl.slip_id
-                       where ps.employee_id="""+str(self.employee_name.employee_id.id)+\
+                       where ps.employee_id="""+str(self.employee_id.employee_id.id)+\
                        """and ps.state='done' and psl.code='NET'
                        order by ps.date_from desc limit 1"""
 
@@ -115,9 +115,9 @@ class EmployeeGratuity(models.Model):
         })
 
     # assigning the join date of the selected employee
-    @api.onchange('employee_name')
-    def _on_change_employee_name(self):
-        rec = self.env['hr.resignation'].search([['id', '=', self.employee_name.id]])
+    @api.onchange('employee_id')
+    def _on_change_employee_id(self):
+        rec = self.env['hr.resignation'].search([['id', '=', self.employee_id.id]])
         if rec:
             self.joined_date = rec.joined_date
         else:

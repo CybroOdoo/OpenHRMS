@@ -60,7 +60,6 @@
         <record model="ir.actions.act_window" id="view_employee_resignation">
             <field name="name">Employee Resignation</field>
             <field name="res_model">hr.resignation</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state', 'in', ('draft', 'confirm'))]</field>
             <field name="help" type="html">

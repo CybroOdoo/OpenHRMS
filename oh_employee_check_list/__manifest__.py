@@ -35,7 +35,6 @@
         'views/employee_form_inherit_view.xml',
         'views/checklist_view.xml',
         'views/employee_check_list_view.xml',
-        'views/settings_view.xml',
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],
