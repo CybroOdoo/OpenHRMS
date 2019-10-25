@@ -58,7 +58,7 @@ class HrAppraisalForm(models.Model):
     emp_survey_id = fields.Many2one('survey.survey', string="Select Appraisal Form")
     colloborator_survey_id = fields.Many2one('survey.survey', string="Select Opinion Form")
     colleague_survey_id = fields.Many2one('survey.survey', string="Select Opinion Form")
-    response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null", oldname="response")
+    response_id = fields.One2many('survey.user_input', "Response", ondelete="set null", oldname="response")
     final_evaluation = fields.Text(string="Final Evaluation")
     app_period_from = fields.Datetime("From", required=True, readonly=True, default=fields.Datetime.now())
     tot_comp_survey = fields.Integer(string="Count Answers", compute="_compute_completed_survey")
