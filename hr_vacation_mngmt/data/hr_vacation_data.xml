@@ -25,6 +25,7 @@
 
         <record id="air_lines_partner" model="res.partner">
             <field name="name">Airlines</field>
+            <field name="supplier">True</field>
         </record>
     </data>
 </odoo>

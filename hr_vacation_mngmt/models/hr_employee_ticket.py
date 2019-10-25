@@ -44,6 +44,7 @@ class HrFlightTicket(models.Model):
         return {'type': 'ir.actions.act_window_close'}
 
     def confirm_ticket(self):
+        product_id = self.env['product.product'].search([("name", "=", "Flight Ticket")])
         if self.ticket_fare <= 0:
             raise UserError(_('Please add ticket fare.'))
         inv_obj = self.env['account.move']
@@ -65,37 +66,23 @@ class HrFlightTicket(models.Model):
                 pterm.with_context(currency_id=self.env.user.company_id.id).compute(
                     value=1, date_ref=fields.Date.context_today(self))[0]
             date_due = max(line[0] for line in pterm_list)
-        abc = {'name': '/',
-               'invoice_origin': 'Flight Ticket',
-               'type': 'in_invoice',
-               'journal_id': journal_id.id,
-               'invoice_payment_term_id': partner.property_payment_term_id.id,
-               'invoice_date_due': date_due,
-               'ref': False,
-               'partner_id': partner.id,
-               'invoice_partner_bank_id': partner.property_account_payable_id.id,
-               'state': 'draft',
-               'invoice_line_ids': [(0, 0, {
-                   'name': 'Flight Ticket',
-                   'price_unit': self.ticket_fare,
-                   'quantity': 1.0,
-                   'account_id': expense_account,
-               })]
-               }
         inv_id = self.env['account.move'].create({
             'name': '/',
             'invoice_origin': 'Flight Ticket',
             'type': 'in_invoice',
             'journal_id': journal_id.id,
+            # 'invoice_payment_term_id': partner.property_payment_term_id.id,
             'invoice_date_due': date_due,
             'ref': False,
             'partner_id': partner.id,
+            # 'invoice_partner_bank_id': partner.property_account_payable_id.id,
             'state': 'draft',
-            'default_invoice_line_ids': [(0, 0, {
+            'invoice_line_ids': [(0, 0, {
                 'name': 'Flight Ticket',
                 'price_unit': self.ticket_fare,
                 'quantity': 1.0,
                 'account_id': int(expense_account),
+                'product_id': product_id.id,
             })],
         })
         # inv_id.action_invoice_open()
