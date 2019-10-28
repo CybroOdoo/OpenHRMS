@@ -24,7 +24,9 @@
     'name': 'Open HRMS Core',
     'version': '13.0.1.0.0',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
-    'description': 'Main module of Open HRMS. It brings all others into a single module',
+    'description': 'Main module of Open HRMS, It brings all others into a single module, Payroll, Payroll Accounting,Expense,' 
+                'Dashboard, Employees, Employee Document, Resignation, Salary Advance, Loan Management, Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, Shift Management, Employee History'
+                'Branch Transfer, Employee Appraisal,Biometric Device, Announcements, Insurance Management, Vacation Management,Employee Appreciations, Asset Custody, Employee Checklist, Entry and Exit Checklist, Disciplinary Actions, Attrition Rate, Document Expiry, Visa Expiry, Law Suit Management'
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
