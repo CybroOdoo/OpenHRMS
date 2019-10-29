@@ -28,6 +28,7 @@
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
+    'live_test_url': 'http://demo.openhrms.com/web/signup',
     'website': "https://www.openhrms.com",
     'depends': ['hr_payroll_account',
                 'hr_gamification',
