@@ -67,7 +67,6 @@ class HrEmployee(models.Model):
             'type': 'ir.actions.act_window',
             'view_id': False,
             'view_mode': 'tree,form',
-            'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
                            Click to Create for New Documents
                         </p>'''),

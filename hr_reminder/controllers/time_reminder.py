@@ -47,7 +47,7 @@ class CalendarController(http.Controller):
             # If user is logged, redirect to form view of event
             # otherwise, display the simplifyed web page with event informations
             if request.session.uid:
-                return werkzeug.utils.redirect('/web?db=%s#id=%s&view_type=form&model=calendar.event' % (db, id))
+                return werkzeug.utils.redirect('/web?db=%s#id=%s&model=calendar.event' % (db, id))
 
             # NOTE : we don't use request.render() since:
             # - we need a template rendering which is not lazy, to render before cursor closing

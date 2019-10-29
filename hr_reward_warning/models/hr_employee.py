@@ -44,7 +44,6 @@ class HrAnnouncements(models.Model):
                 if len(ann_ids) > 1:
                     value = {
                         'domain': str([('id', 'in', ann_ids)]),
-                        'view_type': 'form',
                         'view_mode': 'tree,form',
                         'res_model': 'hr.announcement',
                         'view_id': False,
@@ -54,7 +53,6 @@ class HrAnnouncements(models.Model):
                     }
                 else:
                     value = {
-                        'view_type': 'form',
                         'view_mode': 'form',
                         'res_model': 'hr.announcement',
                         'view_id': view_id,
