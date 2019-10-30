@@ -56,6 +56,7 @@ class HrLeaveRequest(models.Model):
                     return {
                         'name': _('Re-Assign Task'),
                         'type': 'ir.actions.act_window',
+                        'view_type': 'form',
                         'view_mode': 'form',
                         'res_model': 'task.reassign',
                         'target': 'new',
@@ -79,6 +80,7 @@ class HrLeaveRequest(models.Model):
         return {
             'name': _('Book Flight Ticket'),
             'type': 'ir.actions.act_window',
+            'view_type': 'form',
             'view_mode': 'form',
             'view_id': self.env.ref('hr_vacation_mngmt.view_hr_book_flight_ticket_form').id,
             'res_model': 'hr.flight.ticket',
@@ -93,6 +95,7 @@ class HrLeaveRequest(models.Model):
         return {
             'name': _('Flight Ticket'),
             'type': 'ir.actions.act_window',
+            'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'hr.flight.ticket',
             'target': 'current',
