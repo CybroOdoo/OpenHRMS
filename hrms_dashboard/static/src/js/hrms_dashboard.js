@@ -177,7 +177,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.payslip',
             view_mode: 'tree,form,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
             domain: [['employee_id','=', this.login_employee.id]],
             target: 'current'
@@ -208,7 +207,6 @@ var HrDashboard = AbstractAction.extend({
                     type: 'ir.actions.act_window',
                     res_model: 'hr.contract',
                     view_mode: 'tree,form,calendar',
-                    view_type: 'form',
                     views: [[false, 'list'],[false, 'form']],
                     context: {
                         'search_default_employee_id': self.login_employee.id,
@@ -237,7 +235,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.leave',
             view_mode: 'tree,form,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
             domain: [['date_from','>', fday],['state','=','validate'],['date_from','<', lday]],
             target: 'current'
@@ -257,7 +254,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.leave',
             view_mode: 'tree,form,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
             domain: [['date_from','<=', date], ['date_to', '>=', date], ['state','=','validate']],
             target: 'current'
@@ -275,7 +271,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.leave',
             view_mode: 'tree,form,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
             domain: [['state','in',['confirm','validate1']]],
             target: 'current'
@@ -293,7 +288,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.leave.allocation',
             view_mode: 'tree,form,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'form']],
             domain: [['state','in',['confirm', 'validate1']]],
             target: 'current'
@@ -312,7 +306,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'account.analytic.line',
             view_mode: 'tree,form',
-            view_type: 'form',
             views: [[false, 'list'], [false, 'form']],
             context: {
                 'search_default_month': true,
@@ -334,7 +327,6 @@ var HrDashboard = AbstractAction.extend({
             type: 'ir.actions.act_window',
             res_model: 'hr.applicant',
             view_mode: 'tree,kanban,form,pivot,graph,calendar',
-            view_type: 'form',
             views: [[false, 'list'],[false, 'kanban'],[false, 'form'],
                     [false, 'pivot'],[false, 'graph'],[false, 'calendar']],
             context: {},

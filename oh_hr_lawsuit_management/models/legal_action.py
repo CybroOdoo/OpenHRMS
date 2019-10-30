@@ -83,8 +83,6 @@ class HrLegalEmployeeMaster(models.Model):
             if legal_ids:
                 if len(legal_ids) <= 1:
                     value = {
-                        'view_type': 'form',
-                        'view_mode': 'form',
                         'res_model': 'hr.lawsuit',
                         'view_id': view_id,
                         'type': 'ir.actions.act_window',
@@ -94,7 +92,6 @@ class HrLegalEmployeeMaster(models.Model):
                 else:
                     value = {
                         'domain': str([('id', 'in', legal_ids)]),
-                        'view_type': 'form',
                         'view_mode': 'tree,form',
                         'res_model': 'hr.lawsuit',
                         'view_id': False,

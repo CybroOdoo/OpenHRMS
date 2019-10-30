@@ -51,7 +51,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Department History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'department.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
@@ -61,7 +60,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Department History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'department.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
@@ -76,7 +74,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Timesheet Cost Details"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'timesheet.cost',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
@@ -86,7 +83,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Timesheet Cost Details"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'timesheet.cost',
                 'type': 'ir.actions.act_window',
                 'target': 'new'
@@ -101,7 +97,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Salary History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'salary.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
@@ -111,7 +106,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Salary History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'salary.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new'
@@ -126,7 +120,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Contract History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'contract.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
@@ -136,7 +129,6 @@ class DepartmentDetails(models.Model):
             return {
                 'name': _("Contract History"),
                 'view_mode': 'tree',
-                'view_type': 'form',
                 'res_model': 'contract.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new'

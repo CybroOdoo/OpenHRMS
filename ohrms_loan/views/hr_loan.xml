@@ -130,7 +130,7 @@
         <field name="name">Loans</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hr.loan</field>
-        <field name="src_model">hr.employee</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee"/>
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_myloan': 1}</field>
         <field name="view_id" eval="hr_loan_tree_view"/>

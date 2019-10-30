@@ -39,7 +39,6 @@ class HrCustody(models.Model):
             if custody_ids:
                 if len(custody_ids) <= 1:
                     value = {
-                        'view_type': 'form',
                         'view_mode': 'form',
                         'res_model': 'hr.custody',
                         'view_id': view_id,
@@ -50,7 +49,6 @@ class HrCustody(models.Model):
                 else:
                     value = {
                         'domain': str([('id', 'in', custody_ids)]),
-                        'view_type': 'form',
                         'view_mode': 'tree,form',
                         'res_model': 'hr.custody',
                         'view_id': False,
@@ -75,7 +73,6 @@ class HrCustody(models.Model):
             if equipment_ids:
                 if len(equipment_ids) <= 1:
                     value = {
-                        'view_type': 'form',
                         'view_mode': 'form',
                         'res_model': 'custody.property',
                         'view_id': view_id,
@@ -86,7 +83,6 @@ class HrCustody(models.Model):
                 else:
                     value = {
                         'domain': str([('id', 'in', equipment_ids)]),
-                        'view_type': 'form',
                         'view_mode': 'tree,form',
                         'res_model': 'custody.property',
                         'view_id': False,

@@ -44,7 +44,6 @@ var reminder_menu = Widget.extend({
                              type: 'ir.actions.act_window',
                             res_model: model,
                             view_mode: 'list',
-                            view_type: 'list',
                             domain: [[date, '=', new Date()]],
                             views: [[false, 'list']],
                             target: 'new',})
@@ -55,7 +54,6 @@ var reminder_menu = Widget.extend({
                             type: 'ir.actions.act_window',
                             res_model: model,
                             view_mode: 'list',
-                            view_type: 'list',
                             domain: [[date, '=', self.reminder[i+3]]],
                             views: [[false, 'list']],
                             target: 'new',
@@ -67,7 +65,6 @@ var reminder_menu = Widget.extend({
                             type: 'ir.actions.act_window',
                             res_model: model,
                             view_mode: 'list',
-                            view_type: 'list',
                             domain: [[date, '<', self.reminder[i+5]],[date, '>', self.reminder[i+4]]],
                             views: [[false, 'list']],
                             target: 'new',
