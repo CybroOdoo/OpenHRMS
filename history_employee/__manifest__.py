@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employee History',
-    'version': '13.0.1.0.0',
+    'version': '13.0.1.1.0',
     'summary': """History Of Employees In Your Company""",
     'description': 'Track the History of Employees in your Company',
     'category': 'Generic Modules/Human Resources',
