@@ -159,7 +159,6 @@ class HrAppraisalForm(models.Model):
             'model': 'ir.actions.act_window',
             'name': 'Answers',
             'type': 'ir.actions.act_window',
-            'view_type': 'form',
             'view_mode': 'form,tree',
             'res_model': 'survey.user_input',
             'views': [(tree_id, 'tree'), (form_id, 'form')],

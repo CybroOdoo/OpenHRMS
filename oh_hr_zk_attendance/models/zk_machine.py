@@ -1,4 +1,24 @@
 # -*- coding: utf-8 -*-
+###################################################################################
+#
+#    Cybrosys Technologies Pvt. Ltd.
+#    Copyright (C) 2018-TODAY Cybrosys Technologies(<http://www.cybrosys.com>).
+#    Author: cybrosys(<https://www.cybrosys.com>)
+#
+#    This program is free software: you can modify
+#    it under the terms of the GNU Affero General Public License (AGPL) as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+###################################################################################
 import pytz
 import sys
 import datetime
@@ -29,7 +49,6 @@ class ZkMachine(models.Model):
     address_id = fields.Many2one('res.partner', string='Working Address')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id.id)
 
-    
     def device_connect(self, zk):
         command = CMD_CONNECT
         command_string = ''
@@ -50,7 +69,6 @@ class ZkMachine(models.Model):
         except:
             conn = False
         return conn
-    
     
     def clear_attendance(self):
         for info in self:
@@ -80,6 +98,7 @@ class ZkMachine(models.Model):
         command = unpack('HHHH', zk.data_recv[:8])[0]
         if command == CMD_PREPARE_DATA:
             size = unpack('I', zk.data_recv[8:12])[0]
+            print("size", size)
             return size
         else:
             return False
@@ -91,7 +110,6 @@ class ZkMachine(models.Model):
         chksum = 0
         session_id = zk.session_id
         reply_id = unpack('HHHH', zk.data_recv[:8])[3]
-
         buf = zk.createHeader(command, chksum, session_id, reply_id, command_string)
         zk.zkclient.sendto(buf, zk.address)
         try:
@@ -110,11 +128,15 @@ class ZkMachine(models.Model):
 
             users = {}
             if len(zk.userdata) > 0:
-                userdata = zk.userdata[0]
+                for x in range(len(zk.userdata)):
+                    if x > 0:
+                        zk.userdata[x] = zk.userdata[x][8:]
+                userdata = b''.join(zk.userdata)
                 userdata = userdata[11:]
                 while len(userdata) > 72:
                     uid, role, password, name, userid = unpack('2s2s8s28sx31s', userdata.ljust(72)[:72])
                     uid = int(binascii.hexlify(uid), 16)
+                    # print("uid",uid)
                     # Clean up some messy characters from the user name
                     password = password.split(b'\x00', 1)[0]
                     password = str(password.strip(b'\x00|\x01\x10x|\x000').decode('utf-8'))
@@ -125,6 +147,7 @@ class ZkMachine(models.Model):
                         name = uid
                     users[uid] = (userid, name, int(binascii.hexlify(role), 16), password)
                     userdata = userdata[72:]
+                    # print(users)
             return users
         except:
             return False
@@ -135,7 +158,6 @@ class ZkMachine(models.Model):
         for machine in machines :
             machine.download_attendance()
         
-    
     def download_attendance(self):
         _logger.info("++++++++++++Cron Executed++++++++++++++++++++++")
         zk_attendance = self.env['zk.machine.attendance']
@@ -175,7 +197,7 @@ class ZkMachine(models.Model):
                     attendance = []
                     if len(zk.attendancedata) > 0:
                         # The first 4 bytes don't seem to be related to the user
-                        for x in xrange(len(zk.attendancedata)):
+                        for x in range(len(zk.attendancedata)):
                             if x > 0:
                                 zk.attendancedata[x] = zk.attendancedata[x][8:]
                         attendancedata = b''.join(zk.attendancedata) 
