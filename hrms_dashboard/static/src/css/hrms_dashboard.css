@@ -188,7 +188,7 @@ rect:hover {  fill:#934da5; }
     background-color: #3e6282;
     /*background-image: linear-gradient(180deg, #3e6282, #41666f);*/
     position: fixed;
-    z-index: 999;
+    /*z-index: 999;*/
 }
 .employee-prof .oh-card:hover {
 
