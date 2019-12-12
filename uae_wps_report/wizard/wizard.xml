@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="wps_wizard_form" model="ir.ui.view">
+            <field name="name">wps.wizard.form</field>
+            <field name="model">wps.wizard</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Generate SIF">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="days"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                            <field name="salary_month"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Print xlsx" name="print_xlsx" type="object" class="btn-primary"/>
+                        <button string="Cancel" name="cancel" type="object" special="cancel" class="btn-cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="wps_action_view" model="ir.actions.act_window">
+            <field name="name">Generate SIF</field>
+            <field name="target">new</field>
+            <field name="res_model">wps.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+        <menuitem
+                id="wps_wizard_menu"
+                name="SIF"
+                parent="hr_payroll_community.menu_hr_payroll_community_root"/>
+        <menuitem
+                id="wps_wizard_submenu"
+                name="Create SIF"
+                parent="wps_wizard_menu"
+                action="wps_action_view"
+                groups="account.group_account_manager"/>
+
+    </data>
+
+</odoo>
