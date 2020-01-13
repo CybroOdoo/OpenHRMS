@@ -14,9 +14,9 @@ class SalaryRuleInput(models.Model):
         emp_id = contract_obj.browse(contract_ids[0].id).employee_id
         adv_salary = self.env['salary.advance'].search([('employee_id', '=', emp_id.id)])
         for adv_obj in adv_salary:
-            current_date = datetime.strptime(date_from, '%Y-%m-%d').date().month
+            current_date = datetime.strptime(str(date_from), '%Y-%m-%d').date().month
             date = adv_obj.date
-            existing_date = datetime.strptime(date, '%Y-%m-%d').date().month
+            existing_date = datetime.strptime(str(date), '%Y-%m-%d').date().month
             if current_date == existing_date:
                 state = adv_obj.state
                 amount = adv_obj.advance
