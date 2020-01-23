@@ -23,20 +23,20 @@
                         </div>
                 		<group>
 	                		<group>
-	                        	<field name="employee_id"/>
-                                <field name="department"/>
-                                <field name="date"/>
-	                        	<field name="reason"/>
-                                <field name="exceed_condition" groups="hr.group_hr_manager,hr.group_hr_user"/>
+	                        	<field name="employee_id" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"/>
+                                <field name="department" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"/>
+                                <field name="date" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"/>
+	                        	<field name="reason" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"/>
+                                <field name="exceed_condition" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}" groups="hr.group_hr_manager,hr.group_hr_user"/>
 		                    </group>
 		                    <group>
-                    			<field name="advance"/>
-                                <field name="currency_id" groups="base.group_multi_currency"/>
-                                <field name="company_id"  groups="base.group_multi_currency"/>
-                                <field name="credit"  attrs="{'invisible':[('state', '=', 'draft'), ('state', '=', 'submit')]}" groups="account.group_account_manager"/>
-                                <field name="debit" attrs="{'invisible':[('state', '=', 'draft'), ('state', '=', 'submit')]}" groups="account.group_account_manager"/>
-                                <field name="journal" attrs="{'invisible': [('state', '=', 'draft'), ('state', '=', 'submit')]}" groups="account.group_account_manager"/>
-                                <field name="employee_contract_id"  attrs="{'invisible': ['|', ('state', '=', 'draft'), ('state', '=', 'approve')]}" groups="hr.group_hr_manager,hr.group_hr_user"/>
+                    			<field name="advance" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"/>
+                                <field name="currency_id" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}" groups="base.group_multi_currency"/>
+                                <field name="company_id" attrs="{'readonly':[('state','in',['approve','cancel','reject'])]}"  groups="base.group_multi_currency"/>
+                                <field name="credit"  attrs="{'invisible':[('state', '=', 'draft'), ('state', '=', 'submit')], 'readonly':[('state','in',['approve','cancel','reject'])]}" groups="account.group_account_manager"/>
+                                <field name="debit" attrs="{'invisible':[('state', '=', 'draft'), ('state', '=', 'submit')], 'readonly':[('state','in',['approve','cancel','reject'])]}" groups="account.group_account_manager"/>
+                                <field name="journal" attrs="{'invisible': [('state', '=', 'draft'), ('state', '=', 'submit')], 'readonly':[('state','in',['approve','cancel','reject'])]}" groups="account.group_account_manager"/>
+                                <field name="employee_contract_id"  attrs="{'invisible': ['|', ('state', '=', 'draft'), ('state', '=', 'approve')], 'readonly':[('state','in',['approve','cancel','reject'])]}" groups="hr.group_hr_manager,hr.group_hr_user"/>
 	                    	</group>
                     	</group>
 		            </sheet>
