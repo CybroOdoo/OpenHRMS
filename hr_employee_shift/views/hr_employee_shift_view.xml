@@ -20,8 +20,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='name']" position="after" style="height:30px;width:200px">
                     <group>
-                    <field name="hr_department" style="height:30px;width:200px" />
-                    <field name="sequence" style="height:30px;width:200px"/>
+                    <field name="hr_department" style="height:30px;width:200px;font-size:16px;" />
+                    <field name="sequence" style="height:30px;width:200px;font-size:20px;"/>
                     </group>
                     <field name="color" invisible="1"/>
                 </xpath>
@@ -53,7 +53,7 @@
                                 <div class="oe_kanban_content">
                                     <div class="row">
                                         <div class="o_primary style_shift">
-                                            <div class="text-center"><strong><field name="name"/></strong></div>
+                                            <div class="text-center"><span style="margin-left:25px;"><strong><field name="name"/></strong></span></div>
                                         </div>
 
                                     </div>

@@ -21,9 +21,9 @@ class HrEmployeeShift(models.Model):
             (0, 0, {'name': _('Friday Morning'), 'dayofweek': '4', 'hour_from': 8, 'hour_to': 12}),
         ]
 
-    color = fields.Integer(string='Color Index')
-    hr_department = fields.Many2one('hr.department', string="Department", required=True)
-    sequence = fields.Integer(string="Sequence", required=True, default=1)
+    color = fields.Integer(string='Color Index', help="Color")
+    hr_department = fields.Many2one('hr.department', string="Department", required=True, help="Department")
+    sequence = fields.Integer(string="Sequence", required=True, default=1, help="Sequence")
     attendance_ids = fields.One2many(
         'resource.calendar.attendance', 'calendar_id', 'Workingssss Time',
         copy=True, default=_get_default_attendance_ids)

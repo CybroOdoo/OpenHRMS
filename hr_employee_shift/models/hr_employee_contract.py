@@ -6,20 +6,20 @@ from odoo import models, fields, api, _
 class HrEmployeeContract(models.Model):
     _inherit = 'hr.contract'
 
-    shift_schedule = fields.One2many('hr.shift.schedule', 'rel_hr_schedule', string="Shift Schedule")
-    working_hours = fields.Many2one('resource.calendar', string='Working Schedule')
-    department_id = fields.Many2one('hr.department', string="Department",
+    shift_schedule = fields.One2many('hr.shift.schedule', 'rel_hr_schedule', string="Shift Schedule", help="Shift schedule")
+    working_hours = fields.Many2one('resource.calendar', string='Working Schedule', help="Working hours")
+    department_id = fields.Many2one('hr.department', string="Department", help="Department",
                                     required=True)
 
 
 class HrSchedule(models.Model):
     _name = 'hr.shift.schedule'
 
-    start_date = fields.Date(string="Date From", required=True)
-    end_date = fields.Date(string="Date To", required=True)
+    start_date = fields.Date(string="Date From", required=True, help="Starting date for the shift")
+    end_date = fields.Date(string="Date To", required=True, help="Ending date for the shift")
     rel_hr_schedule = fields.Many2one('hr.contract')
-    hr_shift = fields.Many2one('resource.calendar', string="Shift", required=True)
-    company_id = fields.Many2one('res.company', string='Company')
+    hr_shift = fields.Many2one('resource.calendar', string="Shift", required=True, help="Shift")
+    company_id = fields.Many2one('res.company', string='Company', help="Company")
 
     @api.onchange('start_date', 'end_date')
     def get_department(self):
