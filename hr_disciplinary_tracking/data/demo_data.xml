@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="employee_one" model="hr.employee">
+            <field name="name">Johny</field>
+        </record>
+
+        <record id="employee_two" model="hr.employee">
+            <field name="name">Stella</field>
+        </record>
+
+        <record id="employee_three" model="hr.employee">
+            <field name="name">Rose</field>
+        </record>
+
+        <record id="department_one" model="hr.department">
+            <field name="name">Administration</field>
+        </record>
+
+        <record id="department_two" model="hr.department">
+            <field name="name">Management</field>
+        </record>
+
+        <record id="department_three" model="hr.department">
+            <field name="name">Sales</field>
+        </record>
+
+
+        <record id="discipline_categories_one" model="discipline.category">
+            <field name="name">Violation of Company Rules</field>
+            <field name="code">101</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+
+        <record id="discipline_categories_two" model="discipline.category">
+            <field name="name">Mis-behaviour to Co-workers</field>
+            <field name="code">102</field>
+            <field name="category_type">action</field>
+        </record>
+
+        <record id="discipline_categories_three" model="discipline.category">
+            <field name="name">Damage to company properties</field>
+            <field name="code">103</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+
+        <record id="disciplinary_action_one" model="disciplinary.action">
+            <field name="employee_name" ref="employee_one"/>
+            <field name="department_name" ref="department_one"/>
+            <field name="joined_date">2020-03-02</field>
+            <field name="discipline_reason" ref="discipline_categories_one"/>
+        </record>
+
+        <record id="disciplinary_action_two" model="disciplinary.action">
+            <field name="employee_name" ref="employee_two"/>
+            <field name="department_name" ref="department_two"/>
+            <field name="joined_date">2020-03-02</field>
+            <field name="discipline_reason" ref="discipline_categories_two"/>
+        </record>
+
+        <record id="disciplinary_action_three" model="disciplinary.action">
+            <field name="employee_name" ref="employee_three"/>
+            <field name="department_name" ref="department_three"/>
+            <field name="joined_date">2020-03-02</field>
+            <field name="discipline_reason" ref="discipline_categories_three"/>
+        </record>
+
+    </data>
+</odoo>

@@ -24,20 +24,12 @@ class CategoryDiscipline(models.Model):
 
     # Discipline Categories
 
-    code = fields.Char(string="Code", required=True)
-    name = fields.Char(string="Name", required=True)
-    description = fields.Text(string="Details")
+    code = fields.Char(string="Code", required=True, help="Category code")
+    name = fields.Char(string="Name", required=True, help="Category name")
+    category_type = fields.Selection([('disciplinary', 'Disciplinary Category'), ('action', 'Action Category')],
+                                   string="Category Type", help="Choose the category type disciplinary or action")
+    description = fields.Text(string="Details", help="Details for this category")
 
-
-class CategoryAction(models.Model):
-    _name = 'action.category'
-    _description = 'Action Category'
-
-    # Action Categories
-
-    code = fields.Char(string="Code", required=True)
-    name = fields.Char(string="Name", required=True)
-    description = fields.Text(string="Details")
 
 class DisciplinaryAction(models.Model):
     _name = 'disciplinary.action'
@@ -56,22 +48,22 @@ class DisciplinaryAction(models.Model):
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
 
-    employee_name = fields.Many2one('hr.employee', string='Employee', required=True)
-    department_name = fields.Many2one('hr.department', string='Department', required=True)
-    discipline_reason = fields.Many2one('discipline.category', string='Reason', required=True)
+    employee_name = fields.Many2one('hr.employee', string='Employee', required=True, help="Employee name")
+    department_name = fields.Many2one('hr.department', string='Department', required=True, help="Department name")
+    discipline_reason = fields.Many2one('discipline.category', string='Reason', required=True, help="Choose a disciplinary reason")
     explanation = fields.Text(string="Explanation by Employee", help='Employee have to give Explanation'
                                                                      'to manager about the violation of discipline')
-    action = fields.Many2one('action.category', string="Action")
+    action = fields.Many2one('discipline.category', string="Action", help="Choose an action for this disciplinary action")
     read_only = fields.Boolean(compute="get_user", default=True)
     warning_letter = fields.Html(string="Warning Letter")
     suspension_letter = fields.Html(string="Suspension Letter")
     termination_letter = fields.Html(string="Termination Letter")
     warning = fields.Integer(default=False)
-    action_details = fields.Text(string="Action Details")
+    action_details = fields.Text(string="Action Details", help="Give the details for this action")
     attachment_ids = fields.Many2many('ir.attachment', string="Attachments",
                                       help="Employee can submit any documents which supports their explanation")
     note = fields.Text(string="Internal Note")
-    joined_date = fields.Date(string="Joined Date")
+    joined_date = fields.Date(string="Joined Date", help="Employee joining date")
 
     # assigning the sequence for the record
     @api.model
@@ -118,23 +110,19 @@ class DisciplinaryAction(models.Model):
         if self.state == 'action':
             raise ValidationError(_('You Can not edit a Validated Action !!'))
 
-    
     def assign_function(self):
 
         for rec in self:
             rec.state = 'explain'
 
-    
     def cancel_function(self):
         for rec in self:
             rec.state = 'cancel'
 
-    
     def set_to_function(self):
         for rec in self:
             rec.state = 'draft'
 
-    
     def action_function(self):
         for rec in self:
             if not rec.action:
@@ -160,14 +148,11 @@ class DisciplinaryAction(models.Model):
                     raise ValidationError(_('You have to fill up the  Action Information !!'))
             rec.state = 'action'
 
-    
     def explanation_function(self):
         for rec in self:
 
             if not rec.explanation:
                 raise ValidationError(_('You must give an explanation !!'))
-        if len(self.explanation.split()) < 5:
-            raise ValidationError(_('Your explanation must contain at least 5 words   !!'))
 
         self.write({
             'state': 'submitted'
