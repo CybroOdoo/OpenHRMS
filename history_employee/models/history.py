@@ -191,36 +191,36 @@ class WageDetails(models.Model):
 class DepartmentHistory(models.Model):
     _name = 'department.history'
 
-    employee_id = fields.Char(string='Employee Id')
-    employee_name = fields.Char(string='Employee Name')
-    changed_field = fields.Char(string='Changed Field')
-    updated_date = fields.Date(string='Updated On')
-    current_value = fields.Char(string='Current Value')
+    employee_id = fields.Char(string='Employee Id', help="Employee")
+    employee_name = fields.Char(string='Employee Name', help="Name")
+    changed_field = fields.Char(string='Job position', help="Displays the changed department/job position")
+    updated_date = fields.Date(string='Date', help="Display the date on which  department or job position changed")
+    current_value = fields.Char(string='Designation', help="Display the designation")
 
 
 class TimesheetCost(models.Model):
     _name = 'timesheet.cost'
 
-    employee_id = fields.Char(string='Employee Id')
-    employee_name = fields.Char(string='Employee Name')
-    updated_date = fields.Date(string='Updated On')
-    current_value = fields.Char(string='Current Value')
+    employee_id = fields.Char(string='Employee Id', help="Employee")
+    employee_name = fields.Char(string='Employee Name', help="Name")
+    updated_date = fields.Date(string='Updated On', help="Updated Date of Time Sheet")
+    current_value = fields.Char(string='Current Cost', help="Updated Value of Time Sheet")
 
 
 class SalaryHistory(models.Model):
     _name = 'salary.history'
 
-    employee_id = fields.Char(string='Employee Id')
-    employee_name = fields.Char(string='Employee Name')
-    updated_date = fields.Date(string='Updated On')
-    current_value = fields.Char(string='Current Value')
+    employee_id = fields.Char(string='Employee Id', help="Employee")
+    employee_name = fields.Char(string='Employee Name', help="Name")
+    updated_date = fields.Date(string='Updated On', help="Salary Updated Date")
+    current_value = fields.Char(string='Current Salary', help="Updated Salary")
 
 
 class ContractHistory(models.Model):
     _name = 'contract.history'
 
-    employee_id = fields.Char(string='Employee Id')
-    employee_name = fields.Char(string='Employee Name')
-    updated_date = fields.Date(string='Updated On')
-    changed_field = fields.Char(string='Changed Field')
-    current_value = fields.Char(string='Current Value')
+    employee_id = fields.Char(string='Employee Id', help="Employee")
+    employee_name = fields.Char(string='Employee Name', help="Name")
+    updated_date = fields.Date(string='Updated On', help="Contract Updated Date")
+    changed_field = fields.Char(string='Changed Field', help="Updated Field's")
+    current_value = fields.Char(string='Current Contract', help="Updated Value of Contract")

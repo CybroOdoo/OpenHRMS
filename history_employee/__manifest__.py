@@ -33,7 +33,6 @@
     'depends': ['hr', 'hr_contract', 'oh_employee_creation_from_user'],
     'data': ['views/employee_history.xml',
              'views/history_views.xml',
-             'security/secure.xml',
              'security/ir.model.access.csv'
              ],
     'demo': [],
