@@ -3,7 +3,6 @@
 from datetime import date, datetime, timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import Warning, UserError
-# from odoo.tools import image_resize_images
 
 
 class HrCustody(models.Model):
@@ -13,6 +12,18 @@ class HrCustody(models.Model):
     _name = 'hr.custody'
     _description = 'Hr Custody Management'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    read_only = fields.Boolean(string="check field")
+
+    @api.onchange('employee')
+    def _compute_read_only(self):
+        """ Use this function to check weather the user has the permission to change the employee"""
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        print(res_user.has_group('hr.group_hr_user'))
+        if res_user.has_group('hr.group_hr_user'):
+            self.read_only = True
+        else:
+            self.read_only = False
 
     def mail_reminder(self):
         now = datetime.now() + timedelta(days=1)
@@ -34,8 +45,8 @@ class HrCustody(models.Model):
                                      'cursor: pointer; white-space: nowrap; background-image: none; '
                                      'background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px;">'
                                      'Renew %s</a></div>') % \
-                                    (i.employee.name, i.name, i.custody_name.name, i.date_request, i.purpose,
-                                        date_now, i.name, url, i.name)
+                                   (i.employee.name, i.name, i.custody_name.name, i.date_request, i.purpose,
+                                    date_now, i.name, url, i.name)
                     main_content = {
                         'subject': _('REMINDER On %s') % i.name,
                         'author_id': self.env.user.partner_id.id,
@@ -46,7 +57,8 @@ class HrCustody(models.Model):
                     mail_id.mail_message_id.body = mail_content
                     mail_id.send()
                     if i.employee.user_id:
-                        mail_id.mail_message_id.write({'needaction_partner_ids': [(4, i.employee.user_id.partner_id.id)]})
+                        mail_id.mail_message_id.write(
+                            {'needaction_partner_ids': [(4, i.employee.user_id.partner_id.id)]})
                         mail_id.mail_message_id.write({'partner_ids': [(4, i.employee.user_id.partner_id.id)]})
 
     @api.model
@@ -54,21 +66,17 @@ class HrCustody(models.Model):
         vals['name'] = self.env['ir.sequence'].next_by_code('hr.custody')
         return super(HrCustody, self).create(vals)
 
-    
     def sent(self):
         self.state = 'to_approve'
 
-    
     def send_mail(self):
         template = self.env.ref('hr_custody.custody_email_notification_template')
         self.env['mail.template'].browse(template.id).send_mail(self.id)
         self.mail_send = True
 
-    
     def set_to_draft(self):
         self.state = 'draft'
 
-    
     def renew_approve(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
@@ -77,7 +85,6 @@ class HrCustody(models.Model):
         self.renew_date = ''
         self.state = 'approved'
 
-    
     def renew_refuse(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
@@ -85,14 +92,12 @@ class HrCustody(models.Model):
         self.renew_date = ''
         self.state = 'approved'
 
-    
     def approve(self):
         for custody in self.env['hr.custody'].search([('custody_name', '=', self.custody_name.id)]):
             if custody.state == "approved":
                 raise UserError(_("Custody is not available now"))
         self.state = 'approved'
 
-    
     def set_to_return(self):
         self.state = 'returned'
         self.return_date = date.today()
@@ -103,22 +108,28 @@ class HrCustody(models.Model):
         if self.return_date < self.date_request:
             raise Warning('Please Give Valid Return Date')
 
-    name = fields.Char(string='Code', copy=False)
-    company_id = fields.Many2one('res.company', 'Company', readonly=True,
+    name = fields.Char(string='Code', copy=False, help="Code")
+    company_id = fields.Many2one('res.company', 'Company', readonly=True, help="Company",
                                  default=lambda self: self.env.user.company_id)
-    rejected_reason = fields.Text(string='Rejected Reason', copy=False, readonly=1)
-    renew_rejected_reason = fields.Text(string='Renew Rejected Reason', copy=False, readonly=1)
+    rejected_reason = fields.Text(string='Rejected Reason', copy=False, readonly=1, help="Reason for the rejection")
+    renew_rejected_reason = fields.Text(string='Renew Rejected Reason', copy=False, readonly=1,
+                                        help="Renew rejected reason")
     date_request = fields.Date(string='Requested Date', required=True, track_visibility='always', readonly=True,
+                               help="Requested date",
                                states={'draft': [('readonly', False)]}, default=datetime.now().strftime('%Y-%m-%d'))
-    employee = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True,
+    employee = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True, help="Employee",
+                               default=lambda self: self.env.user.employee_id.id,
                                states={'draft': [('readonly', False)]})
-    purpose = fields.Char(string='Reason', track_visibility='always', required=True, readonly=True,
+    purpose = fields.Char(string='Reason', track_visibility='always', required=True, readonly=True, help="Reason",
                           states={'draft': [('readonly', False)]})
     custody_name = fields.Many2one('custody.property', string='Property', required=True, readonly=True,
+                                   help="Property name",
                                    states={'draft': [('readonly', False)]})
     return_date = fields.Date(string='Return Date', required=True, track_visibility='always', readonly=True,
+                              help="Return date",
                               states={'draft': [('readonly', False)]})
-    renew_date = fields.Date(string='Renewal Return Date', track_visibility='always', readonly=True, copy=False)
+    renew_date = fields.Date(string='Renewal Return Date', track_visibility='always',
+                             help="Return date for the renewal", readonly=True, copy=False)
     notes = fields.Html(string='Notes')
     renew_return_date = fields.Boolean(default=False, copy=False)
     renew_reject = fields.Boolean(default=False, copy=False)
@@ -137,7 +148,7 @@ class HrPropertyName(models.Model):
 
     name = fields.Char(string='Property Name', required=True)
     image = fields.Image(string="Image",
-        help="This field holds the image used for this provider, limited to 1024x1024px")
+                         help="This field holds the image used for this provider, limited to 1024x1024px")
     image_medium = fields.Binary(
         "Medium-sized image", attachment=True,
         help="Medium-sized image of this provider. It is automatically "
@@ -148,9 +159,41 @@ class HrPropertyName(models.Model):
         help="Small-sized image of this provider. It is automatically "
              "resized as a 64x64px image, with aspect ratio preserved. "
              "Use this field anywhere a small image is required.")
-    desc = fields.Html(string='Description')
-    company_id = fields.Many2one('res.company', 'Company',
+    desc = fields.Html(string='Description', help="Description")
+    company_id = fields.Many2one('res.company', 'Company', help="Company",
                                  default=lambda self: self.env.user.company_id)
+    property_selection = fields.Selection([('empty', 'No Connection'),
+                                           ('asset', 'Assets'),
+                                           ('product', 'Products')],
+                                          default='empty',
+                                          string='Property From', help="Select the property")
+    asset_true = fields.Boolean('Asset Exists', default=False)
+    asset_id = fields.Many2one('account.asset', string="Assets", help="Assets")
+    product_id = fields.Many2one('product.product', string='Product', help="Product")
+
+
+    # def _compute_read_only(self):
+    #     """ Use this function to check weather the user has the permission to change the employee"""
+    #     res_user = self.env['res.users'].search([('id', '=', self._uid)])
+    #     print(res_user.has_group('hr.group_hr_user'))
+    #     if res_user.has_group('hr.group_hr_user'):
+    #         self.read_only = True
+    #     else:
+    #         self.read_only = False
+
+    @api.onchange('property_selection')
+    def onchange_property_selection(self):
+        if self.property_selection == 'asset':
+            asset_obj = self.env['ir.module.module'].search([('name', '=', 'account_asset')])
+            if asset_obj.state != 'installed':
+                self.asset_true = False
+                raise UserError(_('No asset module found. Kindly install the asset module.'))
+            else:
+                self.asset_true = True
+
+    @api.onchange('product_id')
+    def onchange_product(self):
+        self.name = self.product_id.name
 
 
 class HrReturnDate(models.TransientModel):
@@ -168,7 +211,6 @@ class HrReturnDate(models.TransientModel):
         if self.returned_date <= custody_obj.date_request:
             raise Warning('Please Give Valid Renewal Date')
 
-    
     def proceed(self):
         context = self._context
         custody_obj = self.env['hr.custody'].search([('id', '=', context.get('custody_id'))])

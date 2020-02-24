@@ -30,7 +30,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['hr', 'mail', 'hr_employee_updation'],
+    'depends': ['hr', 'mail', 'hr_employee_updation', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'security/custody_security.xml',
@@ -41,9 +41,9 @@
         'views/notification_mail.xml',
         'reports/custody_report.xml'
     ],
+    'demo': ['data/demo_data.xml'],
     'images': ['static/description/banner.jpg'],
     'license': 'AGPL-3',
-    'demo': [],
     'installable': True,
     'auto_install': False,
     'application': False,
