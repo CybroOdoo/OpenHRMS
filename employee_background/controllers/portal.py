@@ -15,14 +15,8 @@ class CustomerPortal(CustomerPortal):
     @http.route(['/my/records', '/my/quotes/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_records(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         partner = request.env.user.partner_id
-        print(partner.id)
         employee_records = request.env['employee.verification'].sudo().search(['&',('state','=','assign'),('agency','=',partner.id)])
         varification_count = request.env['employee.verification'].sudo().search_count(['&',('state','=','assign'),('agency','=',partner.id)])
-
-        print(varification_count)
-        print(partner.name)
-        print(employee_records)
-
         pager = portal_pager(
             url="/my/quotes",
             url_args={'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
@@ -46,7 +40,6 @@ class CustomerPortal(CustomerPortal):
     def portal_record_page(self, order=None, access_token=None, **kw):
         try:
             data = request.env['employee.verification'].sudo().browse(order)
-            print("data=",data.id)
         except AccessError:
             return request.redirect('/my')
 

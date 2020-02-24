@@ -137,7 +137,7 @@
         </record>
 
         <!--Different menu item for employee verification-->
-         <menuitem id="employee_verification_menu" action="action_employee_verification" name="Employee Verification" parent="hr_employee_updation.menu_hr_management"
-                    sequence=""/>
+         <menuitem id="employee_verification_menu" action="action_employee_verification" name="Verification" parent="hr.menu_hr_employee_payroll"
+                   />
     </data>
 </odoo>

@@ -10,18 +10,18 @@ class EmployeeVerification(models.Model):
     _name = 'employee.verification'
     _rec_name = 'verification_id'
 
-    verification_id = fields.Char('ID', readonly=True, copy=False)
+    verification_id = fields.Char('ID', readonly=True, copy=False, help="Verification Id")
     employee = fields.Many2one('hr.employee', string='Employee', required=True, help='You can choose the employee for background verification')
     address = fields.Many2one(related='employee.address_home_id', string='Address', readonly=False)
-    assigned_by = fields.Many2one('res.users', string='Assigned By', readonly=1, default=lambda self: self.env.uid)
+    assigned_by = fields.Many2one('res.users', string='Assigned By', readonly=1, default=lambda self: self.env.uid, help="Assigned Login User")
     agency = fields.Many2one('res.partner', string='Agency', domain=[('verification_agent', '=', True)], help='You can choose a Verification Agent')
     resume_uploaded = fields.Many2many('ir.attachment', string="Resume of Applicant",
                                          help='You can attach the copy of your document', copy=False)
-    description_by_agency = fields.Char(string='Description', readonly=True)
-    agency_attachment_id = fields.Many2one('ir.attachment', string='Attachment',help='Attachment from Agency')
+    description_by_agency = fields.Char(string='Description', readonly=True, help="Description")
+    agency_attachment_id = fields.Many2one('ir.attachment', string='Attachment', help='Attachment from Agency')
     field_check = fields.Boolean(string='Check', invisible=True)
-    assigned_date = fields.Date(string="Assigned Date", readonly=True, default=date.today())
-    expected_date = fields.Date(state='Expected Date', help='Expected date of completion of background varification')
+    assigned_date = fields.Date(string="Assigned Date", readonly=True, default=date.today(), help="Record Assigned Date")
+    expected_date = fields.Date(state='Expected Date', help='Expected date of completion of background verification')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('assign', 'Assigned'),

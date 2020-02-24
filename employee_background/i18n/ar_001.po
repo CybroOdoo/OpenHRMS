@@ -1,0 +1,380 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* employee_background
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-12 05:28+0000\n"
+"PO-Revision-Date: 2020-02-12 05:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: employee_background
+#: model:mail.template,body_html:employee_background.assign_agency_email_template
+msgid ""
+"\n"
+"                \n"
+"              <p>Dear ${object.agency.name},<p>\n"
+"              <p>A new request is created to varify our employee <b> ${object.employee.name} </b> .\n"
+"               To complete the Employee Verification process collect the required details and submit it as soon as possible.<p>\n"
+"              <p>You can reply to this email if you have any questions.</p>\n"
+"              <p>Thank you,</p>\n"
+"            \n"
+"\t        "
+msgstr ""
+
+
+#. module: employee_background
+#: model:mail.template,report_name:employee_background.assign_agency_email_template
+msgid "${(object.resume_applicant or '').replace('/','_')}"
+msgstr ""
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_home_menu_employee
+msgid "<span style=\"padding-left:8px;\">Employees</span>"
+msgstr "<span style=\"padding-left:8px;\">الموظفين</span>"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__address
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_records
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Address"
+msgstr "عنوان"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__agency
+msgid "Agency"
+msgstr "وكالة"
+
+#. module: employee_background
+#: code:addons/employee_background/models/employee_verification.py:0
+#, python-format
+msgid "Agency is not assigned. Please select one of the Agency."
+msgstr ".لم يتم تعيين الوكالة. يرجى اختيار واحدة من الوكالة"
+
+#. module: employee_background
+#: model:ir.actions.act_window,name:employee_background.approved_employee_verification
+msgid "Approved Verification"
+msgstr "التحقق المعتمدة"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.employee_disciplinary_form
+msgid "Assign to agency"
+msgstr "التنازل عن الوكالة"
+
+#. module: employee_background
+#: model:ir.model.fields.selection,name:employee_background.selection__employee_verification__state__assign
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Assigned"
+msgstr "تعيين"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__assigned_by
+msgid "Assigned By"
+msgstr "عين من"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__assigned_date
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Assigned Date"
+msgstr "تاريخ محدد"
+
+#. module: employee_background
+#: model:ir.actions.act_window,name:employee_background.assigned_employee_verification
+msgid "Assigned Verification"
+msgstr "التحقق المعين"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__agency_attachment_id
+#: model_terms:ir.ui.view,arch_db:employee_background.employee_disciplinary_form
+msgid "Attachment"
+msgstr "المرفق"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__agency_attachment_id
+msgid "Attachment from Agency"
+msgstr "مرفق من الوكالة"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__field_check
+msgid "Check"
+msgstr "التحقق من"
+
+#. module: employee_background
+#: model_terms:ir.actions.act_window,help:employee_background.action_employee_verification
+msgid "Click to create a new Employee verification."
+msgstr ".انقر لإنشاء التحقق الموظف الجديد"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Completed"
+msgstr "منجز"
+
+#. module: employee_background
+#: model:ir.model,name:employee_background.model_res_partner
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__description_by_agency
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Description"
+msgstr "وصف"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Download"
+msgstr "تحميل"
+
+#. module: employee_background
+#: model:ir.model.fields.selection,name:employee_background.selection__employee_verification__state__draft
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Draft"
+msgstr "مشروع"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__employee
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_records
+msgid "Employee"
+msgstr "موظف"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_completed
+msgid "Employee Details"
+msgstr "تفاصيل الموظف"
+
+#. module: employee_background
+#: model:ir.actions.act_window,name:employee_background.action_employee_verification
+#: model:ir.ui.menu,name:employee_background.employee_verification_menu
+#: model_terms:ir.ui.view,arch_db:employee_background.employee_disciplinary_form
+#: model_terms:ir.ui.view,arch_db:employee_background.employee_disciplinary_tree
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_home_agent
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Employee Verification"
+msgstr "التحقق من الموظفين"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_res_partner__verification_agent
+#: model:ir.model.fields,field_description:employee_background.field_res_users__verification_agent
+msgid "Employee Verification agent"
+msgstr "موظف التحقق من الموظف"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_home_menu_employee
+msgid "Employees"
+msgstr "الموظفين"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__address
+msgid "Enter here the private address of the employee, not the one linked to your company."
+
+msgstr ".أدخل هنا العنوان الخاص للموظف ، وليس العنوان المرتبط بشركتك"
+				
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__expected_date
+msgid "Expected Date"
+msgstr "التاريخ المتوقع"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Expected completion Date"
+msgstr "تاريخ الإنتهاء المتوقع"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__expected_date
+msgid "Expected date of completion of background varification"
+msgstr "التاريخ المتوقع لإكمال تنوع الخلفية"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Group By"
+msgstr "مجموعة من"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__id
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__verification_id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.employee_disciplinary_form
+msgid "Information from Agency"
+msgstr "معلومات من الوكالة"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.res_partner_agent_form
+msgid "Is Agent"
+msgstr "هو الوكيل"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_res_partner__verification_agent
+#: model:ir.model.fields,help:employee_background.field_res_users__verification_agent
+msgid "Mark it if the partner is an Employee Verification Agent"
+msgstr "حدده إذا كان الشريك هو وكيل التحقق من الموظفين"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Name"
+msgstr "اسم"
+
+#. module: employee_background
+#: code:addons/employee_background/models/employee_verification.py:0
+#, python-format
+msgid "No attachments available."
+msgstr ".لا المرفقات المتاحة"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_records
+msgid "Order Date"
+msgstr "تاريخ الطلب"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Personal Details"
+msgstr "تفاصيل شخصية"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Private details"
+msgstr "تفاصيل خاصة"
+
+#. module: employee_background
+#: model:ir.actions.act_window,name:employee_background.refused_employee_verification
+msgid "Refused Verification"
+msgstr "رفض التحقق"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__resume_uploaded
+msgid "Resume of Applicant"
+msgstr "استئناف مقدم الطلب"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "State"
+msgstr "حالة"
+
+#. module: employee_background
+#: model:ir.model.fields,field_description:employee_background.field_employee_verification__state
+#: model_terms:ir.ui.view,arch_db:employee_background.search_view_employee
+msgid "Status"
+msgstr "الحالة"
+
+#. module: employee_background
+#: model:ir.actions.act_window,name:employee_background.submitted_employee_verification
+msgid "Submitted Verification"
+msgstr "تم التحقق"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "There are currently no orders for your account."
+msgstr ".لا يوجد حاليًا أي طلبات لحسابك"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_my_records
+msgid "There are currently no quotations for your account."
+msgstr "لا يوجد حاليًا عروض أسعار لحسابك"
+
+#. module: employee_background
+#: code:addons/employee_background/models/employee_verification.py:0
+#, python-format
+msgid "There should be at least address or resume of the employee."
+msgstr "يجب أن يكون هناك عنوان أو استئناف الموظف على الأقل"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Upload"
+msgstr "رفع"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_page
+msgid "Upload file if any"
+msgstr "تحميل الملف إن وجد"
+
+#. module: employee_background
+#: model:ir.model.fields.selection,name:employee_background.selection__employee_verification__state__submit
+msgid "Varification Completed"
+msgstr "v"
+
+#. module: employee_background
+#: model:mail.template,subject:employee_background.assign_agency_email_template
+msgid "Verification of ${object.employee.name}"
+msgstr "${object.employee.name} التحقق من"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__resume_uploaded
+msgid "You can attach the copy of your document"
+msgstr "يمكنك إرفاق نسخة من المستند"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__agency
+msgid "You can choose a Verification Agent"
+msgstr "يمكنك اختيار وكيل التحقق"
+
+#. module: employee_background
+#: model:ir.model.fields,help:employee_background.field_employee_verification__employee
+msgid "You can choose the employee for background verification"
+msgstr "يمكنك اختيار الموظف للتحقق من الخلفية"
+
+#. module: employee_background
+#: code:addons/employee_background/models/employee_verification.py:0
+#, python-format
+msgid "You cannot delete the verification created."
+msgstr ".لا يمكنك حذف التحقق الذي تم إنشاؤه"
+
+#. module: employee_background
+#: code:addons/employee_background/controllers/portal.py:0
+#, python-format
+msgid "You need to Enter description or attact a file before submit."
+msgstr ".تحتاج إلى إدخال وصف أو ملف ملف قبل إرسال"
+
+#. module: employee_background
+#: model_terms:ir.ui.view,arch_db:employee_background.portal_record_completed
+msgid "Your report successfully submitted"
+msgstr "تم إرسال تقريرك بنجاح"
+
+#. module: employee_background
+#: model:ir.model,name:employee_background.model_employee_verification
+msgid "employee.verification"
+msgstr ""

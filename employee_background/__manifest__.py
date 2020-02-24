@@ -36,7 +36,7 @@
              'views/agent_portal_templates.xml',
              'data/default_mail.xml'
              ],
-    'demo': [],
+    'demo': ['data/demo_data.xml'],
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'installable': True,
