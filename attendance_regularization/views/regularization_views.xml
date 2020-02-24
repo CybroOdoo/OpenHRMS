@@ -17,7 +17,7 @@
         </record>
 
        <record model="ir.actions.act_window" id="action_view_regularization1">
-            <field name="name">Attendance Regularization Request</field>
+            <field name="name">Regularization Request</field>
             <field name="res_model">attendance.regular</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[]</field>
@@ -28,9 +28,7 @@
         </record>
 
         <menuitem id="regular_onsight" name="Attendance Regularization" parent="hr_attendance.menu_hr_attendance_root"
-                    sequence="9" groups="base.group_user"/>
-        <menuitem id="applying_regular1" name="Request Regularization" parent="regular_onsight"
-                  action="action_view_regularization1" sequence="15" groups="base.group_user"/>
+                    sequence="15" groups="base.group_user" action="action_view_regularization1"/>
         <record id="view_regular_approve_tree" model="ir.ui.view">
             <field name="name">attendance.regular_request_tree</field>
             <field name="model">attendance.regular</field>
@@ -64,11 +62,11 @@
                    </header>
                    <sheet>
                        <group col="4" colspan="4">
-                           <field name="reg_category"/>
-                           <field name="from_date"/>
-                           <field name="reg_reason"/>
-                           <field name="to_date"/>
-                           <field name="employee_id"/>
+                           <field name="reg_category" attrs="{'readonly':[('state_select','=','approved')]}"/>
+                           <field name="from_date" attrs="{'readonly':[('state_select','=','approved')]}"/>
+                           <field name="reg_reason" attrs="{'readonly':[('state_select','=','approved')]}"/>
+                           <field name="to_date" attrs="{'readonly':[('state_select','=','approved')]}"/>
+                           <field name="employee_id" attrs="{'readonly':[('state_select','=','approved')]}"/>
                        </group>
                    </sheet>
                  <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
@@ -87,7 +85,11 @@
                 </p>
             </field>
         </record>
-        <menuitem id="approving_regular" name="Regularization Approval" parent="regular_onsight"
-                  action="action_view_request_regularization" groups="hr_attendance.group_hr_attendance_manager"/>
+        <menuitem id="approving_regular"
+                  name="Regularization Approval"
+                  parent="hr_attendance.menu_hr_attendance_manage_attendances"
+                  sequence="25"
+                  action="action_view_request_regularization"
+                  groups="hr_attendance.group_hr_attendance_manager"/>
     </data>
 </odoo>
