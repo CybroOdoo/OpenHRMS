@@ -7,23 +7,23 @@ class HrPopupReminder(models.Model):
     _name = 'hr.reminder'
 
     name = fields.Char(string='Title', required=True)
-    model_name = fields.Many2one('ir.model', string="Model", required=True, domain="[('model', 'like','hr')]")
-    model_field = fields.Many2one('ir.model.fields', string='Field',
+    model_name = fields.Many2one('ir.model', help="Choose the model name", string="Model", required=True, domain="[('model', 'like','hr')]")
+    model_field = fields.Many2one('ir.model.fields', string='Field', help="Choose the field",
                                   domain="[('model_id', '=',model_name),('ttype', 'in', ['datetime','date'])]",
                                   required=True)
     search_by = fields.Selection([('today', 'Today'),
                                   ('set_period', 'Set Period'),
                                   ('set_date', 'Set Date'), ],
                                  required=True, string="Search By")
-    days_before = fields.Integer(string='Reminder before')
+    days_before = fields.Integer(string='Reminder before', help="NUmber of days before the reminder")
     active = fields.Boolean(string="Active", default=True)
     # exclude_year = fields.Boolean(string="Consider day alone")
-    reminder_active = fields.Boolean(string="Reminder Active")
-    date_set = fields.Date(string='Select Date')
-    date_from = fields.Date(string="Start Date")
-    date_to = fields.Date(string="End Date")
-    expiry_date = fields.Date(string="Reminder Expiry Date")
-    company_id = fields.Many2one('res.company', string='Company', required=True,
+    reminder_active = fields.Boolean(string="Reminder Active", help="Reminder active")
+    date_set = fields.Date(string='Select Date', help="Select the reminder set date")
+    date_from = fields.Date(string="Start Date", help="Start date")
+    date_to = fields.Date(string="End Date", help="End date")
+    expiry_date = fields.Date(string="Reminder Expiry Date", help="Expiry date")
+    company_id = fields.Many2one('res.company', string='Company', required=True, help="Company",
                                  default=lambda self: self.env.user.company_id)
 
     def reminder_scheduler(self):
