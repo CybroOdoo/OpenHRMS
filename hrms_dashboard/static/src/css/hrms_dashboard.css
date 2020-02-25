@@ -56,6 +56,7 @@ overflow: auto !important;
     font-size: 14px;
     color: #868e96;
     font-weight: bold;
+
 }
 
 .stat-widget-one .stat-digit {
@@ -122,6 +123,10 @@ rect:hover {  fill:#934da5; }
 .monthly_leave_graph_view .legend{
     height: 250px;
     overflow: scroll;
+    margin-left: 112px;
+    margin-top: 77px;
+    margin-bottom: -97px
+
 }
 .legend td, .legend .legend_col{
     padding:4px 5px;
@@ -363,6 +368,7 @@ rect:hover {  fill:#934da5; }
     font-size: 17px;
     color: #000;
     margin-left: 1rem;
+    padding-left: 26px;
 
 }
 
@@ -377,7 +383,7 @@ rect:hover {  fill:#934da5; }
 .stat-widget-one {
 
     background-color: white;
-    text-align: left;
+    text-align: inherit !important;
 
 }
 .stat-widget-one {
@@ -457,6 +463,7 @@ rect:hover {  fill:#934da5; }
     width: 64%;
     font-weight: bold;
     float: left;
+    text-align: center !important;
 }
 .leaves_request_today p {
     font-size: 14px;
@@ -467,6 +474,8 @@ rect:hover {  fill:#934da5; }
     width:64%;
     float:left;
     font-weight: bold;
+    text-align: center;
+    text-align: center !important;
 }
 .leaves_request_month p{
     font-size: 14px;
@@ -477,6 +486,7 @@ rect:hover {  fill:#934da5; }
     width:64%;
     float:left;
     font-weight: bold;
+    text-align: center !important;
 }
 h4 .stat-count {
     font-size: 17px;
@@ -521,11 +531,12 @@ h4 .stat-count {
     color:#fff !important;
 }
 .graph_view .legend {
-    margin-bottom: 27px;
+    margin-bottom: -49px !important;
     display: inline-block;
     border-collapse: collapse;
     border-spacing: 0px;
-    margin-left: 29px;
+    margin-left: 90px !important;
+    margin-top: 77px !important;
 }
 .hr-chart-1{
     margin: 15px 0px;
@@ -562,6 +573,7 @@ h4 .stat-count {
     width: 70%;
     float: left;
     font-weight: bold;
+    text-align: center !important;
 }
 .hr_leave_allocations_approve h4 {
 
@@ -642,6 +654,7 @@ h4 .stat-count {
     width: 70%;
     float: left;
     font-weight: bold;
+    text-align: center !important;
 }
 .hr_job_application_approve h4 {
 
@@ -985,4 +998,7 @@ h4 .stat-count {
   border-right: 3px solid #1e5799;
   border-bottom: 3px solid transparent;
   border-top: 3px solid #1e5799;
+}
+.text-align {
+  margin-left: 17px;
 }

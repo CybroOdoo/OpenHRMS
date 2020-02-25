@@ -9,6 +9,7 @@
     <t t-name="LoginEmployeeDetails">
         <link rel="stylesheet" href="/hrms_dashboard/static/src/css/hrms_dashboard.css"/>
         <div class="row main-section">
+            <div class="col-md-2 col-sm-2 dummy"></div>
             <div class="col-md-2 col-sm-2 employee-prof">
                 <div class="oh-card">
                 <div class="oh-media">
@@ -70,8 +71,8 @@
                     </div>
                     <div class="employee-country">
                         <t t-if="widget.login_employee['country_id']">
-                            <p class="text-light"><t t-esc="widget.login_employee['country_id'][1]"/></p>
                             <p class="text-light">Nationality</p>
+                            <p class="text-light"><t t-esc="widget.login_employee['country_id'][1]"/></p>
                         </t>
                         <t t-if="!widget.login_employee['country_id']">
                             <p class="text-light" style="color:#b6b6b6 !important">Nationality</p>
@@ -79,11 +80,11 @@
                         </t>
                     </div>
                     <div class="employee-mobile">
-                        <t t-if="widget.login_employee['personal_mobile']">
-                            <p class="text-light"><t t-esc="widget.login_employee['personal_mobile']"/></p>
+                        <t t-if="widget.login_employee['mobile_phone']">
                             <p>Mobile</p>
+                            <p class="text-light"><t t-esc="widget.login_employee['mobile_phone']"/></p>
                         </t>
-                        <t t-if="!widget.login_employee['personal_mobile']">
+                        <t t-if="!widget.login_employee['mobile_phone']">
                             <p class="text-light" style="color:#b6b6b6 !important">Mobile</p>
                             <p style="color:#b6b6b6 !important">- - -</p>
                         </t>
@@ -91,7 +92,7 @@
                 </div>
                 </div></div>
             </div>
-            <div class="col-md-2 col-sm-6 hr_payslip oh-payslip" style="margin-left: 242px;">
+            <div class="col-md-2 col-sm-6 hr_payslip oh-payslip" >
                 <div class="oh-card">
                     <div class="oh-card-body">
                         <div class="stat-widget-one">
@@ -248,7 +249,7 @@
                             <div class="oh-card-body pb-0">
                                 <h4 class="mb-0">
                                 </h4>
-                                <div class="oh-ribbon"><span>Department Employees</span></div>
+                                <div class="oh-ribbon"><span>Departments</span></div>
                             </div>
                             <div class="emp_graph"/>
                         </div>
@@ -322,7 +323,7 @@
                     <div class="hr_notification_head">
                     Upcoming Birthdays
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 text-align">
                         <t t-foreach="widget.employee_birthday" t-as="employee">
                         <div class="col-sm-12 col-lg-12" style="padding:0;">
                             <div class="text-color">
@@ -349,7 +350,7 @@
                         Upcoming Events
                         </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 text-align">
                         <t t-foreach="widget.upcoming_events" t-as="event">
                         <div class="col-sm-12 col-lg-12" style="padding:0;">
                             <div class="text-color">
@@ -377,7 +378,7 @@
                         Announcements
                         </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 text-align">
                         <t t-foreach="widget.announcements" t-as="announcement">
                         <div class="col-sm-12 col-lg-12" style="padding:0;">
                             <div class="text-color">

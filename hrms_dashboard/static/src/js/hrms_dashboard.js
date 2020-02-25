@@ -19,6 +19,7 @@ var HrDashboard = AbstractAction.extend({
         '/hrms_dashboard/static/src/js/lib/d3.min.js'
     ],
     events: {
+        'click .login_broad_factor': 'employee_broad_factor',
         'click .hr_leave_request_approve': 'leaves_to_approve',
         'click .hr_leave_allocations_approve': 'leave_allocations_to_approve',
         'click .hr_timesheets': 'hr_timesheets',
@@ -37,7 +38,6 @@ var HrDashboard = AbstractAction.extend({
 
     init: function(parent, context) {
         this._super(parent, context);
-
         this.date_range = 'week';  // possible values : 'week', 'month', year'
         this.date_from = moment().subtract(1, 'week');
         this.date_to = moment();
@@ -259,7 +259,34 @@ var HrDashboard = AbstractAction.extend({
             target: 'current'
         }, options)
     },
+    employee_broad_factor: function(e) {
+        console.log("broad_factor")
+        var self = this;
+        e.stopPropagation();
+        e.preventDefault();
+        var options = {
+            on_reverse_breadcrumb: this.on_reverse_breadcrumb,
+        };
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        console.log(this,"loploploplop");
+        this.do_action({
+            name: _t("Leave Request"),
+            type: 'ir.actions.act_window',
+            res_model: 'hr.leave',
+            view_mode: 'tree,form,calendar',
+            views: [[false, 'list'],[false, 'form']],
+            domain: [['state','in',['validate']],['employee_id','=', this.login_employee.id],['date_to','<=',today]],
+            target: 'current',
+            context:{'order':'duration_display'}
+        }, options)
+    },
     leaves_to_approve: function(e) {
+        console.log("leaves_to_approve")
         var self = this;
         e.stopPropagation();
         e.preventDefault();
@@ -572,7 +599,6 @@ var HrDashboard = AbstractAction.extend({
                   .attr("font-weight", "bold");
 
         });
-
     },
 
     update_leave_trend: function(){
@@ -815,6 +841,7 @@ var HrDashboard = AbstractAction.extend({
                         // call the update function of histogram with all data.
                         hG.update(fData.map(function(v){
                             return [v.l_month,v.total];}), barColor);
+
                     }
                     // Animating the pie-slice requiring a custom function which specifies
                     // how the intermediate paths should be drawn.

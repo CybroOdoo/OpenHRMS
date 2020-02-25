@@ -8,13 +8,21 @@ from pytz import utc
 from odoo import models, fields, api, _
 from odoo.http import request
 from odoo.tools import float_utils
+
 ROUNDING_FACTOR = 16
+
+
+class HrLeave(models.Model):
+    _inherit = 'hr.leave'
+    duration_display = fields.Char('Requested (Days/Hours)', compute='_compute_duration_display', store=True,
+                                   help="Field allowing to see the leave request duration"
+                                        " in days or hours depending on the leave_type_request_unit")
 
 
 class Employee(models.Model):
     _inherit = 'hr.employee'
 
-    birthday = fields.Date('Date of Birth', groups="base.group_user")
+    birthday = fields.Date('Date of Birth', groups="base.group_user", help="Birthday")
 
     @api.model
     def get_user_employee_details(self):
@@ -40,7 +48,8 @@ class Employee(models.Model):
         cr = self._cr
         cr.execute(query)
         leaves_this_month = cr.fetchall()
-        leaves_alloc_req = self.env['hr.leave.allocation'].sudo().search_count([('state', 'in', ['confirm', 'validate1'])])
+        leaves_alloc_req = self.env['hr.leave.allocation'].sudo().search_count(
+            [('state', 'in', ['confirm', 'validate1'])])
         timesheet_count = self.env['account.analytic.line'].sudo().search_count(
             [('project_id', '!=', False), ('user_id', '=', uid)])
         timesheet_view_id = self.env.ref('hr_timesheet.hr_timesheet_line_search')
@@ -68,7 +77,7 @@ class Employee(models.Model):
                     'broad_factor': broad_factor if broad_factor else 0,
                     'leaves_to_approve': leaves_to_approve,
                     'leaves_today': leaves_today,
-                    'leaves_this_month':leaves_this_month,
+                    'leaves_this_month': leaves_this_month,
                     'leaves_alloc_req': leaves_alloc_req,
                     'emp_timesheets': timesheet_count,
                     'job_applications': job_applications,
@@ -223,7 +232,8 @@ group by hr_employee.department_id,hr_department.name""")
                         if match:
                             match[dept_name] = result_lines[line]['days']
         for result in graph_result:
-            result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + result['l_month'].split(' ')[1:2][0]
+            result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + \
+                                result['l_month'].split(' ')[1:2][0]
         return graph_result, department_list
 
     def get_work_days_dashboard(self, from_datetime, to_datetime, compute_leaves=False, calendar=None, domain=None):
@@ -306,7 +316,8 @@ group by hr_employee.department_id,hr_department.name""")
                 if match:
                     match[0]['leave'] = result_lines[line]['days']
         for result in graph_result:
-            result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + result['l_month'].split(' ')[1:2][0]
+            result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + \
+                                result['l_month'].split(' ')[1:2][0]
         return graph_result
 
     @api.model
@@ -334,7 +345,7 @@ group by hr_employee.department_id,hr_department.name""")
         cr.execute('''select to_char(joining_date, 'Month YYYY') as l_month, count(id) from hr_employee 
         WHERE joining_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
         AND CURRENT_DATE + interval '1 month - 1 day'
-        group by l_month;''')
+        group by l_month''')
         join_data = cr.fetchall()
         cr.execute('''select to_char(resign_date, 'Month YYYY') as l_month, count(id) from hr_employee 
         WHERE resign_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
@@ -380,10 +391,14 @@ group by hr_employee.department_id,hr_department.name""")
             """ % (month_date[0], month_date[0], month_date[0],))
             month_emp = self._cr.fetchone()
             # month_emp = (month_emp[0], month_emp[1].split(' ')[:1][0].strip()[:3])
-            match_join = list(filter(lambda d: d['l_month'] == month_emp[1].split(' ')[:1][0].strip()[:3], month_join))[0]['count']
-            match_resign = list(filter(lambda d: d['l_month'] == month_emp[1].split(' ')[:1][0].strip()[:3], month_resign))[0]['count']
-            month_avg = (month_emp[0]+match_join-match_resign+month_emp[0])/2
-            attrition_rate = (match_resign/month_avg)*100 if month_avg != 0 else 0
+            match_join = \
+                list(filter(lambda d: d['l_month'] == month_emp[1].split(' ')[:1][0].strip()[:3], month_join))[0][
+                    'count']
+            match_resign = \
+                list(filter(lambda d: d['l_month'] == month_emp[1].split(' ')[:1][0].strip()[:3], month_resign))[0][
+                    'count']
+            month_avg = (month_emp[0] + match_join - match_resign + month_emp[0]) / 2
+            attrition_rate = (match_resign / month_avg) * 100 if month_avg != 0 else 0
             vals = {
                 # 'month': month_emp[1].split(' ')[:1][0].strip()[:3] + ' ' + month_emp[1].split(' ')[-1:][0],
                 'month': month_emp[1].split(' ')[:1][0].strip()[:3],
@@ -391,3 +406,9 @@ group by hr_employee.department_id,hr_department.name""")
             }
             month_attrition.append(vals)
         return month_attrition
+
+
+class BroadFactor(models.Model):
+    _inherit = 'hr.leave.type'
+
+    emp_broad_factor = fields.Boolean(string="Broad Factor", help="If check it will display in broad factor type")
