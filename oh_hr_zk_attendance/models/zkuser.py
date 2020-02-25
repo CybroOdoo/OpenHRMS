@@ -26,7 +26,6 @@ def zksetuser(self, uid, userid, name, password, role):
     buf = self.createHeader(command, chksum, session_id,
         reply_id, command_string)
     self.zkclient.sendto(buf, self.address)
-    #print buf.encode("hex")
     try:
         self.data_recv, addr = self.zkclient.recvfrom(1024)
         self.session_id = unpack('HHHH', self.data_recv[:8])[2]
@@ -46,7 +45,6 @@ def zkgetuser(self):
     buf = self.createHeader(command, chksum, session_id,
         reply_id, command_string)
     self.zkclient.sendto(buf, self.address)
-    #print buf.encode("hex")
     try:
         self.data_recv, addr = self.zkclient.recvfrom(1024)
         
@@ -91,8 +89,6 @@ def zkgetuser(self):
                     name = uid
                 
                 users[uid] = (userid, name, int( role.encode("hex"), 16 ), password)
-                
-                #print("%d, %s, %s, %s, %s" % (uid, userid, name, int( role.encode("hex"), 16 ), password))
                 userdata = userdata[72:]
                 
         return users
@@ -111,7 +107,6 @@ def zkclearuser(self):
     buf = self.createHeader(command, chksum, session_id,
         reply_id, command_string)
     self.zkclient.sendto(buf, self.address)
-    #print buf.encode("hex")
     try:
         self.data_recv, addr = self.zkclient.recvfrom(1024)
         self.session_id = unpack('HHHH', self.data_recv[:8])[2]
@@ -131,7 +126,6 @@ def zkclearadmin(self):
     buf = self.createHeader(command, chksum, session_id,
         reply_id, command_string)
     self.zkclient.sendto(buf, self.address)
-    #print buf.encode("hex")
     try:
         self.data_recv, addr = self.zkclient.recvfrom(1024)
         self.session_id = unpack('HHHH', self.data_recv[:8])[2]

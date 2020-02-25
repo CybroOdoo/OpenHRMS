@@ -38,16 +38,17 @@ _logger = logging.getLogger(__name__)
 class HrAttendance(models.Model):
     _inherit = 'hr.attendance'
 
-    device_id = fields.Char(string='Biometric Device ID')
+    device_id = fields.Char(string='Biometric Device ID', help="Device Id")
 
 
 class ZkMachine(models.Model):
     _name = 'zk.machine'
-    
-    name = fields.Char(string='Machine IP', required=True)
-    port_no = fields.Integer(string='Port No', required=True)
-    address_id = fields.Many2one('res.partner', string='Working Address')
-    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id.id)
+
+    name = fields.Char(string='Machine IP', required=True, help="Give the machine IP")
+    port_no = fields.Integer(string='Port No', required=True, help="Give the Port number")
+    address_id = fields.Many2one('res.partner', string='Working Address', help="Working address")
+    company_id = fields.Many2one('res.company', string='Company', help="Company",
+                                 default=lambda self: self.env.user.company_id.id)
 
     def device_connect(self, zk):
         command = CMD_CONNECT
@@ -69,7 +70,7 @@ class ZkMachine(models.Model):
         except:
             conn = False
         return conn
-    
+
     def clear_attendance(self):
         for info in self:
             try:
@@ -98,7 +99,6 @@ class ZkMachine(models.Model):
         command = unpack('HHHH', zk.data_recv[:8])[0]
         if command == CMD_PREPARE_DATA:
             size = unpack('I', zk.data_recv[8:12])[0]
-            print("size", size)
             return size
         else:
             return False
@@ -136,7 +136,6 @@ class ZkMachine(models.Model):
                 while len(userdata) > 72:
                     uid, role, password, name, userid = unpack('2s2s8s28sx31s', userdata.ljust(72)[:72])
                     uid = int(binascii.hexlify(uid), 16)
-                    # print("uid",uid)
                     # Clean up some messy characters from the user name
                     password = password.split(b'\x00', 1)[0]
                     password = str(password.strip(b'\x00|\x01\x10x|\x000').decode('utf-8'))
@@ -147,7 +146,6 @@ class ZkMachine(models.Model):
                         name = uid
                     users[uid] = (userid, name, int(binascii.hexlify(role), 16), password)
                     userdata = userdata[72:]
-                    # print(users)
             return users
         except:
             return False
@@ -155,9 +153,9 @@ class ZkMachine(models.Model):
     @api.model
     def cron_download(self):
         machines = self.env['zk.machine'].search([])
-        for machine in machines :
+        for machine in machines:
             machine.download_attendance()
-        
+
     def download_attendance(self):
         _logger.info("++++++++++++Cron Executed++++++++++++++++++++++")
         zk_attendance = self.env['zk.machine.attendance']
@@ -200,18 +198,18 @@ class ZkMachine(models.Model):
                         for x in range(len(zk.attendancedata)):
                             if x > 0:
                                 zk.attendancedata[x] = zk.attendancedata[x][8:]
-                        attendancedata = b''.join(zk.attendancedata) 
-                        attendancedata = attendancedata[14:] 
+                        attendancedata = b''.join(zk.attendancedata)
+                        attendancedata = attendancedata[14:]
                         while len(attendancedata) > 0:
                             uid, state, timestamp, space = unpack('24s1s4s11s', attendancedata.ljust(40)[:40])
                             pls = unpack('c', attendancedata[29:30])
                             uid = uid.split(b'\x00', 1)[0].decode('utf-8')
                             tmp = ''
                             for i in reversed(range(int(len(binascii.hexlify(timestamp)) / 2))):
-                                tmp += binascii.hexlify(timestamp).decode('utf-8')[i * 2:(i * 2) + 2] 
+                                tmp += binascii.hexlify(timestamp).decode('utf-8')[i * 2:(i * 2) + 2]
                             attendance.append((uid, int(binascii.hexlify(state), 16),
                                                decode_time(int(tmp, 16)), unpack('HHHH', space[:8])[0]))
-                            
+
                             attendancedata = attendancedata[40:]
                 except Exception as e:
                     _logger.info("++++++++++++Exception++++++++++++++++++++++", e)
@@ -248,11 +246,11 @@ class ZkMachine(models.Model):
                                                                   'address_id': info.address_id.id})
                                             att_var = att_obj.search([('employee_id', '=', get_user_id.id),
                                                                       ('check_out', '=', False)])
-                                            if each[3] == 0: #check-in
+                                            if each[3] == 0:  # check-in
                                                 if not att_var:
                                                     att_obj.create({'employee_id': get_user_id.id,
                                                                     'check_in': atten_time})
-                                            if each[3] == 1: #check-out
+                                            if each[3] == 1:  # check-out
                                                 if len(att_var) == 1:
                                                     att_var.write({'check_out': atten_time})
                                                 else:

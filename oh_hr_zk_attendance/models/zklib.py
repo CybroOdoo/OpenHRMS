@@ -65,7 +65,6 @@ class ZKLib:
         buf = unpack('8B'+'%sB' % len(command_string), buf)
         
         chksum = unpack('H', self.createChkSum(buf))[0]
-        #print unpack('H', self.createChkSum(buf))
         reply_id += 1
         if reply_id >= USHRT_MAX:
             reply_id -= USHRT_MAX

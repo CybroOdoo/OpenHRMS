@@ -5,7 +5,6 @@ def zkextendfmt(self):
         self.exttrynumber = 1
         
     data_seq=[ self.data_recv.encode("hex")[4:6], self.data_recv.encode("hex")[6:8] ]
-    #print data_seq
     if self.exttrynumber == 1:
         plus1 = 0
         plus2 = 0
@@ -37,10 +36,8 @@ def zkextendfmt(self):
     counter = hex( self.counter ).lstrip("0x")
     if len(counter):
         counter = "0" + counter
-    #print self.data_seq1+" "+self.data_seq2+desc
     data = "0b00"+self.data_seq1+self.data_seq2+self.id_com+counter+"007e457874656e64466d7400"
     self.zkclient.sendto(data.decode("hex"), self.address)
-    #print data
     try:
         self.data_recv, addr = self.zkclient.recvfrom(1024)
     except:
@@ -52,5 +49,4 @@ def zkextendfmt(self):
     
     self.id_com = self.data_recv.encode("hex")[8:12]
     self.counter = self.counter+1
-    #print self.data_recv.encode("hex")
     return self.data_recv[8:]
