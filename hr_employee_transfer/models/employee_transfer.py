@@ -17,8 +17,8 @@ class EmployeeTransfer(models.Model):
     name = fields.Char(string='Name', help='Give a name to the Transfer', copy=False, default="/", readonly=True)
     employee_id = fields.Many2one('hr.employee', string='Employee', required=True,
                                   help='Select the employee you are going to transfer')
-    date = fields.Date(string='Date', default=fields.Date.today())
-    branch = fields.Many2one('transfer.company', string='Transfer Branch',  copy=False,required=True)
+    date = fields.Date(string='Date', default=fields.Date.today(), help="Date")
+    branch = fields.Many2one('transfer.company', string='Transfer Branch', help="Branch", copy=False, required=True)
 
     state = fields.Selection(
         [('draft', 'New'), ('cancel', 'Cancelled'), ('transfer', 'Transferred'), ('done', 'Done')],
@@ -31,23 +31,19 @@ class EmployeeTransfer(models.Model):
     sequence_number = fields.Integer(string='Sequence Number', help='A unique sequence number for the Transfer',
                                      default=1, copy=False)
     company_id = fields.Many2one('res.company', string='Company',
-                                 related='employee_id.company_id')
-    note = fields.Text(string='Internal Notes')
-    transferred = fields.Boolean(string='Transferred', copy=False, default=False, compute='_get_transferred')
-    responsible = fields.Many2one('hr.employee', string='Responsible', default=_default_employee, readonly=True)
+                                 related='employee_id.company_id', help="Company")
+    note = fields.Text(string='Internal Notes', help="Specify notes for the transfer if any")
+    transferred = fields.Boolean(string='Transferred', copy=False, default=False, compute='_get_transferred', help="Transferred")
+    responsible = fields.Many2one('hr.employee', string='Responsible', default=_default_employee, readonly=True, help="Responsible person for the transfer")
 
     def _get_transferred(self):
-        print("compute")
         if self:
-            print("self", self.branch.company_id)
-            print("self", self.env.user.company_id.id)
             if self.branch.company_id == self.env.user.company_id.id:
                 self.transferred = True
             else:
                 self.transferred = False
 
     def transfer(self):
-        print("Transfer function")
         obj_emp = self.env['hr.employee'].browse(self.employee_id.id)
         emp = {}
         if not self.branch:

@@ -101,6 +101,6 @@
               name="Transfers"
               sequence="10"
               action="action_employee_transfer"
-              web_icon="hr_leave_request_aliasing,static/description/transfer_icon.png"
+              web_icon="hr_employee_transfer,static/description/transfer_icon.png"
               groups="hr.group_hr_manager"/>
 </odoo>

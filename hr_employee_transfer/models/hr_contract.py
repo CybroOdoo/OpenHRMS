@@ -6,7 +6,7 @@ class HrContract(models.Model):
 
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id)
     from_transfer = fields.Boolean(string='Transferred', default=False)
-    emp_transfer = fields.Many2one('employee.transfer', string='Transferred Employee')
+    emp_transfer = fields.Many2one('employee.transfer', string='Transferred Employee', help="Transferred employee")
 
     @api.model
     def create(self, vals):
