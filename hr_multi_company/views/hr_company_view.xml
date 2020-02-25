@@ -11,17 +11,6 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="hr_contract_inherit_form_view1">
-        <field name="name">hr.contract.form.view1</field>
-        <field name="model">hr.contract</field>
-        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-        <field name="arch" type="xml">
-            <field name="job_id" position="after">
-                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
-            </field>
-        </field>
-    </record>
-
     <record model="ir.ui.view" id="hr_attendance_inherit_form_view1">
         <field name="name">hr.attendance.form.view1</field>
         <field name="model">hr.attendance</field>
