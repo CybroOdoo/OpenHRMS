@@ -11,21 +11,21 @@ class EmployeeInsurance(models.Model):
     _description = 'HR Insurance'
     _rec_name = 'employee_id'
 
-    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
-    policy_id = fields.Many2one('insurance.policy', string='Policy', required=True)
-    amount = fields.Float(string='Policy Amount', required=True)
-    sum_insured = fields.Float(string="Sum Insured", required=True)
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True, help="Employee")
+    policy_id = fields.Many2one('insurance.policy', string='Policy', required=True, help="Policy")
+    amount = fields.Float(string='Premium', required=True, help="Policy amount")
+    sum_insured = fields.Float(string="Sum Insured", required=True, help="Insured sum")
     policy_coverage = fields.Selection([('monthly', 'Monthly'), ('yearly', 'Yearly')],
                                        required=True, default='monthly',
-                                       string='Policy Coverage',)
+                                       string='Policy Coverage', help="During of the policy")
     date_from = fields.Date(string='Date From',
-                            default=time.strftime('%Y-%m-%d'), readonly=True)
-    date_to = fields.Date(string='Date To',   readonly=True,
+                            default=time.strftime('%Y-%m-%d'), readonly=True, help="Start date")
+    date_to = fields.Date(string='Date To',   readonly=True, help="End date",
                           default=str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10])
     state = fields.Selection([('active', 'Active'),
                               ('expired', 'Expired'), ],
                              default='active', string="State",compute='get_status')
-    company_id = fields.Many2one('res.company', string='Company', required=True,
+    company_id = fields.Many2one('res.company', string='Company', required=True, help="Company",
                                  default=lambda self: self.env.user.company_id)
 
     def get_status(self):
@@ -52,10 +52,10 @@ class EmployeeInsurance(models.Model):
 class HrInsurance(models.Model):
     _inherit = 'hr.employee'
 
-    insurance_percentage = fields.Float(string="Company Percentage ")
-    deduced_amount_per_month = fields.Float(string="Salary deduced per month", compute="get_deduced_amount")
-    deduced_amount_per_year = fields.Float(string="Salary deduced per year", compute="get_deduced_amount")
-    insurance = fields.One2many('hr.insurance', 'employee_id', string="Insurance",
+    insurance_percentage = fields.Float(string="Company Percentage ", help="Company insurance percentage")
+    deduced_amount_per_month = fields.Float(string="Salary deduced per month", compute="get_deduced_amount", help="Amount that is deduced from the salary per month")
+    deduced_amount_per_year = fields.Float(string="Salary deduced per year", compute="get_deduced_amount", help="Amount that is deduced fronm the salary per year")
+    insurance = fields.One2many('hr.insurance', 'employee_id', string="Insurance", help="Insurance",
                                 domain=[('state', '=', 'active')])
 
     def get_deduced_amount(self):
