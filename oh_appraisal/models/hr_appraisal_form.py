@@ -151,9 +151,9 @@ class HrAppraisalForm(models.Model):
     def action_get_answers(self):
         """ This function will return all the answers posted related to this appraisal."""
 
-        tree_res = self.env['ir.model.data'].get_object_reference('survey', 'survey_user_input_tree')
+        tree_res = self.env['ir.model.data'].get_object_reference('survey', 'survey_user_input_view_tree')
         tree_id = tree_res and tree_res[1] or False
-        form_res = self.env['ir.model.data'].get_object_reference('survey', 'survey_user_input_form')
+        form_res = self.env['ir.model.data'].get_object_reference('survey', 'survey_user_input_view_form')
         form_id = form_res and form_res[1] or False
         return {
             'model': 'ir.actions.act_window',
