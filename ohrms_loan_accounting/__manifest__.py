@@ -38,7 +38,6 @@
     'data': [
         'views/hr_loan_config.xml',
         'views/hr_loan_acc.xml',
-
     ],
     'demo': [],
     'images': ['static/description/banner.jpg'],

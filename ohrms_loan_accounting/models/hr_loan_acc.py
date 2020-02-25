@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
-from odoo import models, api,fields
+from odoo import models, api, fields
 from odoo.exceptions import UserError
 
 
@@ -20,7 +20,6 @@ class HrLoanAcc(models.Model):
         ('cancel', 'Canceled'),
     ], string="State", default='draft', track_visibility='onchange', copy=False, )
 
-    
     def action_approve(self):
         """This create account move for request.
             """
@@ -76,7 +75,6 @@ class HrLoanAcc(models.Model):
             self.write({'state': 'approve'})
         return True
 
-    
     def action_double_approve(self):
         """This create account move for request in case of double approval.
             """
@@ -127,7 +125,6 @@ class HrLoanAcc(models.Model):
 class HrLoanLineAcc(models.Model):
     _inherit = "hr.loan.line"
 
-
     def action_paid_amount(self):
         """This create the account move line for payment of each installment.
             """
@@ -173,7 +170,6 @@ class HrLoanLineAcc(models.Model):
 class HrPayslipAcc(models.Model):
     _inherit = 'hr.payslip'
 
-    
     def action_payslip_done(self):
         for line in self.input_line_ids:
             if line.loan_line_id:
