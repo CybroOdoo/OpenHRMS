@@ -23,9 +23,8 @@
             Overview
         </h2>
         <h3 class="oe_slogan" style="text-align: left;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
-            Employee Gratuity Settlement is a component of Open HRMS suit. This module manages employee settlements during resignation process.
-                    A Gratuity Settlement can be created only if the Resignation Request of the employee is approved.
-		    The Gratuity amount is calculated by the basic equation, <b>Last drawn salary (basic salary plus dearness allowance) * number of completed years of service * 15/26.</b>
+            Employee Gratuity Settlement is a component of Open HRMS suit. This module manages employee settlements.
+                    A Gratuity Settlement can be created only if the employee have any running contract .
         </h3>
     </div>
 </section>
@@ -37,9 +36,13 @@
         </h2>
         <div style="padding: 5% 0% 0% 0%;">
             <div class="col-md-12" style="font-size: 16px;color: #000 !important">
+                 <img style="border:8px white; width:17px" src="oh_icon.png">Probation period in employee contract.</span><br/>
                 <img style="border:8px white; width:17px" src="oh_icon.png"> Manager can create Gratuity Settlements of Employees.</span><br/>
-                <img style="border:8px white; width:17px" src="oh_icon.png"> A settlement can be created only if the Resignation Request of the employee is approved.</span><br/>
-                <img style="border:8px white; width:17px" src="oh_icon.png"> The Gratuity Amount is calculated based on a predefined equation.
+                <img style="border:8px white; width:17px" src="oh_icon.png"> A settlement can be created only if the employee have any running contract.</span><br/>
+                 <img style="border:8px white; width:17px" src="oh_icon.png"> Manager can create different gratuity Configration.</span><br />
+                <img style="border:8px white; width:17px" src="oh_icon.png"> The Gratuity Amount is calculated based on a predefined equation.</span><br/>
+                <img style="border:8px white; width:17px" src="oh_icon.png"> If the wage type is hourly then gratuity payment is calculated as employee basic salary * Employee Daily Wage Days * gratuity configration rule percentage * gratuity calculation years.</span><br/>
+                 <img style="border:8px white; width:17px" src="oh_icon.png"> If the wage type is monthly then gratuity payment is calculated as employee basic salary * (Working Days/Employee Daily Wage Days) * gratuity configration rule percentage * gratuity calculation years.
                 <br/>
             </div>
         </div>
@@ -53,15 +56,15 @@
         </h2>
         <h3 class="oe_slogan" style="text-align: left;padding: 0% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
             <img style="border:8px white; width:17px" src="oh_icon.png">
-            You can create Gratuity Settlement once the 'Resignation Request' of the employee is approved.
+            You can create Gratuity Settlement from payroll configration.Payroll->Configration->Gratuity Configration
              </span><br/>
          </h3>
         <div class="oe_row oe_spaced">
             <img src="open-hrms-gratuity-1.png" alt="" style="width: 95%;"/>
         </div>
-        <h3 class="oe_slogan" style="text-align: left;padding: 3% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
+        <h3 class="oe_slogan" style="text-align: left;padding: 0% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
             <img style="border:8px white; width:17px" src="oh_icon.png">
-             Select the Employee and click 'Validate'.
+            Set up the gratuity configration and set the contract type if contract type is limited then during gratuity settlement if you have not specify the end date for contract, gratuity configration of limited type will be taken.
              </span><br/>
          </h3>
         <div class="oe_row oe_spaced">
@@ -69,7 +72,7 @@
         </div>
         <h3 class="oe_slogan" style="text-align: left;padding: 3% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
             <img style="border:8px white; width:17px" src="oh_icon.png">
-             The last salary of employee is calculated from his latest payslip. Click 'Calculate' to calculate the Gratuity amount.
+             Set up the gratuity configration and select contract type,if contract type is Unlimited then during gratuity settlement if you have specify the end date for contract, gratuity configration of Unlimited type will be taken.
              </span><br/>
          </h3>
         <div class="oe_row oe_spaced">
@@ -77,7 +80,7 @@
         </div>
         <h3 class="oe_slogan" style="text-align: left;padding: 3% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
             <img style="border:8px white; width:17px" src="oh_icon.png">
-             The Gratuity amount is calculated based on the basic equation.
+             Now create contract for the employee and set up the wage type.
              </span><br/>
          </h3>
         <div class="oe_row oe_spaced">
@@ -85,11 +88,22 @@
         </div>
         <h3 class="oe_slogan" style="text-align: left;padding: 3% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
             <img style="border:8px white; width:17px" src="oh_icon.png">
-             Settlements Creation.
+              You can create gratuity settlement from 'End of service' menu.Payroll->End of service.
              </span><br/>
          </h3>
         <div class="oe_row oe_spaced">
             <img src="open-hrms-gratuity-5.png" alt="" style="width: 95%;"/>
+        </div>
+        <h3 class="oe_slogan" style="text-align: left;padding: 3% 0% 0% 0%;font-size: 16px;width: 90%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 24px;">
+            <img style="border:8px white; width:17px" src="oh_icon.png">
+            By selecting the employee, if the employee have running contract,contract type of employee gets selected,And gratuity amount gets calculated.
+            Gratuity payment is calculated based on wage type in the contract form.
+             If wage type is hourly then gratuity payment is calculated as employee salary * Total number of days employee worked * gratuity configration rule percentage * employee gratuity years.
+             If wage type is monthly then gratuity payment is calculated as (employee salary/Total number of employee wage days) * Total number of days employee worked * gratuity configration rule percentage * employee gratuity years.
+             </span><br/>
+         </h3>
+        <div class="oe_row oe_spaced">
+            <img src="open-hrms-gratuity-6.png" alt="" style="width: 95%;"/>
         </div>
     </div>
 </section>

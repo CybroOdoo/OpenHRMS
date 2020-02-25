@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_gratuity_accounting_configuration_tree" model="ir.ui.view">
+            <field name="name">view.hr.gratuity.accounting.configuration.tree</field>
+            <field name="model">hr.gratuity.accounting.configuration</field>
+            <field name="arch" type="xml">
+                <tree string="Gratuity Accounting Configuration">
+                    <field name="name"/>
+                    <field name="config_contract_type"/>
+                    <field name="gratuity_start_date"/>
+                    <field name="gratuity_end_date"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_hr_gratuity_accounting_configuration_form" model="ir.ui.view">
+            <field name="name">view.hr.gratuity.accounting.configuration</field>
+            <field name="model">hr.gratuity.accounting.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Accounting Configuration Menu">
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" text="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" required="1" placeholder="e.g. Configuration Limited"/>
+                            </h1>
+                            <label for="config_contract_type" class="oe_edit_only"/>
+                            <h6>
+                                <field name="config_contract_type" style="width:45%"/>
+                            </h6>
+                        </div>
+                        <group string="Validity Details">
+                            <group>
+                                <field name="gratuity_start_date" class="oe_inline"/>
+                            </group>
+                            <group>
+                                <field name="gratuity_end_date" class="oe_inline"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="configuration_rules" string="Rules">
+                                <field name="gratuity_configuration_table">
+                                    <tree string="Gratuity Configuration">
+                                        <field name="name"/>
+                                        <field name="from_year"/>
+                                        <field name="to_year"/>
+                                        <field name="employee_daily_wage_days"/>
+                                        <field name="employee_working_days"/>
+                                        <field name="percentage"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="accounting" string="Accounting">
+                                <group>
+                                    <group name="gratuity_accounting_config" string="Journal Configuration">
+                                        <field string="Journal" required="1" name="gratuity_journal"/>
+                                    </group>
+                                    <group name="gratuity_accounting_config" string="Accounting Configuration">
+                                        <field string="Credit Account" required="1" name="gratuity_credit_account"/>
+                                        <field string="Debit Account" required="1" name="gratuity_debit_account"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_gratuity_accounting_configuration_filter_view" model="ir.ui.view">
+            <field name="name">hr.gratuity.accounting.configuration.search</field>
+            <field name="model">hr.gratuity.accounting.configuration</field>
+            <field name="arch" type="xml">
+                <search string="Archived Gratuity Configuration">
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_hr_gratuity_accounting_configuration">
+            <field name="name">Gratuity Configuration</field>
+            <field name="res_model">hr.gratuity.accounting.configuration</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem action="action_view_hr_gratuity_accounting_configuration"
+                  id="menu_action_hr_gratuity_account_config"
+                  parent="hr_payroll_community.menu_hr_payroll_community_configuration"
+                  sequence="30"
+                  groups="hr.group_hr_user"/>
+
+    </data>
+</odoo>
