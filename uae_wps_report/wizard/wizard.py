@@ -73,7 +73,6 @@ class Wizard(models.TransientModel):
             raise UserError(_('There are no payslip Created for the selected month'))
         company = self.env['res.company']._company_default_get('wps.wizard')
         user = self.env['res.users'].browse(self.env.uid)
-        print(user, "user")
         if user.tz:
             tz = pytz.timezone(user.tz) or pytz.utc
             date = pytz.utc.localize(datetime.now()).astimezone(tz)

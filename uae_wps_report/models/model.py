@@ -5,9 +5,11 @@ from odoo import models, fields, api
 class Employee(models.Model):
     _inherit = 'hr.employee'
 
-    labour_card_number = fields.Char(string="Employee Card Number", size=14, required=True)
-    salary_card_number = fields.Char(string="Salary Card Number/Account Number", size=16, required=True)
-    agent_id = fields.Many2one('res.bank', string="Agent/Bank", required=True)
+    labour_card_number = fields.Char(string="Employee Card Number", size=14, required=True,
+                                     help="Labour Card Number Of Employee")
+    salary_card_number = fields.Char(string="Salary Card Number/Account Number", size=16, required=True,
+                                     help="Salary card number or account number of employee")
+    agent_id = fields.Many2one('res.bank', string="Agent/Bank", required=True, help="Agent ID or bank ID of Employee")
 
     def write(self, vals):
         if 'labour_card_number' in vals.keys():
@@ -32,7 +34,7 @@ class Employee(models.Model):
 class Bank(models.Model):
     _inherit = 'res.bank'
 
-    routing_code = fields.Char(string="Routing Code", size=9, required=True)
+    routing_code = fields.Char(string="Routing Code", size=9, required=True, help="Bank Route Code")
 
     def write(self, vals):
         if 'routing_code' in vals.keys():
@@ -48,17 +50,20 @@ class Bank(models.Model):
 class Company(models.Model):
     _inherit = 'res.company'
 
-    employer_id = fields.Char(string="Employer ID")
+    employer_id = fields.Char(string="Employer ID", help="Company Employer ID")
 
     def write(self, vals):
-        if 'company_registry' in vals.keys():
-            vals['company_registry'] = vals['company_registry'].zfill(13)
-        if 'employer_id' in vals.keys():
-            vals['employer_id'] = vals['employer_id'].zfill(13)
+        if 'company_registry' in vals:
+            vals['company_registry'] = vals['company_registry'].zfill(13) if vals['company_registry'] else False
+        if 'employer_id' in vals:
+            vals['employer_id'] = vals['employer_id'].zfill(13) if vals['employer_id'] else False
         return super(Company, self).write(vals)
 
+    @api.model
     def create(self, vals):
-        vals['company_registry'] = vals['company_registry'].zfill(13)
-        if 'employer_id' in vals.keys():
-            vals['employer_id'] = vals['employer_id'].zfill(13)
+        vals['company_registry'] = vals['company_registry'].zfill(13) if vals['company_registry'] else False
+        if 'employer_id' in vals:
+            vals['employer_id'] = vals['employer_id'].zfill(13) if vals['employer_id'] else False
         return super(Company, self).create(vals)
+
+
