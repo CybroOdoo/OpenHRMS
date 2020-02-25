@@ -29,9 +29,12 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['base', 'hr', 'mail', 'hr_gamification'],
+    'depends': ['base', 'hr', 'mail', 'hr_gamification', 'hr_contract'],
     'data': [
         'security/ir.model.access.csv',
+        'data/data.xml',
+        'views/contract_days_view.xml',
+        'views/updation_config.xml',
         'views/hr_employee_view.xml',
         'views/hr_notification.xml',
     ],

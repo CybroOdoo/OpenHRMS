@@ -21,22 +21,11 @@
 #
 ###################################################################################
 from datetime import datetime, timedelta
-from odoo import models, fields, _
+from odoo import models, fields, _, api
 
 GENDER_SELECTION = [('male', 'Male'),
                     ('female', 'Female'),
                     ('other', 'Other')]
-
-
-class HrEmployeeContractName(models.Model):
-    """This class is to add emergency contact table"""
-
-    _name = 'hr.emergency.contact'
-    _description = 'HR Emergency Contact'
-
-    number = fields.Char(string='Number', help='Contact Number')
-    relation = fields.Char(string='Contact', help='Relation with employee')
-    employee_obj = fields.Many2one('hr.employee', invisible=1)
 
 
 class HrEmployeeFamilyInfo(models.Model):
@@ -45,17 +34,12 @@ class HrEmployeeFamilyInfo(models.Model):
     _name = 'hr.employee.family'
     _description = 'HR Employee Family'
 
-
     employee_id = fields.Many2one('hr.employee', string="Employee", help='Select corresponding Employee',
                                   invisible=1)
-
+    relation_id = fields.Many2one('hr.employee.relation', string="Relation", help="Relationship with the employee")
     member_name = fields.Char(string='Name')
-    relation = fields.Selection([('father', 'Father'),
-                                 ('mother', 'Mother'),
-                                 ('daughter', 'Daughter'),
-                                 ('son', 'Son'),
-                                 ('wife', 'Wife')], string='Relationship', help='Relation with employee')
     member_contact = fields.Char(string='Contact No')
+    birth_date = fields.Date(string="DOB", tracking=True)
 
 
 class HrEmployee(models.Model):
@@ -94,8 +78,10 @@ class HrEmployee(models.Model):
                         'email_to': i.work_email,
                     }
                     self.env['mail.mail'].sudo().create(main_content).send()
-    personal_mobile = fields.Char(string='Mobile', related='address_home_id.mobile', store=True)
-    joining_date = fields.Date(string='Joining Date')
+
+    personal_mobile = fields.Char(string='Mobile', related='address_home_id.mobile', store=True,
+                  help="Personal mobile number of the employee")
+    joining_date = fields.Date(string='Joining Date', help="Employee joining date computed from the contract start date",compute='compute_joining', store=True)
     id_expiry_date = fields.Date(string='Expiry Date', help='Expiry date of Identification ID')
     passport_expiry_date = fields.Date(string='Expiry Date', help='Expiry date of Passport ID')
     id_attachment_id = fields.Many2many('ir.attachment', 'id_attachment_rel', 'id_ref', 'attach_ref',
@@ -104,7 +90,34 @@ class HrEmployee(models.Model):
                                               string="Attachment",
                                               help='You can attach the copy of Passport')
     fam_ids = fields.One2many('hr.employee.family', 'employee_id', string='Family', help='Family Information')
-    emergency_contacts = fields.One2many('hr.emergency.contact', 'employee_obj', string='Emergency Contact')
+
+    @api.depends('contract_id')
+    def compute_joining(self):
+        if self.contract_id:
+            date = min(self.contract_id.mapped('date_start'))
+            self.joining_date = date
+        else:
+            self.joining_date = False
+
+    @api.onchange('spouse_complete_name', 'spouse_birthdate')
+    def onchange_spouse(self):
+        relation = self.env.ref('hr_employee_updation.employee_relationship')
+        lines_info = []
+        spouse_name = self.spouse_complete_name
+        date = self.spouse_birthdate
+        if spouse_name and date:
+            lines_info.append((0, 0, {
+                'member_name': spouse_name,
+                'relation_id': relation.id,
+                'birth_date': date,
+            })
+                              )
+            self.fam_ids = [(6, 0, 0)] + lines_info
 
 
+class EmployeeRelationInfo(models.Model):
+    """Table for keep employee family information"""
 
+    _name = 'hr.employee.relation'
+
+    name = fields.Char(string="Relationship", help="Relationship with thw employee")

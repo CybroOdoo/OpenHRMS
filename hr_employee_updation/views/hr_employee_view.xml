@@ -12,11 +12,13 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='personal_information']/group" position="after">
-                    <group name="emergency_contact" colspan="4" string="Emergency Contacts">
-                        <field name="emergency_contacts">
+                    <group name="fam_ids" colspan="4" string="Dependence Details">
+                        <field name="fam_ids">
                             <tree editable="bottom">
-                                <field name="number"/>
-                                <field name="relation"/>
+                                <field name="member_name" required="1"/>
+                                <field name="relation_id" required="1"/>
+                                <field name="member_contact"/>
+                                <field name="birth_date"/>
                             </tree>
                         </field>
                     </group>
@@ -38,20 +40,6 @@
                         <field name="passport_attachment_id" groups="hr.group_hr_user" widget="many2many_binary" class="oe_inline" attrs="{'invisible': [('passport_id', 'in', [None,False])]}"/>
                     </group>
                 </xpath>
-
-                <page name="hr_settings" position="after">
-                    <page name="family_info" string="Family Information">
-                        <group string="Family">
-                            <field name="fam_ids" nolabel="1">
-                                <tree editable="bottom">
-                                    <field name="member_name"/>
-                                    <field name="relation"/>
-                                    <field name="member_contact"/>
-                                </tree>
-                            </field>
-                        </group>
-                    </page>
-                </page>
 
             </field>
         </record>
