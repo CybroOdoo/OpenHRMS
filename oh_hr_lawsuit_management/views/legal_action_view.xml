@@ -27,11 +27,16 @@
                         </h1>
                         <group>
                             <group>
+                                <field name="ref_no"/>
                                 <field name="party1"/>
                                 <field name="party2_name" invisible="1"/>
                                 <field name="party2"/>
                                 <field name="employee_id" attrs="{'invisible': [('party2','!=','employee')],
                                                                   'required': [('party2','=','employee')]}"/>
+                                <field name="partner_id" attrs="{'invisible': [('party2','!=','partner')],
+                                                                  'required': [('party2','=','partner')]}"/>
+                                <field name="other_name" attrs="{'invisible': [('party2','!=','other')],
+                                                                  'required': [('party2','=','other')]}"/>
                                 <field name="court_name"/>
                                 <field name="judge"/>
                                 <field name="lawyer"/>
@@ -39,6 +44,7 @@
                             </group>
                             <group>
                                 <field name="requested_date"/>
+                                <field name="hearing_date"/>
                             </group>
                         </group>
                         <notebook>
@@ -97,7 +103,6 @@
         <record id="action_hr_lawsuit" model="ir.actions.act_window">
             <field name="name">Legal Management</field>
             <field name="res_model">hr.lawsuit</field>
-            <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="hr_lawsuit_search_view"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">

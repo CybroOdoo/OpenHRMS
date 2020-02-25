@@ -35,7 +35,7 @@
         'security/ir.model.access.csv',
         'views/legal_action_view.xml',
     ],
-    'demo': [],
+    'demo': ['data/demo_data.xml'],
     'images': ['static/description/banner.jpg'],
     'license': 'AGPL-3',
     'installable': True,
