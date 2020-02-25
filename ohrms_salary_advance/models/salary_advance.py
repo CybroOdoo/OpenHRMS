@@ -11,16 +11,16 @@ class SalaryAdvancePayment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', readonly=True, default=lambda self: 'Adv/')
-    employee_id = fields.Many2one('hr.employee', string='Employee', required=True)
-    date = fields.Date(string='Date', required=True, default=lambda self: fields.Date.today())
-    reason = fields.Text(string='Reason')
+    employee_id = fields.Many2one('hr.employee', string='Employee', required=True, help="Employee")
+    date = fields.Date(string='Date', required=True, default=lambda self: fields.Date.today(), help="Submit date")
+    reason = fields.Text(string='Reason', help="Reason")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True,
                                   default=lambda self: self.env.user.company_id.currency_id)
     company_id = fields.Many2one('res.company', string='Company', required=True,
                                  default=lambda self: self.env.user.company_id)
     advance = fields.Float(string='Advance', required=True)
     payment_method = fields.Many2one('account.journal', string='Payment Method')
-    exceed_condition = fields.Boolean(string='Exceed than maximum',
+    exceed_condition = fields.Boolean(string='Exceed than Maximum',
                                       help="The Advance is greater than the maximum percentage in salary structure")
     department = fields.Many2one('hr.department', string='Department')
     state = fields.Selection([('draft', 'Draft'),
@@ -72,12 +72,10 @@ class SalaryAdvancePayment(models.Model):
     def approve_request(self):
         """This Approve the employee salary advance request.
                    """
-        print("self",self)
         emp_obj = self.env['hr.employee']
-        print (self)
         address = emp_obj.browse([self.employee_id.id]).address_home_id
         if not address.id:
-            raise except_orm('Error!', 'Define home address for employee')
+            raise except_orm('Error!', 'Define home address for the employee. i.e address under private information of the employee.')
         salary_advance_search = self.search([('employee_id', '=', self.employee_id.id), ('id', '!=', self.id),
                                              ('state', '=', 'approve')])
         current_month = datetime.strptime(str(self.date), '%Y-%m-%d').date().month
@@ -88,10 +86,8 @@ class SalaryAdvancePayment(models.Model):
         if not self.employee_contract_id:
             raise except_orm('Error!', 'Define a contract for the employee')
         struct_id = self.employee_contract_id.struct_id
-        if not struct_id.max_percent or not struct_id.advance_date:
-            raise except_orm('Error!', 'Max percentage or advance days are not provided in Contract')
         adv = self.advance
-        amt = (self.employee_contract_id.struct_id.max_percent * self.employee_contract_id.wage) / 100
+        amt = self.employee_contract_id.wage
         if adv > amt and not self.exceed_condition:
             raise except_orm('Error!', 'Advance amount is greater than allotted')
 
@@ -129,7 +125,6 @@ class SalaryAdvancePayment(models.Model):
             raise except_orm('Warning', 'You must Enter the Salary Advance amount')
 
         move_obj = self.env['account.move']
-        print("move_obj",move_obj)
         timenow = time.strftime('%Y-%m-%d')
         line_ids = []
         debit_sum = 0.0
@@ -172,11 +167,9 @@ class SalaryAdvancePayment(models.Model):
                 })
                 line_ids.append(credit_line)
                 credit_sum += credit_line[2]['credit'] - credit_line[2]['debit']
-            print(line_ids,"line_ids")
             move.update({'line_ids': line_ids})
             print("move.update({'line_ids': line_ids})",move.update({'invoice_line_ids': line_ids}))
             draft = move_obj.create(move)
-            print(draft)
             draft.post()
             self.state = 'approve'
             return True

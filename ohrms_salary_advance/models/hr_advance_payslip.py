@@ -17,7 +17,6 @@ class SalaryRuleInput(models.Model):
             current_date = date_from.month
             date = adv_obj.date
             existing_date = date.month
-            print(current_date,existing_date)
             if current_date == existing_date:
                 state = adv_obj.state
                 amount = adv_obj.advance
