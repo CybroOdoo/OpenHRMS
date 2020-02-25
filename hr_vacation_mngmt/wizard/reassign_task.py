@@ -32,9 +32,7 @@ class ReAssignTask(models.TransientModel):
                 raise UserError(_('Selected employees %s are not available') % (', '.join(emp_unavail),))
 
         else:
-            print('r')
             manager = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
-            print(manager)
             holiday = self.leave_req_id
             tasks = self.env['project.task']
             for task in self.pending_tasks:
@@ -46,7 +44,6 @@ class ReAssignTask(models.TransientModel):
                 }
                 tasks.sudo().create(vals)
             if holiday.double_validation:
-                print('hjn')
                 return holiday.write({'state': 'validate1', 'manager_id': manager.id if manager else False})
             else:
                 holiday.action_validate()

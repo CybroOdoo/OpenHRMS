@@ -8,11 +8,11 @@ from odoo.exceptions import UserError
 class HrLeaveRequest(models.Model):
     _inherit = 'hr.leave'
 
-    remaining_leaves = fields.Float(string='Remaining Legal Leaves', related='employee_id.remaining_leaves')
-    overlapping_leaves = fields.Many2many('hr.leave', compute='get_overlapping_leaves', string='Overlapping Leaves')
-    pending_tasks = fields.One2many('pending.task', 'leave_id', string='Pending Tasks')
-    holiday_managers = fields.Many2many('res.users', compute='get_hr_holiday_managers')
-    flight_ticket = fields.One2many('hr.flight.ticket', 'leave_id', string='Flight Ticket')
+    remaining_leaves = fields.Float(string='Remaining Legal Leaves', related='employee_id.remaining_leaves', help="Remaining legal leaves")
+    overlapping_leaves = fields.Many2many('hr.leave', compute='get_overlapping_leaves', string='Overlapping Leaves', help="Overlapping leaves")
+    pending_tasks = fields.One2many('pending.task', 'leave_id', string='Pending Tasks', help="Pending tasks")
+    holiday_managers = fields.Many2many('res.users', compute='get_hr_holiday_managers', help="Holiday managers")
+    flight_ticket = fields.One2many('hr.flight.ticket', 'leave_id', string='Flight Ticket', help="Flight ticket")
     # Commented for odoo 13 compatibility
     # double_validation = fields.Boolean(string='Apply Double Validation', related='holiday_status_id.double_validation')
     expense_account = fields.Many2one('account.account')
@@ -62,7 +62,6 @@ class HrLeaveRequest(models.Model):
                         'context': ctx,
                     }
             else:
-                print(holiday)
                 # if holiday.double_validation:
                 #     return holiday.write({'state': 'validate1', 'manager_id': manager.id if manager else False})
                 # else:
@@ -127,14 +126,13 @@ class PendingTask(models.Model):
     _name = 'pending.task'
 
     name = fields.Char(string='Task', required=True)
-    leave_id = fields.Many2one('hr.leave', string='Leave Request')
-    # print("leave_id",leave_id)
-    dept_id = fields.Many2one('hr.department', string='Department', related='leave_id.department_id')
-    project_id = fields.Many2one('project.project', string='Project', required=True)
-    description = fields.Text(string='Description')
-    assigned_to = fields.Many2one('hr.employee', string='Assigned to',
+    leave_id = fields.Many2one('hr.leave', string='Leave Request', help="Leave request")
+    dept_id = fields.Many2one('hr.department', string='Department', related='leave_id.department_id', help="Department")
+    project_id = fields.Many2one('project.project', string='Project', required=True, help="Project")
+    description = fields.Text(string='Description', help="Description")
+    assigned_to = fields.Many2one('hr.employee', string='Assigned to', help="Employee who is assigned to",
                                   domain="[('department_id', '=', dept_id)]")
-    unavailable_employee = fields.Many2many('hr.employee', string='Unavailable Employees',
+    unavailable_employee = fields.Many2many('hr.employee', string='Unavailable Employees', help="unavailable employee",
                                             compute='get_unavailable_employee')
 
     def get_unavailable_employee(self):

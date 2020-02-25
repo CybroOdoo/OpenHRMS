@@ -7,6 +7,7 @@
             <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header/button[@name='action_approve']" position="before">
+                    <field name="flight_ticket" invisible="1"/>
                     <button type="object" icon="fa-pencil-square-o" name="view_flight_ticket"
                                 string="Flight Ticket" class="oe_stat_button" attrs="{'invisible': [('flight_ticket','=', [])]}"
                                 groups="hr_holidays.group_hr_holidays_manager"/>

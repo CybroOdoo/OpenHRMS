@@ -6,7 +6,7 @@ from odoo import models, fields, api, _
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
-    leave_salary = fields.Boolean(string='Leave Salary')
+    leave_salary = fields.Boolean(string='Leave Salary', help="Check leave if salary should be paid for the employee if is on ;leave")
 
     @api.model
     def _get_payslip_lines(self, contract_ids, payslip_id):

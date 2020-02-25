@@ -9,24 +9,24 @@ class HrFlightTicket(models.Model):
     _name = 'hr.flight.ticket'
 
     name = fields.Char()
-    employee_id = fields.Many2one('hr.leave', string='Employee', required=True)
-    ticket_type = fields.Selection([('one', 'One Way'), ('round', 'Round Trip')], string='Ticket Type', default='round')
-    depart_from = fields.Char(string='Departure', required=True)
-    destination = fields.Char(string='Destination', required=True)
-    date_start = fields.Date(string='Start Date', required=True)
-    date_return = fields.Date(string='Return Date')
+    employee_id = fields.Many2one('hr.leave', string='Employee', required=True, help="Employee")
+    ticket_type = fields.Selection([('one', 'One Way'), ('round', 'Round Trip')], string='Ticket Type', default='round', help="Select the ticket type")
+    depart_from = fields.Char(string='Departure', required=True, help="Departure")
+    destination = fields.Char(string='Destination', required=True, help="Destination")
+    date_start = fields.Date(string='Start Date', required=True, help="Start date")
+    date_return = fields.Date(string='Return Date', help="Return date")
     ticket_class = fields.Selection([('economy', 'Economy'),
                                      ('premium_economy', 'Premium Economy'),
                                      ('business', 'Business'),
-                                     ('first_class', 'First Class')], string='Class')
-    ticket_fare = fields.Float(string='Ticket Fare')
-    flight_details = fields.Text(string='Flight Details')
-    return_flight_details = fields.Text(string='Return Flight Details')
+                                     ('first_class', 'First Class')], string='Class', help="Select the ticket class")
+    ticket_fare = fields.Float(string='Ticket Fare', help="Give the ticket fare")
+    flight_details = fields.Text(string='Flight Details', help="Flight details")
+    return_flight_details = fields.Text(string='Return Flight Details', help="return flight details")
     state = fields.Selection([('booked', 'Booked'), ('confirmed', 'Confirmed'), ('started', 'Started'),
                               ('completed', 'Completed'), ('canceled', 'Canceled')], string='Status', default='booked')
-    invoice_id = fields.Many2one('account.move', string='Invoice')
-    leave_id = fields.Many2one('hr.leave', string='Leave')
-    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id)
+    invoice_id = fields.Many2one('account.move', string='Invoice', help="Invoice")
+    leave_id = fields.Many2one('hr.leave', string='Leave', help="Leave")
+    company_id = fields.Many2one('res.company', 'Company', help="Company", default=lambda self: self.env.user.company_id)
 
     def name_get(self):
         res = []
@@ -49,7 +49,6 @@ class HrFlightTicket(models.Model):
             raise UserError(_('Please add ticket fare.'))
         inv_obj = self.env['account.move']
         expense_account = self.env['ir.config_parameter'].sudo().get_param('travel_expense_account')
-        print(type(expense_account))
         if not expense_account:
             raise UserError(_('Please select expense account for the flight tickets.'))
         domain = [
