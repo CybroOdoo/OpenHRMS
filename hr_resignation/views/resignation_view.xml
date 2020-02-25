@@ -9,10 +9,13 @@
                 <tree string="Employee Resignation">
                     <field name="employee_id"/>
                     <field name="department_id"/>
-                    <field name="joined_date"/>
-                    <field name="expected_revealing_date"/>
+                    <field name="employee_contract"/>
+                    <field name="joined_date" readonly="1"/>
+                    <field name="expected_revealing_date" />
                     <field name="approved_revealing_date"/>
+                    <field name="resignation_type"/>
                     <field name="notice_period"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>
@@ -27,6 +30,7 @@
                         <button string="Cancel" type="object" name="cancel_resignation" states='draft'/>
                         <button string="Approve" type="object" groups="hr.group_hr_user" name="approve_resignation" states='confirm'/>
                         <button string="Reject" type="object" groups="hr.group_hr_user" name="reject_resignation" states='confirm'/>
+                        <button string="Set to Draft" type="object" groups="hr.group_hr_manager" name="reset_to_draft" states='approved'/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
                     </header>
                     <sheet>
@@ -36,19 +40,27 @@
                             </h1>
                         </div>
                         <group>
-                            <group>
-                                <field name="employee_id"/>
+                            <group string="Employee Details">
+                                <field name="read_only" invisible="1"/>
+                                <field name="employee_id" attrs="{'readonly': ['|',('read_only','=',False),('state','=','approved')]}"/>
                                 <field name="department_id"/>
-                                <field name="joined_date"/>
-                                <field name="resign_confirm_date" class="oe_read_only" attrs="{'invisible':[('resign_confirm_date','=','')]}"/>
+                                <field name="employee_contract"/>
                             </group>
-                            <group>
-                                <field name="expected_revealing_date"/>
-                                <field name="approved_revealing_date" states="confirm,approved"/>
-                                <field name="notice_period" states="confirm,approved"/>
+                            <group string="Dates">
+                                <field name="joined_date"/>
+                                <field name="resign_confirm_date"
+                                       readonly="1"
+                                       attrs="{'invisible':[('resign_confirm_date','=',False)]}"/>
+                                <field name="expected_revealing_date" attrs="{'readonly': [('state','=','approved')]}"/>
+                                <field name="approved_revealing_date"
+                                        groups="hr.group_hr_user"/>
+                                <field name="notice_period"/>
+                            </group>
+                            <group string="Resignation Details">
+                                <field name="resignation_type" string="Type" groups="hr.group_hr_user" attrs="{'readonly': [('state','=','approved')]}"/>
+                                <field name="reason" attrs="{'readonly': [('state','=','approved')]}"/>
                             </group>
                         </group>
-                        <field name="reason"/>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
@@ -61,7 +73,7 @@
             <field name="name">Employee Resignation</field>
             <field name="res_model">hr.resignation</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('state', 'in', ('draft', 'confirm'))]</field>
+            <field name="domain">[('state', 'in', ('draft', 'confirm','cancel'))]</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">Employee Resignation Form
                 </p>
@@ -71,7 +83,6 @@
                   groups="base.group_user"
                   web_icon="hr_resignation,static/description/resignation_web.png"
                   sequence="21"/>
-
         <menuitem id="employee_resignation_request" parent="employee_resignation" name="Resignation Request"
                   action="view_employee_resignation" groups="base.group_user" sequence="4"/>
     </data>

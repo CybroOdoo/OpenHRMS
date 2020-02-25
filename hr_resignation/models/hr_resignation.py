@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 import datetime
-from datetime import datetime
+from datetime import datetime, timedelta
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+
 date_format = "%Y-%m-%d"
+RESIGNATION_TYPE = [('resigned', 'Normal Resignation'),
+                    ('fired', 'Fired by the company')]
 
 
 class HrResignation(models.Model):
@@ -11,27 +14,43 @@ class HrResignation(models.Model):
     _inherit = 'mail.thread'
     _rec_name = 'employee_id'
 
-    def _get_employee_id(self):
-        # assigning the related employee of the logged in user
-        employee_rec = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
-        return employee_rec.id
-
     name = fields.Char(string='Order Reference', required=True, copy=False, readonly=True, index=True,
                        default=lambda self: _('New'))
-    employee_id = fields.Many2one('hr.employee', string="Employee", default=_get_employee_id,
+    employee_id = fields.Many2one('hr.employee', string="Employee", default=lambda self: self.env.user.employee_id.id,
                                   help='Name of the employee for whom the request is creating')
     department_id = fields.Many2one('hr.department', string="Department", related='employee_id.department_id',
                                     help='Department of the employee')
-    joined_date = fields.Date(string="Join Date", required=True,
-                              help='Joining date of the employee')
-    expected_revealing_date = fields.Date(string="Relieving Date", required=True,
-                                          help='Date on which he is revealing from the company')
-    resign_confirm_date = fields.Date(string="Resign confirm date", help='Date on which the request is confirmed')
-    approved_revealing_date = fields.Date(string="Approved Date", help='The date approved for the relieving')
-    reason = fields.Text(string="Reason", help='Specify reason for leaving the company')
-    notice_period = fields.Char(string="Notice Period", compute='_compute_notice_period')
-    state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Cancel')],
-                             string='Status', default='draft')
+    resign_confirm_date = fields.Date(string="Confirmed Date",
+                                      help='Date on which the request is confirmed by the employee.',
+                                      track_visibility="always")
+    approved_revealing_date = fields.Date(string="Approved Last Day Of Employee",
+                                          help='Date on which the request is confirmed by the manager.',
+                                          track_visibility="always")
+    joined_date = fields.Date(string="Join Date", required=False, readonly=True,
+                              help='Joining date of the employee.i.e Start date of the first contract')
+
+    expected_revealing_date = fields.Date(string="Last Day of Employee", required=True,
+                                          help='Employee requested date on which he is revealing from the company.')
+    reason = fields.Text(string="Reason", required=True, help='Specify reason for leaving the company')
+    notice_period = fields.Char(string="Notice Period")
+    state = fields.Selection(
+        [('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Rejected')],
+        string='Status', default='draft', track_visibility="always")
+    resignation_type = fields.Selection(selection=RESIGNATION_TYPE, help="Select the type of resignation: normal "
+                                                                         "resignation or fired by the company")
+    read_only = fields.Boolean(string="check field")
+    employee_contract = fields.Char(String="Contract")
+
+    @api.onchange('employee_id')
+    @api.depends('employee_id')
+    def _compute_read_only(self):
+        """ Use this function to check weather the user has the permission to change the employee"""
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        print(res_user.has_group('hr.group_hr_user'))
+        if res_user.has_group('hr.group_hr_user'):
+            self.read_only = True
+        else:
+            self.read_only = False
 
     @api.onchange('employee_id')
     def set_join_date(self):
@@ -64,20 +83,14 @@ class HrResignation(models.Model):
                 if resignation_request:
                     raise ValidationError(_('There is a resignation request in confirmed or'
                                             ' approved state for this employee'))
+                if rec.employee_id:
+                    no_of_contract = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)])
+                    for contracts in no_of_contract:
+                        if contracts.state == 'open':
+                            rec.employee_contract = contracts.name
+                            rec.notice_period = contracts.notice_days
 
-    
-    def _compute_notice_period(self):
-        # calculating the notice period for the employee
-        for rec in self:
-            if rec.approved_revealing_date and rec.resign_confirm_date:
-                approved_date = datetime.strptime(str(rec.approved_revealing_date), date_format)
-                confirmed_date = datetime.strptime(str(rec.resign_confirm_date), date_format)
-                notice_period = approved_date - confirmed_date
-                rec.notice_period = notice_period.days
-            else:
-                rec.notice_period = ''
-
-    @api.constrains('joined_date', 'expected_revealing_date')
+    @api.constrains('joined_date')
     def _check_dates(self):
         # validating the entered dates
         for rec in self:
@@ -86,45 +99,80 @@ class HrResignation(models.Model):
             if resignation_request:
                 raise ValidationError(_('There is a resignation request in confirmed or'
                                         ' approved state for this employee'))
-            if rec.joined_date >= rec.expected_revealing_date:
-                raise ValidationError(_('Relieving date must be anterior to joining date'))
 
-    
     def confirm_resignation(self):
-        for rec in self:
-            rec.state = 'confirm'
-            rec.resign_confirm_date = str(datetime.now())
+        if self.joined_date:
+            if self.joined_date >= self.expected_revealing_date:
+                raise ValidationError(_('Last date of the Employee must be anterior to Joining date'))
+            for rec in self:
+                rec.state = 'confirm'
+                rec.resign_confirm_date = str(datetime.now())
+        else:
+            raise ValidationError(_('Please set joining date for employee'))
 
-    
     def cancel_resignation(self):
         for rec in self:
             rec.state = 'cancel'
 
-    
     def reject_resignation(self):
         for rec in self:
-            rec.state = 'rejected'
+            rec.state = 'cancel'
 
-    
+    def reset_to_draft(self):
+        for rec in self:
+            rec.state = 'draft'
+            rec.employee_id.active = True
+            rec.employee_id.resigned = False
+            rec.employee_id.fired = False
+
     def approve_resignation(self):
         for rec in self:
-            if not rec.approved_revealing_date:
-                raise ValidationError(_('Enter Approved Relieving Date'))
-            if rec.approved_revealing_date and rec.resign_confirm_date:
-                if rec.approved_revealing_date <= rec.resign_confirm_date:
-                    raise ValidationError(_('Approved relieving date must be anterior to confirmed date'))
-                rec.state = 'approved'
+            if rec.expected_revealing_date and rec.resign_confirm_date:
+                no_of_contract = self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)])
+                for contracts in no_of_contract:
+                    if contracts.state == 'open':
+                        rec.employee_contract = contracts.name
+                        rec.state = 'approved'
+                        rec.approved_revealing_date = rec.resign_confirm_date + timedelta(days=contracts.notice_days)
+                    else:
+                        rec.approved_revealing_date = rec.expected_revealing_date
+                # Changing state of the employee if resigning today
+                if rec.expected_revealing_date <= fields.Date.today() and rec.employee_id.active:
+                    rec.employee_id.active = False
+                    # Changing fields in the employee table with respect to resignation
+                    rec.employee_id.resign_date = rec.expected_revealing_date
+                    if rec.resignation_type == 'resigned':
+                        rec.employee_id.resigned = True
+                    else:
+                        rec.employee_id.fired = True
+                    # Removing and deactivating user
+                    if rec.employee_id.user_id:
+                        rec.employee_id.user_id.active = False
+                        rec.employee_id.user_id = None
+            else:
+                raise ValidationError(_('Please enter valid dates.'))
 
-    
     def update_employee_status(self):
         resignation = self.env['hr.resignation'].search([('state', '=', 'approved')])
         for rec in resignation:
-            if rec.approved_revealing_date <= fields.Date.today() and rec.employee_id.active:
+            if rec.expected_revealing_date <= fields.Date.today() and rec.employee_id.active:
                 rec.employee_id.active = False
-                rec.employee_id.resign_date = rec.approved_revealing_date
+                # Changing fields in the employee table with respect to resignation
+                rec.employee_id.resign_date = rec.expected_revealing_date
+                if rec.resignation_type == 'resigned':
+                    rec.employee_id.resigned = True
+                else:
+                    rec.employee_id.fired = True
+                # Removing and deactivating user
+                if rec.employee_id.user_id:
+                    rec.employee_id.user_id.active = False
+                    rec.employee_id.user_id = None
 
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    resign_date = fields.Date('Resign Date', readonly=True)
+    resign_date = fields.Date('Resign Date', readonly=True, help="Date of the resignation")
+    resigned = fields.Boolean(string="Resigned", default=False, store=True,
+                              help="If checked then employee has resigned")
+    fired = fields.Boolean(string="Fired", default=False, store=True, help="If checked then employee has fired")
