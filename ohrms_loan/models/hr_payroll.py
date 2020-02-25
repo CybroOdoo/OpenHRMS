@@ -8,7 +8,7 @@ from datetime import datetime
 class HrPayslipInput(models.Model):
     _inherit = 'hr.payslip.input'
 
-    loan_line_id = fields.Many2one('hr.loan.line', string="Loan Installment")
+    loan_line_id = fields.Many2one('hr.loan.line', string="Loan Installment", help="Loan installment")
 
 
 class HrPayslip(models.Model):
@@ -27,7 +27,7 @@ class HrPayslip(models.Model):
         ttyme = datetime.fromtimestamp(time.mktime(time.strptime(str(date_from), "%Y-%m-%d")))
         locale = self.env.context.get('lang') or 'en_US'
         self.name = _('Salary Slip of %s for %s') % (
-        employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale)))
+            employee.name, tools.ustr(babel.dates.format_date(date=ttyme, format='MMMM-y', locale=locale)))
         self.company_id = employee.company_id
 
         if not self.env.context.get('contract') or not self.contract_id:
@@ -71,7 +71,6 @@ class HrPayslip(models.Model):
                             result['loan_line_id'] = loan_line.id
         return res
 
-    
     def action_payslip_done(self):
         for line in self.input_line_ids:
             if line.loan_line_id:

@@ -23,6 +23,7 @@
         <field name="arch" type="xml">
             <form string="Loan Request">
                 <header>
+                    <button name="compute_installment" type="object" string="Compute Installment" class="oe_highlight"  attrs="{'invisible':[('state','in',('approve', 'refuse'))]}"/>
                     <button name="action_submit" type="object" string="Submit" states="draft" class="oe_highlight"/>
                     <button name="action_cancel" type="object" string="Cancel" states="draft" />
                     <button name="action_approve" type="object" string="Approve" states="waiting_approval_1" class="oe_highlight" groups="hr.group_hr_manager,hr.group_hr_user"/>
@@ -63,9 +64,6 @@
                                 <field name="total_paid_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 <field name="balance_amount" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                             </group>
-                            <button type="object" name="compute_installment" string="Compute Installment"  colspan="2" attrs="{'invisible':[('state','=','approve')]}"
-                            groups="hr.group_hr_manager,hr.group_hr_user" class="oe_stat_button"
-                            icon="fa-clock-o"/>
                             <div class="oe_clear"/>
                         </page>
                     </notebook>
