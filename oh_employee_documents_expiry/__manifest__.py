@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employee Documents',
-    'version': '13.0.1.0.0',
+    'version': '13.0.2.0.0',
     'summary': """Manages Employee Documents With Expiry Notifications.""",
     'description': """OH Addon: Manages Employee Related Documents with Expiry Notifications.""",
     'category': 'Generic Modules/Human Resources',
@@ -34,7 +34,10 @@
     'data': [
         'security/ir.model.access.csv',
         'views/employee_document_view.xml',
+        'views/document_type_view.xml',
+        'views/hr_document_template.xml',
     ],
+    'demo': ['data/demo_data.xml'],
     'images': ['static/description/banner.jpg'],
     'license': 'AGPL-3',
     'installable': True,
