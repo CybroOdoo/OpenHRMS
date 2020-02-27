@@ -1,0 +1,47 @@
+<templates id="template" xml:space="preserve">
+    <t t-extend="AppsMenu">
+        <t t-jquery=".dropdown" t-operation="replace">
+            <li class="dropdown">
+                <a class="full" data-toggle="dropdown" data-display="static" href="#">
+                    <i class="fa fa-th-large" style="font-size: 16px !important;"/>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                    <div class="search-container form-row align-items-center m-auto mb-5 col-9">
+                        <div class="search-input col-md-10 ml-auto mr-auto mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-search"/>
+                                    </div>
+                                </div>
+                                <input type="search"
+                                       autocomplete="off"
+                                       placeholder="Search menus..."
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="search-results col-md-10 ml-auto mr-auto"/>
+                    </div>
+
+                <div class="nav-container">
+                    <div class="app-menu">
+                        <t t-foreach="widget.getApps()" t-as="app">
+                            <a role="menuitem" t-attf-href="#menu_id=#{app.menuID}"
+                               class="dropdown-item o_app mt0"
+                               t-att-data-menu-id="app.menuID"
+                               t-att-data-menu-xmlid="app.xmlID"
+                               t-att-data-action-id="app.actionID">
+                                    <img t-att-title="app.name"
+                                         style="width: 50px !important;height: 50px !important;border-radius: 5px !important;margin: 5px 5px 5px 5px;"
+                                         t-attf-src="#{app.webIcon}"/>
+                                <b class="a_app_menu_title"><t t-esc="app.name"/></b>
+                            </a>
+                        </t>
+                    </div>
+                    </div>
+                </div>
+            </li>
+        </t>
+    </t>
+
+</templates>
