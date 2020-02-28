@@ -13,40 +13,25 @@
             <field name="name">Car</field>
         </record>
 
-        <record id="employee_one" model="hr.employee">
-            <field name="name">Johny</field>
+       <record id="employee_custody" model="hr.employee">
+              <field name="name">Juliet </field>
+              <field name="job_title">Odoo Developer</field>
+              <field name="work_location">Building 3, Fifth Floor</field>
+              <field name="work_phone">(956)-3852-7863</field>
+              <field name="work_email">juliet123@example.com</field>
+              <field name="image_1920" type="base64" file="hr_custody/static/images/hr_custody_employee.jpg"/>
         </record>
 
-        <record id="employee_two" model="hr.employee">
-            <field name="name">Stella</field>
-        </record>
 
-        <record id="employee_three" model="hr.employee">
-            <field name="name">Rose</field>
-        </record>
-
-        <record id="Custody_demo_one" model="hr.custody">
+        <record id="custody_demo_one" model="hr.custody">
             <field name="custody_name" ref="property_one"/>
-            <field name="employee" ref="employee_one"/>
+            <field name="employee" ref="employee_custody"/>
             <field name="purpose">Projectwork</field>
             <field name="date_request">2020-03-02</field>
             <field name="return_date">2020-03-02</field>
+            <field name="state">draft</field>
         </record>
 
-        <record id="Custody_demo_two" model="hr.custody">
-            <field name="custody_name" ref="property_one"/>
-            <field name="employee" ref="property_two"/>
-            <field name="purpose">ClientMeeting</field>
-            <field name="date_request">2020-03-02</field>
-            <field name="return_date">2020-03-02</field>
-        </record>
 
-        <record id="Custody_demo_three" model="hr.custody">
-            <field name="custody_name" ref="property_one"/>
-            <field name="employee" ref="employee_three"/>
-            <field name="purpose">Onsight</field>
-            <field name="date_request">2020-03-02</field>
-            <field name="return_date">2020-03-02</field>
-        </record>
     </data>
 </odoo>

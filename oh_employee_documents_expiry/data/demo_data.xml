@@ -2,16 +2,14 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="employee_one" model="hr.employee">
-            <field name="name">Johny</field>
-        </record>
-
-        <record id="employee_two" model="hr.employee">
-            <field name="name">Stella</field>
-        </record>
-
-        <record id="employee_three" model="hr.employee">
-            <field name="name">Rose</field>
+        <record id="employee_document_id" model="hr.employee">
+              <field name="name">Joe</field>
+              <field name="job_title">Chief Medical Officer</field>
+              <field name="work_location">Building 1, Third Floor</field>
+              <field name="work_phone">(376)-3852-7863</field>
+              <field name="work_email">joe@example.com</field>
+              <field name="image_1920" type="base64"
+                     file="oh_employee_documents_expiry/static/image/employee_image.jpeg"/>
         </record>
 
         <record id="document_one" model="document.type">
@@ -28,18 +26,9 @@
 
         <record id="document_action_one" model="hr.employee.document">
             <field name="name">DC01</field>
-            <field name="employee_ref" ref="employee_one"/>
+            <field name="employee_ref" ref="employee_document_id"/>
         </record>
 
-        <record id="document_action_two" model="hr.employee.document">
-            <field name="name">DC02</field>
-            <field name="employee_ref" ref="employee_two"/>
-        </record>
-
-        <record id="document_action_three" model="hr.employee.document">
-            <field name="name">DC03</field>
-            <field name="employee_ref" ref="employee_three"/>
-        </record>
 
     </data>
 </odoo>

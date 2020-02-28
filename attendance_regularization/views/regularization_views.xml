@@ -7,11 +7,11 @@
             <field name="priority" eval="8" />
             <field name="arch" type="xml">
                 <tree string="Attendance Regularization">
+                    <field name="employee_id"/>
                     <field name="reg_category"/>
                     <field name="from_date"/>
                     <field name="reg_reason"/>
                     <field name="to_date"/>
-                    <field name="employee_id"/>
                 </tree>
             </field>
         </record>
@@ -35,11 +35,11 @@
             <field name="priority" eval="8" />
             <field name="arch" type="xml">
                 <tree string="Approve Regularization">
+                    <field name="employee_id"/>
                     <field name="reg_category"/>
                     <field name="from_date"/>
                     <field name="reg_reason"/>
                     <field name="to_date"/>
-                    <field name="employee_id"/>
                 </tree>
             </field>
         </record>
