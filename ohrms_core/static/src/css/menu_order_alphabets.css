@@ -83,9 +83,6 @@
     flex-wrap: wrap;
 
 }
-#chart-container ~ .o_content {
-    display: none;
-}
 .o_main_navbar .dropdown-menu.show {
     max-height: none !important;
     min-width: 100%;
