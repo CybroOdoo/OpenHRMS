@@ -9,3 +9,8 @@
 #### Version 13.0.1.1.0
 ##### FIX
 - Bug Fixed.
+
+#### 27.02.2020
+#### Version 13.0.1.2.1
+##### FIX
+- Bug Fixed.

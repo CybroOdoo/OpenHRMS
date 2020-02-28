@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Core',
-    'version': '13.0.1.1.0',
+    'version': '13.0.1.2.1',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
     'description': """Main module of Open HRMS, It brings all others into a single module, Payroll, Payroll Accounting,Expense,
                 Dashboard, Employees, Employee Document, Resignation, Salary Advance, Loan Management, Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, Shift Management, Employee History,
