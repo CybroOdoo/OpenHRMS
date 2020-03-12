@@ -54,6 +54,7 @@ odoo.define('ohrms_core.appMenu', function (require) {
             return this._super.apply(this, arguments);
         },
         _searchMenusSchedule: function () {
+            this.$search_results.removeClass("o_hidden")
             this.$app_menu.addClass("o_hidden");
             this._search_def.reject();
             this._search_def = $.Deferred();
@@ -65,7 +66,7 @@ odoo.define('ohrms_core.appMenu', function (require) {
             var query = this.$search_input.val();
             if (query === "") {
                 this.$search_container.removeClass("has-results");
-                this.$app_menu.removeClass("o_hidden")
+                this.$app_menu.removeClass("o_hidden");
                 this.$search_results.empty();
                 return;
             }
@@ -117,6 +118,9 @@ odoo.define('ohrms_core.appMenu', function (require) {
                 return text.indexOf(_app.name + suffix) === 0;
             });
             this.$dropdown_menu.removeClass("show");
+            this.$search_results.addClass("o_hidden");
+            this.$app_menu.removeClass("o_hidden");
+            this.$search_input.val('');
             // Update navbar menus
             core.bus.trigger("change_menu_section", app.menuID);
         },
