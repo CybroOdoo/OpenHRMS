@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mail_activity_inherit_form_view">
+            <field name="name">mail.activity.form.view</field>
+            <field name="model">mail.activity</field>
+            <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+            <field name="arch" type="xml">
+                <field name="note" position="replace">
+                    <field name="check_type_check" invisible="1"/>
+                    <field name="on_board_type_check" invisible="1"/>
+                    <field name="off_board_type_check" invisible="1"/>
+                    <notebook>
+                        <page string="Checklists" name="checklist" attrs="{'invisible': [('check_type_check', '!=', True)]}">
+                            <group string="Checklists">
+                                <group name="entry_checklist"
+                                       attrs="{'invisible': [('on_board_type_check', '!=', True)]}">
+                                    <field name="entry_checklist_plan" widget="many2many_checkboxes"/>
+                                </group>
+                                <group name="exit_checklist"
+                                       attrs="{'invisible': [('off_board_type_check', '!=', True)]}">
+                                    <field name="exit_checklist_plan" widget="many2many_checkboxes"/>
+                                </group>
+                            </group>
+                        </page>
+                    <page name="notes" string="Notes">
+                        <field name="note" placeholder="Log a note..."/>
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+
+
+</data>
+        </odoo>

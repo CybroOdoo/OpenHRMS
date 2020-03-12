@@ -3,37 +3,6 @@
 from odoo import models, fields, api
 
 
-class EmployeeEntryDocuments(models.Model):
-    _name = 'employee.checklist'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-    _description = "Employee Documents"
-
-    
-    def name_get(self):
-        result = []
-        for each in self:
-            if each.document_type == 'entry':
-                name = each.name + '_en'
-            elif each.document_type == 'exit':
-                name = each.name + '_ex'
-            elif each.document_type == 'other':
-                name = each.name + '_ot'
-            result.append((each.id, name))
-        return result
-
-    name = fields.Char(string='Name', copy=False, required=1)
-    document_type = fields.Selection([('entry', 'Entry Process'),
-                                      ('exit', 'Exit Process'),
-                                      ('other', 'Other')], string='Checklist Type', help='Type of Checklist',
-                                     readonly=1, required=1)
-
-
-class HrEmployeeDocumentInherit(models.Model):
-    _inherit = 'hr.employee.document'
-
-    document_name = fields.Many2one('employee.checklist', string='Document', help='Type of Document', required=True)
-
-
 class EmployeeMasterInherit(models.Model):
     _inherit = 'hr.employee'
 
@@ -55,12 +24,14 @@ class EmployeeMasterInherit(models.Model):
 
     entry_checklist = fields.Many2many('employee.checklist', 'entry_obj', 'check_hr_rel', 'hr_check_rel',
                                        string='Entry Process',
-                                       domain=[('document_type', '=', 'entry')])
+                                       domain=[('document_type', '=', 'entry')], help="Entry Checklist's")
     exit_checklist = fields.Many2many('employee.checklist', 'exit_obj', 'exit_hr_rel', 'hr_exit_rel',
                                       string='Exit Process',
-                                      domain=[('document_type', '=', 'exit')])
-    entry_progress = fields.Float(compute=entry_progress, string='Entry Progress', store=True, default=0.0)
-    exit_progress = fields.Float(compute=exit_progress, string='Exit Progress', store=True, default=0.0)
+                                      domain=[('document_type', '=', 'exit')], help="Exit Checklists")
+    entry_progress = fields.Float(compute=entry_progress, string='Entry Progress', store=True, default=0.0,
+                                  help="Percentage of Entry Checklists's")
+    exit_progress = fields.Float(compute=exit_progress, string='Exit Progress', store=True, default=0.0,
+                                 help="Percentage of Exit Checklists's")
     maximum_rate = fields.Integer(default=100)
     check_list_enable = fields.Boolean(invisible=True, copy=False)
 
@@ -77,7 +48,6 @@ class EmployeeDocumentInherit(models.Model):
             result.employee_ref.write({'exit_checklist': [(4, result.document_name.id)]})
         return result
 
-    
     def unlink(self):
         for result in self:
             if result.document_name.document_type == 'entry':
