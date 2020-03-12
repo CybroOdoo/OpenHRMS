@@ -14,27 +14,27 @@ class Service(models.Model):
         employee_rec = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
         return employee_rec.id
 
-    service_name = fields.Char(required=True, string="Reason For Service")
-    employee_id = fields.Many2one('hr.employee', string="Employee", default=_get_employee_id, readonly=True, required=True)
-    service_date = fields.Datetime(string="date", required=True)
+    service_name = fields.Char(required=True, string="Reason For Service", help="Service name")
+    employee_id = fields.Many2one('hr.employee', string="Employee", default=_get_employee_id, readonly=True, required=True, help="Employee")
+    service_date = fields.Datetime(string="date", required=True, help="Service date")
     state = fields.Selection([('draft', 'Draft'),
                               ('requested', 'Requested'),
                               ('assign', 'Assigned'),
                               ('check', 'Checked'),
                               ('reject', 'Rejected'),
-                              ('approved', 'Approved')], default='draft', track_visibility='onchange')
-    service_executer = fields.Many2one('hr.employee', string='Service Executer')
+                              ('approved', 'Approved')], default='draft', track_visibility='onchange', help="State")
+    service_executer = fields.Many2one('hr.employee', string='Service Executer', help="Service executer")
     read_only = fields.Boolean(string="check field", compute='get_user')
-    tester = fields.One2many('service.execute', 'test', string='tester')
-    internal_note = fields.Text(string="internal notes")
+    tester = fields.One2many('service.execute', 'test', string='tester', help="Tester")
+    internal_note = fields.Text(string="internal notes", help="Internal Notes")
     service_type = fields.Selection([('repair', 'Repair'),
                                      ('replace', 'Replace'),
                                      ('updation', 'Updation'),
                                      ('checking', 'Checking'),
                                      ('adjust', 'Adjustment'),
                                      ('other', 'Other')],
-                                    string='Type Of Service', required=True)
-    service_product = fields.Many2one('product.product', string='Item For Service', required=True)
+                                    string='Type Of Service', required=True, help="Type for the service request")
+    service_product = fields.Many2one('product.product', string='Item For Service', required=True, help="Product you want to service")
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
 
@@ -105,17 +105,17 @@ class Executer(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'issue'
 
-    client = fields.Many2one('hr.employee', string="Client")
-    executer = fields.Many2one('hr.employee', string='Executer')
-    issue = fields.Char(string="Issue")
-    execute_date = fields.Datetime(string="Date Of Reporting")
+    client = fields.Many2one('hr.employee', string="Client", help="Client")
+    executer = fields.Many2one('hr.employee', string='Executer', help="Executer")
+    issue = fields.Char(string="Issue", help="Issue")
+    execute_date = fields.Datetime(string="Date Of Reporting", help="Date of reporting")
     state_execute = fields.Selection([('draft', 'Draft'), ('requested', 'Requested'), ('assign', 'Assigned')
                                  , ('check', 'Checked'), ('reject', 'Rejected'),
                               ('approved', 'Approved')], track_visibility='onchange')
-    test = fields.Many2one('service.request', string='test')
-    notes = fields.Text(string="Internal notes")
-    executer_product = fields.Char(string='Service Item')
-    type_service = fields.Char(string='Service Type')
+    test = fields.Many2one('service.request', string='test', help="Test")
+    notes = fields.Text(string="Internal notes", help="Internal Notes")
+    executer_product = fields.Char(string='Service Item', help="service item")
+    type_service = fields.Char(string='Service Type', help="Service type")
 
     
     def service_check(self):
