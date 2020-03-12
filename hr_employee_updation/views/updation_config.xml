@@ -16,6 +16,7 @@
                         <div class="content-group" attrs="{'invisible': [('notice_period', '=', False)]}">
                             <div class="mt16">
                                 <field name="no_of_days" style="width:50px;"/>
+                                <span>days</span>
                             </div>
                         </div>
                     </div>
