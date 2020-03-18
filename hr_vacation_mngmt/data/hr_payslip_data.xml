@@ -7,7 +7,7 @@
         <!-- Salary Rules -->
 
         <record id="hr_salary_rule_leave_salary_basic" model="hr.salary.rule">
-            <field name="name">Leave Salary</field>
+            <field name="name">Leave Salary Basic</field>
             <field name="code">LS</field>
             <field name="sequence" eval="90"/>
             <field name="category_id" ref="hr_payroll_community.ALW"/>
@@ -18,7 +18,7 @@
         </record>
 
         <record id="hr_salary_rule_leave_salary_gross" model="hr.salary.rule">
-            <field name="name">Leave Salary</field>
+            <field name="name">Leave Salary Gross</field>
             <field name="code">LS</field>
             <field name="sequence" eval="90"/>
             <field name="category_id" ref="hr_payroll_community.ALW"/>
