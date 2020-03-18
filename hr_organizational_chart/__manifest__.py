@@ -29,6 +29,7 @@
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
+    'category': 'Generic Modules/Human Resources',
     'website': "https://www.openhrms.com",
     'depends': ['hr'],
     'data': [
