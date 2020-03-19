@@ -1,5 +1,5 @@
-Open HRMS Leave v13
---------------------------------
+Open HRMS Leave Multi-Level Approval v13
+========================================
 Supporting Addon for Open HRMS, Allows You To Create Leave Requests with multi level approvals.
 
 Connect with experts
