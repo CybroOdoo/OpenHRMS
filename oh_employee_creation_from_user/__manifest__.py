@@ -32,7 +32,7 @@
     'depends': ['base', 'hr'],
     'data': ['views/employee_creation_from_user_view.xml'],
     'demo': [],
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
