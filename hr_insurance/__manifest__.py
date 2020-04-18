@@ -41,7 +41,7 @@
         'views/insurance_salary_stucture.xml',
         'views/policy_management.xml',
               ],
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
