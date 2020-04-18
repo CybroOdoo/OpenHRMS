@@ -39,7 +39,7 @@
         'security/ir.model.access.csv',
         'security/branch_security.xml',
     ],
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/banner.png'],
     'installable': True,
     'application': True,
     'auto_install': False,
