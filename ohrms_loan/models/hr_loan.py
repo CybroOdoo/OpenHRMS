@@ -28,9 +28,9 @@ class HrLoan(models.Model):
                 if line.paid:
                     total_paid += line.amount
             balance_amount = loan.loan_amount - total_paid
-            self.total_amount = loan.loan_amount
-            self.balance_amount = balance_amount
-            self.total_paid_amount = total_paid
+            loan.total_amount = loan.loan_amount
+            loan.balance_amount = balance_amount
+            loan.total_paid_amount = total_paid
 
     name = fields.Char(string="Loan Name", default="/", readonly=True, help="Name of the loan")
     date = fields.Date(string="Date", default=fields.Date.today(), readonly=True, help="Date")
@@ -50,10 +50,10 @@ class HrLoan(models.Model):
     job_position = fields.Many2one('hr.job', related="employee_id.job_id", readonly=True, string="Job Position",
                                    help="Job position")
     loan_amount = fields.Float(string="Loan Amount", required=True, help="Loan amount")
-    total_amount = fields.Float(string="Total Amount", readonly=True, compute='_compute_loan_amount',
+    total_amount = fields.Float(string="Total Amount", store=True, readonly=True, compute='_compute_loan_amount',
                                 help="Total loan amount")
-    balance_amount = fields.Float(string="Balance Amount", compute='_compute_loan_amount', help="Balance amount")
-    total_paid_amount = fields.Float(string="Total Paid Amount", compute='_compute_loan_amount',
+    balance_amount = fields.Float(string="Balance Amount", store=True, compute='_compute_loan_amount', help="Balance amount")
+    total_paid_amount = fields.Float(string="Total Paid Amount", store=True, compute='_compute_loan_amount',
                                      help="Total paid amount")
 
     state = fields.Selection([
@@ -91,6 +91,7 @@ class HrLoan(models.Model):
                     'employee_id': loan.employee_id.id,
                     'loan_id': loan.id})
                 date_start = date_start + relativedelta(months=1)
+            loan._compute_loan_amount()
         return True
 
     def action_refuse(self):
