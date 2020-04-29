@@ -18,7 +18,7 @@
         <record id="hr_payslip_rule_insurance" model="hr.salary.rule">
             <field name="code">INSUR</field>
             <field name="name">Insurance Amount</field>
-            <field name="category_id" ref="hr_payroll_community.DEDUCTION"/>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
             <field name="amount_select">code</field>
             <field name="amount_python_compute">result = -(inputs.INSUR.amount)</field>
             <field name="appears_on_payslip" eval="True"/>
