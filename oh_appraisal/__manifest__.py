@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': "Open HRMS Employee Appraisal",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.1.2',
     'summary': """Roll out appraisal plans and get the best of your workforce""",
     'description': """Roll out appraisal plans and get the best of your workforce""",
     'category': 'Generic Modules/Human Resources',
