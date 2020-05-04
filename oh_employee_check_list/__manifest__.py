@@ -38,7 +38,7 @@
         'views/employee_check_list_view.xml',
         'views/hr_plan_view.xml',
     ],
-    'demo': ['data/demo_data.xml'],
+    'demo': [],
     'images': ['static/description/banner.jpg'],
     'license': 'AGPL-3',
     'installable': True,
