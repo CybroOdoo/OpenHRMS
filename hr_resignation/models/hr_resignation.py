@@ -26,7 +26,7 @@ class HrResignation(models.Model):
     approved_revealing_date = fields.Date(string="Approved Last Day Of Employee",
                                           help='Date on which the request is confirmed by the manager.',
                                           track_visibility="always")
-    joined_date = fields.Date(string="Join Date", required=False, readonly=True,
+    joined_date = fields.Date(string="Join Date", required=False, readonly=True, related="employee_id.joining_date",
                               help='Joining date of the employee.i.e Start date of the first contract')
 
     expected_revealing_date = fields.Date(string="Last Day of Employee", required=True,
@@ -52,9 +52,9 @@ class HrResignation(models.Model):
         else:
             self.read_only = False
 
-    @api.onchange('employee_id')
-    def set_join_date(self):
-        self.joined_date = self.employee_id.joining_date if self.employee_id.joining_date else ''
+    # @api.onchange('employee_id')
+    # def set_join_date(self):
+    #     self.joined_date = self.employee_id.joining_date if self.employee_id.joining_date else ''
 
     @api.model
     def create(self, vals):
