@@ -40,7 +40,7 @@
         'views/hr_loan_acc.xml',
     ],
     'demo': [],
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
