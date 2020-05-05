@@ -21,7 +21,7 @@ class HrLoan(models.Model):
         result['employee_id'] = self.env['hr.employee'].search([('user_id', '=', ts_user_id)], limit=1).id
         return result
 
-    @api.one
+    @api.multi
     def _compute_loan_amount(self):
         total_paid = 0.0
         for loan in self:
@@ -29,9 +29,9 @@ class HrLoan(models.Model):
                 if line.paid:
                     total_paid += line.amount
             balance_amount = loan.loan_amount - total_paid
-            self.total_amount = loan.loan_amount
-            self.balance_amount = balance_amount
-            self.total_paid_amount = total_paid
+            loan.total_amount = loan.loan_amount
+            loan.balance_amount = balance_amount
+            loan.total_paid_amount = total_paid
 
     name = fields.Char(string="Loan Name", default="/", readonly=True)
     date = fields.Date(string="Date", default=fields.Date.today(), readonly=True)
@@ -51,9 +51,9 @@ class HrLoan(models.Model):
                                   default=lambda self: self.env.user.company_id.currency_id)
     job_position = fields.Many2one('hr.job', related="employee_id.job_id", readonly=True, string="Job Position")
     loan_amount = fields.Float(string="Loan Amount", required=True)
-    total_amount = fields.Float(string="Total Amount", readonly=True, compute='_compute_loan_amount')
-    balance_amount = fields.Float(string="Balance Amount", compute='_compute_loan_amount')
-    total_paid_amount = fields.Float(string="Total Paid Amount", compute='_compute_loan_amount')
+    total_amount = fields.Float(string="Total Amount", readonly=True, store=True, compute='_compute_loan_amount')
+    balance_amount = fields.Float(string="Balance Amount", store=True, compute='_compute_loan_amount')
+    total_paid_amount = fields.Float(string="Total Paid Amount", store=True, compute='_compute_loan_amount')
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -123,6 +123,7 @@ class HrLoan(models.Model):
                     'employee_id': loan.employee_id.id,
                     'loan_id': loan.id})
                 date_start = date_start + relativedelta(months=1)
+            loan._compute_loan_amount()
         return True
 
 
