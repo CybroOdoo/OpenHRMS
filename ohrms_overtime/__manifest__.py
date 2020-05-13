@@ -35,6 +35,9 @@
     'depends': [
         'base', 'hr', 'hr_contract','hr_attendance', 'hr_holidays', 'project'
     ],
+    'external_dependencies': {
+        'python': ['pandas'],
+    },
     'data': [
 
         'data/data.xml',
