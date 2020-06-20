@@ -46,6 +46,7 @@
                 </attribute>
             </xpath>
             <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
                 <notebook attrs="{'invisible': [('validation_type','!=','multi')]}">
                     <page string="Leave validation">
                         <field name="leave_validators" mode="tree">

@@ -2,7 +2,7 @@
 
 {
     'name': 'Open HRMS Leave Multi-Level Approval',
-    'version': '13.0.1.0.0',
+    'version': '13.0.1.1.0',
     'summary': """Multilevel Approval for Leaves""",
     'description': 'Multilevel Approval for Leaves, leave approval, multiple leave approvers, leave, approval',
     'category': 'Generic Modules/Human Resources',
