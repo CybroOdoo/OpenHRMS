@@ -22,7 +22,7 @@
 
 {
     'name': 'Open HRMS Employee Checklist',
-    'version': '13.0.1.0.0',
+    'version': '13.0.1.0.1',
     'summary': """Manages Employee's Entry & Exit Process""",
     'description': """This module is used to remembering the employee's entry and exit progress.""",
     'category': 'Generic Modules/Human Resources',
