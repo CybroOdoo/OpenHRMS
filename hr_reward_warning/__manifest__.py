@@ -22,14 +22,14 @@
 ###################################################################################
 {
     'name': 'Open HRMS Official Announcements',
-    'version': '12.0.2.0.0',
+    'version': '12.0.2.0.1',
     'summary': """Managing Official Announcements""",
     'description': 'This module helps you to manage hr official announcements',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'hr'],
     'data': [
         'security/ir.model.access.csv',
         'security/reward_security.xml',
