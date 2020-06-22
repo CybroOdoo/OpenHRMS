@@ -103,6 +103,5 @@ class HrAnnouncements(models.Model):
                 }
             return value
 
-
-announcement_count = fields.Integer(compute='_announcement_count', string='# Announcements',
+    announcement_count = fields.Integer(compute='_announcement_count', string='# Announcements',
                                     help="Count of Announcement's")
