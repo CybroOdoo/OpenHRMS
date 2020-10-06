@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="resign_employee_id" model="hr.employee">
+              <field name="name">Sreejith Sasidharan</field>
+              <field name="job_title">Odoo developer</field>
+              <field name="work_location">Building 1, Third Floor</field>
+              <field name="work_phone">(376)-352-741</field>
+              <field name="work_email">sreejith@example.com</field>
+              <field name="image_1920" type="base64"
+                     file="hr_resignation/static/image/resign_employee_id.jpeg"/>
+        </record>
+
+        <record id="resignation_one" model="hr.resignation">
+            <field name="employee_id" ref="resign_employee_id"/>
+            <field name="joined_date">2015-03-02</field>
+            <field name="expected_revealing_date">2020-03-22</field>
+            <field name="reason">Career Change</field>
+        </record>
+
+    </data>
+</odoo>

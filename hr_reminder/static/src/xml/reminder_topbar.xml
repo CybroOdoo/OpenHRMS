@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="reminder_menu">
+
+        <li class="o_mail_navbar_item">
+
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#" title="Reminders">
+                <i class="fa fa-bell"/> <span class="o_notification_counter"/></a>
+            <ul class="o_mail_navbar_dropdown dropdown-menu" role="menu">
+                <li class="o_mail_navbar_dropdown_top">
+<!--                    <t t-if="values">-->
+                    <t t-if="widget.all_reminder">
+                        <h2>all reminder</h2>
+                    </t>
+                    <t t-esc='widget.all_reminder[1]'/>
+<!--                    <t t-foreach='widget.all_reminder[1]' t-as='val'>-->
+<!--                              <a class="reminder"><t t-esc="val['name']"/></a>-->
+<!--                            </t>-->
+                    <div>
+                        <li></li>
+<!--                        <t t-esc='widget.all_reminder[1]'/>-->
+
+                       <span class='label'>Reminders</span>
+<!--                        <ul id="select_a_reminder" class="reminders_list">-->
+                            <t t-foreach='widget.all_reminder' t-as='val'>
+                                <li><t t-esc="val['1']"/></li>
+                            </t>
+<!--                        </ul>-->
+                        <select id="reminder_select" name="Reminder" class='detail-client-address-country'>
+
+                                <t t-if="values">
+                                    <h4>value fnd</h4>
+<!--                            <t t-foreach='values' t-as='val'>-->
+                                    <t t-foreach='widget.all_reminder' t-as='val'>
+
+                                <option class="dropdown-options" t-att-value='val' >
+                                    <t t-esc='val'/>
+                                </option>
+                            </t></t>
+                        </select>
+<!--                        <button class="buttonGet">Get</button>-->
+                    </div>
+<!--                    </t>-->
+                </li>
+
+            </ul>
+        </li>
+    </t>
+    </templates>

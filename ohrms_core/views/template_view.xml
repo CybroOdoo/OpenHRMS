@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/ohrms_core/static/src/js/data.js"/>
+            <script type="application/javascript" src="/ohrms_core/static/src/js/appMenu.js"/>
+        </xpath>
+    </template>
+    <template id="assets_backend_css" inherit_id="web.assets_backend">
+        <xpath expr="//link" position="before">
+            <link rel="stylesheet" type="text/css" href="/ohrms_core/static/src/css/menu_order_alphabets.css"/>
+        </xpath>
+    </template>
+</odoo>
