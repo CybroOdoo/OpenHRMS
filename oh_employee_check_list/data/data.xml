@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <record id="entry_document1" model="employee.checklist">-->
+    <!--        <field name="name">Education Certificate</field>-->
+    <!--        <field name="document_type">entry</field>-->
+    <!--    </record>-->
+    <!--    <record id="entry_document2" model="employee.checklist">-->
+    <!--        <field name="name">Salary Certificate</field>-->
+    <!--        <field name="document_type">entry</field>-->
+    <!--    </record>-->
+    <!--    <record id="entry_document3" model="employee.checklist">-->
+    <!--        <field name="name">Experience Certificate</field>-->
+    <!--        <field name="document_type">entry</field>-->
+    <!--    </record>-->
+    <!--    <record id="exit_document1" model="employee.checklist">-->
+    <!--        <field name="name">Experience Certificate</field>-->
+    <!--        <field name="document_type">exit</field>-->
+    <!--    </record>-->
+    <!--    <record id="exit_document2" model="employee.checklist">-->
+    <!--        <field name="name">Salary Certificate</field>-->
+    <!--        <field name="document_type">exit</field>-->
+    <!--    </record>-->
+
+    <record id="checklist_activity_type" model="hr.plan.activity.type">
+        <field name="summary">Checklists</field>
+        <field name="responsible">manager</field>
+    </record>
+
+    <record id="hr.onboarding_plan" model='hr.plan'>
+        <field name="name">Onboarding</field>
+        <field name="plan_activity_type_ids" eval="[(6, 0, [
+                ref('hr.onboarding_setup_it_materials'),
+                ref('hr.onboarding_plan_training'),
+                ref('hr.onboarding_training'),
+                ref('oh_employee_check_list.checklist_activity_type')
+                ])]"/>
+    </record>
+
+    <record id="hr.offboarding_plan" model='hr.plan'>
+        <field name="name">Offboarding</field>
+        <field name="plan_activity_type_ids" eval="[(6, 0, [
+                ref('hr.onboarding_setup_it_materials'),
+                ref('hr.offboarding_take_back_hr_materials'),
+                ref('oh_employee_check_list.checklist_activity_type')
+                ])]"/>
+    </record>
+</odoo>
