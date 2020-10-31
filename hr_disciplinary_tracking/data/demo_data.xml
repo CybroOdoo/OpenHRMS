@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="department_one" model="hr.department">
+            <field name="name">Marketing</field>
+        </record>
+
+        <record id="employee_discplinary" model="hr.employee">
+              <field name="name">Jack Mark Rose </field>
+              <field name="job_title">Sales Manager</field>
+              <field name="work_location">Building 1, Third Floor</field>
+              <field name="work_phone">(376)-3852-7987</field>
+              <field name="work_email">jack@example.com</field>
+              <field name="image_1920" type="base64" file="hr_disciplinary_tracking/static/image/employee_image.jpg"/>
+        </record>
+
+        <record id="discipline_categories_one" model="discipline.category">
+            <field name="name">Violation of Company Rules</field>
+            <field name="code">101</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+
+        <record id="discipline_categories_two" model="discipline.category">
+            <field name="name">Mis-behaviour to Co-workers</field>
+            <field name="code">102</field>
+            <field name="category_type">action</field>
+        </record>
+
+        <record id="discipline_categories_three" model="discipline.category">
+            <field name="name">Damage to company properties</field>
+            <field name="code">103</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+
+        <record id="disciplinary_action_one" model="disciplinary.action">
+            <field name="employee_name" ref="employee_discplinary"/>
+            <field name="department_name" ref="department_one"/>
+            <field name="joined_date">2020-03-02</field>
+            <field name="discipline_reason" ref="discipline_categories_one"/>
+        </record>
+
+
+    </data>
+</odoo>
