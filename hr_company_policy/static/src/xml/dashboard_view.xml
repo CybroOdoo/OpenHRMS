@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="LoginEmployeeDetails">
+        <t t-jquery="div.employee-mobile" t-operation="after">
+            <div class="col-md-2 col-sm-2">
+                <button type="button" class="btn btn-third oe_company_policy" id="company_policy">
+                    Company Policy
+                </button>
+            </div>
+<!--            <div class="col-md-2 col-sm-2">-->
+<!--                <button type="button" data-toggle="modal" data-target=".company_info">-->
+<!--                    Company policy-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div role="dialog" class="modal fade company_info">-->
+<!--                <div class="employee-country">-->
+<!--                     <t t-if="widget.login_employee['company_info']">-->
+<!--                        <p class="text-light"><t t-esc="widget.login_employee['company_info']"/></p>-->
+<!--                        <p class="text-light">Company Policy</p>-->
+<!--                     </t>-->
+<!--                    <t t-if="!widget.login_employee['company_info']">-->
+<!--                            <p class="text-light" style="color:#b6b6b6 !important">Company Policy</p>-->
+<!--                            <p style="color:#b6b6b6 !important">- - -</p>-->
+<!--                        </t>-->
+<!--                </div>-->
+<!--            </div>-->
+        </t>
+    </t>
+</templates>

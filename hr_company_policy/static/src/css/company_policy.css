@@ -1,0 +1,16 @@
+.oe_company_policy{
+
+    margin-left: 40px;
+    background: #3399ff;
+
+}
+.btn-third:hover {
+
+    color: black;
+    background-color:white;
+    border-color:black;
+
+}
+.dummy{
+    height:60px;
+}
