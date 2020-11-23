@@ -139,12 +139,16 @@ var HrDashboard = AbstractAction.extend({
                     self.update_cp();
                     self.render_dashboards();
                     self.render_graphs();
+                    session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                        if(has_group == false){
+                            $('.employee_dashboard_main').css("display", "none");
+                        }
+                    });
                     self.$el.parent().addClass('oe_background_grey');
                 });
             },
 
     fetch_data: function() {
-        console.log("FETCH_DATE FUNCTION")
         var self = this;
         var def1 =  this._rpc({
                 model: 'hr.employee',
@@ -197,6 +201,11 @@ var HrDashboard = AbstractAction.extend({
             self.$('.o_hr_dashboard').empty();
             self.render_dashboards();
             self.render_graphs();
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                if(has_group == false){
+                    $('.employee_dashboard_main').css("display", "none");
+                }
+            });
         });
     },
 
