@@ -64,6 +64,11 @@ var HrDashboard = AbstractAction.extend({
             self.update_cp();
             self.render_dashboards();
             self.render_graphs();
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                if(has_group == false){
+                    $('.employee_dashboard_main').css("display", "none");
+                }
+            });
             self.$el.parent().addClass('oe_background_grey');
         });
     },
@@ -120,6 +125,11 @@ var HrDashboard = AbstractAction.extend({
             self.$('.o_hr_dashboard').empty();
             self.render_dashboards();
             self.render_graphs();
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                if(has_group == false){
+                    $('.employee_dashboard_main').css("display", "none");
+                }
+            });
         });
     },
 
