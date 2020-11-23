@@ -65,6 +65,11 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
             self.update_cp();
             self.render_dashboards();
             self.render_graphs();
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                if(has_group == false){
+                    $('.employee_dashboard_main').css("display", "none");
+                }
+            });
             self.$el.parent().addClass('oe_background_grey');
         });
     },
@@ -92,6 +97,7 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
     render_dashboards: function() {
         var self = this;
         if (this.login_employee){
+            console.log("dassssssssssss", this.dashboards_templates)
             _.each(this.dashboards_templates, function(template) {
                 self.$('.o_hr_dashboard').append(QWeb.render(template, {widget: self}));
             });
@@ -120,6 +126,11 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
             self.$('.o_hr_dashboard').empty();
             self.render_dashboards();
             self.render_graphs();
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
+                if(has_group == false){
+                    $('.employee_dashboard_main').css("display", "none");
+                }
+            });
         });
     },
 
