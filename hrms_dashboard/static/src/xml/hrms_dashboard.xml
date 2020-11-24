@@ -329,7 +329,7 @@
                             <div class="text-color">
                                 <div class="">
                                 <div class="media">
-                                <a href="#" style="float: left;padding-right: 6%;">
+                                <a href="#" style="float: left;padding-right: 6%; pointer-events: none; cursor: default;">
                                 <img class="align-self-center rounded-circle mr-3" alt=""
                                     t-att-src="widget.get_emp_image_url(employee[0])"/>
                                 </a>
