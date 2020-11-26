@@ -339,7 +339,7 @@ var HrDashboard = AbstractAction.extend({
             var self = this;
             e.stopPropagation();
             e.preventDefault();
-            session.user_has_group('hr.group_hr_user').then(function(has_group){
+            session.user_has_group('hr.group_hr_manager').then(function(has_group){
                 if(has_group){
                     var options = {
                         on_reverse_breadcrumb: self.on_reverse_breadcrumb,
