@@ -25,6 +25,15 @@ class Employee(models.Model):
     birthday = fields.Date('Date of Birth', groups="base.group_user", help="Birthday")
 
     @api.model
+    def check_user_group(self):
+        uid = request.session.uid
+        user = self.env['res.users'].sudo().search([('id', '=', uid)], limit=1)
+        if user.has_group('hr.group_hr_manager'):
+            return True
+        else:
+            return False
+
+    @api.model
     def get_user_employee_details(self):
         uid = request.session.uid
         employee = self.env['hr.employee'].sudo().search_read([('user_id', '=', uid)], limit=1)

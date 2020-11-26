@@ -45,37 +45,37 @@ var HrDashboard = AbstractAction.extend({
         this.employee_birthday = [];
         this.upcoming_events = [];
         this.announcements = [];
-    console.log("INIT FUNCTION 1")
     },
 
     willStart: function() {
-        console.log("WILLSTART FUNCTION")
         var self = this;
-//        return $.when(ajax.loadLibs(this), this._super()).then(function() {console.log("test")
             return self.fetch_data();
-//        });
     },
 
     start: function() {
-        console.log("START FUNCTION")
         var self = this;
         this.set("title", 'Dashboard');
         return this._super().then(function() {
             self.update_cp();
             self.render_dashboards();
             self.render_graphs();
-            session.user_has_group('hr.group_hr_manager').then(function(has_group){
-                if(has_group == false){
-                    $('.employee_dashboard_main').css("display", "none");
-                }
-            });
             self.$el.parent().addClass('oe_background_grey');
         });
     },
 
     fetch_data: function() {
-        console.log("FETCH_DATE FUNCTION")
         var self = this;
+        var def0 =  self._rpc({
+                    model: 'hr.employee',
+                    method: 'check_user_group'
+            }).then(function(result) {
+                if (result == true){
+                    self.is_manager = true;
+                }
+                else{
+                    self.is_manager = false;
+                }
+            });
         var def1 =  this._rpc({
                 model: 'hr.employee',
                 method: 'get_user_employee_details'
@@ -91,18 +91,21 @@ var HrDashboard = AbstractAction.extend({
             self.upcoming_events = res['event'];
             self.announcements = res['announcement'];
         });
-        return $.when(def1, def2);
+        return $.when(def0, def1, def2);
     },
 
-    render_dashboards: function() {console.log("RENDER_DASHBOARD")
+    render_dashboards: function() {
         var self = this;
         if (this.login_employee){
-            _.each(this.dashboards_templates, function(template) {
+            var templates = []
+            if( self.is_manager == true){templates = ['LoginEmployeeDetails','ManagerDashboard', 'EmployeeDashboard'];}
+            else{ templates = ['LoginEmployeeDetails', 'EmployeeDashboard'];}
+            _.each(templates, function(template) {
                 self.$('.o_hr_dashboard').append(QWeb.render(template, {widget: self}));
             });
-            }
+        }
         else{
-            self.$('.o_hr_dashboard').append(QWeb.render('EmployeeWarning', {widget: self}));
+                self.$('.o_hr_dashboard').append(QWeb.render('EmployeeWarning', {widget: self}));
             }
     },
 
@@ -125,11 +128,6 @@ var HrDashboard = AbstractAction.extend({
             self.$('.o_hr_dashboard').empty();
             self.render_dashboards();
             self.render_graphs();
-            session.user_has_group('hr.group_hr_manager').then(function(has_group){
-                if(has_group == false){
-                    $('.employee_dashboard_main').css("display", "none");
-                }
-            });
         });
     },
 
@@ -142,7 +140,7 @@ var HrDashboard = AbstractAction.extend({
     },
 
     get_emp_image_url: function(employee){
-        return window.location.origin + '/web/image?model=hr.employee&field=image&id='+employee;
+        return window.location.origin + '/web/image?model=hr.employee&field=image_1920&id='+employee;
     },
 
     update_attendance: function () {
@@ -207,7 +205,7 @@ var HrDashboard = AbstractAction.extend({
         var self = this;
         e.stopPropagation();
         e.preventDefault();
-        session.user_has_group('hr.group_hr_user').then(function(has_group){
+        session.user_has_group('hr.group_hr_manager').then(function(has_group){
             if(has_group){
                 var options = {
                     on_reverse_breadcrumb: self.on_reverse_breadcrumb,
