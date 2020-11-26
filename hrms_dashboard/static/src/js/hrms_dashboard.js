@@ -65,17 +65,23 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
             self.update_cp();
             self.render_dashboards();
             self.render_graphs();
-            session.user_has_group('hr.group_hr_manager').then(function(has_group){
-                if(has_group == false){
-                    $('.employee_dashboard_main').css("display", "none");
-                }
-            });
             self.$el.parent().addClass('oe_background_grey');
         });
     },
 
     fetch_data: function() {
         var self = this;
+        var def0 =  self._rpc({
+                model: 'hr.employee',
+                method: 'check_user_group'
+        }).then(function(result) {
+            if (result == true){
+                self.is_manager = true;
+            }
+            else{
+                self.is_manager = false;
+            }
+        });
         var def1 =  this._rpc({
                 model: 'hr.employee',
                 method: 'get_user_employee_details'
@@ -91,19 +97,21 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
             self.upcoming_events = res['event'];
             self.announcements = res['announcement'];
         });
-        return $.when(def1, def2);
+        return $.when(def0, def1, def2);
     },
 
     render_dashboards: function() {
         var self = this;
         if (this.login_employee){
-            console.log("dassssssssssss", this.dashboards_templates)
-            _.each(this.dashboards_templates, function(template) {
+            var templates = []
+            if( self.is_manager == true){templates = ['LoginEmployeeDetails','ManagerDashboard', 'EmployeeDashboard'];}
+            else{ templates = ['LoginEmployeeDetails', 'EmployeeDashboard'];}
+            _.each(templates, function(template) {
                 self.$('.o_hr_dashboard').append(QWeb.render(template, {widget: self}));
             });
-            }
+        }
         else{
-            self.$('.o_hr_dashboard').append(QWeb.render('EmployeeWarning', {widget: self}));
+                self.$('.o_hr_dashboard').append(QWeb.render('EmployeeWarning', {widget: self}));
             }
     },
 
@@ -126,11 +134,6 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
             self.$('.o_hr_dashboard').empty();
             self.render_dashboards();
             self.render_graphs();
-            session.user_has_group('hr.group_hr_manager').then(function(has_group){
-                if(has_group == false){
-                    $('.employee_dashboard_main').css("display", "none");
-                }
-            });
         });
     },
 
@@ -198,7 +201,7 @@ var HrDashboard = AbstractAction.extend(ControlPanelMixin, {
         var self = this;
         e.stopPropagation();
         e.preventDefault();
-        session.user_has_group('hr.group_hr_user').then(function(has_group){
+        session.user_has_group('hr.group_hr_manager').then(function(has_group){
             if(has_group){
                 var options = {
                     on_reverse_breadcrumb: self.on_reverse_breadcrumb,
