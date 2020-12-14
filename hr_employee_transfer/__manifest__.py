@@ -25,6 +25,7 @@
     'name': 'Open HRMS Branch Transfer',
     'version': '14.0.1.0.0',
     'summary': 'Employee transfer between branches',
+    'live_test_url': 'https://www.youtube.com/watch?v=gwZ0JpGn-Lw&feature=youtu.be',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions',
     'maintainer': 'Cybrosys Techno Solutions',
