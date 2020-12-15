@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="employee_appraisal" model="hr.employee">
+              <field name="name">Ronnie Chals</field>
+              <field name="job_title">Chief Medical Officer</field>
+              <field name="work_location">Building 1, Third Floor</field>
+              <field name="work_phone">(376)-3852-7863</field>
+              <field name="work_email">chals@example.com</field>
+              <field name="image_1920" type="base64" file="oh_appraisal/static/image/employee_resign.jpeg"/>
+        </record>
+
+        <record id="appraisal" model="hr.appraisal">
+            <field name="emp_id" ref="employee_appraisal"/>
+            <field name="appraisal_deadline">2020-03-22</field>
+            <field name="hr_emp">True</field>
+        </record>
+
+
+    </data>
+</odoo>
