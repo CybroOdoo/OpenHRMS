@@ -25,6 +25,7 @@
     'version': '14.0.1.0.0',
     'summary': """Managing Official Announcements""",
     'description': 'This module helps you to manage hr official announcements',
+    'live_test_url': 'https://www.youtube.com/watch?v=4gy3Jqn46SQ&feature=youtu.be',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
