@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_flight_ticket_user,hr.flight.ticket.user,model_hr_flight_ticket,hr_holidays.group_hr_holidays_user,1,1,1,1
+access_hr_flight_ticket_employee,hr.flight.ticket.employee,model_hr_flight_ticket,base.group_user,1,1,1,1
+access_pending_task_user,pending.task.user,model_pending_task,hr_holidays.group_hr_holidays_user,1,1,1,1
+access_pending_task_employee,pending.task.employee,model_pending_task,base.group_user,1,1,1,1
+access_account_move,account.move.hr_manager,account.model_account_move,hr_holidays.group_hr_holidays_manager,1,0,0,0
+access_account_move_line,account.move.line.hr_manager,account.model_account_move_line,hr_holidays.group_hr_holidays_manager,1,0,0,0
+access_task_reassign_user,task.reassign.user,model_task_reassign,hr_holidays.group_hr_holidays_user,1,1,1,1
+access_task_group_user,task.reassign.group.user,model_task_reassign,base.group_user,1,1,1,1
+acccess_task_manager,task.reassign.manager,model_task_reassign,hr_holidays.group_hr_holidays_manager,1,1,1,1
+
