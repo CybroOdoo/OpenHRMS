@@ -23,6 +23,7 @@
     'name': 'Open HRMS Disciplinary Tracking',
     'version': '14.0.1.0.0',
     'summary': """Employee Disciplinary Tracking Management""",
+    'live_test_url': 'https://youtu.be/LFuw2iY4Deg',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
