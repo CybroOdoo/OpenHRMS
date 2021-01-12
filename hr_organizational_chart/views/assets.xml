@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/hr_organizational_chart/static/src/js/organizational_view.js"/>
+        </xpath>
+    </template>
+    <template id="assets_backend_scss" inherit_id="web.assets_backend">
+        <xpath expr="//link" position="before">
+            <link rel="stylesheet" type="text/scss" href="/hr_organizational_chart/static/src/scss/chart_view.scss"/>
+        </xpath>
+    </template>
+</odoo>
