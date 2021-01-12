@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="employee_department_history">
+            <field name="name">departmenthistory.tree</field>
+            <field name="model">department.history</field>
+<!--            <field name="view_mode">tree</field>-->
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id" invisible="True" />
+                    <field name ="employee_name" invisible="True"/>
+                    <field name="changed_field"/>
+                    <field name="updated_date"/>
+                    <field name="current_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="employee_timesheet_history">
+            <field name="name">timesheetcost.tree</field>
+            <field name="model">timesheet.cost</field>
+<!--            <field name="view_mode">tree</field>-->
+            <field name="arch" type="xml">
+                <tree string="timesheet_cost">
+                    <field name="employee_id" invisible="True" />
+                    <field name ="employee_name" invisible="True"/>
+                    <field name="updated_date"/>
+                    <field name="current_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="employee_salary_history">
+            <field name="name">salaryhistory.tree</field>
+            <field name="model">salary.history</field>
+<!--            <field name="view_mode">tree</field>-->
+            <field name="arch" type="xml">
+                <tree string="salary_history">
+                    <field name="employee_id" invisible="True"/>
+                    <field name ="employee_name" invisible="True"/>
+                    <field name="updated_date"/>
+                    <field name="current_value"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="employee_contract_history">
+            <field name="name">contracthistory.tree</field>
+            <field name="model">contract.history</field>
+<!--            <field name="view_mode">tree</field>-->
+            <field name="arch" type="xml">
+                <tree string="contract">
+                    <field name="employee_id" invisible="True"/>
+                    <field name ="employee_name" invisible="True"/>
+                    <field name="updated_date"/>
+                    <field name="changed_field"/>
+                    <field name="current_value"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
