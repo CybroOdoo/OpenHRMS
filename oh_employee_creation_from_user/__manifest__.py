@@ -23,9 +23,11 @@
     'name': 'Open HRMS Employees From User',
     'version': '14.0.1.0.0',
     'summary': 'Automatically Creates Employee While Creating User',
+    'live_test_url': 'https://youtu.be/gz3Vi3Wn0E8',
     'description': 'This module helps you to create employees automatically while creating users',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
+
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['base', 'hr'],

@@ -25,6 +25,7 @@
     'version': '14.0.1.0.0',
     'summary': """Easily create, manage, and track employee shift schedules.""",
     'description': """Easily create, manage, and track employee shift schedules.""",
+    'live_test_url': 'https://youtu.be/o580wqD9Nig',
     'category': 'Human Resource',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
