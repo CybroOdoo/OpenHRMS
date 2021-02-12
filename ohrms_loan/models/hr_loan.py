@@ -104,7 +104,7 @@ class HrLoan(models.Model):
         for loan in self:
             if loan.state not in ('draft', 'cancel'):
                 raise UserError(
-                    'You cannot delete a loan which is not in draft or cancelled state')
+                    _('You cannot delete a loan which is not in draft or cancelled state'))
         return super(HrLoan, self).unlink()
 
     @api.multi
