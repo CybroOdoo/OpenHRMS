@@ -15,6 +15,9 @@
             <xpath expr="//field[@name='journal_id']" position="attributes">
                     <attribute name="invisible">0</attribute>
             </xpath>
+            <xpath expr="//field[@name='loan_lines']/tree" position="inside">
+              <field name="move_id" invisible="True"/>
+            </xpath>
         </field>
     </record>
 

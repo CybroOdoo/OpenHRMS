@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ohrms_loan_accounting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-13 21:19+0000\n"
+"PO-Revision-Date: 2019-06-13 16:20-0500\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_CO\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. module: ohrms_loan_accounting
+#: model:ir.ui.view,arch_db:ohrms_loan_accounting.view_account_config_inherit
+msgid "Allows you to Add approval from accounting department."
+msgstr "Te permite agregar aprobaciones desde la cuenta del departamento."
+
+#. module: ohrms_loan_accounting
+#: model:ir.model.fields,field_description:ohrms_loan_accounting.field_app_theme_config_settings_loan_approve
+#: model:ir.model.fields,field_description:ohrms_loan_accounting.field_res_config_settings_loan_approve
+msgid "Approval from Accounting Department"
+msgstr "Aprobar desde la cuenta del departamento"
+
+#. module: ohrms_loan_accounting
+#: model:ir.model.fields,field_description:ohrms_loan_accounting.field_hr_loan_line_move_id
+msgid "Asiento contable"
+msgstr "Asiento contable"
+
+#. module: ohrms_loan_accounting
+#: model:ir.ui.view,arch_db:ohrms_loan_accounting.view_account_config_inherit
+msgid "Enable Approval from Accounting Department"
+msgstr "Habilitar aprobación desde la cuenta del departamento"
+
+#. module: ohrms_loan_accounting
+#: model:ir.model,name:ohrms_loan_accounting.model_hr_loan_line
+msgid "Installment Line"
+msgstr "Lineas de cuotas"
+
+#. module: ohrms_loan_accounting
+#: model:ir.ui.view,arch_db:ohrms_loan_accounting.view_account_config_inherit
+msgid "Loan Approval"
+msgstr "Aprobar prestamo"
+
+#. module: ohrms_loan_accounting
+#: model:ir.model.fields,help:ohrms_loan_accounting.field_app_theme_config_settings_loan_approve
+#: model:ir.model.fields,help:ohrms_loan_accounting.field_res_config_settings_loan_approve
+msgid "Loan Approval from account manager"
+msgstr "Aprobar préstamo desde la cuenta del departamento"
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:55
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:102
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:151
+#, python-format
+msgid "Loan For"
+msgstr "Prestamo de"
+
+#. module: ohrms_loan_accounting
+#: model:ir.model,name:ohrms_loan_accounting.model_hr_loan
+msgid "Loan Request"
+msgstr "Solicitud de prestamo"
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:127
+#, python-format
+msgid "Loan Request must be approved"
+msgstr "El préstamo debe ser aprobado"
+
+#. module: ohrms_loan_accounting
+#: model:ir.model,name:ohrms_loan_accounting.model_hr_payslip
+msgid "Pay Slip"
+msgstr "Nómina"
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:18
+#, python-format
+msgid "You must Define a contract for employee."
+msgstr "Debe definir un contrato para el empleado."
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:74
+#, python-format
+msgid "You must compute Loan Request before Approved"
+msgstr "Debe calcular el préstamo antes de ser aprobado"
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:27
+#, python-format
+msgid "You must compute Loan Request before Approved."
+msgstr "Debe calcular el préstamo antes de ser aprobado."
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:20
+#, python-format
+msgid "You must compute installment before Approved."
+msgstr "Debe calcular las cuotas antes de aprobarlo."
+
+#. module: ohrms_loan_accounting
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:25
+#: code:addons/ohrms_loan_accounting/models/hr_loan_acc.py:72
+#, python-format
+msgid "You must enter employee account & Treasury account and journal to approve."
+msgstr "Debe ingresar una Cuenta Contable para el empleado y un Diario para aprobarlo."
+
+#. module: ohrms_loan_accounting
+#: model:ir.model,name:ohrms_loan_accounting.model_res_config_settings
+msgid "res.config.settings"
+msgstr "res.config.settings"

@@ -41,8 +41,8 @@ class HrLoan(models.Model):
     installment = fields.Integer(string="No Of Installments", default=1)
     payment_date = fields.Date(string="Payment Start Date", required=True, default=fields.Date.today())
     loan_lines = fields.One2many('hr.loan.line', 'loan_id', string="Loan Line", index=True)
-    emp_account_id = fields.Many2one('account.account', string="Loan Account")
-    treasury_account_id = fields.Many2one('account.account', string="Treasury Account")
+    emp_account_id = fields.Many2one('account.account', string="Loan Account", help="Debit account")
+    treasury_account_id = fields.Many2one('account.account', string="Treasury Account", help="Credit account")
     journal_id = fields.Many2one('account.journal', string="Journal")
     company_id = fields.Many2one('res.company', 'Company', readonly=True,
                                  default=lambda self: self.env.user.company_id,
@@ -149,5 +149,3 @@ class HrEmployee(models.Model):
         self.loan_count = self.env['hr.loan'].search_count([('employee_id', '=', self.id)])
 
     loan_count = fields.Integer(string="Loan Count", compute='_compute_employee_loans')
-
-

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
-from odoo import models, api,_
+from odoo import models, api,_, fields
 from odoo.exceptions import UserError
 
 
@@ -52,7 +52,7 @@ class HrLoanAcc(models.Model):
                     'loan_id': loan.id,
                 }
                 vals = {
-                    'name': 'Loan For' + ' ' + loan_name,
+                    'name': _('Loan For') + ' ' + loan_name,
                     'narration': loan_name,
                     'ref': reference,
                     'journal_id': journal_id,
@@ -99,7 +99,7 @@ class HrLoanAcc(models.Model):
                 'loan_id': loan.id,
             }
             vals = {
-                'name': 'Loan For' + ' ' + loan_name,
+                'name': _('Loan For') + ' ' + loan_name,
                 'narration': loan_name,
                 'ref': reference,
                 'journal_id': journal_id,
@@ -114,6 +114,8 @@ class HrLoanAcc(models.Model):
 
 class HrLoanLineAcc(models.Model):
     _inherit = "hr.loan.line"
+
+    move_id = fields.Many2one('account.move', string="Asiento contable")
 
     @api.one
     def action_paid_amount(self):
@@ -146,14 +148,16 @@ class HrLoanLineAcc(models.Model):
                 'credit': amount > 0.0 and amount or 0.0,
             }
             vals = {
-                'name': 'Loan For' + ' ' + loan_name,
+                'name': _('Loan For') + ' ' + loan_name,
                 'narration': loan_name,
                 'ref': reference,
                 'journal_id': journal_id,
                 'date': timenow,
                 'line_ids': [(0, 0, debit_vals), (0, 0, credit_vals)]
             }
+
             move = self.env['account.move'].create(vals)
+            line.move_id = move.id
             move.post()
         return True
 
