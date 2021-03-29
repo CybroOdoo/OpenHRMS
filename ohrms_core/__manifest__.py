@@ -30,7 +30,7 @@
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
-    'live_test_url': 'https://youtube.com/playlist?list=PLeJtXzTubzj-wDm0a0hxMVwARk31n41yw',
+    'live_test_url': 'https://bit.ly/3vXgU6D',
     'website': "https://www.openhrms.com",
     'depends': ['web',
                 'hr',
