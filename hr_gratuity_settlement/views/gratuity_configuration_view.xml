@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="gratuity_configuration_tree_view" model="ir.ui.view">
+            <field name="name">gratuity.configuration.tree.view</field>
+            <field name="model">gratuity.configuration</field>
+            <field name="arch" type="xml">
+                <tree string="Gratuity Duration">
+                    <field name="name"/>
+                    <field name="from_year"/>
+                    <field name="to_year"/>
+                </tree>
+            </field>
+        </record>
+        <record id="gratuity_configuration_form_view" model="ir.ui.view">
+            <field name="name">gratuity.configuration.form.view</field>
+            <field name="model">gratuity.configuration</field>
+            <field name="arch" type="xml">
+                <form string="Gratuity Duration">
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <field name="yr_from_flag" invisible="1"/>
+                        <field name="yr_to_flag" invisible="1"/>
+                        <widget name="web_ribbon" text="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group name="duration_details" string="Duration Configuration">
+                            <group>
+                                <field name="from_year" attrs="{'required': [('yr_from_flag', '=', True)]}"/>
+                            </group>
+                            <group>
+                                <field name="to_year" attrs="{'required': [('yr_to_flag', '=', True)]}"/>
+                            </group>
+                        </group>
+                        <group string="Computations Details">
+                            <group>
+                                <field name="employee_working_days"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>
+                                <field name="employee_daily_wage_days"/>
+                            </group>
+                        </group>
+                        <group>
+                            <div class="o_row o_row_readonly">
+                                <span class="oe_inline">Employee is entitled to</span>
+                                <field name="percentage" class="oe_inline"/>
+                                <span class="oe_inline">of the</span>
+                                <field name="employee_working_days" class="oe_inline"/>
+                                <span class="oe_inline">-days gratuity pay.</span>
+                            </div>
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
