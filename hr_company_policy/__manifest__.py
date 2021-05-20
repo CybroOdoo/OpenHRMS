@@ -27,7 +27,7 @@
     'summary': 'Manage Company Policies',
     'description': 'OpenHRMS Company Policies, hrms, policies',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'maintainer': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

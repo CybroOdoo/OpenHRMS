@@ -27,7 +27,7 @@
     'description': """This module is used to remembering the employee's entry and exit progress.""",
     'live_test_url': 'https://www.youtube.com/watch?v=wtYRhGjhDKE&feature=youtu.be',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
     'depends': ['base', 'oh_employee_documents_expiry', 'mail', 'hr'],

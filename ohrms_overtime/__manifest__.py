@@ -28,7 +28,7 @@
         Helps you to manage Employee Overtime.
         """,
     'category': 'Generic Modules/Human Resources',
-    'author': "Cybrosys Techno Solutions",
+    'author': "Cybrosys Techno Solutions,Open HRMS",
     'live_test_url': 'https://youtu.be/lOQCTCxrUKs',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',

@@ -27,7 +27,7 @@
     'summary': """Employee Insurance Management for Open HRMS.""",
     'description': """Manages insurance amounts for employees to be deducted from salary""",
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'live_test_url': 'https://youtu.be/OBwVroUPspw',
     'maintainer': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',

@@ -25,7 +25,7 @@
     'version': '14.0.1.0.0',
     'summary': 'Handle the resignation process of the employee',
     'live_test_url': 'https://www.youtube.com/watch?v=VuFWGXAdriU&feature=youtu.be',
-    'author': 'Cybrosys Techno solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'depends': ['hr', 'hr_employee_updation', 'mail'],

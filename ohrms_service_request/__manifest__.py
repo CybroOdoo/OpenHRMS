@@ -26,7 +26,7 @@
     'summary': """For Requesting Service""",
     'description': """Requesting Services""",
     'category': 'Human Resource',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

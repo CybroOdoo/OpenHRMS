@@ -5,7 +5,7 @@
     'description': """Assigning Attendance for the Employees with Onsight Jobs through the requests by Employees """,
     'live_test_url': 'https://youtu.be/5GwbWciCJDw',
     'category': 'Human Resource',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

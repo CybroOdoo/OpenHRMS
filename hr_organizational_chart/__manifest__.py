@@ -26,7 +26,7 @@
     'version': '14.0.1.0.0',
     'summary': 'HR Employees organizational chart',
     'description': 'HR Employees organizational chart',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'category': 'Generic Modules/Human Resources',

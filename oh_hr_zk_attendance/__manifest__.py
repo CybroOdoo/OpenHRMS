@@ -26,7 +26,7 @@
     'description': 'This module integrates Odoo with the biometric device(Model: ZKteco uFace 202)',
     'category': 'Generic Modules/Human Resources',
      'live_test_url': 'https://youtu.be/RHSHHU7nzTo',
-    'author': 'Cybrosys Techno Solutions, Mostafa Shokiel',
+    'author': 'Cybrosys Techno Solutions, Mostafa Shokiel,Open HRMS',
     'live_test_url': 'https://youtu.be/RHSHHU7nzTo',
     'company': 'Cybrosys Techno Solutions',
     'website': "http://www.openhrms.com",
