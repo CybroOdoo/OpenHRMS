@@ -26,7 +26,7 @@
     'summary': """Assigning Attendance for the Employees with Onsite Jobs""",
     'description': """Assigning Attendance for the Employees with Onsite Jobs through the requests by Employees """,
     'category': 'Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

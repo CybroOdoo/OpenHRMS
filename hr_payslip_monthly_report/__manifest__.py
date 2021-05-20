@@ -25,7 +25,7 @@
     'summary': """Payslip Pivot View Report.""",
     'description': """Payslip monthly report.
     This module gives a pivot view for the HR managers. they can see all the 'NET' amount of payslips in all states""",
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.cybrosys.com',

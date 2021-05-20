@@ -26,7 +26,7 @@
     'summary': """Curtain Raiser of Open HRMS.""",
     'description': """Open HRMS all set in new colour theme of blues and whites totaling to a new experience""",
     'category': 'Themes',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

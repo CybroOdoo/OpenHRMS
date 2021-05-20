@@ -25,7 +25,7 @@
     'version': '11.0.1.0.0',
     'summary': 'Wps Payroll System For UAE',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'maintainer': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

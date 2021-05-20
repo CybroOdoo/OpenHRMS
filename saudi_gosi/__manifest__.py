@@ -4,7 +4,7 @@
     'summary': """GOSI Contribution For Saudi Employees,Added Company Contribution hsitory in GOSI Register""",
     'description': """GOSI Contribution For Saudi Employees""",
     'category': 'Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
