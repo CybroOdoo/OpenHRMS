@@ -25,7 +25,7 @@
     'version': '10.0.1.0.0',
     'summary': """Manage Employee Vacation""",
     'description': """HR Vacation management""",
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'category': 'Generic Modules/Human Resources',

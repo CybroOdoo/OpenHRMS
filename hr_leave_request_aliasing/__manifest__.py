@@ -26,7 +26,7 @@
     'summary': """Allows You To Create Leave Request Automatically From Incoming Mails""",
     'description': 'This module allows you to create leave request directly from incoming mails.',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['base_setup', 'hr_holidays'],

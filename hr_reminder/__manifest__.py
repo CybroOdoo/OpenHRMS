@@ -25,7 +25,7 @@
     'version': '10.0.2.0.0',
     'category': 'Extra Tools',
     'summary': 'HR Reminder For OHRMS',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['base', 'hr'],

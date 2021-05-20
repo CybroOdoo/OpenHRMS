@@ -26,7 +26,7 @@
     'summary': """Enables Multi-Company""",
     'description': 'This module enables multi company features',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['base', 'hr_contract', 'hr_payroll', 'hr_attendance', 'hr_employee_transfer'],
