@@ -26,7 +26,7 @@
     'summary': """Easily create, manage, and track employee shift schedules.""",
     'description': """Easily create, manage, and track employee shift schedules.""",
     'category': 'Human Resource',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

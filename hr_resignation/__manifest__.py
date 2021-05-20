@@ -24,7 +24,7 @@
     'name': 'Open HRMS Resignation',
     'version': '13.0.2.0.0',
     'summary': 'Handle the resignation process of the employee',
-    'author': 'Cybrosys Techno solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'depends': ['hr', 'hr_employee_updation', 'mail'],

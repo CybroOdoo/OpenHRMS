@@ -24,7 +24,7 @@
     'summary': """Verify the background details of an Employee """,
     'category': 'Generic Modules/Human Resources',
     'description': 'Manage the employees background verification Process employee varification ',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",

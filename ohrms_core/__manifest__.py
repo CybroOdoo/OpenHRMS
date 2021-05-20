@@ -28,7 +28,7 @@
                 Dashboard, Employees, Employee Document, Resignation, Salary Advance, Loan Management, Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, Shift Management, Employee History,
                 Branch Transfer, Employee Appraisal,Biometric Device, openhrms, hrms, Announcements, Insurance Management, Vacation Management,Employee Appreciations, Asset Custody, Employee Checklist, Entry and Exit Checklist, Disciplinary Actions, Attrition Rate, Document Expiry, Visa Expiry, Law Suit Management, Employee, Employee Training""",
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions',
     'company': 'Cybrosys Techno Solutions',
     'live_test_url': 'https://youtube.com/playlist?list=PLeJtXzTubzj-wDm0a0hxMVwARk31n41yw',
     'website': "https://www.openhrms.com",
