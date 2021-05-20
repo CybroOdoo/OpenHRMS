@@ -26,7 +26,7 @@
     'summary': """Manage the company properties when it is in the custody of an employee""",
     'description': 'Manage the company properties when it is in the custody of an employee',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",

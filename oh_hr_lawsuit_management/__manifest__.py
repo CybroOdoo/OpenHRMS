@@ -26,7 +26,7 @@
     'summary': """Managing Legal Actions""",
     'description': 'This module manages legal actions.',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['base', 'hr'],

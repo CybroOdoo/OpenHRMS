@@ -27,7 +27,7 @@
     'description': 'Main module of Open HRMS. It brings all others into a single module',
     'live_test_url': 'https://youtube.com/playlist?list=PLeJtXzTubzj-wDm0a0hxMVwARk31n41yw',
     'category': 'Generic Modules/Human Resources',
-    'author': 'Cybrosys Techno Solutions',
+    'author': 'Cybrosys Techno solutions',
     'company': 'Cybrosys Techno Solutions',
     'live_test_url': 'http://demo.openhrms.com/web/signup',
     'website': "https://www.openhrms.com",
