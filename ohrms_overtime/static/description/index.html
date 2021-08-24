@@ -1,516 +1,1220 @@
-<div class="row" style="margin: 0;position: relative;color: #000;background-position: center;background: #ffffff;border-bottom: 1px solid #e4e4e4;text-align: center; margin: auto; display: flex;justify-content: center;">  <a  href="https://www.cybrosys.com/" target="_blank"><img src="images/cybrosys.png" style=" width: 293px; padding: 1rem 0rem; margin: auto" alt="cybrosys-logo"></a> </div>
-<div class="row" style="margin:75px 0;position: relative;color: #000;background-position: center;background: #ffffff;border-bottom: 1px solid #e4e4e4; padding-bottom: 30px;">
-   <div class="col-md-7 col-sm-12 col-xs-12" style="padding: 0px">
-      <div style=" margin: 0 0 0px;padding: 20px 0 10;font-size: 23px;line-height: 35px;font-weight: 400;color: #000;border-top: 1px solid rgba(255,255,255,0.1);border-bottom: 1px solid rgba(255,255,255,0.11);text-align: left;">
-         <h1 style="font-size: 39px;font-weight: 600;margin: 0px !important;">OHRMS Overtime</h1>
-         <h3 style="font-size: 21px;margin-top: 8px;position: relative;">A Module For Requesting Overtime Work.</h3>
-      </div>
-      <h2 style="font-weight: 600;font-size: 1.8rem;margin-top: 15px;">Key Highlights</h2>
-      <ul style=" padding: 0 1px; list-style: none; ">
-         <li style="display: flex;align-items: center;padding: 8px 0;font-size: 18px;"><i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Employee Overtime request could be create using this module.</li>
-         <li style="display: flex;align-items: center;padding: 8px 0;font-size: 18px;"><i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime can be utilise as leave allocation or cash payment.</li>
-         <li style="display: flex;align-items: center;padding: 8px 0;font-size: 18px;"><i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime request could be create for hours and days.</li>
-         <li style="display: flex;align-items: center;padding: 8px 0;font-size: 18px;"><i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime request can configure using Overtime types.</li>
-      </ul>
-   </div>
-   <div class="col-md-5 col-sm-12 col-xs-12"> <img src="images/overtime-main.gif" class="img-responsive" alt=""> </div>
-</div>
-<div>
-   <section class="oe_container" style="padding: 1rem 0rem 1rem; background-color: #ffffff !important;">
-      <div class="row py-4 px-3">
-         <div class="w-100" style="padding-top:30px;padding-bottom:45px;border-radius: 10px;">
-            <ul role="tablist" class="nav nav-pills justify-content-center" data-tabs="tabs" id="pills-tab" style="border: none;background: unset;">
-               <li class="nav-item mr-1 mb-3" style="font-size: 1.05rem;font-weight: 400;transition: all .15s ease;color: #d31c22;background-color: #d31c22;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);border: 0;font-family: 'Open Sans',sans-serif;width: 140px;border-radius: 0.30rem;"> <a id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link active show" style="color: #000000;line-height: 33px;border: 0;border-radius: .25rem;font-weight: 400;text-align: center;
-                  color: #fff;">Overview </a> </li>
-               <li class="nav-item mr-1 mb-3" style="font-size: 1.05rem;font-weight: 400;transition: all .15s ease;color: #d31c22;background-color: #d31c22;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);border: 0;font-family: 'Open Sans',sans-serif;width: 140px;border-radius: 0.30rem;"> <a id="pills-home-tab" data-toggle="pill" href="#pills-home1" role="tab" aria-controls="pills-home" aria-selected="true" class="nav-link " style="color: #000000;line-height: 33px;border: 0;border-radius: .25rem;font-weight: 400; text-align: center;
-                  color: #fff;" >Features </a> </li>
-               <li class="nav-item mr-1 mb-3" style="font-size: 1.05rem;font-weight: 400;transition: all .15s ease;color: #ffffff;background-color: #d31c22;box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);border: 0;font-family: 'Open Sans',sans-serif;width: 140px;border-radius: 0.30rem;"> <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" style="color: #000000;line-height: 33px;border: 0;border-radius: .25rem;font-weight: 400; text-align: center;
-                  color: #fff;">Screenshots </a> </li>
-
-            </ul>
-            <div class="tab-content" id="pills-tabContent"
-               style="padding-top: 30px; padding-bottom: 30px; padding: 30px;">
-               <div class="px-3 pt-1 tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="
-                  pills-home-tab">
-                  <!-- Overview-->
-                  <h2 style="font-weight: 600;text-align: center;width: 100%;">Overview</h2>
-                  <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-                  <h3 class="oe_slogan" style="text-align: center;font-size: 19px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;opacity: 1 !important;line-height: 31px;font-weight: 400;letter-spacing: .5px;margin-bottom: 21px;">
-                     This module OHRMS overtime could be useful for create overtime request based on days and hours. These overtime could
-                     be utilise as leave allocation or cash payment.<br>
-                     There is a python dependency for this module called 'pandas'. You have to install the pandas python dependency before installing this module.
-                     You can use <strong style="font-family:">sudo pip3 install pandas</strong> for installing pandas in ubuntu by running the command in terminal.
-                  </h3>
-               </div>
-               <div class="px-3 pt-1 tab-pane fade " id="pills-home1" role="tabpanel" aria-labelledby="
-                  pills-home-tab">
-                  <!-- feature tab-->
-                  <h2 style="font-weight: 600;text-align: center;width: 100%;">OHRMS Overtime</h2>
-                  <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-                  <ul>
-                     <li class="mb8" style="font-family: Roboto;color: #000;list-style-type: square;font-size: 19px;line-height: 50px; background-color: #3a34380d;padding-left: 20px;border-radius: 7px;list-style: none;"> 
-                        <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Employee Can request for there overtime.
-                     </li>
-                     <li class="mb8" style="font-family: Roboto;color: #000;list-style-type: square;font-size: 19px;line-height: 50px; background-color: #3a34380d;padding-left: 20px;border-radius: 7px;list-style: none;"> 
-                        <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime can be create based on hours and days.
-                     </li>
-                     <li class="mb8" style="font-family: Roboto;color: #000;list-style-type: square;font-size: 19px;line-height: 50px; background-color: #3a34380d;padding-left: 20px;border-radius: 7px;list-style: none;"> 
-                        <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime can utilise as leave allocation or cash payment.
-                     </li>
-                  </ul>
-               </div>
-               <!-- Screenshot tab-->
-               <div class="px-3 tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" >
-                  <div class="tab-pane">
-                     <h2 style="font-weight: 600;text-align: center;width: 100%;">Screenshots</h2>
-                     <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-                     <div>
-                        <section class="oe_container">
-                           <div id="demo" class="row carousel slide  mb32" data-ride="carousel">
-                              <div class="carousel-inner">
-                                 <div class="carousel-item active" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> After Installation Open Overtime Request Module in the menu.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In That Module Can see overtime types menu like below.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In this menu user can create overtime types by clicking Create button.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_type_tree.png"> </div>
-                                    </div>
-                                 </div>
-                                 
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In the below overtime type form view we can see some fields.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In Reference field user can give name fore the overtime type.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In Type filed we have two types Cash and Leave.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> In Duration Type filed we have two types Hours and Days.</h3>
-                                       <h3 class="alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px;"> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i> User can create overtime type in needed specification.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_type_form.png"> </div>
-                                    </div>
-                                 </div>
-                                 
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>When selecting Type as Leave a new field Leave Type will be visible like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/leave_type.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>This Leave type field is filtered basis of Duration type.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>This Leave type can be set for days and hours in the leave type form view.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/leave_type_search.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>When selecting Type as Cash a Tree view will be visible like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/cash_tree.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Payment Rules Can be Set like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/cash_rules.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After creating Overtime Type's we can create a Overtime Request.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In Overtime Request menu we can see a Create button for creating a Request.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_tree.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In Overtime Request form view we have to set some required field.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Employee field we can set requesting employee and other department, job and manager field will be automatically fill based on employee.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Type and Duration Type can set as needed and also need to set date field.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_form.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Here we can see hours field it will automatically computed on basis of date.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In the Case of days type hours field change to days and compute days.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/hours_compute.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After setting these fields employee want submit the request.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Request will be submit using Submit To Finance button.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/submit_button.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After Submit It need to approve by manager.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Before Approving need to select Overtime Type For Computation.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Overtime Type Filtered using Type field and Duration Type field.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_type_request.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In overtime type is based on leave it could have leave type.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>leave allocation will be create on this leave type.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/type_leave_type.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After selecting Overtime Type manager can approve the overtime request.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Approve button will approve the request.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/approve_button.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>When request change to approve state leave allocation will be done.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>This allocated leave record can be see in Leave ID field in the request.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/leave_id.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>When the Type is in Cash and Duration Type set as Days.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/cash_based.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After submitting we need to check the employee contract.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In the case of cash we have to set hour wage and day wage for the overtime.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>These wage fields are included in the contract.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/request_contract.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In Contract can see Salary Information page view.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Here we can see two filed's Day Wage and Hour Wage.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>The Overtime wage is calculated from these field's.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/contract_from.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>We can set values like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/wage_value.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After setting the values we can select Overtime Type in the request.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>It will compute the overtime amount based on wage on contact and rule's in the operation type.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_amount.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>If any Public Holiday comes between selected days it will be shown like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/public_holiday.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>By approving the Request It could be seen in the payslip.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In payslip we have a tree view Other inputs like below.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Here the Overtime will be show.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/payslip_view.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>If you need to compute overtime in the salary you need to add overtime salary rule in the salary structure.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In below you can see the salary structure you need to open it for adding the overtime salary rule.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/salary_structure.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>By opening salary structure it looks like below.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Here we can see add a line button here we can add new salary rule.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/salary_add.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>By clicking Add a line it will redirect to the salary rule's.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In below we can see all salary rule's.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>In there we have overtime salary rule it need to select for the computation.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_rule.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>By selecting it comes in the salary structure like below.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Then need to save the salary structure.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/overtime_structure.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After you need to compute the salary.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Salary will compute using compute sheet button like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/compute_sheet.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>By clicking compute button salary will be compute under salary computation page like below.</h3>
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>Here we can see the overtime salary will be computed.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/salary_compute.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After computation need to confirm the payslip by clicking confirm button.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/payslip_confirm.png"> </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="carousel-item" style="min-height: 0px;">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 mb16 mt16" style="float: left;">
-                                       <h3 class="mb32 alert" style="font-weight:400;color: #091E42;background: #fff;text-align: left;border-radius: 0; font-size: 18px; "> <i class="fa fa-check-circle-o" style="width:40px; color:#00438b"></i>After confirming the payslip we can see the paid overtime request will be marked as paid like below.</h3>
-                                       <div style=""> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/paid_request.png"> </div>
-                                    </div>
-                                 </div>
-
-
-
-                              </div>
-                              <a class="carousel-control-prev" href="#demo" data-slide="prev" style="left:-25px;width: 35px;color: #000;"> <span class="carousel-control-prev-icon"><i class="fa fa-chevron-left" style="font-size:24px"></i></span> </a> <a class="carousel-control-next" href="#demo" data-slide="next" style="right:-25px;width: 35px;color: #000;"> <span class="carousel-control-next-icon"><i class="fa fa-chevron-right" style="font-size:24px"></i></span> </a> 
-                           </div>
-                        </section>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- faq tab-->
-               <div class="px-2 px-lg-4 pt-3 tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                  <ul class="list-unstyled">
-                  </ul>
-               </div>
+<div style="padding: 3.5rem 1.5rem !important; background-color: #ffffff !important;">
+    <div class="container">
+        <!-- HERO -->
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column justify-content-center"
+                style="text-align: center; padding: 1rem !important;">
+                <h1 class="text-center" style="color: #00438B !important; font-size: 4rem !important;"><span
+                        style="font-weight: 700 !important;">OpenHRMS</span><span style="font-weight: 300 !important;">
+                        Overtime</span></h1>
+                <p class="text-center"
+                    style="color: #212529 !important; font-size: 1.5rem !important; letter-spacing: 10px !important;">
+                    A Module For Requesting Overtime Work.</p>
+                <img src="./images/hero.png" class="img-responsive">
             </div>
-         </div>
-      </div>
-   </section>
-   <section class="oe_container" style="padding: 2rem 3rem 1rem;">
-      <h2 style="font-weight: 600;text-align: center;margin-bottom: 25px;width: 100%;">Suggested Products</h2>
-      <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-      <div id="demo1" class="row carousel slide" data-ride="carousel">
-         <!-- The slideshow -->
-         <div class="carousel-inner">
-            <div class="carousel-item active" style="min-height: 0px;">
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/oh_hr_zk_attendance/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_biometric.jpeg"> </div>
-                  </a>
-               </div>
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/oh_appraisal/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_appraisal.jpeg"> </div>
-                  </a>
-               </div>
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/ohrms_loan/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_loan.jpeg"> </div>
-                  </a>
-               </div>
+        </div>
+        <!-- END OF HERO -->
+
+        <!-- OVERVIEW -->
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column justify-content-center"
+                style="text-align: center; padding: 2.5rem 1rem !important;">
+                <h2 style="color: #212529 !important;">Overview</h2>
+                <hr
+                    style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+                <p class="text-center" style="color: #212529 !important; font-size: 1.5rem !important;">
+                    This module OHRMS overtime could be useful for create overtime request based on days and hours.
+                    These overtime could be utilise as leave allocation or cash payment.
+                </p>
+                <p class="text-center" style="color: #212529 !important; font-size: 1.5rem !important;">
+                    There is a python dependency for this module called 'pandas'. You have to install the pandas
+                    python dependency before installing this module. You can use sudo pip3 install pandas for
+                    installing pandas in ubuntu by running the command in terminal.
+                </p>
             </div>
-            <div class="carousel-item" style="min-height: 0px;">
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/ohrms_salary_advance/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_salary.jpeg"> </div>
-                  </a>
-               </div>
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/hr_employee_updation/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_info.jpeg"> </div>
-                  </a>
-               </div>
-               <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
-                  <a href="https://apps.odoo.com/apps/modules/14.0/oh_employee_documents_expiry/" target="_blank">
-                     <div style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;"> <img class="img img-responsive center-block" style="border-top-left-radius: 10px;border-top-right-radius: 10px;" src="images/module_docs.jpeg"> </div>
-                  </a>
-               </div>
+        </div>
+        <!-- END OF OVERVIEW -->
+
+
+        <!-- KEY FEATURES -->
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column justify-content-center"
+                style="text-align: center; padding: 2.5rem 1rem !important;">
+                <h2 style="color: #212529 !important;">Key Features</h2>
+                <hr
+                    style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="d-flex deep-2"
+                            style="height: 60px !important; padding: 1rem 1.5rem !important; border-radius: 0 !important; margin: 1.5rem 0">
+                            <img src="./images/checked.png" style="height: 24px !important; width: 24px !important;"
+                                class="mt-1 mr-2" height="24px" width="24px">
+                            <p class="text-center" style="color: #212529 !important; font-size: 1.3rem !important;">
+                                Employee Overtime request could be create using this module.
+                            </p>
+                        </div>
+
+                        <div class="d-flex deep-2"
+                            style="height: 60px !important; padding: 1rem 1.5rem !important; border-radius: 0 !important; margin: 1.5rem 0">
+                            <img src="./images/checked.png" style="height: 24px !important; width: 24px !important;"
+                                class="mt-1 mr-2" height="24px" width="24px">
+                            <p class="text-center" style="color: #212529 !important; font-size: 1.3rem !important;">
+                                Overtime can be utilise as leave allocation or cash payment.
+                            </p>
+                        </div>
+                        <div class="d-flex deep-2"
+                            style="height: 60px !important; padding: 1rem 1.5rem !important; border-radius: 0 !important; margin: 1.5rem 0">
+                            <img src="./images/checked.png" style="height: 24px !important; width: 24px !important;"
+                                class="mt-1 mr-2" height="24px" width="24px">
+                            <p class="text-center" style="color: #212529 !important; font-size: 1.3rem !important;">
+                                Overtime request could be create for hours and days.
+                            </p>
+                        </div>
+                        <div class="d-flex deep-2"
+                            style="height: 60px !important; padding: 1rem 1.5rem !important; border-radius: 0 !important; margin: 1.5rem 0">
+                            <img src="./images/checked.png" style="height: 24px !important; width: 24px !important;"
+                                class="mt-1 mr-2" height="24px" width="24px">
+                            <p class="text-center" style="color: #212529 !important; font-size: 1.3rem !important;">
+                                Overtime request could be create for hours and days.
+                            </p>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
-         </div>
-         <!-- Left and right controls --> 
-         <a class="carousel-control-prev" href="#demo1" data-slide="prev" style="left:-25px;width: 35px;color: #000;"> <span class="carousel-control-prev-icon"><i class="fa fa-chevron-left" style="font-size:24px"></i></span> </a> <a class="carousel-control-next" href="#demo1" data-slide="next" style="right:-25px;width: 35px;color: #000;"> <span class="carousel-control-next-icon"><i class="fa fa-chevron-right" style="font-size:24px"></i></span> </a> 
-      </div>
-   </section>
-   <section class="row" style="padding: 2rem 3rem 1rem;margin:0px">
-      <h2 style="font-weight: 600;margin-bottom: 20px;text-align: center;width: 100%;">Our Service</h2>
-      <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-      <div class="row" style=" display: flex; justify-content: center; flex-wrap: wrap;width: 100%; ">
-         <!-- <div style="display:flex;padding-top: 20px;justify-content: space-between;"> -->
-         <div class="col-md-2 col-sm-6 col-xs-12">
-            <div style="width:75px;height:75px;background:#fff; border-radius:100%;margin: auto;"> <a href="https://www.cybrosys.com/odoo-customization-and-installation/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-customization.png" style="width: 100%;border-radius: 100%;"/> </a> </div>
-            <h3 class="oe_slogan" style="font-weight: 800;text-align: center;font-size: 14px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;"> <a href="https://www.cybrosys.com/odoo-customization-and-installation/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Odoo Customization </a> </h3>
-         </div>
-         <div class="col-md-2 col-sm-6 col-xs-12">
-            <div style="width:75px;height:75px;background:#fff; border-radius:100%;margin: auto;"> <a href="https://www.cybrosys.com/odoo-erp-implementation/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-erp-implementation.png" style="width: 100%;border-radius: 100%;"/> </a> </div>
-            <h3 class="oe_slogan" style="font-weight: 800;text-align: center;font-size: 14px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;"> <a href="https://www.cybrosys.com/odoo-erp-implementation/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Odoo Implementation </a> </h3>
-         </div>
-         <div class="col-md-2 col-sm-6 col-xs-12">
-            <div style="width:75px;height:75px;background:#fff; border-radius:100%;margin: auto;"> <a href="https://www.cybrosys.com/odoo-erp-integration/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-erp-integration.png" style="width: 100%;border-radius: 100%;"/> </a> </div>
-            <h3 class="oe_slogan" style="font-weight: 800;text-align: center;font-size: 14px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;"> <a href="https://www.cybrosys.com/odoo-erp-integration/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Odoo Integration </a> </h3>
-         </div>
-         <div class="col-md-2 col-sm-6 col-xs-12">
-            <div style="width:75px;height:75px;background:#fff; border-radius:100%;margin: auto;"> <a href="https://www.cybrosys.com/odoo-erp-support/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-erp-support.png" style="width: 100%;border-radius: 100%;"/> </a> </div>
-            <h3 class="oe_slogan" style="font-weight: 800;text-align: center;font-size: 14px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;"> <a href="https://www.cybrosys.com/odoo-erp-support/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Odoo Support</a> </h3>
-         </div>
-         <div class="col-md-2 col-sm-6 col-xs-12">
-            <div style="width:75px;height:75px;background:#fff; border-radius:100%;margin: auto;"> <a href="https://www.cybrosys.com/hire-odoo-developer/" target="_blank"> <img src="https://www.cybrosys.com/images/hire-odoo-developer.png" style="width: 100%;border-radius: 100%;"/> </a> </div>
-            <h3 class="oe_slogan" style="font-weight: 800;text-align: center;font-size: 14px;width: 100%;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;"> <a href="https://www.cybrosys.com/hire-odoo-developer/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Hire Odoo Developers</a> </h3>
-            </a> 
-         </div>
-         <!-- </div> --> 
-      </div>
-   </section>
-   <section class="row"  style="padding: 2rem 3rem 1rem;margin:0px">
-      <div class="row" style="margin: 0">
-         <h2 style="font-weight: 600;margin-bottom: 20px;text-align: center;width: 100%;">Our Industries</h2>
-         <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-         <!-- <div style="display:flex;justify-content: space-between;flex-wrap:wrap;"> -->
-         <div class="row" style="width: 100%">
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/best-trading-erp/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-1.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/best-trading-erp/" target="_blank" style="list-style: none; color:#000; text-decoration: none;font-family: 'Montserrat',sans-serif;"> Trading </a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px; font-family: 'Montserrat',sans-serif;"> Easily procure and sell your products. </h3>
-               </div>
+        </div>
+        <!-- END OF KEY FEATURES -->
+
+        <!-- SCREENSHOTS -->
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column justify-content-center" style="padding: 2.5rem 1rem !important;">
+                <h2 style="text-align: center;  color: #212529 !important;">Screenshots</h2>
+                <hr
+                    style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            01</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">How to Create
+                            Overtime
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After Installation Open Overtime Request Module in the menu.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In That Module Can see overtime types menu like below.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In this menu user can create overtime types by clicking Create button.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime1.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            02</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Type</h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In the below overtime type form view we can see some fields.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Reference field user can give name fore the overtime type.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Type filed we have two types Cash and Leave.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Duration Type filed we have two types Hours and Days.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            User can create overtime type in needed specification.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime2.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            03</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Leave Type
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            When selecting Type as Leave a new field Leave Type will be visible like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime3.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            04</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Duration type
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            This Leave type field is filtered basis of Duration type.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            This Leave type can be set for days and hours in the leave type form view.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime4.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            05</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Tree view
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            When selecting Type as Cash a Tree view will be visible like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime5.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            06</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Payment Rules
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Payment Rules Can be Set like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime6.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            07</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Request
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After creating Overtime Type's we can create a Overtime Request.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Overtime Request menu we can see a Create button for creating a Request.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime7.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            08</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Request
+                            Fields
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Overtime Request form view we have to set some required field.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Employee field we can set requesting employee and other department, job and manager
+                            field will be automatically fill based on employee.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Type and Duration Type can set as needed and also need to set date field.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime8.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            09</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Request
+                            Fields
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Here we can see hours field it will automatically computed on basis of date.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In the Case of days type hours field change to days and compute days.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime9.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            10</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Submit Request
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After setting these fields employee want submit the request.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Request will be submit using Submit To Finance button.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime10.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            11</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">After Submit
+                            Request
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After Submit It need to approve by manager.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Before Approving need to select Overtime Type For Computation.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Overtime Type Filtered using Type field and Duration Type field.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime11.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            12</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">leave allocation
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In overtime type is based on leave it could have leave type.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            leave allocation will be create on this leave type.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime12.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            13</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Type
+                            manager
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After selecting Overtime Type manager can approve the overtime request.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Approve button will approve the request.
+                        </p>
+
+                    </div>
+                </div>
+                <img src="./images/overtime13.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            14</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Approve State
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            When request change to approve state leave allocation will be done.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            This allocated leave record can be see in Leave ID field in the request.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime14.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            15</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Cash and Duration
+                            Type
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            When the Type is in Cash and Duration Type set as Days.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime15.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+
+
+                <!-- endo of img -->
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            16</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Employee Contract
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After submitting we need to check the employee contract.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In the case of cash we have to set hour wage and day wage for the overtime.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            These wage fields are included in the contract.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime16.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            17</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Salary
+                            Information
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In Contract can see Salary Information page view.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Here we can see two filed's Day Wage and Hour Wage.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            The Overtime wage is calculated from these field's.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime17.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            18</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Set Values
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            We can set values like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime18.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            19</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Amount
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After setting the values we can select Overtime Type in the request.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            It will compute the overtime amount based on wage on contact and rule's in the
+                            operation
+                            type.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime19.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            20</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Public Holiday
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            If any Public Holiday comes between selected days it will be shown like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime20.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            21</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Payslip
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            By approving the Request It could be seen in the payslip.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In payslip we have a tree view Other inputs like below.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Here the Overtime will be show.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime21.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            22</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Overtime Salary
+                            Rule
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            If you need to compute overtime in the salary you need to add overtime salary rule
+                            in
+                            the
+                            salary structure.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In below you can see the salary structure you need to open it for adding the
+                            overtime
+                            salary
+                            rule.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime22.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            23</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Salary Structure
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            By opening salary structure it looks like below.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Here we can see add a line button here we can add new salary rule.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime23.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            24</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Salary Rule's
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            By clicking Add a line it will redirect to the salary rule's.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In below we can see all salary rule's.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            In there we have overtime salary rule it need to select for the computation.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime24.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+
+                <!-- endo of img -->
+
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            25</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Save Salary
+                            Structure
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            By selecting it comes in the salary structure like below.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Then need to save the salary structure.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime25.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+
+                <!-- endo of img -->
+
+
+
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            26</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Salary Compute
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After you need to compute the salary.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Salary will compute using compute sheet button like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime26.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            27</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">
+                            Overtime Salary
+                        </h3>
+
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            By clicking compute button salary will be compute under salary computation page like
+                            below.
+                        </p>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            Here we can see the overtime salary will be computed.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime27.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            28</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Payslip
+                            Confirmation
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After computation need to confirm the payslip by clicking confirm button.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime28.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+                <!-- img -->
+                <div class="d-flex m-0">
+                    <div class="mr-3">
+                        <h3
+                            style="font-size: 2rem !important; font-weight: 800 !important; color: #ffffff !important; background-color: #00438B !important; padding: 1rem !important; width: 70px !important; height: 70px !important;">
+                            29</h3>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.7rem !important; font-weight: 600 !important;">Paid Overtime
+                            Request
+                        </h3>
+                        <p
+                            style="color: #212529 !important; font-size: 1.3rem !important; font-weight: 300 !important;">
+                            After confirming the payslip we can see the paid overtime request will be marked as
+                            paid
+                            like below.
+                        </p>
+                    </div>
+                </div>
+                <img src="./images/overtime29.png" class="img-responsive"
+                    style="margin-top: -15px !important; border-top: 5px solid #00438B !important; margin-top: 2rem !important; margin-bottom: 4rem !important;">
+                <!-- endo of img -->
+
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/manufacturing-erp-software/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-2.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;" style=" margin-bottom: 10px; ">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/manufacturing-erp-software/" target="_blank" style="list-style: none; color:#000; text-decoration: none;font-family: 'Montserrat',sans-serif;"> Manufacturing</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px;font-family: 'Montserrat',sans-serif;"> Plan, track and schedule your operations. </h3>
-               </div>
+        </div>
+        <!-- END OF SCREENSHOTS -->
+
+
+        <!-- SUGGESTED PRODUCTS -->
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column justify-content-center"
+                style="text-align: center; padding: 2.5rem 1rem !important;">
+                <h2 style="color: #212529 !important;">Suggested Products</h2>
+                <hr
+                    style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+
+                <div id="demo1" class="row carousel slide" data-ride="carousel">
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="min-height: 0px;">
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/ohrms_core/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/core_image.gif">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/hrms_dashboard/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/dashboard_image.gif">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/oh_hr_zk_attendance/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/bio_image.png">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="min-height: 0px;">
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/oh_appraisal/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/appraisal_image.png">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/hr_employee_shift/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/shift_image.png">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 mb16 mt16" style="float: left;">
+                                <a href="https://apps.odoo.com/apps/modules/13.0/ohrms_salary_advance/" target="_blank">
+                                    <div
+                                        style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);border-radius: 10px;">
+                                        <img class="img img-responsive center-block"
+                                            style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                            src="images/salary_image.png">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#demo1" data-slide="prev"
+                        style="left:-25px;width: 35px;color: #000;"> <span class="carousel-control-prev-icon"><i
+                                class="fa fa-chevron-left" style="font-size:24px"></i></span> </a> <a
+                        class="carousel-control-next" href="#demo1" data-slide="next"
+                        style="right:-25px;width: 35px;color: #000;">
+                        <span class="carousel-control-next-icon"><i class="fa fa-chevron-right"
+                                style="font-size:24px"></i></span>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/restaurant-management/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-3.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/restaurant-management/" target="_blank" style="list-style: none; color:#000; text-decoration: none;font-family: 'Montserrat',sans-serif;"> Restaurant</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px;font-family: 'Montserrat',sans-serif;"> Run your bar or restaurant methodical. </h3>
-               </div>
+        </div>
+        <!-- END OF SUGGESTED PRODUCTS -->
+
+        <!-- OUR SERVICES -->
+        <section class="container" style="margin-top: 6rem !important;">
+            <div class="row">
+                <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center">
+                    <h2 style="color: #212529 !important;">Our Services</h2>
+                    <hr
+                        style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #1dd1a1 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/cogs.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Customization</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #ff6b6b !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/wrench.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Implementation</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #6462CD !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/lifebuoy.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Support</h6>
+                </div>
+
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #ffa801 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/user.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Hire
+                        Odoo
+                        Developer</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #54a0ff  !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/puzzle.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Integration</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #6d7680 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/update.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Migration</h6>
+                </div>
+
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #786fa6 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/consultation.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Consultancy</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #f8a5c2 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/training.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Implementation</h6>
+                </div>
+
+                <div class="col-lg-4 d-flex flex-column justify-content-center align-items-center my-4">
+                    <div class="d-flex justify-content-center align-items-center mx-3 my-3"
+                        style="background-color: #e6be26 !important; border-radius: 15px !important; height: 80px; width: 80px;">
+                        <img src="assets/icons/license.png" class="img-responsive" height="48px" width="48px">
+                    </div>
+                    <h6 class="text-center"
+                        style="font-family: Montserrat, 'sans-serif' !important; font-weight: bold;">Odoo
+                        Licensing Consultancy</h6>
+                </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/pos/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-4.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/pos/" target="_blank" style="list-style: none; color:#000; text-decoration: none;font-family: 'Montserrat',sans-serif;"> POS</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px;font-family: 'Montserrat',sans-serif;"> Easy configuring and convivial selling. </h3>
-               </div>
+        </section>
+        <!-- END OF END OF OUR SERVICES -->
+
+        <!-- OUR INDUSTRIES -->
+        <section class="container" style="margin-top: 6rem !important;">
+            <div class="row">
+                <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center">
+                    <h2 style="color: #212529 !important;">Our Industries</h2>
+                    <hr
+                        style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/trading-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Trading
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Easily procure
+                            and
+                            sell your products</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/pos-black.png" class="img-responsive mb-3" height="48px" width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            POS
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Easy
+                            configuration
+                            and convivial experience</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/education-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Education
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            A platform for
+                            educational management</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/manufacturing-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Manufacturing
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Plan, track and
+                            schedule your operations</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/ecom-black.png" class="img-responsive mb-3" height="48px" width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            E-commerce &amp; Website
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Mobile
+                            friendly,
+                            awe-inspiring product pages</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/service-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Service Management
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Keep track of
+                            services and invoice</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/restaurant-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Restaurant
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            Run your bar or
+                            restaurant methodically</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="my-4 d-flex flex-column justify-content-center"
+                        style="background-color: #f6f8f9 !important; border-radius: 10px; padding: 2rem !important; height: 250px !important;">
+                        <img src="./assets/icons/hotel-black.png" class="img-responsive mb-3" height="48px"
+                            width="48px">
+                        <h5
+                            style="font-family: Montserrat, sans-serif !important; color: #000 !important; font-weight: bold;">
+                            Hotel Management
+                        </h5>
+                        <p style="font-family: Montserrat, sans-serif !important; font-size: 0.9rem !important;">
+                            An
+                            all-inclusive
+                            hotel management application</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/ecommerce-website/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-5.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 0px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/ecommerce-website/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> E-commerce & Website</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px; font-family: 'Montserrat',sans-serif;"> Mobile friendly, awe-inspiring product pages. </h3>
-               </div>
+        </section>
+
+        <!-- END OF END OF OUR INDUSTRIES -->
+
+        <!-- FOOTER -->
+        <!-- Footer Section -->
+        <section class="container" style="margin: 5rem auto 2rem;">
+            <div class="row" style="max-width:1540px;">
+                <div class="col-lg-12 d-flex flex-column justify-content-center align-items-center">
+                    <h2 style="color: #212529 !important;">Need Help?</h2>
+                    <hr
+                        style="border: 3px solid #00438B !important; background-color: #00438B !important; width: 80px !important; margin-bottom: 2rem !important;" />
+                </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/hotel-management-erp/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-6.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/hotel-management-erp/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Hotel Management</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px; font-family: 'Montserrat',sans-serif;"> An all-inclusive hotel management application. </h3>
-               </div>
+
+            <!-- Contact Cards -->
+            <div class="row d-flex justify-content-center align-items-center"
+                style="max-width:1540px; margin: 0 auto 2rem auto;">
+
+                <div class="col-lg-12" style="padding: 0rem 3rem 2rem; border-radius: 10px; margin-right: 3rem; ">
+
+                    <div class="row mt-4">
+                        <div class="col-lg-6">
+                            <a href="mailto:odoo@cybrosys.com" target="_blank" class="btn btn-block mb-2 deep_hover"
+                                style="text-decoration: none;  background-color: #4d4d4d; color: #FFF;  border-radius: 4px;"><i
+                                    class="fa fa-envelope mr-2"></i>odoo@cybrosys.com</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="https://api.whatsapp.com/send?phone=918606827707" target="_blank"
+                                class="btn btn-block mb-2 deep_hover"
+                                style="text-decoration: none;  background-color: #25D366; color: #FFF;  border-radius: 4px;"><i
+                                    class="fa fa-whatsapp mr-2"></i>WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/education-erp-software/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-7.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/education-erp-software/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Education</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px; font-family: 'Montserrat',sans-serif;"> A Collaborative platform for educational management. </h3>
-               </div>
+            <!-- End of Contact Cards -->
+        </section>
+        <!-- Footer -->
+        <section class="oe_container" style="padding: 2rem 3rem 1rem;">
+            <div class="row" style="max-width:1540px; margin: 0 auto; margin-right: 3rem; ">
+                <!-- Logo -->
+                <div class="col-lg-12 d-flex justify-content-center align-items-center" style="margin-top: 3rem;">
+                    <img src="https://www.cybrosys.com/images/logo.png" width="200px" height="auto" />
+                </div>
+                <!-- End of Logo -->
+                <div class="col-lg-12">
+                    <hr
+                        style="margin-top: 3rem;background: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(229,229,229,1) 33%, rgba(229,229,229,1) 58%, rgba(0,212,255,0) 100%); height: 2px; border-style: none;">
+                    <!-- End of Footer Section -->
+                </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12" style=" margin-bottom: 10px; ">
-               <div  >
-                  <div style="width:75px;height:75px;background:#CE2D48; border-radius:100%;float: left;text-align: left;"> <a href="https://www.cybrosys.com/odoo/industries/service-management/" target="_blank"> <img src="https://www.cybrosys.com/images/odoo-index-industry-8.png" alt="Odoo Industry" style="    border-radius: 100%;width:100%;"/> </a> </div>
-               </div>
-               <div style="width:70%;float:left;">
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 14px;font-weight:800;width: auto;margin: 0;margin-top: 14px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 4px;margin-left: 16px;"> <a href="https://www.cybrosys.com/odoo/industries/service-management/" target="_blank" style="list-style: none; color:#000; text-decoration: none; font-family: 'Montserrat',sans-serif;"> Service Management</a> </h3>
-                  <h3 class="oe_slogan" style=" text-align: left;font-size: 12px;width: auto;margin: 0;margin-top:5px;color: #000 !important;margin-top: 5px;opacity: 1 !important;line-height: 17px;float: left;margin-top: 5px;margin-left: 16px; font-family: 'Montserrat',sans-serif;"> Keep track of services and invoice accordingly. </h3>
-               </div>
-            </div>
-         </div>
-      </div>
-</div>
-</section>
-<section class="oe_container" style="padding: 0% 0% 6% 0%;">
-   <center>
-      <div class="col-md-12" style="margin: auto !important;
-         width: 70%;
-         padding: 30px;">
-         <h2 style="font-weight: 600;text-align: center;width: 100%;">Need Any Help?</h2>
-         <hr style="margin-top: 0px;margin-bottom: 2%;border: 0;text-align: center;border-top: 3px solid #d21c22;width: 5%;">
-         <h4 style="font-size:16px;"> If you have anything to share with us based on your use of this module, please let us know. We are ready to offer our support. </h4>
-         <div class="col-md-6" style="float:left; padding:20px;">
-            <h4><i class="fa fa-envelope"></i>Email us </h4>
-            <p>odoo@cybrosys.com  / info@cybrosys.com</p>
-         </div>
-         <div class="col-md-6" style="float:left; padding:20px;">
-            <h4><i class="fa fa-phone"></i> Contact Us </h4>
-            <a href="https://www.cybrosys.com/contact/" target="_blank"> www.cybrosys.com</a>
-         </div>
-      </div>
-   </center>
-</section>
-<section class="oe_container" style="padding: 0% 0% 6% 0%;">
-   <div class="oe_slogan" style="margin-bottom: 0px;">
-      <div style=" display: flex; justify-content: center; flex-wrap: wrap; ">
-      </div>
-      <br>
-      <img src="https://www.cybrosys.com/images/logo.png" style="width: 190px; margin-bottom: 25px;margin-top: 30px;" class="center-block">
-      <div style=" display: flex; justify-content: center; flex-wrap: wrap; "> <a href="https://twitter.com/cybrosys" target="_blank"><i class="fa fa-2x fa-twitter" style="color:white;background: #00a0d1;width:35px;height: 35px;padding-top: 7px;font-size: 21px;margin-right: 6px;border-radius: 100%;"></i></a>
-         </td>
-         <a href="https://www.linkedin.com/company/cybrosys-technologies-pvt-ltd" target="_blank"><i class="fa fa-2x fa-linkedin" style="color:white;background: #31a3d6;width:35px;height: 35px;padding-top: 7px;font-size: 21px;margin-right: 6px;border-radius: 100%;"></i></a>
-         </td>
-         <a href="https://www.facebook.com/cybrosystechnologies" target="_blank"><i class="fa fa-2x fa-facebook" style="color:white;background: #3b5998;width:35px;  height: 35px;padding-top: 7px;font-size: 21px;margin-right: 6px;border-radius: 100%;"></i></a>
-         </td>
-         <a href="https://in.pinterest.com/cybrosys" target="_blank"><i class="fa fa-2x fa-pinterest" style="color:white;background: #ac0f18;width:35px;height: 35px;padding-top: 7px;font-size: 21px;margin-right: 6px;border-radius: 100%;"></i></a>
-         </td>
-      </div>
-   </div>
-</section>
+        </section>
+        <!-- END OF FOOTER -->
+
+
+    </div>
 </div>
