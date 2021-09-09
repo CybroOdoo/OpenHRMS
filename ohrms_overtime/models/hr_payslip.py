@@ -13,7 +13,7 @@ class PayslipOverTime(models.Model):
         input tree.
 
         """
-        res = super(PayslipOverTime, self).get_inputs(contracts, date_to, date_from)
+        res = super(PayslipOverTime, self).get_inputs(contracts, date_from, date_to)
         overtime_type = self.env.ref('ohrms_overtime.hr_salary_rule_overtime')
         contract = self.contract_id
         overtime_id = self.env['hr.overtime'].search([('employee_id', '=', self.employee_id.id),
