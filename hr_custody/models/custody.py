@@ -121,7 +121,7 @@ class HrCustody(models.Model):
     @api.constrains('return_date')
     def validate_return_date(self):
         if self.return_date < self.date_request:
-            raise Warning('Please Give Valid Return Date')
+            raise Warning(_('Please Give Valid Return Date'))
 
     name = fields.Char(string='Code', copy=False)
     company_id = fields.Many2one('res.company', 'Company', readonly=True,
@@ -197,7 +197,7 @@ class HrReturnDate(models.TransientModel):
         context = self._context
         custody_obj = self.env['hr.custody'].search([('id', '=', context.get('custody_id'))])
         if self.returned_date <= custody_obj.date_request:
-            raise Warning('Please Give Valid Renewal Date')
+            raise Warning(_('Please Give Valid Renewal Date'))
 
     @api.multi
     def proceed(self):
