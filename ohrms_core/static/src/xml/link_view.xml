@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="UserMenu">
+        <t t-jquery="div.dropdown-menu" t-operation="replace">
+            <div class="dropdown-menu" role="menu">
+                <a role="menuitem" href="#" data-menu="documentation" class="dropdown-item">Documentation</a>
+                <a role="menuitem" href="#" data-menu="support" class="dropdown-item">Open HRMS</a>
+                <div role="separator" class="dropdown-divider"/>
+                <a role="menuitem" href="#" data-menu="settings" class="dropdown-item">Preferences</a>
+                <a role="menuitem" href="#" data-menu="account" class="dropdown-item">My Odoo.com account</a>
+                <a role="menuitem" href="#" data-menu="logout" class="dropdown-item">Log out</a>
+            </div>
+        </t>
+    </t>
+    <t t-name="ohrms_core.SearchResults">
+        <t t-foreach="results" t-as="result">
+            <t t-set="menu" t-value="widget._menuInfo(result.original)"/>
+            <a t-attf-class="o-menu-search-result dropdown-item col-12 ml-auto mr-auto #{result_first ? 'active' : ''}"
+                 t-attf-style="background-image:url('data:image/png;base64,#{menu.web_icon_data}')"
+                 t-attf-href="#menu_id=#{menu.id}&amp;action_id=#{menu.action_id}"
+                 t-att-data-menu-id="menu.id"
+                 t-att-data-action-id="menu.action_id"
+                 t-att-data-parent-id="menu.parent_id[0]"
+                 t-raw="result.string"/>
+        </t>
+    </t>
+</templates>
