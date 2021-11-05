@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Core',
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.0.1',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
     'description': """Openhrms, Main module of Open HRMS, It brings all others into a single module, Payroll, Payroll Accounting,Expense,
                 Dashboard, Employees, Employee Document, Resignation, Salary Advance, Loan Management, Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, Shift Management, Employee History,
@@ -51,6 +51,7 @@
                 'ohrms_salary_advance',
                 'hr_reward_warning',
                 'hrms_dashboard',
+                'hr_reminder'
                 ],
     'data': [
         'views/menu_arrangement_view.xml',
@@ -59,6 +60,8 @@
     ],
     'assets': {
         'web.assets_backend': [
+            'ohrms_core/static/src/js/appMenu.js',
+            'ohrms_core/static/src/js/data.js',
             'ohrms_core/static/src/css/menu_order_alphabets.css',
         ],
         'web.assets_qweb': [

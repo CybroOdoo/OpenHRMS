@@ -14,14 +14,13 @@
     </t>
     <t t-name="ohrms_core.SearchResults">
         <t t-foreach="results" t-as="result">
-            <t t-set="menu" t-value="widget._menuInfo(result.original)"/>
             <a t-attf-class="o-menu-search-result dropdown-item col-12 ml-auto mr-auto #{result_first ? 'active' : ''}"
-                 t-attf-style="background-image:url('data:image/png;base64,#{menu.web_icon_data}')"
-                 t-attf-href="#menu_id=#{menu.id}&amp;action_id=#{menu.action_id}"
-                 t-att-data-menu-id="menu.id"
-                 t-att-data-action-id="menu.action_id"
-                 t-att-data-parent-id="menu.parent_id[0]"
-                 t-raw="result.string"/>
+                 t-attf-style="background-image:url('data:image/png;base64,#{result.webIconData}')"
+                 t-attf-href="#menu_id=#{result.id}&amp;action_id=#{result.actionID}"
+                 t-att-data-menu-id="result.id"
+                 t-att-data-action-id="result.actionID"
+                 t-raw="result.name"
+                 onclick="$('.dropdown-menu').removeClass('show'); $('.search-results').addClass('o_hidden'); $('.app-menu').removeClass('o_hidden'); $('.search-input input').val('');"/>
         </t>
     </t>
 </templates>

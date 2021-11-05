@@ -6,22 +6,22 @@
                     <i class="fa fa-th-large" style="font-size: 18px !important; color: white;"/>
                 </a>
                 <div class="dropdown-menu" role="menu">
-<!--                    <div class="search-container form-row align-items-center m-auto mb-5 col-9">-->
-<!--                        <div class="search-input col-md-10 ml-auto mr-auto mb-2">-->
-<!--                            <div class="input-group">-->
-<!--                                <div class="input-group-prepend">-->
-<!--                                    <div class="input-group-text">-->
-<!--                                        <i class="fa fa-search"/>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <input type="search"-->
-<!--                                       autocomplete="off"-->
-<!--                                       placeholder="Search menus..."-->
-<!--                                       class="form-control"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="search-results col-md-10 ml-auto mr-auto"/>-->
-<!--                    </div>-->
+                    <div class="search-container form-row align-items-center m-auto mb-5 col-9">
+                        <div class="search-input col-md-10 ml-auto mr-auto mb-2" t-on-input="_searchMenusSchedule">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-search"/>
+                                    </div>
+                                </div>
+                                <input type="search"
+                                       autocomplete="off"
+                                       placeholder="Search menus..."
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="search-results col-md-10 ml-auto mr-auto"/>
+                    </div>
 
                     <div class="nav-container">
                         <div class="app-menu">
