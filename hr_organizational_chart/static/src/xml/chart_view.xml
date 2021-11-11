@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="OrganizationalEmployeeChart">
+        <div id="o_organizational_chart">
+        <h4 class="o_org_chart_title mb16 mt0" align="center">Organization Chart</h4>
+            <center>
+            <div id="o_parent_employee" class="empchart">
+
+            </div>
+            </center>
+        </div>
+
+
+
+
+        </t>
+
+        </templates>
+
