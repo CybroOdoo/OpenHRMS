@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record id="hr_payslip_inherited_view_overtime" model="ir.ui.view">
+            <field name="name">Overtime.Inherited.View</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="overtime_ids" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

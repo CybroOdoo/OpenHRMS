@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">
+            <field eval="[(4, ref('hr_salary_rule_overtime'))]"
+                   name="rule_ids"/>
+        </record>
+
+        <record id="hr_overtime_type_demo_01" model="overtime.type">
+            <field name="name">Leave Hour</field>
+            <field name="type">leave</field>
+            <field name="duration_type">hours</field>
+            <field name="leave_type" ref="hr_holidays.holiday_status_cl"/>
+        </record>
+
+        <record id="hr_overtime_type_demo_02" model="overtime.type">
+            <field name="name">Leave Day</field>
+            <field name="type">leave</field>
+            <field name="duration_type">days</field>
+            <field name="leave_type" ref="hr_holidays.holiday_status_sl"/>
+        </record>
+
+        <record id="hr_overtime_type_demo_03" model="overtime.type">
+            <field name="name">Cash Hour</field>
+            <field name="type">cash</field>
+            <field name="duration_type">hours</field>
+            <field name="leave_type" ref="hr_holidays.holiday_status_cl"/>
+        </record>
+
+        <record id="hr_overtime_type_demo_04" model="overtime.type">
+            <field name="name">Cash Day</field>
+            <field name="type">cash</field>
+            <field name="duration_type">days</field>
+            <field name="leave_type" ref="hr_holidays.holiday_status_sl"/>
+        </record>
+
+        <record id="hr_overtime_type_line_demo_03" model="overtime.type.rule">
+            <field name="type_line_id" ref="hr_overtime_type_demo_03"/>
+            <field name="name">First Category</field>
+            <field name="from_hrs" eval="0"/>
+            <field name="to_hrs" eval="5"/>
+            <field name="hrs_amount" eval="2.0"/>
+        </record>
+
+        <record id="hr_overtime_type_line_demo_04" model="overtime.type.rule">
+            <field name="type_line_id" ref="hr_overtime_type_demo_04"/>
+            <field name="name">First Category</field>
+            <field name="from_hrs" eval="0"/>
+            <field name="to_hrs" eval="5"/>
+            <field name="hrs_amount" eval="2.0"/>
+        </record>
+
+
+        <record id="hr_over_time_request_demo_04" model="hr.overtime">
+            <field name="name">Overtime Request 01</field>
+            <field name="employee_id" ref="hr.employee_admin"/>
+            <field name="type">leave</field>
+            <field name="duration_type">hours</field>
+            <field name="job_id" model="hr.job"
+                   eval="obj().env.ref('hr.employee_admin').job_id.id"/>
+            <field name="department_id" model="hr.department"
+                   eval="obj().env.ref('hr.employee_admin').department_id.id"/>
+            <field name="date_from" eval="time.strftime('%Y-01-01 10:00:00')"/>
+            <field name="date_to" eval="time.strftime('%Y-01-01 12:00:00')"/>
+            <field name="contract_id" ref="hr_contract.hr_contract_admin"/>
+        </record>
+
+        <record id="hr_over_time_request_demo_05" model="hr.overtime">
+            <field name="name">Overtime Request 02</field>
+            <field name="employee_id" ref="hr.employee_qdp"/>
+            <field name="type">cash</field>
+            <field name="duration_type">days</field>
+            <field name="job_id" model="hr.job"
+                   eval="obj().env.ref('hr.employee_qdp').job_id.id"/>
+            <field name="department_id" model="hr.department"
+                   eval="obj().env.ref('hr.employee_qdp').department_id.id"/>
+            <field name="date_from" eval="time.strftime('%Y-01-01 10:00:00')"/>
+            <field name="date_to" eval="time.strftime('%Y-01-03 10:00:00')"/>
+            <field name="contract_id" ref="hr_contract.hr_contract_qdp"/>
+        </record>
+
+    </data>
+</odoo>
