@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="employee_data" model="hr.employee">
+              <field name="name">James Villiam</field>
+              <field name="job_title">Technician</field>
+              <field name="work_phone">(376)-356-7885</field>
+              <field name="work_email">Villiam@example.com</field>
+              <field name="image_1920" type="base64" file="employee_background/static/image/employee_backgrnd.jpeg"/>
+        </record>
+
+
+        <record id="employee_address_one" model="res.partner">
+            <field name="name">James Villiam</field>
+        </record>
+
+        <record id="employee_address_two" model="res.partner">
+            <field name="name">ascent</field>
+        </record>
+
+        <record id="employee_address_three" model="res.partner">
+            <field name="name">Doriz</field>
+        </record>
+
+        <record id="verification_demo_one" model="employee.verification">
+            <field name="employee" ref="employee_data"/>
+            <field name="address" ref="employee_address_one"/>
+            <field name="expected_date">2020-03-02 11:17:56</field>
+            <field name="agency" ref="employee_address_three"/>
+        </record>
+
+    </data>
+</odoo>
