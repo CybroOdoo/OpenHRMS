@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="disciplinary_search_view" model="ir.ui.view">
+            <field name="name">hr disciplinary category view</field>
+            <field name="model">discipline.category</field>
+            <field name="arch" type="xml">
+                <search string="Search information">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category_type"/>
+                    <field name="description"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Department" name="department_name" context="{'group_by':'category_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+		    <!--Discipline Category View-->
+
+	<record id="disciplinary_category_view_tree" model="ir.ui.view">
+            <field name="name">discipline.category.tree</field>
+            <field name="model">discipline.category</field>
+            <field name="arch" type="xml">
+                <tree string="Discipline Categories">
+                   <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="disciplinary_category_view_form" model="ir.ui.view">
+            <field name="name">discipline.category.form</field>
+            <field name="model">discipline.category</field>
+            <field name="arch" type="xml">
+                <form string="Discipline Category">
+                    <sheet>
+                        <group>
+                        <field name="name" required="True"/>
+                        <field name="code" required="True"/>
+                        <field name="category_type" required="True"/>
+			            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+	<record id="action_disciplinary_category_view" model="ir.actions.act_window">
+            <field name="name">Discipline Categories</field>
+            <field name="res_model">discipline.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+	<menuitem id="disciplinary_category_view" action="action_disciplinary_category_view"  groups="hr.group_hr_manager" name="Discipline Category" parent="disciplinary_action"
+                    sequence="3"/>
+
+    </data>
+</odoo>
