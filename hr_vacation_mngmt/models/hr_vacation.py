@@ -4,6 +4,12 @@ from datetime import datetime, timedelta, date
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 
+class HrLeaveType(models.Model):
+    _inherit = 'hr.leave.type'
+
+    # Added for odoo 13 compatibility
+    double_validation = fields.Boolean(string='Apply Double Validation')
+
 
 class HrLeaveRequest(models.Model):
     _inherit = 'hr.leave'
@@ -13,8 +19,8 @@ class HrLeaveRequest(models.Model):
     pending_tasks = fields.One2many('pending.task', 'leave_id', string='Pending Tasks', help="Pending tasks")
     holiday_managers = fields.Many2many('res.users', compute='get_hr_holiday_managers', help="Holiday managers")
     flight_ticket = fields.One2many('hr.flight.ticket', 'leave_id', string='Flight Ticket', help="Flight ticket")
-    # Commented for odoo 13 compatibility
-    # double_validation = fields.Boolean(string='Apply Double Validation', related='holiday_status_id.double_validation')
+
+    double_validation = fields.Boolean(string='Apply Double Validation', related='holiday_status_id.double_validation')
     expense_account = fields.Many2one('account.account')
     leave_salary = fields.Selection([('0', 'Basic'), ('1', 'Gross')], string='Leave Salary')
 

@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': "Open HRMS Vacation Management",
-    'version': '13.0.1.1.0',
+    'version': '13.0.1.1.1',
     'summary': """Vacation Management,manages employee vacation""",
     'description': """HR Vacation management""",
     'author': 'Cybrosys Techno solutions,Open HRMS',

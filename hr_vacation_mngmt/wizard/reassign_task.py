@@ -11,6 +11,7 @@ class ReAssignTask(models.TransientModel):
     leave_req_id = fields.Many2one('hr.leave', string='Leave Request')
 
     def action_approve(self):
+        print("ACTION APPROVE")
         task_pending = False
         e_unavail = False
         emp_unavail = []
@@ -26,12 +27,14 @@ class ReAssignTask(models.TransientModel):
         emp_unavail = set(emp_unavail)
         emp_unavail_count = len(emp_unavail)
         if e_unavail:
+            print("E_UNAVAIL")
             if emp_unavail_count == 1:
                 raise UserError(_('Selected employee %s is not available') % (', '.join(emp_unavail),))
             else:
                 raise UserError(_('Selected employees %s are not available') % (', '.join(emp_unavail),))
 
         else:
+            print("ELSE E_UNAVAIL")
             manager = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
             holiday = self.leave_req_id
             tasks = self.env['project.task']
@@ -44,8 +47,10 @@ class ReAssignTask(models.TransientModel):
                 }
                 tasks.sudo().create(vals)
             if holiday.double_validation:
+                print("HOLIDAY DOUBLE VALIDATION")
                 return holiday.write({'state': 'validate1', 'manager_id': manager.id if manager else False})
             else:
+                print("HOLIDAY VALIDATION: ")
                 holiday.action_validate()
 
     def cancel(self):
