@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="contribution_register_gosi" model="hr.contribution.register">
+            <field name="name">GOSI Contribution For Saudi Employee</field>
+            <field name="partner_id" eval="False"/>
+        </record>
+
+        <record id="contribution_register_gosicompany" model="hr.contribution.register">
+            <field name="name">GOSI Company Contribution For Saudi Employee</field>
+            <field name="partner_id" eval="False"/>
+        </record>
+        <record id="GOSI" model="hr.salary.rule.category">
+            <field name="name">GOSI</field>
+            <field name="code">GOSI</field>
+        </record>
+
+        <record id="hr_rule_gosi" model="hr.salary.rule">
+            <field name="name">GOSI Contribution For Saudi Employee</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">GOSI</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -((contract.wage+(contract.wage*3/12))*9/100)</field>
+            <field name="register_id" ref="contribution_register_gosi"/>
+        </record>
+
+
+        <record id="hr_rule_gosi_comp" model="hr.salary.rule">
+            <field name="name">GOSI Company Contribution For Saudi Employee</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">GOSI_COMP</field>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (((contract.wage+(contract.wage*3/12))*9/100)+(contract.wage*2/100))</field>
+            <field name="register_id" ref="contribution_register_gosicompany"/>
+        </record>
+
+        <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">
+            <field name="code">BASE</field>
+            <field name="name">Base Salary Structure For Saudi Workers</field>
+            <field eval="[(6, 0, [ref('hr_rule_gosi'),ref('hr_payroll_community.hr_rule_basic'),ref('hr_payroll_community.hr_rule_net')
+            ,ref('hr_payroll_community.hr_rule_taxable'),ref('hr_rule_gosi_comp')])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="structure_1717" model="hr.payroll.structure">
+            <field name="code">BSOW</field>
+            <field name="name">Base Salary For Overseas Workers</field>
+            <field eval="[(6, 0, [ref('hr_payroll_community.hr_rule_basic'), ref('hr_payroll_community.hr_rule_net'),ref('hr_payroll_community.hr_rule_taxable')])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="parent_id" ref="hr_payroll_community.structure_base"/>
+        </record>
+    </data>
+</odoo>
