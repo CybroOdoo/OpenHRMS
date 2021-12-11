@@ -28,7 +28,7 @@ class SalaryAdvancePayment(models.Model):
                               ('waiting_approval', 'Waiting Approval'),
                               ('approve', 'Approved'),
                               ('cancel', 'Cancelled'),
-                              ('reject', 'Rejected')], string='Status', default='draft', track_visibility='onchange')
+                              ('reject', 'Rejected')], string='Status', default='draft', tracking=True)
     debit = fields.Many2one('account.account', string='Debit Account')
     credit = fields.Many2one('account.account', string='Credit Account')
     journal = fields.Many2one('account.journal', string='Journal')

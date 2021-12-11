@@ -64,7 +64,7 @@ class HrAppraisalForm(models.Model):
     tot_comp_survey = fields.Integer(string="Count Answers", compute="_compute_completed_survey")
     tot_sent_survey = fields.Integer(string="Count Sent Questions")
     created_by = fields.Many2one('res.users', string="Created By", default=lambda self: self.env.uid)
-    state = fields.Many2one('hr.appraisal.stages', string='Stage', track_visibility='onchange', index=True,
+    state = fields.Many2one('hr.appraisal.stages', string='Stage', tracking=True, index=True,
                             default=lambda self: self._default_stage_id(),
                             group_expand='_read_group_stage_ids')
     # for coloring the kanban box
