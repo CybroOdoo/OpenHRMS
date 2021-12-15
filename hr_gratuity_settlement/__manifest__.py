@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Open HRMS Gratuity Settlement',
+    'version': '15.0.1.0.0',
+    'summary': """Employee Gratuity Settlement""",
+    'author': 'Cybrosys Techno solutions,Open HRMS',
+    'company': 'Cybrosys Techno Solutions',
+    'maintainer': 'Cybrosys Techno Solutions',
+    'category': 'Generic Modules/Human Resources',
+    'website': "https://www.openhrms.com",
+    'depends': ['base', 'hr', 'hr_payroll_community', 'account',],
+    'data': [
+        'data/sequence.xml',
+        'views/hr_gratuity_view.xml',
+        'views/hr_gratuity_accounting_configuration.xml',
+        'views/gratuity_configuration_view.xml',
+        'views/hr_contract_views.xml',
+        'views/hr_training_view.xml',
+        'security/ir.model.access.csv',
+    ],
+    'images': ['static/description/banner.png'],
+    'license': 'AGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}
