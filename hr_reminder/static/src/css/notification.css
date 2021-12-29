@@ -6,7 +6,7 @@
   color: white;
   margin-top: 1em;
 }
- .label {
+.label {
     display: inline-block;
     color: white;
     max-width: 100%;
@@ -20,13 +20,10 @@
     max-height: 400px;
     min-height: 50px;
     overflow-y: auto;
-
-    @media (max-width: @screen-xs-max) {
-        max-height: none;
-    }
-
+}
+@media (max-width: @screen-xs-max) {
+    max-height: none;
+}
 .detail-client-address-country {
    color: black;
- }
-
-
+}
