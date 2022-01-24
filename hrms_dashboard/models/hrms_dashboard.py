@@ -42,7 +42,7 @@ class Employee(models.Model):
         query = """
         select count(id)
         from hr_leave
-        WHERE (hr_leave.date_from::DATE,hr_leave.date_to::DATE) OVERLAPS ('%s', '%s') and 
+        WHERE (hr_leave.date_from::DATE,hr_leave.date_to::DATE) OVERLAPS ('%s', '%s') and
         state='validate'""" % (today, today)
         cr = self._cr
         cr.execute(query)
@@ -105,7 +105,7 @@ class Employee(models.Model):
         uid = request.session.uid
         employee = self.env['hr.employee'].search([('user_id', '=', uid)], limit=1)
 
-        cr.execute("""select *, 
+        cr.execute("""select *,
         (to_char(dob,'ddd')::int-to_char(now(),'ddd')::int+total_days)%total_days as dif
         from (select he.id, he.name, to_char(he.birthday, 'Month dd') as birthday,
         hj.name as job_id , he.birthday as dob,
@@ -143,7 +143,7 @@ class Employee(models.Model):
             on hda.announcement = ha.id
             left join hr_job_position_announcements hpa
             on hpa.announcement = ha.id
-            where ha.state = 'approved' and 
+            where ha.state = 'approved' and
             ha.date_start <= now()::date and
             ha.date_end >= now()::date and
             (ha.is_announcement = True or
@@ -172,8 +172,8 @@ class Employee(models.Model):
     @api.model
     def get_dept_employee(self):
         cr = self._cr
-        cr.execute("""select department_id, hr_department.name,count(*) 
-from hr_employee join hr_department on hr_department.id=hr_employee.department_id 
+        cr.execute("""select department_id, hr_department.name,count(*)
+from hr_employee join hr_department on hr_department.id=hr_employee.department_id
 group by hr_employee.department_id,hr_department.name""")
         dat = cr.fetchall()
         data = []
@@ -244,6 +244,7 @@ group by hr_employee.department_id,hr_department.name""")
         for result in graph_result:
             result['l_month'] = result['l_month'].split(' ')[:1][0].strip()[:3] + " " + \
                                 result['l_month'].split(' ')[1:2][0]
+
         return graph_result, department_list
 
     def get_work_days_dashboard(self, from_datetime, to_datetime, compute_leaves=False, calendar=None, domain=None):
@@ -256,16 +257,16 @@ group by hr_employee.department_id,hr_department.name""")
             to_datetime = to_datetime.replace(tzinfo=utc)
         from_full = from_datetime - timedelta(days=1)
         to_full = to_datetime + timedelta(days=1)
-        intervals = calendar._attendance_intervals(from_full, to_full, resource)
+        intervals = calendar._attendance_intervals_batch(from_full, to_full, resource)
         day_total = defaultdict(float)
-        for start, stop, meta in intervals:
+        for start, stop, meta in intervals[resource.id]:
             day_total[start.date()] += (stop - start).total_seconds() / 3600
         if compute_leaves:
-            intervals = calendar._work_intervals(from_datetime, to_datetime, resource, domain)
+            intervals = calendar._work_intervals_batch(from_datetime, to_datetime, resource, domain)
         else:
-            intervals = calendar._attendance_intervals(from_datetime, to_datetime, resource)
+            intervals = calendar._attendance_intervals_batch(from_datetime, to_datetime, resource)
         day_hours = defaultdict(float)
-        for start, stop, meta in intervals:
+        for start, stop, meta in intervals[resource.id]:
             day_hours[start.date()] += (stop - start).total_seconds() / 3600
         days = sum(
             float_utils.round(ROUNDING_FACTOR * day_hours[day] / day_total[day]) / ROUNDING_FACTOR
@@ -352,12 +353,12 @@ group by hr_employee.department_id,hr_department.name""")
                 'count': 0
             }
             resign_trend.append(vals)
-        cr.execute('''select to_char(joining_date, 'Month YYYY') as l_month, count(id) from hr_employee 
+        cr.execute('''select to_char(joining_date, 'Month YYYY') as l_month, count(id) from hr_employee
         WHERE joining_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
         AND CURRENT_DATE + interval '1 month - 1 day'
         group by l_month''')
         join_data = cr.fetchall()
-        cr.execute('''select to_char(resign_date, 'Month YYYY') as l_month, count(id) from hr_employee 
+        cr.execute('''select to_char(resign_date, 'Month YYYY') as l_month, count(id) from hr_employee
         WHERE resign_date BETWEEN CURRENT_DATE - INTERVAL '12 months'
         AND CURRENT_DATE + interval '1 month - 1 day'
         group by l_month;''')
@@ -382,10 +383,12 @@ group by hr_employee.department_id,hr_department.name""")
             'name': 'Resign',
             'values': resign_trend
         }]
+
         return graph_result
 
     @api.model
     def get_attrition_rate(self):
+
         month_attrition = []
         monthly_join_resign = self.join_resign_trends()
         month_join = monthly_join_resign[0]['values']
@@ -415,6 +418,8 @@ group by hr_employee.department_id,hr_department.name""")
                 'attrition_rate': round(float(attrition_rate), 2)
             }
             month_attrition.append(vals)
+
+
         return month_attrition
 
 

@@ -283,8 +283,8 @@ var HrDashboard = AbstractAction.extend({
 
     //employee broad factor
 
-    employee_broad_factor: function(e) {
-        console.log("broad_factor")
+     employee_broad_factor: function(e) {
+
         var self = this;
         e.stopPropagation();
         e.preventDefault();
@@ -292,12 +292,13 @@ var HrDashboard = AbstractAction.extend({
             on_reverse_breadcrumb: this.on_reverse_breadcrumb,
         };
         var today = new Date();
+
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = mm + '/' + dd + '/' + yyyy;
-        console.log(this,"loploploplop");
+//        today = mm + '/' + dd + '/' + yyyy;
+
         this.do_action({
             name: _t("Leave Request"),
             type: 'ir.actions.act_window',
@@ -308,6 +309,7 @@ var HrDashboard = AbstractAction.extend({
             target: 'current',
             context:{'order':'duration_display'}
         }, options)
+
     },
 
     //hr timesheets
