@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_account_journal_inherit_form">
+            <field name="name">account.journal.inherit.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="default_debit_account_id"/>
+                    <field name="default_credit_account_id"/>
+                </field>
+            </field>
+        </record>
+
+</odoo>
