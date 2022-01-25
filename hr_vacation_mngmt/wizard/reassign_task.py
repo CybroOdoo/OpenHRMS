@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class ReAssignTask(models.TransientModel):
     _name = 'task.reassign'
+    _description = 'ReAssign Task'
 
     pending_tasks = fields.One2many('pending.task', related='leave_req_id.pending_tasks', string='Pending Tasks', readonly=False)
     leave_req_id = fields.Many2one('hr.leave', string='Leave Request')

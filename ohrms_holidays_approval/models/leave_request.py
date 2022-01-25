@@ -206,6 +206,7 @@ class HrLeaveTypes(models.Model):
 class HrLeaveValidators(models.Model):
     """ Model for leave validators in Leave Types configuration """
     _name = 'hr.holidays.validators'
+    _description = 'HR Leave Validators'
 
     hr_holiday_status = fields.Many2one('hr.leave.type')
 
@@ -218,6 +219,7 @@ class HrLeaveValidators(models.Model):
 class LeaveValidationStatus(models.Model):
     """ Model for leave validators and their status for each leave request """
     _name = 'leave.validation.status'
+    _description = 'Leave Validation Status'
 
     holiday_status = fields.Many2one('hr.leave')
 

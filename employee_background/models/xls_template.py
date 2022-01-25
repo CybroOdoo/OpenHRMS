@@ -5,6 +5,7 @@ from odoo import models
 
 class DefaultTemplateXls(models.AbstractModel):
     _name = 'report.employee_background.default_verification_details'
+    _description = 'Report DefaultTemplateXls'
     # _inherit = 'report.report_xlsx.abstract'
 
     _logger = logging.getLogger(__name__)

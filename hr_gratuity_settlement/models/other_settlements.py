@@ -113,6 +113,7 @@ class OtherSettlements(models.Model):
 
 class SettlementReason(models.Model):
     _name = 'settlement.reason'
+    _description = 'Settlement Reason'
     _rec_name = 'settlement_reason'
 
 

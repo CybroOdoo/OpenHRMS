@@ -4,6 +4,7 @@ from odoo import models, fields
 
 class HrGenerateShift(models.Model):
     _name = 'hr.shift.generate'
+    _description = 'HR Generate Shift'
 
     hr_department = fields.Many2one('hr.department', string="Department", help="Department")
     start_date = fields.Date(string="Start Date", required=True, help="Start date")

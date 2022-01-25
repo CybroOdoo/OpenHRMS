@@ -138,6 +138,7 @@ class HrLeaveRequest(models.Model):
 
 class PendingTask(models.Model):
     _name = 'pending.task'
+    _description = 'Pending Task'
 
     name = fields.Char(string='Task', required=True)
     leave_id = fields.Many2one('hr.leave', string='Leave Request', help="Leave request")

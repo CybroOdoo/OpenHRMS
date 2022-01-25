@@ -7,6 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class HrFlightTicket(models.Model):
     _name = 'hr.flight.ticket'
+    _description = 'HR Flight Ticket'
 
     name = fields.Char()
     employee_id = fields.Many2one('hr.leave', string='Employee', required=True, help="Employee")

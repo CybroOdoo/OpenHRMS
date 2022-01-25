@@ -8,6 +8,7 @@ import requests
 
 class EmployeeVerification(models.Model):
     _name = 'employee.verification'
+    _description = 'Employee Verification'
     _rec_name = 'verification_id'
 
     verification_id = fields.Char('ID', readonly=True, copy=False, help="Verification Id")
