@@ -22,10 +22,10 @@ class HrResignation(models.Model):
                                     help='Department of the employee')
     resign_confirm_date = fields.Date(string="Confirmed Date",
                                       help='Date on which the request is confirmed by the employee.',
-                                      track_visibility="always")
+                                      tracking=True)
     approved_revealing_date = fields.Date(string="Approved Last Day Of Employee",
                                           help='Date on which the request is confirmed by the manager.',
-                                          track_visibility="always")
+                                          tracking=True)
     joined_date = fields.Date(string="Join Date", store=True,
                               help='Joining date of the employee.i.e Start date of the first contract')
 
@@ -35,7 +35,7 @@ class HrResignation(models.Model):
     notice_period = fields.Char(string="Notice Period")
     state = fields.Selection(
         [('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Rejected')],
-        string='Status', default='draft', track_visibility="always")
+        string='Status', default='draft', tracking=True)
     resignation_type = fields.Selection(selection=RESIGNATION_TYPE, help="Select the type of resignation: normal "
                                                                          "resignation or fired by the company")
     read_only = fields.Boolean(string="check field")
