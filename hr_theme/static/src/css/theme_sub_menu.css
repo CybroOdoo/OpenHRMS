@@ -81,9 +81,10 @@
 .oe_menu_text:focus {
     color: #377ab6 !important;
 }
-.badge {
+/*.badge {
     background-color: #1371d7 !important;
-}
+}*/
+
 .o_kanban_view.o_kanban_dashboard.o_salesteam_kanban .o_sales_dashboard > div > table > tbody > tr > td.o_main {
     background-color: #01448b !important;
 }

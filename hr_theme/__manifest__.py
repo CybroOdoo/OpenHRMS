@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Theme',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.0.1',
     'summary': """Curtain Raiser of Open HRMS.""",
     'description': """Open HRMS all set in new colour theme of blues and whites totaling to a new experience""",
     'category': 'Themes',
