@@ -163,12 +163,10 @@ class HrPropertyName(models.Model):
     company_id = fields.Many2one('res.company', 'Company', help="Company",
                                  default=lambda self: self.env.user.company_id)
     property_selection = fields.Selection([('empty', 'No Connection'),
-                                           ('asset', 'Assets'),
                                            ('product', 'Products')],
                                           default='empty',
                                           string='Property From', help="Select the property")
-    asset_true = fields.Boolean('Asset Exists', default=False)
-    asset_id = fields.Many2one('account.asset', string="Assets", help="Assets")
+
     product_id = fields.Many2one('product.product', string='Product', help="Product")
 
 
