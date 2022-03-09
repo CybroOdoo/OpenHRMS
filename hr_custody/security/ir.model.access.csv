@@ -10,4 +10,5 @@
 "access_hr_custody_hr_manager2","hr.custody.user2","model_wizard_return_date","hr.group_hr_user",1,1,1,1
 "access_hr_custody_hr_manager3","hr.custody.user3","model_report_custody","hr.group_hr_user",1,1,1,1
 "access_hr_custody_hr_employee2","hr.custody.employee2","model_wizard_return_date","base.group_user",1,1,1,0
+"access_wizard_reason","hr.wizard.reason","model_wizard_reason","hr.group_hr_manager",1,1,1,1
 
