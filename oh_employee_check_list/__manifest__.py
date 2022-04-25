@@ -25,7 +25,7 @@
     'version': '15.0.1.0.0',
     'summary': """Manages Employee's Entry & Exit Process""",
     'description': """This module is used to remembering the employee's entry and exit progress.""",
-    'live_test_url': 'https://www.youtube.com/watch?v=wtYRhGjhDKE&feature=youtu.be',
+    'live_test_url': 'https://youtu.be/KV_Jb_9AGqU',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',

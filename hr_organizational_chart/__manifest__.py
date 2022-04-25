@@ -29,6 +29,7 @@
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
+    'live_test_url': 'https://youtu.be/dyCzplsAysQ',
     'category': 'Generic Modules/Human Resources',
     'website': "https://www.openhrms.com",
     'depends': ['hr'],

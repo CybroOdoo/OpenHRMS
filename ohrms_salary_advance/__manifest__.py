@@ -27,7 +27,7 @@
         Helps you to manage Advance Salary Request of your company's staff.
         """,
     'category': 'Generic Modules/Human Resources',
-    'live_test_url': 'https://youtu.be/fJ3RyE7RGz4',
+    'live_test_url': 'https://youtu.be/5OfoXRZ3AAY',
     'author': "Cybrosys Techno Solutions,Open HRMS",
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',

@@ -27,6 +27,7 @@
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
+    'live_test_url': "https://youtu.be/tOG92cMa4Rg",
     'depends': ['base', 'hr'],
     'data': [
         'security/ir.model.access.csv',

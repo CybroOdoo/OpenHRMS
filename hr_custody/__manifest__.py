@@ -25,7 +25,7 @@
     'version': '15.0.1.0.0',
     'summary': """Manage the company properties when it is in the custody of an employee""",
     'description': 'Manage the company properties when it is in the custody of an employee',
-    'live_test_url': 'https://www.youtube.com/watch?v=keh3ttj9kws&feature=youtu.be',
+    'live_test_url': 'https://youtu.be/rd62HYzZxFI',
     'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',

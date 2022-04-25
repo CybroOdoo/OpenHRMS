@@ -3,6 +3,7 @@
     'name': 'Open HRMS Gratuity Settlement',
     'version': '15.0.1.0.0',
     'summary': """Employee Gratuity Settlement""",
+    'live_test_url': """https://youtu.be/NITjRN6a6Jc""",
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',

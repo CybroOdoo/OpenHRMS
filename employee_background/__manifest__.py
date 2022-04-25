@@ -22,7 +22,7 @@
     'name': 'Open HRMS Employee Background Verification',
     'version': '15.0.1.0.0',
     'summary': """Verify the background details of an Employee """,
-    'live_test_url': 'https://youtu.be/Fv2yGCNQJIA',
+    'live_test_url': 'https://youtu.be/mH5SzuKHa30',
     'category': 'Generic Modules/Human Resources',
     'description': 'Manage the employees background verification Process employee verification ',
     'author': 'Cybrosys Techno solutions,Open HRMS',

@@ -30,7 +30,7 @@
     'author': "Cybrosys Techno Solutions,Open HRMS",
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
-    'live_test_url': 'https://youtu.be/LdUvXDMkd4Q',
+    'live_test_url': 'https://youtu.be/lAT5cqVZTZI',
     'website': "https://www.openhrms.com",
     'depends': [
         'base', 'hr_payroll_community', 'hr', 'account',

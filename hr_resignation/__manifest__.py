@@ -24,7 +24,7 @@
     'name': 'Open HRMS Resignation',
     'version': '15.0.1.0.0',
     'summary': 'Handle the resignation process of the employee',
-    'live_test_url': 'https://www.youtube.com/watch?v=VuFWGXAdriU&feature=youtu.be',
+    'live_test_url': 'https://youtu.be/BorJthxY_VI',
     'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
