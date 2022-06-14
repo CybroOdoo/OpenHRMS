@@ -167,7 +167,7 @@
 
         <menuitem id="disciplinary_action" name="Disciplinary Actions" parent="hr.menu_hr_root"
                   sequence="23"/>
-        <menuitem id="disciplinary_action_create" action="action_disciplinary_action" groups="hr.group_hr_manager"
+        <menuitem id="disciplinary_action_create" action="action_disciplinary_action" groups="hr.group_hr_user"
                   name="Disciplinary Action" parent="disciplinary_action"
                   sequence="1"/>
 
