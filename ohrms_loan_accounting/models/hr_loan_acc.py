@@ -62,6 +62,8 @@ class HrLoanAcc(models.Model):
                     'credit': amount > 0.0 and amount or 0.0,
                     'loan_id': loan.id,
                 }
+                print("22222",debit_vals)
+                print("8888",credit_vals)
                 vals = {
                     'name': 'Loan For' + ' ' + loan_name,
                     'narration': loan_name,
@@ -71,6 +73,7 @@ class HrLoanAcc(models.Model):
                     'line_ids': [(0, 0, debit_vals), (0, 0, credit_vals)]
                 }
                 move = self.env['account.move'].create(vals)
+                print("0000",move)
                 move.post()
             self.write({'state': 'approve'})
         return True
@@ -119,6 +122,7 @@ class HrLoanAcc(models.Model):
             move = self.env['account.move'].create(vals)
             move.post()
         self.write({'state': 'approve'})
+
         return True
 
 
@@ -138,6 +142,12 @@ class HrLoanLineAcc(models.Model):
             journal_id = line.loan_id.journal_id.id
             debit_account_id = line.loan_id.employee_account_id.id
             credit_account_id = line.loan_id.treasury_account_id.id
+            counter = 0
+            name = 'LOAN/' + ' ' + loan_name + '/' + str(counter)
+            move = self.env['account.move'].search([('name','=',name)])
+            if move:
+                counter = counter + 1
+                name = 'LOAN/' + ' ' + loan_name + '/' + str(counter)
             debit_vals = {
                 'name': loan_name,
                 'account_id': debit_account_id,
@@ -154,8 +164,9 @@ class HrLoanLineAcc(models.Model):
                 'debit': amount < 0.0 and -amount or 0.0,
                 'credit': amount > 0.0 and amount or 0.0,
             }
+
             vals = {
-                'name': 'Loan For' + ' ' + loan_name,
+                'name': name,
                 'narration': loan_name,
                 'ref': reference,
                 'journal_id': journal_id,
@@ -172,6 +183,7 @@ class HrPayslipAcc(models.Model):
 
     def action_payslip_done(self):
         for line in self.input_line_ids:
+            print(line)
             if line.loan_line_id:
                 line.loan_line_id.action_paid_amount()
         return super(HrPayslipAcc, self).action_payslip_done()
