@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import time
-from odoo import models, api, fields
+from odoo import models, api, fields,tools
 from odoo.exceptions import UserError
+from datetime import date, datetime, time
+import babel
+from datetime import date, datetime, time
 
 
 class HrLoanAcc(models.Model):
@@ -36,7 +39,7 @@ class HrLoanAcc(models.Model):
                 raise UserError("You must enter employee account & Treasury account and journal to approve ")
             if not self.loan_lines:
                 raise UserError('You must compute Loan Request before Approved')
-            timenow = time.strftime('%Y-%m-%d')
+            timenow = date.today()
             for loan in self:
                 amount = loan.loan_amount
                 loan_name = loan.employee_id.name
@@ -82,7 +85,7 @@ class HrLoanAcc(models.Model):
             raise UserError("You must enter employee account & Treasury account and journal to approve ")
         if not self.loan_lines:
             raise UserError('You must compute Loan Request before Approved')
-        timenow = time.strftime('%Y-%m-%d')
+        timenow = date.today()
         for loan in self:
             amount = loan.loan_amount
             loan_name = loan.employee_id.name
@@ -125,10 +128,12 @@ class HrLoanAcc(models.Model):
 class HrLoanLineAcc(models.Model):
     _inherit = "hr.loan.line"
 
-    def action_paid_amount(self):
+    def action_paid_amount(self,month):
         """This create the account move line for payment of each installment.
             """
-        timenow = time.strftime('%Y-%m-%d')
+        timenow = date.today()
+
+
         for line in self:
             if line.loan_id.state != 'approve':
                 raise UserError("Loan Request must be approved")
@@ -138,6 +143,8 @@ class HrLoanLineAcc(models.Model):
             journal_id = line.loan_id.journal_id.id
             debit_account_id = line.loan_id.employee_account_id.id
             credit_account_id = line.loan_id.treasury_account_id.id
+
+            name = 'LOAN/' + ' ' + loan_name + '/' + month
             debit_vals = {
                 'name': loan_name,
                 'account_id': debit_account_id,
@@ -155,14 +162,16 @@ class HrLoanLineAcc(models.Model):
                 'credit': amount > 0.0 and amount or 0.0,
             }
             vals = {
-                'name': 'Loan For' + ' ' + loan_name,
+                'name': name,
                 'narration': loan_name,
                 'ref': reference,
                 'journal_id': journal_id,
                 'date': timenow,
                 'line_ids': [(0, 0, debit_vals), (0, 0, credit_vals)]
             }
+            print("0000",vals)
             move = self.env['account.move'].create(vals)
+            print(vals)
             move.post()
         return True
 
@@ -172,6 +181,10 @@ class HrPayslipAcc(models.Model):
 
     def action_payslip_done(self):
         for line in self.input_line_ids:
+            date_from = self.date_from
+            tym = datetime.combine(fields.Date.from_string(date_from), time.min)
+            locale = self.env.context.get('lang') or 'en_US'
+            month = tools.ustr(babel.dates.format_date(date=tym, format='MMMM-y', locale=locale))
             if line.loan_line_id:
-                line.loan_line_id.action_paid_amount()
+                line.loan_line_id.action_paid_amount(month)
         return super(HrPayslipAcc, self).action_payslip_done()
