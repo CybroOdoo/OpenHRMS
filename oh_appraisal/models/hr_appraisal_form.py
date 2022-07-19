@@ -21,6 +21,8 @@
 #
 ###################################################################################
 from odoo import models, fields, api, SUPERUSER_ID
+import werkzeug
+from odoo.addons.base.models.ir_ui_view import keep_query
 
 
 class HrAppraisalForm(models.Model):
@@ -107,30 +109,21 @@ class HrAppraisalForm(models.Model):
     def action_start_appraisal(self):
         """ This function will start the appraisal by sending emails to the corresponding employees
             specified in the appraisal"""
+
         send_count = 0
         appraisal_reviewers_list = self.fetch_appraisal_reviewer()
         for appraisal_reviewers, survey_id in appraisal_reviewers_list:
             for reviewers in appraisal_reviewers:
-                print("survey_id",survey_id.get_start_url())
-                url = survey_id.get_start_url()
-                response = self.emp_survey_id._create_answer(survey_id=self.emp_survey_id.id,
-                                                             deadline=self.appraisal_deadline,
-                                                             partner_id=self.emp_id.user_id.partner_id.id,
-                                                             email=reviewers.work_email, appraisal_id=self.ids[0])
-                print("response",response)
-                # if not self.response_id:
-                #     response = self.survey_id._create_answer(partner=self.partner_id)
-                #     self.response_id = response.id
-                # else:
-                #     response = self.response_id
-                # # grab the token of the response and start surveying
-                # return self.survey_id.action_start_survey(answer=response)
-                # token = response.token
-                # if token:
-                url = url
+                baseurl = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                response = survey_id._create_answer(survey_id=survey_id.id,
+                                                    deadline=self.appraisal_deadline,
+                                                    partner=reviewers.user_id.partner_id,
+                                                    email=reviewers.work_email, appraisal_id=self.ids[0])
+
+                url = response.get_start_url()
                 mail_content = "Dear " + reviewers.name + "," + "<br>Please fill out the following survey " \
                                                                 "related to " + self.emp_id.name + "<br>Click here to access the survey.<br>" + \
-                               str(url) + "<br>Post your response for the appraisal till : " \
+                               baseurl + str(url) + "<br>Post your response for the appraisal till : " \
                                + str(self.appraisal_deadline)
                 values = {'model': 'hr.appraisal', 'res_id': self.ids[0], 'subject': survey_id.title,
                           'body_html': mail_content, 'parent_id': None, 'email_from': self.env.user.email or None,
@@ -143,8 +136,8 @@ class HrAppraisalForm(models.Model):
                     self.state = rec.id
                     self.check_sent = True
                     self.check_draft = False
+
             if self.hr_emp and self.emp_survey_id:
-                print(self.emp_id.work_email)
                 self.ensure_one()
                 if not self.response_id:
                     response = self.emp_survey_id._create_answer(survey_id=self.emp_survey_id.id,
@@ -176,9 +169,9 @@ class HrAppraisalForm(models.Model):
         }
 
     def _compute_completed_survey(self):
-        print("self.ids[0]",self.ids)
-        answers = self.env['survey.user_input'].search([('state', '=', 'done'), ('appraisal_id', 'in', self.ids)])
-        self.tot_comp_survey = len(answers)
+        for rec in self:
+            answers = self.env['survey.user_input'].search([('state', '=', 'done'), ('appraisal_id', '=', rec.id)])
+            rec.tot_comp_survey = len(answers)
 
 
 class AppraisalStages(models.Model):
