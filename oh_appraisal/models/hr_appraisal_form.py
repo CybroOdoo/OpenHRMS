@@ -104,22 +104,26 @@ class HrAppraisalForm(models.Model):
             appraisal_reviewers.append((self.hr_colleague_id, self.colleague_survey_id))
         return appraisal_reviewers
 
+
     def action_start_appraisal(self):
         """ This function will start the appraisal by sending emails to the corresponding employees
             specified in the appraisal"""
+
         send_count = 0
         appraisal_reviewers_list = self.fetch_appraisal_reviewer()
         for appraisal_reviewers, survey_id in appraisal_reviewers_list:
             for reviewers in appraisal_reviewers:
-                url = survey_id.get_start_url()
-                response = self.emp_survey_id._create_answer(survey_id=self.emp_survey_id.id,
-                                                             deadline=self.appraisal_deadline,
-                                                             partner_id=self.emp_id.user_id.partner_id.id,
-                                                             email=reviewers.work_email, appraisal_id=self.ids[0])
-                url = url
+                baseurl = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                response = survey_id._create_answer(survey_id=survey_id.id,
+                                                    deadline=self.appraisal_deadline,
+                                                    partner=reviewers.user_id.partner_id,
+                                                    email=reviewers.work_email, appraisal_id=self.ids[0])
+
+                url = response.get_start_url()
+                print("888888888",url)
                 mail_content = "Dear " + reviewers.name + "," + "<br>Please fill out the following survey " \
                                                                 "related to " + self.emp_id.name + "<br>Click here to access the survey.<br>" + \
-                               str(url) + "<br>Post your response for the appraisal till : " \
+                               baseurl + str(url) + "<br>Post your response for the appraisal till : " \
                                + str(self.appraisal_deadline)
                 values = {'model': 'hr.appraisal', 'res_id': self.ids[0], 'subject': survey_id.title,
                           'body_html': mail_content, 'parent_id': None, 'email_from': self.env.user.email or None,
@@ -132,6 +136,7 @@ class HrAppraisalForm(models.Model):
                     self.state = rec.id
                     self.check_sent = True
                     self.check_draft = False
+
             if self.hr_emp and self.emp_survey_id:
                 self.ensure_one()
                 if not self.response_id:
@@ -147,10 +152,8 @@ class HrAppraisalForm(models.Model):
 
     def action_get_answers(self):
         """ This function will return all the answers posted related to this appraisal."""
-
-        tree_id = self.env.ref('survey.survey_user_input_view_tree').id
-        form_id = self.env.ref('survey.survey_user_input_view_form').id
-
+        tree_id = self.env['ir.model.data']._xmlid_to_res_id('survey.survey_user_input_view_tree') or False
+        form_id = self.env['ir.model.data']._xmlid_to_res_id('survey.survey_user_input_view_form') or False
         return {
             'model': 'ir.actions.act_window',
             'name': 'Answers',
@@ -163,8 +166,9 @@ class HrAppraisalForm(models.Model):
         }
 
     def _compute_completed_survey(self):
-        answers = self.env['survey.user_input'].search([('state', '=', 'done'), ('appraisal_id', 'in', self.ids)])
-        self.tot_comp_survey = len(answers)
+        for rec in self:
+            answers = self.env['survey.user_input'].search([('state', '=', 'done'), ('appraisal_id', '=', rec.id)])
+            rec.tot_comp_survey = len(answers)
 
 
 class AppraisalStages(models.Model):

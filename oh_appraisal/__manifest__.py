@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': "Open HRMS Employee Appraisal",
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.0.1',
     'summary': """Roll out appraisal plans and get the best of your workforce""",
     'description': """Roll out appraisal plans and get the best of your workforce""",
     'live_test_url': 'https://www.youtube.com/watch?v=cw4Bs8-SXdY&feature=youtu.be',
@@ -40,7 +40,7 @@
         'data/hr_appraisal_stages.xml'
     ],
     'demo': ['data/demo_data.xml'],
-    'images': ["static/description/banner.png"],
+    'images': ["static/description/website_repeat_sale.png"],
     'license': "AGPL-3",
     'installable': True,
     'application': False,
