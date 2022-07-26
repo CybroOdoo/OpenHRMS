@@ -4,16 +4,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 11:59+0000\n"
-"PO-Revision-Date: 2020-02-11 11:59+0000\n"
+"POT-Creation-Date: 2022-06-27 09:25+0000\n"
+"PO-Revision-Date: 2022-06-27 09:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: hr_contract_types
+#: model:ir.model,name:hr_contract_types.model_hr_contract
+msgid "Contract"
+msgstr "عقد"
 
 #. module: hr_contract_types
 #: model:ir.model,name:hr_contract_types.model_hr_contract_type
@@ -33,17 +38,17 @@ msgstr "أنواع العقود"
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type__create_uid
 msgid "Created by"
-msgstr "انشأ من قبل"
+msgstr "أنشئ بواسطة"
 
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type__create_date
 msgid "Created on"
-msgstr "تم إنشاؤها على"
+msgstr "أنشئ في"
 
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type__display_name
 msgid "Display Name"
-msgstr "اسم العرض"
+msgstr "اسم العرض "
 
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract__type_id
@@ -51,9 +56,9 @@ msgid "Employee Category"
 msgstr "فئة الموظف"
 
 #. module: hr_contract_types
-#: model:ir.model,name:hr_contract_types.model_hr_contract
-msgid "Employee Contract"
-msgstr "عقد الموظف"
+#: model:ir.model.fields,help:hr_contract_types.field_hr_contract__type_id
+msgid "Employee category"
+msgstr "فئة الموظف"
 
 #. module: hr_contract_types
 #: model:ir.model.fields,help:hr_contract_types.field_hr_contract_type__sequence
@@ -63,7 +68,7 @@ msgstr ".يعطي التسلسل عند عرض قائمة العقد"
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type__id
 msgid "ID"
-msgstr "هوية شخصية"
+msgstr "المُعرف"
 
 #. module: hr_contract_types
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type____last_update
@@ -79,6 +84,11 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:hr_contract_types.field_hr_contract_type__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
+
+#. module: hr_contract_types
+#: model:ir.model.fields,help:hr_contract_types.field_hr_contract_type__name
+msgid "Name"
+msgstr "اسم"
 
 #. module: hr_contract_types
 #: model_terms:ir.ui.view,arch_db:hr_contract_types.hr_contract_type_view_search
