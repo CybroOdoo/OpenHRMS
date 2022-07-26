@@ -9,3 +9,8 @@
 #### Version 15.0.1.0.2
 ##### FIX
 - Bug Fix
+
+#### 26.07.2022
+#### Version 15.0.1.1.2
+##### UPDATE
+- Change the PO file
