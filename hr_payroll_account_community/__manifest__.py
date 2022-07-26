@@ -8,7 +8,7 @@
           Generic Payroll system Integrated with Accounting,Expense Encoding,Payment Encoding,Company Contribution Management
     """,
     'description': """Odoo15 Payroll Accounting,Odoo15 Payroll,Odoo 15,Payroll Accounting,Accounting""",
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.1.0',
     'author': 'Odoo SA,Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
