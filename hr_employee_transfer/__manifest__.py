@@ -23,7 +23,7 @@
 
 {
     'name': 'Open HRMS Branch Transfer',
-    'version': '15.0.1.0.1',
+    'version': '15.0.1.1.1',
     'summary': 'Employee transfer between branches',
     'live_test_url': 'https://youtu.be/Qva8kW6xn4c',
     'category': 'Generic Modules/Human Resources',
