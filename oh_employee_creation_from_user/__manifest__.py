@@ -21,7 +21,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employees From User',
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.1.0',
     'summary': 'Automatically Creates Employee While Creating User',
     'live_test_url': 'https://youtu.be/_BJKt6zGjcs',
     'description': 'This module helps you to create employees automatically while creating users',
