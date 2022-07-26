@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Leave Request Aliasing',
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.1.0',
     'summary': """Allows You To Create Leave Request Automatically From Incoming Mails""",
     'description': 'This module allows you to create leave request directly from incoming mails.',
     'live_test_url': 'https://youtu.be/jQFAP20k_Wc',
