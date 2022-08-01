@@ -9,7 +9,7 @@ class HrLeave(models.Model):
     leave_approvals = fields.One2many('leave.validation.status',
                                       'holiday_status',
                                       string='Leave Validators',
-                                      track_visibility='always',
+                                      tracking=True,
                                       help="Leave approvals")
     multi_level_validation = fields.Boolean(
         string='Multiple Level Approval',
@@ -206,6 +206,7 @@ class HrLeaveTypes(models.Model):
 class HrLeaveValidators(models.Model):
     """ Model for leave validators in Leave Types configuration """
     _name = 'hr.holidays.validators'
+    _description = 'HR Leave Validators'
 
     hr_holiday_status = fields.Many2one('hr.leave.type')
 
@@ -218,6 +219,7 @@ class HrLeaveValidators(models.Model):
 class LeaveValidationStatus(models.Model):
     """ Model for leave validators and their status for each leave request """
     _name = 'leave.validation.status'
+    _description = 'Leave Validation Status'
 
     holiday_status = fields.Many2one('hr.leave')
 
@@ -226,7 +228,7 @@ class LeaveValidationStatus(models.Model):
                                        domain="[('share','=',False)]")
     validation_status = fields.Boolean(string='Approve Status', readonly=True,
                                        default=False,
-                                       track_visibility='always', help="Status")
+                                       tracking=True, help="Status")
     leave_comments = fields.Text(string='Comments', help="Comments")
 
     @api.onchange('validating_users')

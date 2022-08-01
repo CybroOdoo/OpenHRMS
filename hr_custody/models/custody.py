@@ -114,28 +114,28 @@ class HrCustody(models.Model):
     rejected_reason = fields.Text(string='Rejected Reason', copy=False, readonly=1, help="Reason for the rejection")
     renew_rejected_reason = fields.Text(string='Renew Rejected Reason', copy=False, readonly=1,
                                         help="Renew rejected reason")
-    date_request = fields.Date(string='Requested Date', required=True, track_visibility='always', readonly=True,
+    date_request = fields.Date(string='Requested Date', required=True, tracking=True, readonly=True,
                                help="Requested date",
                                states={'draft': [('readonly', False)]}, default=datetime.now().strftime('%Y-%m-%d'))
     employee = fields.Many2one('hr.employee', string='Employee', required=True, readonly=True, help="Employee",
                                default=lambda self: self.env.user.employee_id.id,
                                states={'draft': [('readonly', False)]})
-    purpose = fields.Char(string='Reason', track_visibility='always', required=True, readonly=True, help="Reason",
+    purpose = fields.Char(string='Reason', tracking=True, required=True, readonly=True, help="Reason",
                           states={'draft': [('readonly', False)]})
     custody_name = fields.Many2one('custody.property', string='Property', required=True, readonly=True,
                                    help="Property name",
                                    states={'draft': [('readonly', False)]})
-    return_date = fields.Date(string='Return Date', required=True, track_visibility='always', readonly=True,
+    return_date = fields.Date(string='Return Date', required=True, tracking=True, readonly=True,
                               help="Return date",
                               states={'draft': [('readonly', False)]})
-    renew_date = fields.Date(string='Renewal Return Date', track_visibility='always',
+    renew_date = fields.Date(string='Renewal Return Date', tracking=True,
                              help="Return date for the renewal", readonly=True, copy=False)
     notes = fields.Html(string='Notes')
     renew_return_date = fields.Boolean(default=False, copy=False)
     renew_reject = fields.Boolean(default=False, copy=False)
     state = fields.Selection([('draft', 'Draft'), ('to_approve', 'Waiting For Approval'), ('approved', 'Approved'),
                               ('returned', 'Returned'), ('rejected', 'Refused')], string='Status', default='draft',
-                             track_visibility='always')
+                             tracking=True)
     mail_send = fields.Boolean(string="Mail Send")
 
 

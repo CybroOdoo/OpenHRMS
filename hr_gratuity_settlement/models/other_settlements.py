@@ -15,7 +15,7 @@ class OtherSettlements(models.Model):
         ('validate', 'Validated'),
         ('approve', 'Approved'),
         ('cancel', 'Cancelled'),
-    ], default='draft', track_visibility='onchange')
+    ], default='draft', tracking=True)
 
     name = fields.Char(string='Reference', required=True, copy=False, readonly=True,
                        default=lambda self: _('New'))
@@ -113,6 +113,7 @@ class OtherSettlements(models.Model):
 
 class SettlementReason(models.Model):
     _name = 'settlement.reason'
+    _description = 'Settlement Reason'
     _rec_name = 'settlement_reason'
 
 

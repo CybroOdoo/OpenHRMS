@@ -20,7 +20,7 @@ class Regular(models.Model):
                                   required=True, help='Employee')
     state_select = fields.Selection([('draft', 'Draft'), ('requested', 'Requested'), ('reject', 'Rejected'),
                                      ('approved', 'Approved')
-                                     ], default='draft', track_visibility='onchange', string='State',
+                                     ], default='draft', tracking=True, string='State',
                                     help='State')
 
     

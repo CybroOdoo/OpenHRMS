@@ -8,6 +8,7 @@ from odoo.exceptions import UserError
 
 class SalaryAdvancePayment(models.Model):
     _name = "salary.advance"
+    _description = 'Salary Advance Payment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', readonly=True, default=lambda self: 'Adv/')
@@ -28,7 +29,7 @@ class SalaryAdvancePayment(models.Model):
                               ('waiting_approval', 'Waiting Approval'),
                               ('approve', 'Approved'),
                               ('cancel', 'Cancelled'),
-                              ('reject', 'Rejected')], string='Status', default='draft', track_visibility='onchange')
+                              ('reject', 'Rejected')], string='Status', default='draft', tracking=True)
     debit = fields.Many2one('account.account', string='Debit Account')
     credit = fields.Many2one('account.account', string='Credit Account')
     journal = fields.Many2one('account.journal', string='Journal')

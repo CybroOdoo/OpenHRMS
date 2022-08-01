@@ -5,6 +5,7 @@ from odoo import models, fields, api
 
 class InsurancePolicy(models.Model):
     _name = 'insurance.policy'
+    _description = 'Insurance Policy'
 
     name = fields.Char(string='Name', required=True)
     note_field = fields.Html(string='Comment', help="Notes for the insurance policy if any")
