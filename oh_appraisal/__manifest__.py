@@ -40,7 +40,7 @@
         'data/hr_appraisal_stages.xml'
     ],
     'demo': ['data/demo_data.xml'],
-    'images': ["static/description/website_repeat_sale.png"],
+    'images': ["static/description/banner.png"],
     'license': "AGPL-3",
     'installable': True,
     'application': False,
