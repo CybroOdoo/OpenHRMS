@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Overtime',
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.0.1',
     'summary': 'Manage Employee Overtime',
     'description': """
         Helps you to manage Employee Overtime.

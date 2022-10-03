@@ -122,6 +122,7 @@ class HrOverTime(models.Model):
     def _get_hour_amount(self):
         if self.overtime_type_id.rule_line_ids and self.duration_type == 'hours':
             for recd in self.overtime_type_id.rule_line_ids:
+
                 if recd.from_hrs < self.days_no_tmp <= recd.to_hrs and self.contract_id:
                     if self.contract_id.over_hour:
                         cash_amount = self.contract_id.over_hour * recd.hrs_amount

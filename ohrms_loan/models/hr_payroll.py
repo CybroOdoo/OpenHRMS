@@ -48,6 +48,7 @@ class HrPayslip(models.Model):
             worked_days_lines += worked_days_lines.new(r)
         self.worked_days_line_ids = worked_days_lines
         if contracts:
+            print(date_from, date_to, '001qq')
             input_line_ids = self.get_inputs(contracts, date_from, date_to)
             input_lines = self.input_line_ids.browse([])
             for r in input_line_ids:
@@ -55,10 +56,11 @@ class HrPayslip(models.Model):
             self.input_line_ids = input_lines
         return
 
-    def get_inputs(self, contract_ids, date_from, date_to):
+    def get_inputs(self, contract_ids, date_to, date_from):
         """This Compute the other inputs to employee payslip.
                            """
         res = super(HrPayslip, self).get_inputs(contract_ids, date_from, date_to)
+
         contract_obj = self.env['hr.contract']
         emp_id = contract_obj.browse(contract_ids[0].id).employee_id
         lon_obj = self.env['hr.loan'].search([('employee_id', '=', emp_id.id), ('state', '=', 'approve')])
