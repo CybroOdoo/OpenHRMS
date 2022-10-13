@@ -33,6 +33,7 @@ class CompanyPolicy(models.Model):
 
 class PolicyWizard(models.TransientModel):
     _name = 'res.company.policy'
+    _description = 'Policy Wizard'
 
     company_id = fields.Many2one('res.company', help="Company")
     policy_info = fields.Html(related='company_id.company_info')

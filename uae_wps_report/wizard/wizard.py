@@ -9,6 +9,7 @@ from odoo.tools import date_utils, xlsxwriter, io
 
 class Wizard(models.TransientModel):
     _name = 'wps.wizard'
+    _description = 'WPS Wizard'
 
     report_file = fields.Char()
     name = fields.Char(string="File Name")
