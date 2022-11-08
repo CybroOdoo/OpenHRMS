@@ -1,0 +1,82 @@
+<odoo>
+    <data noupdate="0">
+        <record id="department_one" model="hr.department">
+            <field name="name">Marketing</field>
+        </record>
+        <record id="work_data" model="hr.work.location">
+            <field name="name">Building 3, Third Floor</field>
+            <field name="address_id" ref="base.main_partner"/>
+        </record>
+        <record id="employee_discplinary_tracking" model="hr.employee">
+            <field name="name">Jack Mark Rose</field>
+            <field name="job_title">Sales Manager</field>
+            <field name="work_location_id" ref="work_data"/>
+            <field name="work_phone">(376)-3852-7987</field>
+            <field name="work_email">jack@example.com</field>
+        </record>
+        <!-- Discipline Category Creation -->
+        <record id="discipline_categories_one" model="discipline.category">
+            <field name="name">Violation of Company Rules</field>
+            <field name="code">VIOLATION</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+        <record id="discipline_categories_two" model="discipline.category">
+            <field name="name">Mis-behaviour to Co-workers</field>
+            <field name="code">102</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="discipline_categories_three" model="discipline.category">
+            <field name="name">Damage to company properties</field>
+            <field name="code">103</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+        <record id="discipline_category_instruction" model="discipline.category">
+            <field name="code">INSTRUCTION</field>
+            <field name="name">Not Follow Management Instructions</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+        <record id="discipline_category_performence" model="discipline.category">
+            <field name="code">INSTRUCTION</field>
+            <field name="name">Work Performance Issues</field>
+            <field name="category_type">disciplinary</field>
+        </record>
+        <!-- Action Category Creation -->
+        <record id="action_category_noact" model="discipline.category">
+            <field name="code">NOACTION</field>
+            <field name="name">No Action</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="action_category_verb" model="discipline.category">
+            <field name="code">VERBAL</field>
+            <field name="name">Verbal Warning</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="action_category_wrt" model="discipline.category">
+            <field name="code">WRITTEN</field>
+            <field name="name">Written Warning</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="action_category_meet" model="discipline.category">
+            <field name="code">MEET</field>
+            <field name="name">Meet the Manager</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="action_category_susp" model="discipline.category">
+            <field name="code">SUSPENSION</field>
+            <field name="name">Suspend the Employee</field>
+            <field name="name">Suspend the Employee for one Week</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="action_category_term" model="discipline.category">
+            <field name="code">TERMINATE</field>
+            <field name="name">Terminate the Employee</field>
+            <field name="category_type">action</field>
+        </record>
+        <record id="disciplinary_action_one" model="disciplinary.action">
+            <field name="employee_name" ref="employee_discplinary_tracking"/>
+            <field name="department_name" ref="department_one"/>
+            <field name="joined_date">2020-03-02</field>
+            <field name="discipline_reason" ref="discipline_categories_one"/>
+        </record>
+    </data>
+</odoo>

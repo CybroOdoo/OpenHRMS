@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_holidays_status_validators_users" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation.users</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='holiday_type']" position="replace">
+                <field name="holiday_type" string="Mode"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="replace">
+                <field name="employee_id" attrs="{
+                        'required': [('holiday_type', '=', 'employee')],
+                        'invisible': [('holiday_type', '!=', 'employee')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='mode_company_id']" position="replace">
+                <field name="mode_company_id" attrs="{
+                        'required': [('holiday_type', '=', 'company')],
+                        'invisible': [('holiday_type', '!=', 'company')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="replace">
+                <field name="category_id" attrs="{
+                        'required': [('holiday_type', '=', 'category')],
+                        'invisible': [('holiday_type', '!=','category')]
+                        }"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="replace">
+                <field name="department_id" attrs="{
+                        'required': [('holiday_type', '=', 'department')],
+                        'invisible': [('holiday_type', 'not in', ('employee', 'department'))]
+                        }"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_holidays_status_double_validation" model="ir.ui.view">
+        <field name="name">hr.leave.type.double.validation</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='responsible_id']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('leave_validation_type', 'in', ['no_validation', 'manager','multi'])],
+                    'required': [('leave_validation_type', 'in', ['hr', 'both'])]}
+                </attribute>
+            </xpath>
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook attrs="{'invisible': [('leave_validation_type','!=','multi')]}">
+                    <page string="Leave validation">
+                        <field name="leave_validators" mode="tree">
+                            <tree string="Users" editable="bottom">
+                                <field name="holiday_validators"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_status_validators_leave_create" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation.create.leave</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook attrs="{'invisible': [('multi_level_validation', '=', False)]}">
+                    <page string="Validation Status">
+                        <field name="leave_approvals" mode="tree">
+                            <tree string="Users" editable="false" create="false" delete="false">
+                                <field name="validating_users"/>
+                                <field name="validation_status"/>
+                                <field name="leave_comments"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="validating_users"/>
+                                    <field name="leave_comments"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button string="Approve" name="action_approve" states="confirm" type="object" class="oe_highlight"
+                />
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="replace">
+                <button string="Refuse" name="action_refuse" states="confirm,validate,validate1" type="object"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_status_validators" model="ir.ui.view">
+        <field name="name">hr.holidays.double.validation</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook attrs="{'invisible': [('multi_level_validation', '=', False)]}">
+                    <page string="Validation Status">
+                        <field name="leave_approvals" mode="tree">
+                            <tree string="Users" editable="false" create="false" delete="false">
+                                <field name="validating_users"/>
+                                <field name="validation_status"/>
+                                <field name="leave_comments"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="validating_users"/>
+                                    <field name="leave_comments"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button string="Approve" name="action_approve" states="confirm" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="replace">
+                <button string="Refuse" name="action_refuse" states="confirm,validate,validate1" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="open_holidays_to_approve" model="ir.actions.server">
+        <field name="name">Approvals</field>
+        <field name="model_id" ref="model_hr_leave"/>
+        <field name="binding_model_id" ref="model_hr_leave"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = model._get_approval_requests()
+        </field>
+    </record>
+
+
+    <menuitem
+            id="menu_open_leave_approvals"
+            name="Approval Requests"
+            parent="hr_holidays.menu_hr_holidays_approvals"
+            action="open_holidays_to_approve"
+            sequence="1"/>
+
+</odoo>

@@ -1,0 +1,23 @@
+.oe_company_policy{
+    color: white;
+    margin-left: 50px;
+    background: #517aa1;
+    border-color:white;
+    width: 150px;
+}
+#company_policy{
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-third:hover {
+    font-weight: bolder;
+    color: #5c5555;
+    background-color: #8ebde7;
+    border-color:white;
+    width: 150px;
+}
+
+.dummy{
+    height:60px;
+}

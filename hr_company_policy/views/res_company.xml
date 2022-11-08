@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="res_company_inherited_company_policy" model="ir.ui.view">
+            <field name="name">Company policy</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <notebook>
+                    <page string="Company Policy">
+                        <field name="company_info" widget="html"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="res_company_policy_wizard" model="ir.ui.view">
+            <field name="name">Company policy wizard</field>
+            <field name="model">res.company.policy</field>
+            <field name="arch" type="xml">
+                <form edit="0" create="0" delete="0">
+                    <field name="company_id" invisible="1"/>
+                    <field name="policy_info" widget="html"/>
+                    <footer>
+
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

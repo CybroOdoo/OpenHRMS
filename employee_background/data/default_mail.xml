@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="assign_agency_email_template" model="mail.template">
+            <field name="name">Assign verification e-mail template</field>
+            <field name="subject">Verification of ${object.employee.name}</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">${object.agency.email}</field>
+            <field name="report_name">${(object.resume_applicant or '').replace('/','_')}</field>
+            <field name="model_id" ref="model_employee_verification"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+              <p>Dear ${object.agency.name},<p>
+              <p>A new request is created to verify our employee <b> ${object.employee.name} </b> .
+               To complete the Employee Verification process collect the required details and submit it as soon as possible.<p>
+              <p>You can reply to this email if you have any questions.</p>
+              <p>Thank you,</p>
+            ]]>
+	        </field>
+        </record>
+    </data>
+</odoo>

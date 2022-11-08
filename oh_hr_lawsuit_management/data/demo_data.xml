@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="company_one" model="res.company">
+            <field name="name">MyCompany</field>
+        </record>
+
+        <record id="employee_lawsuite_id" model="hr.employee">
+              <field name="name">Roshan Andrews</field>
+              <field name="job_title">Chief Medical Officer</field>
+              <field name="work_location_id" ref="hr.work_location_1"/>
+              <field name="work_phone">(376)-3852-7863</field>
+              <field name="work_email">joe@example.com</field>
+              <field name="image_1920" type="base64"
+                     file="oh_hr_lawsuit_management/static/image/images.jpeg"/>
+        </record>
+
+
+        <record id="lawyer_one" model="res.partner">
+            <field name="name">Abc company</field>
+        </record>
+
+        <record id="lawyer_two" model="res.partner">
+            <field name="name">ATG</field>
+        </record>
+
+        <record id="lawyer_three" model="res.partner">
+            <field name="name">Doriz</field>
+        </record>
+
+        <record id="legal_action_one" model="hr.lawsuit">
+            <field name="ref_no">RC01</field>
+            <field name="party1" ref="company_one"/>
+            <field name="party2">employee</field>
+            <field name="employee_id" ref="employee_lawsuite_id"/>
+            <field name="court_name">court1</field>
+            <field name="judge">Judge1</field>
+            <field name="lawyer" ref="lawyer_one"/>
+            <field name="requested_date">2020-03-02</field>
+            <field name="hearing_date">2020-05-02</field>
+        </record>
+
+
+    </data>
+</odoo>
