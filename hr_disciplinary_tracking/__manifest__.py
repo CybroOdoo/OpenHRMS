@@ -1,5 +1,5 @@
 {
-    'name': 'Enter Price Open HRMS Disciplinary Tracking',
+    'name': 'Open HRMS Disciplinary Tracking',
     'version': '15.0.1.0.1',
     'summary': """Employee Disciplinary Tracking Management""",
     'live_test_url': 'https://youtu.be/LFuw2iY4Deg',
