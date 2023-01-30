@@ -21,7 +21,7 @@
 #
 ###################################################################################
 {
-    'name': 'Enter Price Open HRMS Disciplinary Tracking',
+    'name': 'Open HRMS Disciplinary Tracking',
     'version': '16.0.1.0.0',
     'summary': """Employee Disciplinary Tracking Management""",
     'live_test_url': 'https://youtu.be/LFuw2iY4Deg',
