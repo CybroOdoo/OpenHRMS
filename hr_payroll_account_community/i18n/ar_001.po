@@ -155,13 +155,13 @@ msgstr "حساب الضرائب"
 #: code:addons/hr_payroll_account_community/models/hr_payroll_account.py:0
 #, python-format
 msgid "The Expense Journal \"%s\" has not properly configured the Credit Account!"
-msgstr "لم تقم مجلة المصروفات \ "٪ s \" بتكوين حساب الائتمان بشكل صحيح!"
+msgstr "لم تقم مجلة المصروفات \"٪s\" بتكوين حساب الائتمان بشكل صحيح!"
 
 #. module: hr_payroll_account_community
 #: code:addons/hr_payroll_account_community/models/hr_payroll_account.py:0
 #, python-format
 msgid "The Expense Journal \"%s\" has not properly configured the Debit Account!"
-msgstr "لم تقم مجلة المصاريف \ "٪ s \" بتكوين حساب الخصم بشكل صحيح!"
+msgstr "لم تقم مجلة المصاريف \"٪s\" بتكوين حساب الخصم بشكل صحيح!"
 
 #. module: hr_payroll_account_community
 #: model:ir.model.fields,help:hr_payroll_account_community.field_hr_payslip_run__journal_id
