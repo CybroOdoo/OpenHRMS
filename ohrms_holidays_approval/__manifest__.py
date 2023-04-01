@@ -33,8 +33,13 @@
     'data': [
         'views/leave_request.xml',
         'security/ir.model.access.csv',
-        'security/security.xml'
+        'security/security.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'ohrms_holidays_approval/static/src/xml/time_off_card.xml',
+        ],
+    },
     'images': ['static/description/banner.png'],
     'license': "AGPL-3",
     'installable': True,

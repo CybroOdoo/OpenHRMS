@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template_ohrms" xml:space="preserve">
+    <t t-name="ohrms_holidays_approval.TimeOffCard" t-inherit="hr_holidays.TimeOffCard" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-set='duration']" position="replace">
+            <t t-set="duration" t-value="data.remaining_leaves" />
+        </xpath>
+    </t>
+</templates>
+
+
