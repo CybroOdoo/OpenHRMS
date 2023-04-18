@@ -23,7 +23,7 @@
 
 {
     'name': 'HR Organizational Chart',
-    'version': '16.0.1.0.0',
+    'version': '16.0.1.0.1',
     'summary': 'HR Employees organizational chart',
     'description': 'HR Employees organizational chart',
     'author': 'Cybrosys Techno solutions,Open HRMS',

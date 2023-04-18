@@ -28,7 +28,7 @@ from odoo.http import request
 
 class EmployeeChart(http.Controller):
 
-    @http.route('/get/parent/colspan', type='json', auth='public', method=['POST'], csrf=False)
+    @http.route('/get/parent/colspan', type='json', auth='public', methods=['POST'], csrf=False)
     def get_col_span(self, emp_id):
         if emp_id:
             employee = request.env['hr.employee'].sudo().browse(int(emp_id))
@@ -36,7 +36,7 @@ class EmployeeChart(http.Controller):
                 child_count = len(employee.child_ids) * 2
                 return child_count
 
-    @http.route('/get/parent/employee', type='json', auth='public', method=['POST'], csrf=False)
+    @http.route('/get/parent/employee', type='json', auth='public', methods=['POST'], csrf=False)
     def get_employee_ids(self):
         employees = request.env['hr.employee'].sudo().search([('parent_id', '=', False)])
         names = []
@@ -87,7 +87,7 @@ class EmployeeChart(http.Controller):
             nodes = child_nodes + """</tr>"""
             return nodes
 
-    @http.route('/get/parent/child', type='http', auth='user', method=['POST'], csrf=False)
+    @http.route('/get/parent/child', type='http', auth='user', methods=['POST'], csrf=False)
     def get_parent_child(self, **post):
         if post:
             val = 0
@@ -109,7 +109,7 @@ class EmployeeChart(http.Controller):
             table += lines + nodes
             return table
 
-    @http.route('/get/child/data', type='json', auth='user', method=['POST'], csrf=False)
+    @http.route('/get/child/data', type='json', auth='user', methods=['POST'], csrf=False)
     def get_child_data(self, click_id):
         if click_id:
             employee = request.env['hr.employee'].sudo().browse(int(click_id))
