@@ -94,7 +94,7 @@
                                        attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </page>
                             <page string="Attendance">
-                                <field name="attendance_ids" readonly="1"/>
+                                <field name="attendance_ids" readonly="1" force_save="1"/>
                             </page>
                             <page string="Work Schedule">
                                 <field name="work_schedule" readonly="1"/>
