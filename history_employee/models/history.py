@@ -65,7 +65,6 @@ class DepartmentDetails(models.Model):
         }
         self.env['timesheet.cost'].sudo().create(vals)
 
-
     def department_details(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -87,7 +86,6 @@ class DepartmentDetails(models.Model):
             }
         else:
             raise UserError('You cannot access this field!!!!')
-
 
     def time_sheet(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
@@ -111,7 +109,6 @@ class DepartmentDetails(models.Model):
         else:
             raise UserError('You cannot access this field!!!!')
 
-
     def salary_history(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
         if res_user.has_group('hr.group_hr_manager'):
@@ -133,7 +130,6 @@ class DepartmentDetails(models.Model):
             }
         else:
             raise UserError('You cannot access this field!!!!')
-
 
     def contract_history(self):
         res_user = self.env['res.users'].search([('id', '=', self._uid)])
