@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-###################################################################################
+###############################################################################
 #    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2021-TODAY Cybrosys Technologies (<https://www.cybrosys.com>).
+#    Copyright (C) 2023-TODAY Cybrosys Technologies (<https://www.cybrosys.com>)
 #
 #    This program is free software: you can modify
 #    it under the terms of the GNU Affero General Public License (AGPL) as
@@ -18,10 +18,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-###################################################################################
+###############################################################################
 {
     'name': 'Open HRMS Reminders Todo',
-    'version': '16.0.1.0.0',
+    'version': '16.0.2.0.0',
     'category': 'Generic Modules/Human Resources',
     'summary': 'HR Reminder For OHRMS',
     'author': 'Cybrosys Techno solutions,Open HRMS',
@@ -33,14 +33,15 @@
         'security/ir.model.access.csv',
         'security/hr_reminder_security.xml',
         'views/hr_reminder_view.xml',
+        'data/ir_cron_reminder.xml'
         
     ],
     'assets': {
         'web.assets_backend': [
             'hr_reminder/static/src/css/notification.css',
             'hr_reminder/static/src/scss/reminder.scss',
+            'hr_reminder/static/src/xml/reminder_topbar.xml',
             'hr_reminder/static/src/js/reminder_topbar.js',
-            'hr_reminder/static/src/xml/reminder_topbar.xml'
         ],
     },
     'images': ['static/description/banner.png'],

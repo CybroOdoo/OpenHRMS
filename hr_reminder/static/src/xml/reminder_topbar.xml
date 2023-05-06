@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
-    <t t-name="reminder_menu" owl="1">
-
+    <t t-name="reminder_menu">
         <div class="o_mail_navbar_item">
-            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+            <a class="dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false"
                href="#" title="Reminders" role="button">
                 <i class="fa fa-bell"/>
                 <span class="o_notification_counter"/>
@@ -18,15 +18,11 @@
                             <t t-foreach='widget.all_reminder' t-as='val'>
                                 <option class="dropdown-options">
                                     <t t-esc="val.name"/>
-
                                 </option>
-
                             </t>
                         </select>
                     </div>
-
                 </li>
-
             </ul>
         </div>
     </t>
