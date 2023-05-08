@@ -47,7 +47,8 @@ class EmployeeChart(http.Controller):
             return key
         elif len(employees) == 0:
             raise UserError(
-                "Should not have manager for the employee in the top of the chart")
+                "Don't need to set manager to an employee at the top of the "
+                "chart")
         else:
             for emp in employees:
                 names.append(emp.name)
