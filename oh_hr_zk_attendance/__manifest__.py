@@ -21,7 +21,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Biometric Device Integration',
-    'version': '16.0.1.0.0',
+    'version': '16.0.1.1.0',
     'summary': """Integrating Biometric Device With HR Attendance (Face + Thumb)""",
     'description': 'This module integrates Odoo with the biometric device(Model: ZKteco uFace 202)',
     'category': 'Generic Modules/Human Resources',
