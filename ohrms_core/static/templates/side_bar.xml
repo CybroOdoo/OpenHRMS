@@ -1,6 +1,6 @@
 <templates id="template" xml:space="preserve">
     <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension" owl="1">
-        <xpath expr="//Dropdown" position="replace">
+        <xpath expr="//Dropdown" position="after">
 <!--            <li class="dropdown d-flex justify-content-center align-items-center">-->
 <!--                <a class="full" data-bs-toggle="dropdown" data-display="static" href="#" aria-expanded="false">-->
 <!--                    <i class="fa fa-th-large" style="font-size: 18px !important; color: white; margin-top: 3px;"/>-->
