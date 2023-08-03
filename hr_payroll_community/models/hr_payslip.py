@@ -237,15 +237,37 @@ class HrPayslip(models.Model):
 
             # compute leave days
             leaves = {}
-            calendar = contract.resource_calendar_id
-            tz = timezone(calendar.tz)
-            day_leave_intervals = contract.employee_id.list_leaves(day_from,
-                                                                   day_to,
-                                                                   calendar=contract.resource_calendar_id)
-
-            for day, hours, leave in day_leave_intervals:
-                for each in leave:
-                    holiday = each.holiday_id
+            query = "SELECT id FROM hr_leave WHERE employee_id = '" + str(
+                self.employee_id.id) + "' " \
+                                       "AND request_date_from > '" + str(
+                self.date_from) + "' AND " \
+                                  "request_date_to < '" + str(self.date_to) + (
+                        "' AND state = "
+                        "'validate'")
+            self.env.cr.execute(query)
+            docs = self.env.cr.dictfetchall()
+            leave_ids = []
+            for rec in docs:
+                leave_ids.append(rec['id'])
+            hr_leaves = self.env['hr.leave'].browse(leave_ids)
+            work_hours = self.contract_id.resource_calendar_id.hours_per_day
+            if hr_leaves:
+                list_leave = []
+                for item in hr_leaves:
+                    duration = item.duration_display
+                    if duration.find('days') != -1:
+                        hours = float(item.duration_display.replace("days",
+                                                                    "")) * work_hours
+                    else:
+                        hours = float(
+                            item.duration_display.replace("hours", ""))
+                    data = {
+                        'duration': hours,
+                        'time off': item
+                    }
+                    list_leave.append(data)
+                for rec in list_leave:
+                    holiday = rec['time off']
                     current_leave_struct = leaves.setdefault(
                         holiday.holiday_status_id, {
                             'name': holiday.holiday_status_id.name or _(
@@ -256,15 +278,10 @@ class HrPayslip(models.Model):
                             'number_of_hours': 0.0,
                             'contract_id': contract.id,
                         })
-                    current_leave_struct['number_of_hours'] += hours
-                    work_hours = calendar.get_work_hours_count(
-                        tz.localize(datetime.combine(day, time.min)),
-                        tz.localize(datetime.combine(day, time.max)),
-                        compute_leaves=False,
-                    )
-                    if work_hours:
-                        current_leave_struct[
-                            'number_of_days'] += hours / work_hours
+
+                    current_leave_struct['number_of_hours'] += rec['duration']
+                    current_leave_struct[
+                        'number_of_days'] += (rec['duration'] / work_hours)
 
             # # compute worked days
             work_data = contract.employee_id.get_work_days_data(day_from,
@@ -343,7 +360,8 @@ class HrPayslip(models.Model):
                     WHERE hp.employee_id = %s AND hp.state = 'done'
                     AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pi.payslip_id AND pi.code = %s""",
                                     (
-                                    self.employee_id, from_date, to_date, code))
+                                        self.employee_id, from_date, to_date,
+                                        code))
                 return self.env.cr.fetchone()[0] or 0.0
 
         class WorkedDays(BrowsableObject):
@@ -358,7 +376,8 @@ class HrPayslip(models.Model):
                     WHERE hp.employee_id = %s AND hp.state = 'done'
                     AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pi.payslip_id AND pi.code = %s""",
                                     (
-                                    self.employee_id, from_date, to_date, code))
+                                        self.employee_id, from_date, to_date,
+                                        code))
                 return self.env.cr.fetchone()
 
             def sum(self, code, from_date, to_date=None):
@@ -380,7 +399,8 @@ class HrPayslip(models.Model):
                             WHERE hp.employee_id = %s AND hp.state = 'done'
                             AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = pl.slip_id AND pl.code = %s""",
                                     (
-                                    self.employee_id, from_date, to_date, code))
+                                        self.employee_id, from_date, to_date,
+                                        code))
                 res = self.env.cr.fetchone()
                 return res and res[0] or 0.0
 
@@ -547,7 +567,6 @@ class HrPayslip(models.Model):
     @api.onchange('employee_id', 'date_from', 'date_to')
     def onchange_employee(self):
 
-
         if (not self.employee_id) or (not self.date_from) or (not self.date_to):
             return
 
@@ -573,6 +592,7 @@ class HrPayslip(models.Model):
             self.contract_id = self.env['hr.contract'].browse(contract_ids[0])
 
         if not self.contract_id.struct_id:
+            self.worked_days_line_ids = False
             return
         self.struct_id = self.contract_id.struct_id
         if self.contract_id:
