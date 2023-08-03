@@ -243,7 +243,7 @@ class HrPayslip(models.Model):
                         AND hl.request_date_to <= '%s'
                         AND hl.state = 'validate'
                     """
-            query = query % (str(contract.employee_id.id), str(day_from.strftime('%Y-%m-%d')), str(day_to.strftime('%Y-%m-%d')))
+            query = query % (str(contract.employee_id.id), day_from.strftime('%Y-%m-%d'), day_to.strftime('%Y-%m-%d'))
             self.env.cr.execute(query)
             docs = self.env.cr.dictfetchall()
             leave_ids = []
