@@ -237,20 +237,20 @@ class HrPayslip(models.Model):
 
             # compute leave days
             leaves = {}
-            query = "SELECT id FROM hr_leave WHERE employee_id = '" + str(
-                self.employee_id.id) + "' " \
-                                       "AND request_date_from > '" + str(
-                self.date_from) + "' AND " \
-                                  "request_date_to < '" + str(self.date_to) + (
-                        "' AND state = "
-                        "'validate'")
+            query = """
+                        SELECT id FROM hr_leave hl WHERE hl.employee_id = %s
+                        AND hl.request_date_from >= '%s'
+                        AND hl.request_date_to <= '%s'
+                        AND hl.state = 'validate'
+                    """
+            query = query % (str(contract.employee_id.id), str(day_from.strftime('%Y-%m-%d')), str(day_to.strftime('%Y-%m-%d')))
             self.env.cr.execute(query)
             docs = self.env.cr.dictfetchall()
             leave_ids = []
             for rec in docs:
                 leave_ids.append(rec['id'])
             hr_leaves = self.env['hr.leave'].browse(leave_ids)
-            work_hours = self.contract_id.resource_calendar_id.hours_per_day
+            work_hours = contract.resource_calendar_id.hours_per_day
             if hr_leaves:
                 list_leave = []
                 for item in hr_leaves:
@@ -268,17 +268,14 @@ class HrPayslip(models.Model):
                     list_leave.append(data)
                 for rec in list_leave:
                     holiday = rec['time off']
-                    current_leave_struct = leaves.setdefault(
-                        holiday.holiday_status_id, {
-                            'name': holiday.holiday_status_id.name or _(
-                                'Global Leaves'),
-                            'sequence': 5,
-                            'code': holiday.holiday_status_id.code or 'GLOBAL',
-                            'number_of_days': 0.0,
-                            'number_of_hours': 0.0,
-                            'contract_id': contract.id,
-                        })
-
+                    current_leave_struct = leaves.setdefault(holiday.holiday_status_id, {
+                        'name': holiday.holiday_status_id.name or _('Global Leaves'),
+                        'sequence': 5,
+                        'code': holiday.holiday_status_id.code or 'GLOBAL',
+                        'number_of_days': 0.0,
+                        'number_of_hours': 0.0,
+                        'contract_id': contract.id,
+                    })
                     current_leave_struct['number_of_hours'] += rec['duration']
                     current_leave_struct[
                         'number_of_days'] += (rec['duration'] / work_hours)
