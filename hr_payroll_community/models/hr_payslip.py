@@ -5,6 +5,7 @@ from collections import defaultdict
 from datetime import date, datetime, time
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+from matplotlib.dates import seconds
 from pytz import timezone
 from pytz import utc
 
@@ -237,37 +238,25 @@ class HrPayslip(models.Model):
 
             # compute leave days
             leaves = {}
-            query = "SELECT id FROM hr_leave WHERE employee_id = '" + str(
-                self.employee_id.id) + "' " \
-                                       "AND request_date_from > '" + str(
-                self.date_from) + "' AND " \
-                                  "request_date_to < '" + str(self.date_to) + (
-                        "' AND state = "
-                        "'validate'")
-            self.env.cr.execute(query)
-            docs = self.env.cr.dictfetchall()
-            leave_ids = []
-            for rec in docs:
-                leave_ids.append(rec['id'])
-            hr_leaves = self.env['hr.leave'].browse(leave_ids)
-            work_hours = self.contract_id.resource_calendar_id.hours_per_day
-            if hr_leaves:
-                list_leave = []
-                for item in hr_leaves:
-                    duration = item.duration_display
-                    if duration.find('days') != -1:
-                        hours = float(item.duration_display.replace("days",
-                                                                    "")) * work_hours
-                    else:
-                        hours = float(
-                            item.duration_display.replace("hours", ""))
-                    data = {
-                        'duration': hours,
-                        'time off': item
-                    }
-                    list_leave.append(data)
-                for rec in list_leave:
-                    holiday = rec['time off']
+
+            calendar = contract.resource_calendar_id
+            tz = timezone(calendar.tz)
+            day_leave_intervals = contract.employee_id.list_leaves(day_from,
+                                                                   day_to,
+                                                                   calendar=contract.resource_calendar_id)
+            multi_leaves = []
+            for day, hours, leave in day_leave_intervals:
+                work_hours = calendar.get_work_hours_count(
+                    tz.localize(datetime.combine(day, time.min)),
+                    tz.localize(datetime.combine(day, time.max)),
+                    compute_leaves=False,
+                )
+                if len(leave) > 1:
+                    for each in leave:
+                        if each.holiday_id:
+                            multi_leaves.append(each.holiday_id)
+                else:
+                    holiday = leave.holiday_id
                     current_leave_struct = leaves.setdefault(
                         holiday.holiday_status_id, {
                             'name': holiday.holiday_status_id.name or _(
@@ -278,12 +267,12 @@ class HrPayslip(models.Model):
                             'number_of_hours': 0.0,
                             'contract_id': contract.id,
                         })
+                    current_leave_struct['number_of_hours'] += hours
+                    if work_hours:
+                        current_leave_struct[
+                            'number_of_days'] += hours / work_hours
 
-                    current_leave_struct['number_of_hours'] += rec['duration']
-                    current_leave_struct[
-                        'number_of_days'] += (rec['duration'] / work_hours)
-
-            # # compute worked days
+            # compute worked days
             work_data = contract.employee_id.get_work_days_data(day_from,
                                                                 day_to,
                                                                 calendar=contract.resource_calendar_id)
@@ -295,8 +284,49 @@ class HrPayslip(models.Model):
                 'number_of_hours': work_data['hours'],
                 'contract_id': contract.id,
             }
-
             res.append(attendances)
+
+            uniq_leaves = [*set(multi_leaves)]
+            c_leaves = {}
+            for rec in uniq_leaves:
+                c_leaves.setdefault(rec.holiday_status_id,
+                                    {'hours': float(
+                                        rec.duration_display.replace(
+                                            "hours",
+                                            "")), })
+            flag = 1
+            for item in c_leaves:
+                if not leaves:
+                    data = {
+                        'name': item.name,
+                        'sequence': 20,
+                        'code': item.code or 'LEAVES',
+                        'number_of_hours': c_leaves[item]['hours'],
+                        'number_of_days': c_leaves[item][
+                                              'hours'] / work_hours,
+                        'contract_id': contract.id,
+                    }
+                    res.append(data)
+
+                for time_off in leaves:
+                    if item == time_off:
+                        leaves[item]['number_of_hours'] += c_leaves[item][
+                            'hours']
+                        leaves[item]['number_of_days'] += c_leaves[item][
+                                                              'hours'] / work_hours
+                    if item not in leaves and flag == 1:
+                        data = {
+                            'name': item.name,
+                            'sequence': 20,
+                            'code': holiday.holiday_status_id.code or 'GLOBAL',
+                            'number_of_hours': c_leaves[item]['hours'],
+                            'number_of_days': c_leaves[item][
+                                                  'hours'] / work_hours,
+                            'contract_id': contract.id,
+                        }
+                        res.append(data)
+                        flag = 0
+
             res.extend(leaves.values())
         return res
 
