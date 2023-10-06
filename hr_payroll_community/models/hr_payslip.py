@@ -5,7 +5,6 @@ from collections import defaultdict
 from datetime import date, datetime, time
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
-from matplotlib.dates import seconds
 from pytz import timezone
 from pytz import utc
 
