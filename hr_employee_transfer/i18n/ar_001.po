@@ -19,7 +19,7 @@ msgstr ""
 #: model:ir.model.fields,help:hr_employee_transfer.field_employee_transfer__state
 msgid ""
 " * The 'Draft' status is used when a transfer is created and unconfirmed Transfer.\n"
-" * The 'Transferred' status is used when the user confirm the transfer. It stays in the open status till the other branch/company receive the employee.\n"
+" * The 'Transferred' status is used when the user confirm the transfer. It stays in the open status till the other company receive the employee.\n"
 " * The 'Done' status is set automatically when the employee is Joined/Received.\n"
 " * The 'Cancelled' status is used when user cancel Transfer."
 msgstr ""
@@ -196,7 +196,7 @@ msgstr "الحالة"
 #: code:addons/hr_employee_transfer/models/employee_transfer.py:0
 #, python-format
 msgid ""
-"This employee will remains on the same company until the Transferred Branch "
+"This employee will remains on the same company until the Transferred Company"
 "accept this transfer request"
 msgstr ""
 "سيبقى هذا الموظف في نفس الشركة حتى الفرع المحول"
@@ -209,7 +209,7 @@ msgid "Transfer"
 msgstr "نقل"
 
 #. module: hr_employee_transfer
-#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__branch
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__company
 msgid "Transfer To"
 msgstr "حول إلى"
 
@@ -232,8 +232,8 @@ msgid "Transferred employee"
 msgstr "موظف منقول"
 
 #. module: hr_employee_transfer
-#: model:ir.model.fields,help:hr_employee_transfer.field_employee_transfer__branch
-msgid "Transferring Branch / Company"
+#: model:ir.model.fields,help:hr_employee_transfer.field_employee_transfer__Company
+msgid "Transferring Company"
 msgstr "تحويل فرع / شركة"
 
 #. module: hr_employee_transfer
@@ -265,5 +265,5 @@ msgstr "لا يمكنك التحويل لنفس الشركة."
 #. module: hr_employee_transfer
 #: code:addons/hr_employee_transfer/models/employee_transfer.py:0
 #, python-format
-msgid "You should select the branch/company."
+msgid "You should select the company."
 msgstr "يجب عليك تحديد الفرع / الشركة."

@@ -1,49 +1,45 @@
 # -*- coding: utf-8 -*-
-################################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
+###############################################################################
 #
-#    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2022-TODAY Cybrosys Technologies (<https://www.cybrosys.com>)
-#    Author: Hajaj Roshan (<https://www.cybrosys.com>)
+#   Cybrosys Technologies Pvt. Ltd.
 #
-#    This program is free software: you can modify
-#    it under the terms of the GNU Affero General Public License (AGPL) as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#   Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#   Author: Hajaj( odoo@cybrosys.com )
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#   You can modify it under the terms of the GNU AFFERO
+#   GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
 #
-################################################################################
-
+#   You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+#   (AGPL v3) along with this program.
+#   If not, see <http://www.gnu.org/licenses/>.
+#
+###############################################################################
 {
-    'name': 'Open HRMS Branch Transfer',
-    'version': '16.0.1.0.0',
-    'summary': 'Employee transfer between branches',
+    'name': 'Open HRMS Company Transfer',
+    'version': '16.0.1.0.1',
+    'category': 'Human Resources',
+    'summary': 'Employee transfer between companies',
+    'description': 'This modules allows the user to transfer an employee from '
+                   'one company to another company',
     'live_test_url': 'https://youtu.be/Qva8kW6xn4c',
-    'category': 'Generic Modules/Human Resources',
     'author': 'Cybrosys Techno solutions,Open HRMS',
-    'maintainer': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
+    'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
-    'depends': ['base',
-                'hr',
-                'hr_contract',
-                'hr_employee_updation',
-                ],
+    'depends': ['base', 'hr', 'hr_contract', 'hr_employee_updation',],
     'data': [
-        'views/employee_transfer.xml',
         'security/ir.model.access.csv',
-        'security/branch_security.xml',
+        'security/company_security.xml',
+        'views/employee_transfer.xml',
     ],
     'images': ['static/description/banner.png'],
-    'installable': True,
-    'application': True,
-    'auto_install': False,
     'license': 'AGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': True,
 }
