@@ -375,6 +375,8 @@
                 <button name="close_payslip_run" type="object" string="Close" states="draft" class="oe_highlight"/>
                 <button name="%(action_hr_payslip_by_employees)d" type="action" states="draft" string="Generate Payslips" class="oe_highlight"/>
                 <button string="Set to Draft" name="draft_payslip_run" type="object" states="close" />
+                <button string="Validate" name="action_validate_payslips" type="object" class="oe_highlight"
+                    attrs="{'invisible': [('is_validate', '=', False)]}"/>
                 <field name="state" widget="statusbar"/>
             </header>
             <sheet>
@@ -388,6 +390,7 @@
                            <field name="date_start" class="oe_inline"/> - <field name="date_end" class="oe_inline"/>
                      </div>
                     <field name="credit_note"/>
+                    <field name="is_validate" invisible="1"/>
                 </group>
                 <separator string="Payslips"/>
                 <field name="slip_ids"/>
