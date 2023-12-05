@@ -38,7 +38,7 @@
              'views/hr_payslip_views.xml',
              'views/hr_salary_rule_views.xml', ],
     'images': ['static/description/banner.jpg'],
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
     'application': False,
