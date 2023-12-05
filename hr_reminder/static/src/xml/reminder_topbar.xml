@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <!--    Template of the remainder menu in systray-->
+    <t t-name="owl.reminder_menu">
+        <div class="o_mail_navbar_item">
+            <a class="dropdown-toggle"
+               t-on-click="(ev) => this.showReminder(ev)"
+               data-bs-toggle="dropdown"
+               aria-expanded="false"
+               href="#" title="Reminders" role="button">
+                <i class="fa fa-bell"/>
+                <span class="o_notification_counter"/>
+            </a>
+            <ul class="o_mail_navbar_dropdown dropdown-menu" role="menu">
+                <li class="o_mail_navbar_dropdown_top">
+                    <h2>Reminders</h2>
+                    <div>
+                        <select id="reminder_select" name="Reminder"
+                                class='reminders_list form-control'>
+                            <t t-foreach='state.all_remainders' t-as='val'
+                               t-key="val.id">
+                                <option class="dropdown-options">
+                                    <t t-esc="val.name"/>
+                                </option>
+                            </t>
+                        </select>
+                        <div class="container" style="text-align:center;">
+                            <button class="btn btn-primary"
+                                    style="margin-top: 8px;"
+                                    t-on-click="(ev) => this.reminderActive(ev)">
+                                View
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </t>
+</templates>

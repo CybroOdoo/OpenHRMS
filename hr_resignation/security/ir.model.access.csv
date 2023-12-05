@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_resignation,access.hr.resignation,hr_resignation.model_hr_resignation,base.group_user,1,1,1,0
+access_hr_employee,access.hr.employee,hr.model_hr_employee,base.group_user,1,1,1,0
+access_hr_contract_user,access.hr.contract.user,hr_contract.model_hr_contract,base.group_user,1,0,0,0

@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payroll_community_structure,access.hr.payroll.structure,model_hr_payroll_structure,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payroll_community_structure_hr_user,access.hr.payroll.structure.hr.user,model_hr_payroll_structure,hr.group_hr_user,1,0,0,0
+access_hr_contribution_register,access.hr.contribution.register,model_hr_contribution_register,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_salary_rule_category,access.hr.salary.rule.category,model_hr_salary_rule_category,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payslip,access.hr.payslip,model_hr_payslip,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payslip_line,access.hr.payslip.line,model_hr_payslip_line,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payslip_input_user,access.hr.payslip.input.user,model_hr_payslip_input,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payslip_worked_days_officer,access.hr.payslip.worked_days.officer,model_hr_payslip_worked_days,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_payslip_run,access.hr.payslip.run,model_hr_payslip_run,hr_payroll_community.group_hr_payroll_community_manager,1,1,1,1
+access_hr_rule_input_officer,access.hr.rule.input.office,model_hr_rule_input,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_salary_rule_user,access.hr.salary.rule.user,model_hr_salary_rule,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_contract_advantage_template,access.hr.contract.advantage.template.user,model_hr_contract_advantage_template,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_hr_contract_advantage_template_hr_user,access.hr.contract.advantage.template.hr.user,model_hr_contract_advantage_template,hr.group_hr_user,1,0,0,0
+access_hr_payslip_employees,access.hr.payslip.employees,model_hr_payslip_employees,base.group_user,1,1,1,1
+access_group_user,access.user,model_hr_payslip_employees,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
+access_group_user,access.user,model_payslip_lines_contribution_register,hr_payroll_community.group_hr_payroll_community_user,1,1,1,1
