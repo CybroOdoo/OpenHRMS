@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Odoo17 Payroll
+Odoo17 Payroll
 ==============
 Manage your employee payroll records.
 

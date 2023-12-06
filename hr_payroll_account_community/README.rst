@@ -2,7 +2,7 @@
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Payroll Accounting
+Odoo17 Payroll Accounting
 ===========================
 * This module Manage payroll and accounting.
 

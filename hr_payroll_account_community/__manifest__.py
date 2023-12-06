@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Payroll Accounting',
+    'name': 'Odoo17 Payroll Accounting',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': """Generic Payroll system Integrated with Accounting""",

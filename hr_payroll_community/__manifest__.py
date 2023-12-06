@@ -21,11 +21,11 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Odoo17 Payroll',
+    'name': 'Odoo17 Payroll',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': 'Manage your employee payroll records',
-    'description': "Odoo 17 Payroll for Community version where can manage "
+    'description': "odoo17, odoo payroll, odoo17 payroll, payroll community,odoo 17, payroll,Odoo 17 Payroll for Community version where can manage "
                    "Employee Payroll Records",
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
