@@ -2,7 +2,7 @@
    :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
    :alt: License: LGPL-3
 
-OpenHRMS CORE
+Open HRMS CORE
 ==============
 * Open HRMS is a one-stop solution to manage human resource pool in a better and efficient format.
 * It is a Open Source Project for empower Odoo HRMS by Cybrosys Technologies.

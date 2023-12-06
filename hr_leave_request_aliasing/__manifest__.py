@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
+#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Leave Request Aliasing',
+    'name': 'Open HRMS Leave Request Aliasing',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': """Automated Leave Request generation from Incoming Emails.""",

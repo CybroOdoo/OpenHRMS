@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
+#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Employee Documents Expiry',
+    'name': 'Open HRMS Employee Documents Expiry',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': """Manages Employee Documents With Expiry Notifications.""",

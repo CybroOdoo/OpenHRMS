@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Employee Documents Expiry
+Open HRMS Employee Documents Expiry
 ==================================
 Supporting Addon for Open HRMS, Manages Employee Related Documents.
 The application also allows you to set an alert message on reaching the

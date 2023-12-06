@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Official Announcements
+Open HRMS Official Announcements
 ================================
 Supporting Addon for Open HRMS.
 This module helps to manage official announcements.

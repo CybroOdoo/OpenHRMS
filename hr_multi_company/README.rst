@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Multi Company
+Open HRMS Multi Company
 =================
 Supporting Addon for Open HRMS, Added Advance Fields On Employee Master
 

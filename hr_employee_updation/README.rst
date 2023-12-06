@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Employee Info
+Open HRMS Employee Info
 =======================
 This module helps you to add additional information in employee records
 

@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Employees From User
+Open HRMS Employees From User
 =============================
 This module supports Addon for Open HRMS, Creates Employee While Creating User
 

@@ -2,7 +2,7 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Loan Accounting
+Open HRMS Loan Accounting
 ===========================
 Create accounting entries for loan requests.
 

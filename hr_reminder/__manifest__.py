@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
+#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Reminders Todo',
+    'name': 'Open HRMS Reminders Todo',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': 'HR Reminder For OHRMS',

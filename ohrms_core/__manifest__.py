@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
+#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Core',
+    'name': 'Open HRMS Core',
     'version': '17.0.1.0.0',
     'category': 'Generic Modules/Human Resources',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
@@ -32,7 +32,7 @@
     Shift Management, Employee History, Branch Transfer, Employee Appraisal,
     Biometric Device, Announcements, Insurance Management, Vacation Management,
     Employee Appreciations, Asset Custody, Employee Checklist, Entry and Exit 
-    Checklist, Disciplinary Actions, openhrms, OpenHRMS, hrms, Attrition Rate, 
+    Checklist, Disciplinary Actions, openhrms, Open HRMS, hrms, Attrition Rate, 
     Document Expiry, Visa Expiry, Law Suit Management, Employee, Employee 
     Training """,
     'author': 'Cybrosys Techno solutions',

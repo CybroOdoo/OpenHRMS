@@ -2,9 +2,9 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-OpenHRMS Reminders Todo
+Open HRMS Reminders Todo
 ========================
-Odoo OpenHRMS Reminder is a powerful and easy-to-use tool that can help you
+Odoo Open HRMS Reminder is a powerful and easy-to-use tool that can help you
 improve your HR processes and ensure that important events are never forgotten.
 
 Configuration

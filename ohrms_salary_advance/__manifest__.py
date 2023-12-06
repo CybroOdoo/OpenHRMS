@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of OpenHRMS Project <https://www.openhrms.com>
+#    A part of Open HRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
@@ -21,10 +21,10 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Advance Salary',
+    'name': 'Open HRMS Advance Salary',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
-    'summary': 'Advance Salary In OpenHRMS.',
+    'summary': 'Advance Salary In Open HRMS.',
     'description': "THis module is a component of Open HRMS suit. It module "
                    "helps the user to manage salary advance requests from "
                    "employees. You can configure advance salary rules, set "
