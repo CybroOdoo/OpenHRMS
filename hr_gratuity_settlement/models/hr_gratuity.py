@@ -63,7 +63,6 @@ class EmployeeGratuity(models.Model):
 
     @api.onchange('employee_id')
     def _onchange_employee_id(self):
-        print("_onchange_employee_id")
         """ calculating the gratuity pay based on the contract and gratuity
         configurations """
         if self.employee_id.id:
@@ -167,7 +166,7 @@ class EmployeeGratuity(models.Model):
                     daily_wage = self.employee_basic_salary / self.employee_gratuity_duration.employee_daily_wage_days
                     working_days_salary = daily_wage * self.employee_gratuity_duration.employee_working_days
                     gratuity_pay_per_year = working_days_salary * self.employee_gratuity_duration.percentage
-                    employee_gratuity_amount = gratuity_pay_per_year * self.employee_gratuity_years
+                    employee_gratuity_amount = gratuity_pay_per_year * round(self.employee_gratuity_years, 2)
                     self.employee_gratuity_amount = round(employee_gratuity_amount, 2)
                 else:
                     raise UserError(_("Employee wage days is not configured in "
@@ -175,8 +174,6 @@ class EmployeeGratuity(models.Model):
 
     # Changing state to submit
     def submit_request(self):
-        print("submit_request")
-        print(self.state)
         self.write({'state': 'submit'})
 
     # Canceling the gratuity request
