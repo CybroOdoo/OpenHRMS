@@ -30,8 +30,12 @@ class HrEmployeeBase(models.AbstractModel):
     _inherit = 'hr.employee.base'
 
     def _compute_newly_hired(self):
-        new_hire_field = self._get_new_hire_field()
         new_hire_date = fields.Datetime.now() - timedelta(days=90)
         for employee in self:
-            employee.newly_hired = employee[
-                                       new_hire_field] > new_hire_date.date()
+            if employee['first_contract_date']:
+                employee.newly_hired = (employee[
+                                           'first_contract_date'] >
+                                        new_hire_date.date())
+            else:
+                employee.newly_hired = employee[
+                                           'create_date'] > new_hire_date
