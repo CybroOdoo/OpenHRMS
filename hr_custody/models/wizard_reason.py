@@ -30,7 +30,6 @@ class WizardReason(models.TransientModel):
     _name = 'wizard.reason'
 
     def send_reason(self):
-        print("heyyyyyyy")
         context = self._context
         reject_obj = self.env[context.get('model_id')].search([('id', '=', context.get('reject_id'))])
         if 'renew' in context.keys():
