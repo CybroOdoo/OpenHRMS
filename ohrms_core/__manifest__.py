@@ -25,16 +25,14 @@
     'version': '17.0.1.0.0',
     'category': 'Generic Modules/Human Resources',
     'summary': """Open HRMS Suit: It brings all Open HRMS modules""",
-    'description': """Openhrms, Main module of Open HRMS, It brings all others 
-    into a single module, Payroll, Payroll Accounting, Expense, Dashboard,
+    'description': """Openhrms, Main module of Open HRMS,Payroll, Payroll Accounting, Expense, Dashboard,
     Employees, Employee Document, Resignation, Salary Advance, Loan Management, 
     Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, 
     Shift Management, Employee History, Branch Transfer, Employee Appraisal,
     Biometric Device, Announcements, Insurance Management, Vacation Management,
     Employee Appreciations, Asset Custody, Employee Checklist, Entry and Exit 
     Checklist, Disciplinary Actions, openhrms, Open HRMS, hrms, Attrition Rate, 
-    Document Expiry, Visa Expiry, Law Suit Management, Employee, Employee 
-    Training """,
+    Document Expiry, Visa Expiry, Law Suit Management, Employee, Employee Training, payroll, odoo17 payroll""",
     'author': 'Cybrosys Techno solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
