@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Demo HR Appraisal Data-->
+        <record id="appraisal" model="hr.appraisal">
+            <field name="employee_id" ref="employee_appraisal"/>
+            <field name="stage_id" ref="hr_appraisal_done"/>
+            <field name="appraisal_deadline">2024-03-22</field>
+            <field name="hr_emp">True</field>
+        </record>
+    </data>
+</odoo>

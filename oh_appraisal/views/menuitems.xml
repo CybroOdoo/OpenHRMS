@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Main appraisal menu see in app list-->
+    <menuitem name="Appraisal"
+              id="hr_appraisal_menu_root"
+              web_icon="oh_appraisal,static/description/icon.png"
+              groups="oh_appraisal.oh_appraisal_group_manager,oh_appraisal.oh_appraisal_group_employee"/>
+<!--    Appraisal menu see inside oh appraisal module-->
+    <menuitem name="Appraisal"
+              id="hr_appraisal_menu"
+              parent="hr_appraisal_menu_root"
+              action="hr_appraisal_action"
+              groups="oh_appraisal.oh_appraisal_group_manager,oh_appraisal.oh_appraisal_group_employee"/>
+<!--    Answer see inside oh appraisal module-->
+    <menuitem name="Answers"
+              id="hr_appraisal_menu_answers"
+              parent="hr_appraisal_menu_root"
+              action="survey.action_survey_user_input"
+              groups="oh_appraisal.oh_appraisal_group_employee"/>
+</odoo>

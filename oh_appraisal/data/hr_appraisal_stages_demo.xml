@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--        Data to create for appraisal stage when the module is installed-->
+        <record id="hr_appraisal_start" model="hr.appraisal.stages">
+            <field name="name">To Start</field>
+            <field name="sequence">1</field>
+        </record>
+        <!--        Data to create for appraisal stage when the module is installed-->
+        <record id="hr_appraisal_sent" model="hr.appraisal.stages">
+            <field name="name">Sent Mail</field>
+            <field name="sequence">2</field>
+        </record>
+        <!--        Data to create for appraisal stage when the module is installed-->
+        <record id="hr_appraisal_done" model="hr.appraisal.stages">
+            <field name="name">Done</field>
+            <field name="sequence">3</field>
+        </record>
+        <!--        Data to create for appraisal stage when the module is installed-->
+        <record id="hr_appraisal_cancel" model="hr.appraisal.stages">
+            <field name="name">Cancel</field>
+            <field name="sequence">4</field>
+        </record>
+    </data>
+</odoo>
