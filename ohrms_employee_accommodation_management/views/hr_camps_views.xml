@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Views and action of model hr camps -->
+    <record id="hr_camps_action" model="ir.actions.act_window">
+        <field name="name">Camp</field>
+        <field name="res_model">hr.camps</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="hr_camps_view_tree" model="ir.ui.view">
+        <field name="name">hr.camps.view.tree</field>
+        <field name="model">hr.camps</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="capacity"/>
+                <field name="occupied"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hr_camps_view_form" model="ir.ui.view">
+        <field name="name">hr.camps.view.form</field>
+        <field name="model">hr.camps</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group name="address">
+                            <span>
+                                <b>Address</b>
+                            </span>
+                            <field name="street" placeholder="Street..."
+                                   class="o_address_street"/>
+                            <field name="street_near" placeholder="Street 2..."
+                                   class="o_address_street"/>
+                            <field name="city" placeholder="City"
+                                   class="o_address_city"/>
+                            <field name="state_id" class="o_address_state"
+                                   placeholder="State"
+                                   options="{'no_open': True, 'no_quick_create': True}"
+                                   context="{'default_country_id': country_id}"/>
+                            <field name="zip" placeholder="ZIP"
+                                   class="o_address_zip"/>
+                            <field name="country_id" placeholder="Country"
+                                   class="o_address_country"
+                                   options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="occupied"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Rooms" string="Rooms">
+                            <field name="room_ids"/>
+                        </page>
+                        <page name="Employees" string="Employees">
+                            <field name="employee_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="hr_camps_menu_root" name="Master Data"
+              parent="hr_allocation_transfer_main_menu_root" sequence="2">
+        <menuitem id="hr_camps_menu" name="Camp" action="hr_camps_action"/>
+    </menuitem>
+</odoo>

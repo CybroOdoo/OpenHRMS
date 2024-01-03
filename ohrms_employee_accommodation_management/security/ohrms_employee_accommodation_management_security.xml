@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Multi company rule for models -->
+        <record id="hr_allocation_transfer_rule_company" model="ir.rule">
+            <field name="name">Hr Allocation Transfer Rule</field>
+            <field name="model_id" ref="model_hr_allocation_transfer"/>
+            <field name="active" eval="True"/>
+            <field name="domain_force">
+                ['|',('company_id','=',False),('company_id', 'in', company_ids)]
+            </field>
+        </record>
+        <record id="hr_rooms_rule_company" model="ir.rule">
+            <field name="name">Hr Rooms</field>
+            <field name="model_id" ref="model_hr_rooms"/>
+            <field name="active" eval="True"/>
+            <field name="domain_force">
+                ['|',('company_id','=',False),('company_id', 'in', company_ids)]
+            </field>
+        </record>
+        <record id="hr_camps_rule_company" model="ir.rule">
+            <field name="name">Hr Camps</field>
+            <field name="model_id" ref="model_hr_camps"/>
+            <field name="active" eval="True"/>
+            <field name="domain_force">
+                ['|',('company_id','=',False),('company_id', 'in', company_ids)]
+            </field>
+        </record>
+</odoo>

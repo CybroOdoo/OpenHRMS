@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Views and action of model hr rooms -->
+    <record id="hr_rooms_action" model="ir.actions.act_window">
+        <field name="name">Room</field>
+        <field name="res_model">hr.rooms</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="hr_rooms_view_tree" model="ir.ui.view">
+        <field name="name">hr.rooms.view.tree</field>
+        <field name="model">hr.rooms</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="capacity" required="True"/>
+                <field name="occupied"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hr_rooms_view_form" model="ir.ui.view">
+        <field name="name">hr.rooms.view.form</field>
+        <field name="model">hr.rooms</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_room" type="object"
+                            class="oe_highlight" string="Make Available"
+                            states='not_available'/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group name="address">
+                            <span>
+                                <b>Address</b>
+                            </span>
+                            <field name="street" placeholder="Street..."
+                                   class="o_address_street"/>
+                            <field name="street_near" placeholder="Street 2..."
+                                   class="o_address_street"/>
+                            <field name="city" placeholder="City"
+                                   class="o_address_city"/>
+                            <field name="state_id" class="o_address_state"
+                                   placeholder="State"
+                                   options="{'no_open': True, 'no_quick_create': True}"
+                                   context="{'default_country_id': country_id}"/>
+                            <field name="zip" placeholder="ZIP"
+                                   class="o_address_zip"/>
+                            <field name="country_id" placeholder="Country"
+                                   class="o_address_country"
+                                   options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                            <field name="company_id"/>
+                            <field name="capacity" required="True"/>
+                            <field name="occupied"/>
+                            <field name="camp_id"
+                                   attrs="{'readonly': [('state','=','available')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="Employees" string="Employees">
+                            <field name="employee_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <menuitem id="hr_rooms_menu" name="Room" action="hr_rooms_action"
+              parent="hr_camps_menu_root"/>
+</odoo>

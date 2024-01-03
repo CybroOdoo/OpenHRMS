@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template for pdf  print type wise -->
+    <template id="report_hr_allocation_type">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center>
+                        <h1>Room Allocation Report</h1>
+                    </center>
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <strong>Type:</strong>
+                            <h4>
+                                <p t-esc="type.capitalize()"/>
+                            </h4>
+                        </div>
+                        <div class="col-3">
+                            <strong>Start Date:</strong>
+                            <p t-esc="from_date"/>
+                        </div>
+                        <div class="col-3">
+                            <strong>End Date:</strong>
+                            <p t-esc="to_date"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Sequence number</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="datas" t-as="line">
+                                <td class="text-left">
+                                    <span t-esc="line['sequence_number']"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-esc="line['date']"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-esc="type.capitalize()"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-esc="line['state'].capitalize()"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

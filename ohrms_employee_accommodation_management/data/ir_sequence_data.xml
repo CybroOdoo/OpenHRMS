@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence for all models -->
+    <data noupdate="1">
+        <record id="seq_hr_rooms" model="ir.sequence">
+            <field name="name">Hr Room</field>
+            <field name="code">hr.rooms</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">RM</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_hr_camps" model="ir.sequence">
+            <field name="name">Hr Camps</field>
+            <field name="code">hr.camps</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">CP</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_hr_allocation_transfer" model="ir.sequence">
+            <field name="name">Hr Allocation Transfer</field>
+            <field name="code">hr.allocation.transfer</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">AT</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

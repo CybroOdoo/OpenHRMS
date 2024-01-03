@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_rooms_manager,access.hr.rooms,model_hr_rooms,hr.group_hr_manager,1,1,1,1
+access_hr_camps_manager,access.hr.camps,model_hr_camps,hr.group_hr_manager,1,1,1,1
+access_hr_allocation_report_manager,access.hr.allocation_report,model_hr_allocation_report,hr.group_hr_manager,1,1,1,1
+access_hr_allocation_transfer_manager,access.hr.allocation.transfer,model_hr_allocation_transfer,hr.group_hr_manager,1,1,1,1
+access_hr_allocation_transfer_user,access.hr.allocation.transfer,model_hr_allocation_transfer,hr.group_hr_user,1,0,0,0

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard for pdf  print-->
+    <record id="hr_allocation_report_action" model="ir.actions.act_window">
+        <field name="name">Room Allocation Report</field>
+        <field name="res_model">hr.allocation.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="hr_allocation_report_view_form" model="ir.ui.view">
+        <field name="name">hr.allocation.report.view.form</field>
+        <field name="model">hr.allocation.report</field>
+        <field name="arch" type="xml">
+            <form string="Room Allocation Report">
+                <group>
+                    <group>
+                        <field name="filter" widget="radio"/>
+                    </group>
+                    <group>
+                        <field name="employee_id"
+                               attrs="{'invisible' : [('filter', '=', 'type_wise')]}"/>
+                        <field name="type"
+                               attrs="{'invisible' : [('filter', '=', 'employee_wise')]}"/>
+                    </group>
+                    <group>
+                        <field name="from_date"/>
+                    </group>
+                    <group>
+                        <field name="to_date"/>
+                    </group>
+                    <group>
+                        <footer>
+                            <button name="action_print_pdf" string="Print pdf"
+                                    type="object" class="oe_highlight"/>
+                            <button string="Cancel" class="btn-secondary"
+                                    special="cancel" data-hotkey="z"/>
+                        </footer>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <menuitem id="report_menu_root" name="Report"
+              parent="hr_allocation_transfer_main_menu_root">
+        <menuitem id="hr_allocation_report_menu"
+                  action="hr_allocation_report_action"
+                  name="Employee Room Allocation Report"/>
+    </menuitem>
+</odoo>

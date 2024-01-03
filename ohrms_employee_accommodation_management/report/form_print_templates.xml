@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template for form print -->
+    <template id="form_print">
+        <t t-foreach="room_allocation" t-as="allocation">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                    <center>
+                        <h1>Room Allocation Form</h1>
+                    </center>
+                    <div align="center">
+                        <div>
+                            <strong>Employee:</strong>
+                            <h4>
+                                <t t-esc="allocation.employee_id.name"/>
+                            </h4>
+                        </div>
+                        <br/>
+                        <div>
+                            <strong>Date:</strong>
+                            <t t-esc="allocation.date"/>
+                        </div>
+                    </div>
+                    <div align="center">
+                        <br/>
+                        <div>
+                            <strong>Type:</strong>
+                            <t t-esc="allocation.type"/>
+                        </div>
+                            <br/>
+                            <div>
+                                <strong>Room No:</strong>
+                                <t t-esc="allocation.room_id.name"/>
+                            </div>
+                            <br/>
+                            <div>
+                                <strong>Camp No:</strong>
+                                <t t-esc="allocation.camp_id.name"/>
+                            </div>
+                            <br/>
+                        </div>
+                        <br/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

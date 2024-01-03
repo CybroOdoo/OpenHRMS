@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Views and action of model allocation transfer -->
+    <record id="hr_allocation_transfer_action" model="ir.actions.act_window">
+        <field name="name">Hr Allocation</field>
+        <field name="res_model">hr.allocation.transfer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="hr_allocation_transfer_view_tree" model="ir.ui.view">
+        <field name="name">hr.allocation.transfer.view.tree</field>
+        <field name="model">hr.allocation.transfer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence_number"/>
+                <field name="employee_id"/>
+                <field name="type"/>
+                <field name="room_id"/>
+                <field name="camp_id"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="hr_allocation_transfer_view_form" model="ir.ui.view">
+        <field name="name">hr.allocation.transfer.view.form</field>
+        <field name="model">hr.allocation.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object"
+                            class="oe_highlight" string="Confirm"
+                            states='draft'/>
+                    <button name="action_done" type="object"
+                            class="oe_highlight" string="Done"
+                            states='confirm'/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="sequence_number"/>
+                    </h1>
+                    <br/>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="type"/>
+                            <field name="date"/>
+                            <field name="room_ids" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="camp_id"
+                                   options="{'limit': 10, 'create': False, 'create_edit': False,'no_quick_create': True}"/>
+                            <field name="room_id"
+                                   domain="[('id', 'in',room_ids )]"
+                                   options="{'limit': 10, 'create': False, 'create_edit': False,'no_quick_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <menuitem id="hr_allocation_transfer_main_menu_root"
+              name="Company Accommodation" web_icon="ohrms_employee_accommodation_management,static/description/icon.png">
+        <menuitem id="hr_allocation_transfer_menu_root" name="Operation"
+                  sequence="1">
+            <menuitem id="hr_allocation_transfer_menu"
+                      action="hr_allocation_transfer_action" name="Allocation"/>
+        </menuitem>
+    </menuitem>
+</odoo>

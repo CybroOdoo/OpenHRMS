@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding='utf-8'?>
+<odoo>
+    <data>
+        <!-- Report action of pdf print form view of all models-->
+        <record id="action_hr_allocation_report_employee"
+                model="ir.actions.report">
+            <field name="name">Room Allocation Report</field>
+            <field name="model">hr.allocation.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ohrms_employee_accommodation_management.report_hr_allocation_employee</field>
+            <field name="report_file">report_hr_allocation_employee</field>
+            <field name="binding_type" ref="model_hr_allocation_report"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="action_hr_allocation_report_type" model="ir.actions.report">
+            <field name="name">Room Allocation Report</field>
+            <field name="model">hr.allocation.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ohrms_employee_accommodation_management.report_hr_allocation_type</field>
+            <field name="report_file">report_hr_allocation_type</field>
+            <field name="binding_type" ref="model_hr_allocation_report"/>
+            <field name="binding_type">report</field>
+        </record>
+        <record id="action_hr_allocation_transfer_form_print"
+                model="ir.actions.report">
+            <field name="name">Hr Allocation Transfer Report</field>
+            <field name="model">hr.allocation.transfer</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ohrms_employee_accommodation_management.form_print</field>
+            <field name="report_file">report.ohrms_employee_accommodation_management.form_print</field>
+            <field name="binding_model_id" ref="model_hr_allocation_transfer"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
