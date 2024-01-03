@@ -39,7 +39,7 @@
         'views/res_config_settings_views.xml',
         'views/hr_loan_views.xml',
     ],
-    'images': ['static/description/images/banner.jpg'],
+    'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
