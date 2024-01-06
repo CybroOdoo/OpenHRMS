@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Customize Attendance Report -->
+    <record id="view_attendance_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.oh_hr_zk_attendance</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="worked_hours" position="after">
+                <field name="worked_hours" type="measure"/>
+            </field>
+        </field>
+    </record>
+<!-- The view extends the base 'hr.attendance_view_filter' view and adds a new filter
+    for grouping attendance records by date.-->
+    <record id="hr_attendance_view_filter" model="ir.ui.view">
+        <field name="name">hr.attendance.view.filter.hr_attendance_view_filter
+        </field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_check_out']" position="after">
+                <group expand="0" string="Group By">
+                    <separator/>
+                    <filter name="date" string="Date"
+                            context="{'group_by':'check_in:day'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+<!--    The search view enhances the usability of the daily attendance report by providing predefined filters.-->
+    <record id="zk_report_daily_attendance_view_search" model="ir.ui.view">
+        <field name="name">zk.report.daily.attendance.search</field>
+        <field name="model">zk.report.daily.attendance</field>
+        <field name="arch" type="xml">
+            <search string="Hr Attendance Search">
+                <filter icon="terp-stock_align_left_24" string="My Attendance"
+                        name="my_attendance"
+                        domain="[('name.user_id.id', '=', uid)]"/>
+                <filter name="today" string="Today"
+                        domain="[('punching_time', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('punching_time', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+                <filter string="Current Month" name="month"
+                        domain="[('punching_time', '&gt;=', datetime.datetime.now().strftime('%Y-%m-01'))]"/>
+                <separator/>
+
+                <field name="name" string="Name"/>
+            </search>
+        </field>
+    </record>
+<!--    The tree view specifies the fields to be displayed in the daily attendance report.-->
+    <record id="zk_report_daily_attendance_view_tree" model="ir.ui.view">
+        <field name="name">zk.report.daily.attendance.tree</field>
+        <field name="model">zk.report.daily.attendance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="punching_day"/>
+                <field name="name"/>
+                <field name="punch_type"/>
+                <field name="attendance_type"/>
+                <field name="punching_time"/>
+                <field name="address_id"/>
+            </tree>
+        </field>
+    </record>
+<!--    The action window configures how the attendance analysis should be presented to the user.-->
+    <record id="zk_report_daily_attendance_action"
+            model="ir.actions.act_window">
+        <field name="name">Attendance Analysis</field>
+        <field name="res_model">zk.report.daily.attendance</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_my_attendance':1}</field>
+        <field name="search_view_id"
+               ref="zk_report_daily_attendance_view_search"/>
+    </record>
+<!--    The menu item is associated with the 'zk_report_daily_attendance_action' action window.-->
+    <menuitem id="zk_report_daily_attendance_meny" name="Attendance log"
+              action="zk_report_daily_attendance_action"
+              parent="zk_machine_menu"
+              sequence="2" groups="hr_attendance.group_hr_attendance_officer"/>
+</odoo>

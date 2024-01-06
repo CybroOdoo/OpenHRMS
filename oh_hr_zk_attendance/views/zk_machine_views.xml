@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    The form view is designed for managing biometric devices and includes buttons for actions,
+    as well as fields for configuring the machine's details.-->
+    <record id="zk_machine_view_form" model="ir.ui.view">
+        <field name="name">zk.machine.view.form</field>
+        <field name="model">zk.machine</field>
+        <field name="arch" type="xml">
+            <form string="Biometric Device">
+                <header>
+                    <button name="clear_attendance" type="object"
+                            string="Clear Data" class="oe_highlight"
+                            icon="fa-remove "
+                            confirm="Are you sure you want to do this?"/>
+                    <button name="download_attendance" type="object"
+                            string="Download Data" class="oe_highlight"
+                            icon="fa-download "
+                            confirm="Are you sure you want to do this?"/>
+                    <button name="restart_device" type="object"
+                            string="Restart Device" class="oe_highlight"
+                            icon="fa-refresh "
+                            confirm="Are you sure you want to do this?"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Machine IP"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="port_no"/>
+                            <field name="address_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--Tree view for zk.machine for showing the device details-->
+    <record id="zk_machine_view_tree" model="ir.ui.view">
+        <field name="name">zk.machine.view.tree</field>
+        <field name="model">zk.machine</field>
+        <field name="arch" type="xml">
+            <tree string="Biometric Machine">
+                <field name="name"/>
+                <field name="port_no"/>
+                <field name="address_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+    <!--Menu action for attendance -->
+    <record id="zk_machine_action" model="ir.actions.act_window">
+        <field name="name">Attendances</field>
+        <field name="res_model">zk.machine</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!--The form view enhances the default 'hr.view_employee_form' view by adding a new field,
+    'device_id', after the 'user_id' field on the 'hr_settings' page.-->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.oh_hr_zk_attendance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']//field[@name='user_id']"
+                   position="after">
+                <field name="device_id"/>
+            </xpath>
+        </field>
+    </record>
+<!--    The menu item is placed under the 'hr_attendance.menu_hr_attendance_root' parent menu.-->
+    <menuitem id="zk_machine_menu"
+              parent="hr_attendance.menu_hr_attendance_root" sequence="50"
+              name="Biometric Manager"/>
+<!-- The submenu item is placed under the 'zk_machine_menu' parent menu and triggers the 'zk_machine_action'.-->
+    <menuitem id="zk_machine_sub_menu" parent="zk_machine_menu"
+              name="Device Configuration" action="zk_machine_action"
+              sequence="1"/>
+</odoo>
