@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Custody Mail Template-->
+    <data>
+        <record id="custody_email_notification_template" model="mail.template">
+            <field name="name">Custody e-mail template</field>
+            <field name="email_from">{{object.company_id and object.company_id.email or ''}}</field>
+            <field name="subject">Notification to return company asset-{{object.custody_property_id.name}}</field>
+            <field name="email_to">{{object.employee_id.work_email}}</field>
+            <field name="model_id" ref="hr_custody.model_hr_custody"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                    <![CDATA[
+                          <p>Dear <t t-out="object.employee_id.name"></t>,<br/><br/>
+                          You are in possession of the company asset
+                          <strong><t t-out="object.custody_property_id.name"></t></strong>
+                          since <strong><t t-out="object.return_date"></t>.</strong><br/><br/>
+                          Please kindly return the property as soon as possible.<br/><br/></p>
+                          Regards,<br/><br/>
+                          <t t-out="object.company_id.name"></t>]]>
+            </field>
+        </record>
+    </data>
+</odoo>

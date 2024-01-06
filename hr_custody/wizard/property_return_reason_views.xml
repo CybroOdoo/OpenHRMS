@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model='ir.ui.view' id='property_return_reason_view_form'>
+            <field name="name">property.return.reason.form</field>
+            <field name="model">property.return.reason</field>
+            <field name="arch" type="xml">
+                <form string="Update Reason">
+                    <group>
+                        <field name="reason" required="True"/>
+                    </group>
+                    <footer>
+                        <button name="send_reason" string="Proceed" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model='ir.actions.act_window' id='wizard_reason_act'>
+            <field name="name">Update Reason</field>
+            <field name="res_model">property.return.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="property_return_reason_view_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

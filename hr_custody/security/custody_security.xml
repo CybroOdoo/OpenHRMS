@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="property_rule_custody" model="ir.rule">
+        <field name="name">Custody Multi Company</field>
+        <field name="model_id" ref="model_custody_property"/>
+        <field eval="True" name="global"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record id="property_rule_custody_req" model="ir.rule">
+        <field name="name">Custody Request Multi Company</field>
+        <field name="model_id" ref="model_hr_custody"/>
+        <field eval="True" name="global"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+    <record id="hr_custody_personal_rule_manager" model="ir.rule">
+        <field name="name">Employee Resignation Manager</field>
+        <field ref="hr_custody.model_hr_custody" name="model_id"/>
+        <field name="domain_force">[('employee_id.user_id.id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Hr Custody sequence number generation-->
+    <data noupdate="1">
+        <record id="custody_sequence_id" model="ir.sequence">
+            <field name="name">Custody Code</field>
+            <field name="code">hr.custody</field>
+            <field name="prefix">CR</field>
+            <field eval="4" name="padding"/>
+            <field eval="False" name="company_id"/>
+        </record>
+    </data>
+</odoo>

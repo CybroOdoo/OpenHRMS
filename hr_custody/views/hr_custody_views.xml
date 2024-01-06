@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Hr Custody from view -->
+    <record id="hr_custody_view_form" model="ir.ui.view">
+        <field name="name">hr.custody.form</field>
+        <field name="model">hr.custody</field>
+        <field name="arch" type="xml">
+            <form string="Custody">
+                <header>
+                    <button string="Send For Approval" type="object"
+                            name="sent"
+                            class="oe_highlight"
+                            invisible=" state not in 'draft' "/>
+                    <button string="Approve" groups="hr.group_hr_manager"
+                            type="object" name="approve"
+                            class="oe_highlight"
+                            invisible=" state not in 'to_approve' or is_renew_return_date"/>
+                    <button string="Renewal Approval"
+                            groups="hr.group_hr_manager" type="object"
+                            name="renew_approve"
+                            class="oe_highlight"
+                            invisible=" state not in 'to_approve' or is_renew_return_date ==False"/>
+                    <button string="Refuse" groups="hr.group_hr_manager"
+                            type="action"
+                            name="%(hr_custody.property_return_date_act)d"
+                            invisible="state not in 'to_approve' or is_renew_return_date"
+                            context="{'reject_id':id,'model_id':'hr.custody'}"/>
+                    <button class="btn-primary"
+                            name="%(hr_custody.property_return_date_act)d"
+                            string="Refuse"
+                            groups="hr.group_hr_manager" type="action"
+                            invisible="state not in 'to_approve' or is_renew_return_date == False"
+                            context="{'reject_id':id,'model_id':'hr.custody','renew': 'renew'}"/>
+                    <button string="Set to Draft" type="object"
+                            name="set_to_draft"
+                            invisible="state not in 'rejected'"/>
+                    <button string="Return" type="object"
+                            name="set_to_return"
+                            groups="hr.group_hr_manager"
+                            invisible="state not in 'approved'"/>
+                    <button string="Send Mail" type="object"
+                            name="send_mail" groups="hr.group_hr_manager"
+                            invisible="is_mail_send == False or state not in 'approved'"/>
+                    <button string="Send Mail" type="object"
+                            class="oe_highlight" name="send_mail"
+                            groups="hr.group_hr_manager"
+                            invisible=" is_mail_send or state not in 'approved'"/>
+                    <button string="Renew" type="action"
+                            name="%(property_return_date_act)d"
+                            context="{'custody_id':id}"
+                            class="oe_highlight"
+                            invisible="state not in 'approved' or is_renew_return_date"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,to_approve,approved,returned"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" readonly="1" nolabel="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="is_read_only" invisible="1"/>
+                            <field name="employee_id"
+                                   readonly="is_read_only == False"/>
+                            <field name="custody_property_id"
+                                   options="{'no_open':True,'no_create':True}"
+                                   domain="[('company_id','child_of',[company_id])]"
+                                   readonly="state != 'draft'"/>
+                            <field name="is_renew_return_date"
+                                   invisible="1"/>
+                            <field name="is_renew_reject" invisible="1"/>
+                            <field name="is_mail_send" invisible="1"/>
+                            <field name="purpose"
+                                   readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="date_request"
+                                   readonly="state != 'draft'"/>
+                            <field name="return_date"
+                                   invisible="is_renew_return_date and renew_date not in [None,False] and is_renew_reject == False"
+                                   readonly="state != 'draft'"/>
+                            <field name="renew_date"
+                                   invisible="is_renew_return_date == False or state != 'to_approve'"/>
+                            <field name="rejected_reason"
+                                   invisible="state not in 'rejected'"/>
+                            <field name="renew_rejected_reason"
+                                   invisible=" is_renew_reject == False or state not in 'approved' "/>
+                            <field name="company_id"
+                                   options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Hr Custody tree view -->
+    <record id="hr_custody_view_tree" model="ir.ui.view">
+        <field name="name">hr.custody.tree</field>
+        <field name="model">hr.custody</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="custody_property_id"/>
+                <field name="purpose"/>
+                <field name="date_request"/>
+                <field name="return_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Hr Custody search view -->
+    <record id="hr_custody_view_search" model="ir.ui.view">
+        <field name="name">hr.custody.search</field>
+        <field name="model">hr.custody</field>
+        <field name="arch" type="xml">
+            <search string="Custody">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="custody_property_id"/>
+                <field name="purpose"/>
+                <field name="date_request"/>
+                <field name="return_date"/>
+                <field name="state"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="status" domain="[]"
+                            context="{'group_by':'state'}"/>
+                    <filter string="Employee" name="employee" domain="[]"
+                            context="{'group_by':'employee_id'}"/>
+                    <filter string="Custody Name" name="custody"
+                            domain="[]"
+                            context="{'group_by':'custody_property_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Hr Custody action -->
+    <record id="hr_custody_action" model="ir.actions.act_window">
+        <field name="name">Custody</field>
+        <field name="res_model">hr.custody</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="hr_custody_view_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to Create a New Record.
+            </p>
+        </field>
+    </record>
+    <!-- Hr Custody menu -->
+    <menuitem id="hr_custody_main_menu"
+              web_icon="hr_custody,static/description/icon.png"
+              name="Custody" sequence="20"/>
+    <menuitem id="hr_custody_menu" parent="hr_custody_main_menu"
+              name="Custody Management" sequence="20"/>
+    <menuitem action="hr_custody_action" id="hr_custody_menu"
+              parent="hr_custody.hr_custody_main_menu"
+              name="Custody Request" sequence="1"/>
+</odoo>
