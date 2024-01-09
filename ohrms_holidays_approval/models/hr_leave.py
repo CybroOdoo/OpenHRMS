@@ -48,9 +48,10 @@ class HrLeave(models.Model):
     @api.depends('validation_status_ids')
     def _compute_user_ids(self):
         """Method for computing user_ids"""
-        self.user_ids = self.env['res.users'].search(
-            [('id', 'in', self.validation_status_ids.filtered(
-                lambda x: not x.validation_status).mapped('user_id').ids)])
+        for rec in self:
+            rec.user_ids = rec.env['res.users'].search(
+                [('id', 'in', rec.validation_status_ids.filtered(
+                    lambda x: not x.validation_status).mapped('user_id').ids)])
 
     @api.onchange('holiday_status_id')
     def _onchange_holiday_status_id(self):
@@ -84,9 +85,8 @@ class HrLeave(models.Model):
             [('user_id', '=', self.env.uid)], limit=1)
         active_id = self.env.context.get('active_id') if self.env.context.get(
             'active_id') else self.id
-        user = self.env['hr.leave'].search([('id', '=', active_id)], limit=1)
-        for user_obj in user.validation_status_ids.mapped(
-                'user_id').filtered(lambda x: x.id == self.env.uid):
+        user = self.env['hr.leave'].browse(active_id)
+        if self.env.uid in user.validation_status_ids.mapped('user_id').ids:
             user.validation_status_ids.search(
                 [('leave_id', '=', user.id),
                  ('user_id', '=', self.env.uid)]).validation_status = True
@@ -123,7 +123,6 @@ class HrLeave(models.Model):
                     raise UserError(_(
                         'Leave request must be confirmed '
                         'or validated in order to refuse it.'))
-
                 if holiday.state == 'validate1':
                     holiday.sudo().write(
                         {'state': 'refuse',

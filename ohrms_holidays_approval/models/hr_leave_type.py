@@ -33,13 +33,13 @@ class HrLeaveType(models.Model):
         compute='_compute_multi_level_validation')
     leave_validation_type = fields.Selection(
         selection_add=[('multi', 'Multi Level Approval')])
-    validator_ids = fields.One2many('hr.holidays.validators',
-                                    'leave_type_id',
-                                    string='Leave Validators',
-                                    help="Indicates the leave validators")
+    validator_ids = fields.Many2many('hr.holidays.validators',
+                                     string='Leave Validators',
+                                     help="Indicates the leave validators")
 
     @api.depends('leave_validation_type')
     def _compute_multi_level_validation(self):
         """Method for validating the value of multi_level_validation"""
-        self.multi_level_validation = True if (
-                self.leave_validation_type == 'multi') else False
+        for rec in self:
+            rec.multi_level_validation = True if (
+                    rec.leave_validation_type == 'multi') else False

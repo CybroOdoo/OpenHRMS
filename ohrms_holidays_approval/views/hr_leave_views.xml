@@ -23,7 +23,6 @@
                     can_approve) or (multi_level_validation and uid not in
                     user_ids) or state not in ('confirm', 'validate1',
                     'validate')"/>
-
             </xpath>
             <xpath expr="//group[last()]" position="after">
                 <field name="multi_level_validation" invisible="1"/>

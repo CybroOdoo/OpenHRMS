@@ -37,7 +37,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/hr_leave_views.xml',
-        'views/hr_leave_type_views.xml'
+        'views/hr_leave_type_views.xml',
+        'views/hr_holidays_validators_views.xml',
     ],
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',

@@ -23,16 +23,15 @@
 from odoo import fields, models
 
 
-class HrLeaveValidators(models.Model):
+class HrHolidaysValidators(models.Model):
     """ Model for leave validators in Leave Types configuration """
     _name = 'hr.holidays.validators'
     _description = 'Hr Holidays Validators'
 
-    leave_type_id = fields.Many2one('hr.leave.type',
-                                    string="Holiday Type",
-                                    help='Indicates the type of leave')
     user_id = fields.Many2one('res.users',
                               string='Leave Validators',
                               help="Users who has the permission "
                                    "to grant leave approval",
                               domain="[('share','=',False)]")
+    name = fields.Char(string="Name", help="Name of the User",
+                       related="user_id.name")

@@ -20,11 +20,7 @@
                 <field name="multi_level_validation" invisible="1"/>
                 <notebook invisible="leave_validation_type != 'multi'">
                     <page string="Leave validation">
-                        <field name="validator_ids" mode="tree">
-                            <tree string="Users" editable="bottom">
-                                <field name="user_id"/>
-                            </tree>
-                        </field>
+                        <field name="validator_ids" />
                     </page>
                 </notebook>
             </xpath>

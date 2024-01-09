@@ -29,7 +29,7 @@ class LeaveValidationStatus(models.Model):
     _name = 'leave.validation.status'
     _description = 'Leave Validation Status'
 
-    leave_id = fields.Many2one('hr.leave', string='Leave')
+    leave_id = fields.Many2one('hr.leave', string='Leave', help='Leave record')
     user_id = fields.Many2one('res.users',
                               string='Leave Validators',
                               help="Indicates the validators of leave",
