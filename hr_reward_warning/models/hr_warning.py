@@ -37,7 +37,7 @@ class HrAnnouncementTable(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('to_approve', 'Waiting For Approval'),
                               ('approved', 'Approved'), ('rejected', 'Refused'), ('expired', 'Expired')],
                              string='Status',  default='draft',
-                             track_visibility='always')
+                             tracking=True)
     requested_date = fields.Date(string='Requested Date', default=datetime.now().strftime('%Y-%m-%d'),
                                  help="Create Date of Record")
     attachment_id = fields.Many2many('ir.attachment', 'doc_warning_rel', 'doc_id', 'attach_id4',
