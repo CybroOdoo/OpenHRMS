@@ -2,8 +2,8 @@
     :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 
-Open HRMS Employee Info
-=======================
+OpenHRMS Employee Info
+======================
 This module helps you to add additional information in employee records
 
 Configuration
@@ -21,7 +21,7 @@ General Public License, Version 3 (LGPL v3).
 
 Credits
 -------
-Developer: (V17) Aiswarya J P
+* Developer: (V17) Aiswarya J P, Contact: odoo@cybrosys.com
 
 Contacts
 --------

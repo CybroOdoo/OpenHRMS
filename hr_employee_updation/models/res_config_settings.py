@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
+#    A part of OpenHRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,7 +20,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ResConfigSettings(models.TransientModel):
@@ -30,25 +30,9 @@ class ResConfigSettings(models.TransientModel):
 
     notice_period = fields.Boolean(string='Notice Period',
                                    help='Enable to configure a notice period'
-                                        ' for an employee.')
+                                        ' for an employee.',
+                                   config_parameter='hr_employee_updation.notice_period')
     no_of_days = fields.Integer(string='Notice Period Days',
                                 help='Set the number of days for the notice'
-                                     ' period.')
-
-    def set_values(self):
-        """Save the configuration values for notice period in the system."""
-        super().set_values()
-        self.env['ir.config_parameter'].sudo().set_param(
-            "hr_resignation.notice_period", self.notice_period)
-        self.env['ir.config_parameter'].sudo().set_param(
-            "hr_resignation.no_of_days", self.no_of_days)
-
-    @api.model
-    def get_values(self):
-        """Retrieve the configuration values for notice period from the
-         system."""
-        res = super().get_values()
-        get_param = self.env['ir.config_parameter'].sudo().get_param
-        res['notice_period'] = get_param('hr_resignation.notice_period')
-        res['no_of_days'] = int(get_param('hr_resignation.no_of_days'))
-        return res
+                                     ' period.',
+                                config_parameter='hr_employee_updation.no_of_days')

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
+#    A part of OpenHRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -33,12 +33,10 @@ class HrContract(models.Model):
         """Get the default notice period from the  configuration.
             :return: The default notice period in days.
             :rtype: int """
-        if self.env['ir.config_parameter'].get_param(
-                'hr_resignation.notice_period'):
-            return self.env['ir.config_parameter'].get_param(
-                'hr_resignation.no_of_days')
-        else:
-            return 0
+        return self.env['ir.config_parameter'].get_param(
+            'hr_employee_updation.no_of_days') if self.env[
+            'ir.config_parameter'].get_param(
+            'hr_employee_updation.notice_period') else 0
 
     notice_days = fields.Integer(string="Notice Period",
                                  default=_default_notice_days,
