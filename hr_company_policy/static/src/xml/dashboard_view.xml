@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="hrms_dashboard.LoginEmployeeDetails" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class, 'employee-details')]" position="inside">
+            <div class="company-container">
+                <button type="button" t-on-click="getCompanyPolicy" class="btn btn-third oe_company_policy" id="company_policy">
+                    Company Policy
+                </button>
+            </div>
+        </xpath>
+    </t>
+</templates>
