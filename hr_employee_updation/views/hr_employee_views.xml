@@ -3,11 +3,9 @@
     <!-- Reports Menu -->
     <menuitem id="employee_report_menu" name="Reports" sequence="30"
               groups="hr.group_hr_manager,hr.group_hr_user"/>
-
     <!-- HR Management Menu -->
     <menuitem id="hr_management_menu" name="HR Management" parent="hr.menu_hr_root" sequence="5"
               groups="hr.group_hr_manager,hr.group_hr_user"/>
-
     <!-- Employee Form View Extension -->
     <record id="view_employee_form" model="ir.ui.view">
         <field name="name">hr.employee.view.form.inherit.hr.employee.updation</field>
@@ -51,12 +49,12 @@
     </record>
 
     <!-- Gamification Employee Form View Extension -->
-    <record id="hr_gamification.hr_hr_employee_view_form" model="ir.ui.view">
-        <field name="name">hr.employee.view.form.inherit.hr.employee.updation</field>
+    <record id="hr_hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.gamification.view.form.inherit.hr.employee.updation</field>
         <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="inherit_id" ref="hr_gamification.hr_hr_employee_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='public']" position="after">
+            <xpath expr="//page[@name='received_badges']" position="replace">
                 <page string="Received Badges" invisible="not user_id">
                     <div name="badges" groups="hr.group_hr_user">
                         <field name="has_badges" invisible="1"/>

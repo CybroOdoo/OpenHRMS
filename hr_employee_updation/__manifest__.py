@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
+#    A part of OpenHRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'Open HRMS Employee Info',
+    'name': 'OpenHRMS Employee Info',
     'version': '17.0.1.0.0',
     'category': 'Human Resources',
     'summary': """Adding Advanced Fields In Employee Master""",
@@ -35,7 +35,7 @@
     'depends': ['hr', 'mail', 'hr_gamification', 'hr_contract'],
     'data': [
         'security/ir.model.access.csv',
-        'data/hr_employee_relation_demo.xml',
+        'data/hr_employee_relation_data.xml',
         'data/ir_cron_data.xml',
         'views/hr_contract_views.xml',
         'views/res_config_settings_views.xml',

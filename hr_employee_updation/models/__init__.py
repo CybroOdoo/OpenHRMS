@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
+#    A part of OpenHRMS Project <https://www.openhrms.com>
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,7 +20,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_employee
 from . import hr_contract
+from . import hr_employee
 from . import hr_employee_relation
 from . import res_config_settings
