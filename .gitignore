@@ -62,3 +62,4 @@ postgresql/
 etc/addons/
 etc/sessions/
 etc/filestore/
+.DS_Store
