@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+        <record id="view_trial_date" model="ir.ui.view">
+            <field name="name">Trial Date</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                    <field name="trial_date_end" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_priority" model="ir.ui.view">
+            <field name="name">probation</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="inside">
+                    <button name="action_approve" string="Approve" class="oe_highlight" type="object"
+                            attrs="{'invisible':[('state','!=','probation')]}"
+                            groups="hr.group_hr_manager"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@name='information']/group/group[@name='salary']" position="after">
+                    <field name="training_amount"/>
+                </xpath>
+                
+                <xpath expr="/form/sheet/notebook/page[@name='information']"
+                       position="after">
+                    <page string="Probationary Details" name="probation"
+                          attrs="{'invisible': [('trial_date_end', '=', False)]}">
+                        <group string="Probationary Details" name="training_info">
+                            <field name="training_info" placeholder="Probationary Details"/>
+                            <field name="waiting_for_approval" invisible="1"/>
+                            <field name="is_approve" invisible="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="action_contract_approvals" model="ir.actions.act_window">
+            <field name="name">Contracts For Approvals</field>
+            <field name="res_model">hr.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'probation'),('trial_date_end', '&lt;=',
+                context_today().strftime('%Y-%m-%d'))]
+            </field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem
+                id="menu_hr_employee"
+                name="Approvals"
+                action="action_contract_approvals"
+                groups="hr.group_hr_manager"
+                parent="hr.menu_hr_employee_payroll"/>
+
+        <record id="training_menu_action" model="ir.actions.act_window">
+            <field name="name">Probation Details</field>
+            <field name="res_model">hr.training</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Probation Details
+                </p>
+            </field>
+        </record>
+
+        <record id="training_tree_view" model="ir.ui.view">
+            <field name="name">Training Tree</field>
+            <field name="model">hr.training</field>
+            <field name="arch" type="xml">
+                <tree string="Training Details" delete="0" create="0">
+                    <field name="employee_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="training_from_view" model="ir.ui.view">
+            <field name="name">Training Form</field>
+            <field name="model">hr.training</field>
+            <field name="arch" type="xml">
+                <form string="Training Details" delete="0" create="0" edit="0">
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h3>
+                                    <field name="employee_id" readonly="1"/>
+                                </h3>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="start_date" style="width:100px" readonly="1"/>
+                                <field name="end_date" style="width:100px" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="state" style="width:100px" readonly="1"/>
+                            </group>
+                        </group>
+                        <separator string="Leave Information"/>
+                        <field name="leave_ids" readonly="1">
+                            <tree>
+                                <field name="employee_id"/>
+                                <field name="department_id"/>
+                                <field name="holiday_status_id"/>
+                                <field name="name"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <field name="duration_display"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem
+                id="menu_hr_training"
+                name="Probation Details"
+                groups="base.group_no_one"
+                action="training_menu_action"
+                parent="hr.hr_menu_hr_reports"/>
+    </data>
+</odoo>

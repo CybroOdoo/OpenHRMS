@@ -1,0 +1,174 @@
+<odoo>
+
+    <template id="portal_my_home_agent" name="Portal My Home Agent : Verificaation entries"
+              inherit_id="portal.portal_my_home"
+              priority="21">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Employee Verification</t>
+                <t t-set="url" t-value="'/my/records'"/>
+                <t t-set="placeholder_count" t-value="'verification_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_menu_employee" name="Portal layout : employe menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'employee'">
+                <a t-if='records' t-attf-href="/my/records?{{ keep_query() }}"><span style="padding-left:8px;">Employees</span></a>
+                <t t-else="">Employees</t>
+            </li>
+            <li t-if="page_name == 'employee_details'">
+                <a t-if='records'>
+                    <a t-attf-href="/my/records?{{ keep_query() }}"><span style="padding-left:8px;">Employees</span></a>
+                    <span style="padding-left:8px;"></span>
+                    <t t-esc="records.employee.name"/>
+                </a>
+                <t t-else="">Employees</t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_records" name="Employee varification">
+      <t t-call="portal.portal_layout">
+
+<!--        <h3>Verifications Required-->
+<!--            <t t-call="portal.portal_searchbar"/>-->
+<!--        </h3>-->
+        <t t-if="not records">
+            <p>There are currently no quotations for your account.</p>
+        </t>
+        <div t-if="records" class="panel panel-default">
+            <div class="table-responsive border rounded border-top-0 #{classes if classes else ''}">
+                <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                    <thead>
+                      <tr class="active">
+                          <th>Employee </th>
+                          <th>Order Date</th>
+                          <th>Address</th>
+                          <th></th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="records" t-as="record">
+                        <tr>
+                            <td>
+                                <a t-attf-href="/my/details/#{record.id}?#{keep_query()}">
+                                    <t t-esc="record.employee.name"/>
+                                </a>
+                            </td>
+                            <td><span t-field="record.assigned_date"/></td>
+                            <td><span t-field="record.address"/></td>
+                        </tr>
+                    </t>
+                </table>
+            </div>
+            <div t-if="pager" class="o_portal_pager text-center">
+              <t t-call="portal.pager"/>
+            </div>
+        </div>
+      </t>
+    </template>
+
+    <template id="portal_record_page" name="My Employee Details">
+      <t t-call="portal.portal_layout">
+<!--        <h3>Employee Details-->
+
+<!--        </h3>-->
+        <t t-if="not records">
+            <p>There are currently no orders for your account.</p>
+        </t>
+        <div t-if="records" class="panel panel-default">
+            <div class="table-responsive">
+                <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                    <thead>
+                  <tr class="active">
+                      <th>Personal Details </th>
+                    </tr>
+                </thead>
+                <t t-foreach="records" t-as="record">
+                    <tr>
+                        <td><h3>Name</h3></td>
+                        <td><h4><t t-esc="records.employee.name"/></h4></td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>
+                            <t t-if="records.address">
+                                <t t-esc="record.address.street"/><br/>
+                                <t t-esc="record.address.street2"/><br/>
+                                <t t-esc="record.address.city"/><br/>
+                                <t t-esc="record.address.state_id.name"/><br/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Assigned Date</td>
+                        <td><t t-esc="records.assigned_date"/></td>
+                    </tr>
+                    <tr>
+                        <td>Expected completion Date</td>
+                        <td><t t-esc="records.expected_date"/></td>
+                    </tr>
+                    <tr>
+                        <td>Private details</td>
+                            <td>
+                                <a class="btn btn-info" target="_blank" t-attf-href="/web/content/#{record.resume_uploaded.id}?download=true">
+                                    <i class="fa fa-download btn btn-primary"></i> <h4>Download</h4>
+<!--                                    <img  style="width: 150px; height: 100px; object-fit: cover;" t-attf-src="data:image/png;base64,{{record.resume_uploaded.id}"/>-->
+
+                                </a>
+                            </td>
+                    </tr>
+                </t>
+                </table>
+            </div>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="portal.pager"/>
+            </div>
+        </div>
+
+        <form action="/test/path"  method="post" class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data" id="file_upload_form">
+            <div class="form-group form-field o_website_form_required_custom">
+                <label class="col-md-3 col-sm-4 control-label" for="contact_name">Description</label>
+                <div class="col-md-7 col-sm-8">
+                <input type="text" class="form-control o_website_form_input" name="description" required=""/>
+                </div>
+
+                <label class="col-md-3 col-sm-4 control-label" for="contact_name">Upload file if any</label>
+                <div class="col-md-7 col-sm-8">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="employee_token" t-att-value="records.id"/>
+                    <input type="file" name="attachment" class="file" multiple="true"
+                           data-show-upload="true"
+                           data-show-caption="true"
+                           data-show-preview="true"
+                           lass="file"
+                           id="records.id"/>
+<!--                    <button type="submit" name="redirect" class="btn btn-link btn-sm btn-block cybro-super-btn" style="margin-top:20px;">Submit</button>-->
+
+                </div>
+                <button type="submit" name="Upload" style="margin-top:20px;" class="fa fa-upload btn btn-secondary">
+                                    Upload
+                    </button>
+            </div>
+        </form>
+      </t>
+    </template>
+
+
+    <template id="portal_record_completed" name="Employee varification completed">
+        <t t-call="portal.portal_layout">
+        <h3>Employee Details</h3>
+            <div class="table-responsive">
+                <table class="table table-hover o_portal_my_doc_table">
+                    <thead>
+                  <tr class="active">
+                      <th>Your report successfully submitted</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </t>
+    </template>
+
+</odoo>

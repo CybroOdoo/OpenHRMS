@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record model="ir.ui.view" id="hr_employee_history_form_view">
+            <field name="name">hr.employeehistory.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page name="history" string="Employee History">
+                        <group>
+                            <group>
+                                <button type="object" name="department_details"  class="oe_highlight" string="Job History" />
+                                <button type="object" name="salary_history"  class="oe_highlight" string="Salary History"/>
+                                <button type="object" name="contract_history" class="oe_highlight" string="Contract History"/>
+                                <button type="object" name="time_sheet" class="oe_highlight" string="Timesheet Cost"/>
+                            </group>
+                        </group>
+                    </page>
+                 </xpath>
+            </field>
+         </record>
+    </data>
+</odoo>

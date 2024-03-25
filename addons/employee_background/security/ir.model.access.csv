@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+manager_view_verification,view_verification_for_manager,model_employee_verification,hr.group_hr_manager,1,1,1,1
+agent_view_verification,view_verification_for_agent,base.model_ir_attachment,base.group_portal,1,1,1,1

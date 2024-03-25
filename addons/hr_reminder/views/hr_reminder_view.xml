@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_reminder_form_view" model="ir.ui.view">
+        <field name="name">hr.reminder.form.view</field>
+        <field name="model">hr.reminder</field>
+        <field name="arch" type="xml">
+            <form string="HR Reminder">
+                <sheet>
+                    <div class="oe_title">
+                        <h1 class="o_row">
+                            <field name="name" placeholder="Reminder Title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name"/>
+                            <field name="search_by"/>
+                            <field name="date_from" attrs="{'invisible':
+                            [('search_by','not in','set_period')], 'required':
+                            [('search_by', '=', 'set_period')]}"/>
+                            <field name="date_set" attrs="{'invisible':
+                            [('search_by','not in','set_date')], 'required':
+                            [('search_by', '=', 'set_date')]}"/>
+                            <field name="date_to" attrs="{'invisible':
+                            [('search_by','not in','set_period')], 'required':
+                            [('search_by', '=', 'set_period')]}"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="model_field"/>
+                            <field name="days_before" attrs="{'invisible':
+                            [('search_by','=','today')]}"/>
+                            <field name="expiry_date" attrs="{'invisible':
+                            [('search_by','=','today')]}"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_reminder_tree_view" model="ir.ui.view">
+        <field name="name">hr.reminder.tree.view</field>
+        <field name="model">hr.reminder</field>
+        <field name="arch" type="xml">
+            <tree string="Pop-Up Reminder">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="model_field"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_reminder" model="ir.actions.act_window">
+        <field name="name">Reminders</field>
+        <field name="res_model">hr.reminder</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to configure new periodic reminder.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Reminders" id="hr_reminder_menu"
+              web_icon="hr_reminder,static/description/reminder_icon.png"
+              action="action_hr_reminder" sequence="8"/>
+</odoo>

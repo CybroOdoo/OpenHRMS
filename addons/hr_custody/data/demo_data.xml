@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="property_one" model="custody.property">
+            <field name="name">Laptop</field>
+        </record>
+
+        <record id="property_two" model="custody.property">
+            <field name="name">Seminar hall</field>
+        </record>
+
+        <record id="property_three" model="custody.property">
+            <field name="name">Car</field>
+        </record>
+
+
+         <record id="work_data" model="hr.work.location">
+          <field name="name">Building 3, Third Floor</field>
+          <field name="address_id" ref="base.main_partner" />
+      </record>
+
+       <record id="employee_custody" model="hr.employee">
+              <field name="name">Juliet </field>
+              <field name="job_title">Odoo Developer</field>
+              <field name="work_location_id" ref="work_data"/>
+              <field name="work_phone">(956)-3852-7863</field>
+              <field name="work_email">juliet123@example.com</field>
+              <field name="image_1920" type="base64" file="hr_custody/static/images/hr_custody_employee.jpg"/>
+        </record>
+
+
+
+        <record id="custody_demo_one" model="hr.custody">
+            <field name="custody_name" ref="property_one"/>
+            <field name="employee" ref="employee_custody"/>
+            <field name="purpose">Projectwork</field>
+            <field name="date_request">2021-03-02</field>
+            <field name="return_date">2021-03-02</field>
+            <field name="state">draft</field>
+        </record>
+
+
+    </data>
+</odoo>

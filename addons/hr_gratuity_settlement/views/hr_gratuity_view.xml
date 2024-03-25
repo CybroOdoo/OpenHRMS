@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_gratuity_tree" model="ir.ui.view">
+            <field name="name">hr.gratuity.tree</field>
+            <field name="model">hr.gratuity</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Gratuity" default_order="name desc">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="employee_joining_date"/>
+                    <field name="employee_gratuity_years"/>
+                    <field name="employee_basic_salary" widget="monetary"/>
+                    <field name="employee_contract_type"/>
+                    <field name="employee_gratuity_amount" widget="monetary"/>
+                    <field name="state"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_contract_form_inherit_wage" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit.wage</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_id']" position="before">
+                <field name="currency_id" invisible="1"/>
+                <field name="company_country_id" invisible="1"/>
+<!--                <field name="structure_type_id" required="1" domain="['|', ('country_id', '=', False), ('country_id', '=', company_country_id)]"/>-->
+            </xpath>
+            <xpath expr="//page[@name='information']" position="attributes">
+                <attribute name="attrs">{'invisible': [('wage_type', '=', 'hourly')]}</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="Salary Information" name="information_salary_hourly" attrs="{'invisible': [('wage_type', '!=', 'hourly')]}">
+                    <group name="main_info_hourly">
+                        <group name="salary_and_advantages_hourly" string="Hourly Advantages in Cash">
+                            <field name="wage_type"/>
+                            <label for="wage"/>
+                            <div class="o_row" name="wage">
+                                <field name="hourly_wage" nolabel="1"/>
+                                <span>/ hour</span>
+                            </div>
+<!--                            <field name="advantages" nolabel="1" placeholder="Advantages..." colspan="2" invisible="1"/>-->
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//label[@for='wage']" position="before">
+                <field name="wage_type"/>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="employee_gratuity_form" model="ir.ui.view">
+            <field name="name">hr.gratuity.form</field>
+            <field name="model">hr.gratuity</field>
+            <field name="arch" type="xml">
+                <form string="Employee Gratuity">
+                    <header>
+                        <button name="submit_request" string="Submit" type="object" class="btn-primary"
+                                attrs="{'invisible' : [('state', '!=', 'draft')]}"/>
+                        <button name="approved_request" string="Approve" type="object" class="btn-primary"
+                                attrs="{'invisible' : [('state', '!=', 'submit')]}"
+                                groups="account.group_account_manager"/>
+                        <button name="cancel_request" string="Cancel" type="object" class="btn-primary"
+                                attrs="{'invisible' : [('state', 'in', ['draft','approve','cancel'])]}"
+                                groups="account.group_account_manager"/>
+                        <button name="set_to_draft" string="Set to draft" type="object" class="btn-primary"
+                                attrs="{'invisible' : [('state', 'in', ['draft','approve','submit'])]}"
+                                groups="account.group_account_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" text="Approved" bg_color="bg-success"
+                                attrs="{'invisible': [('state', '!=', 'approve')]}"/>
+                        <widget name="web_ribbon" text="Canceled" bg_color="bg-danger"
+                                attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                        <div class="oe_title">
+                            <h2>
+                                <field name="name" readonly="1"/>
+                            </h2>
+                            <label for="employee_id" string="Employee Name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employee_id" string="Employee Name" placeholder="Employee"
+                                       attrs="{'readonly':[('state','!=','draft')]}" required="True"/>
+                            </h1>
+                        </div>
+                        <group col="2" colspan="6">
+                            <group string="Employee Details">
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="employee_contract_type" force_save="1"/>
+                                <field name="employee_joining_date"  force_save="1"/>
+                                <field name="wage_type" invisible="1"/>
+                                <label for="employee_basic_salary" string="Basic Salary"/>
+                                <div class="o_row" name="employee_basic_salary">
+                                    <field name="employee_basic_salary" widget="monetary" nolabel="1" force_save="1"/>
+                                    <span attrs="{'invisible': [('wage_type', '=', 'hourly')]}">/ month</span>
+                                    <span attrs="{'invisible': [('wage_type', '!=', 'hourly')]}">/ hour</span>
+                                </div>
+                            </group>
+                            <group string="Employee Working Details">
+                                <label for="total_working_years"/>
+                                <div name="total_working_years">
+                                    <field name="total_working_years" force_save="1"/>
+                                    <span> years</span>
+                                </div>
+                                <label for="employee_probation_years"/>
+                                <div name="employee_probation_years">
+                                    <field name="employee_probation_years" force_save="1"/>
+                                    <span> years</span>
+                                </div>
+                                <label for="employee_gratuity_years"/>
+                                <div name="employee_gratuity_years">
+                                    <field name="employee_gratuity_years" force_save="1"/>
+                                    <span> years</span>
+                                </div>
+                            </group>
+                            <group string="Gratuity Details">
+                                <field name="employee_gratuity_configuration" force_save="1"/>
+                                <field name="employee_gratuity_duration" force_save="1"/>
+                            </group>
+                            <group string="Amount">
+                                <field name="employee_gratuity_amount" widget="monetary" force_save="1"/>
+                            </group>
+                            <group string="Account Details" invisible="1">
+                                <field string="Journal" name="hr_gratuity_journal" required="1"/>
+                                <field string="Credit Account" name="hr_gratuity_credit_account" required="1"/>
+                                <field string="Debit Account" name="hr_gratuity_debit_account" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_employee_gratuity" model="ir.actions.act_window">
+            <field name="name">Gratuity Settlement</field>
+            <field name="res_model">hr.gratuity</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="main_menu_hr_resignation" name="End of Service" sequence="71" parent="hr_payroll_community.menu_hr_payroll_community_root"
+                  groups="hr.group_hr_user"/>
+        <menuitem id="menu_hr_gratuity" name="Gratuity Settlement" parent="main_menu_hr_resignation"
+                  action="action_employee_gratuity" sequence="1" groups="hr.group_hr_user"/>
+
+    </data>
+</odoo>

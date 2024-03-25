@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="LoginEmployeeDetails">
+        <t t-jquery="div.employee-mobile" t-operation="after">
+            <div class="col-md-2 col-sm-2">
+                <button type="button" class="btn btn-third oe_company_policy" id="company_policy">
+                    Company Policy
+                </button>
+            </div>
+        </t>
+    </t>
+</templates>

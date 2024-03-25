@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_gosisaudi" model="ir.ui.view">
+            <field name="name">gosi.paysliptree</field>
+            <field name="model">gosi.payslip</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Service Execute">
+                    <field name="employee_id"/>
+                    <field name="department"/>
+                    <field name="position"/>
+                    <field name="nationality"/>
+                    <field name="gos_numb"/>
+                    <field name="issued_dat"/>
+                </tree>
+            </field>
+        </record>
+        <record id="gosi_payslip3" model="ir.ui.view">
+            <field name="name">gosi.payslip_name</field>
+            <field name="model">gosi.payslip</field>
+            <field name="arch" type="xml">
+                <form string="Service Execute">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <group string="Employee Details" col="2"
+                                   colspan="2">
+                                <field name="employee_id"/>
+                                <field name="department"/>
+                                <field name="position"/>
+                                <field name="nationality"/>
+                            </group>
+                            <group string="GOSI Details" col="2" colspan="2">
+                                <field name="type_gosi"/>
+                                <field name="dob"/>
+                                <field name="gos_numb"/>
+                                <field name="issued_dat"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"
+                               widget="mail_followers"
+                               groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_employee_gosi">
+            <field name="name">Employee GOSI</field>
+            <field name="res_model">gosi.payslip</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_no_content_create">Create new record
+                </p>
+            </field>
+        </record>
+        <menuitem id="gosi_employee" name="GOSI Register"
+                  parent="hr_payroll_community.menu_hr_payroll_community_root"
+                  action="action_view_employee_gosi" sequence="2"/>
+
+        <record model="ir.ui.view" id="hr_employee_inherited_form_view">
+            <field name="name">hr.employees.form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='hr_settings']" position="after">
+                    <page name="gosi_info" string="GOSI Information"
+                          attrs="{'invisible':[('limit','=',False)]}" groups="hr.group_hr_user">
+                    <!--   v16Fix: added group groups="hr.group_hr_user"    -->
+                        <group col="4" colspan="4">
+                            <field name="type"/>
+                            <field name="gosi_number"/>
+                            <field name="issue_date"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']//field[@name='country_of_birth']"
+                       position="after">
+                    <field name="limit" />
+                </xpath>
+                <xpath expr="//page[@name='personal_information']//field[@name='place_of_birth']"
+                       position="after">
+                    <field name="age"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payslip_inherited_form_view">
+            <field name="name">hr.payslip.form.view</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id"
+                   ref="hr_payroll_community.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='struct_id']" position="after">
+                    <field name="gosi_no"></field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

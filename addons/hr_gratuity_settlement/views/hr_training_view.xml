@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record id="view_priority" model="ir.ui.view">
+            <field name="name">probation</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header" position="inside">
+                    <button name="action_approve" string="Approve" class="oe_highlight" type="object"
+                            attrs="{'invisible':[('state','!=','probation')]}"
+                            groups="hr.group_hr_manager"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@name='information']"
+                       position="after">
+                    <page string="Probationary Details" name="probation"
+                          attrs="{'invisible': [('trial_date_end', '=', False)]}">
+                        <group string="Probationary Details" name="training_info">
+                            <field name="training_info" placeholder="Probationary Details"/>
+                            <field name="waiting_for_approval" invisible="1"/>
+                            <field name="is_approve" invisible="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_contract_approvals" model="ir.actions.act_window">
+            <field name="name">Contracts For Approvals</field>
+            <field name="res_model">hr.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'probation'),('trial_date_end', '&lt;=',
+                context_today().strftime('%Y-%m-%d'))]
+            </field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem
+                id="menu_hr_employee"
+                name="Approvals"
+                action="action_contract_approvals"
+                groups="hr.group_hr_manager"
+                parent="hr.menu_hr_employee_payroll"/>
+
+    </data>
+</odoo>

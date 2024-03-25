@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="employee_one" model="hr.employee">
+            <field name="name">Johny</field>
+        </record>
+
+        <record id="employee_two" model="hr.employee">
+            <field name="name">Stella</field>
+        </record>
+
+        <record id="employee_three" model="hr.employee">
+            <field name="name">Rose</field>
+        </record>
+
+        <record id="employee_transfer_one" model="employee.transfer">
+            <field name="employee_id" ref="employee_one"/>
+        </record>
+
+        <record id="employee_transfer_two" model="employee.transfer">
+            <field name="employee_id" ref="employee_two"/>
+        </record>
+
+        <record id="employee_transfer_three" model="employee.transfer">
+            <field name="employee_id" ref="employee_three"/>
+        </record>
+
+    </data>
+</odoo>

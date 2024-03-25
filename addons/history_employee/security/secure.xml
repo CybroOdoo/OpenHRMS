@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+<!--        <record id="normal_user_rule_history1" model="ir.rule">-->
+<!--            <field name="name">Normal User can see its own records</field>-->
+<!--            <field name="model_id" ref="history_employee.model_department_history"/>-->
+<!--                <field name="domain_force">[('emp_id','=',user.employee_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+<!--        <record id="normal_user_contract_history" model="ir.rule">-->
+<!--            <field name="name">Normal User can see its own records</field>-->
+<!--            <field name="model_id" ref="history_employee.model_contract_history"/>-->
+<!--            <field name="domain_force">[('emp_id','=',user.employee_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+<!--        <record id="normal_user_wage_history" model="ir.rule">-->
+<!--            <field name="name">Normal User can see its own records</field>-->
+<!--            <field name="model_id" ref="history_employee.model_salary_history"/>-->
+<!--            <field name="domain_force">[('emp_id','=',user.employee_id.id)]</field>-->
+<!--            <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+    </data>
+</odoo>
