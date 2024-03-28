@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Template to show the Employee Verification menu in the user portal-->
+    <template id="portal_my_home_agent"
+              name="Portal My Home Agent : Verification entries"
+              inherit_id="portal.portal_my_home"
+              priority="21">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div class="o_portal_category row g-2 mt-3"
+                 id="portal_common_category">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Employee Verification</t>
+                    <t t-set="text">Complete the verification of employees</t>
+                    <t t-set="url" t-value="'/my/records'"/>
+                    <t t-set="placeholder_count"
+                       t-value="'verification_count'"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+    <!--    Template to show the Employee Verification records for the corresponding agent-->
+    <template id="portal_my_home_menu_employee"
+              name="Portal layout : employee menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'employee'">
+                <a t-if='records' t-attf-href="/my/records?{{ keep_query() }}">
+                    <span style="padding-left:8px;">Employees</span>
+                </a>
+                <t t-else="">Employees</t>
+            </li>
+            <li t-if="page_name == 'employee_details'">
+                <a t-if='records'>
+                    <a t-attf-href="/my/records?{{ keep_query() }}">
+                        <span style="padding-left:8px;">Employees</span>
+                    </a>
+                    <t t-esc="records.employee_id.name"/>
+                </a>
+                <t t-else="">Employees</t>
+            </li>
+        </xpath>
+    </template>
+    <!--    Template to show the verification records assigned for the current user to check-->
+    <template id="portal_my_records" name="Employee verification">
+        <t t-call="portal.portal_layout">
+            <t t-if="not records">
+                <p>There are currently no quotations for your account.</p>
+            </t>
+            <div t-if="records" class="panel panel-default">
+                <div class="table-responsive border rounded border-top-0 #{classes if classes else ''}">
+                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Employee</th>
+                                <th>Order Date</th>
+                                <th>Address</th>
+                                <th/>
+                            </tr>
+                        </thead>
+                        <t t-foreach="records" t-as="record">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="/my/details/#{record.id}?#{keep_query()}">
+                                        <t t-esc="record.employee_id.name"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <span t-field="record.assigned_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="record.address_id"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager"/>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!--    Template to show the details about the verification record of the employee-->
+    <template id="portal_record_page" name="My Employee Details">
+        <t t-call="portal.portal_layout">
+            <t t-if="not records">
+                <p>There are currently no orders for your account.</p>
+            </t>
+            <div t-if="records" class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                        <thead>
+                            <tr class="active">
+                                <th>Personal Details</th>
+                            </tr>
+                        </thead>
+                        <t t-foreach="records" t-as="record">
+                            <tr>
+                                <td>
+                                    <h3>Name</h3>
+                                </td>
+                                <td>
+                                    <h4>
+                                        <t t-esc="records.employee_id.name"/>
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>
+                                    <t t-if="records.address_id">
+                                        <t t-esc="record.address_id.street"/>
+                                        <br/>
+                                        <t t-esc="record.address_id.street2"/>
+                                        <br/>
+                                        <t t-esc="record.address_id.city"/>
+                                        <br/>
+                                        <t t-esc="record.address_id.state_id.name"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Assigned Date</td>
+                                <td>
+                                    <t t-esc="records.assigned_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Expected completion Date</td>
+                                <td>
+                                    <t t-esc="records.expected_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Private details</td>
+                                <td>
+                                    <a class="btn btn-info" target="_blank"
+                                       t-attf-href="/web/content/#{record.resume_ids.id}?download=true">
+                                        <i class="fa fa-download btn btn-primary"/>
+                                        <h4>Download</h4>
+                                    </a>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager"/>
+                </div>
+            </div>
+            <form role="form" action="/test/path"
+                  id="room_website_form"
+                  method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token"
+                       t-att-value="request.csrf_token()"/>
+                <div class="form-group form-field o_website_form_required_custom">
+                    <label class="col-md-3 col-sm-4 control-label"
+                           for="contact_name">Description
+                    </label>
+                    <div class="col-md-7 col-sm-8">
+                        <input type="text"
+                               class="form-control o_website_form_input"
+                               name="description" required=""/>
+                    </div>
+                    <label class="col-md-3 col-sm-4 control-label"
+                           for="contact_name">Upload file if any
+                    </label>
+                    <div class="col-md-7 col-sm-8">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="employee_token"
+                               t-att-value="records.id"/>
+                        <input type="file" name="attachment"
+                               class="o_input_file file"
+                               multiple="true"
+                               data-show-upload="true"
+                               data-show-caption="true"
+                               data-show-preview="true"
+                               lass="file"
+                               t-att-id="records.id"/>
+                    </div>
+                    <button type="submit" name="Upload" style="margin-top:20px;"
+                            class="fa fa-upload btn btn-secondary">
+                        Upload
+                    </button>
+                </div>
+            </form>
+        </t>
+    </template>
+    <!--    Template to load when the verification of the employee is completed by the agent-->
+    <template id="portal_record_completed"
+              name="Employee varification completed">
+        <t t-call="portal.portal_layout">
+            <h3>Employee Details</h3>
+            <div class="table-responsive">
+                <table class="table table-hover o_portal_my_doc_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Your report successfully submitted</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

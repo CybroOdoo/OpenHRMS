@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Tree view of the model Employee Verification-->
+    <record id="employee_verification_view_tree" model="ir.ui.view">
+        <field name="name">employee.verification.view.tree</field>
+        <field name="model">employee.verification</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Verification">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="agency_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!--Form view of the model Employee Verification-->
+    <record id="employee_verification_view_form" model="ir.ui.view">
+        <field name="name">employee.verification.view.form</field>
+        <field name="model">employee.verification</field>
+        <field name="arch" type="xml">
+            <form string="Employee Verification">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button string="Assign to agency"
+                            groups="hr.group_hr_manager"
+                            type="object" name="action_assign_statusbar"
+                            class="oe_highlight"
+                            invisible="state not in ['draft']"/>
+                </header>
+                <sheet>
+                    <field name="company_id" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group col="2">
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="address_id"/>
+                            <field name="assigned_date"/>
+                            <field name="expected_date"/>
+                        </group>
+                        <group>
+                            <field name="agency_id"/>
+                            <field name="assigned_id"/>
+                            <field name="resume_ids"
+                                   widget="many2many_binary" class="oe_inline"/>
+                        </group>
+                    </group>
+                    <notebook invisible="state not in ['submit']">
+                        <page name="agent" string="Information from Agency">
+                            <group>
+                                <field name="agency_attachment_ids" widget="many2many_binary"/>
+                                <field name="description_by_agency"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--Search view of the model employee verification-->
+    <record id="employee_verification_view_search" model="ir.ui.view">
+        <field name="name">employee.verification.view.search</field>
+        <field name="model">employee.verification</field>
+        <field name="arch" type="xml">
+            <search string="Employee Verification">
+                <field name="state" string="State"/>
+                <filter domain="[('state','=','draft')]" string="Draft"
+                        name="draft"/>
+                <filter domain="[('state','=','assign')]" string="Assigned"
+                        name="Assigned"/>
+                <filter domain="[('state','=','submit')]" string="Completed"
+                        name="Completed"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="status" string="Status" domain="[]"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!--Action for the model Employee Verification-->
+    <record id="employee_verification_action" model="ir.actions.act_window">
+        <field name="name">Employee Verification</field>
+        <field name="res_model">employee.verification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="employee_verification_view_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Employee verification.
+            </p>
+        </field>
+    </record>
+    <!--Menu Item for the model Employee Verification-->
+    <menuitem id="employee_verification_menu_verification"
+              action="employee_verification_action" name="Verification"
+              parent="hr.menu_hr_employee_payroll"/>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    Sequence id for employee verification-->
+        <record id="ir_sequence_employee_verification" model="ir.sequence">
+            <field name="name">Employee Verification</field>
+            <field name="code">employee.verification</field>
+            <field name="prefix">EV/</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
