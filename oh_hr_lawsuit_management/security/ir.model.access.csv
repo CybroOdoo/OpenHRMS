@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_lawsuit_manager,access.hr.lawsuit.manager,model_hr_lawsuit,oh_hr_lawsuit_management.lawsuit_group_manager,1,1,1,1
+access_hr_lawsuit_user,access.hr.lawsuit.user,model_hr_lawsuit,oh_hr_lawsuit_management.lawsuit_group_manager,1,0,0,0
+access_court_court_manager,access.court.court.manager,model_court_court,oh_hr_lawsuit_management.lawsuit_group_manager,1,1,1,1
+access_court_court_user,access.court.court.user,model_court_court,oh_hr_lawsuit_management.lawsuit_group_manager,1,0,0,0

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- Define the form view for Legal Actions (lawsuits) -->
+    <record id='hr_lawsuit_view_form' model='ir.ui.view'>
+        <field name="name">hr.lawsuit.view.form</field>
+        <field name="model">hr.lawsuit</field>
+        <field name="arch" type="xml">
+            <form string="Legal Actions">
+                <header>
+                    <button name="action_process" string="Process" type="object"
+                            invisible="state in ['running', 'fail', 'cancel', 'won']"/>
+                    <button name="action_won" string="Won" type="object"
+                            invisible="state in ['draft', 'fail', 'cancel', 'won']"/>
+                    <button name="action_loss" string="Loss" type="object"
+                            invisible="state in ['draft', 'fail', 'cancel', 'won']"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ['fail', 'cancel', 'won']"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,running,won"/>
+                </header>
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="party1_id" readonly="state !='draft'"/>
+                            <field name="party2" readonly="state !='draft'"/>
+                            <field name="employee_id" invisible=
+                                    "party2 != 'employee'"
+                                   required="party2 =='employee'"
+                                   readonly="state !='draft'"/>
+                            <field name="partner_id" invisible=
+                                    "party2 != 'partner'"
+                                   required="party2 =='partner'"
+                                   readonly="state != 'draft'"
+                            />
+                            <field name="other_name" invisible=
+                                    "party2 != 'other'"
+                                   required="party2 =='other'"/>
+                            <field name="court_id" readonly="state =='won'"/>
+                            <field name="judge_id"
+                                   options="{'no_create': True}"/>
+                            <field name="lawyer_id" readonly="state =='won'"/>
+                            <field name="company_id"
+                                   options="{'no_create': True}"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="requested_date"
+                                   readonly="state =='draft'"/>
+                            <field name="hearing_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="case_desc" string="Case Details">
+                            <field name="case_details"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+        <!-- Define the tree view for Legal Actions (lawsuits) -->
+    <record id='hr_lawsuit_view_tree' model='ir.ui.view' >
+        <field name="name">hr.lawsuit.view.tree</field>
+        <field name="model">hr.lawsuit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="party1_id"/>
+                <field name="party2"/>
+                <field name="court_id"/>
+                <field name="judge_id"/>
+                <field name="lawyer_id"/>
+                <field name="requested_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+        <!-- Define the search view for Legal Actions (lawsuits) -->
+    <record id='hr_lawsuit_view_search' model='ir.ui.view'>
+        <field name="name">hr.lawsuit.view.search</field>
+        <field name="model">hr.lawsuit</field>
+        <field name="arch" type="xml">
+            <search string="Legal Actions">
+                <field name="name"/>
+                <field name="party1_id"/>
+                <field name="party2"/>
+                <field name="court_id"/>
+                <field name="judge_id"/>
+                <field name="lawyer_id"/>
+                <field name="requested_date"/>
+                <field name="state"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="Status"
+                            context="{'group_by':'state'}"/>
+                    <filter string="Employee" name="Employee"
+                            context="{'group_by':'employee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+        <!-- Define the action for accessing Legal Actions (lawsuits) -->
+    <record id="hr_lawsuit_action" model="ir.actions.act_window">
+        <field name="name">Legal Management</field>
+        <field name="res_model">hr.lawsuit</field>
+        <field name="search_view_id" ref="hr_lawsuit_view_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to Create a New Record.
+            </p>
+        </field>
+    </record>
+        <!-- Define the menu item for accessing Legal Actions (lawsuits) -->
+    <menuitem id="hr_lawsuit_menu" parent="hr.menu_hr_root"
+              action="hr_lawsuit_action"
+              name="Legal Actions" sequence="10"
+              groups="lawsuit_group_manager"/>
+</odoo>
