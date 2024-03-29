@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Inherited the views of hr.employee to add the following fields-->
+<odoo>
+    <record model="ir.ui.view" id="view_employee_form">
+        <field name="name">hr.employees.form.view.inherit.saudi.gosi</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="gosi_info" string="GOSI Information"
+                      invisible="limit == False" groups="hr.group_hr_user">
+                    <group col="4" colspan="4">
+                        <field name="type"/>
+                        <field name="gosi_number"/>
+                        <field name="issue_date"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']//field[@name='country_of_birth']"
+                   position="after">
+                <field name="limit"/>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']//field[@name='place_of_birth']"
+                   position="after">
+                <field name="age"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
