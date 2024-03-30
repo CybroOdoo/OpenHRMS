@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Data file for Onboarding and Offboarding Checklist-->
+        <record id="checklist_onboarding_activity_type"
+                model="hr.plan.activity.type">
+            <field name="summary">Checklists</field>
+            <field name="responsible">manager</field>
+            <field name="plan_id" ref="hr.onboarding_plan"/>
+        </record>
+        <record id="checklist_offboarding_activity_type"
+                model="hr.plan.activity.type">
+            <field name="summary">Checklists</field>
+            <field name="responsible">manager</field>
+            <field name="plan_id" ref="hr.offboarding_plan"/>
+        </record>
+        <record id="hr.onboarding_plan" model="hr.plan">
+            <field name="name">Onboarding</field>
+            <field name="plan_activity_type_ids"
+                   eval="[(6, 0, [ ref('hr.onboarding_setup_it_materials'),
+                   ref('hr.onboarding_plan_training'),
+                   ref('hr.onboarding_training'),
+                   ref('oh_employee_check_list.checklist_onboarding_activity_type')])]"/>
+        </record>
+        <record id="hr.offboarding_plan" model="hr.plan">
+            <field name="name">Offboarding</field>
+            <field name="plan_activity_type_ids"
+                   eval="[(6, 0, [ ref('hr.onboarding_setup_it_materials'),
+                   ref('hr.offboarding_take_back_hr_materials'),
+                   ref('oh_employee_check_list.checklist_offboarding_activity_type')])]"/>
+        </record>
+    </data>
+</odoo>

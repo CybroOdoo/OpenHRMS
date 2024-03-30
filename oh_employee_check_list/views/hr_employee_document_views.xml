@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_document_form_view" model="ir.ui.view">
+        <!--Inherit employee_document model for adding fields in employee_document form view-->
+        <field name="name">
+            hr.employee.document.view.form.inherit.oh.employee.check.list
+        </field>
+        <field name="model">hr.employee.document</field>
+        <field name="inherit_id"
+               ref="oh_employee_documents_expiry.employee_document_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="document_id" options="{'no_create': True}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

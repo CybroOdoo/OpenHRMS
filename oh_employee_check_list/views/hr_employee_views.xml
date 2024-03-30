@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form" model="ir.ui.view">
+        <!--Inherit hr_employee model for adding fields in hr_employee form view-->
+        <field name="name">
+            hr.employee.view.form.inherit.oh.employee.check.list
+        </field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <field name="category_ids" position="after">
+                <div>
+                    <field name="entry_progress" widget="percentpie"/>
+                    <field name="exit_progress" widget="percentpie"/>
+                </div>
+            </field>
+            <page name="hr_settings" position="after">
+                <page name="checklist" string="Checklist">
+                    <group>
+                        <group name="employee_entry_checklist_ids"
+                               string="Entry Checklist">
+                            <field name="employee_entry_checklist_ids"
+                                   widget="many2many_checkboxes"/>
+                            <field name="check_list_enable" invisible="1"/>
+                        </group>
+                        <group name="employee_exit_checklist_ids"
+                               string="Exit Checklist">
+                            <field name="employee_exit_checklist_ids"
+                                   widget="many2many_checkboxes"/>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+    <record id="view_employee_tree" model="ir.ui.view">
+        <!--Inherit hr_employee model for adding fields in hr_employee tree view-->
+        <field name="name">
+            hr.employee.view.tree.inherit.oh.employee.check.list
+        </field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="entry_progress" widget="progressbar"/>
+                <field name="exit_progress" widget="progressbar"/>
+            </field>
+        </field>
+    </record>
+    <record id="hr_kanban_view_employees" model="ir.ui.view">
+        <!--Inherit hr_employee model for adding fields in hr_employee kanban view-->
+        <field name="name">
+            hr.employee.view.kanban.inherit.oh.employee.check.list
+        </field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="entry_progress"/>
+                <field name="maximum_rate"/>
+                <field name="check_list_enable" invisible="1"/>
+            </xpath>
+            <xpath expr="//ul/li[2]" position="after">
+                <li t-if="record.check_list_enable.raw_value==1">
+                    <field name="entry_progress" widget="gauge"
+                           style="width:120px;height:90px;cursor:pointer;"
+                           options="{'max_field': 'maximum_rate'}">
+                        Entry Progress
+                    </field>
+                </li>
+            </xpath>
+        </field>
+    </record>
+</odoo>
