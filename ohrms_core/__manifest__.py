@@ -24,7 +24,7 @@
     'name': 'Open HRMS Core',
     'version': '17.0.1.0.0',
     'category': 'Generic Modules/Human Resources',
-    'summary': """Open HRMS Odoo17, HRMS odoo17, Odoo HR, HR Dashboard, Odoo17 Payroll, HR Management, Odoo Branch, Odoo Loan, Salary Advance""",
+    'summary': """Open HRMS Odoo17, HRMS odoo17, Odoo HR, HR Dashboard, Odoo17 Payroll, HR Management, Odoo Branch, Odoo Loan, Salary Advance, Odoo17,Payroll,Dashboard,Accounting,HR Kit,HR,Odoo Apps""",
     'description': """Openhrms, Main module of Open HRMS,Payroll, Payroll Accounting, Expense, Dashboard,
     Employees, Employee Document, Resignation, Salary Advance, Loan Management, 
     Gratuity, Service Request, Gosi, WPS Report, Reminder, Multi Company, 
