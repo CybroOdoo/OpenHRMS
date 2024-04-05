@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    Inheriting hr_contract form view-->
+    <record id="hr_contract_view_form" model="ir.ui.view">
+        <field name="name">
+            hr.contract.view.form.inherit.hr.gratuity.settlement
+        </field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                <field name="trial_date_end" invisible="1"/>
+            </xpath>
+            <xpath expr="/form/header" position="inside">
+                <button name="action_approve" string="Approve"
+                        class="oe_highlight" type="object"
+                        invisible="state != 'probation'"
+                        groups="hr.group_hr_manager"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='information']/group/group[@name='salary']"
+                   position="after">
+                <field name="training_amount"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='information']"
+                   position="after">
+                <page string="Probationary Details" name="probation"
+                      invisible="trial_date_end == False">
+                    <group string="Probationary Details" name="training_info">
+                        <field name="training_info"
+                               placeholder="Probationary Details"/>
+                        <field name="waiting_for_approval" invisible="1"/>
+                        <field name="is_approve" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="before">
+                <field name="currency_id" invisible="1"/>
+                <field name="company_country_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="Salary Information"
+                      name="information_salary_hourly"
+                      invisible="wage_type != 'hourly'">
+                    <group name="main_info_hourly">
+                        <group name="salary_and_advantages_hourly"
+                               string="Hourly Advantages in Cash">
+                            <field name="wage_type"/>
+                            <label for="wage"/>
+                            <div class="o_row" name="wage">
+                                <field name="hourly_wage" nolabel="1"/>
+                                <span>/ hour</span>
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//label[@for='wage']" position="before">
+                <field name="wage_type"/>
+            </xpath>
+            <xpath expr="/form/header" position="inside">
+                <button name="action_approve" string="Approve"
+                        class="oe_highlight" type="object"
+                        invisible="state != 'probation'"
+                        groups="hr.group_hr_manager"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='information']"
+                   position="after">
+                <page string="Probationary Details" name="probation"
+                      invisible="trial_date_end == False">
+                    <group string="Probationary Details" name="training_info">
+                        <field name="training_info"
+                               placeholder="Probationary Details"/>
+                        <field name="waiting_for_approval" invisible="1"/>
+                        <field name="is_approve" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <!--    hr_contract action-->
+    <record id="action_contract_approvals" model="ir.actions.act_window">
+        <field name="name">Contracts For Approvals</field>
+        <field name="res_model">hr.contract</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'probation'),('trial_date_end', '&lt;=',
+            context_today().strftime('%Y-%m-%d'))]
+        </field>
+        <field name="context">{}</field>
+    </record>
+    <!--    Approvals menu-->
+    <menuitem
+            id="menu_hr_employee"
+            name="Approvals"
+            action="action_contract_approvals"
+            groups="hr.group_hr_manager"
+            parent="hr.menu_hr_employee_payroll"/>
+</odoo>

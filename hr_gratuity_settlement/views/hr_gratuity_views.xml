@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Tree view for hr_gratuity-->
+    <record id="hr_gratuity_tree_view" model="ir.ui.view">
+        <field name="name">hr.gratuity.view.tree</field>
+        <field name="model">hr.gratuity</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Gratuity" default_order="name desc">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="employee_joining_date"/>
+                <field name="employee_gratuity_years"/>
+                <field name="employee_basic_salary" widget="monetary"/>
+                <field name="employee_contract_type"/>
+                <field name="employee_gratuity_amount" widget="monetary"/>
+                <field name="state"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    <!--    Form view of hr_gratuity-->
+    <record id="hr_gratuity_view_form" model="ir.ui.view">
+        <field name="name">hr.gratuity.view.form</field>
+        <field name="model">hr.gratuity</field>
+        <field name="arch" type="xml">
+            <form string="Employee Gratuity">
+                <header>
+                    <button name="submit_request" string="Submit"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="approved_request" string="Approve"
+                            type="object" class="btn-primary"
+                            invisible="state != 'submit'"
+                            groups="account.group_account_manager"/>
+                    <button name="cancel_request" string="Cancel"
+                            type="object" class="btn-primary"
+                            invisible="state in ('draft', 'approve', 'cancel')"
+                            groups="account.group_account_manager"/>
+                    <button name="set_to_draft" string="Set to draft"
+                            type="object" class="btn-primary"
+                            invisible="state in ('draft', 'approve', 'submit')"
+                            groups="account.group_account_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submit,approve"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" text="Approved"
+                            bg_color="bg-success"
+                            invisible="state != 'approve'"/>
+                    <widget name="web_ribbon" text="Canceled"
+                            bg_color="bg-danger"
+                            invisible="state != 'cancel'"/>
+                    <div class="oe_title">
+                        <h2>
+                            <field name="name" readonly="1"/>
+                        </h2>
+                        <label for="employee_id" string="Employee Name"
+                               class="oe_edit_only"/>
+                        <h1>
+                            <field name="employee_id" string="Employee Name"
+                                   placeholder="Employee"
+                                   readonly="state != 'draft'"
+                                   required="True"/>
+                        </h1>
+                    </div>
+                    <group col="2" colspan="6">
+                        <group string="Employee Details">
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="employee_contract_type"
+                                   force_save="1"/>
+                            <field name="employee_joining_date"
+                                   force_save="1"/>
+                            <field name="wage_type" invisible="1"/>
+                            <label for="employee_basic_salary"
+                                   string="Basic Salary"/>
+                            <div class="o_row" name="employee_basic_salary">
+                                <field name="employee_basic_salary"
+                                       widget="monetary" nolabel="1"
+                                       force_save="1"/>
+                                <span invisible="wage_type == 'hourly'">
+                                    / month
+                                </span>
+                                <span invisible="wage_type == 'hourly'">
+                                    / hour
+                                </span>
+                            </div>
+                        </group>
+                        <group string="Employee Working Details">
+                            <label for="total_working_years"/>
+                            <div name="total_working_years">
+                                <field name="total_working_years"
+                                       force_save="1"/>
+                                <span>years</span>
+                            </div>
+                            <label for="employee_probation_years"/>
+                            <div name="employee_probation_years">
+                                <field name="employee_probation_years"
+                                       force_save="1"/>
+                                <span>years</span>
+                            </div>
+                            <label for="employee_gratuity_years"/>
+                            <div name="employee_gratuity_years">
+                                <field name="employee_gratuity_years"
+                                       force_save="1"/>
+                                <span>years</span>
+                            </div>
+                        </group>
+                        <group string="Gratuity Details">
+                            <field name="employee_gratuity_configuration_id"
+                                   force_save="1"/>
+                            <field name="employee_gratuity_duration_id"
+                                   force_save="1"/>
+                        </group>
+                        <group string="Amount">
+                            <field name="employee_gratuity_amount"
+                                   widget="monetary" force_save="1"/>
+                        </group>
+                        <group string="Account Details" invisible="1">
+                            <field string="Journal"
+                                   name="hr_gratuity_journal_id" required="1"/>
+                            <field string="Credit Account"
+                                   name="hr_gratuity_credit_account_id"
+                                   required="1"/>
+                            <field string="Debit Account"
+                                   name="hr_gratuity_debit_account_id"
+                                   required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"
+                           widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+<!--    hr_gratuity action-->
+    <record id="hr_gratuity_action" model="ir.actions.act_window">
+        <field name="name">Gratuity Settlement</field>
+        <field name="res_model">hr.gratuity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!--    End of Service Menu-->
+    <menuitem id="main_menu_hr_resignation" name="End of Service"
+              sequence="71"
+              parent="hr_payroll_community.menu_hr_payroll_community_root"
+              groups="hr.group_hr_user"/>
+<!--    Gratuity Settlement Menu-->
+    <menuitem id="menu_hr_gratuity" name="Gratuity Settlement"
+              parent="main_menu_hr_resignation"
+              action="hr_gratuity_action" sequence="1"
+              groups="hr.group_hr_user"/>
+</odoo>
