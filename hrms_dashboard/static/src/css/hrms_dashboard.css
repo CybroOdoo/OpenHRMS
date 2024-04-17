@@ -186,39 +186,15 @@ rect:hover {  fill:#934da5; }
 .container-fluid.o_hr_dashboard {
     padding: 0px !important;
 }
-/*
 .employee-prof {
 
     padding: 0px;
     height: 100%;
     background-color: #3e6282;
-    overflow: auto !important;
     /*background-image: linear-gradient(180deg, #3e6282, #41666f);*/
+    position: fixed;
     /*z-index: 999;*/
-
-/*    position: fixed;
 }
-*/
-
-.employee-prof {
-    padding: 0px;
-    height: 100%;
-    background-color: #3e6282;
-    overflow: auto !important;
-/*    position: fixed;*/
-    top: 45px;    /* Adjust as needed */
-    right: 0;  /* Adjust as needed */
-    bottom: 0; /* Adjust as needed */
-    left: 0;   /* Adjust as needed */
-    z-index: 999;
-}
-
-/*
-.employee-details {
-    overflow: auto;
-}
-*/
-
 .employee-prof .oh-card:hover {
 
     transform:none !important;
@@ -252,7 +228,7 @@ rect:hover {  fill:#934da5; }
     float: left;
     padding-right: 0px;
     width: 100%;
-    height: 100% !important;
+    height: 185px;
     overflow: hidden;
     background: #999999;
 
