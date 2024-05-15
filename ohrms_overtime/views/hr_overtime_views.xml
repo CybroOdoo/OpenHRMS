@@ -150,7 +150,7 @@
     <!-- MenuItems -->
     <menuitem id="hr_overtime_menu_root" name="Overtime Request"
               groups="base.group_user"
-              web_icon="ohrms_overtime,static/description/overtime_icon.png"/>
+              web_icon="ohrms_overtime,static/description/icon.png"/>
     <menuitem id="hr_overtime_menu" name="Overtime Request"
               parent="hr_overtime_menu_root"
               action="hr_overtime_action"
