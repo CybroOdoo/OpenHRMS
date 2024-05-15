@@ -39,7 +39,7 @@ class ServiceRequest(models.Model):
 		return employee_rec.id
 
 	service_name = fields.Char(required=True, string="Reason For Service",
-	                           help="Service name")
+							   help="Service name")
 	employee_id = fields.Many2one('hr.employee', string="Employee",
 	                              default=_get_employee_id, readonly=True,
 	                              required=True, help="Employee")

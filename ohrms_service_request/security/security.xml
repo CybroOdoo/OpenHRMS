@@ -5,8 +5,8 @@
         <field name="name">Request Visibility</field>
         <field ref="model_service_request" name="model_id"/>
         <field name="domain_force">['|',
-            ('employee_id.address_home_id.id','=',user.partner_id.id),
-            ('employee_id.address_home_id','=',False)]
+            ('employee_id.work_contact_id.id','=',user.partner_id.id),
+            ('employee_id.work_contact_id','=',False)]
         </field>
         <field name="groups" eval="[(4, ref('project.group_project_user'))]"/>
     </record>
