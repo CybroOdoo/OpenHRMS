@@ -72,12 +72,13 @@ overflow: auto !important;
   font-size: 17px;
   text-align: center;
   color: #00438b; }
-
-.mb-0{
+/*====Causing style issue in hr_custody list view alignment===================*/
+/*.mb-0{
     font-size: 1.083rem;
     position: relative;
     text-align: center;
-}
+}*/
+/*============================================================================*/
 .mb-0 .dash-title {
     font-size: 1.083rem;
     text-align: center;
