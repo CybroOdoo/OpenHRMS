@@ -10,7 +10,7 @@
                 <div class="dropdown-menu fullscreen-menu" role="menu">
                     <div class="search-container form-row align-items-center m-auto col-12"
                          t-ref="search-container">
-                        <div class="search-input col-md-10 ml-auto mr-auto mb-5 "
+                        <div class="search-input col-md-7 mx-auto mr-auto mb-5"
                              t-on-input="_searchMenusSchedule">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -25,13 +25,15 @@
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="search-results col-md-10 ml-auto mr-auto">
+
+                        <div class="search-results col-md-6 mx-auto bg-secondary">
                             <t  t-if="this.state.results"
                                 t-call="ohrms_core.SearchResults">
                                     <t t-set="results" t-value="this.state.results"/>
                                     <t t-set="widget" t-value="this"/>
                             </t>
                         </div>
+
                         </div>
                     <div class="nav-container">
                         <div class="app-menu">

@@ -15,12 +15,16 @@
     <t t-name="ohrms_core.SearchResults">
         <t t-foreach="results" t-as="result" t-key="result.id">
             <a t-attf-class="o-menu-search-result dropdown-item col-12 ml-auto mr-auto #{result_first ? 'active' : ''}"
-                 t-attf-style="background-image:url('data:image/png;base64,#{result.webIconData}')"
-                 t-attf-href="#menu_id=#{result.id}&amp;action_id=#{result.actionID}"
+                 onclick="$('.dropdown-menu').removeClass('show'); $('.search-results').addClass('o_hidden'); $('.app-menu').removeClass('o_hidden'); $('.search-input input').val('');"
+            >
+            <t t-attf-style="background-image:url('data:image/png;base64,#{result.webIconData}')"/>
+            <t t-attf-href="#menu_id=#{result.id}&amp;action_id=#{result.actionID}"
                  t-att-data-menu-id="result.id"
                  t-att-data-action-id="result.actionID"
                  t-out="result.name"
-                 onclick="$('.dropdown-menu').removeClass('show'); $('.search-results').addClass('o_hidden'); $('.app-menu').removeClass('o_hidden'); $('.search-input input').val('');"/>
+                 onclick="$('.dropdown-menu').removeClass('show'); $('.search-results').addClass('o_hidden'); $('.app-menu').removeClass('o_hidden'); $('.search-input input').val('');"
+            />
+            </a>
         </t>
     </t>
 </templates>
