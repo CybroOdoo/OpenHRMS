@@ -43,7 +43,7 @@ class PayslipLinesContributionRegister(models.TransientModel):
 
     def action_print_report(self):
         """Function for Print Report"""
-        active_ids = self.env.context.get('active_ids', [])
+        active_ids = secontribution_register_actionlf.env.context.get('active_ids', [])
         datas = {
             'ids': active_ids,
             'model': 'hr.contribution.register',
