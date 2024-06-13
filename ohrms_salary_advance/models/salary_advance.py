@@ -8,6 +8,7 @@ from odoo.exceptions import UserError
 
 class SalaryAdvancePayment(models.Model):
     _name = "salary.advance"
+    _description = 'Salary Advance Payment'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Name', readonly=True, default=lambda self: 'Adv/')
