@@ -22,7 +22,7 @@ class Service(models.Model):
                               ('assign', 'Assigned'),
                               ('check', 'Checked'),
                               ('reject', 'Rejected'),
-                              ('approved', 'Approved')], default='draft', track_visibility='onchange', help="State")
+                              ('approved', 'Approved')], default='draft', tracking=True, help="State")
     service_executer = fields.Many2one('hr.employee', string='Service Executer', help="Service executer")
     read_only = fields.Boolean(string="check field", compute='get_user')
     tester = fields.One2many('service.execute', 'test', string='tester', help="Tester")
@@ -111,7 +111,7 @@ class Executer(models.Model):
     execute_date = fields.Datetime(string="Date Of Reporting", help="Date of reporting")
     state_execute = fields.Selection([('draft', 'Draft'), ('requested', 'Requested'), ('assign', 'Assigned')
                                  , ('check', 'Checked'), ('reject', 'Rejected'),
-                              ('approved', 'Approved')], track_visibility='onchange')
+                              ('approved', 'Approved')], tracking=True)
     test = fields.Many2one('service.request', string='test', help="Test")
     notes = fields.Text(string="Internal notes", help="Internal Notes")
     executer_product = fields.Char(string='Service Item', help="service item")

@@ -6,10 +6,9 @@ class HrEmployeeContract(models.Model):
     _inherit = 'hr.contract'
 
     def _get_default_notice_days(self):
-        if self.env['ir.config_parameter'].get_param(
-                'hr_resignation.notice_period'):
-            return self.env['ir.config_parameter'].get_param(
-                            'hr_resignation.no_of_days')
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        if get_param('hr_resignation.notice_period'):
+            return get_param('hr_resignation.no_of_days')
         else:
             return 0
 
