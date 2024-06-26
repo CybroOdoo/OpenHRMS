@@ -386,7 +386,7 @@
                                                 style="float: left;padding-right: 6%; pointer-events: none; cursor: default;">
                                                 <img class="align-self-center rounded-circle mr-3"
                                                     alt=""
-                                                    t-att-src="this.state.get_emp_image_url(employee)"/>
+                                                    t-att-src="this.get_emp_image_url(employee)"/>
                                             </a>
                                             <div class="media-body">
                                                 <h2 class="text-color display-6"
