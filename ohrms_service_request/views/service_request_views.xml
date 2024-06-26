@@ -12,6 +12,7 @@
                 <field name="service_date"/>
                 <field name="service_type"/>
                 <field name="service_product_id"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -80,12 +81,33 @@
             </pivot>
         </field>
     </record>
+
+    <record id="service_request_view_search" model="ir.ui.view">
+        <field name="name">service.request.view.search</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <search string="Services">
+                <field name="state" string="State"/>
+                <filter domain="[('state','=','draft')]" string="Draft"
+                        name="service_draft"/>
+                <filter domain="[('state','=','requested')]"
+                        string="Service Request"
+                        name="service_requested"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="status" string="Status" domain="[]"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <!--        Service Request window action-->
     <record model="ir.actions.act_window" id="action_view_service_requests">
-        <field name="name">Service Request</field>
+        <field name="name">Service Requests</field>
         <field name="res_model">service.request</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
+        <field name="context">{"search_default_service_draft":1}</field>
         <field name="help" type="html">
             <p class="oe_view_no_content_create">Create new Request
             </p>
@@ -93,10 +115,10 @@
     </record>
     <!--    Service approval window action-->
     <record model="ir.actions.act_window" id="action_view_service_approve">
-        <field name="name">Service Approval</field>
+        <field name="name">Service for Approval</field>
         <field name="res_model">service.request</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[['state', '=','requested']]</field>
+        <field name="context">{"search_default_service_requested":1}</field>
         <field name="help" type="html">
             <p class="oe_view_no_content_create">Create new record
             </p>
@@ -117,11 +139,12 @@
     <!--    Services menu-->
     <menuitem id="service_root" name="Services" parent="hr.menu_hr_root"/>
     <!--    Request Service menu-->
-    <menuitem id="service_requests" name="Request Service" parent="service_root"
-              action="action_view_service_requests" groups="base.group_user"/>
+    <menuitem id="service_requests" name="Service Requests" parent="service_root"
+              action="action_view_service_requests" groups="base.group_user"
+              sequence="1"/>
     <!--    Service Approval menu-->
-    <menuitem id="service_approve" name="Service Approval" parent="service_root"
-              action="action_view_service_approve"
+    <menuitem id="service_approve" name="Service for Approval" parent="service_root"
+              action="action_view_service_approve" sequence="2"
               groups="hr_attendance.group_hr_attendance_manager"/>
     <!--    Reporting menu-->
     <menuitem id="service_report" name="Reporting" parent="service_root"

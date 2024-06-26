@@ -40,8 +40,7 @@ class ServiceExecute(models.Model):
                                    help="Date of reporting")
     state_execute = fields.Selection(
         [('draft', 'Draft'), ('requested', 'Requested'),
-         ('assign', 'Assigned')
-            , ('check', 'Checked'), ('reject', 'Rejected'),
+         ('assign', 'Assigned'), ('check', 'Checked'), ('reject', 'Rejected'),
          ('approved', 'Approved')], tracking=True, help="state of the request")
     test_id = fields.Many2one('service.request', string='test',
                               help="Test")

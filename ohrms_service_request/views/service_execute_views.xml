@@ -55,9 +55,32 @@
             </form>
         </field>
     </record>
+
+    <!--    Service Execute Search View-->
+    <record id="service_execute_view_search" model="ir.ui.view">
+        <field name="name">service.execute.view.search</field>
+        <field name="model">service.execute</field>
+        <field name="arch" type="xml">
+            <search string="Executions">
+                <field name="state_execute" string="State"/>
+                <filter domain="[('state_execute','=','draft')]" string="Drafted Execution"
+                        name="service_execution_draft"/>
+                <filter domain="[('state_execute','=','check')]" string="Service Execution Checked"
+                        name="service_execution_check"/>
+                <filter domain="[('state_execute','=','approved')]"
+                        string="Service Execution Approved"
+                        name="service_execution_approved"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="status" string="Status" domain="[]"
+                            context="{'group_by':'state_execute'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <!--    Service Execute Action-->
     <record model="ir.actions.act_window" id="service_execute_action">
-        <field name="name">Service Check</field>
+        <field name="name">Service Execution</field>
         <field name="res_model">service.execute</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -70,5 +93,6 @@
     <menuitem id="execute_service" name="Service Execution"
               parent="service_root"
               action="service_execute_action"
+              sequence="3"
               groups="ohrms_service_request.service_group_executer"/>
 </odoo>
