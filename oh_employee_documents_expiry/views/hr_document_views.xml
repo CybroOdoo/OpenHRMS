@@ -46,8 +46,8 @@
     <!--    Menu item for documents.-->
     <menuitem id="hr_document_menu"
               name="Document Templates"
-              parent="hr.menu_hr_root"
-              sequence="4"
+              parent="oh_employee_documents_expiry.menu_human_resources_configuration_document"
+              sequence="1"
               action="hr_document_action"
               groups="hr.group_hr_manager"/>
 </odoo>

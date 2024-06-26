@@ -31,9 +31,16 @@
         <field name="view_mode">tree,form</field>
     </record>
     <!--   Menu item for document_type model.-->
+    <menuitem
+            id="menu_human_resources_configuration_document"
+            name="Employee Document"
+            parent="hr.menu_human_resources_configuration"
+            sequence="7"
+            groups="base.group_no_one"/>
+
     <menuitem id="document_type_menu"
               name="Employee Document Types"
-              parent="hr.menu_human_resources_configuration"
-              sequence="6"
+              parent="oh_employee_documents_expiry.menu_human_resources_configuration_document"
+              sequence="3"
               action="document_type_action"/>
 </odoo>
