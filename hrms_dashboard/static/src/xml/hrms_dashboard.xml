@@ -386,13 +386,13 @@
                                                 style="float: left;padding-right: 6%; pointer-events: none; cursor: default;">
                                                 <img class="align-self-center rounded-circle mr-3"
                                                     alt=""
-                                                    t-att-src="this.get_emp_image_url(employee)"/>
+                                                    t-att-src="this.get_emp_image_url(employee[0])"/>
                                             </a>
                                             <div class="media-body">
                                                 <h2 class="text-color display-6"
                                                     style="font-size: 15px;"><t t-esc="employee[1]"/> </h2>
-                                                <p><t t-esc="employee[3]"/></p>
-                                                <p class="text-light"><t t-esc="employee[2]"/></p>
+                                                <p><t t-esc="employee[3]['en_US']"/></p>
+                                                <p class="text-color"><t t-esc="employee[2]"/></p>
                                             </div>
                                         </div>
                                     </div>
