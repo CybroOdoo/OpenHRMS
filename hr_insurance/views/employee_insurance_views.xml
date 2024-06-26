@@ -68,9 +68,14 @@
     </record>
     <!--        hr insurance menu-->
     <menuitem
-            id="hr_insurance_menu"
-            name="Insurance"
-            parent="hr.menu_hr_root"
-            action="hr_insurance_action"/>
+            id="menu_human_resources_configuration_insurance"
+            name="Insurance &amp; Policies"
+            parent="hr.menu_human_resources_configuration"
+            sequence="6"
+            groups="base.group_no_one"/>
+
+    <menuitem id="hr_insurance_menu" action="hr_insurance_action" name="Insurance" sequence="1"
+              parent="hr_insurance.menu_human_resources_configuration_insurance"
+              />
 
 </odoo>

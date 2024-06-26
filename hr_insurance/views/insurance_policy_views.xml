@@ -43,10 +43,12 @@
             </p>
         </field>
     </record>
+
     <menuitem
             id="policy_management_menu"
             name="Insurance Policy"
-            parent="hr.menu_human_resources_configuration"
+            sequence="2"
+            parent="hr_insurance.menu_human_resources_configuration_insurance"
             action="insurance_policy_action"/>
 
 </odoo>
