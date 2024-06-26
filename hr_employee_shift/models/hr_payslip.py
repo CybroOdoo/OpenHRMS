@@ -64,8 +64,8 @@ class HrPayslip(models.Model):
 
             # Gather all intervals and holidays
             for days in contract.shift_schedule:
-                start_date = datetime.datetime.strptime(str(days.start_date), tools.DEFAULT_SERVER_DATE_FORMAT)
-                end_date = datetime.datetime.strptime(str(days.end_date), tools.DEFAULT_SERVER_DATE_FORMAT)
+                start_date = datetime.strptime(str(days.start_date), tools.DEFAULT_SERVER_DATE_FORMAT)
+                end_date = datetime.strptime(str(days.end_date), tools.DEFAULT_SERVER_DATE_FORMAT)
                 nb_of_days = (days.end_date - days.start_date).days + 1
                 for day in range(0, nb_of_days):
                     working_intervals_on_day = days.hr_shift._get_day_work_intervals(

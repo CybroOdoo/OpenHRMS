@@ -104,9 +104,9 @@ class ResourceCalendar(models.Model):
         self.ensure_one()
 
         if not start_time:
-            start_time = datetime.time.min
+            start_time = time.min
         if not end_time:
-            end_time = datetime.time.max
+            end_time = time.max
 
         working_intervals = [att_interval for att_interval in
                              self._iter_day_attendance_intervals(day_date,
@@ -160,9 +160,9 @@ class ResourceCalendar(models.Model):
             from_time = self.float_to_time(calendar_working_day.hour_from)
             to_time = self.float_to_time(calendar_working_day.hour_to)
 
-            dt_f = datetime.datetime.combine(day_date,
+            dt_f = datetime.combine(day_date,
                                              max(from_time, start_time))
-            dt_t = datetime.datetime.combine(day_date, min(to_time, end_time))
+            dt_t = datetime.combine(day_date, min(to_time, end_time))
 
             yield self._interval_new(dt_f, dt_t,
                                      {'attendances': calendar_working_day})
