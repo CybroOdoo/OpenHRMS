@@ -21,7 +21,7 @@
 ###############################################################################
 {
     'name': 'Open HRMS Legal Actions',
-    'version': '17.0.1.0.0',
+    'version': '17.0.1.0.1',
     'category': 'Human Resources',
     'summary': """Helps to streamline and manage Legal actions effectively.""",
     'description': """Empowering seamless legal operations, this module 
