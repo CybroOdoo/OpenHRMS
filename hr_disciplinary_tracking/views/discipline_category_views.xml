@@ -53,7 +53,8 @@
 
     <menuitem id="disciplinary_category_menu"
               action="discipline_category_action" groups="hr.group_hr_manager"
-              name="Discipline Category" parent="disciplinary_action"
+              name="Discipline Category"
+              parent="hr_disciplinary_tracking.menu_human_resources_configuration_disciplinary"
               sequence="3"/>
 
 </odoo>

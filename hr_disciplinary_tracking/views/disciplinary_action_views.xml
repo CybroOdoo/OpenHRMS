@@ -196,12 +196,17 @@
         </field>
     </record>
 
-    <menuitem id="disciplinary_action" name="Disciplinary Actions"
-              parent="hr.menu_hr_root"
-              sequence="23"/>
+    <menuitem
+            id="menu_human_resources_configuration_disciplinary"
+            name="Disciplinary Actions"
+            parent="hr.menu_human_resources_configuration"
+            sequence="5"
+            groups="base.group_no_one"/>
+
     <menuitem id="disciplinary_action_create"
               action="disciplinary_action_action" groups="hr.group_hr_user"
-              name="Disciplinary Action" parent="disciplinary_action"
+              name="Disciplinary Action"
+              parent="hr_disciplinary_tracking.menu_human_resources_configuration_disciplinary"
               sequence="1"/>
 
 </odoo>
