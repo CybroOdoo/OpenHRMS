@@ -20,7 +20,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from odoo import fields, models
+from odoo import fields, models, _
 
 
 class HrEmployee(models.Model):
@@ -36,3 +36,23 @@ class HrEmployee(models.Model):
         """Compute the number of loans associated with the employee."""
         self.loan_count = self.env['hr.loan'].search_count(
             [('employee_id', '=', self.id)])
+
+    def action_loan_view(self):
+        """ Opens a view to list all documents related to the current
+         employee."""
+        self.ensure_one()
+        return {
+            'name': _('Loan'),
+            'domain': [('employee_id', '=', self.id)],
+            'res_model': 'hr.loan',
+            'type': 'ir.actions.act_window',
+            'view_id': False,
+            'view_mode': 'tree,form',
+            'help': _('''<p class="oe_view_nocontent_create">
+                           Click to Create for New Loan
+                        </p>'''),
+            'limit': 80,
+            'context': "{'default_employee_id': %s}" % self.id
+        }
+
+

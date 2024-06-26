@@ -7,14 +7,12 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
-                <button name="%(act_hr_employee_loan_request)d"
-                        type="action"
-                        class="oe_stat_button"
-                        icon="fa-money"
-                        groups="hr.group_hr_manager,hr.group_hr_user">
+                <button class="oe_stat_button" name="action_loan_view"
+                        type="object" icon="fa-money" groups="hr.group_hr_manager,hr.group_hr_user">
                     <field name="loan_count" widget="statinfo" string="Loans"/>
                 </button>
             </xpath>
         </field>
     </record>
 </odoo>
+

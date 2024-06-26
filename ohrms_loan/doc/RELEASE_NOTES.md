@@ -5,3 +5,7 @@
 ##### ADD
 
 - Initial commit for Open HRMS Loan Management
+
+##### FIX 
+
+- Updated the Loan Smart button view and added the domain for the tree and form view
