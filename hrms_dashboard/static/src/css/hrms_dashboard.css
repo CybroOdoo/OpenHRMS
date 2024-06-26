@@ -229,13 +229,15 @@ rect:hover {  fill:#934da5; }
     float: left;
     padding-right: 0px;
     width: 100%;
-    height: 185px;
+    height: 285px;
     overflow: hidden;
     background: #999999;
 
 }
 .employee-prof .employee-icon img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     background: #fff;
 }
 
