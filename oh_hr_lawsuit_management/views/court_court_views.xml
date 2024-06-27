@@ -38,13 +38,6 @@
     </record>
         <!-- Define the menu item for accessing Court records -->
 
-    <menuitem
-            id="menu_human_resources_configuration_court"
-            name="Legal Actions"
-            parent="hr.menu_human_resources_configuration"
-            sequence="5"
-            groups="base.group_no_one"/>
-
     <menuitem id="court_court_menu"
               name="Court" sequence="10"
               action="court_court_action"

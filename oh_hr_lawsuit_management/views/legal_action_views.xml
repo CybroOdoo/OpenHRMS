@@ -118,6 +118,15 @@
         </field>
     </record>
         <!-- Define the menu item for accessing Legal Actions (lawsuits) -->
+
+
+    <menuitem
+            id="menu_human_resources_configuration_court"
+            name="Legal Actions"
+            parent="hr.menu_human_resources_configuration"
+            sequence="5"
+            groups="base.group_no_one"/>
+
     <menuitem id="hr_lawsuit_menu"
               parent="oh_hr_lawsuit_management.menu_human_resources_configuration_court"
               action="hr_lawsuit_action"
