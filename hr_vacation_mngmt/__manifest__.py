@@ -22,7 +22,7 @@
 ###############################################################################
 {
     'name': "Open HRMS Vacation Management",
-    'version': '17.0.1.0.0',
+    'version': '17.0.1.0.1',
     'category': 'Human Resources',
     'summary': """Vacation Management,manages employee vacation""",
     'description': """The 'Vacation Management System' is a robust platform

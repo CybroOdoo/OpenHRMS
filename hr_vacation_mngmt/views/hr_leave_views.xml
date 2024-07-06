@@ -15,7 +15,6 @@
                         invisible="not flight_ticket_ids"
                 />
             </xpath>
-
              <xpath expr="//header/button[@name='action_draft']" position="before">
                  <button string="Book Flight Ticket" name="action_book_ticket"
                         type="object"

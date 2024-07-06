@@ -25,6 +25,18 @@
                                        widget="radio"/>
                             </div>
                         </div>
+                        <div class="text-muted">
+                                Expense Account
+                            </div>
+                            <div>
+                            <field name="expense_account_id"/><br/>
+                            </div>
+                             <div class="text-muted">
+                                Expense Product
+                            </div>
+                              <div>
+                            <field name="expense_product_id"/>
+                              </div>
                     </div>
                 </div>
             </xpath>

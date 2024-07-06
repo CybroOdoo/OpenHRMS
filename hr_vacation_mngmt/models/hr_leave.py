@@ -122,7 +122,7 @@ class HrLeave(models.Model):
                 _('Only an HR Officer or Manager can book flight tickets.'))
         ctx = dict(self.env.context or {})
         ctx.update({
-            'default_employee_id': self.employee_id.id,
+            'default_employee_id': self.id,
             'default_leave_id': self.id,
         })
         return {

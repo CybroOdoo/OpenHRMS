@@ -93,19 +93,17 @@ class HrFlightTicket(models.Model):
     def action_confirm_ticket(self):
         """This method confirms the flight ticket and generates an
          invoice for the ticket fare."""
-        product_id = self.env['product.product'].search(
-            [("name", "=", "Flight Ticket")])
+        product_id = self.env['ir.config_parameter'].get_param('hr_vacation_mngmt.expense_product_id')
         if self.ticket_fare <= 0:
             raise UserError(_('Please add ticket fare.'))
-        expense_account = self.env['ir.config_parameter'].sudo().get_param(
-            'travel_expense_account')
+        expense_account = self.env['ir.config_parameter'].get_param('hr_vacation_mngmt.expense_account_id')
         if not expense_account:
             raise UserError(
-                _('Please select expense account for the flight tickets.'))
+                _('Please select expense account for the flight tickets from the settings.'))
         journal_id = self.env['account.journal'].search(
             [('type', '=', 'purchase'),
              ('company_id', '=', self.company_id.id)], limit=1)
-        partner = self.env.ref('hr_vacation_mngmt.res_partner_data')
+        partner = self.env.ref('hr_vacation_mngmt.res_partner_data_airlines')
         if not partner.property_payment_term_id:
             date_due = fields.Date.context_today(self)
         else:
@@ -129,7 +127,7 @@ class HrFlightTicket(models.Model):
                 'price_unit': self.ticket_fare,
                 'quantity': 1.0,
                 'account_id': int(expense_account),
-                'product_id': product_id.id,
+                'product_id': product_id,
             })],
         })
         self.write({'state': 'confirmed', 'invoice_id': inv_id.id})

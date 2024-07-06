@@ -34,12 +34,6 @@ class ResConfigSettings(models.TransientModel):
     reminder_day_before = fields.Integer(string='Reminder Day Before',
                                          config_parameter='hr_vacation_mngmt.reminder_day_before',
                                          help='Set the day to send  reminder .')
-    default_expense_account_id = fields.Many2one('account.account',
-                                                 string='Travel Expense Account',
-                                                 config_parameter='hr_vacation_mngmt.default_expense_account_id',
-                                                 default_model='hr.leave',
-                                                 help='Set the default expense'
-                                                      ' account.')
     default_leave_salary = fields.Selection([('0', 'Basic'),
                                              ('1', 'Gross')],
                                             string='Leave Salary',
@@ -47,3 +41,16 @@ class ResConfigSettings(models.TransientModel):
                                             config_parameter='hr_vacation_mngmt.default_leave_salary',
                                             help='Set the default leave salary'
                                                  ' of employee.')
+    expense_account_id = fields.Many2one(
+        'account.account',
+        string='Expense Account',
+        required=True,
+        domain="[('account_type','=','expense')]",
+        help="Select expense account",
+        config_parameter='hr_vacation_mngmt.expense_account_id')
+    expense_product_id = fields.Many2one('product.product',
+                                        domain="[('type', '=', 'service')]",
+                                         required=True,
+                                         string="Expense Product",
+                                         help="Select expense product",
+                                         config_parameter='hr_vacation_mngmt.expense_product_id')
