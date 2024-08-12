@@ -45,7 +45,7 @@
             'hr_payroll_dashboard/static/src/xml/payroll_dashboard.xml'
         ],
     },
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/banner.jpg'],
     "external_dependencies": {"python": ["pandas"]},
     'license': 'LGPL-3',
     'installable': True,
