@@ -927,7 +927,7 @@ h4 .stat-count {
 
 
 .row.main-section {
-    margin-right: 0px; !important;
+    margin-right: 0px !important;
 }
 /* width */
 .hr_notification::-webkit-scrollbar {
