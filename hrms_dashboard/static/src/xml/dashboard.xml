@@ -357,6 +357,7 @@
                             <th>Worked Hours</th>
                         </thead>
                         <tbody>
+                            <t t-log="this.state.login_employee['attendance_lines'],'Anjana---------------2'"/>
                             <tr class="attendance_lines"
                                 t-foreach="this.state.login_employee['attendance_lines']"
                                 t-as="lines" t-key="lines['id']">
@@ -450,7 +451,7 @@
                     <div class="col-xs-12 text-align">
                         <t t-if="this.state.employee_birthday">
                             <t t-foreach="this.state.employee_birthday"
-                               t-as="employee" t-key="employee">
+                               t-as="employee" t-key="employee['id']">
                             <div class="col-sm-12 col-lg-12 birth_emp"
                                  t-att-style="employee['is_birthday'] ? 'background: #3e6282;' : ''">
                                 <div class="text-color">

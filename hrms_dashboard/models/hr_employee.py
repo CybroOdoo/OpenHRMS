@@ -79,6 +79,7 @@ class HrEmployee(models.Model):
         for line in attendance:
             if line['check_in'] and line['check_out']:
                 val = {
+                    'id':line['id'],
                     'date': line['check_in'].date(),
                     'sign_in': line['check_in'].time().strftime('%H:%M'),
                     'sign_out': line['check_out'].time().strftime('%H:%M'),
@@ -229,8 +230,9 @@ class HrEmployee(models.Model):
              ('department_ids', 'in', employee.department_id.id),
              ('position_ids', 'in', employee.job_id.id),
              ], fields=['announcement_reason', 'date_start', 'date_end'])
+
         lang = f"'{self.env.context['lang']}'"
-        cr.execute("""select  e.name ->> e.lang as name, e.date_begin,
+        cr.execute("""select e.id, e.name ->> e.lang as name, e.date_begin,
          e.date_end,rp.name as location
         from event_event e
         inner join res_partner rp 

@@ -15,6 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <t t-log="lines,'Anjana---------------1'"/>
                             <tr t-foreach="lines" t-as="line">
                                 <t t-if="line['broad_factor']">
                                     <t t-set="broad_factor" t-value="line['broad_factor']"/>

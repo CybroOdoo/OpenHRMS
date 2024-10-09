@@ -8,11 +8,12 @@ import { useService } from "@web/core/utils/hooks";
 import { WebClient } from "@web/webclient/webclient";
 import { user } from "@web/core/user";
 const actionRegistry = registry.category("actions");
+import { ActivityMenu } from "@hr_attendance/components/attendance_menu/attendance_menu";
+import { patch } from "@web/core/utils/patch";
 export class HrDashboard extends Component{
     static template = 'HrDashboardMain';
     static props = ["*"];
     setup() {
-        // When the component is about to start, fetch data in tiles
         this.effect = useService("effect");
         this.action = useService("action");
         this.log_in_out = useRef("log_in_out")
@@ -581,7 +582,7 @@ export class HrDashboard extends Component{
             context:{'order':'duration_display'}
         })
     }
-    attendance_sign_in_out() {
+     attendance_sign_in_out() {
         if (this.state.login_employee['attendance_state'] == 'checked_out') {
             this.state.login_employee['attendance_state'] = 'checked_in'
         }
@@ -600,9 +601,15 @@ export class HrDashboard extends Component{
             var message = ''
             if (attendance_state == 'checked_in'){
                 message = 'Checked In'
+                this.env.bus.trigger('signin_signout', {
+                    mode: "checked_in",
+                });
             }
             else if (attendance_state == 'checked_out'){
                 message = 'Checked Out'
+                this.env.bus.trigger('signin_signout', {
+                    mode: false,
+                });
             }
             this.effect.add({
                 message: _t("Successfully " + message),
@@ -613,3 +620,21 @@ export class HrDashboard extends Component{
     }
 }
 registry.category("actions").add("hr_dashboard", HrDashboard)
+
+patch(ActivityMenu.prototype, {
+    setup() {
+        super.setup();
+        var self = this
+        onMounted(() => {
+            this.env.bus.addEventListener('signin_signout', ({
+                detail
+            }) => {
+                if (detail.mode == 'checked_in') {
+                    self.state.checkedIn = detail.mode
+                } else {
+                    self.state.checkedIn = false
+                }
+            })
+        })
+    },
+})
