@@ -154,7 +154,7 @@ class HrSalaryRule(models.Model):
     @api.constrains('parent_rule_id')
     def _check_parent_rule_id(self):
         """Function to adding constrains for parent_rule_id field"""
-        if self._has_cycle():
+        if self._has_cycle('parent_rule_id'):
             raise ValidationError(
                 _('Error! You cannot create recursive hierarchy '
                   'of Salary Rules.'))
