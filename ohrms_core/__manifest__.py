@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'Open HRMS Core',
+    'name': 'Open HRMS Core Odoo 18',
     'version': '18.0.1.0.0',
     'category': 'Generic Modules/Human Resources',
     'summary': """Open HRMS Odoo18, HRMS odoo18, Odoo HR, HR Dashboard, 
