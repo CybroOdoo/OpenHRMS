@@ -126,32 +126,43 @@
                 <t t-call="portal.pager"/>
             </div>
         </div>
-
-        <form action="/test/path"  method="post" class="s_website_form form-horizontal container-fluid mt32" enctype="multipart/form-data" id="file_upload_form">
-            <div class="form-group form-field o_website_form_required_custom">
-                <label class="col-md-3 col-sm-4 control-label" for="contact_name">Description</label>
-                <div class="col-md-7 col-sm-8">
-                <input type="text" class="form-control o_website_form_input" name="description" required=""/>
-                </div>
-
-                <label class="col-md-3 col-sm-4 control-label" for="contact_name">Upload file if any</label>
-                <div class="col-md-7 col-sm-8">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <input type="hidden" name="employee_token" t-att-value="records.id"/>
-                    <input type="file" name="attachment" class="file" multiple="true"
-                           data-show-upload="true"
-                           data-show-caption="true"
-                           data-show-preview="true"
-                           lass="file"
-                           id="records.id"/>
-<!--                    <button type="submit" name="redirect" class="btn btn-link btn-sm btn-block cybro-super-btn" style="margin-top:20px;">Submit</button>-->
-
-                </div>
-                <button type="submit" name="Upload" style="margin-top:20px;" class="fa fa-upload btn btn-secondary">
-                                    Upload
+        <form role="form" action="/test/path"
+                  id="room_website_form"
+                  method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token"
+                       t-att-value="request.csrf_token()"/>
+                <div class="form-group form-field o_website_form_required_custom">
+                    <label class="col-md-3 col-sm-4 control-label"
+                           for="contact_name">Description
+                    </label>
+                    <div class="col-md-7 col-sm-8">
+                        <input type="text"
+                               class="form-control o_website_form_input"
+                               name="description" required=""/>
+                    </div>
+                    <label class="col-md-3 col-sm-4 control-label"
+                           for="contact_name">Upload file if any
+                    </label>
+                    <div class="col-md-7 col-sm-8">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="employee_token"
+                               t-att-value="records.id"/>
+                        <input type="file" name="attachment"
+                               class="o_input_file file"
+                               multiple="true"
+                               data-show-upload="true"
+                               data-show-caption="true"
+                               data-show-preview="true"
+                               lass="file"
+                               t-att-id="records.id"/>
+                    </div>
+                    <button type="submit" name="Upload" style="margin-top:20px;"
+                            class="fa fa-upload btn btn-secondary">
+                        Upload
                     </button>
-            </div>
-        </form>
+                </div>
+            </form>
       </t>
     </template>
 
