@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Employee Background Verification',
-    'version': '16.0.1.0.0',
+    'version': '16.0.2.0.0',
     'summary': """Verify the background details of an Employee """,
     'live_test_url': 'https://youtu.be/mH5SzuKHa30',
     'category': 'Generic Modules/Human Resources',
