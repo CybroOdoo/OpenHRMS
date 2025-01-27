@@ -86,6 +86,8 @@
                             string="Generate Payslips" class="oe_highlight"/>
                     <button string="Set to Draft" name="action_payslip_run"
                             type="object" invisible="state != 'close'"/>
+                    <button string="Validate" name="action_validate_payslips" type="object" class="oe_highlight"
+                    invisible="is_validate == False"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -103,6 +105,7 @@
                                    readonly="state != 'draft'"/>
                         </div>
                         <field name="credit_note" readonly="state != 'draft'"/>
+                        <field name="is_validate" invisible="1"/>
                     </group>
                     <separator string="Payslips"/>
                     <field name="slip_ids" readonly="state != 'draft'"/>

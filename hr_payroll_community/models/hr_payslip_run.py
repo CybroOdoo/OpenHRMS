@@ -56,6 +56,21 @@ class HrPayslipRun(models.Model):
                                  help="If its checked, indicates that all"
                                       "payslips generated from here are refund"
                                       "payslips.")
+    is_validate = fields.Boolean(compute='_compute_is_validate')
+
+    def _compute_is_validate(self):
+        for record in self:
+            if record.slip_ids and record.slip_ids.filtered(
+                    lambda slip: slip.state == 'draft'):
+                record.is_validate = True
+            else:
+                record.is_validate = False
+
+    def action_validate_payslips(self):
+        if self.slip_ids:
+            for slip in self.slip_ids.filtered(
+                    lambda slip: slip.state == 'draft'):
+                slip.action_payslip_done()
 
     def action_payslip_run(self):
         """Function for state change"""
