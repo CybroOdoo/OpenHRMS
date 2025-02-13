@@ -21,12 +21,12 @@
 #
 #############################################################################
 {
-    'name': 'Open HRMS Core Odoo 18',
+    'name': 'Open HRMS Core',
     'version': '18.0.1.0.0',
     'category': 'Generic Modules/Human Resources',
     'summary': """Open HRMS Odoo18, HRMS odoo18, Odoo HR, HR Dashboard, 
      Odoo18 Payroll, HR Management, Odoo Branch, Odoo Loan, Salary Advance, 
-     Odoo18,Payroll,Dashboard,Accounting,HR Kit,HR,Odoo Apps""",
+     Odoo18,Payroll,Dashboard,Accounting,HR Kit,HR,Odoo Apps, Odoo18""",
     'description': """Openhrms, Main module of Open HRMS,Payroll, Payroll 
      Accounting, Expense, Dashboard,Employees, Employee Document, Resignation, 
      Salary Advance, Loan Management, Gratuity, Service Request, Gosi, 
@@ -40,7 +40,7 @@
     'author': 'Cybrosys Techno solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
-    'live_test_url': 'https://youtu.be/kBBlUFofCTs',
+    'live_test_url': 'https://hrms.easyinstance.com/web/login?redirect=/odoo/employees',
     'website': "https://www.openhrms.com",
     'depends': [
         'hr',

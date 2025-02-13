@@ -21,7 +21,7 @@
 #
 #############################################################################
 {
-    'name': 'OpenHRMS Employee Info',
+    'name': 'Open HRMS Employee Info',
     'version': '18.0.1.0.0',
     'category': 'Human Resources',
     'summary': """Adding Advanced Fields In Employee Master""",
