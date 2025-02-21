@@ -1,0 +1,306 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* history_employee
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-18 06:03+0000\n"
+"PO-Revision-Date: 2023-11-18 06:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__changed_field
+msgid "Changed Field"
+msgstr ""
+
+#. module: history_employee
+#. odoo-python
+#: code:addons/history_employee/models/hr_employee.py:0
+#: code:addons/history_employee/models/hr_employee.py:0
+#: model_terms:ir.ui.view,arch_db:history_employee.view_employee_form
+#, python-format
+msgid "Contract History"
+msgstr "تاريخ العقد"
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__create_uid
+#: model:ir.model.fields,field_description:history_employee.field_department_history__create_uid
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__create_uid
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__create_date
+#: model:ir.model.fields,field_description:history_employee.field_department_history__create_date
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__create_date
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__current_value
+msgid "Current Cost"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__current_value
+msgid "Current Salary"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__current_value
+msgid "Current Value"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_department_history__updated_date
+msgid "Date"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_contract_history__updated_date
+msgid "Date when the contract was updated."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_hourly_cost__updated_date
+msgid "Date when the hourly cost was updated."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_salary_history__updated_date
+msgid "Date when the salary was updated."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_department_history__current_value
+msgid "Designation"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__display_name
+#: model:ir.model.fields,field_description:history_employee.field_department_history__display_name
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__display_name
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_department_history__updated_date
+msgid "Display the date on which  department or job position changed"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_department_history__current_value
+msgid "Display the designation"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_department_history__changed_field
+msgid "Displays the changed department/job position"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.view_employee_form
+msgid "Employee History"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__employee_id
+#: model:ir.model.fields,field_description:history_employee.field_department_history__employee_id
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__employee_id
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__employee_id
+msgid "Employee Id"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__employee_name
+#: model:ir.model.fields,field_description:history_employee.field_department_history__employee_name
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__employee_name
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__employee_name
+msgid "Employee Name"
+msgstr ""
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.hourly_cost_view_tree
+msgid "Hourly Cost"
+msgstr ""
+
+#. module: history_employee
+#. odoo-python
+#: code:addons/history_employee/models/hr_employee.py:0
+#: code:addons/history_employee/models/hr_employee.py:0
+#, python-format
+msgid "Hourly Cost Details"
+msgstr ""
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.view_employee_form
+msgid "Hourly Cost History"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__id
+#: model:ir.model.fields,field_description:history_employee.field_department_history__id
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__id
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__id
+msgid "ID"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_salary_history__employee_id
+msgid "Id  of the employee associated with the salary history record."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_department_history__employee_id
+msgid "Id of the associated Employee"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_contract_history__employee_id
+msgid "Id of the employee associated with the contract history record."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_hourly_cost__employee_id
+msgid "Id of the employee associated with the hourly cost record"
+msgstr ""
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.view_employee_form
+msgid "Job / Department History"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_department_history__changed_field
+msgid "Job position/Department"
+msgstr ""
+
+#. module: history_employee
+#. odoo-python
+#: code:addons/history_employee/models/hr_employee.py:0
+#: code:addons/history_employee/models/hr_employee.py:0
+#, python-format
+msgid "Job/Department History"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__write_uid
+#: model:ir.model.fields,field_description:history_employee.field_department_history__write_uid
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__write_uid
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__write_date
+#: model:ir.model.fields,field_description:history_employee.field_department_history__write_date
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__write_date
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_contract_history__employee_name
+msgid "Name of the employee whose contract history is being updated."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_department_history__employee_name
+msgid "Name of the employee whose department or job position has changed."
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_hourly_cost__employee_name
+msgid "Name of the employee whose hourly cost is being updated"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_salary_history__employee_name
+msgid "Name of the employee whose salary history is being updated."
+msgstr ""
+
+#. module: history_employee
+#. odoo-python
+#: code:addons/history_employee/models/hr_employee.py:0
+#: code:addons/history_employee/models/hr_employee.py:0
+#: model_terms:ir.ui.view,arch_db:history_employee.view_employee_form
+#, python-format
+msgid "Salary History"
+msgstr "تاريخ الراتب"
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_contract_history__changed_field
+msgid "The updated field or attribute of the contract."
+msgstr "الحقل أو السمة المحدثة للعقد"
+
+#. module: history_employee
+#: model:ir.model.fields,field_description:history_employee.field_contract_history__updated_date
+#: model:ir.model.fields,field_description:history_employee.field_hourly_cost__updated_date
+#: model:ir.model.fields,field_description:history_employee.field_salary_history__updated_date
+msgid "Updated On"
+msgstr "تحديث في"
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_salary_history__current_value
+msgid "Updated salary value."
+msgstr "تحديث قيمة الراتب"
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_contract_history__current_value
+msgid "Updated value of the contract."
+msgstr "قيمة العقد المحدثة"
+
+#. module: history_employee
+#: model:ir.model.fields,help:history_employee.field_hourly_cost__current_value
+msgid "Updated value of the hourly cost."
+msgstr "القيمة المحدثة للتكلفة بالساعة."
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.contract_history_view_tree
+msgid "contract"
+msgstr "عقد"
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_contract_history
+msgid "contract.history"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_department_history
+msgid "department.history"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_hourly_cost
+msgid "hourly.cost"
+msgstr ""
+
+#. module: history_employee
+#: model:ir.model,name:history_employee.model_salary_history
+msgid "salary.history"
+msgstr ""
+
+#. module: history_employee
+#: model_terms:ir.ui.view,arch_db:history_employee.salary_history_views_tree
+msgid "salary_history"
+msgstr ""
