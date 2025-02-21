@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leave_validation_status_hr_holidays_manager,access.leave.validation.status.hr.holidays.manager,model_leave_validation_status,hr_holidays.group_hr_holidays_manager,1,1,1,1
+access_leave_validation_status_hr_holidays_user,access.leave.validation.status.hr.holidays.user,model_leave_validation_status,hr_holidays.group_hr_holidays_user,1,1,1,1
+access_leave_validation_status_user,access.leave.validation.status.user,model_leave_validation_status,base.group_user,1,1,0,0
+access_hr_holidays_validators_hr_holidays_manager,access.hr.holidays.validators.hr.holidays.manager,model_hr_holidays_validators,hr_holidays.group_hr_holidays_manager,1,1,1,1
+access_hr_holidays_validators_user,access.hr.holidays.validators.user,model_hr_holidays_validators,base.group_user,1,1,0,0

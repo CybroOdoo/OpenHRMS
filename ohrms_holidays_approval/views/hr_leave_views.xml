@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit hr leave form view for replacing the action_approve and
+    action_refuse buttons-->
+    <record id="hr_leave_view_form" model="ir.ui.view">
+        <field name="name">hr.leave.view.form.inherit.ohrms.holidays.approval</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button string="Approve" name="action_approve"
+                        invisible="state != 'confirm' or
+                        (multi_level_validation and uid not in user_ids) or
+                        (not multi_level_validation and not can_approve)"
+                        type="object"
+                        class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//button[@name='action_refuse']" position="replace">
+                <button string="Refuse" name="action_refuse" type="object"
+                        invisible="(not multi_level_validation and not
+                    can_approve) or (multi_level_validation and uid not in
+                    user_ids) or state not in ('confirm', 'validate1',
+                    'validate')"/>
+            </xpath>
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <field name="user_ids"
+                       invisible="1"/>
+                <notebook invisible="multi_level_validation == False">
+                    <page string="Validation Status">
+                        <field name="validation_status_ids" mode="list"
+                               readonly="state in ['refuse','validate']">
+                            <list string="Users"
+                                  create="false" delete="false">
+                                <field name="user_id"/>
+                                <field name="validation_status"/>
+                                <field name="leave_comments"
+                                       readonly="user_id != uid"/>
+                            </list>
+                            <form>
+                                <group>
+                                    <field name="user_id"/>
+                                    <field name="leave_comments"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+    <!-- Approval requests menu action-->
+    <record id="hr_leave_action" model="ir.actions.server">
+        <field name="name">Approvals</field>
+        <field name="model_id" ref="model_hr_leave"/>
+        <field name="binding_model_id" ref="model_hr_leave"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = model._get_approval_requests()
+        </field>
+    </record>
+    <!-- Approval requests menu-->
+    <menuitem
+            id="hr_leave_menu"
+            name="Approval Requests"
+            parent="hr_holidays.menu_hr_holidays_management"
+            action="hr_leave_action"
+            sequence="1"/>
+</odoo>

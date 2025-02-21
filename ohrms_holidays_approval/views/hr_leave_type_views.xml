@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherited hr leave type form view to add extra fields-->
+    <record id="edit_holiday_status_form" model="ir.ui.view">
+        <field name="name">hr.leave.type.view.form.inherit.ohrms.holidays .approval</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='responsible_ids']"
+                   position="attributes">
+                <attribute name="invisible">
+                    leave_validation_type in ['no_validation',
+                    'manager','multi'] and (requires_allocation == 'no' or
+                    allocation_validation_type != 'officer')
+                </attribute>
+            </xpath>
+            <xpath expr="//group[last()]" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+                <notebook invisible="leave_validation_type != 'multi'">
+                    <page string="Leave validation">
+                        <field name="validator_ids"/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>
