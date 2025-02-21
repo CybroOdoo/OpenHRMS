@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Inherit Res Partner form view to include is_judge field and smart
+     button-->
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.oh.hr
+            .lawsuit.management
+        </field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="30"/>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button class="oe_stat_button" name="action_view_legal"
+                        type="object"
+                        icon="fa-gavel">
+                    <field string="Legal Actions" name="legal_count"
+                           widget="statinfo"/>
+                </button>
+            </div>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_judge"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
