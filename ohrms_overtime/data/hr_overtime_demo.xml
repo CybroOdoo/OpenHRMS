@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Define a payroll structure with a reference to the 'hr_salary_rule_overtime' salary rule -->
+    <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">
+        <field eval="[(4, ref('hr_salary_rule_overtime'))]"
+               name="rule_ids"/>
+    </record>
+    <!-- Define an overtime type for leave hours -->
+    <record id="hr_overtime_type_demo_leave_hour" model="overtime.type">
+        <field name="name">Leave Hour</field>
+        <field name="type">leave</field>
+        <field name="duration_type">hours</field>
+        <field name="leave_type_id" ref="hr_holidays.holiday_status_cl"/>
+    </record>
+    <!-- Define an overtime type for leave days -->
+    <record id="hr_overtime_type_demo_leave_day" model="overtime.type">
+        <field name="name">Leave Day</field>
+        <field name="type">leave</field>
+        <field name="duration_type">days</field>
+        <field name="leave_type_id" ref="hr_holidays.holiday_status_sl"/>
+    </record>
+    <!-- Define an overtime type for cash hours -->
+    <record id="hr_overtime_type_demo_cash_hour" model="overtime.type">
+        <field name="name">Cash Hour</field>
+        <field name="type">cash</field>
+        <field name="duration_type">hours</field>
+        <field name="leave_type_id" ref="hr_holidays.holiday_status_cl"/>
+    </record>
+    <!-- Define an overtime type for cash days -->
+    <record id="hr_overtime_type_demo_cash_day" model="overtime.type">
+        <field name="name">Cash Day</field>
+        <field name="type">cash</field>
+        <field name="duration_type">days</field>
+        <field name="leave_type_id" ref="hr_holidays.holiday_status_sl"/>
+    </record>
+    <!-- Define a rule for the 'Cash Hour' overtime type -->
+    <record id="hr_overtime_type_rule_demo_cash_hour" model="overtime.type.rule">
+        <field name="type_line_id" ref="hr_overtime_type_demo_cash_hour"/>
+        <field name="name">First Category</field>
+        <field name="from_hrs" eval="0"/>
+        <field name="to_hrs" eval="5"/>
+        <field name="hrs_amount" eval="2.0"/>
+    </record>
+    <!-- Define a rule for the 'Cash Day' overtime type -->
+    <record id="hr_overtime_type_rule_demo_cash_day" model="overtime.type.rule">
+        <field name="type_line_id" ref="hr_overtime_type_demo_cash_day"/>
+        <field name="name">First Category</field>
+        <field name="from_hrs" eval="0"/>
+        <field name="to_hrs" eval="5"/>
+        <field name="hrs_amount" eval="2.0"/>
+    </record>
+    <!-- Define an overtime request for an employee with leave type -->
+    <record id="hr_over_time_request_demo_leave" model="hr.overtime">
+        <field name="name">Overtime Request Leave</field>
+        <field name="employee_id" ref="hr.employee_admin"/>
+        <field name="type">leave</field>
+        <field name="duration_type">hours</field>
+        <field name="job_id" model="hr.job"
+               eval="obj().env.ref('hr.employee_admin').job_id.id"/>
+        <field name="department_id" model="hr.department"
+               eval="obj().env.ref('hr.employee_admin').department_id.id"/>
+        <field name="date_from" eval="time.strftime('%Y-01-01 10:00:00')"/>
+        <field name="date_to" eval="time.strftime('%Y-01-01 12:00:00')"/>
+        <field name="contract_id" ref="hr_contract.hr_contract_admin"/>
+    </record>
+    <!-- Define an overtime request for an employee with cash type -->
+    <record id="hr_over_time_request_demo_cash" model="hr.overtime">
+        <field name="name">Overtime Request Cash</field>
+        <field name="employee_id" ref="hr.employee_qdp"/>
+        <field name="type">cash</field>
+        <field name="duration_type">days</field>
+        <field name="job_id" model="hr.job"
+               eval="obj().env.ref('hr.employee_qdp').job_id.id"/>
+        <field name="department_id" model="hr.department"
+               eval="obj().env.ref('hr.employee_qdp').department_id.id"/>
+        <field name="date_from" eval="time.strftime('%Y-01-01 10:00:00')"/>
+        <field name="date_to" eval="time.strftime('%Y-01-03 10:00:00')"/>
+        <field name="contract_id" ref="hr_contract.hr_contract_qdp"/>
+    </record>
+</odoo>

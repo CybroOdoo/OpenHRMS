@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Define UI view for Overtime Type form -->
+    <record id="overtime_type_view_form" model="ir.ui.view">
+        <field name="name">overtime.type.view.form</field>
+        <field name="model">overtime.type</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Type">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="0"
+                                   placeholder="Reference ...."/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="duration_type"/>
+                                <field name="leave_compute_ids" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="leave_type_id"
+                                       invisible=" type != 'leave'"/>
+                            </group>
+                        </group>
+                    </div>
+                    <notebook invisible=" type != 'cash'">
+                        <page string="Rules" name="cash_rules">
+                            <field name="rule_line_ids">
+                                <list string="Rules" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="from_hrs"/>
+                                    <field name="to_hrs"/>
+                                    <field name="hrs_amount"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Define UI view for Overtime Type list view -->
+    <record id="overtime_type_view_tree" model="ir.ui.view">
+        <field name="name">overtime.type.view.list</field>
+        <field name="model">overtime.type</field>
+        <field name="arch" type="xml">
+            <list string="Overtime Type">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <!-- Define action window for Overtime Type -->
+    <record id="hr_overtime_type_action" model="ir.actions.act_window">
+        <field name="name">Overtime Types</field>
+        <field name="res_model">overtime.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create new Approval Type.
+            </p>
+        </field>
+    </record>
+    <!-- MenuItems -->
+    <menuitem id="overtime_type_menu" name="Overtime Types"
+              parent="hr_overtime_menu_root"
+              groups="hr_holidays.group_hr_holidays_user"
+              action="hr_overtime_type_action"/>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Define a salary rule for overtime -->
+    <record id="hr_salary_rule_overtime" model="hr.salary.rule">
+        <field name="name">Overtime</field>
+        <field name="code">OT100</field>
+        <field name="sequence" eval="100"/>
+        <field name="category_id" ref="hr_payroll_community.ALW"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = inputs.OT100</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">result = inputs.OT100.amount</field>
+    </record>
+</odoo>
