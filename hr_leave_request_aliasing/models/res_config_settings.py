@@ -35,3 +35,14 @@ class ResConfigSettings(models.TransientModel):
     alias_domain = fields.Char(string='Domain', translate=True,
                                help='Default alias domain for leave',
                                config_parameter='hr_holidays.alias_domain')
+    date_format = fields.Selection(
+        selection=[
+            ('dd/mm/yyyy', 'DD/MM/YYYY'),
+            ('yyyy/mm/dd', 'YYYY/MM/DD'),
+            ('mm/dd/yyyy', 'MM/DD/YYYY')
+        ],
+        string='Date Format',
+        default='dd/mm/yyyy',
+        help='Select the format in which dates should be displayed or used.',
+        config_parameter='hr_holidays.date_format'
+    )

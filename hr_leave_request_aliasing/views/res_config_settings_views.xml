@@ -45,6 +45,12 @@
                                                class="col-md-3"/>
                                         <field name="alias_domain"/>
                                     </div>
+                                    <div class="row mt16">
+                                        <label for="date_format"
+                                               string="Date Format"
+                                               class="col-md-3"/>
+                                        <field name="date_format"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

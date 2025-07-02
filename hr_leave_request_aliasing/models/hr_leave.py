@@ -51,15 +51,37 @@ class HrLeave(models.Model):
             msg_body = msg_dict.get('body', '')
             cleaner = re.compile('<.*?>')
             clean_msg_body = re.sub(cleaner, '', msg_body)
-            date_list = re.findall(r'\d{2}/\d{2}/\d{4}', clean_msg_body)
+            date_format = self.env['ir.config_parameter'].sudo().get_param(
+                'hr_holidays.date_format')
+            if date_format == 'dd/mm/yyyy':
+                date_list = re.findall(r'\d{2}/\d{2}/\d{4}', clean_msg_body)
+            elif date_format == 'yyyy/mm/dd':
+                date_list = re.findall(r'\d{4}/\d{2}/\d{2}', clean_msg_body)
+            elif date_format == 'mm/dd/yyyy':
+                date_list = re.findall(r'\d{2}/\d{2}/\d{4}', clean_msg_body)
             if len(date_list) > 0:
-                start_date = datetime.strptime(
-                    date_list[0], '%d/%m/%Y')
+                if date_format == 'dd/mm/yyyy':
+                    start_date = datetime.strptime(
+                        date_list[0], '%d/%m/%Y')
+                elif date_format == 'yyyy/mm/dd':
+                    start_date = datetime.strptime(
+                        date_list[0], '%Y/%m/%d')
+                elif date_format == 'mm/dd/yyyy':
+                    start_date = datetime.strptime(
+                        date_list[0], '%m/%d/%Y')
+
                 if len(date_list) == 1:
                     date_to = start_date
                 else:
-                    date_to = datetime.strptime(
-                        date_list[1], '%d/%m/%Y')
+                    if date_format == 'dd/mm/yyyy':
+                        date_to = datetime.strptime(
+                            date_list[1], '%d/%m/%Y')
+                    elif date_format == 'yyyy/mm/dd':
+                        date_to = datetime.strptime(
+                            date_list[1],'%Y/%m/%d')
+                    elif date_format == 'mm/dd/yyyy':
+                        date_to = datetime.strptime(
+                            date_list[1],'%m/%d/%Y')
                 no_of_days_temp = (
                         datetime.strptime(str(date_to),
                                           "%Y-%m-%d %H:%M:%S") -
