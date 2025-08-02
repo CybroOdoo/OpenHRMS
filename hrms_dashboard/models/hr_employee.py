@@ -264,6 +264,9 @@ class HrEmployee(models.Model):
     @api.model
     def get_department_leave(self):
         """Returns the department monthly wise leave information"""
+        user = self.env.user
+        if not user.has_group('hr.group_hr_manager'):
+            return [], []
         month_list = []
         graph_result = []
         for i in range(5, -1, -1):
@@ -553,3 +556,30 @@ class HrEmployee(models.Model):
             }
             dataset.append(vals)
         return dataset
+
+    @api.model
+    def get_employee_project_tasks(self):
+        """Get employee's project tasks"""
+        employee = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+        if not employee:
+            return []
+
+        # Get tasks assigned to the current user
+        tasks = self.env['project.task'].search([
+            ('user_ids', 'in', self.env.uid),
+            ('active', '=', True)
+        ], order='date_deadline asc', limit=10)
+
+        task_data = []
+        for task in tasks:
+            task_data.append({
+                'id': task.id,
+                'task_name': task.name,
+                'project_name': task.project_id.name if task.project_id else 'No Project',
+                'date_deadline': task.date_deadline.strftime('%Y-%m-%d') if task.date_deadline else '',
+                'stage_name': task.stage_id.name if task.stage_id else 'No Stage',
+            })
+
+        return task_data
+
+user_leaves

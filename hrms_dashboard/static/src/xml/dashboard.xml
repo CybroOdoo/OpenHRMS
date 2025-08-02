@@ -27,7 +27,8 @@
                 <div class="oh_card">
                     <div class="oh-media">
                         <div class="employee_icon">
-                            <img class="align-self-center mr-3" alt="" t-att-src="'data:image/png;base64,'+this.state.login_employee['image_1920']"/>
+                            <img class="align-self-center mr-3" alt=""
+                                 t-att-src="'data:image/png;base64,'+this.state.login_employee['image_1920']"/>
                         </div>
                         <div class="media-body employee_name">
                             <h2 class="text-color display-6"><t t-esc="this.state.login_employee['name']"/> </h2>
@@ -42,7 +43,8 @@
                         <div class="employee_experience">
                             <t t-if="this.state.login_employee['experience']">
                                 <p class="text-light">Joined </p>
-                                <p><t t-esc="this.state.login_employee['experience']"/> Ago</p>
+                                <p><t t-esc="this.state.login_employee['experience']"/>
+                                    Ago</p>
                             </t>
                             <t t-if="!this.state.login_employee['experience']">
                                 <p class="text-light"
@@ -79,7 +81,7 @@
                         </div>
                         <div class="address">
                             <p><i class="fa fa-home" style="padding-right: 8px;color: darkblue;"/>Address
-                            :
+                                :
                                 <t t-if="this.state.login_employee['private_street']">
                                     <t t-esc="this.state.login_employee['private_street']"/>
                                 </t>
@@ -357,7 +359,6 @@
                             <th>Worked Hours</th>
                         </thead>
                         <tbody>
-                            <t t-log="this.state.login_employee['attendance_lines'],'Anjana---------------2'"/>
                             <tr class="attendance_lines"
                                 t-foreach="this.state.login_employee['attendance_lines']"
                                 t-as="lines" t-key="lines['id']">
@@ -384,7 +385,7 @@
                             <th>From Date</th>
                             <th>To Date</th>
                             <th>Type</th>
-                            <th>Status</th>
+                            <th style="min-width:120px;">Status</th>
                         </thead>
                         <tbody>
                             <tr class="leave_lines"
@@ -404,43 +405,89 @@
                 </div>
             </div>
         </div>
+
         <div class="row main-section">
-            <div class="col-md-2 col-sm-2 dummy"/>
-            <div class="col-sm-6 col-lg-6 user_expense">
-                <div class="oh-card text-color">
-                    <div class="oh-card-body pb-0">
-                        <p class="stat_head" style="padding : 0px;">EXPENSES
-                            <div class="add_lines"
-                                 t-on-click="add_expense">
-                                <i class="fa fa-plus"/>
-                            </div>
-                        </p>
-                    </div>
-                    <div class="expense_table">
-                        <thead>
+    <div class="col-md-2 col-sm-2 dummy"/>
+    <div class="col-sm-5 col-lg-5 user_expense">
+        <div class="oh-card text-color">
+            <div class="oh-card-body pb-0">
+                <p class="stat_head" style="padding : 0px;">EXPENSES</p>
+                <div class="add_lines"
+                     t-on-click="add_expense">
+                    <i class="fa fa-plus"/>
+                </div>
+            </div>
+            <div class="expense_table">
+                <table>
+                    <thead>
+                        <tr>
                             <th>Date</th>
                             <th>Subject</th>
                             <th>Amount</th>
-                            <th>Status</th>
-                        </thead>
-                        <tbody>
-                            <tr class="expense_lines"
-                                t-foreach="this.state.login_employee['expense_lines']"
-                                t-as="lines" t-key="lines['id']">
-                                <td t-esc="lines['date']"/>
-                                <td t-esc="lines['name']"/>
-                                <td t-esc="lines['total_amount']"/>
-                                <td>
-                                    <span class="state_td"
-                                          t-esc="lines['state']"
-                                          t-attf-style="background: #{lines['color']};"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </div>
-                </div>
+                            <th style="min-width:120px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="expense_lines"
+                            t-foreach="this.state.login_employee['expense_lines']"
+                            t-as="lines" t-key="lines['id']">
+                            <td t-esc="lines['date']"/>
+                            <td t-esc="lines['name']"/>
+                            <td t-esc="lines['total_amount']"/>
+                            <td>
+                                <span class="state_td"
+                                      t-esc="lines['state']"
+                                      t-attf-style="background: #{lines['color']};"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
+    <div class="col-sm-5 col-lg-5 projects">
+        <div class="oh-card text-color">
+            <div class="oh-card-body pb-0">
+                <p class="stat_head" style="padding : 0px;">PROJECTS</p>
+                <div class="add_lines"
+                     t-on-click="add_project">
+                    <i class="fa fa-plus"/>
+                </div>
+            </div>
+            <div class="leaves_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th style="min-width:120px;">Stage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="project_task_lines"
+                            t-foreach="this.state.login_employee['project_task_lines']"
+                            t-as="lines" t-key="lines['id']">
+                            <td t-esc="lines['project_name']"/>
+                            <td t-esc="lines['task_name']"/>
+                            <td t-esc="lines['date_deadline']"/>
+                            <td>
+                                <span class="state_td"
+                                      t-esc="lines['stage_name']"
+                                      t-attf-style="background: #6c757d;"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
         <div class="row main-section">
             <div class="col-md-2 col-sm-2 dummy"/>
             <div class="col-md-4 col-lg-3">
@@ -449,7 +496,7 @@
                         Upcoming Birthdays
                     </div>
                     <div class="col-xs-12 text-align">
-                        <t t-if="this.state.employee_birthday">
+                        <t t-if="this.state.employee_birthday and this.state.employee_birthday.length > 0">
                             <t t-foreach="this.state.employee_birthday"
                                t-as="employee" t-key="employee['id']">
                             <div class="col-sm-12 col-lg-12 birth_emp"
@@ -484,6 +531,13 @@
                             </div>
                         </t>
                         </t>
+                        <t t-else="">
+                            <div class="text-center" style="padding: 20px; color: #6c757d;">
+                                <div style="font-size: 48px; margin-bottom: 10px;">🎂</div>
+                                <h4 style="margin-bottom: 8px; color: #495057;">No Upcoming Birthdays</h4>
+                                <p style="margin: 0; font-size: 14px;">There are no birthdays in the coming days.</p>
+                            </div>
+                        </t>
                     </div>
                 </div>
             </div>
@@ -495,6 +549,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 text-align">
+                        <t t-if="this.state.upcoming_events and this.state.upcoming_events.length > 0">
                         <t t-foreach="this.state.upcoming_events" t-as="event"
                            t-key="event">
                             <div class="col-sm-12 col-lg-12" style="padding:0;">
@@ -516,10 +571,18 @@
                                                 <t t-if="event[4]">
                                                     <p>Online</p>
                                                 </t>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <div class="text-center" style="padding: 20px; color: #6c757d;">
+                                <div style="font-size: 48px; margin-bottom: 10px;">📅</div>
+                                <h4 style="margin-bottom: 8px; color: #495057;">No Upcoming Events</h4>
+                                <p style="margin: 0; font-size: 14px;">No events scheduled for the coming days.</p>
                             </div>
                         </t>
                     </div>
@@ -533,6 +596,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 text-align">
+                        <t t-if="this.state.announcements and this.state.announcements.length > 0">
                         <t t-foreach="this.state.announcements"
                            t-as="announcement" t-key="announcement">
                             <div class="col-sm-12 col-lg-12" style="padding:0;">
@@ -546,10 +610,18 @@
                                                     ---
                                                     <t t-esc="announcement['date_end']"/>
                                                 </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <div class="text-center" style="padding: 20px; color: #6c757d;">
+                                <div style="font-size: 48px; margin-bottom: 10px;">📢</div>
+                                <h4 style="margin-bottom: 8px; color: #495057;">No Announcements</h4>
+                                <p style="margin: 0; font-size: 14px;">No announcements available at this time.</p>
                             </div>
                         </t>
                     </div>

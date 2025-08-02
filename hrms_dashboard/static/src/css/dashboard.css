@@ -1023,17 +1023,17 @@ h4 .stat-count {
   margin-left: 17px;
 }
 /*New Styles*/
-.user_expense,.user_leaves,.user_attendance{
+.user_expense,.user_leaves,.user_attendance, .projects{user_leaves
     padding-right: 0px !important;
 }
-.user_expense .oh-card, .user_leaves .oh-card,.user_attendance .oh-card {
+.user_expense .oh-card, .user_leaves .oh-card,.user_attendance .oh-card, .projects .oh-card{
     background: #fff;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     will-change: transform, box-shadow;
     box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
     padding: 15px;
 }
-.user_expense .stat_head, .user_leaves .stat_head, .user_attendance .stat_head {
+.user_expense .stat_head, .user_leaves .stat_head, .user_attendance .stat_head, .projects .stat_head {
     text-align: left !important;
     font-weight: 400;
     font-size: 18px;
@@ -1048,7 +1048,7 @@ h4 .stat-count {
     font-size: 15px;
     height: 42px;
 }
-.user_leaves th {
+.user_leaves th, .projects th {
     width: 29%;
     font-size: 15px;
     height: 42px;
@@ -1058,10 +1058,10 @@ h4 .stat-count {
     font-size: 15px;
     height: 42px;
 }
-.user_expense td,.user_leaves td, .user_attendance td {
+.user_expense td,.user_leaves td, .user_attendance td, .projects td {
     height: 38px;
 }
-.expense_table, .leaves_table, .attendance_table {
+.expense_table, .leaves_table, .attendance_table, .projects_table {
     color: black;
     height: 185px;
     overflow-x: hidden;
@@ -1075,7 +1075,7 @@ h4 .stat-count {
     padding-left: 5px;
     padding-top: 2px;
 }
-.user_leaves .add_lines {
+.user_leaves .add_lines .projects {
     margin-bottom: 27px;
     color: black
 }
