@@ -560,12 +560,12 @@ class HrEmployee(models.Model):
     @api.model
     def get_employee_project_tasks(self):
         """Get employee's project tasks"""
-        employee = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+        employee = self.env['hr.employee'].sudo().browse(self.env.uid)
         if not employee:
             return []
 
         # Get tasks assigned to the current user
-        tasks = self.env['project.task'].search([
+        tasks = self.env['project.task'].sudo().search([
             ('user_ids', 'in', self.env.uid),
             ('active', '=', True)
         ], order='date_deadline asc', limit=10)
@@ -582,4 +582,3 @@ class HrEmployee(models.Model):
 
         return task_data
 
-user_leaves
