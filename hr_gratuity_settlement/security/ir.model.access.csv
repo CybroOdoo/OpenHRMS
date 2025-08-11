@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_gratuity_manager,access.hr.gratuity.manager,model_hr_gratuity,hr.group_hr_manager,1,1,1,1
+access_hr_gratuity_user,access.hr.gratuity.user,model_hr_gratuity,hr.group_hr_user,1,1,1,1
+access_hr_gratuity_accounting_configuration_manager,access.hr.gratuity.accounting.configuration.manager,model_hr_gratuity_accounting_configuration,hr.group_hr_manager,1,1,1,1
+access_hr_gratuity_accounting_configuration_user,access.hr.gratuity.accounting.configuration.user,model_hr_gratuity_accounting_configuration,hr.group_hr_user,1,1,1,1
+access_gratuity_configuration_user,access.gratuity.configuration.user,model_gratuity_configuration,hr.group_hr_user,1,0,0,0
+access_gratuity_configuration_manager,access.gratuity.configuration.manager,model_gratuity_configuration,hr.group_hr_manager,1,1,1,1
+access_hr_training_user,access.hr.training.user,model_hr_training,base.group_user,1,1,1,1
