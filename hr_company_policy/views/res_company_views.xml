@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Inherited form view of the model res company-->
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">res.company.view.form.inherit.hr.company.policy
+        </field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <notebook>
+                <page string="Company Policy">
+                    <field name="company_info" widget="html"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
