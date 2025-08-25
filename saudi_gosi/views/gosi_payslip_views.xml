@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+   Defines the tree view for the GOSI payslip model.
+   Displays fields such as employee details, department, position, nationality, GOSI number, and issue date.
+   -->
+    <record id="gosi_payslip_view_tree" model="ir.ui.view">
+        <field name="name">gosi.payslip.view.tree</field>
+        <field name="model">gosi.payslip</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Service Execute">
+                <field name="employee_id"/>
+                <field name="department"/>
+                <field name="position"/>
+                <field name="nationality"/>
+                <field name="gos_numb"/>
+                <field name="issued_dat"/>
+            </list>
+        </field>
+    </record>
+    <!--
+Defines the form view for the GOSI payslip model.
+The form is used to display and edit GOSI payslip details, with sections for employee details and GOSI information.
+-->
+    <record id="gosi_payslip_view_form" model="ir.ui.view">
+        <field name="name">gosi.payslip.view.form</field>
+        <field name="model">gosi.payslip</field>
+        <field name="arch" type="xml">
+            <form string="Service Execute">
+                <sheet>
+                    <group col="4" colspan="4">
+                        <group string="Employee Details" col="2"
+                               colspan="2">
+                            <field name="employee_id"/>
+                            <field name="department"/>
+                            <field name="position"/>
+                            <field name="nationality"/>
+                        </group>
+                        <group string="GOSI Details" col="2" colspan="2">
+                            <field name="type_gosi"/>
+                            <field name="dob"/>
+                            <field name="gos_numb"/>
+                            <field name="issued_dat"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <!--
+Defines the action for opening the GOSI payslip views.
+The action provides access to both list and form views of the GOSI payslip records.
+-->
+    <record id="gosi_payslip_action" model="ir.actions.act_window">
+        <field name="name">Employee GOSI</field>
+        <field name="res_model">gosi.payslip</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_no_content_create">Create new record
+            </p>
+        </field>
+    </record>
+    <!--
+    Adds a menu item under the payroll menu to access the GOSI Register.
+    This menu item opens the action that displays the GOSI payslip records.
+    -->
+    <menuitem id="gosi_payslip_menu" name="GOSI Register"
+              parent="hr_payroll_community.menu_hr_payroll_community_root"
+              action="gosi_payslip_action" sequence="2"/>
+</odoo>

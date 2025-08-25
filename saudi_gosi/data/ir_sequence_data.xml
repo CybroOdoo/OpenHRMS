@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+       This record creates a new sequence for the Open HRMS Saudi Gosi module.
+       The sequence is used to generate unique identifiers for Gosi payslips. -->
+        <record id="seq_gosi_sequence" model="ir.sequence">
+            <field name="name">Open HRMS Saudi Gosi</field>
+            <field name="code">gosi.payslip</field>
+            <field name="prefix">EG</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>
