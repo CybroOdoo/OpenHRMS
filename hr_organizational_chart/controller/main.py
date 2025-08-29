@@ -105,8 +105,8 @@ class EmployeeChart(http.Controller):
                 <p>""" + str(emp.job_id.name) + """</p></div></a></div>"""
             table += view + """</div></td></tr>"""
             loop_len = len(child_ids)*2
-            lines = self.get_lines(loop_len)
-            nodes = self.get_nodes(child_ids)
+            lines = self.get_lines(loop_len) or ""
+            nodes = self.get_nodes(child_ids) or ""
             table += lines + nodes
             return table
 
