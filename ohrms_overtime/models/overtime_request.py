@@ -44,6 +44,9 @@ class HrOverTime(models.Model):
     def _default_employee(self):
         return self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
 
+    def _get_user_partner(self):
+        return self.current_user.partner_id.id
+
     @api.onchange('days_no_tmp')
     def _onchange_days_no_tmp(self):
         self.days_no = self.days_no_tmp
@@ -104,6 +107,7 @@ class HrOverTime(models.Model):
                     'department_id': sheet.employee_id.department_id.id,
                     'job_id': sheet.employee_id.job_id.id,
                     'manager_id': sheet.sudo().employee_id.parent_id.user_id.id,
+                    'current_user_boolean': sheet.employee_id.user_id.id == self.env.uid
                 })
 
     @api.depends('project_id')
@@ -114,7 +118,7 @@ class HrOverTime(models.Model):
                     'project_manager_id': sheet.project_id.user_id.id,
                 })
 
-    @api.depends('date_from', 'date_to')
+    @api.depends('date_from', 'date_to','duration_type')
     def _get_days(self):
         for recd in self:
             if recd.date_from and recd.date_to:
@@ -246,15 +250,17 @@ class HrOverTime(models.Model):
 
     @api.onchange('date_from', 'date_to', 'employee_id')
     def _onchange_date(self):
-        holiday = False
-        if self.contract_id and self.date_from and self.date_to:
-            for leaves in self.contract_id.resource_calendar_id.global_leave_ids:
+        holiday = False       
+
+        if (self.current_user_boolean or self.env.uid == self._get_user_partner()) and self.contract_id and self.date_from and self.date_to:
+            for leaves in self.contract_id.sudo().resource_calendar_id.global_leave_ids:
                 leave_dates = pd.date_range(leaves.date_from, leaves.date_to).date
                 overtime_dates = pd.date_range(self.date_from, self.date_to).date
                 for over_time in overtime_dates:
                     for leave_date in leave_dates:
                         if leave_date == over_time:
                             holiday = True
+
             if holiday:
                 self.write({
                     'public_holiday': 'You have Public Holidays in your Overtime request.'})
