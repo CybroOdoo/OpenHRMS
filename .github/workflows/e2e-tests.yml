@@ -8,6 +8,22 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: odoo
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
 
@@ -15,26 +31,51 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-      - name: Start OpenHRMS app
-        run: |
-          nohup python app.py &  # Replace with actual start command
-          sleep 10
 
-      - name: Wait for localhost
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget git python3-pip python3-dev libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libpq-dev
+
+      - name: Install Odoo dependencies
+        run: |
+          pip install wheel
+          pip install -r https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
+
+      - name: Download Odoo
+        run: |
+          git clone --depth 1 --branch 14.0 https://www.github.com/odoo/odoo.git odoo-14.0
+
+      - name: Install OpenHRMS modules
+        run: |
+          mkdir -p odoo-14.0/custom_addons
+          cp -r ./* odoo-14.0/custom_addons/
+
+      - name: Start Odoo server
+        run: |
+          nohup python3 odoo-14.0/odoo-bin \
+            -c odoo-14.0/debian/odoo.conf \
+            --addons-path=odoo-14.0/addons,odoo-14.0/custom_addons \
+            --db_host=localhost \
+            --db_user=odoo \
+            --db_password=odoo \
+            --xmlrpc-port=8080 \
+            --log-level=info &
+          sleep 30
+
+      - name: Check Odoo is running
         run: |
           for i in {1..10}; do
-            curl -sSf http://localhost && break || sleep 5
+            curl -sSf http://localhost:8080 || sleep 5
           done
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+
       - name: Install testRigor CLI
         run: npm install -g testrigor
 
       - name: Run testRigor E2E tests
-        run: testrigor run --suite-id=${{ vars.TESTRIGOR_SUITE_ID }} --token=${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost
+        run: testrigor run --suite-id=${{ vars.TESTRIGOR_SUITE_ID }} --token=${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost:8080
