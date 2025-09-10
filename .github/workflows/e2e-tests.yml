@@ -1,0 +1,40 @@
+name: testRigor E2E Tests
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Start OpenHRMS app
+        run: |
+          nohup python app.py &  # Replace with actual start command
+          sleep 10
+
+      - name: Wait for localhost
+        run: |
+          for i in {1..10}; do
+            curl -sSf http://localhost && break || sleep 5
+          done
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install testRigor CLI
+        run: npm install -g testrigor
+
+      - name: Run testRigor E2E tests
+        run: testrigor run --suite-id=${{ vars.TESTRIGOR_SUITE_ID }} --token=${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost
