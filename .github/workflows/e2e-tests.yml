@@ -44,7 +44,7 @@ jobs:
       - name: Instalar módulos do OpenHRMS
         run: |
           mkdir -p odoo-14.0/custom_addons
-          cp -r ./* odoo-14.0/custom_addons/
+          cp -r hrms_* odoo-14.0/custom_addons/
 
       - name: Iniciar servidor Odoo
         run: |
