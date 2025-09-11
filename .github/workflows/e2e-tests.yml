@@ -69,7 +69,7 @@ jobs:
           node-version: '18'
 
       - name: Install testRigor CLI
-        run: npm install -g testrigor
+        run: npm install -g testrigor-cli
 
       - name: Run testRigor E2E tests
         run: testrigor run --suite-id=${{ vars.TESTRIGOR_SUITE_ID }} --token=${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost:8080
