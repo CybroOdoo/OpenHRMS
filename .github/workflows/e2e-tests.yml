@@ -18,11 +18,6 @@ jobs:
           POSTGRES_PASSWORD: odoo
         ports:
           - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.8'   
 
       - name: Install system dependencies
         run: |
@@ -46,15 +41,14 @@ jobs:
         run: |
           git clone --depth 1 --branch 14.0 https://www.github.com/odoo/odoo.git odoo-14.0
 
-      - name: Install OpenHRMS modules
+      - name: Instalar módulos do OpenHRMS
         run: |
           mkdir -p odoo-14.0/custom_addons
           cp -r ./* odoo-14.0/custom_addons/
 
-      - name: Start Odoo server
+      - name: Iniciar servidor Odoo
         run: |
           nohup python3 odoo-14.0/odoo-bin \
-            -c odoo-14.0/debian/odoo.conf \
             --addons-path=odoo-14.0/addons,odoo-14.0/custom_addons \
             --db_host=localhost \
             --db_user=odoo \
@@ -66,7 +60,7 @@ jobs:
       - name: Check Odoo is running
         run: |
           for i in {1..10}; do
-            curl -sSf http://localhost:8080 || sleep 5
+            curl -sSf http://localhost:8080 && break || sleep 5
           done
 
       - name: Set up Node.js
