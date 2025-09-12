@@ -63,6 +63,10 @@ jobs:
             curl -sSf http://localhost:8069 && break || sleep 5
           done
 
+      - name: Show Odoo logs (debug)
+        run: |
+           cat odoo-server.log || echo "No log file found"
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
