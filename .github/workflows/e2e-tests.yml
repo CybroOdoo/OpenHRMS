@@ -53,14 +53,14 @@ jobs:
             --db_host=localhost \
             --db_user=odoo \
             --db_password=odoo \
-            --xmlrpc-port=8069 \
+            --xmlrpc-port=8080 \
             --log-level=info &
           sleep 30
 
       - name: Check Odoo is running
         run: |
           for i in {1..10}; do
-            curl -sSf http://localhost:8069 && break || sleep 5
+            curl -sSf http://localhost:8080 && break || sleep 5
           done
 
       - name: Show Odoo logs (debug)
@@ -76,4 +76,4 @@ jobs:
         run: npm install -g testrigor-cli
 
       - name: Run testRigor E2E tests
-        run: testrigor test-suite run ${{ vars.TESTRIGOR_SUITE_ID }} --token ${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost:8069
+        run: testrigor test-suite run ${{ vars.TESTRIGOR_SUITE_ID }} --token ${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost:8080
