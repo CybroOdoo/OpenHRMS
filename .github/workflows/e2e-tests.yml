@@ -41,39 +41,41 @@ jobs:
         run: |
           git clone --depth 1 --branch 14.0 https://www.github.com/odoo/odoo.git odoo-14.0
 
-      - name: Instalar módulos do OpenHRMS
+      - name: Install OpenHRMS modules
         run: |
           mkdir -p odoo-14.0/custom_addons
           cp -r hrms_* odoo-14.0/custom_addons/
 
-      - name: Iniciar servidor Odoo
+      - name: Create Odoo Database (if not exists)
         run: |
-          nohup python3 odoo-14.0/odoo-bin \
-            --addons-path=odoo-14.0/addons,odoo-14.0/custom_addons \
-            --db_host=localhost \
-            --db_user=odoo \
-            --db_password=odoo \
-            --xmlrpc-port=8080 \
-            --log-level=info &
+          PGPASSWORD=odoo psql -h localhost -U odoo -c "CREATE DATABASE odoo;" || echo "DB already exists"
+
+      - name: Start Odoo server
+        run: |
+          python3 odoo-14.0/odoo-bin \
+          --addons-path=odoo-14.0/addons,odoo-14.0/custom_addons \
+          --db_host=localhost \
+          --db_user=odoo \
+          --db_password=odoo \
+          --xmlrpc-port=8080 \
+          --log-level=info &
           sleep 30
 
-      - name: Check Odoo is running
+      - name: Wait for Odoo to be ready
         run: |
-          for i in {1..10}; do
-            curl -sSf http://localhost:8080 && break || sleep 5
+          for i in {1..30}; do
+            if curl -sS http://localhost:8080 | grep -q "Odoo"; then
+              echo "Odoo is up!"
+              exit 0
+            fi
+            echo "Waiting for Odoo..."
+            sleep 5
           done
-
-      - name: Show Odoo logs (debug)
-        run: |
-           cat odoo-server.log || echo "No log file found"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+          echo "Odoo did not start in time."
+          exit 1
 
       - name: Install testRigor CLI
-        run: npm install -g testrigor-cli
+        run: pip install testrigor
 
       - name: Run testRigor E2E tests
         run: testrigor test-suite run ${{ vars.TESTRIGOR_SUITE_ID }} --token ${{ secrets.TESTRIGOR_TOKEN }} --url=http://localhost:8080
