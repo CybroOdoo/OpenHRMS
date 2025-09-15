@@ -115,7 +115,6 @@ jobs:
           --localhost
           --url http://localhost:8080
           --junit-report-save-path ./testrigor-report.xml
-          --test-case-uuid 451841ea-40bb-4c98-acaf-c487a60bfda7
 
       - name: Upload testRigor report
         if: always()
