@@ -27,6 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v5
         with:
@@ -47,25 +48,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip wheel
           python -m pip install -r https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
+          # Ensure pandas is present, like the script does for dashboards
+          python -m pip install "pandas==1.5.3"
 
       - name: Download Odoo 14
         run: |
           git clone --depth 1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
 
-      - name: Install OpenHRMS modules
+
+      - name: Place OpenHRMS modules
         run: |
           mkdir -p odoo-14.0/custom_addons
           shopt -s nullglob
           cp -r hrms_* odoo-14.0/custom_addons/
 
-      - name: Create Odoo Database (if not exists)
-        run: |
-          PGPASSWORD=odoo psql -h localhost -U odoo -c "CREATE DATABASE odoo;" || echo "DB already exists"
 
-      - name: Start Odoo server (log to file)
+      - name: Write Odoo configuration
         run: |
           cat > odoo.conf <<'EOF'
           [options]
+          admin_passwd = admin
           addons_path = odoo-14.0/addons,odoo-14.0/custom_addons
           db_host = localhost
           db_port = 5432
@@ -73,11 +75,44 @@ jobs:
           db_password = odoo
           xmlrpc_port = 8080
           log_level = info
-          admin_passwd = admin
           EOF
 
-          # Initialize base modules and start, logging to odoo.log
-          python odoo-14.0/odoo-bin -c odoo.conf -d odoo -i base --without-demo=all > odoo.log 2>&1 &
+
+      - name: Resolve OpenHRMS module list
+        id: mods
+        run: |
+          python - <<'PY'
+          import os, json
+          root = 'odoo-14.0/custom_addons'
+          mods = []
+          for d in sorted(os.listdir(root)):
+              p = os.path.join(root, d)
+              if not os.path.isdir(p):
+                  continue
+              if os.path.isfile(os.path.join(p, '__manifest__.py')) or os.path.isfile(os.path.join(p, '__openerp__.py')):
+                  mods.append(d)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('mods=' + ','.join(mods) + '\n')
+          print("Modules:", ','.join(mods))
+          PY
+
+
+      - name: Initialize DB & install OpenHRMS modules (headless)
+        env:
+          MODS: ${{ steps.mods.outputs.mods }}
+        run: |
+          # Create DB + base first
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
+            -i base --without-demo=all --load-language=en_US --stop-after-init
+          # Then install every OpenHRMS module discovered above
+          if [ -n "$MODS" ]; then
+            python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
+              -i "$MODS" --without-demo=all --stop-after-init
+          fi
+
+      - name: Start Odoo server (log to file)
+        run: |
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo > odoo.log 2>&1 &
           echo $! > odoo.pid
           sleep 5
           echo "Odoo PID: $(cat odoo.pid)"
