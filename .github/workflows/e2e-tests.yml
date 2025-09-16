@@ -3,50 +3,54 @@ name: testRigor E2E Tests
 on:
   push:
     branches:
-      - "**"
+      - '**'
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
 
-      # Use the indexed installer script to set up OpenHRMS via Docker
-      - name: Prepare and patch setup_openhrms.sh for Odoo 14 on port 8080
+      # Build a local Odoo 14 image that already has pandas installed
+      # (avoids module install failures due to missing pandas)
+      - name: Build local odoo:14.0 with pandas
         shell: bash
         run: |
           set -euo pipefail
-          # Ensure script is executable (assumes it's checked into the repo root)
-          if [[ ! -f setup_openhrms.sh ]]; then
-            echo "setup_openhrms.sh not found at repo root." >&2
-            exit 1
-          fi
-          chmod +x setup_openhrms.sh
+          cat > Dockerfile.odoo14 <<'EOF'
+          FROM odoo:14.0
+          USER root
+          RUN python3 -m pip install --upgrade pip && \
+              pip3 install "pandas==1.5.3"
+          USER odoo
+          EOF
+          docker build -f Dockerfile.odoo14 -t odoo:14.0 .
 
-          # Patch defaults inside the script (no functional change beyond versions/port)
-          # - Odoo 14 image
-          sed -i 's/^ODOO_IMAGE="odoo:11.0"/ODOO_IMAGE="odoo:14.0"/' setup_openhrms.sh
-          # - Postgres 13 image
-          sed -i 's/^PG_IMAGE="postgres:10"/PG_IMAGE="postgres:13"/' setup_openhrms.sh
-          # - Bind Odoo to host port 8080 (your tests expect this)
-          sed -i 's/^HOST_HTTP_PORT="8069"/HOST_HTTP_PORT="8080"/' setup_openhrms.sh
-          # - Clone OpenHRMS 14.0 branch instead of 11.0
-          sed -i 's/--branch 11\.0/--branch 14.0/' setup_openhrms.sh
-          # - pandas version compatible with Python in odoo:14.0 (used by hrms_dashboard)
-          sed -i 's/pip install -U pandas==0\.24\.2/pip install -U "pandas==1.5.3"/' setup_openhrms.sh
+      - name: Ensure setup_openhrms.sh is executable
+        run: chmod +x ./setup_openhrms.sh
 
+      # Run your indexed installer script. We pass env vars commonly honored by such scripts.
+      # Even if the script ignores them, our locally built odoo:14.0 tag is already used.
       - name: Run OpenHRMS installer (Docker)
-        shell: bash
+        env:
+          HOST_HTTP_PORT: "8080"       # tests expect :8080
+          PG_IMAGE: "postgres:13"      # preferred PG version
+          ODOO_IMAGE: "odoo:14.0"      # use the locally-built image w/ pandas
+          OPENHRMS_BRANCH: "14.0"
         run: |
           set -euo pipefail
           sudo ./setup_openhrms.sh
+
+      - name: Show running containers
+        run: docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}'
 
       - name: Wait for Odoo to be ready on :8080
         shell: bash
         run: |
           set -euo pipefail
-          for i in {1..60}; do  # up to ~5 minutes
+          for i in {1..120}; do  # up to ~10 minutes (pull + init can take time)
             if curl -fsS "http://localhost:8080/web/login" | grep -qi "Odoo"; then
               echo "Odoo is up!"
               exit 0
@@ -55,8 +59,6 @@ jobs:
             sleep 5
           done
           echo "Odoo did not start in time."
-          echo "==== Recent OpenHRMS logs ===="
-          sudo tail -n 300 /opt/openhrms/logs/openhrms.log || true
           exit 1
 
       - name: Set up Node.js
@@ -79,21 +81,14 @@ jobs:
           --url http://localhost:8080
           --junit-report-save-path ./testrigor-report.xml
 
-      - name: Upload testRigor report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: testrigor-report
-          path: ./testrigor-report.xml
-
-      - name: Upload OpenHRMS logs
+      - name: Gather Odoo logs
         if: always()
         shell: bash
         run: |
           set -euo pipefail
-          # Collect logs written by the installer-run Odoo container
-          sudo cp /opt/openhrms/logs/openhrms.log ./odoo.log || true
-        uses: actions/upload-artifact@v4
-        with:
-          name: odoo-logs
-          path: ./odoo.log
+          # Try the script's log path if it uses a mounted volume
+          if [[ -f /opt/openhrms/logs/openhrms.log ]]; then
+            sudo cp /opt/openhrms/logs/openhrms.log ./odoo.log || true
+          fi
+          # Fallback: capture docker logs from the Odoo container bound to :8080 or image odoo:14.0
+          if [[ ! -s ./odoo.log ]]; then
