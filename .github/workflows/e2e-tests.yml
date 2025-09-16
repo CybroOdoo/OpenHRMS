@@ -61,7 +61,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip wheel
           python -m pip install -r odoo-14.0/requirements.txt
-          # Quiet PDF indexation warning + DB driver:
           python -m pip install pdfminer.six psycopg2-binary
 
       - name: Prepare custom addons
@@ -69,11 +68,9 @@ jobs:
         run: |
           set -e
           mkdir -p odoo-14.0/custom_addons
-          # If repo has a custom_addons/ folder, prefer it:
           if [ -d "custom_addons" ]; then
             rsync -a --delete custom_addons/ odoo-14.0/custom_addons/
           fi
-          # Also support repos that keep OpenHRMS modules at root as hrms_* / ohrms_*:
           shopt -s nullglob
           for d in hrms_* hr_* ohrms_* openhrms_*; do
             if [ -d "$d" ]; then
@@ -101,7 +98,6 @@ jobs:
 
       - name: Ensure DB exists
         run: |
-          PGPASSWORD=odoo psql -h "$PGHOST" -U "$PGUSER" -c "SELECT 1" || true
           PGPASSWORD=odoo psql -h "$PGHOST" -U "$PGUSER" -tc "SELECT 1 FROM pg_database WHERE datname='odoo'" | grep -q 1 || \
             PGPASSWORD=odoo createdb -h "$PGHOST" -U "$PGUSER" odoo
 
@@ -110,19 +106,19 @@ jobs:
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
             -i base --without-demo=all --load-language=en_US --stop-after-init
 
-      # Change 1: exclude hr_reminder and anything that depends on it (reverse-deps)
+      # Build a curated, safe install list AND exclude hr_reminder + reverse deps
       - name: Select installable addons (exclude hr_reminder & reverse-deps; curated list)
         id: depfilter
         run: |
           ROOT="odoo-14.0/custom_addons"
-          # Hard remove the problematic addon if present
           rm -rf "$ROOT/hr_reminder" || true
 
           python - <<'PY'
           import ast, os
           ROOT = "odoo-14.0/custom_addons"
-          BAD = {"hr_reminder"}          # exclude this and its reverse-deps
-          WANTED = ["ohrms_core", "hr_payroll_community", "hr_payroll_account_community", "hr_resignation"]  # curated, safe
+          BAD = {"hr_reminder"}
+          # Include the set you previously installed successfully (minus hr_reminder):
+          WANTED = ["ohrms_core", "hr_payroll_community", "hr_payroll_account_community", "hr_employee_updation", "hr_resignation"]
 
           manifests, deps = {}, {}
           if os.path.isdir(ROOT):
@@ -140,6 +136,8 @@ jobs:
                       continue
                   manifests[d] = data
                   deps[d] = set(data.get("depends", []))
+
+          # reverse deps (custom addons only)
           rdeps = {m:set() for m in manifests}
           for m, ds in deps.items():
               for d in ds:
@@ -155,24 +153,51 @@ jobs:
               stack.extend(sorted(rdeps.get(b, ())))
 
           install = [m for m in WANTED if m in manifests and m not in to_skip]
-          print("Skipping (hr_reminder + reverse-deps):", ", ".join(sorted(to_skip)) or "(none)")
+
+          print("Skipping:", ", ".join(sorted(to_skip)) or "(none)")
           print("Install list:", ", ".join(install) or "(empty)")
 
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write("install=" + ",".join(install) + "\n")
           PY
 
-      # Change 2: install only from that filtered list
       - name: Install OpenHRMS (filtered)
         if: ${{ steps.depfilter.outputs.install != '' }}
+        shell: bash
         run: |
+          set -euo pipefail
           echo "Installing: ${{ steps.depfilter.outputs.install }}"
+
+          # Sanity: check each addon exists in either core or custom
+          missing=0
+          IFS=',' read -ra mods <<< "${{ steps.depfilter.outputs.install }}"
+          for m in "${mods[@]}"; do
+            if [ ! -d "odoo-14.0/custom_addons/$m" ] && [ ! -d "odoo-14.0/addons/$m" ] && [ ! -d "odoo-14.0/odoo/addons/$m" ]; then
+              echo "::error::Addon '$m' not found in addons paths"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Available custom addons:"
+            ls -1 odoo-14.0/custom_addons || true
+            exit 2
+          fi
+
+          # Run install; ALWAYS show log tail; fail with same RC
+          set +e
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
             -i "${{ steps.depfilter.outputs.install }}" --without-demo=all --stop-after-init
+          rc=$?
+          echo "==== Tail of odoo.log (post-install) ===="
+          tail -n 300 odoo.log || true
+          if [ $rc -ne 0 ]; then
+            echo "==== ERROR/CRITICAL lines from odoo.log ===="
+            (grep -nE "ERROR|CRITICAL|Traceback" odoo.log || true)
+            exit $rc
+          fi
 
       - name: Start Odoo server (background, log to file)
         run: |
-          # Start server with already-initialized DB and installed modules
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo > odoo.log 2>&1 &
           echo $! > odoo.pid
           sleep 5
