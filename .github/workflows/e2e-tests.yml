@@ -47,14 +47,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip wheel
           python -m pip install -r https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
-          # Dashboard needs pandas
+          # Dashboard commonly needs pandas
           python -m pip install "pandas==1.5.3"
 
       - name: Download Odoo 14
         run: |
           git clone --depth 1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
 
-      # Copy vendored OpenHRMS addons from THIS repo (now includes hr_* to catch hr_resignation, etc.)
+      # Copy vendored OpenHRMS addons from THIS repo.
+      # Include payroll & related, plus hr_* (for hr_resignation/hr_employee_updation), but we'll blocklist later.
       - name: Place OpenHRMS modules (repo-vendored)
         run: |
           mkdir -p odoo-14.0/custom_addons
@@ -70,7 +71,7 @@ jobs:
           echo "Custom addons (from repo):"
           ls -1 odoo-14.0/custom_addons || true
 
-      # If critical deps are still missing (e.g., hr_resignation), fetch them from a v14 fork
+      # Fallback fetch for critical deps if they weren't vendored
       - name: Ensure required OpenHRMS dependencies (fallback fetch v14)
         run: |
           need_copy=()
@@ -123,15 +124,38 @@ jobs:
           print("Modules:", ','.join(mods))
           PY
 
+      # >>> NEW: blocklist incompatible addons for Odoo 14 (prevents hr_reminder crash)
+      - name: Filter incompatible addons
+        id: keep
+        env:
+          ALL_MODS: ${{ steps.mods.outputs.mods }}
+        run: |
+          BLOCKLIST=("hr_reminder")
+          IFS=',' read -ra arr <<< "$ALL_MODS"
+          kept=()
+          for m in "${arr[@]}"; do
+            skip=0
+            for b in "${BLOCKLIST[@]}"; do
+              if [ "$m" = "$b" ]; then
+                echo "Excluding incompatible addon: $m"
+                skip=1
+                break
+              fi
+            done
+            [ $skip -eq 0 ] && kept+=("$m")
+          done
+          echo "mods=$(IFS=,; echo "${kept[*]}")" >> "$GITHUB_OUTPUT"
+          echo "Installing addons: $(IFS=,; echo "${kept[*]}")"
+
       - name: Initialize DB & install OpenHRMS modules (headless)
         env:
-          MODS: ${{ steps.mods.outputs.mods }}
+          FILTERED_MODS: ${{ steps.keep.outputs.mods }}
         run: |
           # 1) Create DB + base first
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
             -i base --without-demo=all --load-language=en_US --stop-after-init
 
-          # 2) Pre-install core deps if present (prevents hrms_dashboard failure)
+          # 2) Pre-install core deps if present
           CORE=(ohrms_core hr_payroll_community hr_payroll_account_community hr_employee_updation hr_resignation)
           EXISTING_CORE=()
           for m in "${CORE[@]}"; do
@@ -143,12 +167,12 @@ jobs:
               -i "$(IFS=, ; echo "${EXISTING_CORE[*]}")" --without-demo=all --stop-after-init
           fi
 
-          # 3) Install all discovered addons (already-installed ones will be skipped)
-          if [ -n "$MODS" ]; then
+          # 3) Install the filtered set (already-installed ones are skipped)
+          if [ -n "$FILTERED_MODS" ]; then
             python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
-              -i "$MODS" --without-demo=all --stop-after-init
+              -i "$FILTERED_MODS" --without-demo=all --stop-after-init
           else
-            echo "No custom addons discovered; proceeding with base only."
+            echo "No custom addons to install after filtering; proceeding with base only."
           fi
 
       - name: Start Odoo server (log to file)
