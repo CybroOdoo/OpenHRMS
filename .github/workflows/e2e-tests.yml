@@ -1,4 +1,4 @@
-name: testRigor E2E Tests
+ name: testRigor E2E Tests
 
 on:
   push:
@@ -60,7 +60,9 @@ jobs:
         run: |
           mkdir -p odoo-14.0/custom_addons
           shopt -s nullglob
-          cp -r hrms_* odoo-14.0/custom_addons/
+          # copy all the usual OpenHRMS module name patterns you vendor
+          cp -r hrms_* ohrms_* oh_* hr_payroll_* odoo-14.0/custom_addons/ || true
+
 
 
       - name: Write Odoo configuration
