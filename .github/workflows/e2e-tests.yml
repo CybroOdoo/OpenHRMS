@@ -73,7 +73,7 @@ jobs:
             rsync -a --delete custom_addons/ odoo-14.0/custom_addons/
           fi
           shopt -s nullglob
-          # COPY ALL EXPECTED PREFIXES (added: oh_*)
+          # COPY ALL EXPECTED PREFIXES (includes oh_* for ohrms_core dependency)
           for d in hrms_* hr_* ohrms_* openhrms_* oh_*; do
             if [ -d "$d" ]; then
               cp -r "$d" odoo-14.0/custom_addons/
@@ -120,7 +120,7 @@ jobs:
           import ast, os
           ROOT = "odoo-14.0/custom_addons"
           BAD = {"hr_reminder"}
-          # Your curated list (leave deps to Odoo to resolve, we just need them present):
+          # Your curated list (leave deep deps to Odoo to resolve — just have them present):
           WANTED = ["ohrms_core", "hr_payroll_community", "hr_payroll_account_community", "hr_employee_updation", "hr_resignation"]
 
           manifests, deps = {}, {}
@@ -159,8 +159,8 @@ jobs:
           print("Skipping:", ", ".join(sorted(to_skip)) or "(none)")
           print("Install list:", ", ".join(install) or "(empty)")
 
-          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write("install=" + ","".join(install) + "\n")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"install={','.join(install)}\n")
           PY
 
       - name: Install OpenHRMS (filtered)
