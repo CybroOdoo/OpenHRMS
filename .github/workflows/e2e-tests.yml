@@ -1,130 +1,138 @@
-name: Odoo CI
+name: Odoo + testRigor E2E
 
 on:
   push:
+    branches:
+      - "**"
   pull_request:
 
 jobs:
-  build:
+  e2e:
     runs-on: ubuntu-latest
 
     services:
       postgres:
         image: postgres:13
         env:
+          POSTGRES_DB: odoo
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
-          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U odoo -d postgres"
+          --health-cmd="pg_isready -U odoo -d odoo"
           --health-interval=10s
           --health-timeout=5s
-          --health-retries=5
+          --health-retries=12
 
     env:
       PGHOST: localhost
       PGPORT: "5432"
       PGUSER: odoo
       PGPASSWORD: odoo
-      PGDATABASE: postgres
+      PGDATABASE: odoo
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.8
         uses: actions/setup-python@v5
         with:
           python-version: "3.8"
 
-      - name: Install system packages
+      - name: Show Python being used
+        run: |
+          which python
+          python --version
+
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libpq-dev python3-dev libsasl2-dev libldap2-dev libssl-dev \
-            wkhtmltopdf xfonts-75dpi xfonts-base \
-            nodejs npm
+            wget git python3-dev libxml2-dev libxslt1-dev zlib1g-dev \
+            libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libpq-dev \
+            wkhtmltopdf xfonts-75dpi xfonts-base
 
-      - name: Get Odoo 14 (if not present)
+      - name: Download Odoo 14
         run: |
-          if [ ! -d odoo-14.0 ]; then
-            git clone --depth=1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
-          fi
+          git clone --depth 1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
 
-      - name: Python dependencies
+      - name: Install Odoo Python deps
         run: |
           python -m pip install --upgrade pip wheel
-          pip install -r odoo-14.0/requirements.txt
-          # Quiet the PDF indexation warning; DB driver:
-          pip install pdfminer.six psycopg2-binary
+          python -m pip install -r odoo-14.0/requirements.txt
+          # Quiet PDF indexation warning + DB driver:
+          python -m pip install pdfminer.six psycopg2-binary
 
-      - name: Prepare addons folder
+      - name: Prepare custom addons
+        shell: bash
         run: |
+          set -e
           mkdir -p odoo-14.0/custom_addons
-          # If your repo already has custom_addons/ at the root, copy them in:
+          # If repo has a custom_addons/ folder, prefer it:
           if [ -d "custom_addons" ]; then
             rsync -a --delete custom_addons/ odoo-14.0/custom_addons/
           fi
+          # Also support repos that keep OpenHRMS modules at root as hrms_* / ohrms_*:
+          shopt -s nullglob
+          for d in hrms_* hr_* ohrms_* openhrms_*; do
+            if [ -d "$d" ]; then
+              cp -r "$d" odoo-14.0/custom_addons/
+            fi
+          done
 
       - name: Create odoo.conf
         run: |
-          cat > odoo.conf <<'CFG'
+          cat > odoo.conf <<'EOF'
           [options]
           admin_passwd = admin
           db_host = localhost
           db_port = 5432
           db_user = odoo
           db_password = odoo
-          logfile = odoo.log
           addons_path = odoo-14.0/odoo/addons,~/.local/share/Odoo/addons/14.0,odoo-14.0/addons,odoo-14.0/custom_addons
+          xmlrpc_port = 8080
+          logfile = odoo.log
+          log_level = info
           limit_time_cpu = 600
           limit_time_real = 1200
           workers = 0
-          CFG
+          EOF
 
-      - name: Wait for Postgres and ensure role
+      - name: Ensure DB exists
         run: |
-          for i in {1..30}; do
-            if pg_isready -h "$PGHOST" -p "$PGPORT" -U "$PGUSER"; then
-              break
-            fi
-            sleep 2
-          done
-          psql -v ON_ERROR_STOP=1 -c "CREATE USER odoo WITH PASSWORD 'odoo' CREATEDB;" || true
-          psql -v ON_ERROR_STOP=1 -c "ALTER ROLE odoo WITH SUPERUSER;" || true
+          PGPASSWORD=odoo psql -h "$PGHOST" -U "$PGUSER" -c "SELECT 1" || true
+          PGPASSWORD=odoo psql -h "$PGHOST" -U "$PGUSER" -tc "SELECT 1 FROM pg_database WHERE datname='odoo'" | grep -q 1 || \
+            PGPASSWORD=odoo createdb -h "$PGHOST" -U "$PGUSER" odoo
 
-      - name: "# 1) Create DB + base first"
+      - name: "#1 Initialize base only (no server yet)"
         run: |
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
             -i base --without-demo=all --load-language=en_US --stop-after-init
 
-      # === Change 1: compute a safe install list, excluding hr_reminder and its reverse deps ===
-      - name: Select installable addons (exclude hr_reminder and reverse deps)
+      # Change 1: exclude hr_reminder and anything that depends on it (reverse-deps)
+      - name: Select installable addons (exclude hr_reminder & reverse-deps; curated list)
         id: depfilter
         run: |
           ROOT="odoo-14.0/custom_addons"
-          # Belt & suspenders: remove the problematic addon if present
+          # Hard remove the problematic addon if present
           rm -rf "$ROOT/hr_reminder" || true
 
           python - <<'PY'
           import ast, os
           ROOT = "odoo-14.0/custom_addons"
-          BAD = {"hr_reminder"}  # modules to exclude (plus everything that depends on them)
+          BAD = {"hr_reminder"}          # exclude this and its reverse-deps
+          WANTED = ["ohrms_core", "hr_payroll_community", "hr_payroll_account_community", "hr_resignation"]  # curated, safe
 
-          manifests, deps, rdeps = {}, {}, {}
-          if not os.path.isdir(ROOT):
-              print("No custom_addons dir; nothing to install.")
-          else:
+          manifests, deps = {}, {}
+          if os.path.isdir(ROOT):
               for d in os.listdir(ROOT):
                   p = os.path.join(ROOT, d)
                   if not os.path.isdir(p): continue
                   mf = None
                   for fn in ("__manifest__.py","__openerp__.py"):
                       f = os.path.join(p, fn)
-                      if os.path.isfile(f):
-                          mf = f; break
+                      if os.path.isfile(f): mf = f; break
                   if not mf: continue
                   try:
                       data = ast.literal_eval(open(mf, encoding="utf-8").read())
@@ -132,34 +140,29 @@ jobs:
                       continue
                   manifests[d] = data
                   deps[d] = set(data.get("depends", []))
+          rdeps = {m:set() for m in manifests}
+          for m, ds in deps.items():
+              for d in ds:
+                  if d in rdeps:
+                      rdeps[d].add(m)
 
-              rdeps = {m:set() for m in manifests}
-              for m, ds in deps.items():
-                  for d in ds:
-                      if d in rdeps:
-                          rdeps[d].add(m)
+          to_skip = set()
+          stack = list(BAD)
+          while stack:
+              b = stack.pop()
+              if b in to_skip: continue
+              to_skip.add(b)
+              stack.extend(sorted(rdeps.get(b, ())))
 
-              # find everything that (transitively) depends on BAD
-              to_skip = set()
-              stack = list(BAD)
-              while stack:
-                  b = stack.pop()
-                  if b in to_skip: continue
-                  to_skip.add(b)
-                  stack.extend(sorted(rdeps.get(b, ())))
+          install = [m for m in WANTED if m in manifests and m not in to_skip]
+          print("Skipping (hr_reminder + reverse-deps):", ", ".join(sorted(to_skip)) or "(none)")
+          print("Install list:", ", ".join(install) or "(empty)")
 
-              # Curated set we want to install; hr_employee_updation is intentionally omitted
-              wanted = ["ohrms_core", "hr_payroll_community", "hr_payroll_account_community", "hr_resignation"]
-              install = [m for m in wanted if m in manifests and m not in to_skip]
-
-              print("Skipping (reverse-deps of hr_reminder):", ", ".join(sorted(to_skip)) or "(none)")
-              print("Install list:", ", ".join(install) or "(empty)")
-
-              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-                  f.write("install=" + ",".join(install) + "\n")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("install=" + ",".join(install) + "\n")
           PY
 
-      # === Change 2: install only that safe list; remove any broad/bulk installs ===
+      # Change 2: install only from that filtered list
       - name: Install OpenHRMS (filtered)
         if: ${{ steps.depfilter.outputs.install != '' }}
         run: |
@@ -167,5 +170,59 @@ jobs:
           python odoo-14.0/odoo-bin -c odoo.conf -d odoo \
             -i "${{ steps.depfilter.outputs.install }}" --without-demo=all --stop-after-init
 
-      - name: Done
-        run: echo "Setup finished."
+      - name: Start Odoo server (background, log to file)
+        run: |
+          # Start server with already-initialized DB and installed modules
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo > odoo.log 2>&1 &
+          echo $! > odoo.pid
+          sleep 5
+          echo "Odoo PID: $(cat odoo.pid)"
+
+      - name: Wait for Odoo to be ready
+        run: |
+          for i in {1..60}; do
+            if curl -fsS http://localhost:8080/web/login | grep -qi "Odoo"; then
+              echo "Odoo is up!"
+              exit 0
+            fi
+            echo "Waiting for Odoo..."
+            sleep 5
+          done
+          echo "Odoo did not start in time."
+          echo "==== Last 200 lines of odoo.log ===="
+          tail -n 200 odoo.log || true
+          exit 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install testRigor CLI
+        run: npm install -g testrigor-cli
+
+      - name: Show testRigor CLI version
+        run: testrigor --version
+
+      - name: Run testRigor E2E tests
+        run: >
+          testrigor test-suite run
+          ${{ vars.TESTRIGOR_SUITE_ID }}
+          --token ${{ secrets.TESTRIGOR_TOKEN }}
+          --localhost
+          --url http://localhost:8080
+          --junit-report-save-path ./testrigor-report.xml
+
+      - name: Upload testRigor report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testrigor-report
+          path: ./testrigor-report.xml
+
+      - name: Upload Odoo logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odoo-logs
+          path: ./odoo.log
