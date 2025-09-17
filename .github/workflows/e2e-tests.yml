@@ -8,50 +8,84 @@ on:
 jobs:
   e2e:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: odoo
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U odoo -d odoo"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
 
     steps:
       - uses: actions/checkout@v4
 
-      # Build a local Odoo 14 image that already has pandas installed
-      # (avoids module install failures due to missing pandas)
-      - name: Build local odoo:14.0 with pandas
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Show Python being used
+        run: |
+          which python
+          python --version
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget git python3-dev libxml2-dev libxslt1-dev zlib1g-dev \
+            libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libpq-dev
+
+      - name: Install Odoo dependencies (into this Python)
+        run: |
+          python -m pip install --upgrade pip wheel
+          python -m pip install -r https://raw.githubusercontent.com/odoo/odoo/14.0/requirements.txt
+
+      - name: Download Odoo 14
+        run: |
+          git clone --depth 1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
+
+      - name: Install OpenHRMS modules
         shell: bash
         run: |
-          set -euo pipefail
-          cat > Dockerfile.odoo14 <<'EOF'
-          FROM odoo:14.0
-          USER root
-          RUN python3 -m pip install --upgrade pip && \
-              pip3 install "pandas==1.5.3"
-          USER odoo
+          mkdir -p odoo-14.0/custom_addons
+          shopt -s nullglob
+          cp -r hrms_* odoo-14.0/custom_addons/
+
+      - name: Create Odoo Database (if not exists)
+        run: |
+          PGPASSWORD=odoo psql -h localhost -U odoo -c "CREATE DATABASE odoo;" || echo "DB already exists"
+
+      - name: Start Odoo server (log to file)
+        run: |
+          cat > odoo.conf <<'EOF'
+          [options]
+          addons_path = odoo-14.0/addons,odoo-14.0/custom_addons
+          db_host = localhost
+          db_port = 5432
+          db_user = odoo
+          db_password = odoo
+          xmlrpc_port = 8080
+          log_level = info
+          admin_passwd = admin
           EOF
-          docker build -f Dockerfile.odoo14 -t odoo:14.0 .
+          # Initialize base modules and start, logging to odoo.log
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo -i base --without-demo=all > odoo.log 2>&1 &
+          echo $! > odoo.pid
+          sleep 5
+          echo "Odoo PID: $(cat odoo.pid)"
 
-      - name: Ensure setup_openhrms.sh is executable
-        run: chmod +x ./setup_openhrms.sh
-
-      # Run your indexed installer script. We pass env vars commonly honored by such scripts.
-      # Even if the script ignores them, our locally built odoo:14.0 tag is already used.
-      - name: Run OpenHRMS installer (Docker)
-        env:
-          HOST_HTTP_PORT: "8080"       # tests expect :8080
-          PG_IMAGE: "postgres:13"      # preferred PG version
-          ODOO_IMAGE: "odoo:14.0"      # use the locally-built image w/ pandas
-          OPENHRMS_BRANCH: "14.0"
+      - name: Wait for Odoo to be ready
         run: |
-          set -euo pipefail
-          sudo ./setup_openhrms.sh
-
-      - name: Show running containers
-        run: docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}'
-
-      - name: Wait for Odoo to be ready on :8080
-        shell: bash
-        run: |
-          set -euo pipefail
-          for i in {1..120}; do  # up to ~10 minutes (pull + init can take time)
-            if curl -fsS "http://localhost:8080/web/login" | grep -qi "Odoo"; then
+          for i in {1..60}; do # up to ~5 minutes
+            if curl -fsS http://localhost:8080/web/login | grep -qi "Odoo"; then
               echo "Odoo is up!"
               exit 0
             fi
@@ -59,6 +93,8 @@ jobs:
             sleep 5
           done
           echo "Odoo did not start in time."
+          echo "==== Last 200 lines of odoo.log ===="
+          tail -n 200 odoo.log || true
           exit 1
 
       - name: Set up Node.js
@@ -81,14 +117,16 @@ jobs:
           --url http://localhost:8080
           --junit-report-save-path ./testrigor-report.xml
 
-      - name: Gather Odoo logs
+      - name: Upload testRigor report
         if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          # Try the script's log path if it uses a mounted volume
-          if [[ -f /opt/openhrms/logs/openhrms.log ]]; then
-            sudo cp /opt/openhrms/logs/openhrms.log ./odoo.log || true
-          fi
-          # Fallback: capture docker logs from the Odoo container bound to :8080 or image odoo:14.0
-          if [[ ! -s ./odoo.log ]]; then
+        uses: actions/upload-artifact@v4
+        with:
+          name: testrigor-report
+          path: ./testrigor-report.xml
+
+      - name: Upload Odoo logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odoo-logs
+          path: ./odoo.log
