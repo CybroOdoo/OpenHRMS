@@ -3,7 +3,7 @@ name: testRigor E2E Tests
 on:
   push:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   e2e:
@@ -52,22 +52,29 @@ jobs:
         run: |
           git clone --depth 1 --branch 14.0 https://github.com/odoo/odoo.git odoo-14.0
 
-      - name: Install OpenHRMS modules
-        shell: bash
+      - name: Install repository’s local HRMS modules (if present)
         run: |
           mkdir -p odoo-14.0/custom_addons
           shopt -s nullglob
-          cp -r hrms_* odoo-14.0/custom_addons/
+          cp -r hrms_* odoo-14.0/custom_addons/ || true
+
+      - name: Fetch OpenHRMS upstream addons (branch 14.0)
+        run: |
+          mkdir -p odoo-14.0/custom_addons
+          rm -rf odoo-14.0/custom_addons/openhrms
+          git clone --depth 1 --branch 14.0 https://github.com/CybroOdoo/OpenHRMS.git odoo-14.0/custom_addons/openhrms
 
       - name: Create Odoo Database (if not exists)
+        env:
+          PGPASSWORD: odoo
         run: |
-          PGPASSWORD=odoo psql -h localhost -U odoo -c "CREATE DATABASE odoo;" || echo "DB already exists"
+          psql -h localhost -U odoo -c "CREATE DATABASE odoo;" || echo "DB already exists"
 
-      - name: Start Odoo server (log to file)
+      - name: Write Odoo config
         run: |
           cat > odoo.conf <<'EOF'
           [options]
-          addons_path = odoo-14.0/addons,odoo-14.0/custom_addons
+          addons_path = odoo-14.0/addons,odoo-14.0/custom_addons,odoo-14.0/custom_addons/openhrms
           db_host = localhost
           db_port = 5432
           db_user = odoo
@@ -76,15 +83,42 @@ jobs:
           log_level = info
           admin_passwd = admin
           EOF
-          # Initialize base modules and start, logging to odoo.log
-          python odoo-14.0/odoo-bin -c odoo.conf -d odoo -i base --without-demo=all > odoo.log 2>&1 &
+
+      # Install core/base first so subsequent installs are faster/clean
+      - name: Initialize base (headless)
+        run: |
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo -i base --without-demo=all --stop-after-init
+
+      # Install a curated set of OpenHRMS addons (skip known-problematic ones)
+      - name: Pre-install OpenHRMS addons (headless)
+        env:
+          MODS: >-
+            hr
+            hr_contract
+            hr_holidays
+            hr_attendance
+            hr_org_chart
+            hrms_employee_updation
+            hr_resignation
+            hr_payroll_community
+            hr_payroll_account_community
+        run: |
+          # Convert whitespace list to comma-separated for -i
+          CSV_MODS=$(echo "${MODS}" | tr -s '[:space:]' ',' | sed 's/^,\|,$//g')
+          echo "Installing addons: ${CSV_MODS}"
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo -i "${CSV_MODS}" --without-demo=all --stop-after-init
+
+      - name: Start Odoo server (log to file)
+        run: |
+          # Start without -i; modules are already installed
+          python odoo-14.0/odoo-bin -c odoo.conf -d odoo > odoo.log 2>&1 &
           echo $! > odoo.pid
           sleep 5
           echo "Odoo PID: $(cat odoo.pid)"
 
       - name: Wait for Odoo to be ready
         run: |
-          for i in {1..60}; do # up to ~5 minutes
+          for i in {1..60}; do  # up to ~5 minutes
             if curl -fsS http://localhost:8080/web/login | grep -qi "Odoo"; then
               echo "Odoo is up!"
               exit 0
