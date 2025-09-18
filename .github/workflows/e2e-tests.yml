@@ -145,8 +145,8 @@ jobs:
       - name: Run testRigor E2E tests
         run: >
           testrigor test-suite run
-          ${{ vars.TESTRIGOR_SUITE_ID }}
-          --token ${{ secrets.TESTRIGOR_TOKEN }}
+          ${{ vars.OPENHRMS_SUITE_ID }}
+          --token ${{ secrets.OPENHRMS_TOKEN }}
           --localhost
           --url http://localhost:8080
           --junit-report-save-path ./testrigor-report.xml
