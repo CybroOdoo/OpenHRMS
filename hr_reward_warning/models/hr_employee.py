@@ -87,7 +87,7 @@ class HrEmployee(models.Model):
             if len(announcement_ids) > 1:
                 value = {
                     'domain': [('id', 'in', announcement_ids)],
-                    'view_mode': 'tree,form',
+                    'view_mode': 'list,form',
                     'res_model': 'hr.announcement',
                     'type': 'ir.actions.act_window',
                     'name': _('Announcements'),
