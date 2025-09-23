@@ -33,6 +33,47 @@ class HrLoan(models.Model):
             loan.balance_amount = balance_amount
             loan.total_paid_amount = total_paid
 
+    def _calculate_service_years(self, employee):
+        if employee.joining_date:
+            start_date = employee.joining_date
+        else:
+            start_date = fields.Date.today()
+        today = fields.Date.today()
+        years = (today - start_date).days / 365.25
+        return years
+
+    def _check_multiple_loan_eligibility(self):
+        """Check if employee is eligible for multiple loans based on settings"""
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+
+        allow_multiple = ICPSudo.get_param('ohrms_loan.allow_multiple_loans', 'False')
+        if allow_multiple not in ['True', '1', True]:
+            return False
+
+        condition = ICPSudo.get_param('ohrms_loan.multiple_loan_condition', 'none')
+
+        if condition == 'years_of_service':
+            min_years = int(ICPSudo.get_param('ohrms_loan.min_service_years', 2))
+            service_years = self._calculate_service_years(self.employee_id)
+            if service_years >= min_years:
+                return True
+
+        elif condition == 'job_position':
+            allowed_jobs = ICPSudo.get_param('ohrms_loan.allowed_job_ids', '')
+            if allowed_jobs and self.employee_id.job_id:
+                try:
+                    allowed_job_ids = [int(x) for x in allowed_jobs.split(',') if x.strip().isdigit()]
+                    if self.employee_id.job_id.id in allowed_job_ids:
+                        return True
+                except ValueError:
+                    # If parsing fails, don't allow multiple loans
+                    pass
+
+        elif condition == 'loan_type':
+            return True
+
+        return False
+
     name = fields.Char(string="Loan Name", default="/", readonly=True)
     date = fields.Date(string="Date", default=fields.Date.today(), readonly=True)
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
@@ -66,14 +107,20 @@ class HrLoan(models.Model):
 
     @api.model
     def create(self, values):
-        loan_count = self.env['hr.loan'].search_count([('employee_id', '=', values['employee_id']), ('state', '=', 'approve'),
-                                                       ('balance_amount', '!=', 0)])
-        if loan_count:
-            raise ValidationError(_("The employee has already a pending installment"))
-        else:
-            values['name'] = self.env['ir.sequence'].get('hr.loan.seq') or ' '
-            res = super(HrLoan, self).create(values)
-            return res
+        existing_loans = self.env['hr.loan'].search([
+            ('employee_id', '=', values['employee_id']),
+            ('state', '=', 'approve'),
+            ('balance_amount', '!=', 0)
+        ])
+
+        if existing_loans:
+            temp_loan = self.new(values)
+            if not temp_loan._check_multiple_loan_eligibility():
+                raise ValidationError(_("The employee has already a pending installment"))
+
+        values['name'] = self.env['ir.sequence'].get('hr.loan.seq') or ' '
+        res = super(HrLoan, self).create(values)
+        return res
 
     @api.multi
     def action_refuse(self):
@@ -81,6 +128,18 @@ class HrLoan(models.Model):
 
     @api.multi
     def action_submit(self):
+        for loan in self:
+            existing_loans = self.env['hr.loan'].search([
+                ('employee_id', '=', loan.employee_id.id),
+                ('state', 'in', ['submit', 'waiting_approval_1', 'waiting_approval_2', 'approve']),
+                ('balance_amount', '!=', 0),
+                ('id', '!=', loan.id)
+            ])
+
+            if existing_loans and not loan._check_multiple_loan_eligibility():
+                raise ValidationError(
+                    _("The employee has already a pending loan. Multiple loans are not allowed based on current settings."))
+
         self.write({'state': 'waiting_approval_1'})
 
     @api.multi
@@ -97,6 +156,17 @@ class HrLoan(models.Model):
             if not data.loan_lines:
                 raise ValidationError(_("Please Compute installment"))
             else:
+                existing_loans = self.env['hr.loan'].search([
+                    ('employee_id', '=', data.employee_id.id),
+                    ('state', '=', 'approve'),
+                    ('balance_amount', '!=', 0),
+                    ('id', '!=', data.id)
+                ])
+
+                if existing_loans and not data._check_multiple_loan_eligibility():
+                    raise ValidationError(
+                        _("Cannot approve: The employee has already an active loan and is not eligible for multiple loans."))
+
                 self.write({'state': 'approve'})
 
     @api.multi
@@ -147,7 +217,5 @@ class HrEmployee(models.Model):
         """This compute the loan amount and total loans count of an employee.
             """
         self.loan_count = self.env['hr.loan'].search_count([('employee_id', '=', self.id)])
-
     loan_count = fields.Integer(string="Loan Count", compute='_compute_employee_loans')
-
-
+    join_date = fields.Date(string="Join Date", help="Employee joining date")

@@ -159,4 +159,23 @@
             </xpath>
         </field>
     </record>
+
+    <!-- Add this at the end of your existing hr_loan_views.xml file, just before </odoo> -->
+
+    <!-- Action for Loan Configuration Settings -->
+    <record id="action_loan_config_settings" model="ir.actions.act_window">
+        <field name="name">Loan Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'ohrms_loan'}</field>
+    </record>
+
+    <!-- Configuration Menu Item -->
+    <menuitem id="menu_loan_configuration"
+              name="Configuration"
+              parent="menu_hr_loans_and_advances"
+              sequence="100"
+              action="action_loan_config_settings"/>
 </odoo>

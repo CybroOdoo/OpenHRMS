@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_loan" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.loan</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Loans" string="Loans" data-key="ohrms_loan">
+                    <h2>Loans</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="allow_multiple_loans"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="allow_multiple_loans"/>
+                                <div class="text-muted">
+                                    Allow employees to have multiple active loans based on conditions
+                                </div>
+                                <div class="content-group" attrs="{'invisible': [('allow_multiple_loans', '=', False)]}">
+                                    <div class="mt16">
+                                        <label for="multiple_loan_condition" class="o_light_label" string="Condition Type"/>
+                                        <field name="multiple_loan_condition" class="o_light_label"/>
+                                    </div>
+                                    <div class="mt16" attrs="{'invisible': [('multiple_loan_condition', '!=', 'years_of_service')]}">
+                                        <label for="min_service_years" class="o_light_label" string="Minimum Years of Service"/>
+                                        <field name="min_service_years" class="oe_inline"/>
+                                        <span class="o_form_label"> years</span>
+                                    </div>
+                                    <div class="mt16" attrs="{'invisible': [('multiple_loan_condition', '!=', 'job_position')]}">
+                                        <label for="allowed_job_ids" class="o_light_label" string="Allowed Job Positions"/>
+                                        <field name="allowed_job_ids" widget="many2many_tags"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

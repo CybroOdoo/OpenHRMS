@@ -22,7 +22,7 @@
 ###################################################################################
 {
     'name': 'Open HRMS Loan Management',
-    'version': '12.0.1.0.0',
+    'version': '12.0.3.0.0',
     'summary': 'Manage Loan Requests',
     'description': """
         Helps you to manage Loan Requests of your company's staff.
@@ -39,6 +39,7 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'views/hr_loan_seq.xml',
+        'views/res_config_settings_views.xml',
         'data/salary_rule_loan.xml',
         'views/hr_loan.xml',
         'views/hr_payroll.xml',
