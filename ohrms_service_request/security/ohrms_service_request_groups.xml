@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Service ir module category-->
+    <record id="module_service_execute" model="ir.module.category">
+        <field name="name">Service</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record model="res.groups.privilege" id="res_groups_privilege_services">
+        <field name="name">Service</field>
+        <field name="category_id" ref="ohrms_service_request.module_service_execute"/>
+        <field name="sequence">7</field>
+    </record>
+
+    <!--    Service Executor res groups-->
+    <record id="service_group_executor" model="res.groups">
+        <field name="name">Service Executor</field>
+        <field name="privilege_id" ref="res_groups_privilege_services"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>
