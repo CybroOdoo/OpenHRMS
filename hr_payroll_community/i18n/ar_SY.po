@@ -1822,10 +1822,3 @@ msgstr "تاريخ بدء الدفعة"
 msgid "Salary Rule Categories"
 msgstr "فئات قواعد الرواتب"
 
-# filepath: /Users/yasseraqlan/Github/OpenHRMS/hr_payroll_community/i18n/es.po
-
-#. module: hr_payroll_community
-#: model:ir.ui.menu,name:hr_payroll_community.menu_hr_salary_rule_category
-msgid "Salary Rule Categories"
-msgstr "فئات قواعد الرواتب"
-
