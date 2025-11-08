@@ -51,4 +51,5 @@ docs/_build/
 # PyBuilder
 target/
 
+__pycache__
 .pyc
