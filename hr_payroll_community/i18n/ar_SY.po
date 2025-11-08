@@ -1816,3 +1816,16 @@ msgstr "سيتم تخصيص النتيجة لمتغير"
 #: model:ir.model.fields,help:hr_payroll_community.field_hr_payslip_run__date_start
 msgid "start date for batch"
 msgstr "تاريخ بدء الدفعة"
+
+#. module: hr_payroll_community
+#: model:ir.ui.menu,name:hr_payroll_community.menu_hr_salary_rule_category
+msgid "Salary Rule Categories"
+msgstr "فئات قواعد الرواتب"
+
+# filepath: /Users/yasseraqlan/Github/OpenHRMS/hr_payroll_community/i18n/es.po
+
+#. module: hr_payroll_community
+#: model:ir.ui.menu,name:hr_payroll_community.menu_hr_salary_rule_category
+msgid "Salary Rule Categories"
+msgstr "فئات قواعد الرواتب"
+
