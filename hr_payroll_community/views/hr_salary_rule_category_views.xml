@@ -50,10 +50,10 @@
                ref="hr_salary_rule_category_search"/>
     </record>
     <menuitem
-            id="menu_hr_salary_rule_category"
-            action="hr_salary_rule_category_action"
-            parent="menu_hr_payroll_community_configuration"
-            sequence="11"
-            groups="base.group_no_one"
-    />
+        id="menu_hr_salary_rule_category"
+        name="Salary Rule Categories" 
+        action="action_hr_salary_rule_category"
+        parent="menu_hr_payroll_configuration"
+        sequence="11"
+        groups="hr_payroll_community.group_hr_payroll_user"/>
 </odoo>
