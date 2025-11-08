@@ -49,7 +49,15 @@
         <field name="search_view_id"
                ref="hr_salary_rule_category_search"/>
     </record>
-    <!-- Add the parent menu first -->
+
+    <!-- Root Payroll Menu -->
+    <menuitem
+        id="menu_hr_payroll_community_root"
+        name="Payroll"
+        groups="hr_payroll_community.group_hr_payroll_user"
+        sequence="45"/>
+
+    <!-- Configuration Menu -->
     <menuitem
         id="menu_hr_payroll_configuration"
         name="Configuration"
@@ -57,11 +65,11 @@
         sequence="100"
         groups="hr_payroll_community.group_hr_payroll_user"/>
 
-    <!-- Then add the salary rule categories menu -->
+    <!-- Salary Rule Categories Menu -->
     <menuitem
         id="menu_hr_salary_rule_category"
         name="Salary Rule Categories"
-        action="action_hr_salary_rule_category"
+        action="hr_salary_rule_category_action"
         parent="menu_hr_payroll_configuration"
         sequence="11"
         groups="hr_payroll_community.group_hr_payroll_user"/>
