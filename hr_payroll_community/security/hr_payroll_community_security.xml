@@ -55,7 +55,7 @@
         </record>
         <record id="group_hr_payroll_user" model="res.groups">
             <field name="name">Payroll Officer</field>
-            <field name="category_id" ref="module_category_payroll"/>
+            <field name="category_id" ref="base.module_category_human_resources_payroll"/>
             <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
         </record>
     </data>
