@@ -31,4 +31,4 @@ class HrAttendance(models.Model):
                                  string='Company',
                                  copy=False, readonly=True,
                                  help="Company of the attendance.",
-                                 default=lambda self: self.env.user.company_id)
+                                 default=lambda self: self.env.company)
