@@ -184,6 +184,14 @@ class HrSalaryRule(models.Model):
         """
         for rec in self:
             rec.ensure_one()
+
+            if 'worked_days' in localdict and hasattr(localdict['worked_days'], 'dict'):
+                worked_days_obj = localdict['worked_days']
+                for code in worked_days_obj.dict:
+                    worked_day_line = worked_days_obj.dict[code]
+                    # Add direct access variables for number_of_days
+                    localdict[f'{code}'] = worked_day_line.number_of_days
+
             if rec.amount_select == 'fix':
                 try:
                     return rec.amount_fix, float(
