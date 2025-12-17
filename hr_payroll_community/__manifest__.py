@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Odoo 19 HR Payroll',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Human Resources',
     'summary': """Odoo 19 HR Payroll, Odoo19 Payroll, Payroll, Odoo Payroll,
     Payroll V19, Odoo19, Payroll Management, Odoo19 Payslip""",
