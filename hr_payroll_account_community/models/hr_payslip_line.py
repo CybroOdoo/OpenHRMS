@@ -32,17 +32,15 @@ class HrPayslipLine(models.Model):
     _inherit = 'hr.payslip.line'
 
     def _get_partner_id(self, credit_account):
-        """Get partner_id of slip line to use in account_move_line."""
-        # use partner of salary rule or fallback on employee's address
-        register_partner_id = self.salary_rule_id.register_id.partner_id
-        if credit_account:
-            if (register_partner_id or
-                    self.salary_rule_id.account_credit_id.account_type in (
-                    'asset_receivable', 'liability_payable')):
-                return register_partner_id.id
-        else:
-            if (register_partner_id or
-                    self.salary_rule_id.account_debit_id.account_type in (
-                    'asset_receivable', 'liability_payable')):
-                return register_partner_id.id
-        return False
+        partner = self.salary_rule_id.register_id.partner_id
+
+        account = (
+            self.salary_rule_id.account_credit_id
+            if credit_account
+            else self.salary_rule_id.account_debit_id
+        )
+
+        if partner or account.account_type in ('asset_receivable', 'liability_payable'):
+            return partner.id if partner else None
+
+        return None

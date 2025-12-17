@@ -46,15 +46,14 @@ class HrPayslip(models.Model):
                               help="Accounting entry associated with "
                                    "this record")
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals_list):
-        """Create a new payroll slip.This method is called when creating a
-                   new payroll slip.It checks if 'journal_id' is present in the
-                   context and, if so, sets the 'journal_id' field in the values."""
-        for vals in vals_list:
-            if 'journal_id' in self.env.context:
-                vals['journal_id'] = self.env.context.get('journal_id')
-        return super(HrPayslip, self).create(vals_list)
+        journal_id = self.env.context.get('journal_id')
+        if journal_id:
+            for vals in vals_list:
+                vals['journal_id'] = journal_id
+
+        return super().create(vals_list)
 
     @api.onchange('contract_id')
     def onchange_contract_id(self):
@@ -66,7 +65,8 @@ class HrPayslip(models.Model):
         super(HrPayslip, self).onchange_contract_id()
         self.journal_id = self.contract_id.journal_id.id or (
                 not self.contract_id and
-                self.default_get(['journal_id'])['journal_id'])
+                self.default_get(['journal_id']).get('journal_id')
+        )
 
     def action_payslip_cancel(self):
         """Cancel the payroll slip and associated accounting entries.This
