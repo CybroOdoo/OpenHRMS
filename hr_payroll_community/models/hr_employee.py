@@ -26,7 +26,6 @@ from odoo import fields, models
 class HrEmployee(models.Model):
     """Inherit hr_employee for getting Payslip Counts"""
     _inherit = 'hr.employee'
-    _description = 'Employee'
 
     slip_ids = fields.One2many('hr.payslip',
                                'employee_id', string='Payslips',

@@ -123,11 +123,6 @@ class HrSalaryRule(models.Model):
                                      digits='Payroll Rate',
                                      help='For example, enter 50.0 to apply '
                                           'a percentage of 50%')
-    amount_percentage = fields.Float(string='Percentage (%)',
-                                     digits='Payroll Rate',
-                                     help='For example, enter 50.0 to apply '
-                                          'a percentage of 50%')
-
     amount_python_compute = fields.Text(string='Python Code',
                                         default='''
             # Available variables:
