@@ -23,6 +23,9 @@ msgid ""
 "                           Click to Create for New Documents\n"
 "                        </p>"
 msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                           انقر للإنشاء من أجل مستندات جديدة\n"
+"                        </p>"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model,name:oh_employee_documents_expiry.model_ir_attachment
@@ -38,12 +41,12 @@ msgstr "مرفق"
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_employee__document_count
 msgid "Count of documents."
-msgstr ""
+msgstr "عدد المستندات."
 
 #. module: oh_employee_documents_expiry
 #: model_terms:ir.actions.act_window,help:oh_employee_documents_expiry.hr_document_action
 msgid "Create First Document Template"
-msgstr ""
+msgstr "إنشاء أول قالب مستند"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__create_uid
@@ -104,7 +107,7 @@ msgstr "رقم المستند"
 #: model:ir.actions.act_window,name:oh_employee_documents_expiry.hr_document_action
 #: model:ir.ui.menu,name:oh_employee_documents_expiry.hr_document_menu
 msgid "Document Templates"
-msgstr ""
+msgstr "قوالب المستندات"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model,name:oh_employee_documents_expiry.model_document_type
@@ -116,7 +119,7 @@ msgstr "نوع الوثيقة"
 #. odoo-python
 #: code:addons/oh_employee_documents_expiry/models/hr_employee_document.py:0
 msgid "Document-%s Expired On %s"
-msgstr ""
+msgstr "انتهت صلاحية المستند %s في %s"
 
 #. module: oh_employee_documents_expiry
 #. odoo-python
@@ -137,13 +140,13 @@ msgstr "الموظف"
 #. module: oh_employee_documents_expiry
 #: model:ir.actions.server,name:oh_employee_documents_expiry.ir_cron_scheduler_employee_data_reminder_ir_actions_server
 msgid "Employee Document Expiration"
-msgstr ""
+msgstr "انتهاء مستندات الموظفين"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.actions.act_window,name:oh_employee_documents_expiry.document_type_action
 #: model:ir.ui.menu,name:oh_employee_documents_expiry.document_type_menu
 msgid "Employee Document Types"
-msgstr ""
+msgstr "أنواع مستندات الموظفين"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.actions.act_window,name:oh_employee_documents_expiry.hr_employee_document_action
@@ -158,7 +161,7 @@ msgstr "مرجع الموظف"
 #. module: oh_employee_documents_expiry
 #: model:ir.ui.menu,name:oh_employee_documents_expiry.hr_employee_menu
 msgid "Employees"
-msgstr ""
+msgstr "الموظفون"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields.selection,name:oh_employee_documents_expiry.selection__hr_employee_document__notification_type__everyday
@@ -232,12 +235,12 @@ msgstr "اسم"
 #: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_document__note
 #: model_terms:ir.ui.view,arch_db:oh_employee_documents_expiry.hr_document_view_tree
 msgid "Note"
-msgstr ""
+msgstr "ملاحظة"
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_document__note
 msgid "Note of the document."
-msgstr ""
+msgstr "ملاحظة المستند."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__notification_type
@@ -269,25 +272,25 @@ msgstr ""
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_employee_document__employee_ref_id
 msgid "Specify the employee name."
-msgstr ""
+msgstr "حدد اسم الموظف."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_ir_attachment__doc_attach_rel
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_product_document__doc_attach_rel
 msgid ""
 "This field allows you to associateHR employee documents with the record."
-msgstr ""
+msgstr "يسمح لك هذا الحقل بربط مستندات موظف الموارد البشرية بالسجل."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_ir_attachment__attach_rel
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_product_document__attach_rel
 msgid "This field allows you to attach HR documents to the record."
-msgstr ""
+msgstr "يسمح لك هذا الحقل بإرفاق مستندات الموارد البشرية بالسجل."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_employee_document__document_type_id
 msgid "Type of the document."
-msgstr ""
+msgstr "نوع المستند."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_employee_document__doc_attachment_ids
@@ -297,7 +300,7 @@ msgstr "يمكنك إرفاق نسخة من المستند"
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_document__attach_ids
 msgid "You can attach the copy of your document."
-msgstr ""
+msgstr "يمكنك إرفاق نسخة من مستندك."
 
 #. module: oh_employee_documents_expiry
 #: model:ir.model.fields,help:oh_employee_documents_expiry.field_hr_document__name
@@ -313,10 +316,10 @@ msgstr ".يمكنك إعطاء رقم المستند الخاص بك"
 #. odoo-python
 #: code:addons/oh_employee_documents_expiry/models/hr_employee_document.py:0
 msgid "Your Document Is Expired."
-msgstr ""
+msgstr "انتهت صلاحية المستند الخاص بك."
 
 #. module: oh_employee_documents_expiry
 #. odoo-python
 #: code:addons/oh_employee_documents_expiry/models/hr_employee.py:0
 msgid "employee_ref_id"
-msgstr ""
+msgstr "مرجع الموظف"

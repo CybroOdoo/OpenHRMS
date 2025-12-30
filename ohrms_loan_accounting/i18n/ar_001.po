@@ -23,7 +23,7 @@ msgstr "موافقة من قسم المحاسبة"
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.hr_loan_view_form
 msgid "Approve"
-msgstr ""
+msgstr "يوافق"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields.selection,name:ohrms_loan_accounting.selection__hr_loan__state__approve
@@ -33,7 +33,7 @@ msgstr "وافق"
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.hr_loan_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields.selection,name:ohrms_loan_accounting.selection__hr_loan__state__cancel
@@ -43,7 +43,7 @@ msgstr "ملغي"
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.hr_loan_view_form
 msgid "Compute Installment"
-msgstr ""
+msgstr "احتساب القسط"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model,name:ohrms_loan_accounting.model_res_config_settings
@@ -67,7 +67,7 @@ msgstr "مشروع"
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_hr_loan__employee_account_id
 msgid "Employee account"
-msgstr ""
+msgstr "حساب الموظف"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,field_description:ohrms_loan_accounting.field_account_move_line__id
@@ -96,7 +96,7 @@ msgstr "عنصر اليومية"
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_hr_loan__journal_id
 msgid "Journal for the loan"
-msgstr ""
+msgstr "اليومية الخاصة بالقرض"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,field_description:ohrms_loan_accounting.field_hr_loan__employee_account_id
@@ -106,7 +106,7 @@ msgstr "حساب القرض"
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.res_config_settings_view_form
 msgid "Loan Approval"
-msgstr ""
+msgstr "اعتماد القرض"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_res_config_settings__loan_approve
@@ -127,7 +127,7 @@ msgstr "طلب قرض"
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_account_move_line__loan_id
 msgid "Loan id on invoice line"
-msgstr ""
+msgstr "معرّف القرض في سطر الفاتورة"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model,name:ohrms_loan_accounting.model_hr_payslip
@@ -137,7 +137,7 @@ msgstr "قسيمة المرتب"
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.hr_loan_view_form
 msgid "Refuse"
-msgstr ""
+msgstr "رفض"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields.selection,name:ohrms_loan_accounting.selection__hr_loan__state__refuse
@@ -152,12 +152,12 @@ msgstr "حالة"
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_hr_loan__state
 msgid "State of the loan request"
-msgstr ""
+msgstr "حالة طلب القرض"
 
 #. module: ohrms_loan_accounting
 #: model_terms:ir.ui.view,arch_db:ohrms_loan_accounting.hr_loan_view_form
 msgid "Submit"
-msgstr ""
+msgstr "إرسال"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields.selection,name:ohrms_loan_accounting.selection__hr_loan__state__waiting_approval_1
@@ -172,7 +172,7 @@ msgstr "حساب الخزينة"
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields,help:ohrms_loan_accounting.field_hr_loan__treasury_account_id
 msgid "Treasury account for the loan"
-msgstr ""
+msgstr "حساب الخزينة للقرض"
 
 #. module: ohrms_loan_accounting
 #: model:ir.model.fields.selection,name:ohrms_loan_accounting.selection__hr_loan__state__waiting_approval_2

@@ -35,17 +35,17 @@ msgstr "المرفق"
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.hr_hr_employee_view_form
 msgid ""
 "Badges are rewards of good work. Give them to people you believe deserve it."
-msgstr ""
+msgstr "الشارات هي مكافآت للعمل الجيد. امنحها لمن تعتقد أنه يستحقها."
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_employee_family__birth_date
 msgid "Birth date of the family member"
-msgstr ""
+msgstr "تاريخ ميلاد فرد العائلة"
 
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.hr_hr_employee_view_form
 msgid "Click to grant this employee his first badge"
-msgstr ""
+msgstr "انقر لمنح هذا الموظف أول شارة له"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee_family__member_contact
@@ -55,7 +55,7 @@ msgstr "رقم الاتصال"
 #. module: hr_employee_updation
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_employee_family__member_contact
 msgid "Contact No of the family member"
-msgstr ""
+msgstr "رقم الاتصال لفرد العائلة"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee_family__create_uid
@@ -72,12 +72,12 @@ msgstr "تم إنشاؤها على"
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee_family__birth_date
 msgid "DOB"
-msgstr ""
+msgstr "تاريخ الميلاد"
 
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.view_employee_form
 msgid "Dependence Details"
-msgstr ""
+msgstr "تفاصيل المعالين"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee__display_name
@@ -127,12 +127,12 @@ msgstr "معلومات العائلة"
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.hr_hr_employee_view_form
 msgid "Grant a Badge"
-msgstr ""
+msgstr "منح شارة"
 
 #. module: hr_employee_updation
 #: model:ir.actions.server,name:hr_employee_updation.ir_con_employee_data_reminder_ir_actions_server
 msgid "HR Employee Data Expiration"
-msgstr ""
+msgstr "انتهاء بيانات موظف الموارد البشرية"
 
 #. module: hr_employee_updation
 #: model:ir.model,name:hr_employee_updation.model_hr_employee_family
@@ -161,12 +161,12 @@ msgstr "المُعرف"
 #. odoo-python
 #: code:addons/hr_employee_updation/models/hr_employee.py:0
 msgid "ID-%s Expired On %s"
-msgstr ""
+msgstr "انتهت صلاحية الهوية %s في %s"
 
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.view_employee_form
 msgid "Identification ID"
-msgstr ""
+msgstr "رقم الهوية"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee__joining_date
@@ -198,30 +198,30 @@ msgstr "اسم"
 #. module: hr_employee_updation
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_employee_family__member_name
 msgid "Name of the family member"
-msgstr ""
+msgstr "اسم فرد العائلة"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee__notice_days
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_version__notice_days
 msgid "Notice Period"
-msgstr ""
+msgstr "فترة الإشعار"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_employee__notice_days
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_version__notice_days
 msgid "Number of days required for notice before termination."
-msgstr ""
+msgstr "عدد الأيام المطلوبة للإشعار قبل إنهاء الخدمة."
 
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.view_employee_form
 msgid "Passport ID"
-msgstr ""
+msgstr "رقم جواز السفر"
 
 #. module: hr_employee_updation
 #. odoo-python
 #: code:addons/hr_employee_updation/models/hr_employee.py:0
 msgid "Passport-%s Expired On %s"
-msgstr ""
+msgstr "انتهت صلاحية جواز السفر %s في %s"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,help:hr_employee_updation.field_hr_employee__personal_mobile
@@ -231,7 +231,7 @@ msgstr "رقم الجوال الشخصي للموظف"
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.hr_hr_employee_view_form
 msgid "Received Badges"
-msgstr ""
+msgstr "الشارات المستلمة"
 
 #. module: hr_employee_updation
 #: model:ir.model.fields,field_description:hr_employee_updation.field_hr_employee_family__relation_id
@@ -262,9 +262,9 @@ msgstr "حدد الموظف المقابل"
 #. module: hr_employee_updation
 #: model:ir.model,name:hr_employee_updation.model_hr_version
 msgid "Version"
-msgstr ""
+msgstr "الإصدار"
 
 #. module: hr_employee_updation
 #: model_terms:ir.ui.view,arch_db:hr_employee_updation.hr_hr_employee_view_form
 msgid "to reward this employee for a good action"
-msgstr ""
+msgstr "لمكافأة هذا الموظف على تصرف جيد"
