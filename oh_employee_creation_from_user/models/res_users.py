@@ -29,7 +29,7 @@ class ResUsers(models.Model):
 
     employee_id = fields.Many2one('hr.employee',
                                   string='Related Employee',
-                                  ondelete='restrict', auto_join=True,
+                                  ondelete='restrict',
                                   help='Related employee based on the'
                                        ' data of the user')
 

@@ -60,29 +60,25 @@ class OHRMSConfiguration(models.TransientModel):
              '- This installs the module Biometric Device Integration.')
     test_module_hr_custody = fields.Boolean(string="HR Custody Module",
                                             help="HR Custody module installed or not",
-                                            default=False, invisible=True)
+                                            default=False)
     test_module_hr_employee_shift = fields.Boolean(string="HR Employee Shift",
                                                    help="HR Employee Shift module installed or not",
-                                                   default=False,
-                                                   invisible=True)
+                                                   default=False)
     test_module_hr_insurance = fields.Boolean(string="HR Insurance",
                                               help="HR Insurance module installed or not",
-                                              default=False, invisible=True)
+                                              default=False)
     test_module_oh_hr_lawsuit_management = fields.Boolean(
         string="HR Lawsuit Management",
-        help="HR Lawsuit Management module installed or not", default=False,
-        invisible=True)
+        help="HR Lawsuit Management module installed or not", default=False)
     test_module_hr_resignation = fields.Boolean(string="HR Resignation",
                                                 help="HR Resignation module installed or not",
-                                                default=False, invisible=True)
+                                                default=False)
     test_module_hr_vacation_mngmt = fields.Boolean(string="Vacation Management",
                                                    help="Vacation Management module installed or not",
-                                                   default=False,
-                                                   invisible=True)
+                                                   default=False)
     test_module_oh_hr_zk_attendance = fields.Boolean(string="Attendance",
                                                      help="Attendance module installed or not",
-                                                     default=False,
-                                                     invisible=True)
+                                                     default=False)
 
     @api.onchange('module_hr_custody')
     def onchange_module_hr_custody(self):

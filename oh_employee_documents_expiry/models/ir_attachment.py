@@ -32,13 +32,13 @@ class IrAttachment(models.Model):
     doc_attach_rel = fields.Many2many('hr.employee.document',
                                       'doc_attachment_ids',
                                       'attach_id3', 'doc_id',
-                                      string="Attachment", invisible=1,
+                                      string="Employee Document Attachment",
                                       help='This field allows you to associate'
                                            'HR employee documents with the '
                                            'record.')
     attach_rel = fields.Many2many('hr.document',
                                   'attach_ids', 'attachment_id3',
                                   'document_id',
-                                  string="Attachment", invisible=1,
+                                  string="HR Document Attachment",
                                   help='This field allows you to attach HR '
                                        'documents to the record.')

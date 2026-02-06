@@ -30,8 +30,7 @@ class HrEmployeeFamily(models.Model):
     _rec_name = 'member_name'
 
     employee_id = fields.Many2one('hr.employee', string="Employee",
-                                  help='Select corresponding Employee',
-                                  invisible=1)
+                                  help='Select corresponding Employee')
     relation_id = fields.Many2one('hr.employee.relation', string="Relation",
                                   help="Relationship with the employee")
     member_name = fields.Char(string='Name', help='Name of the family member')
