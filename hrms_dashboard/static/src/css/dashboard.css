@@ -946,7 +946,7 @@ h4 .stat-count {
 
 
 .row.main-section {
-    margin-right: 0px; !important;
+    margin-right: 0px !important;
     margin-top: 5px
 }
 /* width */
@@ -1023,7 +1023,7 @@ h4 .stat-count {
   margin-left: 17px;
 }
 /*New Styles*/
-.user_expense,.user_leaves,.user_attendance, .projects{user_leaves
+.user_expense,.user_leaves,.user_attendance, .projects{
     padding-right: 0px !important;
 }
 .user_expense .oh-card, .user_leaves .oh-card,.user_attendance .oh-card, .projects .oh-card{

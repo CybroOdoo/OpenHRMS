@@ -43,7 +43,8 @@
                     height: 28px;
                     padding: 0px;
                     border: 0px;
-                    border-dropdown-item bottom: 1px solid gray('400');
+                    /* border-dropdown-item bottom: 1px solid gray('400');*/
+                    border-bottom: 1px solid #ced4da;
                     border-color: gray('700');
                     box-shadow: none;
                     font-weight: 500;
