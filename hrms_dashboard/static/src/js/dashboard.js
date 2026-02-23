@@ -1,6 +1,5 @@
 /** @odoo-module **/
 import { registry } from "@web/core/registry";
-import { session } from "@web/session";
 import { _t } from "@web/core/l10n/translation";
 import { onMounted, Component, useRef } from "@odoo/owl";
 import { onWillStart, useState } from "@odoo/owl";
@@ -71,7 +70,7 @@ export class HrDashboard extends Component{
                     views: [[false, 'form']],
                     target: 'new',
                     context: {
-                        'default_user_ids': [session.uid]
+                        'default_user_ids': [user.userId]
                     }
                 });
             }
@@ -82,7 +81,7 @@ export class HrDashboard extends Component{
                     res_model: 'project.task',
                     view_mode: 'tree,form,kanban',
                     views: [[false, 'list'],[false, 'form'],[false, 'kanban']],
-                    domain: [['user_ids','in', session.uid]],
+                    domain: [['user_ids','in', user.userId]],
                     target: 'current'
                 });
             }

@@ -450,7 +450,7 @@
             <div class="oh-card-body pb-0">
                 <p class="stat_head" style="padding : 0px;">PROJECTS</p>
                 <div class="add_lines"
-                     t-on-click="add_project">
+                     t-on-click="add_project_task">
                     <i class="fa fa-plus"/>
                 </div>
             </div>
