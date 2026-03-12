@@ -76,6 +76,7 @@ msgid "Attachment Count"
 msgstr "Cantidad de archivos adjuntos"
 
 #. module: oh_appraisal
+#: model:hr.appraisal.stages,name:oh_appraisal.hr_appraisal_cancel
 #: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
 msgid "Cancel"
 msgstr "Cancelar"
@@ -165,6 +166,7 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: oh_appraisal
+#: model:hr.appraisal.stages,name:oh_appraisal.hr_appraisal_done
 #: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_form_view
 msgid "Done"
 msgstr "Hecho"
@@ -362,6 +364,11 @@ msgid "Select Opinion Form"
 msgstr "Seleccionar formulario de opinión"
 
 #. module: oh_appraisal
+#: model:hr.appraisal.stages,name:oh_appraisal.hr_appraisal_sent
+msgid "Sent Mail"
+msgstr "Correo enviado"
+
+#. module: oh_appraisal
 #: model_terms:ir.ui.view,arch_db:oh_appraisal.hr_appraisal_kanban
 msgid "Sent Questions:"
 msgstr "Enviar preguntas:"
@@ -399,9 +406,14 @@ msgid ""
 msgstr "Esta etapa se pliega en la vista kanban cuando no hay registros en esa etapa para mostrar."
 
 #. module: oh_appraisal
+#: model:hr.appraisal.stages,name:oh_appraisal.hr_appraisal_start
+msgid "To Start"
+msgstr "Por iniciar"
+
+#. module: oh_appraisal
 #: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread
 msgid "Unread Messages"
-msgstr "Mensajes no leídos"
+msgstr "Mensajes no ledos"
 
 #. module: oh_appraisal
 #: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread_counter
