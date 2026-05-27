@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Core',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'category': 'Generic Modules/Human Resources',
     'summary': """Open HRMS Odoo19, HRMS odoo19, Odoo HR, HR Dashboard, 
      Odoo19 Payroll, HR Management, Odoo Branch, Odoo Loan, Salary Advance, 
@@ -64,17 +64,22 @@
         'hr_reminder'
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/menu_arrangement_view.xml',
         'views/hr_config_view.xml',
         'views/ir_ui_menu_views.xml',
         'views/hr_employee_views.xml',
+        'wizard/ohrms_core_support_views.xml',
     ],
     'assets': {
         'web.assets_backend': [
             'ohrms_core/static/src/css/menu_order_alphabets.css',
+            'ohrms_core/static/src/css/ohrms_core_support.css',
             'web/static/lib/jquery/jquery.js',
             'ohrms_core/static/src/js/appMenu.js',
+            'ohrms_core/static/src/js/ohrms_core_systray.js',
             'ohrms_core/static/src/xml/link_view.xml',
+            'ohrms_core/static/src/xml/ohrms_core_systray.xml',
             'ohrms_core/static/templates/side_bar.xml',
         ],
     },

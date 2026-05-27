@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ohrms_core.OhrmsCoreSystray">
+        <div
+            class="o_ohrms_core_systray"
+            t-on-click="openOhrmsCoreSupport"
+            role="button"
+            tabindex="0"
+            title="Contact Open HRMS Core Support (Alt+Shift+H)"
+            aria-label="Contact Open HRMS Core Support (Alt+Shift+H)"
+        >
+            <i class="fa fa-headphones" aria-hidden="true" />
+        </div>
+    </t>
+</templates>
