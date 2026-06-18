@@ -9,3 +9,8 @@
 ##### UPDATE
 - Updated project details displayed on the dashboard
 - Fixed styling errors in the dashboard UI
+
+#### 01.08.2025
+#### Version 18.0.1.2.0
+##### UPDATE
+- Updated HRMS Dashboard with a fully responsive layout

@@ -120,13 +120,41 @@ export class HrDashboard extends Component{
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            fontColor: '#374151',
+                            usePointStyle: true,
+                            fontFamily: "'Inter', sans-serif",
+                            fontSize: 11,
+                            padding: 12
+                        }
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                const dataset = data.datasets[tooltipItem.datasetIndex];
+                                const total = dataset.data.reduce((a, b) => a + b, 0);
+                                const currentValue = dataset.data[tooltipItem.index];
+                                const percentage = ((currentValue / total) * 100).toFixed(2);
+                                return data.labels[tooltipItem.index] + ": " + currentValue + " (" + percentage + "%)";
+                            }
+                        }
+                    },
                     plugins: {
                         legend: {
                             display: true,
                             position: 'right',
                             labels: {
-                                color: 'black',
+                                color: '#374151',
                                 usePointStyle: true,
+                                font: {
+                                    size: 11,
+                                    family: "'Inter', sans-serif"
+                                },
+                                padding: 12
                             }
                         },
                         tooltip: {
@@ -178,6 +206,7 @@ export class HrDashboard extends Component{
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
                             callbacks: {
@@ -211,6 +240,7 @@ export class HrDashboard extends Component{
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
                             callbacks: {
@@ -253,7 +283,7 @@ export class HrDashboard extends Component{
                     datasets: datasets
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
@@ -306,7 +336,7 @@ export class HrDashboard extends Component{
                     }]
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
@@ -365,7 +395,7 @@ export class HrDashboard extends Component{
                     }]
                 },
                 options: {
-                    responsive: false,
+                    responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
@@ -424,6 +454,23 @@ export class HrDashboard extends Component{
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: 'right',
+                        labels: {
+                            fontColor: '#374151',
+                            usePointStyle: true,
+                            fontFamily: "'Inter', sans-serif",
+                            fontSize: 11,
+                            padding: 12
+                        }
+                    },
+                    scale: {
+                        ticks: {
+                            display: false,
+                            beginAtZero: true
+                        }
+                    },
                     plugins: {
                         tooltip: {
                             callbacks: {
@@ -436,19 +483,25 @@ export class HrDashboard extends Component{
                             display: true,
                             position: 'right',
                             labels: {
-                                color: 'black'
+                                color: '#374151',
+                                usePointStyle: true,
+                                font: {
+                                    size: 11,
+                                    family: "'Inter', sans-serif"
+                                },
+                                padding: 12
                             }
                         }
                     },
-                   scales: {
-                    r: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            ticks: {
+                                display: false
+                            }
                         }
                     }
                 }
-            }
             });
         }
     }
