@@ -126,8 +126,9 @@ class HrLoan(models.Model):
                 )
 
             # generate sequence
-            values['name'] = self.env['ir.sequence'].next_by_code(
-                'hr.loan.seq') or _('New')
+            if values.get('name', 'New') in ('New', _('New')):
+                values['name'] = self.env['ir.sequence'].next_by_code(
+                    'hr.loan.seq') or _('New')
 
         return super(HrLoan, self).create(vals_list)
 
