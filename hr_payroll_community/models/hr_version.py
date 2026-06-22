@@ -61,8 +61,8 @@ class HrContract(models.Model):
         hierarchy (parent=False first,then first level children and so on)
         and without duplicate
         """
-        # structures = self.mapped('struct_id')
-        structures = self.mapped('contract_template_id.struct_id')
+        structures = self.mapped('struct_id')
+        # structures = self.mapped('contract_template_id.struct_id')
 
         if not structures:
             return []

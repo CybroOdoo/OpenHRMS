@@ -461,9 +461,12 @@ class HrPayslip(models.Model):
         # get the ids of the structures on the contracts and their
         # parent id as well
         contracts = self.env['hr.version'].browse(contract_ids)
-        if len(contracts) == 1 and payslip.contract_id.contract_template_id.struct_id:
+        if payslip.struct_id:
             structure_ids = list(
-                set(payslip.contract_id.contract_template_id.struct_id._get_parent_structure().ids))
+                set(payslip.struct_id._get_parent_structure().ids))
+        elif len(contracts) == 1 and contracts.struct_id:
+            structure_ids = list(
+                set(contracts.struct_id._get_parent_structure().ids))
         else:
             structure_ids = contracts.get_all_structures()
         # get the rules of the structure and thier children
@@ -612,9 +615,9 @@ class HrPayslip(models.Model):
             if not contract_ids:
                 return
             self.contract_id = self.env['hr.version'].browse(contract_ids[0])
-            if not self.contract_id.contract_template_id.struct_id:
+            if not self.contract_id.struct_id:
                 return
-            self.struct_id = self.contract_id.contract_template_id.struct_id
+            self.struct_id = self.contract_id.struct_id
         if self.contract_id:
             contract_ids = self.contract_id.ids
         # computation of the salary input
