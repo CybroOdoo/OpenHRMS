@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Resignation',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'category': 'Human Resources',
     'summary': 'Manages the resignation process of the employees',
     'description': """This module helps to create and approve/reject employee

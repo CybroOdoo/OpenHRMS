@@ -135,7 +135,7 @@ class HrResignation(models.Model):
             rec.notice_period = 0
 
             if rec.employee_id:
-                contract = self.env['hr.version'].search([
+                contract = self.env['hr.version'].sudo().search([
                     ('employee_id', '=', rec.employee_id.id),
                     '|', ('date_start', '=', False),
                     ('date_start', '<=', today),
@@ -205,7 +205,7 @@ class HrResignation(models.Model):
         for resignation in self:
             if (resignation.expected_revealing_date and
                     resignation.resign_confirm_date):
-                employee_contract = self.env['hr.version'].search(
+                employee_contract = self.env['hr.version'].sudo().search(
                     [('employee_id', '=', self.employee_id.id)])
                 if not employee_contract:
                     raise ValidationError(
