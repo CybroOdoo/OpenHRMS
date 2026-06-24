@@ -49,7 +49,7 @@ msgstr "كمية"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Approve"
-msgstr ""
+msgstr "يوافق"
 
 #. module: ohrms_loan
 #: model:ir.model.fields.selection,name:ohrms_loan.selection__hr_loan__state__approve
@@ -69,7 +69,7 @@ msgstr "مقدار وسطي"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #. module: ohrms_loan
 #: model:ir.model.fields.selection,name:ohrms_loan.selection__hr_loan__state__cancel
@@ -79,7 +79,7 @@ msgstr "ملغي"
 #. module: ohrms_loan
 #: model_terms:ir.actions.act_window,help:ohrms_loan.hr_loan_action
 msgid "Click to create a new Loan request."
-msgstr ""
+msgstr "انقر لإنشاء طلب قرض جديد."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__company_id
@@ -90,7 +90,7 @@ msgstr "الشركة"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Compute Installment"
-msgstr ""
+msgstr "احتساب القسط"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__create_uid
@@ -118,12 +118,12 @@ msgstr "تاريخ"
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_payslip_input__date_to
 msgid "Date To"
-msgstr ""
+msgstr "إلى تاريخ"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_payslip_input__date_from
 msgid "Date from"
-msgstr ""
+msgstr "من تاريخ"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__date
@@ -145,7 +145,7 @@ msgstr "القسم"
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__loan_lines
 msgid "Details of installment lines associated with the loan."
-msgstr ""
+msgstr "تفاصيل بنود الأقساط المرتبطة بالقرض."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_employee__display_name
@@ -178,7 +178,7 @@ msgstr "الموظف"
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_payslip_input__date_to
 msgid "End date for the payslip input."
-msgstr ""
+msgstr "تاريخ النهاية لمدخلات قسيمة المرتب."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_follower_ids
@@ -243,7 +243,7 @@ msgstr "خط التقسيط"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Installments"
-msgstr ""
+msgstr "الأقساط"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_is_follower
@@ -253,12 +253,12 @@ msgstr "هو تابع"
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__job_position_id
 msgid "Job Position"
-msgstr ""
+msgstr "المسمى الوظيفي"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__job_position_id
 msgid "Job position of the employee"
-msgstr ""
+msgstr "المسمى الوظيفي للموظف"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__write_uid
@@ -318,7 +318,7 @@ msgstr "طلب قرض"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_tree
 msgid "Loan Requests"
-msgstr ""
+msgstr "طلبات القروض"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__loan_amount
@@ -339,7 +339,7 @@ msgstr "القروض"
 #. module: ohrms_loan
 #: model:ir.ui.menu,name:ohrms_loan.hr_loan_menu_root
 msgid "Loans & Advances"
-msgstr ""
+msgstr "القروض والسلف"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_has_error
@@ -359,7 +359,7 @@ msgstr "الموعد النهائي لنشاطي"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_search
 msgid "My Requests"
-msgstr ""
+msgstr "طلباتي"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__name
@@ -370,7 +370,7 @@ msgstr "اسم القرض"
 #. odoo-python
 #: code:addons/ohrms_loan/models/hr_loan.py:0
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_calendar_event_id
@@ -415,7 +415,7 @@ msgstr "عدد الاقساط"
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_employee__loan_count
 msgid "Number of loans associated with the employee"
-msgstr ""
+msgstr "عدد القروض المرتبطة بالموظف"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_needaction_counter
@@ -461,12 +461,12 @@ msgstr ".كشوف المرتبات"
 #. odoo-python
 #: code:addons/ohrms_loan/models/hr_loan.py:0
 msgid "Please Compute installment"
-msgstr ""
+msgstr "يرجى احتساب القسط"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "التقييمات"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan_line__loan_id
@@ -481,7 +481,7 @@ msgstr "قسيمة الراتب"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Refuse"
-msgstr ""
+msgstr "رفض"
 
 #. module: ohrms_loan
 #: model:ir.model.fields.selection,name:ohrms_loan.selection__hr_loan__state__refuse
@@ -492,7 +492,7 @@ msgstr "رفض"
 #: model:ir.actions.act_window,name:ohrms_loan.hr_loan_action
 #: model:ir.ui.menu,name:ohrms_loan.hr_loan_menu_requests
 msgid "Request for Loan"
-msgstr ""
+msgstr "طلب قرض"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_user_id
@@ -507,7 +507,7 @@ msgstr "خطأ في تسليم الرسائل القصيرة"
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_payslip_input__date_from
 msgid "Start date for the payslip input."
-msgstr ""
+msgstr "تاريخ البداية لمدخلات قسيمة المرتب."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__state
@@ -517,7 +517,7 @@ msgstr "حالة"
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_search
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__activity_state
@@ -535,7 +535,7 @@ msgstr ""
 #. module: ohrms_loan
 #: model_terms:ir.ui.view,arch_db:ohrms_loan.hr_loan_view_form
 msgid "Submit"
-msgstr ""
+msgstr "إرسال"
 
 #. module: ohrms_loan
 #: model:ir.model.fields.selection,name:ohrms_loan.selection__hr_loan__state__waiting_approval_1
@@ -546,12 +546,12 @@ msgstr "قدمت"
 #. odoo-python
 #: code:addons/ohrms_loan/models/hr_loan.py:0
 msgid "The Employee already has a pending installment"
-msgstr ""
+msgstr "لدى الموظف بالفعل قسط معلق"
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__state
 msgid "The current state of the loan request."
-msgstr ""
+msgstr "الحالة الحالية لطلب القرض."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,help:ohrms_loan.field_hr_loan__department_id
@@ -594,7 +594,7 @@ msgstr ".نوع نشاط الاستثناء في السجل"
 #. module: ohrms_loan
 #: model_terms:ir.actions.act_window,help:ohrms_loan.hr_loan_action
 msgid "Use this menu to create loan requests."
-msgstr ""
+msgstr "استخدم هذه القائمة لإنشاء طلبات القروض."
 
 #. module: ohrms_loan
 #: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__website_message_ids
@@ -610,4 +610,4 @@ msgstr "سجل اتصالات الموقع"
 #. odoo-python
 #: code:addons/ohrms_loan/models/hr_loan.py:0
 msgid "You cannot delete a loan which is not in draft or cancelled state"
-msgstr ""
+msgstr "لا يمكنك حذف قرض ليس في حالة مسودة أو مُلغى"

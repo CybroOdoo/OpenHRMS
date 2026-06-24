@@ -18,7 +18,7 @@ msgstr ""
 #. module: hr_employee_transfer
 #: model_terms:ir.ui.view,arch_db:hr_employee_transfer.employee_transfer_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #. module: hr_employee_transfer
 #: model:ir.model.fields.selection,name:hr_employee_transfer.selection__employee_transfer__state__cancel
@@ -77,7 +77,7 @@ msgstr "منجز"
 #. module: hr_employee_transfer
 #: model_terms:ir.ui.view,arch_db:hr_employee_transfer.employee_transfer_view_search
 msgid "Draft"
-msgstr ""
+msgstr "مسودة"
 
 #. module: hr_employee_transfer
 #: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__employee_id
@@ -101,7 +101,7 @@ msgstr "نقل الموظف"
 #. module: hr_employee_transfer
 #: model_terms:ir.ui.view,arch_db:hr_employee_transfer.employee_transfer_view_search
 msgid "Group By"
-msgstr ""
+msgstr "تجميع حسب"
 
 #. module: hr_employee_transfer
 #: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__id
@@ -165,7 +165,7 @@ msgstr "موظف قديم"
 #. module: hr_employee_transfer
 #: model:ir.model.fields,help:hr_employee_transfer.field_employee_transfer__old_employee_id
 msgid "Old employee details"
-msgstr ""
+msgstr "تفاصيل الموظف السابق"
 
 #. module: hr_employee_transfer
 #: model_terms:ir.ui.view,arch_db:hr_employee_transfer.employee_transfer_view_form

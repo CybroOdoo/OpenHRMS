@@ -18,32 +18,32 @@ msgstr ""
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_employee__announcement_count
 msgid "# Announcements"
-msgstr ""
+msgstr "عدد الإعلانات"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "الإجراءات اللازمة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "الأنشطة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "تمييز استثناء النشاط"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "حالة النشاط"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "أيقونة نوع النشاط"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_search
@@ -58,7 +58,7 @@ msgstr "نوع الإعلان"
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__announcement
 msgid "Announcement message"
-msgstr ""
+msgstr "رسالة الإعلان"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__announcement_reason
@@ -125,6 +125,9 @@ msgid ""
 "By Department: Announcement intended for Employees in specific Departments.\n"
 "By Job Position: Announcement intended for Employees who are having specific Job Positions"
 msgstr ""
+"حسب الموظف: إعلان موجه لموظفين محددين.\n"
+"حسب القسم: إعلان موجه لموظفين في أقسام محددة.\n"
+"حسب المسمى الوظيفي: إعلان موجه لموظفين لديهم مسميات وظيفية محددة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields.selection,name:hr_reward_warning.selection__hr_announcement__announcement_type__job_position
@@ -225,17 +228,17 @@ msgstr "منتهي الصلاحية"
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "المتابعون"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "المتابعون (الشركاء)"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "أيقونة Font Awesome مثل fa-tasks"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_form
@@ -250,7 +253,7 @@ msgstr "إعلان الموارد البشرية"
 #. module: hr_reward_warning
 #: model:ir.model,name:hr_reward_warning.model_hr_announcement
 msgid "HR Announcement"
-msgstr ""
+msgstr "إعلان الموارد البشرية"
 
 #. module: hr_reward_warning
 #: model:ir.actions.server,name:hr_reward_warning.ir_cron_hr_announcement_expiry_date_ir_actions_server
@@ -260,7 +263,7 @@ msgstr "تاريخ انتهاء إعلان الموارد البشرية"
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "لديه رسالة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__id
@@ -271,28 +274,28 @@ msgstr "المُعرف"
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "أيقونة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "أيقونة للإشارة إلى نشاط استثنائي."
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "إذا تم تحديده، فإن الرسائل الجديدة تتطلب انتباهك."
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_error
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "إذا تم تحديده، فإن بعض الرسائل بها خطأ في التسليم."
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "متابع"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_search
@@ -333,17 +336,17 @@ msgstr "شركة مستخدم تسجيل الدخول"
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسالة"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "الرسائل"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "الموعد النهائي لنشاطي"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_search
@@ -378,7 +381,7 @@ msgstr "عدد الاخطاء"
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "عدد الرسائل التي تتطلب إجراء"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_error_counter
@@ -393,7 +396,7 @@ msgstr "موقف الموظف المخول بالاطلاع على ذلك."
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "التقييمات"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_form
@@ -418,7 +421,7 @@ msgstr "المستخدم المسؤول"
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسائل القصيرة"
 
 #. module: hr_reward_warning
 #: model_terms:ir.ui.view,arch_db:hr_reward_warning.hr_announcement_view_form
@@ -448,7 +451,7 @@ msgstr "ولاية"
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__state
 msgid "State of announcement."
-msgstr ""
+msgstr "حالة الإعلان."
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__state
@@ -464,6 +467,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"الحالة بناءً على الأنشطة\n"
+"متأخر: تاريخ الاستحقاق قد مضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"مخطط: أنشطة مستقبلية."
 
 #. module: hr_reward_warning
 #. odoo-python
@@ -474,12 +481,12 @@ msgstr "يجب أن يكون تاريخ البدء أقدم من تاريخ ال
 #. module: hr_reward_warning
 #: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__announcement_reason
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 #. module: hr_reward_warning
 #: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "نوع نشاط الاستثناء في السجل."
 
 #. module: hr_reward_warning
 #: model:ir.model.fields.selection,name:hr_reward_warning.selection__hr_announcement__state__to_approve
