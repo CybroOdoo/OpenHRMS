@@ -420,6 +420,10 @@ class HrPayslip(models.Model):
             """a class that will be used into the python code, mainly for
             usability purposes"""
 
+            def __getattr__(self, attr):
+                """Expose the current payslip fields to salary-rule code."""
+                return getattr(self.dict, attr, 0.0)
+
             def sum(self, code, from_date, to_date=None):
                 """Function for getting sum of Payslip with respect to
                  from_date,to_date fields"""
@@ -457,7 +461,8 @@ class HrPayslip(models.Model):
         rules = BrowsableObject(payslip.employee_id.id, rules_dict, self.env)
         baselocaldict = {'categories': categories, 'rules': rules,
                          'payslip': payslips, 'worked_days': worked_days,
-                         'inputs': inputs}
+                         'inputs': inputs, 'date_from': payslip.date_from,
+                         'date_to': payslip.date_to}
         # get the ids of the structures on the contracts and their
         # parent id as well
         contracts = self.env['hr.version'].browse(contract_ids)
