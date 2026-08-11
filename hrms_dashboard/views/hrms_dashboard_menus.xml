@@ -10,5 +10,5 @@
               name="Dashboard"
               action="hr_action_dashboard"
               web_icon="hrms_dashboard,static/description/icon.png"
-              sequence="-100" groups="base.group_user"/>
+              sequence="-7" groups="base.group_user"/>
 </odoo>

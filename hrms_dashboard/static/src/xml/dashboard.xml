@@ -1,666 +1,1062 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="HrDashboardMain">
+        <style>
+            .oh_dashboards, .stat-card-title, .stat-card-subtitle, .stat-card-value, .info-label, .info-value {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+            }
+            .stat-card-title { color: #000000 !important; }
+            @media print {
+                @page { margin: 0 !important; }
+                body { padding: 10mm !important; }
+                .top-bar-btn { display: inline-flex !important; border: none !important; background: transparent !important; padding: 0 !important; font-size: 18px !important; color: #000 !important; }
+                .top-bar-btn svg { display: none !important; }
+                .top-bar-right { display: none !important; }
+            }
+            @media (max-width: 768px) {
+                .dashboard-top-bar {
+                    padding: 16px 16px !important;
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    gap: 16px !important;
+                    height: auto !important;
+                }
+                .top-bar-left, .top-bar-right {
+                    width: 100% !important;
+                    justify-content: flex-start !important;
+                    flex-wrap: wrap !important;
+                    gap: 12px !important;
+                }
+            }
+        </style>
         <div class="oh_dashboards">
-            <div class="container-fluid o_hr_dashboard">
-                <t t-if="this.state.login_employee">
-                    <t t-if="this.state.is_manager == true">
-                        <t t-call="LoginEmployeeDetails"/>
-                        <t t-call="EmployeeDashboard"/>
-                        <t t-call="ManagerDashboard"/>
+            <div class="o_hr_dashboard_custom">
+                
+                <!-- TOP BAR -->
+                <div class="dashboard-top-bar" style="top: 0px !important; padding: 16px 56px !important;">
+                    <div class="top-bar-left">
+                        <div style="position: relative;">
+                            <button class="top-bar-btn outline-btn date-filter-btn" style="display:inline-flex; align-items:center; gap:8px; border-radius:8px; color:#154580; padding:8px 14px; border:1px solid #E2E8F0; background-color:#F8FAFC; font-size:14px; cursor:pointer;" t-on-click="toggleDateDropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span style="font-weight: 600;">
+                                    <t t-if="this.state.date_range == 'today'">Today</t>
+                                    <t t-elif="this.state.date_range == 'week'">This week</t>
+                                    <t t-elif="this.state.date_range == 'month'">This month</t>
+                                    <t t-elif="this.state.date_range == 'quarter'">This quarter</t>
+                                    <t t-elif="this.state.date_range == 'year'">This year</t>
+                                    <t t-elif="this.state.date_range == 'custom'">Custom range</t>
+                                    <t t-else="">This month</t>
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-left:4px; opacity: 0.8;">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </button>
+
+                            <!-- Date Filter Dropdown Menu -->
+                            <t t-if="this.state.show_date_dropdown">
+                                <div class="profile-dropdown-backdrop" t-on-click="closeDateDropdown"></div>
+                                <div class="date-dropdown-menu">
+                                    
+                                    <!-- List View -->
+                                    <t t-if="this.state.date_dropdown_view == 'list'">
+                                        <div class="date-menu-label">DATE RANGE</div>
+                                        <div t-attf-class="date-menu-item {{this.state.date_range == 'today' ? 'active' : ''}}" t-on-click="() => this.setDateFilter('today')">
+                                            <span>Today</span>
+                                            <i class="fa fa-check" t-if="this.state.date_range == 'today'"/>
+                                        </div>
+                                        <div t-attf-class="date-menu-item {{this.state.date_range == 'week' ? 'active' : ''}}" t-on-click="() => this.setDateFilter('week')">
+                                            <span>This week</span>
+                                            <i class="fa fa-check" t-if="this.state.date_range == 'week'"/>
+                                        </div>
+                                        <div t-attf-class="date-menu-item {{this.state.date_range == 'month' ? 'active' : ''}}" t-on-click="() => this.setDateFilter('month')">
+                                            <span>This month</span>
+                                            <i class="fa fa-check" t-if="this.state.date_range == 'month'"/>
+                                        </div>
+                                        <div t-attf-class="date-menu-item {{this.state.date_range == 'quarter' ? 'active' : ''}}" t-on-click="() => this.setDateFilter('quarter')">
+                                            <span>This quarter</span>
+                                            <i class="fa fa-check" t-if="this.state.date_range == 'quarter'"/>
+                                        </div>
+                                        <div t-attf-class="date-menu-item {{this.state.date_range == 'year' ? 'active' : ''}}" t-on-click="() => this.setDateFilter('year')">
+                                            <span>This year</span>
+                                            <i class="fa fa-check" t-if="this.state.date_range == 'year'"/>
+                                        </div>
+                                        <div class="date-menu-item custom-range-item" t-on-click="() => this.setDateFilter('custom_trigger')">
+                                            <span>Custom range...</span>
+                                            <i class="fa fa-chevron-right"/>
+                                        </div>
+                                    </t>
+
+                                    <!-- Custom View -->
+                                    <t t-if="this.state.date_dropdown_view == 'custom'">
+                                        <div class="custom-range-header">
+                                            <button class="back-btn" t-on-click="backToDateList">
+                                                <i class="fa fa-chevron-left"/>
+                                            </button>
+                                            <span class="custom-range-title">Custom range</span>
+                                        </div>
+                                        <div class="custom-range-body">
+                                            <div class="custom-input-group">
+                                                <label>From</label>
+                                                <input type="date" t-model="this.state.custom_date_from"/>
+                                            </div>
+                                            <div class="custom-input-group">
+                                                <label>To</label>
+                                                <input type="date" t-model="this.state.custom_date_to"/>
+                                            </div>
+                                            <div class="custom-range-actions">
+                                                <button class="cancel-btn" t-on-click="closeDateDropdown">Cancel</button>
+                                                <button class="apply-btn" t-on-click="applyCustomDateFilter">Apply</button>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="top-bar-right">
+                        <!-- Export Button -->
+                        <button t-on-click="export_dashboard_pdf" style="display:inline-flex; align-items:center; gap:7px; padding:8px 16px; border-radius:8px; border:1px solid #BFDBFE; background:#FFFFFF; color:#154580; font-size:14px; font-weight:400; cursor:pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Export
+                        </button>
+
+                        <t t-if="this.state.login_employee['attendance_state'] == 'checked_in'">
+                            <button t-on-click="attendance_sign_in_out" style="display:inline-flex; align-items:center; gap:7px; padding:8px 16px; border-radius:8px; border:none; background:#FEE2E2; color:#991B1B; font-size:14px; font-weight:400; cursor:pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                    <polyline points="16 17 21 12 16 7"/>
+                                    <line x1="21" y1="12" x2="9" y2="12"/>
+                                </svg>
+                                Check Out
+                            </button>
+                        </t>
+                        <t t-else="">
+                            <button t-on-click="attendance_sign_in_out" style="display:inline-flex; align-items:center; gap:7px; padding:8px 18px; border-radius:8px; border:none; background:#1B5298; color:#FFFFFF; font-size:14px; font-weight:400; cursor:pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                    <polyline points="10 17 15 12 10 7"/>
+                                    <line x1="15" y1="12" x2="3" y2="12"/>
+                                </svg>
+                                Check In
+                            </button>
+                        </t>
+
+                        <div style="position: relative;">
+                            <div class="top-bar-icon-btn" style="cursor: pointer;" t-on-click="toggleNotificationsDropdown" title="Notifications">
+                                <i class="fa fa-bell-o"/>
+                                <t t-if="this.pending_activities_count > 0">
+                                    <span class="notification-badge"><t t-esc="this.pending_activities_count"/></span>
+                                </t>
+                            </div>
+                            <!-- Notifications Dropdown Menu -->
+                            <t t-if="this.state.show_notifications_dropdown">
+                                <div class="profile-dropdown-backdrop" t-on-click="closeNotificationsDropdown"></div>
+                                <div class="profile-dropdown-menu" style="width: 320px; right: -20px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                                    <div style="font-size: 15px; font-weight: 700; color: #1e293b;">Notifications</div>
+                                    <div style="display: flex; flex-direction: column; gap: 16px; max-height: 350px; overflow-y: auto; overflow-x: hidden;">
+                                        <t t-if="this.state.activities and this.state.activities.length > 0">
+                                            <t t-foreach="this.state.activities.slice(0, 4)" t-as="act" t-key="act.id + act.type">
+                                                <div style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer;" t-on-click="view_activities">
+                                                    <t t-if="act.type == 'reminder'">
+                                                        <div style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #3b82f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                                            <i class="fa fa-bell-o"/>
+                                                        </div>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <div style="width: 36px; height: 36px; border-radius: 10px; background-color: #f1f5f9; color: #3b82f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                                            <i class="fa fa-plane"/>
+                                                        </div>
+                                                    </t>
+                                                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                                                        <span style="font-size: 13px; font-weight: 500; color: #1e293b; line-height: 1.4;"><t t-esc="act.title"/></span>
+                                                        <span style="font-size: 11px; font-weight: 500; color: #94a3b8;"><t t-esc="act.date_str"/></span>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <div style="font-size: 13px; color: #94a3b8; text-align: center; padding: 16px 0;">No new notifications</div>
+                                        </t>
+                                    </div>
+                                    <t t-if="this.state.activities and this.state.activities.length > 4">
+                                        <div style="border-top: 1px solid #f1f5f9; padding-top: 12px; text-align: center;">
+                                            <span t-on-click="view_activities" style="color: #3b82f6; font-size: 13px; font-weight: 600; cursor: pointer;">View All</span>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                        <div style="position: relative;">
+                            <div class="profile-dropdown-wrapper" style="display: flex; align-items: center; gap: 10px; cursor: pointer;" t-on-click="toggleProfileDropdown">
+                                <div class="top-bar-avatar">
+                                    <span class="initials">
+                                        <t t-if="this.state.login_employee"><t t-esc="this.state.login_employee['name'].substring(0, 2).toUpperCase()"/></t>
+                                    </span>
+                                </div>
+                                <i class="fa fa-chevron-down" style="color: #64748B; font-size: 10px;"/>
+                            </div>
+
+                            <!-- Profile Dropdown Menu -->
+                            <t t-if="this.state.show_profile_dropdown">
+                                <div class="profile-dropdown-backdrop" t-on-click="closeProfileDropdown"></div>
+                                <div class="profile-dropdown-menu">
+                                    <div class="profile-menu-header">
+                                        <div class="top-bar-avatar" style="width: 36px !important; height: 36px !important; position: relative;">
+                                            <span class="initials" style="font-size: 14px;">
+                                                <t t-if="this.state.login_employee"><t t-esc="this.state.login_employee['name'].substring(0, 2).toUpperCase()"/></t>
+                                            </span>
+                                            <div class="status-dot-green"></div>
+                                        </div>
+                                        <div class="profile-menu-info">
+                                            <div class="profile-menu-name"><t t-esc="this.state.login_employee['name']"/></div>
+                                            <div class="profile-menu-id">
+                                                <t t-if="this.state.login_employee['barcode']"><t t-esc="this.state.login_employee['barcode']"/></t>
+                                                <t t-else="">EMP-ID</t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-menu-divider"></div>
+                                    <div class="profile-menu-item" t-on-click="action_my_profile">
+                                        <i class="fa fa-user-o"/> My profile
+                                    </div>
+                                    <t t-if="this.state.is_manager">
+                                        <div class="profile-menu-item" t-on-click="action_my_payslips">
+                                            <i class="fa fa-file-text-o"/> My payslips
+                                        </div>
+                                    </t>
+                                    <div class="profile-menu-item" t-on-click="action_preferences">
+                                        <i class="fa fa-cog"/> Preferences
+                                    </div>
+                                    <div class="profile-menu-divider"></div>
+                                    <div class="profile-menu-item text-danger" t-on-click="action_sign_out">
+                                        <i class="fa fa-sign-out"/> Sign out
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-content">
+                    <t t-if="this.state.login_employee">
+                        <t t-if="this.state.is_manager == true">
+                            <t t-call="LoginEmployeeDetails"/>
+                            <t t-call="ManagerDashboard"/>
+                            <t t-call="EmployeeDashboard"/>
+                        </t>
+                        <t t-else="">
+                            <t t-call="LoginEmployeeDetails"/>
+                            <t t-call="EmployeeDashboard"/>
+                        </t>
                     </t>
-                    <t t-else="">
-                        <t t-call="LoginEmployeeDetails"/>
-                        <t t-call="EmployeeDashboard"/>
-                    </t>
-                </t>
+                </div>
             </div>
         </div>
      </t>
-    <!-- LoginEmployeeDetails Done -->
+
+    <!-- LoginEmployeeDetails (Top Stats + Checkin Card + Profile Card + Attendance Trend) -->
     <t t-name="LoginEmployeeDetails">
-        <link rel="stylesheet"
-              href="/hrms_dashboard/static/src/css/dashboard.css"/>
-        <div class="row main-section">
-            <div class="col-md-2 col-sm-2 dummy"/>
-            <div class="col-md-2 col-sm-2 employee_prof">
-                <div class="oh_card">
-                    <div class="oh-media">
-                        <div class="employee_icon">
-                            <img class="align-self-center mr-3" alt=""
-                                 t-att-src="'data:image/png;base64,'+this.state.login_employee['image_1920']"/>
-                        </div>
-                        <div class="media-body employee_name">
-                            <h2 class="text-color display-6"><t t-esc="this.state.login_employee['name']"/> </h2>
-                            <t t-if="this.state.login_employee['job_id']">
-                                <p class="text-light"><t t-esc="this.state.login_employee['job_id'][1]"/></p>
-                            </t>
-                            <t t-if="!this.state.login_employee['job_id']">
-                                <p class="text-light"
-                                   style="color:#b6b6b6 !important">Add job title</p>
-                            </t>
-                        </div>
-                        <div class="employee_experience">
-                            <t t-if="this.state.login_employee['experience']">
-                                <p class="text-light">Joined </p>
-                                <p><t t-esc="this.state.login_employee['experience']"/>
-                                    Ago</p>
-                            </t>
-                            <t t-if="!this.state.login_employee['experience']">
-                                <p class="text-light"
-                                   style="color:#b6b6b6 !important">Joined</p>
-                                <p class="text-light"
-                                   style="color:#b6b6b6 !important">Date</p>
-                                <p class="text-light"
-                                   style="color:#b6b6b6 !important">--/--/----</p>
-                            </t>
-                        </div>
-                        <div class="contact">
-                            <t t-if="this.state.login_employee['mobile_phone']">
-                                <p>
-                                    <i class="fa fa-phone" style="padding-right: 8px;color: darkblue;"/>
-                                    <t t-esc="this.state.login_employee['mobile_phone']"/>
-                                </p>
-                            </t>
-                            <t t-if="!this.state.login_employee['mobile_phone']">
-                                <i class="fa fa-phone" style="padding-right: 8px;color: darkblue;"/>
-                                <p>---</p>
-                            </t>
-                            <t t-if="this.state.login_employee['work_email']">
-                                <p>
-                                    <i class="fa fa-envelope" style="padding-right: 8px;color: darkblue;"/>
-                                    <t t-esc="this.state.login_employee['work_email']"/>
-                                </p>
-                            </t>
-                            <t t-if="!this.state.login_employee['work_email']">
-                                <p>
-                                    <i class="fa fa-envelope" style="padding-right: 8px;color: darkblue;"/>
-                                    <p>---</p>
-                                </p>
-                            </t>
-                        </div>
-                        <div class="address">
-                            <p><i class="fa fa-home" style="padding-right: 8px;color: darkblue;"/>Address
-                                :
-                                <t t-if="this.state.login_employee['private_street']">
-                                    <t t-esc="this.state.login_employee['private_street']"/>
-                                </t>
-                            </p>
-                            <p style="padding-left: 80px;" t-if="this.state.login_employee['private_street2']">
-                                <t t-esc="this.state.login_employee['private_street2']"/>
-                            </p>
-                            <p style="padding-left: 80px;" t-if="this.state.login_employee['private_city']">
-                                    <t t-esc="this.state.login_employee['private_city']"/>
-                            </p>
-                            <p style="padding-left: 80px;" t-if="this.state.login_employee['private_state_id']">
-                                    <t t-esc="this.state.login_employee['private_state_id'][1]"/>
-                            </p>
-                            <p style="padding-left: 80px;" t-if="this.state.login_employee['private_zip']">
-                                    <t t-esc="this.state.login_employee['private_zip']"/>
-                            </p>
-                            <p style="padding-left: 80px;" t-if="this.state.login_employee['private_country_id']">
-                                    <t t-esc="this.state.login_employee['private_country_id'][1]"/>
-                            </p>
+        <link rel="stylesheet" href="/hrms_dashboard/static/src/css/dashboard.css"/>
+
+        <!-- Row 1: Top Row (Payslips, Timesheets, Contracts, Broad Factor, Check-In) -->
+        <div class="dashboard-grid-5">
+            <t t-if="this.state.is_manager">
+                <div class="modern-card top-stat-card clickable hr_payslip" t-on-click="hr_payslip">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon bg-purple-light">
+                            <i class="fa fa-file-text-o"/>
                         </div>
                         <div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 hr_payslip oh-payslip"
-                 t-on-click="hr_payslip">
-                <div class="oh-card">
-                    <div class="oh-card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon"><i class="fa fa-money"/></div>
-                            <div class="stat-content">
-                                <div class="stat-text">Payslips
-                                </div>
-                                <div class="stat-digit"><t t-esc="this.state.login_employee['payslip_count']"/>
-                                </div>
+                            <div class="stat-card-title">Payslips</div>
+                            <div class="stat-card-subtitle">
+                                <t t-if="this.state.date_range == 'today'">Today</t>
+                                <t t-elif="this.state.date_range == 'week'">This week</t>
+                                <t t-elif="this.state.date_range == 'month'">This month</t>
+                                <t t-elif="this.state.date_range == 'quarter'">This quarter</t>
+                                <t t-elif="this.state.date_range == 'year'">This year</t>
+                                <t t-elif="this.state.date_range == 'custom'">Custom range</t>
+                                <t t-else="">This month</t>
                             </div>
                         </div>
                     </div>
+                    <div class="stat-card-value"><t t-esc="this.state.login_employee['payslip_count']"/></div>
+                    <div class="sparkline-container" style="position: absolute; bottom: 16px; left: 20px; width: calc(100% - 40px); height: 32px; z-index: 1; opacity: 0.8; background: url('data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'&gt;&lt;defs&gt;&lt;linearGradient id='g1' x1='0' y1='0' x2='0' y2='1'&gt;&lt;stop offset='0%' stop-color='%238A2BE2' stop-opacity='0.4'/&gt;&lt;stop offset='100%' stop-color='%238A2BE2' stop-opacity='0'/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;path d='M0,15 L20,12 L40,16 L60,8 L80,10 L100,5 L100,20 L0,20 Z' fill='url(%23g1)' stroke='none'/&gt;&lt;path d='M0,15 L20,12 L40,16 L60,8 L80,10 L100,5' fill='none' stroke='%238A2BE2' stroke-width='1.5'/&gt;&lt;/svg&gt;') no-repeat center bottom; background-size: 100% 100%;"></div>
+                </div>
+            </t>
+
+            <div class="modern-card top-stat-card clickable hr_timesheets" t-on-click="hr_timesheets">
+                <div class="stat-card-header">
+                    <div class="stat-card-icon bg-blue-light">
+                        <i class="fa fa-clock-o"/>
+                    </div>
+                    <div>
+                        <div class="stat-card-title">Timesheets</div>
+                        <div class="stat-card-subtitle">Pending</div>
+                    </div>
+                </div>
+                <div class="stat-card-value"><t t-esc="this.state.login_employee['emp_timesheets']"/></div>
+                <div class="sparkline-container" style="position: absolute; bottom: 16px; left: 20px; width: calc(100% - 40px); height: 32px; z-index: 1; opacity: 0.8; background: url('data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'&gt;&lt;defs&gt;&lt;linearGradient id='g2' x1='0' y1='0' x2='0' y2='1'&gt;&lt;stop offset='0%' stop-color='%233B82F6' stop-opacity='0.4'/&gt;&lt;stop offset='100%' stop-color='%233B82F6' stop-opacity='0'/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;path d='M0,5 L25,12 L50,10 L75,16 L100,12 L100,20 L0,20 Z' fill='url(%23g2)' stroke='none'/&gt;&lt;path d='M0,5 L25,12 L50,10 L75,16 L100,12' fill='none' stroke='%233B82F6' stroke-width='1.5'/&gt;&lt;/svg&gt;') no-repeat center bottom; background-size: 100% 100%;"></div>
+            </div>
+
+            <t t-if="this.state.is_manager">
+                <div class="modern-card top-stat-card clickable hr_contract" t-on-click="hr_contract">
+                    <div class="stat-card-header">
+                        <div class="stat-card-icon bg-teal-light">
+                            <i class="fa fa-briefcase"/>
+                        </div>
+                        <div>
+                            <div class="stat-card-title">Contracts</div>
+                            <div class="stat-card-subtitle">Running</div>
+                        </div>
+                    </div>
+                    <div class="stat-card-value"><t t-esc="this.state.login_employee['contracts_count']"/></div>
+                    <div class="sparkline-container" style="position: absolute; bottom: 16px; left: 20px; width: calc(100% - 40px); height: 32px; z-index: 1; opacity: 0.8; background: url('data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'&gt;&lt;defs&gt;&lt;linearGradient id='g3' x1='0' y1='0' x2='0' y2='1'&gt;&lt;stop offset='0%' stop-color='%2314B8A6' stop-opacity='0.4'/&gt;&lt;stop offset='100%' stop-color='%2314B8A6' stop-opacity='0'/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;path d='M0,15 L30,14 L60,10 L80,12 L100,5 L100,20 L0,20 Z' fill='url(%23g3)' stroke='none'/&gt;&lt;path d='M0,15 L30,14 L60,10 L80,12 L100,5' fill='none' stroke='%2314B8A6' stroke-width='1.5'/&gt;&lt;/svg&gt;') no-repeat center bottom; background-size: 100% 100%;"></div>
+                </div>
+            </t>
+
+            <div class="modern-card top-stat-card clickable login_broad_factor" t-on-click="employee_broad_factor">
+                <div class="stat-card-header">
+                    <div class="stat-card-icon bg-orange-light">
+                        <i class="fa fa-line-chart"/>
+                    </div>
+                    <div>
+                        <div class="stat-card-title">Approved Leaves</div>
+                        <div class="stat-card-subtitle">Validated</div>
+                    </div>
+                </div>
+                <div class="stat-card-value"><t t-esc="this.state.login_employee['broad_factor']"/></div>
+                <div class="sparkline-container" style="position: absolute; bottom: 16px; left: 20px; width: calc(100% - 40px); height: 32px; z-index: 1; opacity: 0.8; background: url('data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'&gt;&lt;defs&gt;&lt;linearGradient id='g4' x1='0' y1='0' x2='0' y2='1'&gt;&lt;stop offset='0%' stop-color='%23F97316' stop-opacity='0.4'/&gt;&lt;stop offset='100%' stop-color='%23F97316' stop-opacity='0'/&gt;&lt;/linearGradient&gt;&lt;/defs&gt;&lt;path d='M0,8 L20,12 L40,8 L60,15 L80,14 L100,18 L100,20 L0,20 Z' fill='url(%23g4)' stroke='none'/&gt;&lt;path d='M0,8 L20,12 L40,8 L60,15 L80,14 L100,18' fill='none' stroke='%23F97316' stroke-width='1.5'/&gt;&lt;/svg&gt;') no-repeat center bottom; background-size: 100% 100%;"></div>
+            </div>
+
+            <!-- CHECK-IN CARD -->
+            <div class="modern-card checkin-card" t-ref="log_in_out">
+                <div>
+                    <div class="checkin-header">
+                        <t t-if="this.state.login_employee['attendance_state'] =='checked_out'">
+                            CHECKED OUT
+                            <span style="float:right; width: 8px; height: 8px; border-radius: 50%; background-color: #94a3b8; display: inline-block;"></span>
+                        </t>
+                        <t t-else="">
+                            CHECKED IN
+                            <span style="float:right; width: 8px; height: 8px; border-radius: 50%; background-color: #4ade80; display: inline-block;"></span>
+                        </t>
+                    </div>
+                    <div class="checkin-time">
+                        <t t-esc="this.state.checkin_time_str"/>
+                    </div>
+                    <div class="checkin-status">
+                        <t t-esc="this.state.checkin_since_str"/>
+                    </div>
+                </div>
+                <div t-attf-class="btn-checkin-action #{this.state.login_employee['attendance_state'] == 'checked_out' ? 'btn-action-in' : 'btn-action-out'}" t-on-click="attendance_sign_in_out">
+                    <t t-if="this.state.login_employee['attendance_state'] =='checked_out'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2" style="margin-right: 8px; margin-bottom: 2px;">
+                            <path d="M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        <span>Check In</span>
+                    </t>
+                    <t t-else="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2" style="margin-right: 8px; margin-bottom: 2px;">
+                            <path d="M9 6H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span>Check Out</span>
+                    </t>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-6 hr_timesheets oh-payslip oh-timesheets"
-                 t-on-click="hr_timesheets">
-                <div class="oh-card">
-                    <div class="oh-card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon"><i class="fa fa-clock-o"/></div>
-                            <div class="stat-content">
-                                <div class="stat-text">Timesheets</div>
-                                <div class="stat-digit"><t t-esc="this.state.login_employee['emp_timesheets']"/></div>
-                            </div>
+        </div>
+
+        <!-- Row 2: Profile Card + Attendance Trend -->
+        <div class="dashboard-grid-2-profile">
+            <!-- Profile Card -->
+            <div class="modern-card profile-card employee_prof">
+                <div class="profile-header-bg" style="background: linear-gradient(135deg, #0d2d5e 0%, #1B5298 60%, #1e6bb5 100%) !important;"></div>
+
+                <div class="profile-active-dot" t-attf-style="background-color: #{this.state.login_employee['attendance_state'] == 'checked_in' ? '#22c55e' : '#cbd5e1'};"></div>
+
+                <div class="profile-avatar-wrapper">
+                    <t t-if="this.state.login_employee['image_1920']">
+                        <img class="profile-avatar" t-att-src="'data:image/png;base64,'+this.state.login_employee['image_1920']" alt="Profile"/>
+                    </t>
+                    <t t-else="">
+                        <div class="profile-initials">
+                            <t t-esc="this.state.login_employee['name'].substring(0, 2).toUpperCase()"/>
+                        </div>
+                    </t>
+                </div>
+
+                <div class="profile-details">
+                    <div class="profile-name"><t t-esc="this.state.login_employee['name']"/></div>
+                    <div class="profile-job">
+                        <t t-if="this.state.login_employee['job_id']"><t t-esc="this.state.login_employee['job_id'][1]"/></t>
+                        <t t-else=""></t>
+                        <t t-if="this.state.login_employee['department_id']">
+                            · <t t-esc="this.state.login_employee['department_id'][1]"/>
+                        </t>
+                    </div>
+
+                    <div class="profile-grid-info">
+                        <div class="info-block">
+                            <span class="info-label">Position</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['job_id']"><t t-esc="this.state.login_employee['job_id'][1]"/></t>
+                                <t t-else="">-</t>
+                            </span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Department</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['department_id']"><t t-esc="this.state.login_employee['department_id'][1]"/></t>
+                                <t t-else="">-</t>
+                            </span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Joined</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['experience']"><t t-esc="this.state.login_employee['experience']"/></t>
+                                <t t-else="">-</t>
+                            </span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Employee ID</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['barcode']"><t t-esc="this.state.login_employee['barcode']"/></t>
+                                <t t-else="">-</t>
+                            </span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Nationality</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['country_id']"><t t-esc="this.state.login_employee['country_id'][1]"/></t>
+                                <t t-else="">-</t>
+                            </span>
+                        </div>
+                        <div class="info-block">
+                            <span class="info-label">Contact</span>
+                            <span class="info-value">
+                                <t t-if="this.state.login_employee['mobile_phone']"><t t-esc="this.state.login_employee['mobile_phone']"/></t>
+                                <t t-else="">-</t>
+                            </span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-6 hr_contract oh-payslip oh-contracts"
-                 t-on-click="hr_contract">
-                <div class="oh-card">
-                    <div class="oh-card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon"><i class="fa fa-fw fa-book"/></div>
-                            <div class="stat-content">
-                                <div class="stat-text">Contracts</div>
-                                <div class="stat-digit"><t t-esc="this.state.login_employee['contracts_count']"/></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-6 login_broad_factor oh-payslip oh-broad-factor"
-                 t-on-click="employee_broad_factor">
-                <div class="oh-card">
-                    <div class="oh-card-body">
-                        <div class="stat-widget-one">
-                            <div class="stat-icon"><i class="fa fa-bar-chart"/></div>
-                            <div class="stat-content">
-                                <div class="stat-text">Broad Factor</div>
-                                <div class="stat-digit"><t t-esc="this.state.login_employee['broad_factor']"/></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-2 hr_attendance_login">
-                <div class="oh-card">
-                    <div class="oh-card-body">
-                        <div class="stat-widget-one"
-                             t-ref="log_in_out"
-                             t-on-click="attendance_sign_in_out">
-                            <t t-if="this.state.login_employee['attendance_state'] =='checked_out'">
-                                <div class="stat-icon hr_attendance_btn">
-                                    <i class="fa fa-sign-in o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-text">Check In</div>
-                                </div>
+
+                <div t-attf-class="profile-status-box #{this.state.login_employee['attendance_state'] == 'checked_in' ? 'status-in' : 'status-out'}">
+                    <div class="profile-status-text">
+                        <i class="fa fa-clock-o"/>
+                        <div style="line-height: 1.2;">
+                            <t t-if="this.state.login_employee['attendance_state'] == 'checked_in'">
+                                <div>Checked in - <t t-esc="this.state.checkin_hm_str"/></div>
                             </t>
-                            <t t-if="this.state.login_employee['attendance_state'] =='checked_in'">
-                                <div class="stat-icon hr_attendance_btn">
-                                    <i class="fa fa-sign-out o_hr_attendance_sign_in_out_icon"/>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="stat-text">Check out</div>
-                                </div>
+                            <t t-else="">
+                                <div>Not checked in</div>
                             </t>
+                            <div class="status-subtext" style="font-size: 10px; margin-top: 2px;">
+                                <t t-esc="this.state.checkin_since_str"/>
+                            </div>
                         </div>
                     </div>
+                    <div class="profile-status-dot" t-attf-style="background-color: #{this.state.login_employee['attendance_state'] == 'checked_in' ? '#22c55e' : '#cbd5e1'};"></div>
+                </div>
+            </div>
+
+            <!-- Attendance Trend -->
+            <div class="modern-card chart-card user_attendance_trend">
+                <div class="chart-header">
+                    <span style="font-size: 15px; font-weight: 700; color: #1e293b;">Attendance trend</span>
+                </div>
+                <div class="chart-wrapper trend-graph" t-ref="leave_trend">
+                    <canvas id="leaveTrendChart"></canvas>
                 </div>
             </div>
         </div>
     </t>
 
-    <!-- ManagerDashboard Done -->
+    <!-- ManagerDashboard -->
     <t t-name="ManagerDashboard">
-        <div class="employee_dashboard_main">
-            <div class="row main-section">
-                <div class="col-md-2 col-sm-2 dummy"/>
-                <div class="col-sm-3 col-lg-3" style="padding-left: 0px;">
+        <!-- Row 3: Manager Stat Cards -->
+        <div class="dashboard-grid-3">
+            <div class="modern-card manager-stat-card clickable hr_leave_request_approve" t-on-click="leaves_to_approve">
+                <div class="manager-icon-wrap bg-amber-light">
+                    <i class="fa fa-plane"/>
+                </div>
+                <div>
+                    <div class="manager-val"><t t-esc="this.state.login_employee.leaves_to_approve"/></div>
+                    <div class="manager-title">Leave Requests</div>
+                </div>
+            </div>
 
-                    <div class="col-sm-12 col-lg-12 leave-manager">
-                        <div class="row" style="margin:0px">
-                            <div class="col-sm-6 col-lg-6 hr_leave_request_approve"
-                                 t-on-click="leaves_to_approve">
-                                <div class=" text-color">
-                                    <div class="oh-card-body pb-0">
-                                        <p class="stat-title">Leave Requests</p>
-                                        <h4 class="mb-0">
-                                            <p class="stat-count"><t t-esc="this.state.login_employee.leaves_to_approve"/></p>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-6" style="padding:0px">
-                                <div class="row" style="margin:0px">
-                                    <div class="col-sm-12 col-lg-12 leaves_request_today"
-                                         t-on-click="leaves_request_today">
-                                        <div class=" text-color">
-                                            <div class="oh-card-body">
-                                                 <p class="stat-title">Today</p>
-                                                <h4 class="mb-0">
-                                                    <p class="stat-count"><t t-esc="this.state.login_employee.leaves_today"/>
-                                                    </p>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-lg-12 leaves_request_month"
-                                         t-on-click="leaves_request_month">
-                                        <div class=" text-color">
-                                            <div class="oh-card-body">
-                                                <p class="stat-title">This Month</p>
-                                                <h4 class="mb-0">
-                                                    <p class="stat-count"><t t-esc="this.state.login_employee.leaves_this_month"/></p>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="modern-card manager-stat-card clickable hr_leave_allocations_approve" t-on-click="leave_allocations_to_approve">
+                <div class="manager-icon-wrap bg-sky-light">
+                    <i class="fa fa-calendar-plus-o"/>
+                </div>
+                <div>
+                    <div class="manager-val"><t t-esc="this.state.login_employee.leaves_alloc_req"/></div>
+                    <div class="manager-title">Leave Allocations</div>
+                </div>
+            </div>
 
-                    <div class="col-sm-12 col-lg-12" style="padding-right: 0;">
-                        <div class="row" style="margin:0px">
-                            <div class="col-sm-12 col-lg-12 hr_leave_allocations_approve"
-                                 t-on-click="leave_allocations_to_approve">
-                                <div class="oh-card text-color">
-                                    <div class="oh-card-body pb-0">
-                                         <p class="stat-title">Leave Allocation Requests</p>
-                                        <h4 class="mb-0">
-                                            <p class="stat-count"><t t-esc="this.state.login_employee.leaves_alloc_req"/></p>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-lg-12 hr_job_application_approve"
-                                 t-on-click="job_applications_to_approve">
-                                <div class="oh-card text-color">
-                                    <div class="oh-card-body pb-0">
-                                        <p class="stat-title">Job Applications</p>
-                                        <h4 class="mb-0">
-                                            <p class="stat-count"><t t-esc="this.state.login_employee.job_applications"/></p>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="modern-card manager-stat-card clickable hr_job_application_approve" t-on-click="job_applications_to_approve">
+                <div class="manager-icon-wrap bg-indigo-light">
+                    <i class="fa fa-suitcase"/>
                 </div>
-                <div class="col-sm-7 col-lg-7">
-                    <div class="col-sm-12 col-lg-12  graph_view"
-                         style="padding:0">
-                        <div class="text-color hr-chart-1">
-                            <div class="oh-card-body pb-0">
-                                <h4 class="mb-0">
-                                </h4>
-                                <div class="oh-ribbon"><span>Departments</span></div>
-                            </div>
-                            <div class="emp_graph" t-ref="emp_graph">
-                                <canvas id="employeePieChart"
-                                        style="width:100%;max-width:685px;padding-top:15px;padding-left: 20px;"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row main-section">
-                <div class="col-md-2 col-sm-2 dummy"/>
-                <div class="col-sm-10 col-lg-10  monthly_leave_graph_view">
-                    <div class="oh-card text-color">
-                        <div class="oh-card-body pb-0">
-                            <h4 class="mb-0">
-                            </h4>
-                            <p class="stat-head" style="padding : 0px;">Monthly Leave Analysis</p>
-                        </div>
-                        <div class="leave_graph" t-ref="leave_graph">
-                            <canvas id="leave_barChart"
-                                    style="width:100%;max-width:550px"/>
-                            <canvas id="leave_doughnutChart"
-                                    style="width:100%;max-width:600px"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row main-section">
-                <div class="col-md-2 col-sm-2 dummy"/>
-                <div class="col-sm-5 col-lg-5 monthly_join_resign_trend">
-                    <div class="oh-card text-color">
-                        <div class="oh-card-body pb-0">
-                            <h4 class="mb-0">
-                            </h4>
-                            <p class="stat-head" style="padding : 0px;">Monthly Join/Resign Analysis</p>
-                        </div>
-                        <div class="join_resign_trend"
-                             t-ref="join_resign_trend">
-                            <canvas id="lineChart"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-5 col-lg-5  monthly_attrition_rate">
-                    <div class="oh-card text-color">
-                        <div class="oh-card-body pb-0">
-                            <h4 class="mb-0">
-                            </h4>
-                            <p class="stat-head" style="padding : 0px;">Attrition Rate</p>
-                        </div>
-                        <div class="attrition_rate" t-ref="attrition_rate">
-                            <canvas id="attritionRateChart"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </t>
-
-    <!-- EmployeeDashboard Done -->
-    <t t-name="EmployeeDashboard">
-        <div class="row main-section">
-            <div class="col-md-2 col-sm-2 dummy"/>
-            <div class="col-sm-5 col-lg-5 user_attendance">
-                <div class="oh-card text-color">
-                    <div class="oh-card-body pb-0">
-                        <p class="stat_head" style="padding : 0px;">ATTENDANCE
-                            <div class="add_lines"
-                                 t-on-click="add_attendance">
-                                <i class="fa fa-plus"/>
-                            </div>
-                        </p>
-                    </div>
-                    <div class="attendance_table">
-                        <thead>
-                            <th>Date</th>
-                            <th>Sign In</th>
-                            <th>Sign Out</th>
-                            <th>Worked Hours</th>
-                        </thead>
-                        <tbody>
-                            <tr class="attendance_lines"
-                                t-foreach="this.state.login_employee['attendance_lines']"
-                                t-as="lines" t-key="lines['id']">
-                                <td t-esc="lines['date']"/>
-                                <td t-esc="lines['sign_in']"/>
-                                <td t-esc="lines['sign_out']"/>
-                                <td t-esc="lines['worked_hours']"/>
-                            </tr>
-                        </tbody>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-5 col-lg-5 user_leaves">
-                <div class="oh-card text-color">
-                    <div class="oh-card-body pb-0">
-                        <p class="stat_head" style="padding : 0px;">LEAVES</p>
-                        <div class="add_lines"
-                             t-on-click="add_leave">
-                                <i class="fa fa-plus"/>
-                            </div>
-                    </div>
-                    <div class="leaves_table">
-                        <thead>
-                            <th>From Date</th>
-                            <th>To Date</th>
-                            <th>Type</th>
-                            <th style="min-width:120px;">Status</th>
-                        </thead>
-                        <tbody>
-                            <tr class="leave_lines"
-                                t-foreach="this.state.login_employee['leave_lines']"
-                                t-as="lines" t-key="lines['id']">
-                                <td t-esc="lines['request_date_from']"/>
-                                <td t-esc="lines['request_date_to']"/>
-                                <td t-esc="lines['type']"/>
-                                <td>
-                                    <span class="state_td"
-                                          t-esc="lines['state']"
-                                          t-attf-style="background: #{lines['color']};"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </div>
+                <div>
+                    <div class="manager-val"><t t-esc="this.state.login_employee.job_applications"/></div>
+                    <div class="manager-title">Job Applications</div>
                 </div>
             </div>
         </div>
 
-        <div class="row main-section">
-    <div class="col-md-2 col-sm-2 dummy"/>
-    <div class="col-sm-5 col-lg-5 user_expense">
-        <div class="oh-card text-color">
-            <div class="oh-card-body pb-0">
-                <p class="stat_head" style="padding : 0px;">EXPENSES</p>
-                <div class="add_lines"
-                     t-on-click="add_expense">
-                    <i class="fa fa-plus"/>
+        <!-- Row 4: Charts -->
+        <div class="dashboard-grid-2">
+            <div class="modern-card chart-card graph_view">
+                <div class="chart-header">Employees by department</div>
+                <div class="chart-wrapper pie-chart-container emp_graph" style="display: flex; align-items: center; justify-content: space-between;" t-ref="emp_graph">
+                    <div style="width: 50%; height: 250px; position: relative;">
+                        <canvas id="employeePieChart"></canvas>
+                    </div>
+                    <div id="employeePieLegend" class="custom-pie-legend" style="width: 45%; max-height: 250px; overflow-y: auto;"></div>
                 </div>
             </div>
-            <div class="expense_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Subject</th>
-                            <th>Amount</th>
-                            <th style="min-width:120px;">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="expense_lines"
-                            t-foreach="this.state.login_employee['expense_lines']"
-                            t-as="lines" t-key="lines['id']">
-                            <td t-esc="lines['date']"/>
-                            <td t-esc="lines['name']"/>
-                            <td t-esc="lines['total_amount']"/>
-                            <td>
-                                <span class="state_td"
-                                      t-esc="lines['state']"
-                                      t-attf-style="background: #{lines['color']};"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="modern-card chart-card monthly_leave_graph_view">
+                <div class="chart-header">
+                    <span>Monthly leave analysis</span>
+                    <span class="badge" style="background-color: #F1F5F9; color: #64748B; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;">2026</span>
+                </div>
+                <div class="chart-wrapper leave_graph" t-ref="leave_graph">
+                    <canvas id="leave_barChart"></canvas>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-5 col-lg-5 projects">
-        <div class="oh-card text-color">
-            <div class="oh-card-body pb-0">
-                <p class="stat_head" style="padding : 0px;">PROJECTS</p>
-                <div class="add_lines"
-                     t-on-click="add_project_task">
-                    <i class="fa fa-plus"/>
-                </div>
-            </div>
-            <div class="leaves_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Project</th>
-                            <th>Task</th>
-                            <th>Due Date</th>
-                            <th style="min-width:120px;">Stage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="project_task_lines"
-                            t-foreach="this.state.login_employee['project_task_lines']"
-                            t-as="lines" t-key="lines['id']">
-                            <td t-esc="lines['project_name']"/>
-                            <td t-esc="lines['task_name']"/>
-                            <td t-esc="lines['date_deadline']"/>
-                            <td>
-                                <span class="state_td"
-                                      t-esc="lines['stage_name']"
-                                      t-attf-style="background: #6c757d;"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-
-
-
-        <div class="row main-section">
-            <div class="col-md-2 col-sm-2 dummy"/>
-            <div class="col-md-4 col-lg-3">
-                <div class="hr_notification">
-                    <div class="hr_notification-head">
-                        Upcoming Birthdays
+        <!-- Requests across Open HRMS -->
+        <div class="modern-card" style="margin-bottom: 24px; padding: 20px 24px;">
+            <div style="font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 20px;">Requests across Open HRMS</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                <!-- Item 1 -->
+                <div class="request-item-card" style="display: flex; align-items: center; gap: 16px; min-width: 150px; flex: 1; cursor: pointer;" t-on-click="open_loan_requests">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #8b5cf6; box-shadow: 0 8px 16px -4px rgba(139, 92, 246, 0.5); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        <i class="fa fa-money"/>
                     </div>
-                    <div class="col-xs-12 text-align">
-                        <t t-if="this.state.employee_birthday and this.state.employee_birthday.length > 0">
-                            <t t-foreach="this.state.employee_birthday"
-                               t-as="employee" t-key="employee['id']">
-                            <div class="col-sm-12 col-lg-12 birth_emp"
-                                 t-att-style="employee['is_birthday'] ? 'background: #3e6282;' : ''">
-                                <div class="text-color">
-                                    <div class="">
-                                        <div class="media">
-                                            <a href="#"
-                                               style="float: left;padding-right: 6%; pointer-events: none; cursor: default;padding-left:6%">
-                                                <img class="align-self-center birth_img"
-                                                     alt=""
-                                                     t-attf-src="/web/image?model=hr.employee&amp;id={{employee['id']}}&amp;field=image_1920"/>
-                                            </a>
-                                            <div class="media-body">
-                                                <h2 class="text-color display-6"
-                                                    t-att-style="employee['is_birthday'] ? 'color: white; font-weight:500' : ''">
-                                                    <t t-esc="employee['name']"/>
-                                                </h2>
-                                                <p t-att-style="employee['is_birthday'] ? 'color: white; font-weight:500' : ''"><t t-esc="employee['birthday']"/></p>
-                                                <t t-if="employee['is_birthday']">
-                                                    <span class="birthday">Happy Birthday..!! 🎁</span>
-                                                </t>
-                                                <t t-if="employee['days']">
-                                                    <span class="days_left"> <t
-                                                            t-esc="employee['days']"/>
-                                                        Days Left</span>
-                                                </t>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </t>
-                        </t>
-                        <t t-else="">
-                            <div class="text-center" style="padding: 20px; color: #6c757d;">
-                                <div style="font-size: 48px; margin-bottom: 10px;">🎂</div>
-                                <h4 style="margin-bottom: 8px; color: #495057;">No Upcoming Birthdays</h4>
-                                <p style="margin: 0; font-size: 14px;">There are no birthdays in the coming days.</p>
-                            </div>
-                        </t>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-3">
-                <div class="col-xs-12  hr_notification" style="padding: 0;">
-                    <div class="col-xs-12" style="padding:0;">
-                        <div class="hr_notification-head">
-                            Upcoming Events
+                    <div>
+                        <div style="font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center;">
+                            <t t-esc="this.state.open_hrms_requests['loan'] || 0"/> <i class="fa fa-angle-right" style="font-size: 14px; color: #94a3b8; margin-left: 8px; font-weight: normal;"/>
                         </div>
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b;">Loan Requests</div>
                     </div>
-                    <div class="col-xs-12 text-align">
-                        <t t-if="this.state.upcoming_events and this.state.upcoming_events.length > 0">
+                </div>
+                <!-- Divider -->
+                <div class="request-divider" style="width: 1px; height: 40px; background-color: #e2e8f0;"/>
+
+                <!-- Item 2 -->
+                <div class="request-item-card" style="display: flex; align-items: center; gap: 16px; min-width: 150px; flex: 1; cursor: pointer;" t-on-click="open_salary_advance">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #3b82f6; box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.5); color: white; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="fill: none;">
+                            <path d="M11 15h2a2 2 0 1 0 0-4h-3c-1.3 0-2.5.5-3.4 1.3L2.5 15.5l1.6 3A10 10 0 0 0 11 21h4c2.8 0 5-2.2 5-5V9.4A2.6 2.6 0 0 0 17.4 7a2.6 2.6 0 0 0-2.6 2.6V15" style="fill: none;"/>
+                            <circle cx="12" cy="7" r="3" style="fill: none;"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center;">
+                            <t t-esc="this.state.open_hrms_requests['salary_advance'] || 0"/> <i class="fa fa-angle-right" style="font-size: 14px; color: #94a3b8; margin-left: 8px; font-weight: normal;"/>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b;">Salary Advance</div>
+                    </div>
+                </div>
+                <!-- Divider -->
+                <div class="request-divider" style="width: 1px; height: 40px; background-color: #e2e8f0;"/>
+
+                <!-- Item 3 -->
+                <div class="request-item-card" style="display: flex; align-items: center; gap: 16px; min-width: 150px; flex: 1; cursor: pointer;" t-on-click="open_resignations">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #ef4444; box-shadow: 0 8px 16px -4px rgba(239, 68, 68, 0.5); color: white; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="fill: none;">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" style="fill: none;"/>
+                            <circle cx="9" cy="7" r="4" style="fill: none;"/>
+                            <line x1="22" y1="11" x2="16" y2="11" style="fill: none;"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center;">
+                            <t t-esc="this.state.open_hrms_requests['resignation'] || 0"/> <i class="fa fa-angle-right" style="font-size: 14px; color: #94a3b8; margin-left: 8px; font-weight: normal;"/>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b;">Resignations</div>
+                    </div>
+                </div>
+                <!-- Divider -->
+                <div class="request-divider" style="width: 1px; height: 40px; background-color: #e2e8f0;"/>
+
+                <!-- Item 4 -->
+                <div class="request-item-card" style="display: flex; align-items: center; gap: 16px; min-width: 150px; flex: 1; cursor: pointer;" t-on-click="open_transfers">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #10b981; box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.5); color: white; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="fill: none;">
+                            <line x1="6" y1="3" x2="6" y2="15" style="fill: none;"/>
+                            <circle cx="18" cy="6" r="3" style="fill: none;"/>
+                            <circle cx="6" cy="18" r="3" style="fill: none;"/>
+                            <path d="M18 9a9 9 0 0 1-9 9" style="fill: none;"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center;">
+                            <t t-esc="this.state.open_hrms_requests['transfer'] || 0"/> <i class="fa fa-angle-right" style="font-size: 14px; color: #94a3b8; margin-left: 8px; font-weight: normal;"/>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b;">Branch Transfers</div>
+                    </div>
+                </div>
+                <!-- Divider -->
+                <div class="request-divider" style="width: 1px; height: 40px; background-color: #e2e8f0;"/>
+
+                <!-- Item 5 -->
+                <div class="request-item-card" style="display: flex; align-items: center; gap: 16px; min-width: 150px; flex: 1; cursor: pointer;" t-on-click="open_service_requests">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background-color: #f59e0b; box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.5); color: white; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="fill: none;">
+                            <path d="m17 2 4 4-4 4" style="fill: none;"/>
+                            <path d="M3 11v-1a4 4 0 0 1 4-4h14" style="fill: none;"/>
+                            <path d="m7 22-4-4 4-4" style="fill: none;"/>
+                            <path d="M21 13v1a4 4 0 0 1-4 4H3" style="fill: none;"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 20px; font-weight: 700; color: #1e293b; display: flex; align-items: center;">
+                            <t t-esc="this.state.open_hrms_requests['shift'] || 0"/> <i class="fa fa-angle-right" style="font-size: 14px; color: #94a3b8; margin-left: 8px; font-weight: normal;"/>
+                        </div>
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b;">Service Requests</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Row 5: Charts -->
+        <div class="dashboard-grid-2" style="grid-template-columns: 2fr 1fr;">
+            <div class="modern-card chart-card monthly_join_resign_trend">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Join / Resign analysis</span>
+                    <div class="badge" style="background-color: #dcfce7; color: #166534; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px; display: flex; align-items: center;">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #16a34a; margin-right: 6px;"></span>
+                        <span id="attritionRateText">Attrition --%</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper join_resign_trend" t-ref="join_resign_trend">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <div id="joinResignLegend" style="display: flex; justify-content: center; gap: 24px; margin-top: 16px; font-size: 13px; font-weight: 600; color: #64748B;"></div>
+            </div>
+
+            <div class="modern-card chart-card department_leave_doughnut">
+                <div class="chart-header">
+                    <span>Department-wise leave</span>
+                </div>
+                <div class="chart-wrapper pie-chart-container" style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="width: 50%; height: 250px; position: relative;">
+                        <canvas id="leave_doughnutChart"></canvas>
+                    </div>
+                    <div id="leaveDoughnutLegend" class="custom-pie-legend" style="width: 45%; max-height: 250px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 6: Charts -->
+        <div class="dashboard-grid-2" style="grid-template-columns: 2fr 1fr;">
+            <div class="modern-card chart-card monthly_attrition_rate">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Attrition rate</span>
+                    <div class="badge" style="background-color: #dcfce7; color: #166534; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px; display: flex; align-items: center;">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #16a34a; margin-right: 6px;"></span>
+                        <span id="avgAttritionRateText">Avg --%</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper attrition_rate" t-ref="attrition_rate">
+                    <canvas id="attritionRateChart"></canvas>
+                </div>
+                <div id="attritionLegend" style="display: flex; justify-content: center; gap: 24px; margin-top: 16px; font-size: 13px; font-weight: 600; color: #64748B;"></div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="modern-card notification-card" style="height: 100%; max-height: unset; display: flex; flex-direction: column;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Upcoming Events</span>
+                    <a href="#" t-on-click="view_events" style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none;">View all <i class="fa fa-angle-right"/></a>
+                </div>
+                <div class="notification-list" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding-top: 16px;">
+                    <t t-if="this.state.upcoming_events and this.state.upcoming_events.length > 0">
                         <t t-foreach="this.state.upcoming_events" t-as="event" t-key="event['id']">
-    <div class="col-sm-12 col-lg-12" style="padding:0;">
-        <div class="text-color">
-            <div class="media">
-                <div class="media-body">
-                    <!-- Event Name -->
-                    <h2 class="text-color display-6" style="font-size: 15px;">
-                        <t t-esc="event['name']"/>
-                    </h2>
-
-                    <!-- Event Date -->
-                    <p>
-                        Date:
-                        <t t-esc="event['date_begin']"/> -
-                        <t t-esc="event['date_end']"/>
-                    </p>
-
-                    <!-- Venue -->
-                    <p>
-                        Venue:
-                        <t t-esc="event['address_id'] and event['address_id'][1] or 'Online'"/>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</t>
-
-                        </t>
-                        <t t-else="">
-                            <div class="text-center" style="padding: 20px; color: #6c757d;">
-                                <div style="font-size: 48px; margin-bottom: 10px;">📅</div>
-                                <h4 style="margin-bottom: 8px; color: #495057;">No Upcoming Events</h4>
-                                <p style="margin: 0; font-size: 14px;">No events scheduled for the coming days.</p>
-                            </div>
-                        </t>
-                    </div>
-                 </div>
-            </div>
-            <div class="col-md-4 col-lg-4">
-                <div class="col-xs-12  hr_notification" style="padding: 0;">
-                    <div class="col-xs-12" style="padding:0;">
-                        <div class="hr_notification-head">
-                            Announcements
-                        </div>
-                    </div>
-                    <div class="col-xs-12 text-align">
-                        <t t-if="this.state.announcements and this.state.announcements.length > 0">
-                        <t t-foreach="this.state.announcements"
-                           t-as="announcement" t-key="announcement">
-                            <div class="col-sm-12 col-lg-12" style="padding:0;">
-                                <div class="text-color">
-                                    <div class="">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h2 class="text-color display-6"
-                                                    style="font-size: 15px;"><t t-esc="announcement['announcement_reason']"/> </h2>
-                                                <p>Date : <t t-esc="announcement['date_start']"/>
-                                                    ---
-                                                    <t t-esc="announcement['date_end']"/>
-                                                </p>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="notification-item" style="display: flex; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; cursor: pointer;" t-on-click="view_event_record" t-att-data-id="event.id">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background-color: #f8fafc; border: 1px solid #e2e8f0; flex-shrink: 0;">
+                                    <span style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;"><t t-esc="event.event_month"/></span>
+                                    <span t-att-style="'font-size: 16px; font-weight: 700; color: ' + event.icon_color + ';'"><t t-esc="event.event_day"/></span>
+                                </div>
+                                <div class="notif-content" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+                                    <div class="notif-title" style="font-size: 14px; font-weight: 600; color: #1e293b; line-height: 1.2;"><t t-esc="event['name']"/></div>
+                                    <div class="notif-desc" style="font-size: 12px; color: #64748b; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fa fa-clock-o"/> <t t-esc="event.event_time"/> • <t t-esc="event.event_year"/>
                                     </div>
                                 </div>
-                            </t>
-                        </t>
-                        <t t-else="">
-                            <div class="text-center" style="padding: 20px; color: #6c757d;">
-                                <div style="font-size: 48px; margin-bottom: 10px;">📢</div>
-                                <h4 style="margin-bottom: 8px; color: #495057;">No Announcements</h4>
-                                <p style="margin: 0; font-size: 14px;">No announcements available at this time.</p>
                             </div>
                         </t>
-                    </div>
-                 </div>
-            </div>
-        </div>
-        <div class="row main-section">
-            <div class="col-md-2 col-sm-2 dummy"/>
-            <div class="col-sm-5 col-lg-5 monthly_join_resign_trend">
-                <div class="oh-card text-color">
-                    <div class="oh-card-body pb-0">
-                        <h4 class="mb-0">
-                        </h4>
-                        <p class="stat-head" style="padding : 0px;">My Leave Analysis</p>
-                    </div>
-                    <div class="leave_trend" t-ref="leave_trend"
-                         style="display: ruby-text;">
-                        <canvas id="leaveTrendChart"
-                                style="height: 270px;"/>
-                    </div>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No upcoming events</div>
+                        </div>
+                    </t>
                 </div>
             </div>
-            <div class="col-sm-5 col-lg-5  monthly_attrition_rate">
-                <div class="oh-card text-color">
-                    <div class="oh-card-body pb-0">
-                        <h4 class="mb-0">
-                        </h4>
-                        <p class="stat-head" style="padding : 0px;">My Skill Analysis</p>
-                    </div>
-                    <div class="skill">
-                        <canvas id="skillChart" style="height: 275px;"/>
-                    </div>
-                </div>
-                </div>
+
         </div>
+
+        <!-- Documents & Reminders Row -->
+        <div t-att-class="this.state.is_manager ? 'dashboard-grid-2' : ''" t-att-style="this.state.is_manager ? 'grid-template-columns: 2fr 1fr;' : 'display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 24px;'">
+            
+            <!-- Documents expiring soon -->
+            <t t-if="this.state.is_manager">
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>Documents expiring soon</span>
+                    <t t-if="this.state.urgent_count > 0">
+                        <span class="badge" style="background-color: #fee2e2; color: #b91c1c; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;"><i class="fa fa-circle" style="font-size: 6px; margin-right: 4px; vertical-align: middle;"/> <t t-esc="this.state.urgent_count"/> urgent</span>
+                    </t>
+                    <t t-else="">
+                        <span class="badge" style="background-color: #f1f5f9; color: #64748b; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;">0 urgent</span>
+                    </t>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.expiring_documents and this.state.expiring_documents.length > 0">
+                        <t t-foreach="this.state.expiring_documents" t-as="doc" t-key="doc.id">
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div t-attf-style="width: 36px; height: 36px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; background-color: #{doc.color};">
+                                        <t t-esc="doc.initials"/>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; color: #1e293b; font-size: 14px;"><t t-esc="doc.name"/></div>
+                                        <div style="color: #64748b; font-size: 12px;"><t t-esc="doc.type"/></div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <t t-if="doc.is_urgent">
+                                        <span class="badge" style="background-color: #fee2e2; color: #b91c1c; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;">
+                                            <i class="fa fa-circle" style="font-size: 6px; margin-right: 4px; vertical-align: middle;"/> in <t t-esc="doc.days_left"/> days
+                                        </span>
+                                    </t>
+                                    <t t-elif="doc.days_left &lt;= 30">
+                                        <span class="badge" style="background-color: #fef3c7; color: #b45309; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;">
+                                            <i class="fa fa-circle" style="font-size: 6px; margin-right: 4px; vertical-align: middle;"/> in <t t-esc="doc.days_left"/> days
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="badge" style="background-color: #e0f2fe; color: #0369a1; border-radius: 12px; font-weight: 600; padding: 4px 12px; font-size: 11px;">
+                                            <i class="fa fa-circle" style="font-size: 6px; margin-right: 4px; vertical-align: middle;"/> in <t t-esc="doc.days_left"/> days
+                                        </span>
+                                    </t>
+                                    <div t-on-click="send_document_reminder" t-att-data-id="doc.id" style="width: 32px; height: 32px; border-radius: 8px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; color: #64748b; cursor: pointer;" title="Send Reminder">
+                                        <i class="fa fa-bell-o"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No upcoming document expirations!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            </t>
+
+            <!-- Reminders & to-do -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>Reminders &amp; to-do</span>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" t-on-click="view_reminders" style="color: #8b5cf6; font-size: 13px; font-weight: 600; text-decoration: none;">Reminders <i class="fa fa-angle-right"/></a>
+                        <a href="#" t-on-click="view_activities" style="color: #14b8a6; font-size: 13px; font-weight: 600; text-decoration: none;">To-dos <i class="fa fa-angle-right"/></a>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.activities and this.state.activities.length > 0">
+                        <t t-foreach="this.state.activities" t-as="act" t-key="act.id + act.type">
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <t t-if="act.is_done">
+                                        <div t-attf-style="width: 20px; height: 20px; border-radius: 6px; background-color: #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'}; color: white; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fa fa-check" style="font-size: 12px;"/>
+                                        </div>
+                                        <span style="font-size: 13px; font-weight: 500; color: #94a3b8; text-decoration: line-through;"><t t-esc="act.title"/></span>
+                                    </t>
+                                    <t t-else="">
+                                        <div t-on-click="mark_activity_done" t-att-data-id="act.id" t-att-data-type="act.type" t-attf-style="width: 20px; height: 20px; border-radius: 6px; border: 2px solid #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'}; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Mark as done">
+                                        </div>
+                                        <span t-attf-style="font-size: 13px; font-weight: 600; color: #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'};"><t t-esc="act.title"/></span>
+                                    </t>
+                                </div>
+                                <t t-if="act.badge_class == 'badge-yellow'">
+                                    <span class="badge" style="background-color: #fef3c7; color: #b45309; border-radius: 12px; font-weight: 600; padding: 4px 10px; font-size: 11px;"><t t-esc="act.date_str"/></span>
+                                </t>
+                                <t t-elif="act.badge_class == 'badge-red'">
+                                    <span class="badge" style="background-color: #fee2e2; color: #b91c1c; border-radius: 12px; font-weight: 600; padding: 4px 10px; font-size: 11px;"><t t-esc="act.date_str"/></span>
+                                </t>
+                                <t t-else="">
+                                    <span style="font-size: 12px; color: #64748b; background-color: #f1f5f9; padding: 2px 8px; border-radius: 12px; font-weight: 500;"><t t-esc="act.date_str"/></span>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">You have no pending reminders!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Action items Row -->
+        <div class="dashboard-grid-3">
+            <!-- Pending approvals -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; padding-bottom: 0; margin-bottom: 24px;">
+                    <span style="font-size: 18px; font-weight: 700; color: #1e293b;">Pending approvals</span>
+                    <t t-if="this.state.pending_approvals and this.state.pending_approvals.length > 0">
+                        <div class="awaiting-badge">
+                            <span class="awaiting-dot"></span>
+                            <t t-esc="this.state.pending_approvals.length"/> awaiting
+                        </div>
+                    </t>
+                </div>
+                <div class="approvals-list">
+                    <t t-if="this.state.pending_approvals and this.state.pending_approvals.length > 0">
+                        <t t-foreach="this.state.pending_approvals" t-as="approval" t-key="approval.id">
+                            <div class="approval-item">
+                                <div style="display: flex; align-items: center; gap: 16px;">
+                                    <div class="avatar-circle" t-attf-style="background-color: #{approval.color};">
+                                        <t t-esc="approval.initials"/>
+                                    </div>
+                                    <div class="approval-info">
+                                        <div class="approval-name"><t t-esc="approval.name"/></div>
+                                        <div class="approval-subtitle"><t t-esc="approval.subtitle"/></div>
+                                    </div>
+                                </div>
+                                <div class="approval-actions">
+                                    <button class="btn-reject" t-on-click="reject_leave" t-att-data-id="approval.id">
+                                        <i class="fa fa-times"/>
+                                    </button>
+                                    <button class="btn-approve" t-on-click="approve_leave" t-att-data-id="approval.id">
+                                        <i class="fa fa-check"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No pending approvals!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Upcoming Birthdays -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>Upcoming birthdays</span>
+                    <a href="#" t-on-click="view_birthdays" style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none;">View all <i class="fa fa-angle-right"/></a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.employee_birthday and this.state.employee_birthday.length > 0">
+                        <t t-foreach="this.state.employee_birthday" t-as="bday" t-key="bday.id">
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div t-attf-style="width: 36px; height: 36px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; background-color: #{bday.color};">
+                                        <t t-esc="bday.initials"/>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 600; color: #1e293b; font-size: 14px;"><t t-esc="bday.name"/></div>
+                                        <div style="color: #64748b; font-size: 11px;"><t t-esc="bday.department"/></div>
+                                    </div>
+                                </div>
+                                <t t-if="bday.display_date == 'Today'">
+                                    <span class="badge" style="background-color: #e0f2fe; color: #0369a1; border-radius: 12px; font-weight: 600; padding: 4px 10px; font-size: 11px;"><t t-esc="bday.display_date"/></span>
+                                </t>
+                                <t t-else="">
+                                    <span style="font-size: 12px; color: #64748b; background-color: #f1f5f9; padding: 2px 8px; border-radius: 12px; font-weight: 500;"><t t-esc="bday.display_date"/></span>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No upcoming birthdays!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Announcements -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>Announcements</span>
+                    <a href="#" t-on-click="view_announcements" style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none;">View all <i class="fa fa-angle-right"/></a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.announcements and this.state.announcements.length > 0">
+                        <t t-foreach="this.state.announcements" t-as="ann" t-key="ann.id">
+                            <div style="display: flex; align-items: flex-start; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="width: 32px; height: 32px; border-radius: 8px; background-color: #eff6ff; color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 2px;"><i class="fa fa-bullhorn"/></div>
+                                <div>
+                                    <div style="font-weight: 600; color: #1e293b; font-size: 13px; line-height: 1.4;"><t t-esc="ann.announcement_reason"/></div>
+                                    <div style="color: #94a3b8; font-size: 11px; margin-top: 2px;"><t t-esc="ann.author"/> · <t t-esc="ann.time_ago"/></div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No recent announcements!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            </div>
     </t>
 
-    <!-- EmployeeWarning Done -->
+    <!-- EmployeeDashboard -->
+    <t t-name="EmployeeDashboard">
+        <t t-if="!this.state.is_manager">
+        <!-- Documents & Reminders Row -->
+        <div style="display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 24px;">
+
+            <!-- Reminders & to-do -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>
+                        <t t-if="this.state.open_hrms_requests and this.state.open_hrms_requests['hr_reminder']">Reminders &amp; to-do</t>
+                        <t t-else="">To-dos</t>
+                    </span>
+                    <div style="display: flex; gap: 12px;">
+                        <t t-if="this.state.open_hrms_requests and this.state.open_hrms_requests['hr_reminder']">
+                            <a href="#" t-on-click="view_reminders" style="color: #8b5cf6; font-size: 13px; font-weight: 600; text-decoration: none;">Reminders <i class="fa fa-angle-right"/></a>
+                        </t>
+                        <a href="#" t-on-click="view_activities" style="color: #14b8a6; font-size: 13px; font-weight: 600; text-decoration: none;">To-dos <i class="fa fa-angle-right"/></a>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.activities and this.state.activities.length > 0">
+                        <t t-foreach="this.state.activities" t-as="act" t-key="act.id + act.type">
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <t t-if="act.is_done">
+                                        <div t-attf-style="width: 20px; height: 20px; border-radius: 6px; background-color: #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'}; color: white; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fa fa-check" style="font-size: 12px;"/>
+                                        </div>
+                                        <span style="font-size: 13px; font-weight: 500; color: #94a3b8; text-decoration: line-through;"><t t-esc="act.title"/></span>
+                                    </t>
+                                    <t t-else="">
+                                        <div t-on-click="mark_activity_done" t-att-data-id="act.id" t-att-data-type="act.type" t-attf-style="width: 20px; height: 20px; border-radius: 6px; border: 2px solid #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'}; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Mark as done">
+                                        </div>
+                                        <span t-attf-style="font-size: 13px; font-weight: 600; color: #{act.type == 'reminder' ? '#8b5cf6' : '#14b8a6'};"><t t-esc="act.title"/></span>
+                                    </t>
+                                </div>
+                                <t t-if="act.badge_class == 'badge-yellow'">
+                                    <span class="badge" style="background-color: #fef3c7; color: #b45309; border-radius: 12px; font-weight: 600; padding: 4px 10px; font-size: 11px;"><t t-esc="act.date_str"/></span>
+                                </t>
+                                <t t-elif="act.badge_class == 'badge-red'">
+                                    <span class="badge" style="background-color: #fee2e2; color: #b91c1c; border-radius: 12px; font-weight: 600; padding: 4px 10px; font-size: 11px;"><t t-esc="act.date_str"/></span>
+                                </t>
+                                <t t-else="">
+                                    <span style="font-size: 12px; color: #64748b; background-color: #f1f5f9; padding: 2px 8px; border-radius: 12px; font-weight: 500;"><t t-esc="act.date_str"/></span>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">You have no pending reminders!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="dashboard-grid-2">
+            <!-- Upcoming Events -->
+            <div class="modern-card notification-card" style="height: 100%; max-height: unset; display: flex; flex-direction: column;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Upcoming Events</span>
+                    <a href="#" t-on-click="view_events" style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none;">View all <i class="fa fa-angle-right"/></a>
+                </div>
+                <div class="notification-list" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding-top: 16px;">
+                    <t t-if="this.state.upcoming_events and this.state.upcoming_events.length > 0">
+                        <t t-foreach="this.state.upcoming_events" t-as="event" t-key="event['id']">
+                            <div class="notification-item" style="display: flex; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; cursor: pointer;" t-on-click="view_event_record" t-att-data-id="event.id">
+                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background-color: #f8fafc; border: 1px solid #e2e8f0; flex-shrink: 0;">
+                                    <span style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;"><t t-esc="event.event_month"/></span>
+                                    <span t-att-style="'font-size: 16px; font-weight: 700; color: ' + event.icon_color + ';'"><t t-esc="event.event_day"/></span>
+                                </div>
+                                <div class="notif-content" style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+                                    <div class="notif-title" style="font-size: 14px; font-weight: 600; color: #1e293b; line-height: 1.2;"><t t-esc="event['name']"/></div>
+                                    <div class="notif-desc" style="font-size: 12px; color: #64748b; font-weight: 500; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fa fa-clock-o"/> <t t-esc="event.event_time"/> • <t t-esc="event.event_year"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No upcoming events</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+
+
+            <!-- Announcements -->
+            <div class="modern-card" style="padding: 24px;">
+                <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span>Announcements</span>
+                    <a href="#" t-on-click="view_announcements" style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none;">View all <i class="fa fa-angle-right"/></a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <t t-if="this.state.announcements and this.state.announcements.length > 0">
+                        <t t-foreach="this.state.announcements" t-as="ann" t-key="ann.id">
+                            <div style="display: flex; align-items: flex-start; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9;">
+                                <div style="width: 32px; height: 32px; border-radius: 8px; background-color: #eff6ff; color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 2px;"><i class="fa fa-bullhorn"/></div>
+                                <div>
+                                    <div style="font-weight: 600; color: #1e293b; font-size: 13px; line-height: 1.4;"><t t-esc="ann.announcement_reason"/></div>
+                                    <div style="color: #94a3b8; font-size: 11px; margin-top: 2px;"><t t-esc="ann.author"/> · <t t-esc="ann.time_ago"/></div>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="empty-state" style="padding: 24px 0; text-align: center;">
+                            <div style="color: #94a3b8; font-size: 14px;">No recent announcements!</div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            </div>
+        </t>
+    </t>
+
+    <!-- EmployeeWarning -->
     <t t-name="EmployeeWarning">
         <div>
             <p>Error : Could not find employee linked to user</p>

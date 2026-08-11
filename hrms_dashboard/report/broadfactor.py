@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -53,10 +53,12 @@ class EmployeeBroadFactor(models.Model):
 
 
 class ReportOverdue(models.AbstractModel):
+    """Report Overdue for Broadfactor."""
     _name = 'report.hrms_dashboard.report_broadfactor'
 
     @api.model
     def get_report_values(self, docids=None, data=None):
+        """Retrieve the broad factor report values for rendering the template."""
         sql = """select * from hr_employee_broad_factor"""
         self.env.cr.execute(sql)
         lines = self.env.cr.dictfetchall()
