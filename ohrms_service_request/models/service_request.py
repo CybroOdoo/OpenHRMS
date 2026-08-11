@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -21,7 +21,7 @@
 #
 #############################################################################
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class ServiceRequest(models.Model):
@@ -29,6 +29,7 @@ class ServiceRequest(models.Model):
     _name = 'service.request'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Service Request"
+    _order = "create_date desc"
 
     def _get_employee_id(self):
         """Current employee"""
@@ -36,12 +37,12 @@ class ServiceRequest(models.Model):
             [('user_id', '=', self.env.uid)], limit=1)
         return employee_rec.id
 
-    service_name = fields.Char(required=True, string="Reason For Service",
+    service_name = fields.Char(required=True, string="Subject", tracking=True,
                                help="Service name")
     employee_id = fields.Many2one('hr.employee', string="Employee",
                                   default=_get_employee_id, readonly=True,
-                                  required=True, help="Related Employee")
-    service_date = fields.Datetime(string="date", required=True,
+                                  required=True, tracking=True, help="Related Employee")
+    service_date = fields.Datetime(string="Service Date", required=True, tracking=True,
                                    help="Service date")
     state = fields.Selection([('draft', 'Draft'),
                               ('requested', 'Requested'),
@@ -51,27 +52,28 @@ class ServiceRequest(models.Model):
                               ('approved', 'Approved')], default='draft',
                              tracking=True, help="Stages of serice")
     service_executor_id = fields.Many2one('hr.employee',
-                                          string='Service Executor',
+                                          string='Assigned To', tracking=True,
                                           help="Employee- executor for "
                                                "this service")
     read_only = fields.Boolean(string="Check field",
                                compute='_compute_read_only',
                                help="checking project manager privileges")
-    tester_ids = fields.One2many('service.execute',
-                                 'test_id', string='Tester',
-                                 help="Related services")
-    internal_note = fields.Text(string="internal notes",
+    execution_ids = fields.One2many('service.execute',
+                                 'request_id', string='Executions',
+                                 help="Related service executions")
+    execution_count = fields.Integer(compute='_compute_execution_count', string='Execution Count')
+    internal_note = fields.Text(string="Description",
                                 help="Notes for the internal purpose")
-    service_type = fields.Selection([('repair', 'Repair'),
-                                     ('replace', 'Replace'),
-                                     ('updating', 'Updating'),
-                                     ('checking', 'Checking'),
-                                     ('adjust', 'Adjustment'),
-                                     ('other', 'Other')],
-                                    string='Type Of Service', required=True,
-                                    help="Type for the service request")
+    service_type = fields.Many2one('service.category', string='Service Type',
+                                   required=True, tracking=True, help="Type for the service request")
+    priority = fields.Selection([
+        ('0', 'Normal'),
+        ('1', 'Low'),
+        ('2', 'High'),
+        ('3', 'Very High')], string='Priority', default='0', tracking=True)
+    deadline_date = fields.Datetime(string="Deadline", tracking=True, help="Expected completion deadline")
     service_product_id = fields.Many2one('product.product',
-                                         string='Item For Service',
+                                         string='Product/Asset', tracking=True,
                                          required=True,
                                          help="Product you want to service")
     name = fields.Char(string='Reference', required=True, copy=False,
@@ -85,15 +87,32 @@ class ServiceRequest(models.Model):
             val['name'] = self.env['ir.sequence'].next_by_code('service.request')
         return super(ServiceRequest, self).create(vals)
 
-    @api.depends('read_only')
+    @api.depends_context('uid')
     def _compute_read_only(self):
-        """Compute method to determine if the user has project manager
-        privileges."""
-        res_user = self.env['res.users'].search([('id', '=', self._uid)])
-        if res_user.has_group('project.group_project_manager'):
-            self.read_only = True
-        else:
-            self.read_only = False
+        """Compute method to determine if the user has project manager privileges."""
+        for record in self:
+            if self.env.user.has_group('project.group_project_manager') or self.env.user.has_group('hr_attendance.group_hr_attendance_manager'):
+                record.read_only = True
+            else:
+                record.read_only = False
+
+    @api.depends('execution_ids')
+    def _compute_execution_count(self):
+        """Compute the total number of executions for the service request."""
+        for record in self:
+            record.execution_count = len(record.execution_ids)
+
+    def action_open_executions(self):
+        """Open the tree/form view of related service executions."""
+        self.ensure_one()
+        return {
+            'name': _('Service Executions'),
+            'view_mode': 'list,form',
+            'res_model': 'service.execute',
+            'domain': [('request_id', '=', self.id)],
+            'context': {'default_request_id': self.id},
+            'type': 'ir.actions.act_window',
+        }
 
     def action_submit_reg(self):
         """ Change the state of the service request to 'requested'."""
@@ -117,19 +136,28 @@ class ServiceRequest(models.Model):
             'executor_id': self.service_executor_id.id,
             'client_id': self.employee_id.id,
             'executor_product': self.service_product_id.name,
-            'type_service': self.service_type,
+            'type_service': self.service_type.id,
             'execute_date': self.service_date,
             'state_execute': self.state,
             'notes': self.internal_note,
-            'test_id': self.id,
+            'request_id': self.id,
         }
-        self.env['service.execute'].sudo().create(vals)
+        execute_rec = self.env['service.execute'].sudo().create(vals)
+        
+        # Send email/message notification to the assigned executor
+        if self.service_executor_id.user_id:
+            execute_rec.message_post(
+                body='You have been assigned to execute this service request. Please review and complete it.',
+                subject='Service Execution Assigned',
+                partner_ids=[self.service_executor_id.user_id.partner_id.id],
+                message_type='comment',
+            )
         return
 
     def action_service_approval(self):
         """Approve the service request"""
         for record in self:
-            record.tester_ids.sudo().state_execute = 'approved'
+            record.execution_ids.sudo().state_execute = 'approved'
             record.write({
                 'state': 'approved'
             })
@@ -141,3 +169,10 @@ class ServiceRequest(models.Model):
             'state': 'reject'
         })
         return
+
+    def unlink(self):
+        """ Prevent deletion of records unless they are in 'draft' or 'reject' state. """
+        for request in self:
+            if request.state not in ('draft', 'reject'):
+                raise UserError(_("You can only delete service requests that are in 'Draft' or 'Rejected' state."))
+        return super(ServiceRequest, self).unlink()

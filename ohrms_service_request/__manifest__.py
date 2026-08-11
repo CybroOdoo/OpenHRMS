@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': "Open HRMS Service Request",
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': """For Requesting Services""",
     'description': """It allows employees to submit service requests related to 
@@ -34,10 +34,11 @@
     'depends': ['hr', 'stock', 'oh_employee_creation_from_user', 'project',
                 'hr_attendance'],
     'data': [
+        'security/ohrms_service_request_groups.xml',
         'security/ir.model.access.csv',
         'security/service_request_security.xml',
-        'security/ohrms_service_request_groups.xml',
         'data/service_request_sequence.xml',
+        'data/service_category_data.xml',
         'views/service_request_views.xml',
         'views/service_execute_views.xml',
     ],

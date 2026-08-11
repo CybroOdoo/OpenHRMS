@@ -20,5 +20,15 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import models
+from odoo import fields, models
 
+
+class ServiceCategory(models.Model):
+    """ Model representing a service request category """
+    _name = 'service.category'
+    _description = "Service Category"
+    _order = 'name'
+
+    name = fields.Char(string='Category Name', required=True, translate=True)
+    active = fields.Boolean(default=True, help="Set active to false to hide the category without removing it.")
+    description = fields.Text(string='Description', help="Guidelines or details about this category.")

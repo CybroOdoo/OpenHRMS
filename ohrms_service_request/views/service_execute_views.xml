@@ -6,13 +6,16 @@
         <field name="model">service.execute</field>
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
-            <list string="Service Execute">
-                <field name="client_id"/>
+            <list string="Service Execute" decoration-danger="deadline_date &lt; current_date and state_execute not in ('check', 'approved', 'reject')">
+                <field name="request_id"/>
+                <field name="client_id" widget="many2one_avatar"/>
                 <field name="executor_product"/>
-                <field name="executor_id"/>
+                <field name="executor_id" widget="many2one_avatar"/>
                 <field name="issue"/>
                 <field name="execute_date"/>
-                <field name="state_execute"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="deadline_date" optional="show"/>
+                <field name="state_execute" widget="badge" decoration-info="state_execute in ('draft', 'requested')" decoration-warning="state_execute == 'assign'" decoration-primary="state_execute == 'check'" decoration-success="state_execute == 'approved'"/>
             </list>
         </field>
     </record>
@@ -28,15 +31,22 @@
                             groups="ohrms_service_request.service_group_executor"
                             invisible="state_execute in ['check','approved']"/>
                     <field name="state_execute" widget="statusbar"
-                           statusbar_visible="draft,requested,approved"/>
+                           statusbar_visible="draft,requested,assign,check"/>
                 </header>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="priority" widget="priority" class="me-3" readonly="1"/>
+                            <field name="issue" readonly="1"/>
+                        </h1>
+                    </div>
                     <group col="4" colspan="4" string="Service Execution">
+                        <field name="request_id" readonly="1"/>
                         <field name="client_id"/>
                         <field name="execute_date"/>
                         <field name="type_service"/>
                         <field name="executor_id"/>
-                        <field name="issue"/>
+                        <field name="deadline_date" readonly="1"/>
                         <field name="executor_product"/>
                     </group>
                     <notebook>
@@ -64,5 +74,5 @@
     <menuitem id="execute_service" name="Service Execution"
               parent="service_root"
               action="service_execute_action"
-              groups="ohrms_service_request.service_group_executor"/>
+              groups="ohrms_service_request.service_group_executor" sequence="20"/>
 </odoo>

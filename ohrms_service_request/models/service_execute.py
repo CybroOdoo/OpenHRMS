@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -29,6 +29,7 @@ class ServiceExecute(models.Model):
     _rec_name = 'issue'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Service Execute'
+    _order = 'create_date desc'
 
     client_id = fields.Many2one('hr.employee', string="Client",
                                 help="Name of the client")
@@ -44,19 +45,30 @@ class ServiceExecute(models.Model):
             , ('check', 'Checked'), ('reject', 'Rejected'),
          ('approved', 'Approved')], string="State", tracking=True,
         help="state of the request")
-    test_id = fields.Many2one('service.request', string='test',
-                              help="Test service")
+    request_id = fields.Many2one('service.request', string='Service Request',
+                              ondelete='cascade', help="Test service")
     notes = fields.Text(string="Internal notes", help="Any description")
     executor_product = fields.Char(string='Service Item',
                                    help="Which item is going to service")
-    type_service = fields.Char(string='Service Type',
+    type_service = fields.Many2one('service.category', string='Service Type',
                                help="Which type of service")
+    priority = fields.Selection(related='request_id.priority', string='Priority')
+    deadline_date = fields.Datetime(related='request_id.deadline_date', string='Deadline')
 
     def action_service_check(self):
         """ Change the state of the associated 'service.request' object to
             'check' and update the 'state_execute' field to 'check'."""
-        self.test_id.sudo().state = 'check'
+        self.request_id.sudo().state = 'check'
         self.write({
             'state_execute': 'check'
         })
+        
+        # Send email/message notification to the manager who created/assigned it
+        if self.request_id.create_uid:
+            self.request_id.sudo().message_post(
+                body='Execution completed by technician. Please review and approve the service request.',
+                subject='Service Execution Completed',
+                partner_ids=[self.request_id.create_uid.partner_id.id],
+                message_type='comment',
+            )
         return
