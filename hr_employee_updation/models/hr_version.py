@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -32,7 +32,7 @@ class HrVersion(models.Model):
     notice_days = fields.Integer(
         string="Notice Period",
         compute="_compute_notice_days",
-        store=False,  # keep False if you want it dynamic
+        store=False,
         help="Number of days required for notice before termination."
     )
 

@@ -20,8 +20,14 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_version
-from . import hr_employee
-from . import hr_employee_family
-from . import hr_employee_relation
-from . import res_config_settings
+from odoo import fields, models
+
+class ResCompany(models.Model):
+    """
+    Extends res.company to add default configuration days for
+    ID and Passport expiry notifications.
+    """
+    _inherit = 'res.company'
+
+    id_expiry_days = fields.Integer(string='ID Expiry Notification Days', default=14)
+    passport_expiry_days = fields.Integer(string='Passport Expiry Notification Days', default=180)

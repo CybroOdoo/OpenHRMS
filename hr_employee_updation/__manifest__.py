@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Employee Info',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': """Adding Advanced Fields In Employee Master""",
     'description': 'This module helps you to add more information '
@@ -39,6 +39,7 @@
         'data/ir_cron_data.xml',
         'views/hr_version_views.xml',
         'views/hr_employee_views.xml',
+        'views/res_config_settings_views.xml',
     ],
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',

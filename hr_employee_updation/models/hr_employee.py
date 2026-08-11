@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -41,8 +41,6 @@ class HrEmployee(models.Model):
                                     " contract start date")
     id_expiry_date = fields.Date(help='Expiry date of Identification document',
                                  string='Expiry Date',)
-    passport_expiry_date = fields.Date(help='Expiry date of Passport ID',
-                                       string='Expiry Date')
     identification_attachment_ids = fields.Many2many(
         'ir.attachment', 'id_attachment_rel',
         'id_ref', 'attach_ref', string="Attachment",
@@ -80,43 +78,87 @@ class HrEmployee(models.Model):
 
     def expiry_mail_reminder(self):
         """Sending  ID and Passport expiry notification."""
-        current_date = fields.Date.context_today(self) + timedelta(days=1)
+        current_date = fields.Date.context_today(self)
         employee_ids = self.search(['|', ('id_expiry_date', '!=', False),
-                                    ('passport_expiry_date', '!=', False)])
+                                    ('passport_expiration_date', '!=', False)])
         for employee in employee_ids:
             if employee.id_expiry_date:
+                id_days = int(self.env['ir.config_parameter'].sudo().get_param('hr_employee_updation.id_expiry_days', 14))
                 exp_date = fields.Date.from_string(
-                    employee.id_expiry_date) - timedelta(days=14)
-                if current_date >= exp_date:
+                    employee.id_expiry_date) - timedelta(days=id_days)
+                if current_date == exp_date:
                     mail_content = ("Hello  " + employee.name + ",<br>Your ID "
-                                    + employee.identification_id +
+                                    + (employee.identification_id or '') +
                                     " is going to expire on " +
                                     str(employee.id_expiry_date)
                                     + ". Please renew it before expiry date")
                     main_content = {
                         'subject': _('ID-%s Expired On %s') % (
-                            employee.identification_id,
+                            employee.identification_id or '',
                             employee.id_expiry_date),
                         'author_id': self.env.user.partner_id.id,
                         'body_html': mail_content,
-                        'email_to': employee.work_email,
+                        'email_to': employee.work_email or employee.private_email,
                     }
                     self.env['mail.mail'].sudo().create(main_content).send()
-            if employee.passport_expiry_date:
+            if employee.passport_expiration_date:
+                passport_days = int(self.env['ir.config_parameter'].sudo().get_param('hr_employee_updation.passport_expiry_days', 180))
                 exp_date = fields.Date.from_string(
-                    employee.passport_expiry_date) - timedelta(days=180)
-                if current_date >= exp_date:
+                    employee.passport_expiration_date) - timedelta(days=passport_days)
+                if current_date == exp_date:
                     mail_content = ("  Hello  " + employee.name +
-                                    ",<br>Your Passport " + employee.passport_id
+                                    ",<br>Your Passport " + (employee.passport_id or '')
                                     +" is going to expire on " +
-                                    str(employee.passport_expiry_date) +
+                                    str(employee.passport_expiration_date) +
                                     ". Please renew it before expire")
                     main_content = {
                         'subject': _('Passport-%s Expired On %s') % (
-                            employee.passport_id,
-                            employee.passport_expiry_date),
+                            employee.passport_id or '',
+                            employee.passport_expiration_date),
                         'author_id': self.env.user.partner_id.id,
                         'body_html': mail_content,
-                        'email_to': employee.work_email,
+                        'email_to': employee.work_email or employee.private_email,
                     }
                     self.env['mail.mail'].sudo().create(main_content).send()
+
+    def action_send_manual_reminder_id(self):
+        """Manually send ID expiry notification to the employee."""
+        for employee in self:
+            if not employee.id_expiry_date:
+                continue
+            mail_content = ("Hello  " + employee.name + ",<br>This is a reminder that your ID "
+                            + (employee.identification_id or '') +
+                            " is going to expire on " +
+                            str(employee.id_expiry_date)
+                            + ". Please renew it before expiry date")
+            main_content = {
+                'subject': _('Reminder: ID-%s Expiring On %s') % (
+                    employee.identification_id or '',
+                    employee.id_expiry_date),
+                'author_id': self.env.user.partner_id.id,
+                'body_html': mail_content,
+                'email_to': employee.work_email,
+            }
+            self.env['mail.mail'].sudo().create(main_content).send()
+        return True
+
+    def action_send_manual_reminder_pass(self):
+        """Manually send Passport expiry notification to the employee."""
+        for employee in self:
+            if not employee.passport_expiration_date:
+                continue
+            mail_content = ("Hello  " + employee.name +
+                            ",<br>This is a reminder that your Passport " + (employee.passport_id or '')
+                            +" is going to expire on " +
+                            str(employee.passport_expiration_date) +
+                            ". Please renew it before expire")
+            main_content = {
+                'subject': _('Reminder: Passport-%s Expiring On %s') % (
+                    employee.passport_id or '',
+                    employee.passport_expiration_date),
+                'author_id': self.env.user.partner_id.id,
+                'body_html': mail_content,
+                'email_to': employee.work_email,
+            }
+            self.env['mail.mail'].sudo().create(main_content).send()
+        return True

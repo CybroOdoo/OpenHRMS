@@ -20,8 +20,22 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_version
-from . import hr_employee
-from . import hr_employee_family
-from . import hr_employee_relation
-from . import res_config_settings
+from odoo import fields, models
+
+class ResConfigSettings(models.TransientModel):
+    """
+    Extends res.config.settings to allow HR managers to configure
+    the number of days in advance to send ID and Passport expiration emails.
+    """
+    _inherit = 'res.config.settings'
+
+    id_expiry_days = fields.Integer(
+        string='ID Expiry Notification Days',
+        config_parameter='hr_employee_updation.id_expiry_days',
+        default=14
+    )
+    passport_expiry_days = fields.Integer(
+        string='Passport Expiry Notification Days',
+        config_parameter='hr_employee_updation.passport_expiry_days',
+        default=180
+    )
