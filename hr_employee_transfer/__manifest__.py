@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Branch Transfer',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': 'Employee transfer between branches',
     'description': 'This modules allows the user to transfer an employee from '
@@ -32,7 +32,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://cybrosys.com, https://www.openhrms.com',
-    'depends': ['hr'],
+    'depends': ['hr', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'security/hr_employee_security.xml',

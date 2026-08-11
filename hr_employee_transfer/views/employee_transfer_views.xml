@@ -64,20 +64,47 @@
                     <group>
                         <group>
                             <field name="employee_id"
-                                   options="{'no_create': True}"
+                                   domain="['|', ('company_id', '=', False), ('company_id', '!=', transfer_company_id)]"
+                                   options="{'no_create': True, 'no_open': True}"
                                    readonly="state != 'draft'"/>
-                            <field name="transfer_date" readonly="state != 'draft'"/>
+                            <field name="transfer_date" invisible="1"/>
+                            <field name="transfer_date_str" readonly="1"/>
                             <field name="transferred" invisible="1"/>
                             <field name="transfer_company_id"
+                                   domain="[('id', '!=', company_id)]"
                                    groups="base.group_multi_company"
-                                   options="{'no_create': True}"
+                                   options="{'no_create': True, 'no_open': True}"
                                    readonly="state != 'draft'"/>
                         </group>
                         <group>
-                            <field name="company_id"
-                                   groups="base.group_multi_company"
-                                   options="{'no_create': True}"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="1"/>
                             <field name="responsible_employee_id"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group string="Target Assignment">
+                        <group>
+                            <field name="new_department_id" 
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', transfer_company_id)]" 
+                                   context="{'employee_transfer_bypass': True}"
+                                   readonly="state != 'draft'" 
+                                   options="{'no_create': True}"/>
+                            <field name="new_job_id" 
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', transfer_company_id)]" 
+                                   context="{'employee_transfer_bypass': True}"
+                                   readonly="state != 'draft'" 
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="new_work_location_id" 
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', transfer_company_id)]" 
+                                   context="{'employee_transfer_bypass': True}"
+                                   readonly="state != 'draft'" 
+                                   options="{'no_create': True}"/>
+                            <field name="new_parent_id" 
+                                   domain="['|', ('company_id', '=', False), ('company_id', '=', transfer_company_id)]" 
+                                   context="{'employee_transfer_bypass': True}"
+                                   readonly="state != 'draft'" 
                                    options="{'no_create': True}"/>
                         </group>
                     </group>
@@ -87,6 +114,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

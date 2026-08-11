@@ -256,8 +256,9 @@ msgstr "التحويلات"
 msgid ""
 "Use this menu to browse previous transfer. To record new\n"
 "                transfer, you may use the create button."
-msgstr "استخدم هذه القائمة لاستعراض عمليات النقل السابقة. لتسجيل الجديد
-النقل، يمكنك استخدام زر الإنشاء."
+msgstr ""
+"استخدم هذه القائمة لاستعراض عمليات النقل السابقة. لتسجيل الجديد\n"
+"النقل، يمكنك استخدام زر الإنشاء."
 
 #. module: hr_employee_transfer
 #. odoo-python
