@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,16 +20,4 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from odoo import fields, models
-
-
-class HrPayrollStructure(models.Model):
-    """Class for the inherited model hr_payroll_structure. Contains fields
-        related to the salary structure of the salary advance."""
-    _inherit = 'hr.payroll.structure'
-
-    max_percent = fields.Integer(string='Max.Salary Advance Percentage',
-                                 help="Maximum percentage of the salary "
-                                      "advance.")
-    advance_date = fields.Integer(string='Salary Advance-After days',
-                                  help="Salary advance after days.")
+from . import salary_advance_payment_wizard

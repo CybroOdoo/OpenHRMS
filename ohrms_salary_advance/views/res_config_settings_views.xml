@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.salary.advance</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='hr']" position="inside">
+                <block title="Salary Advance" name="salary_advance_setting_container">
+                    <setting string="Salary Advance" help="Enable Salary Advance Requests" company_dependent="1">
+                        <field name="salary_advance_enabled"/>
+                    </setting>
+                    <setting string="Advance Limit (%)" help="Maximum percentage of wage allowed as advance" company_dependent="1" invisible="not salary_advance_enabled">
+                        <field name="salary_advance_max_percent"/>
+                    </setting>
+                    <setting string="Advance Limit (Fixed)" help="Maximum fixed amount allowed as advance (0 for no limit)" company_dependent="1" invisible="not salary_advance_enabled">
+                        <field name="salary_advance_max_amount"/>
+                    </setting>
+                    <setting string="Minimum Employment Days" help="Minimum days of employment required to request an advance" company_dependent="1" invisible="not salary_advance_enabled">
+                        <field name="salary_advance_min_days"/>
+                    </setting>
+                    <setting string="Multiple Active Advances" help="Allow employees to have multiple un-paid advances simultaneously" company_dependent="1" invisible="not salary_advance_enabled">
+                        <field name="salary_advance_multiple_active"/>
+                    </setting>
+                    <setting string="Auto Deduct from Payroll" help="Automatically deduct salary advances during payroll computation" company_dependent="1" invisible="not salary_advance_enabled">
+                        <field name="salary_advance_auto_deduct"/>
+                    </setting>
+                </block>
+
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="action_salary_advance_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'ohrms_salary_advance'}</field>
+    </record>
+</odoo>

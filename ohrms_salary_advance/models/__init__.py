@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,6 +20,9 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_payroll_structure
+
+from . import hr_employee
 from . import hr_payslip
 from . import salary_advance
+from . import res_company
+from . import res_config_settings

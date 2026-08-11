@@ -3,3 +3,5 @@ access_salary_advance_user,access.salary.advance,model_salary_advance,base.group
 access_salary_advance_officer,access.salary.advance,model_salary_advance,hr.group_hr_user,1,1,1,1
 access_salary_advance_manager,access.salary.advance,model_salary_advance,hr.group_hr_manager,1,1,1,1
 access_account_manager,access.salary.advance,model_salary_advance,account.group_account_manager,1,1,1,1
+access_salary_advance_payment_wizard_account,access.salary.advance.payment.wizard,model_salary_advance_payment_wizard,account.group_account_user,1,1,1,1
+access_salary_advance_payment_wizard_hr,access.salary.advance.payment.wizard,model_salary_advance_payment_wizard,hr.group_hr_user,1,1,1,1
