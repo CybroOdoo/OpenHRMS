@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -30,18 +30,25 @@ class AccConfig(models.TransientModel):
     loan_approve = fields.Boolean(default=False,
                                   string="Approval from Accounting Department",
                                   help="Loan Approval from account manager")
+    loan_approval_threshold = fields.Float(
+        string="Approval Threshold",
+        default=0.0,
+        help="Loans with an amount equal to or above this threshold will require Account Manager approval if double approval is enabled."
+    )
+
 
     @api.model
     def get_values(self):
         """ Get the values to the config parameter"""
         res = super(AccConfig, self).get_values()
         res.update(
-            loan_approve=self.env['ir.config_parameter'].sudo().get_param(
-                'account.loan_approve'))
+            loan_approve=self.env['ir.config_parameter'].sudo().get_param('account.loan_approve') == 'True',
+            loan_approval_threshold=float(self.env['ir.config_parameter'].sudo().get_param('account.loan_approval_threshold', default=0.0))
+        )
         return res
 
     def set_values(self):
         """ Set values to the config parameter"""
         super(AccConfig, self).set_values()
-        self.env['ir.config_parameter'].sudo().set_param(
-            'account.loan_approve', self.loan_approve)
+        self.env['ir.config_parameter'].sudo().set_param('account.loan_approve', self.loan_approve)
+        self.env['ir.config_parameter'].sudo().set_param('account.loan_approval_threshold', self.loan_approval_threshold)

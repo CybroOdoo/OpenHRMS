@@ -5,23 +5,19 @@
         <field name="name">res.config.settings.inherits.ohrms.loan.accounting</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id"
-               ref="account.res_config_settings_view_form"/>
+               ref="ohrms_loan.res_config_settings_view_form_loan"/>
         <field name="arch" type="xml">
-            <xpath expr="//block[@id='storno']" position="after">
-                <h2>Loan Approval</h2>
-                <div class="row mt16 o_settings_container">
-                    <div class="col-12 col-lg-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                            <field name="loan_approve"/>
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <label for="loan_approve"/>
-                            <div class="text-muted">
-                                Loan Approval from account manager
-                            </div>
+            <xpath expr="//block[@name='hr_loan_setting_container']" position="inside">
+                <setting string="Approval from Accounting Department" help="Loan Approval from account manager">
+                    <field name="loan_approve"/>
+                    <div class="content-group mt16" invisible="not loan_approve">
+                        <label for="loan_approval_threshold" string="Approval Threshold"/>
+                        <field name="loan_approval_threshold" class="oe_inline"/>
+                        <div class="text-muted">
+                            Loans strictly below this amount will bypass Account Manager approval.
                         </div>
                     </div>
-                </div>
+                </setting>
             </xpath>
         </field>
     </record>
