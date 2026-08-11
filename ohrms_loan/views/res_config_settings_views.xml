@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_loan" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.loan</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='hr']" position="inside">
+                <block title="HRMS Loan" name="hr_loan_setting_container">
+                    <setting string="Allow Multiple Active Loans" help="Allow employees to have more than one active loan at a time.">
+                        <field name="allow_multiple_loans"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

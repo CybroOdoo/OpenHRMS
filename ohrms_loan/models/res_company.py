@@ -20,10 +20,17 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_employee
-from . import hr_loan
-from . import hr_payslip
-from . import hr_loan_line
-from . import hr_payslip_input
-from . import res_company
-from . import res_config_settings
+from odoo import fields, models
+
+
+class ResCompany(models.Model):
+    """
+    Inherit 'res.company' to add configurations for HRMS loans.
+    """
+    _inherit = 'res.company'
+
+    allow_multiple_loans = fields.Boolean(
+        string="Allow Multiple Active Loans",
+        default=False,
+        help="If checked, allows employees to have more than one active loan at a time."
+    )

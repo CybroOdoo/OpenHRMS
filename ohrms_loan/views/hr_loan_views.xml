@@ -5,12 +5,13 @@
         <field name="name">hr.loan.view.list</field>
         <field name="model">hr.loan</field>
         <field name="arch" type="xml">
-            <list string="Loan Requests">
+            <list string="Loan Requests" decoration-muted="is_fully_paid == True">
                 <field name="name"/>
                 <field name="employee_id"/>
                 <field name="loan_amount"/>
                 <field name="date"/>
                 <field name="state"/>
+                <field name="is_fully_paid" widget="boolean_toggle" readonly="1"/>
             </list>
         </field>
     </record>
@@ -23,7 +24,7 @@
                 <header>
                     <button name="action_compute_installment" type="object"
                             string="Compute Installment" class="oe_highlight"
-                            invisible="state in ('approve','refuse')"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_submit" type="object" string="Submit" invisible="state != 'draft'"
                             class="oe_highlight"/>
                     <button name="action_approve" type="object"
@@ -31,7 +32,19 @@
                             class="oe_highlight"
                             groups="hr.group_hr_manager"/>
                     <button name="action_refuse" type="object" string="Refuse"
-                            invisible="state not in ['draft','waiting_approval_1']"
+                            invisible="state != 'waiting_approval_1'"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                    <button name="action_early_settlement" type="object" string="Early Settlement"
+                            invisible="state != 'approve' or balance_amount &lt;= 0"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                    <button name="action_deferment" type="object" string="Defer Installment"
+                            invisible="state != 'approve' or balance_amount &lt;= 0"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+                    <button name="action_topup" type="object" string="Top-Up Loan"
+                            invisible="state != 'approve' or balance_amount &lt;= 0"
                             class="oe_highlight"
                             groups="hr.group_hr_manager"/>
                     <button name="action_cancel" type="object" string="Cancel" invisible="state != 'draft'"/>
@@ -41,19 +54,24 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                     </div>
+                    <widget name="web_ribbon" title="Closed" bg_color="text-bg-success"
+                            invisible="state != 'approve' or balance_amount &gt; 0"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
                         </h1>
                     </div>
                     <group col="4">
-                        <field name="employee_id" readonly="state == 'approve'"/>
+                        <field name="is_current_user_hr" invisible="1"/>
+                        <field name="employee_id" readonly="state == 'approve' or is_current_user_hr == False"/>
                         <field name="date"/>
                         <field name="department_id"/>
                         <field name="job_position_id"/>
                         <field name="loan_amount" readonly="state == 'approve'"/>
                         <field name="installment" readonly="state == 'approve'"/>
                         <field name="payment_date" readonly="state == 'approve'"/>
+                        <field name="interest_rate" readonly="state == 'approve'"/>
+                        <field name="interest_type" readonly="state == 'approve'"/>
                         <field name="company_id" options="{'no_create': True}"
                                readonly="state != 'draft'"
                                groups="base.group_multi_company"/>
@@ -62,9 +80,11 @@
                     </group>
                     <notebook>
                         <page string="Installments">
-                            <field name="loan_lines">
+                            <field name="loan_lines" readonly="state == 'approve'">
                                 <list string="Installments" editable="bottom">
                                     <field name="date"/>
+                                    <field name="principal_amount"/>
+                                    <field name="interest_amount"/>
                                     <field name="amount"/>
                                     <field name="paid"
                                            column_invisible="True"/>
@@ -72,9 +92,14 @@
                             </field>
                             <group class="oe_subtotal_footer oe_right"
                                    colspan="2">
+                                <field name="total_interest_amount" widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
                                 <field name="total_amount" widget="monetary"
                                        options="{'currency_field': 'currency_id'}"/>
                                 <field name="total_paid_amount"
+                                       widget="monetary"
+                                       options="{'currency_field': 'currency_id'}"/>
+                                <field name="remaining_principal"
                                        widget="monetary"
                                        options="{'currency_field': 'currency_id'}"/>
                                 <field name="balance_amount"
@@ -146,5 +171,6 @@
     <menuitem id="hr_loan_menu_requests"
               name="Request for Loan"
               parent="hr_loan_menu_root"
-              action="hr_loan_action"/>
+              action="hr_loan_action"
+              sequence="2"/>
 </odoo>

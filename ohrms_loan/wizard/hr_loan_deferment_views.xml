@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_loan_deferment_form" model="ir.ui.view">
+        <field name="name">hr.loan.deferment.form</field>
+        <field name="model">hr.loan.deferment</field>
+        <field name="arch" type="xml">
+            <form string="Defer Loan Installment">
+                <group>
+                    <field name="loan_id" invisible="1"/>
+                    <field name="loan_line_id" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="reason"/>
+                </group>
+                <footer>
+                    <button name="action_defer" string="Confirm Deferment" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

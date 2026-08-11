@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- Multi-company rule on the 'hr_loan' model -->
         <record id="hr_loan_rule_company" model="ir.rule">
             <field name="name">Loan Request Multi Company</field>
@@ -14,7 +14,7 @@
         <record id="hr_loan_rule_user" model="ir.rule">
             <field name="name">Loan Forms Modification Accounts and Hr</field>
             <field name="model_id" ref="model_hr_loan"/>
-            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]"/>
+            <field name="groups" eval="[(4, ref('hr.group_hr_manager'))]"/>
             <field name="perm_write" eval="1"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>

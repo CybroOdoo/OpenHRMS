@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Loan Management',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': 'Manage Employee Loan Requests',
     'description': """This module facilitates the creation and management of 
@@ -38,12 +38,18 @@
         'security/hr_loan_security.xml',
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
+        'data/hr_salary_rule_data.xml',
+        'data/hr_rule_input_data.xml',
         'views/hr_loan_views.xml',
+        'wizard/hr_loan_early_settlement_views.xml',
+        'wizard/hr_loan_deferment_views.xml',
+        'wizard/hr_loan_topup_views.xml',
         'views/hr_payslip_views.xml',
         'views/hr_employee_views.xml',
+        'views/res_config_settings_views.xml',
     ],
-    'demo': ['data/hr_salary_rule_demo.xml',
-             'data/hr_rule_input_demo.xml', ],
+    'demo': [],
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,

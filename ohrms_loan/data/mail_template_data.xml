@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- 1. Loan Submitted Notification (To Manager) -->
+        <record id="email_template_loan_submitted" model="mail.template">
+            <field name="name">Loan Request: Submitted</field>
+            <field name="model_id" ref="ohrms_loan.model_hr_loan"/>
+            <field name="subject">New Loan Request: {{ object.name }}</field>
+            <field name="email_to">{{ ctx.get('email_to') }}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear <t t-out="object.employee_id.parent_id.name or 'Manager'"/>,
+        <br/><br/>
+        A new loan request has been submitted by <strong t-out="object.employee_id.name"/> and is waiting for your review.
+        <br/><br/>
+        <strong>Loan Details:</strong><br/>
+        - Amount: <t t-out="object.loan_amount"/><br/>
+        - Requested Date: <t t-out="object.date"/><br/>
+        <br/>
+        Please login to the system to review and approve/refuse this request.
+        <br/><br/>
+        Thank you.
+    </p>
+</div>
+            </field>
+        </record>
+
+        <!-- 2. Loan Approved Notification (To Employee) -->
+        <record id="email_template_loan_approved" model="mail.template">
+            <field name="name">Loan Request: Approved</field>
+            <field name="model_id" ref="ohrms_loan.model_hr_loan"/>
+            <field name="subject">Loan Request Approved: {{ object.name }}</field>
+            <field name="email_to">{{ ctx.get('email_to') }}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear <t t-out="object.employee_id.name"/>,
+        <br/><br/>
+        Great news! Your loan request <strong t-out="object.name"/> for the amount of <strong t-out="object.loan_amount"/> has been <strong>Approved</strong>.
+        <br/><br/>
+        The funds will be disbursed according to company policy. You can check your loan schedule in the system.
+        <br/><br/>
+        Thank you.
+    </p>
+</div>
+            </field>
+        </record>
+
+        <!-- 3. Installment Payment Receipt (To Employee) -->
+        <record id="email_template_loan_installment_paid" model="mail.template">
+            <field name="name">Loan Installment: Receipt</field>
+            <field name="model_id" ref="ohrms_loan.model_hr_loan_line"/>
+            <field name="subject">Loan Installment Receipt ({{ object.loan_id.name }})</field>
+            <field name="email_to">{{ ctx.get('email_to') }}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear <t t-out="object.employee_id.name"/>,
+        <br/><br/>
+        This is a confirmation that your loan installment scheduled for <strong t-out="object.date"/> has been successfully paid/deducted.
+        <br/><br/>
+        <strong>Payment Details:</strong><br/>
+        - Loan Reference: <t t-out="object.loan_id.name"/><br/>
+        - Amount Deducted: <t t-out="object.amount"/><br/>
+        <br/>
+        Your remaining balance is: <strong t-out="object.loan_id.balance_amount"/><br/>
+        <br/>
+        Thank you.
+    </p>
+</div>
+            </field>
+        </record>
+
+        <!-- 4. Loan Fully Closed Notification (To Employee) -->
+        <record id="email_template_loan_closed" model="mail.template">
+            <field name="name">Loan Request: Fully Paid</field>
+            <field name="model_id" ref="ohrms_loan.model_hr_loan"/>
+            <field name="subject">Congratulations! Loan Fully Paid: {{ object.name }}</field>
+            <field name="email_to">{{ ctx.get('email_to') }}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear <t t-out="object.employee_id.name"/>,
+        <br/><br/>
+        Congratulations! Your loan <strong t-out="object.name"/> has been <strong>Fully Paid</strong>.
+        <br/><br/>
+        Your outstanding balance is now $0.00. No further deductions will be made for this loan.
+        <br/><br/>
+        Thank you for your timely payments!
+    </p>
+</div>
+            </field>
+        </record>
+    </data>
+</odoo>

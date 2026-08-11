@@ -20,10 +20,6 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import hr_employee
-from . import hr_loan
-from . import hr_payslip
-from . import hr_loan_line
-from . import hr_payslip_input
-from . import res_company
-from . import res_config_settings
+from . import hr_loan_early_settlement
+from . import hr_loan_deferment
+from . import hr_loan_topup

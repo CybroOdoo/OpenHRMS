@@ -14,7 +14,6 @@
                         groups="hr.group_hr_manager,hr.group_hr_user">
                     <field name="loan_count" widget="statinfo" string="Loans"/>
                 </button>
-
             </xpath>
         </field>
     </record>

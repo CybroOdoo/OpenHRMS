@@ -6,3 +6,6 @@ access_hr_loan_officer,access.hr.loan.officer,model_hr_loan,hr.group_hr_user,1,1
 access_hr_loan_line_officer,access.hr.loan.line.officer,model_hr_loan_line,hr.group_hr_user,1,1,1,1
 access_hr_loan_manager,access.hr.loan.manager,model_hr_loan,hr.group_hr_manager,1,1,1,1
 access_hr_loan_line_manager,access.hr.loan.line.manager,model_hr_loan_line,hr.group_hr_manager,1,1,1,1
+access_hr_loan_early_settlement_user,access.hr.loan.early.settlement.user,model_hr_loan_early_settlement,base.group_user,1,1,1,1
+access_hr_loan_deferment_user,access.hr.loan.deferment.user,model_hr_loan_deferment,base.group_user,1,1,1,1
+access_hr_loan_topup_user,access.hr.loan.topup.user,model_hr_loan_topup,base.group_user,1,1,1,1
