@@ -8,7 +8,15 @@
             <form string="Document Name">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="notification_type"/>
+                            <field name="before_days" string="Days Before" help="Number of days before the expiry date to send the advance notification." invisible="notification_type != 'multi'"/>
+                            <field name="before_days" string="Start Days Before" help="Number of days before the expiry date to start sending daily notifications." invisible="notification_type != 'everyday'"/>
+                            <field name="before_days" string="Days After" help="How many days after the expiry date to continue notifying." invisible="notification_type != 'everyday_after'"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
@@ -19,8 +27,10 @@
         <field name="name">document.type.view.tree</field>
         <field name="model">document.type</field>
         <field name="arch" type="xml">
-            <list editable="bottom">
+            <list>
                 <field name="name"/>
+                <field name="notification_type"/>
+                <field name="before_days" string="Days" invisible="notification_type == 'single' or notification_type == False"/>
             </list>
         </field>
     </record>

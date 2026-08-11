@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Employee Documents Expiry',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': """Manages Employee Documents With Expiry Notifications.""",
     'description': """OH Addon: Manages Employee Related Documents with Expiry
@@ -37,12 +37,14 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['hr'],
+    'depends': ['hr', 'mail'],
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'data/ir_cron_data.xml',
+        'wizard/document_renew_wizard_views.xml',
         'views/document_type_views.xml',
-        'views/hr_document_views.xml',
+        'views/hr_employee_document_history_views.xml',
         'views/hr_employee_document_views.xml',
     ],
     'demo': [

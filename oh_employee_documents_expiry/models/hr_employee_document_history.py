@@ -22,22 +22,18 @@
 #############################################################################
 from odoo import fields, models
 
+class HrEmployeeDocumentHistory(models.Model):
+    """Model to store the historical states and attachments of employee documents
+    prior to their manual renewal. Serves as a read-only audit trail."""
+    
+    _name = 'hr.employee.document.history'
+    _description = 'Employee Document Renewal History'
+    _order = 'renewed_on desc'
 
-class DocumentType(models.Model):
-    """This model is used to categorize and manage various document
-     types in the system."""
-    _name = 'document.type'
-    _description = 'Document Type'
-
-    name = fields.Char(string="Name", required=True,
-                       help="Name of the document type")
-    before_days = fields.Integer(string="Days Before",
-                                 help="How many number of days before to get "
-                                      "the notification email.")
-    notification_type = fields.Selection([
-        ('single', 'Notification on expiry date'),
-        ('multi', 'Notification before few days'),
-        ('everyday', 'Everyday till expiry date'),
-        ('everyday_after', 'Notification on and after expiry')
-    ], string='Notification Type',
-        help="Select type of the documents expiry notification.")
+    document_id = fields.Many2one('hr.employee.document', string='Document', required=True, ondelete='cascade')
+    issue_date = fields.Date(string='Issue Date')
+    expiry_date = fields.Date(string='Expiry Date')
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachment(s)')
+    renewed_by = fields.Many2one('res.users', string='Renewed By', default=lambda self: self.env.user)
+    renewed_on = fields.Datetime(string='Renewal Date', default=fields.Datetime.now)
+    renewal_reason = fields.Text(string='Renewal Reason')

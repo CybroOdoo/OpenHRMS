@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -24,9 +24,8 @@ from odoo import fields, models
 
 
 class IrAttachment(models.Model):
-    """This class inherits from 'ir.attachment' and introduces two many-to-many
-     relationships: 'doc_attach_rel' for associating HR employee documents and
-    'attach_rel' for attaching general HR documents to a record."""
+    """This class inherits from 'ir.attachment' and introduces a many-to-many
+     relationship: 'doc_attach_rel' for associating HR employee documents to a record."""
     _inherit = 'ir.attachment'
 
     doc_attach_rel = fields.Many2many('hr.employee.document',
@@ -36,9 +35,3 @@ class IrAttachment(models.Model):
                                       help='This field allows you to associate'
                                            'HR employee documents with the '
                                            'record.')
-    attach_rel = fields.Many2many('hr.document',
-                                  'attach_ids', 'attachment_id3',
-                                  'document_id',
-                                  string="Attachment", invisible=1,
-                                  help='This field allows you to attach HR '
-                                       'documents to the record.')

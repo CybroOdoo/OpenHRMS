@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_activity_data_document_expiry" model="mail.activity.type">
+            <field name="name">Employee Document Expiry</field>
+            <field name="icon">fa-file-text-o</field>
+            <field name="category">default</field>
+            <field name="sequence">100</field>
+        </record>
+    </data>
+</odoo>

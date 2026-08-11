@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -21,7 +21,7 @@
 #
 #############################################################################
 from . import document_type
-from . import hr_document
 from . import hr_employee
 from . import hr_employee_document
+from . import hr_employee_document_history
 from . import ir_attachment

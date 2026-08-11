@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -33,15 +33,14 @@ class HrEmployee(models.Model):
                                     help='Count of documents.')
 
     def _compute_document_count(self):
-        """Get count of documents."""
+        """Compute the total number of documents associated with the employee."""
         for rec in self:
             rec.document_count = self.env[
                 'hr.employee.document'].sudo().search_count(
                 [('employee_ref_id', '=', rec.id)])
 
     def action_document_view(self):
-        """ Opens a view to list all documents related to the current
-         employee."""
+        """Open the list of documents associated with the current employee."""
         self.ensure_one()
         return {
             'name': _('Documents'),
