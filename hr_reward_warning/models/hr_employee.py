@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -35,53 +35,45 @@ class HrEmployee(models.Model):
     def _compute_announcement_count(self):
         """ Compute announcement count for an employee """
         for employee in self:
-            announcement_ids_general = self.env[
-                'hr.announcement'].sudo().search_count(
-                [('is_announcement', '=', True),
-                 ('state', '=', 'approved'),
-                 ('date_start', '<=', fields.Date.today())])
-            announcement_ids_emp = (self.env['hr.announcement'].
-            sudo().search_count(
-                [('employee_ids', 'in', self.id),
-                 ('state', '=', 'approved'),
-                 ('date_start', '<=', fields.Date.today())]))
-            announcement_ids_dep = (self.env['hr.announcement'].
-            sudo().search_count(
-                [('department_ids', 'in', self.department_id.id),
-                 ('state', '=', 'approved'),
-                 ('date_start', '<=', fields.Date.today())]))
-            announcement_ids_job = (self.env['hr.announcement'].
-            sudo().search_count(
-                [('position_ids', 'in', self.job_id.id),
-                 ('state', '=', 'approved'),
-                 ('date_start', '<=', fields.Date.today())]))
-            employee.announcement_count = (announcement_ids_general +
-                                           announcement_ids_emp +
-                                           announcement_ids_dep +
-                                           announcement_ids_job)
+            domain = [
+                ('state', '=', 'approved'),
+                ('date_start', '<=', fields.Date.today())
+            ]
+            or_conditions = [
+                ('is_announcement', '=', True),
+                ('employee_ids', 'in', employee.id)
+            ]
+            if employee.department_id:
+                or_conditions.append(('department_ids', 'in', employee.department_id.id))
+            if employee.job_id:
+                or_conditions.append(('position_ids', 'in', employee.job_id.id))
+            
+            # For N conditions, we need N-1 '|' strings at the beginning.
+            or_domain = ['|'] * (len(or_conditions) - 1) + or_conditions
+            domain.extend(or_domain)
+            
+            employee.announcement_count = self.env['hr.announcement'].sudo().search_count(domain)
 
     def action_open_announcements(self):
         """ Open a view displaying announcements related to the employee. """
-        announcement_ids_general = self.env[
-            'hr.announcement'].sudo().search(
-            [('is_announcement', '=', True),
-             ('state', '=', 'approved'),
-             ('date_start', '<=', fields.Date.today())])
-        announcement_ids_emp = self.env['hr.announcement'].sudo().search(
-            [('employee_ids', 'in', self.id),
-             ('state', '=', 'approved'),
-             ('date_start', '<=', fields.Date.today())])
-        announcement_ids_dep = self.env['hr.announcement'].sudo().search(
-            [('department_ids', 'in', self.department_id.id),
-             ('state', '=', 'approved'),
-             ('date_start', '<=', fields.Date.today())])
-        announcement_ids_job = self.env['hr.announcement'].sudo().search(
-            [('position_ids', 'in', self.job_id.id),
-             ('state', '=', 'approved'),
-             ('date_start', '<=', fields.Date.today())])
-        announcement_ids = (announcement_ids_general.ids +
-                            announcement_ids_emp.ids +
-                            announcement_ids_job.ids + announcement_ids_dep.ids)
+        self.ensure_one()
+        domain = [
+            ('state', '=', 'approved'),
+            ('date_start', '<=', fields.Date.today())
+        ]
+        or_conditions = [
+            ('is_announcement', '=', True),
+            ('employee_ids', 'in', self.id)
+        ]
+        if self.department_id:
+            or_conditions.append(('department_ids', 'in', self.department_id.id))
+        if self.job_id:
+            or_conditions.append(('position_ids', 'in', self.job_id.id))
+            
+        or_domain = ['|'] * (len(or_conditions) - 1) + or_conditions
+        domain.extend(or_domain)
+        
+        announcement_ids = self.env['hr.announcement'].sudo().search(domain).ids
         view_id = self.env.ref('hr_reward_warning.hr_announcement_view_form').id
         if announcement_ids:
             if len(announcement_ids) > 1:

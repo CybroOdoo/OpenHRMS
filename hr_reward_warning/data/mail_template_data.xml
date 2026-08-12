@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_template_hr_announcement" model="mail.template">
+            <field name="name">HR Announcement Notification</field>
+            <field name="model_id" ref="hr_reward_warning.model_hr_announcement"/>
+            <field name="subject">New Announcement: {{ object.announcement_reason }}</field>
+            <field name="email_to">{{ ctx.get('email_to') }}</field>
+            <field name="description">Sent to employees when an announcement is approved.</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Hello,
+        <br/><br/>
+        A new HR Announcement has been published:
+        <br/><br/>
+        <strong>Title:</strong> <t t-out="object.announcement_reason or ''"/>
+        <br/>
+        <strong>Category:</strong> <t t-out="object.category_id.name or 'General'"/>
+        <br/>
+        <strong>Priority:</strong> <t t-out="dict(object._fields['priority'].selection).get(object.priority)"/>
+        <br/><br/>
+        <strong>Details:</strong>
+        <br/>
+        <t t-out="object.announcement or ''"/>
+        <br/><br/>
+        Please check your HR portal for more details or to acknowledge the announcement.
+        <br/><br/>
+        Regards,<br/>
+        HR Department
+    </p>
+</div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -5,7 +5,7 @@
               name="Announcements"
               groups="hr.group_hr_user,hr.group_hr_manager"
               web_icon="hr_reward_warning,static/description/icon.png"
-              sequence="-6"/>
+              sequence="90"/>
 
     <!--  HR Announcements Menu  -->
     <menuitem id="hr_announcement_menu_view_announcements"
@@ -14,4 +14,15 @@
               parent="hr_announcement_menu_root"
               groups="hr.group_hr_user,hr.group_hr_manager"
               sequence="1"/>
+    <menuitem id="hr_announcement_menu_config"
+              name="Configuration"
+              parent="hr_announcement_menu_root"
+              sequence="100"/>
+              
+    <menuitem id="hr_announcement_menu_category"
+              name="Categories"
+              action="hr_announcement_category_action"
+              parent="hr_announcement_menu_config"
+              groups="hr.group_hr_manager"
+              sequence="10"/>
 </odoo>

@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Open HRMS Official Announcements',
-    'version': '19.0.1.0.0',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': """Manages Official Announcements""",
     'description': 'This module helps you to manage HR official announcements',
@@ -35,12 +35,20 @@
     'data': [
         'security/hr_announcement_security.xml',
         'security/ir.model.access.csv',
+        'data/hr_announcement_category_data.xml',
         'data/ir_cron_data.xml',
         'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
         'views/hr_announcement_views.xml',
         'views/hr_employee_views.xml',
         'views/hr_reward_warning_menus.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'hr_reward_warning/static/src/js/systray_announcement.js',
+            'hr_reward_warning/static/src/xml/systray_announcement.xml',
+        ],
+    },
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,
