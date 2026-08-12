@@ -22,17 +22,29 @@
 #############################################################################
 from odoo import fields, models
 
-
-class HrEmployee(models.Model):
+class ResCompany(models.Model):
     """
-    Extends the 'hr.employee' model to include additional fields related to
-    employee resignation.
+    Inherits the res.company model to add configuration fields for the HR Resignation module.
     """
-    _inherit = 'hr.employee'
+    _inherit = 'res.company'
 
-    resign_date = fields.Date(string='Resign Date', readonly=True,
-                              help="Date of the resignation")
-    resigned = fields.Boolean(string="Resigned", default=False,
-                              help="If checked then employee has resigned")
-    fired = fields.Boolean(string="Fired", default=False,
-                           help="If checked then employee has fired")
+    enable_manager_approval = fields.Boolean(string="Enable Manager Approval for Resignation", default=True)
+    clearance_template_id = fields.Many2one('hr.clearance.template', string="Default Clearance Template")
+
+class ResConfigSettings(models.TransientModel):
+    """
+    Inherits the res.config.settings model to expose company-level HR Resignation configurations
+    in the general settings interface.
+    """
+    _inherit = 'res.config.settings'
+
+    enable_manager_approval = fields.Boolean(
+        related='company_id.enable_manager_approval',
+        readonly=False,
+        string="Enable Manager Approval"
+    )
+    clearance_template_id = fields.Many2one(
+        related='company_id.clearance_template_id',
+        readonly=False,
+        string="Default Clearance Template"
+    )

@@ -4,8 +4,7 @@
     <record id="hr_resignation_rule_user" model="ir.rule">
         <field name="name">Employee Resignation User</field>
         <field name="model_id" ref="hr_resignation.model_hr_resignation"/>
-        <field name="domain_force">[('employee_id.user_id','=',user.id)]
-        </field>
+        <field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('clearance_line_ids.responsible_user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
     </record>
     <!--    Manager permission to view all record   -->
