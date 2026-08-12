@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -27,6 +27,10 @@ from odoo.tools import email_split
 
 
 class HrLeave(models.Model):
+    """
+    Model representing hr leave inheriting hr.leave to add incoming mail
+    processing capabilities for creating leave requests automatically.
+    """
     _inherit = 'hr.leave'
 
     @api.model
