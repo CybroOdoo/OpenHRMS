@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -27,23 +27,28 @@ from odoo.http import request
 
 class Reminders(http.Controller):
 
-    @http.route('/hr_reminder/all_reminder', type='json', auth="public")
+    @http.route('/hr_reminder/all_reminder', type='jsonrpc', auth="user")
     def all_reminder(self):
         """Returns the records of the all reminders in the
         model HR Reminder."""
+        if not request.env.user.has_group('hr.group_hr_user'):
+            return {'error': 'access_denied'}
+            
         reminders = []
-        for reminder in request.env['hr.reminder'].search([]):
+        for reminder in request.env['hr.reminder'].sudo().search([]):
+            # Skip corrupted records where the field does not belong to the model
+            if reminder.field_id and reminder.model_id and reminder.field_id.model_id != reminder.model_id:
+                continue
+
             if reminder.search_by == 'today':
                 reminders.append({
                     'id': reminder.id,
                     'name': reminder.name
                 })
             elif reminder.search_by == 'set_period':
-                if (fields.Date.today() >=
-                        reminder.date_from and fields.Date.today()
-                        <= reminder.date_to and (
-                                not reminder.expiry_date or fields.Date.today()
-                                <= reminder.expiry_date)):
+                end_date = reminder.expiry_date if reminder.expiry_date else reminder.date_to
+                if (fields.Date.today() >= reminder.date_from and 
+                        fields.Date.today() <= end_date):
                     reminders.append({
                         'id': reminder.id,
                         'name': reminder.name
@@ -59,13 +64,22 @@ class Reminders(http.Controller):
                     })
         return reminders
 
-    @http.route('/hr_reminder/reminder_active', type='json', auth="public")
+    @http.route('/hr_reminder/reminder_active', type='jsonrpc', auth="public")
     def reminder_active(self, **kwargs):
         """Returns the current reminder when clicked in
         view button in the systray."""
         value = []
-        for reminder in request.env['hr.reminder'].sudo().search([
-            ('name', '=', kwargs.get('reminder_name'))]):
+        domain = []
+        if kwargs.get('reminder_id'):
+            domain = [('id', '=', kwargs.get('reminder_id'))]
+        elif kwargs.get('reminder_name'):
+            domain = [('name', '=', kwargs.get('reminder_name'))]
+        
+        for reminder in request.env['hr.reminder'].sudo().search(domain):
+            # Skip corrupted records where the field does not belong to the model
+            if reminder.field_id and reminder.model_id and reminder.field_id.model_id != reminder.model_id:
+                continue
+
             value.append(reminder.model_id.model)
             value.append(reminder.field_id.name)
             value.append(reminder.search_by)

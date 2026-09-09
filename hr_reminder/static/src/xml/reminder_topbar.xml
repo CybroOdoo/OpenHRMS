@@ -2,46 +2,54 @@
 <templates>
     <!--    Template of the remainder menu in systray-->
     <t t-name="owl.reminder_menu">
-        <div class="o_mail_navbar_item dropdown" t-ref="reminder_menu">
-            <a class="dropdown-toggle d-flex align-items-center"
-               t-on-click="(ev) => this.showReminder(ev)"
-               data-bs-toggle="dropdown"
-               aria-expanded="false"
-               href="#" title="Reminders" role="button">
-                <i class="fa fa-bell me-1"></i>
-                <span class="o_notification_counter"></span>
-            </a>
-            <ul class="o_mail_navbar_dropdown dropdown-menu dropdown-menu-end reminder-dropdown shadow-lg" role="menu">
-                <li class="o_mail_navbar_dropdown_top p-3">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="mb-0 fw-bold text-primary">Reminders</h6>
-                        <i class="fa fa-bell text-muted"></i>
-                    </div>
-
-
-                    <div class="form-group mb-3">
-                        <label for="reminder_select" class="form-label small text-muted">Select Reminder</label>
-                        <select id="reminder_select"
-                                name="Reminder"
-                                class="form-control rounded-pill">
-                            <t t-foreach='state.all_remainders' t-as='val' t-key="val.id">
-                                <option>
+        <Dropdown position="'bottom-end'" state="dropdown" t-if="state.isHRUser" menuClass="'reminder-dropdown shadow-lg p-0'">
+            <button class="o_reminder_navbar_item dropdown-toggle d-flex align-items-center justify-content-center no-caret"
+               t-on-click.prevent="(ev) => this.showReminder(ev)"
+               style="position: relative; width: 46px; height: 46px; border: none; background: transparent;"
+               title="Reminders" tabindex="0">
+                <i class="fa fa-lg fa-bell" role="img" aria-label="Reminders"></i>
+                <t t-if="state.all_remainders and state.all_remainders.length > 0">
+                    <span class="o-mail-MessagingMenu-counter badge rounded-pill text-bg-success" 
+                          style="position: absolute; top: 11px; right: 6px; transform: none; margin: 0;">
+                        <t t-esc="state.all_remainders.length"/>
+                    </span>
+                </t>
+            </button>
+            <t t-set-slot="content">
+                <div class="d-flex justify-content-end align-items-center px-3 pt-1 pb-1 border-bottom bg-white rounded-top">
+                    <span class="text-primary fw-bold" style="font-size: 13px; cursor: default;">Reminders</span>
+                </div>
+                <div class="reminder-list list-group list-group-flush" style="max-height: 350px; overflow-y: auto; border-radius: 0 0 1rem 1rem;">
+                    <t t-if="state.all_remainders.length === 0">
+                        <div class="p-4 text-center text-muted">
+                            <i class="fa fa-bell-slash-o fs-4 mb-2"></i>
+                            <p class="mb-0 small">No Reminders</p>
+                        </div>
+                    </t>
+                    <t t-foreach='state.all_remainders' t-as='val' t-key="val.id">
+                        <div class="list-group-item d-flex align-items-center px-3 py-2 border-0 border-bottom bg-white" style="cursor: default;" t-on-click.prevent.stop="">
+                            <div class="d-flex align-items-center justify-content-center bg-light text-primary rounded" style="width: 36px; height: 36px; flex-shrink: 0;">
+                                <i class="fa fa-bell"></i>
+                            </div>
+                            <div class="flex-grow-1 overflow-hidden ms-3">
+                                <div class="d-flex fw-bold text-dark text-truncate" style="font-size: 13px;">
                                     <t t-esc="val.name"/>
-                                </option>
-                            </t>
-                        </select>
-                    </div>
-
-
-                    <div class="d-grid">
-                        <button type="button"
-                                class="btn btn-outline-primary rounded-pill"
-                                t-on-click="(ev) => this.reminderActive(ev)">
-                            View
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <span class="text-muted text-truncate" style="font-size: 12px;">
+                                        System Reminder
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ms-2 flex-shrink-0">
+                                <button class="btn btn-sm btn-primary rounded-pill px-3 py-1" style="font-size: 12px; transition: all 0.2s ease;" t-on-click.prevent.stop="(ev) => this.reminderActive(ev, val.id, val.name)">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </Dropdown>
     </t>
 </templates>

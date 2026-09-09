@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,7 +20,8 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class HrReminder(models.Model):
@@ -58,3 +59,17 @@ class HrReminder(models.Model):
     company_id = fields.Many2one('res.company', string='Company',
                                  required=True, help="he company to which this reminder belongs.",
                                  default=lambda self: self.env.user.company_id)
+
+    @api.onchange('model_id')
+    def _onchange_model_id(self):
+        """Clear the field_id when the model_id is changed."""
+        if self.model_id:
+            self.field_id = False
+
+    @api.constrains('model_id', 'field_id')
+    def _check_model_field_match(self):
+        """Ensure the selected field belongs to the selected model."""
+        for reminder in self:
+            if reminder.model_id and reminder.field_id:
+                if reminder.field_id.model_id != reminder.model_id:
+                    raise ValidationError(_("The selected field '%s' does not belong to the model '%s'. Please select a valid field.") % (reminder.field_id.name, reminder.model_id.name))
