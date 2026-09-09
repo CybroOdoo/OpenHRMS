@@ -23,9 +23,7 @@
 import json
 import logging
 from urllib.parse import quote
-
 import requests
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -91,6 +89,10 @@ class OhrmsCoreSupport(models.TransientModel):
              'Attachment bytes are redacted to keep the preview readable.')
 
     def _prepare_attachment_payload(self):
+        """
+        Prepare the attachments by extracting their binary data and names,
+        returning a list of dictionaries suitable for the support API payload.
+        """
         payload = []
         for attachment in self.attachment_ids:
             if not attachment.datas:
@@ -105,6 +107,13 @@ class OhrmsCoreSupport(models.TransientModel):
         return payload
 
     def _build_payload(self, redact_attachments=False):
+        """
+        Build the dictionary payload to send to the support endpoint.
+        
+        :param redact_attachments: If True, replace the attachment binary data
+                                   with a simple count string for preview purposes.
+        :return: A dictionary structured for the API request.
+        """
         self.ensure_one()
         if redact_attachments:
             count = sum(1 for attachment in self.attachment_ids
@@ -135,6 +144,10 @@ class OhrmsCoreSupport(models.TransientModel):
                  'support_type', 'category', 'priority', 'attachment_ids',
                  'show_payload')
     def _compute_payload_preview(self):
+        """
+        Compute a formatted JSON string of the payload when the user chooses
+        to preview it, ensuring attachment data is redacted for readability.
+        """
         for record in self:
             if record.show_payload:
                 record.payload_preview = json.dumps(
@@ -146,6 +159,11 @@ class OhrmsCoreSupport(models.TransientModel):
                 record.payload_preview = False
 
     def _submit_support_request(self):
+        """
+        Execute the HTTP POST request to the support endpoint with the built payload.
+        
+        :return: The JSON response from the server.
+        """
         self.ensure_one()
         response = requests.post(
             SUPPORT_ENDPOINT,
@@ -156,6 +174,11 @@ class OhrmsCoreSupport(models.TransientModel):
         return response.json()
 
     def confirm_button(self):
+        """
+        Handle the 'Submit' button click. Submits the support request, handles
+        potential network or server errors by raising ValidationError, and returns
+        a success notification action if successful.
+        """
         self.ensure_one()
         try:
             response_status = self._submit_support_request()
@@ -219,6 +242,10 @@ class OhrmsCoreSupport(models.TransientModel):
         )
 
     def whatsapp_button(self):
+        """
+        Handle the 'WhatsApp' button click. Generates a WhatsApp Web URL
+        pre-filled with the customer's issue details and opens it in a new tab.
+        """
         self.ensure_one()
         message = "{name}\n{email}\n{description}".format(
             name=self.name,

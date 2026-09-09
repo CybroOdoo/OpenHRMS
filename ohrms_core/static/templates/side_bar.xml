@@ -2,20 +2,127 @@
 <!--Template for new AppsMenu-->
 <templates id="template" xml:space="preserve">
     <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension" owl="1">
-        <xpath expr="//Dropdown" position="replace">
-            <li class="dropdown d-flex justify-content-center align-items-center">
-                <a class="full"
-                   href="#" t-on-click="_onMenuClick">
-                <i class="fa fa-th-large"
-                   style="font-size:18px;color:white;margin-top:14px;"/>
-                    </a>
+        <xpath expr="." position="replace">
+            <div t-if="!isScopedApp" class="o_navbar_apps_menu">
+                <li class="dropdown app-launcher-dropdown d-flex justify-content-center align-items-center">
+                <a t-on-click="_onMenuClick" class="full d-flex justify-content-center align-items-center" data-toggle="dropdown" data-display="static"
+                   href="#" style="padding: 0 0 0 16px; margin-right: -4px; height: 46px; text-decoration: none;">
+                    <t t-set="myCurrentApp" t-value="menuService.getCurrentApp()"/>
+                    <t t-if="myCurrentApp and myCurrentApp.webIconData">
+                        <div class="current-app-icon-container" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                            <img t-attf-src="{{myCurrentApp.webIconData}}"
+                                 class="current-app-icon"
+                                 style="width: 24px; height: 24px; object-fit: contain; background: transparent !important; border-radius: 4px;"/>
+                            <i class="fa fa-th-large fallback-icon" style="display: none; font-size: 18px !important; color: #ffffff !important;"/>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <i class="fa fa-th-large fallback-icon" style="font-size: 18px !important; color: #ffffff !important;"/>
+                    </t>
+                </a>
 
-                <div class="dropdown-menu fullscreen-menu" role="menu"
-                     style="background-color:white;">
+                <div class="dropdown-menu fullscreen-menu" role="menu">
+                    <style>
+                        /* Home Menu Custom Theme - Injected via OpenHRMS Core */
+                        /* Bring systray dropdowns to front. */
+                        .o_main_navbar.app-launcher-open .o_menu_systray { position: relative !important; z-index: 1100 !important; }
+                        .o_main_navbar.app-launcher-open .o_menu_systray .dropdown-menu { z-index: 1110 !important; }
+                        
+                        /* Protect Systray Dropdowns from OpenHRMS Core's 100vw overrides and Unify Modern Styling */
+                        .o_main_navbar .o_menu_systray .dropdown-menu.show {
+                            min-width: auto !important;
+                            min-height: auto !important;
+                            max-height: 85vh !important;
+                            width: auto !important;
+                            position: absolute !important;
+                            margin-top: 4px !important;
+                            margin-left: 0 !important;
+                            display: block !important;
+                            border-radius: 12px !important;
+                            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+                            border: none !important;
+                            overflow: hidden !important;
+                        }
+                        
+                        /* Make Reminder Dropdown Wider */
+                        .o_main_navbar .o_menu_systray .reminder-dropdown.show {
+                            min-width: 360px !important;
+                            width: 360px !important;
+                            padding: 16px !important;
+                            white-space: normal !important;
+                        }
+                        
+                        body.app-launcher-open { overflow: hidden !important; padding-right: 0 !important; }
+                        body.app-launcher-open .o-mail-ChatWindow,
+                        body.app-launcher-open .o-mail-ChatHub-bubbles { z-index: 1150 !important; }
+                        html:has(body.app-launcher-open) { overflow: hidden !important; }
+                        .o_main_navbar { background: linear-gradient(to top left, #0d2d5e 0%, #1B5298 60%, #1e6bb5 100%) fixed !important; border-bottom: none !important; }
+                        .o_main_navbar.app-launcher-open { padding-right: 0 !important; width: 100% !important; max-width: 100% !important; }
+                        .o_main_navbar.app-launcher-open .o_menu_brand,
+                        .o_main_navbar.app-launcher-open .o_menu_sections { display: none !important; }
+                        
+                        /* Search and Apps Menu Wrapper */
+                        .o_main_navbar.app-launcher-open .app-launcher-dropdown { position: static !important; }
+                        .o_main_navbar.app-launcher-open .app-launcher-dropdown > a.full .current-app-icon-container,
+                        .o_main_navbar.app-launcher-open .app-launcher-dropdown > a.full .fallback-icon { display: none !important; }
+                        .o_main_navbar.app-launcher-open .app-launcher-dropdown > a.full::before { content: '\f054'; font-family: FontAwesome; color: #ffffff; font-size: 16px; display: block; }
+                        
+                        /* App Icon Hover and Open States */
+                        .o_main_navbar:not(.app-launcher-open) .dropdown > a.full:hover .current-app-icon,
+                        .o_main_navbar:not(.app-launcher-open) .dropdown > a.full:hover .fallback-icon { display: none !important; }
+                        .o_main_navbar:not(.app-launcher-open) .dropdown > a.full:hover::before { content: '\f053'; font-family: FontAwesome; color: #ffffff; font-size: 16px; display: block; }
+                        
+                        .dropdown-menu.fullscreen-menu { position: fixed !important; top: 0 !important; left: 0 !important; right: -5vw !important; bottom: 0 !important; background: linear-gradient(to top left, #0d2d5e 0%, #1B5298 60%, #1e6bb5 100%) fixed !important; border-radius: 0 !important; border: none !important; width: 105vw !important; min-width: 105vw !important; height: 100vh !important; min-height: 100vh !important; padding-right: 5vw !important; overflow: hidden !important; z-index: 1040 !important; transform: none !important; }
+                        .dropdown-menu.fullscreen-menu.show { display: flex !important; flex-direction: column !important; }
+                        .dropdown-menu.fullscreen-menu .nav-container { flex: 1 !important; overflow-y: auto !important; overflow-x: hidden !important; display: block !important; width: 100vw !important; padding-bottom: 50px !important; scrollbar-width: none; }
+                        .dropdown-menu.fullscreen-menu .nav-container::-webkit-scrollbar { display: none; }
+                        .nav-container { background: transparent !important; width: 100% !important; min-height: 100vh !important; }
+                        .dropdown-menu.fullscreen-menu .app-menu { display: grid !important; grid-template-columns: repeat(5, 120px) !important; justify-content: center !important; align-content: flex-start !important; gap: 20px 20px !important; padding-top: 30px !important; max-width: 100% !important; width: 100% !important; margin: 0 auto !important; }
+                        .dropdown-menu.fullscreen-menu .dropdown-item.o_app { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; gap: 10px !important; background: transparent !important; transition: transform 0.2s ease !important; border: none !important; width: 120px !important; max-width: 120px !important; height: 110px !important; max-height: 110px !important; flex-basis: auto !important; padding: 0 !important; margin: 0 !important; }
+                        .dropdown-menu.fullscreen-menu .dropdown-item.o_app:hover, .dropdown-menu.fullscreen-menu .dropdown-item.o_app:focus, .dropdown-menu.fullscreen-menu .dropdown-item.o_app:active { background: transparent !important; outline: none !important; }
+                        .dropdown-menu.fullscreen-menu .dropdown-item.o_app img { background-color: #ffffff !important; border-radius: 16px !important; width: 64px !important; height: 64px !important; padding: 14px !important; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important; transition: all 0.2s ease !important; object-fit: contain !important; margin: 0 !important; flex-shrink: 0 !important; }
+                        .dropdown-menu.fullscreen-menu .dropdown-item.o_app:hover img { transform: translateY(-4px) !important; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1) !important; }
+                        .dropdown-menu.fullscreen-menu .a_app_menu_title { color: #ffffff !important; font-size: 12px !important; font-weight: 600 !important; text-align: center !important; white-space: nowrap !important; overflow: visible !important; display: block !important; width: 100% !important; margin-top: 0 !important; opacity: 1 !important; text-shadow: none !important; letter-spacing: 0.2px !important; }
+                        .dropdown-menu.fullscreen-menu .search-container { margin-top: 0px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; width: 100% !important; }
+                        .dropdown-menu.fullscreen-menu .search-container .search-input { max-width: 460px !important; width: 100% !important; margin: 0 auto 55px auto !important; flex: 0 0 100% !important; }
+                        .dropdown-menu.fullscreen-menu .search-container .search-input .input-group { background: #ffffff !important; border-radius: 50px !important; border: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; overflow: hidden !important; height: 49px !important; align-items: center !important; padding: 0 2px !important; }
+                        .dropdown-menu.fullscreen-menu .search-input .input-group-prepend .input-group-text { background: linear-gradient(to top left, #0d2d5e 0%, #1e6bb5 100%) !important; border-radius: 50% !important; border: none !important; color: #ffffff !important; width: 38px !important; height: 38px !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; margin-left: 4px !important; font-size: 15px !important; }
+                        .dropdown-menu.fullscreen-menu .search-input input { background: transparent !important; color: #222 !important; border: none !important; box-shadow: none !important; font-size: 15px !important; height: 100% !important; padding-left: 14px !important; }
+                        .dropdown-menu.fullscreen-menu .search-input input::placeholder { color: #888 !important; }
+                        
+                        /* Custom Search Modal Overlay */
+                        .custom-search-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); z-index: 10000; display: flex; align-items: flex-start; justify-content: center; padding-top: 10vh; }
+                        .custom-search-modal { background: #ffffff; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); overflow: hidden; display: flex; flex-direction: column; max-height: 80vh; padding-top: 15px; }
+                        .custom-search-header { display: flex; align-items: center; margin: 0 15px 10px 15px; padding: 10px 15px; border: 1px solid #94a3b8; border-radius: 8px; }
+                        .custom-search-header i { font-size: 15px; color: #94a3b8; margin-right: 12px; }
+                        .custom-search-header input { flex: 1; border: none; outline: none; font-size: 14px; color: #1e293b; background: transparent; width: 100%; box-shadow: none !important; font-weight: 400; }
+                        .custom-search-header input::placeholder { color: #94a3b8; font-size: 14px; font-weight: 400; }
+                        .custom-search-header .esc-hint { font-size: 10px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 2px 5px; color: #64748b; font-weight: 600; cursor: pointer; }
+                        .custom-search-results { overflow-y: auto; padding: 5px 0 15px 0; }
+                        .custom-search-category { font-size: 11px; font-weight: 700; color: #94a3b8; padding: 0 25px 10px 25px; text-transform: uppercase; letter-spacing: 0.5px; }
+                        .custom-search-item { display: flex; align-items: center; padding: 8px 15px; margin: 0 10px 2px 10px; border-radius: 8px; text-decoration: none !important; color: #334155; transition: all 0.1s; cursor: pointer; }
+                        .custom-search-item:hover, .custom-search-item.active { background: #eff6ff; color: #1e3a8a; }
+                        .custom-search-item img { width: 22px; height: 22px; border-radius: 6px; margin-right: 15px; object-fit: contain; }
+                        .custom-search-item i { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #64748b; margin-right: 15px; }
+                        .custom-search-item span { flex: 1; font-size: 13.5px; font-weight: 400; }
+                        .custom-search-item .item-enter { opacity: 0; font-size: 12px; color: #94a3b8; border: 1px solid #cbd5e1; padding: 2px 6px; border-radius: 4px; background: #ffffff; }
+                        .custom-search-item:hover .item-enter, .custom-search-item.active .item-enter { opacity: 1; }
+
+                        @media (max-width: 768px) {
+                            div.dropdown-menu.fullscreen-menu div.nav-container { padding: 0 !important; margin: 0 !important; width: 100vw !important; overflow-x: hidden !important; }
+                            div.dropdown-menu.fullscreen-menu div.app-menu { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 15px 0 !important; padding: 20px 0 !important; width: 100vw !important; max-width: 100vw !important; margin: 0 !important; box-sizing: border-box !important; justify-content: stretch !important; justify-items: center !important; }
+                            div.dropdown-menu.fullscreen-menu div.app-menu a.dropdown-item.o_app { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important; width: 100% !important; max-width: 100% !important; min-width: 0 !important; height: auto !important; padding: 0 !important; margin: 0 !important; background-color: transparent !important; }
+                            div.dropdown-menu.fullscreen-menu div.app-menu a.dropdown-item.o_app img { width: 56px !important; height: 56px !important; padding: 12px !important; border-radius: 14px !important; margin-bottom: 8px !important; background-color: #ffffff !important; }
+                            div.dropdown-menu.fullscreen-menu div.search-container { width: 100vw !important; max-width: 100vw !important; margin: 15px 0 25px 0 !important; padding: 0 5% !important; box-sizing: border-box !important; display: block !important; }
+                            div.dropdown-menu.fullscreen-menu div.search-container div.search-input { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; flex: none !important; }
+                            div.dropdown-menu.fullscreen-menu div.search-container div.search-input .input-group { width: 100% !important; height: 48px !important; border-radius: 24px !important; box-sizing: border-box !important; }
+                            div.dropdown-menu.fullscreen-menu div.search-container .input-group-append { display: none !important; }
+                            div.dropdown-menu.fullscreen-menu .search-input .input-group-prepend .input-group-text { width: 34px !important; height: 34px !important; font-size: 14px !important; }
+                        }
+                    </style>
                             <div class="search-container form-row align-items-center m-auto col-12"
                                  t-ref="search-container">
-                                <div class="search-input col-md-7 mx-auto mr-auto mb-5 "
-                                     t-on-input="_searchMenusSchedule">
+                                <div class="search-input col-md-7 mx-auto mr-auto ">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -23,19 +130,16 @@
                                             </div>
                                         </div>
                                         <input type="search"
-                                               t-ref="search-input"
                                                autocomplete="off"
-                                               placeholder="Search menus..."
-                                               class="form-control"/>
+                                               readonly="1"
+                                               t-on-click="openCustomSearch"
+                                               placeholder="Search apps..."
+                                               class="form-control"
+                                               style="cursor: pointer;"/>
+                                        <div class="input-group-append" style="display: flex; align-items: center; padding-right: 12px;">
+                                            <span style="font-size: 11px; background: transparent; border: 1px solid #dcdcdc; border-radius: 4px; padding: 2px 6px; color: #999; font-weight: 500;">Ctrl K</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="search-results col-md-6 mx-auto bg-secondary">
-                                    <t t-if="this.state.results"
-                                       t-call="ohrms_core.SearchResults">
-                                            <t t-set="results"
-                                               t-value="this.state.results"/>
-                                        <t t-set="widget" t-value="this"/>
-                                    </t>
                                 </div>
                             </div>
                     <div class="nav-container">
@@ -53,7 +157,6 @@
                                    t-on-click="_closeFullMenu">
                                             <img t-if="app.webIconData"
                                                  t-att-title="app.name"
-                                                 style="width: 70px !important; height: 70px !important; border-radius: 10px !important; margin: 5px 5px 5px 5px;"
                                                  t-attf-src="{{app.webIconData}}"
                                             />
                                     <b class="a_app_menu_title"><t t-esc="app.name"/></b>
@@ -61,8 +164,33 @@
                             </t>
                         </div>
                     </div>
+                    
+                    <!-- Custom Search Overlay -->
+                    <div t-if="this.state.isSearchOpen" class="custom-search-overlay" t-on-click="closeCustomSearchIfOutside">
+                        <div class="custom-search-modal">
+                            <div class="custom-search-header">
+                                <i class="fa fa-search"/>
+                                <input type="text" t-ref="search-input" t-on-input="_searchMenusSchedule" t-on-keydown="onSearchKeyDown" placeholder="Search apps..." autocomplete="off"/>
+                                <div class="esc-hint" t-on-click="closeCustomSearch">esc</div>
+                            </div>
+                            <div class="custom-search-results">
+                                <div class="custom-search-category">APPS</div>
+                                <t t-foreach="this.state.results" t-as="result" t-key="result.id">
+                                    <a t-attf-class="custom-search-item {{result_index == this.state.activeIndex ? 'active' : ''}}" t-attf-href="/odoo/action-{{result.actionID}}#menu_id={{result.id}}" t-on-click="closeCustomSearch">
+                                        <img t-if="result.webIconData" t-attf-src="data:image/png;base64,{{result.webIconData}}"/>
+                                        <i t-else="" class="fa fa-folder-o"/>
+                                        <span t-out="result.name"/>
+                                        <div class="item-enter">↵</div>
+                                    </a>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </li>
+            </div>
+            <div t-else="" class="mx-2"/>
         </xpath>
     </t>
 </templates>

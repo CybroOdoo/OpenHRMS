@@ -12,3 +12,8 @@
 ##### ADD
 - Added option to submit support ticket and fixed the style issue.
 
+#### 28.07.2026
+#### Version 19.0.2.0.0
+##### UPDT
+- Changed the design for Open HRMS Core
+
