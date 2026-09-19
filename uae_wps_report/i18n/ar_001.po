@@ -1,0 +1,297 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* uae_wps_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-16 03:57+0000\n"
+"PO-Revision-Date: 2025-09-16 03:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_hr_employee__agent_id
+msgid "Agent ID or bank ID of Employee"
+msgstr "معرف الوكيل أو معرف البنك للموظف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_hr_employee__agent_id
+msgid "Agent/Bank"
+msgstr "وكيل / بنك"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__04
+msgid "April"
+msgstr "أبريل"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__08
+msgid "August"
+msgstr "أغسطس"
+
+#. module: uae_wps_report
+#: model:ir.model,name:uae_wps_report.model_res_bank
+msgid "Bank"
+msgstr "بنك"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_res_bank__routing_code
+msgid "Bank Route Code"
+msgstr "كود مسار البنك"
+
+#. module: uae_wps_report
+#: model_terms:ir.ui.view,arch_db:uae_wps_report.wps_report_view_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: uae_wps_report
+#: model:ir.model,name:uae_wps_report.model_res_company
+msgid "Companies"
+msgstr "شركات"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_res_company__employer_id
+msgid "Company Employer ID"
+msgstr "معرف صاحب عمل الشركة"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Configure Your Bank In Accounting Dashboard"
+msgstr "قم بتكوين البنك الخاص بك في لوحة معلومات المحاسبة"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Configure Your Company Employer ID"
+msgstr "قم بتكوين معرف صاحب العمل لشركتك"
+
+#. module: uae_wps_report
+#: model:ir.ui.menu,name:uae_wps_report.wps_report_menu_print_report
+msgid "Create SIF"
+msgstr "إنشاء ملف SIF"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__create_date
+msgid "Created on"
+msgstr "تاريخ الإنشاء"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__days
+msgid "Days of Payment"
+msgstr "أيام الدفع"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__12
+msgid "December"
+msgstr "ديسمبر"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: uae_wps_report
+#: model:ir.model,name:uae_wps_report.model_hr_employee
+msgid "Employee"
+msgstr "موظف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_hr_employee__labour_card_number
+msgid "Employee Card Number"
+msgstr "رقم بطاقة الموظف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_res_company__employer_id
+msgid "Employer ID"
+msgstr "معرف صاحب العمل"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__end_date
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_wps_report__end_date
+msgid "End date of the period for the report"
+msgstr "تاريخ انتهاء الفترة للتقرير"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__02
+msgid "February"
+msgstr "فبراير"
+
+#. module: uae_wps_report
+#: model:ir.actions.act_window,name:uae_wps_report.wps_report_action
+#: model_terms:ir.ui.view,arch_db:uae_wps_report.wps_report_view_form
+msgid "Generate SIF"
+msgstr "إنشاء ملف SIF"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__01
+msgid "January"
+msgstr "يناير"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__07
+msgid "July"
+msgstr "يوليو"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__06
+msgid "June"
+msgstr "يونيو"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_hr_employee__labour_card_number
+msgid "Labour Card Number Of Employee"
+msgstr "رقم بطاقة العمل للموظف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__03
+msgid "March"
+msgstr "مارس"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__05
+msgid "May"
+msgstr "مايو"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_wps_report__salary_month
+msgid "Month for which the salary is being processed"
+msgstr "الشهر الذي تتم فيه معالجة الراتب"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__salary_month
+msgid "Month of Salary"
+msgstr "شهر الراتب"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__11
+msgid "November"
+msgstr "نوفمبر"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_wps_report__days
+msgid "Number of days included in the payment period"
+msgstr "عدد الأيام المشمولة في فترة الدفع"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__10
+msgid "October"
+msgstr "أكتوبر"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Please Set Company Registry Number First"
+msgstr "يرجى تعيين رقم تسجيل الشركة أولاً"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Please Set Employee Card Number of All Employees"
+msgstr "يرجى تعيين رقم بطاقة الموظف لجميع الموظفين"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Please Set Labour Card Number of All Employees"
+msgstr "يرجى تعيين رقم بطاقة العمل لجميع الموظفين"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Please Set Salary Card Number / Account Number of All Employees"
+msgstr "يرجى تعيين رقم بطاقة الراتب / رقم الحساب لجميع الموظفين"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "Please Set a User Timezone"
+msgstr "يرجى تعيين المنطقة الزمنية للمستخدم"
+
+#. module: uae_wps_report
+#: model_terms:ir.ui.view,arch_db:uae_wps_report.wps_report_view_form
+msgid "Print xlsx"
+msgstr "طباعة xlsx"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_res_bank__routing_code
+msgid "Routing Code"
+msgstr "رمز التوجيه"
+
+#. module: uae_wps_report
+#: model:ir.ui.menu,name:uae_wps_report.wps_report_menu_sif
+msgid "SIF"
+msgstr "ملف SIF"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_hr_employee__salary_card_number
+msgid "Salary Card Number/Account Number"
+msgstr "رقم بطاقة الراتب / رقم الحساب"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_hr_employee__salary_card_number
+msgid "Salary card number or account number of employee"
+msgstr "رقم بطاقة الراتب أو رقم الحساب للموظف"
+
+#. module: uae_wps_report
+#: model:ir.model.fields.selection,name:uae_wps_report.selection__wps_report__salary_month__09
+msgid "September"
+msgstr "سبتمبر"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_report__start_date
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: uae_wps_report
+#: model:ir.model.fields,help:uae_wps_report.field_wps_report__start_date
+msgid "Start date of the period for the report"
+msgstr "تاريخ بداية الفترة للتقرير"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "The Dates Can of Same Month Only"
+msgstr "يمكن أن تكون التواريخ من نفس الشهر فقط"
+
+#. module: uae_wps_report
+#. odoo-python
+#: code:addons/uae_wps_report/wizard/wps_report.py:0
+msgid "There are no payslip Created for the selected month"
+msgstr "لا توجد قسائم دفع تم إنشاؤها للشهر المحدد"
+
+#. module: uae_wps_report
+#: model:ir.model,name:uae_wps_report.model_wps_report
+msgid "Wps Report Wizard"
+msgstr "معالج تقرير WPS"
+
