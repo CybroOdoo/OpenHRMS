@@ -1,0 +1,30 @@
+id,name,model_id,group_id/id,operation,domain
+hr_payroll_rule_officer,Officer and subordinates Payslip,hr.payslip,hr_payroll_community.group_hr_payroll_community_user,crud,"['|','|', ('employee_id.user_id', '=',
+                user.id), ('employee_id.department_id', '=', False),
+                ('employee_id.department_id.manager_id.user_id', '=', user.id)]
+            "
+hr_payslip_rule_manager,All Payslip,hr.payslip,hr_payroll_community.group_hr_payroll_community_manager,crud,
+payroll_multi_company_rule,Payroll multi company,hr.payslip,,crud,"['|', ('company_id', '=', False),
+                ('company_id', 'in', company_ids)]
+            "
+access_hr_salary_rule_community_user,access.hr.salary.rule.community.user,hr.salary.rule,hr_payroll_community.group_hr_payroll_community_user,crud,
+hr_salary_rule_multi_company_rule,Salary Rule multi company,hr.salary.rule,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_payroll_community_structure_community_user,access.hr.payroll.structure.community.user,hr.payroll.structure,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payroll_community_structure_hr_user,access.hr.payroll.structure.hr.user,hr.payroll.structure,hr.group_hr_user,r,
+hr_payroll_structure_multi_company_rule,Payroll Structure multi company,hr.payroll.structure,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_contribution_register_community_user,access.hr.contribution.register.community.user,hr.contribution.register,hr_payroll_community.group_hr_payroll_community_user,crud,
+hr_contribution_register_multi_company_rule,Contribution Register multi company,hr.contribution.register,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_salary_rule_category_community_user,access.hr.salary.rule.category.community.user,hr.salary.rule.category,hr_payroll_community.group_hr_payroll_community_user,crud,
+hr_salary_rule_category_multi_company_rule,Salary Rule Category multi company,hr.salary.rule.category,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_payslip_line_community_user,access.hr.payslip.line.community.user,hr.payslip.line,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payslip_input_community_user,access.hr.payslip.input.community.user,hr.payslip.input,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payslip_worked_days_community_user,access.hr.payslip.worked.days.community.user,hr.payslip.worked.days,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payslip_run,access.hr.payslip.run,hr.payslip.run,hr_payroll_community.group_hr_payroll_community_manager,crud,
+hr_payslip_run_multi_company_rule,Payslip Batches multi company,hr.payslip.run,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_rule_input_community_user,access.hr.rule.input.community.user,hr.rule.input,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payslip_employees,access.hr.payslip.employees,hr.payslip.employees,base.group_user,crud,
+access_hr_payslip_employee_line,access.hr.payslip.employee.line,hr.payslip.employee.line,base.group_user,crud,
+access_hr_payslip_run_generate,access.hr.payslip.run.generate,hr.payslip.run.generate,base.group_user,crud,
+access_payslip_lines_contribution_register_community_user,access.payslip.lines.contribution.register.community.user,payslip.lines.contribution.register,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_hr_payslip_monthly_report_manager,hr.payslip.report,hr.payslip.report,hr_payroll_community.group_hr_payroll_community_user,crud,
+access_group_user,Access User,payslip.confirm,hr_payroll_community.group_hr_payroll_community_user,crud,

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_work_entry_type_view_form_inherit_amount" model="ir.ui.view">
+        <field name="name">hr.work.entry.type.form.inherit.amount</field>
+        <field name="model">hr.work.entry.type</field>
+        <field name="inherit_id" ref="hr_work_entry.hr_work_entry_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_group']" position="inside">
+                <group string="Payroll Settings" name="payroll_settings">
+                    <field name="is_paid"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

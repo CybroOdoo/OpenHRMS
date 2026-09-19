@@ -1,0 +1,27 @@
+<odoo>
+    <data noupdate="1">
+
+        <record model="res.groups.privilege" id="res_groups_payroll_community">
+            <field name="name">Payroll</field>
+            <field name="sequence">9</field>
+            <field name="category_id" ref="base.module_category_human_resources"/>
+        </record>
+
+        <!--User access for Payroll Community -->
+
+        <record id="group_hr_payroll_community_user" model="res.groups">
+            <field name="name">Officer</field>
+            <field name="privilege_id" ref="res_groups_payroll_community"/>
+            <field name="implied_ids"
+                   eval="[(4, ref('hr_holidays.group_hr_holidays_user')), (4, ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record id="group_hr_payroll_community_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="privilege_id" ref="res_groups_payroll_community"/>
+            <field name="implied_ids" eval="[(4, ref('hr_payroll_community.group_hr_payroll_community_user'))]"/>
+            <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>

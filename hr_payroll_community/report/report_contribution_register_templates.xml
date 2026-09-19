@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Template for Contribution Register Report-->
+    <template id="report_contributionregister">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>PaySlip Lines by Contribution Register</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-3">
+                                <strong>Register Name:</strong>
+                                <p t-field="o.name"/>
+                            </div>
+                            <div class="col-3">
+                                <strong>Date From:</strong>
+                                <p t-out="data['form']['date_from']"/>
+                            </div>
+                            <div class="col-3">
+                                <strong>Date To:</strong>
+                                <p t-out="data['form']['date_to']"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Quantity/Rate</th>
+                                    <th>Amount</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="lines_data.get(o.id, [])"
+                                   t-as="line">
+                                    <tr t-if="line.get('is_header')" class="fw-bold">
+                                        <td colspan="5">
+                                            <span t-out="line.get('payslip_name', '')"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-else="">
+                                        <td>
+                                            <span t-out="line.get('code', '')"/>
+                                        </td>
+                                        <td>
+                                            <span t-out="line.get('name', '')"/>
+                                        </td>
+                                        <td>
+                                            <span t-out="line.get('quantity', '')"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-out="line.get('amount', 0)"
+                                                  t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-out="line.get('total', 0)"
+                                                  t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

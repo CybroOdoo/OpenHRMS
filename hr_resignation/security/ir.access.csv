@@ -1,0 +1,14 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_resignation_user,hr.resignation user,hr.resignation,base.group_user,cru,"['|', '|', ('employee_id.user_id', '=', user.id), ('employee_id.parent_id.user_id', '=', user.id), ('clearance_line_ids.responsible_user_id', '=', user.id)]"
+access_hr_resignation_officer,hr.resignation officer,hr.resignation,hr.group_hr_user,crud,
+access_hr_resignation_manager,hr.resignation manager,hr.resignation,hr.group_hr_manager,crud,
+access_hr_clearance_type_user,hr.clearance.type.user,hr.clearance.type,base.group_user,r,
+access_hr_clearance_type_officer,hr.clearance.type.officer,hr.clearance.type,hr.group_hr_user,crud,
+access_hr_clearance_type_manager,hr.clearance.type.manager,hr.clearance.type,hr.group_hr_manager,crud,
+rule_hr_clearance_template_multi_company,HR Clearance Template Multi Company,hr.clearance.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_clearance_template_user,hr.clearance.template.user,hr.clearance.template,base.group_user,r,
+access_hr_clearance_template_officer,hr.clearance.template.officer,hr.clearance.template,hr.group_hr_user,crud,
+access_hr_clearance_template_manager,hr.clearance.template.manager,hr.clearance.template,hr.group_hr_manager,crud,
+access_hr_resignation_clearance_line_user,hr.resignation.clearance.line.user,hr.resignation.clearance.line,base.group_user,ru,
+access_hr_resignation_clearance_line_officer,hr.resignation.clearance.line.officer,hr.resignation.clearance.line,hr.group_hr_user,crud,
+access_hr_resignation_clearance_line_manager,hr.resignation.clearance.line.manager,hr.resignation.clearance.line,hr.group_hr_manager,crud

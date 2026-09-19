@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Creating 'Driving License' document type-->
+        <record id="document_type_01" model="document.type">
+            <field name="name">Driving License</field>
+            <field name="notification_type">single</field>
+        </record>
+        <!-- Creating 'Passport' document type-->
+        <record id="document_type_02" model="document.type">
+            <field name="name">Passport</field>
+            <field name="notification_type">multi</field>
+            <field name="before_days">5</field>
+        </record>
+        <!-- Creating 'ID Card' document type-->
+        <record id="document_type_03" model="document.type">
+            <field name="name">ID Card</field>
+            <field name="notification_type">everyday_after</field>
+            <field name="before_days">3</field>
+        </record>
+    </data>
+</odoo>

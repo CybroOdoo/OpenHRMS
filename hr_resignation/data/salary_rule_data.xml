@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_salary_rule_asset_recovery" model="hr.salary.rule">
+            <field name="name">Asset Recovery</field>
+            <field name="sequence" eval="90"/>
+            <field name="code">ASSET_REC</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -(inputs.ASSET_REC.amount) if inputs.ASSET_REC else 0.0</field>
+        </record>
+        
+        <record id="hr_rule_input_asset_recovery" model="hr.rule.input">
+            <field name="code">ASSET_REC</field>
+            <field name="name">Asset Recovery Input</field>
+            <field name="input_id" ref="hr_salary_rule_asset_recovery"/>
+        </record>
+
+        <!-- Automatically add these rules to all salary structures -->
+        <function model="hr.resignation" name="_add_recovery_rules_to_structures"/>
+    </data>
+</odoo>

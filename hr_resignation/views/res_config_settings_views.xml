@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.resignation</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Resignation" string="Resignation" name="hr_resignation" groups="hr.group_hr_manager">
+                    <block title="Resignation Process" name="resignation_process_setting_container">
+                        <setting help="Require line manager approval before HR approval">
+                            <field name="enable_manager_approval"/>
+                        </setting>
+                        <setting help="Default template used for clearance checklist generation">
+                            <field name="clearance_template_id"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_resignation_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module' : 'hr_resignation', 'bin_size': False}</field>
+    </record>
+
+    <menuitem id="hr_resignation_menu_configuration"
+        name="Settings"
+        parent="menu_hr_resignation_config"
+        sequence="0"
+        action="hr_resignation_config_settings_action"
+        groups="hr.group_hr_manager"/>
+</odoo>

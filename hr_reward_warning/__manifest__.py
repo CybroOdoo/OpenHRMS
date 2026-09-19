@@ -1,0 +1,51 @@
+# -*- coding: utf-8 -*-
+#############################################################################
+#
+#    Cybrosys Technologies Pvt. Ltd.
+#
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
+#
+#    You can modify it under the terms of the GNU LESSER
+#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
+#
+#############################################################################
+{
+    'name': 'Open HRMS Official Announcements',
+    'version': '20.0.1.0.0',
+    'category': 'Human Resources',
+    'summary': """Manages Official Announcements""",
+    'description': 'This module helps you to manage HR official announcements',
+    'live_test_url': 'https://youtu.be/VPh1A9-jM5Q',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
+    'company': 'Cybrosys Techno Solutions',
+    'maintainer': 'Cybrosys Techno Solutions',
+    'website': " https://cybrosys.com, https://www.openhrms.com",
+    'depends': ['hr', 'mail'],
+    'data': [
+        'security/ir.access.csv',
+        'data/hr_announcement_category_data.xml',
+        'data/ir_cron_data.xml',
+        'data/ir_sequence_data.xml',
+        'data/mail_template_data.xml',
+        'views/hr_announcement_views.xml',
+        'views/hr_employee_views.xml',
+        'views/hr_reward_warning_menus.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'hr_reward_warning/static/src/js/systray_announcement.js',
+            'hr_reward_warning/static/src/xml/systray_announcement.xml',
+        ],
+    },
+    'images': ['static/description/banner.jpg'],
+    'license': 'LGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

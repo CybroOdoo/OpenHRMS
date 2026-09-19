@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_loan_topup_form" model="ir.ui.view">
+        <field name="name">hr.loan.topup.form</field>
+        <field name="model">hr.loan.topup</field>
+        <field name="arch" type="xml">
+            <form string="Top-Up Loan">
+                <sheet>
+                    <group>
+                        <field name="loan_id" invisible="1"/>
+                        <field name="topup_amount" widget="monetary"/>
+                        <field name="additional_installments"/>
+                    </group>
+                    <p class="text-muted">
+                        This will automatically merge the new funds with the existing unpaid balance and generate a fresh payment schedule spread across the remaining installments.
+                    </p>
+                </sheet>
+                <footer>
+                    <button name="action_topup" string="Confirm Top-Up" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

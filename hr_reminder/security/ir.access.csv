@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_reminder_hr_user,hr.reminder.officer,hr.reminder,hr.group_hr_user,crud,
+access_hr_reminder_administrator,access.hr.reminder.administrator,hr.reminder,hr.group_hr_manager,crud,
+hr_reminder_company_rule,Hr Reminder Company Rule,hr.reminder,,crud,"['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]"

@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation
+access_hr_employee_broad_factor,access_hr_employee_broad_factor,hr.employee.broad.factor,base.group_user,r
+access_hr_employee_payslip,access_hr_employee_payslip,hr.payslip,base.group_user,r
+access_hr_version_user,hr.version.user,hr.version,base.group_user,r

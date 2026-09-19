@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+rule_salary_advance_multi_company,Salary Advance Multi Company,salary.advance,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_salary_advance_user,salary.advance user,salary.advance,base.group_user,crud,"[('employee_id.user_id', '=', user.id)]"
+access_salary_advance_officer,salary.advance officer,salary.advance,hr.group_hr_user,crud,
+access_salary_advance_manager,salary.advance manager,salary.advance,hr.group_hr_manager,crud,
+access_salary_advance_account_user,salary.advance account user,salary.advance,account.group_account_user,crud,
+access_salary_advance_account_manager,salary.advance account manager,salary.advance,account.group_account_manager,crud,
+access_salary_advance_payment_wizard_account,salary.advance.payment.wizard account,salary.advance.payment.wizard,account.group_account_user,crud,
+access_salary_advance_payment_wizard_hr,salary.advance.payment.wizard hr,salary.advance.payment.wizard,hr.group_hr_user,crud,

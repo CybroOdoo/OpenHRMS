@@ -1,0 +1,473 @@
+:root {
+    --ohrms-core-systray-color: #111827;
+    --ohrms-core-systray-bg: rgba(17, 24, 39, 0.08);
+    --ohrms-core-systray-hover-color: #ffffff;
+    --ohrms-core-systray-hover-bg: #00a09d;
+    --ohrms-core-modal-bg: #ffffff;
+    --ohrms-core-modal-body-bg: #fafbfc;
+    --ohrms-core-text-color: #2c3e50;
+    --ohrms-core-muted-border: #dde2e7;
+    --ohrms-core-input-bg: #ffffff;
+    --ohrms-core-input-color: #2c3e50;
+    --ohrms-core-input-shadow: rgba(0, 0, 0, 0.04);
+    --ohrms-core-attachment-border: #c8cdd3;
+    --ohrms-core-payload-bg: #1e2533;
+    --ohrms-core-payload-color: #e6e9ef;
+    --ohrms-core-dialog-shadow: rgba(0, 0, 0, 0.18);
+    --ohrms-core-close-filter: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ohrms-core-systray-color: #ffffff;
+        --ohrms-core-systray-bg: rgba(255, 255, 255, 0.12);
+        --ohrms-core-modal-bg: #1f2937;
+        --ohrms-core-modal-body-bg: #111827;
+        --ohrms-core-text-color: #f3f4f6;
+        --ohrms-core-muted-border: #4b5563;
+        --ohrms-core-input-bg: #1f2937;
+        --ohrms-core-input-color: #f9fafb;
+        --ohrms-core-input-shadow: rgba(0, 0, 0, 0.3);
+        --ohrms-core-attachment-border: #6b7280;
+        --ohrms-core-payload-bg: #030712;
+        --ohrms-core-payload-color: #f3f4f6;
+        --ohrms-core-dialog-shadow: rgba(0, 0, 0, 0.55);
+        --ohrms-core-close-filter: invert(1) grayscale(100%) brightness(200%);
+    }
+}
+
+[data-bs-theme="dark"],
+[data-theme="dark"],
+.o_web_client.o_dark,
+body.o_dark {
+    --ohrms-core-systray-color: #ffffff;
+    --ohrms-core-systray-bg: rgba(255, 255, 255, 0.12);
+    --ohrms-core-modal-bg: #1f2937;
+    --ohrms-core-modal-body-bg: #111827;
+    --ohrms-core-text-color: #f3f4f6;
+    --ohrms-core-muted-border: #4b5563;
+    --ohrms-core-input-bg: #1f2937;
+    --ohrms-core-input-color: #f9fafb;
+    --ohrms-core-input-shadow: rgba(0, 0, 0, 0.3);
+    --ohrms-core-attachment-border: #6b7280;
+    --ohrms-core-payload-bg: #030712;
+    --ohrms-core-payload-color: #f3f4f6;
+    --ohrms-core-dialog-shadow: rgba(0, 0, 0, 0.55);
+    --ohrms-core-close-filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.o_ohrms_core_systray {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    color: #ffffff;
+    background-color: transparent;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.o_ohrms_core_systray:hover,
+.o_ohrms_core_systray:focus-visible {
+    color: var(--ohrms-core-systray-hover-color);
+    transform: scale(1.05);
+    outline: none;
+}
+
+.o_ohrms_core_systray:active {
+    transform: scale(0.95);
+}
+
+.o_ohrms_core_systray .fa {
+    line-height: 1;
+    font-size: 1.15rem !important;
+}
+
+.o_dialog:has(.o_ohrms_core_support_form),
+.o_ohrms_core_support_form {
+    --ohrms-core-modal-bg: #ffffff;
+    --ohrms-core-modal-body-bg: #fafbfc;
+    --ohrms-core-text-color: #2c3e50;
+    --ohrms-core-muted-border: #dde2e7;
+    --ohrms-core-input-bg: #ffffff;
+    --ohrms-core-input-color: #2c3e50;
+    --ohrms-core-input-shadow: rgba(0, 0, 0, 0.04);
+    --ohrms-core-attachment-border: #c8cdd3;
+    --ohrms-core-payload-bg: #1e2533;
+    --ohrms-core-payload-color: #e6e9ef;
+    --ohrms-core-dialog-shadow: rgba(0, 0, 0, 0.18);
+    --ohrms-core-close-filter: none;
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-dialog {
+    max-width: 610px;
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    color: var(--ohrms-core-text-color);
+    background-color: var(--ohrms-core-modal-bg);
+    box-shadow: 0 20px 60px var(--ohrms-core-dialog-shadow);
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-header {
+    color: var(--ohrms-core-text-color);
+    background-color: var(--ohrms-core-modal-bg);
+    border-bottom-color: var(--ohrms-core-muted-border);
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-title,
+.o_dialog:has(.o_ohrms_core_support_form) .modal-header .btn,
+.o_dialog:has(.o_ohrms_core_support_form) .modal-header .o_form_button_cancel {
+    color: var(--ohrms-core-text-color);
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-header .btn-close {
+    filter: var(--ohrms-core-close-filter);
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-body {
+    padding: 0.75rem 1.1rem;
+    color: var(--ohrms-core-text-color);
+    background-color: var(--ohrms-core-modal-body-bg);
+}
+
+.o_dialog:has(.o_ohrms_core_support_form) .modal-footer {
+    padding: 0.5rem 1rem;
+    background-color: var(--ohrms-core-modal-bg);
+}
+
+.o_ohrms_core_support_form .o_form_view {
+    color: var(--ohrms-core-text-color);
+    background-color: var(--ohrms-core-modal-body-bg);
+    padding: 0;
+}
+
+.o_ohrms_core_support_form .o_inner_group {
+    grid-template-columns: 1fr !important;
+    row-gap: 0;
+    margin-bottom: 0;
+}
+
+.o_ohrms_core_support_form .o_inner_group .o_cell {
+    grid-column: 1 / -1 !important;
+}
+
+.o_ohrms_core_support_form .o_inner_group .o_wrap_label {
+    margin: 0.35rem 0 0.1rem;
+}
+
+.o_ohrms_core_support_form .o_form_label {
+    font-weight: 600;
+    color: var(--ohrms-core-text-color);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0;
+}
+
+.o_ohrms_core_support_form,
+.o_ohrms_core_support_form .o_group,
+.o_ohrms_core_support_form .o_cell,
+.o_ohrms_core_support_form .o_field_widget,
+.o_ohrms_core_support_form .o_field_widget span,
+.o_ohrms_core_support_form .o_field_widget label {
+    color: var(--ohrms-core-text-color);
+}
+
+.o_ohrms_core_support_form .o_field_widget input.o_input,
+.o_ohrms_core_support_form .o_field_widget textarea.o_input,
+.o_ohrms_core_support_form .o_field_widget select.o_input,
+.o_ohrms_core_support_form .o_field_widget .o_input {
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--ohrms-core-muted-border);
+    border-left: 4px solid #00a09d;
+    border-radius: 5px;
+    color: var(--ohrms-core-input-color);
+    background-color: var(--ohrms-core-input-bg);
+    box-shadow: 0 1px 2px var(--ohrms-core-input-shadow);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    font-size: 0.85rem;
+    min-height: unset;
+}
+
+.o_ohrms_core_support_form .o_field_widget textarea.o_input {
+    min-height: 60px;
+}
+
+.o_ohrms_core_support_form .o_field_widget input.o_input:focus,
+.o_ohrms_core_support_form .o_field_widget textarea.o_input:focus,
+.o_ohrms_core_support_form .o_field_widget select.o_input:focus {
+    border-color: #00a09d;
+    box-shadow: 0 0 0 3px rgba(0, 160, 157, 0.18);
+    outline: none;
+}
+
+.o_ohrms_core_support_form .o_field_widget.o_required_modifier input.o_input,
+.o_ohrms_core_support_form .o_field_widget.o_required_modifier textarea.o_input {
+    border-left-color: #e74c3c;
+}
+
+.o_ohrms_core_support_form .o_field_widget.o_priority,
+.o_ohrms_core_support_form .o_field_widget.o_field_boolean {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.o_ohrms_core_support_form .o_field_widget.o_priority {
+    padding: 0.15rem 0;
+}
+
+.o_ohrms_core_support_form .o_field_widget.o_field_boolean {
+    padding: 0;
+}
+
+.o_ohrms_core_support_form .o_field_many2many_binary {
+    border: 1px dashed var(--ohrms-core-attachment-border);
+    border-radius: 6px;
+    padding: 0.4rem;
+    color: var(--ohrms-core-text-color);
+    background-color: var(--ohrms-core-input-bg);
+}
+
+.o_ohrms_core_support_form .o_field_widget[name="payload_preview"] textarea {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    background-color: var(--ohrms-core-payload-bg);
+    color: var(--ohrms-core-payload-color);
+    border-left-color: #6c757d;
+    min-height: 110px;
+    line-height: 1.3;
+}
+
+.modal-footer .o_ohrms_core_btn_submit,
+.modal-footer .o_ohrms_core_btn_whatsapp,
+.modal-footer .o_ohrms_core_btn_cancel {
+    border-radius: 5px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: none;
+    color: #ffffff;
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.modal-footer .o_ohrms_core_btn_submit .oi,
+.modal-footer .o_ohrms_core_btn_whatsapp .oi {
+    vertical-align: -2px;
+    font-size: 1rem;
+    margin-right: 4px;
+}
+
+.modal-footer .o_ohrms_core_btn_submit {
+    background-color: #28a745;
+}
+
+.modal-footer .o_ohrms_core_btn_submit:hover {
+    background-color: #218838;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.modal-footer .o_ohrms_core_btn_whatsapp {
+    background-color: #25d366;
+}
+
+.modal-footer .o_ohrms_core_btn_whatsapp:hover {
+    background-color: #1ebd5e;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+}
+
+.modal-footer .o_ohrms_core_btn_cancel {
+    background-color: #dc3545;
+}
+
+.modal-footer .o_ohrms_core_btn_cancel:hover {
+    background-color: #c82333;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.modal-footer .o_ohrms_core_btn_submit:active,
+.modal-footer .o_ohrms_core_btn_whatsapp:active,
+.modal-footer .o_ohrms_core_btn_cancel:active {
+    transform: translateY(0);
+}
+
+.o_ohrms_core_ticket_notification .o_notification_content {
+    white-space: pre-line;
+    line-height: 1.5;
+    font-size: 0.88rem;
+}
+
+.o_ohrms_core_ticket_notification {
+    min-width: 340px;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+/* Resize the standard bell icon in the systray to match other icons */
+.o_menu_systray i.fa-bell,
+.o_menu_systray [data-icon="notifications"],
+.o_menu_systray [data-icon="bell"] {
+    font-size: 1.15rem !important;
+}
+
+/* Make all standard Systray dropdowns beautifully rounded */
+.o_menu_systray .dropdown-menu {
+    border-radius: 1rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    margin-top: 10px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* ============================================================================
+   APP LAUNCHER OVERRIDES
+   Ensure the floating Chat Window is always visible and floats on top 
+   of the App Launcher. Overrides any potential XML template caching issues.
+============================================================================ */
+
+/* 1. Prevent action manager and content from clipping chat windows */
+body.app-launcher-open div.o_action_manager,
+body.app-launcher-open div.o_content {
+    overflow: visible !important;
+}
+
+/* 2. Elevate the chat window and chat bubbles above the App Launcher (1040) */
+body.app-launcher-open div.o-mail-ChatWindow,
+body.app-launcher-open div.o-mail-ChatHub-bubbles {
+    z-index: 1150 !important;
+}
+
+/* ============================================================================
+   GLOBAL THEME COLOR OVERRIDES (PURPLE TO BLUE)
+   Forces the OpenHRMS Navy Blue (#1B5298) without requiring a module upgrade.
+============================================================================ */
+
+/* 1. CSS Variables for Bootstrap 5 and Odoo Components */
+:root, .o_web_client, body {
+    --bs-primary: #1B5298 !important;
+    --bs-primary-rgb: 27, 82, 152 !important;
+    --o-brand-odoo: #1B5298 !important;
+    --o-brand-primary: #1B5298 !important;
+    --primary: #1B5298 !important;
+}
+
+/* 2. Primary Buttons */
+.btn-primary,
+.o_form_view .o_statusbar_status .o_arrow_button.btn-primary.disabled {
+    background-color: #1B5298 !important;
+    border-color: #1B5298 !important;
+    color: #ffffff !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    background-color: #0d2d5e !important;
+    border-color: #0d2d5e !important;
+}
+
+/* 3. Outline Buttons */
+.btn-outline-primary {
+    color: #1B5298 !important;
+    border-color: #1B5298 !important;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active {
+    background-color: #1B5298 !important;
+    color: #ffffff !important;
+}
+
+/* 4. Text & Background Utilities */
+.text-primary, .text-odoo {
+    color: #1B5298 !important;
+}
+.bg-primary {
+    background-color: #1B5298 !important;
+}
+
+/* 5. Navigation Bar Active/Hover States */
+/* Ensure menu items don't have a solid background that obscures the navbar's beautiful gradient */
+.o_main_navbar {
+    --NavBar-entry-backgroundColor: transparent !important;
+    --NavBar-entry-backgroundColor--hover: rgba(255, 255, 255, 0.1) !important;
+    --NavBar-entry-backgroundColor--active: rgba(255, 255, 255, 0.15) !important;
+    --NavBar-entry-backgroundColor--focus: rgba(255, 255, 255, 0.1) !important;
+}
+.o_main_navbar .o_menu_brand,
+.o_main_navbar .o_menu_sections .o_nav_entry,
+.o_main_navbar .o_menu_sections .dropdown-toggle {
+    background: transparent !important;
+}
+.o_main_navbar .o_menu_sections .o_nav_entry.active,
+.o_main_navbar .o_menu_sections .dropdown-toggle.active {
+    background: var(--NavBar-entry-backgroundColor--active) !important;
+}
+.o_main_navbar .o_menu_sections .dropdown.show.dropdown-toggle {
+    background: var(--NavBar-entry-backgroundColor--active) !important;
+}
+
+/* 6. Systray Dropdowns (Messaging, Profile, Activities) */
+/* Unify the shape of all systray dropdowns to match the fully rounded, modern look of the Reminders dropdown. */
+/* We target .o-mail-DiscussSystray specifically because Owl renders these outside the navbar DOM. */
+.o_main_navbar .o_menu_systray .dropdown-menu,
+.o_main_navbar .o_user_menu .dropdown-menu,
+.dropdown-menu.o-mail-DiscussSystray {
+    border-radius: 1rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+
+/* 6. Form Checkboxes & Switches */
+.form-check-input:checked {
+    background-color: #1B5298 !important;
+    border-color: #1B5298 !important;
+}
+
+/* 7. Search View / Filter Active Tokens */
+.o_searchview {
+    padding-left: 1rem !important;
+}
+.o_searchview .o_searchview_icon {
+    margin-right: 0.5rem !important;
+}
+.o_searchview .o_searchview_facet .o_searchview_facet_label {
+    background-color: #1B5298 !important;
+    color: #ffffff !important;
+}
+.o_searchview .o_searchview_facet {
+    border-color: #1B5298 !important;
+    background-color: rgba(27, 82, 152, 0.1) !important;
+}
+
+/* 8. Discuss App Search Bar / Video Call Icon Alignment */
+.o-mail-DiscussSearch {
+    align-items: stretch !important;
+    min-height: 42px !important;
+}
+.o-mail-DiscussSearch .btn[data-hotkey="m"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+.o-mail-DiscussSearch input.form-control {
+    font-size: 0.95rem !important;
+}

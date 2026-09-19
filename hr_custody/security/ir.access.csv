@@ -1,0 +1,15 @@
+id,name,model_id,group_id/id,operation,domain
+rule_custody_property_multi_company,Custody Property Multi Company,custody.property,,crud,"['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]"
+rule_hr_custody_multi_company,Custody Request Multi Company,hr.custody,,crud,"['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]"
+access_hr_custody_manager,access.hr.custody.manager,hr.custody,hr.group_hr_manager,crud,
+access_hr_custody_user,access.hr.custody.user,hr.custody,hr.group_hr_user,crud,
+access_hr_custody_base_user,hr.custody.user,hr.custody,base.group_user,cru,"[('employee_id.user_id', '=', user.id)]"
+access_custody_property_manger,custody.property.manager,custody.property,hr.group_hr_manager,crud,
+access_custody_property_user,custody.property.user,custody.property,hr.group_hr_user,crud,
+access_custody_property_base_user,custody.property.user,custody.property,base.group_user,r,
+access_property_return_date_manger,property.return.date.manager,property.return.date,hr.group_hr_manager,crud,
+access_property_return_date_user,property.return.date.user,property.return.date,hr.group_hr_user,crud,
+access_property_return_date_base_user,property.return.date.user,property.return.date,base.group_user,crud,
+access_report_custody_manger,report.custody.manager,report.custody,hr.group_hr_manager,crud,
+access_report_custody_user,report.custody.user,report.custody,hr.group_hr_user,crud,
+access_property_return_reason,property.return.reason.manger,property.return.reason,hr.group_hr_manager,crud,

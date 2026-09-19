@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+#############################################################################
+#
+#    Cybrosys Technologies Pvt. Ltd.
+#
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
+#
+#    You can modify it under the terms of the GNU LESSER
+#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
+#
+#############################################################################
+from odoo import fields, models
+
+
+class IrAttachment(models.Model):
+    """This class inherits from 'ir.attachment' and introduces a many-to-many
+     relationship: 'doc_attach_rel' for associating HR employee documents to a record."""
+    _inherit = 'ir.attachment'
+
+    doc_attach_rel = fields.Many2many('hr.employee.document',
+                                      'doc_attachment_ids',
+                                      'attach_id3', 'doc_id',
+                                      string="Attachment", invisible=1,
+                                      help='This field allows you to associate'
+                                           'HR employee documents with the '
+                                           'record.')

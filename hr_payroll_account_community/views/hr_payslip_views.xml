@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Customizing the hr.payslip form view to include additional
+    fields after the 'paid' field. -->
+    <record model="ir.ui.view" id="hr_payslip_view_form">
+        <field name="name">hr.payslip.view.form.inherit.hr.payroll.account.community</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id"
+               ref="hr_payroll_community.hr_payslip_view_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_open_journal_entry"
+                        class="oe_stat_button"
+                        icon="menu"
+                        type="object"
+                        invisible="not move_id">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Journal Entry</span>
+                    </div>
+                </button>
+                <button name="action_open_payments"
+                        class="oe_stat_button"
+                        icon="attach_money"
+                        type="object"
+                        invisible="payment_count == 0">
+                    <div class="o_stat_info">
+                        <field name="payment_count" widget="statinfo" string="Payments"/>
+                    </div>
+                </button>
+            </div>
+            <xpath expr="//button[@name='action_mark_as_paid']" position="before">
+                <button string="Pay" name="action_open_payment_wizard"
+                        type="object" class="oe_highlight"
+                        invisible="not move_id or payment_count &gt; 0"/>
+            </xpath>
+            <xpath expr="//button[@name='action_mark_as_paid']" position="attributes">
+                <attribute name="invisible">state != 'done' or payment_count == 0</attribute>
+            </xpath>
+            <field name="paid" position="after">
+                <field name="date" readonly="state != 'draft'"/>
+                <field name="journal_id" required="1" readonly="state != 'draft'"/>
+                <field name="move_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- account.payment view inheritance -->
+    <record id="view_account_payment_form_inherit_payslip" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.payslip</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_open_payslip"
+                        class="oe_stat_button"
+                        icon="credit_card"
+                        type="object"
+                        invisible="payslip_count == 0">
+                    <div class="o_stat_info">
+                        <field name="payslip_count" widget="statinfo" string="Payslip"/>
+                    </div>
+                </button>
+            </div>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="invisible">state != 'in_process'</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

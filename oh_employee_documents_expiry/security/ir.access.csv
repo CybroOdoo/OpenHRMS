@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_employee_document_user,access.hr.employee.document.user,hr.employee.document,base.group_user,r,
+access_hr_employee_document_hr_manager,access.hr.employee.document.hr.manager,hr.employee.document,hr.group_hr_manager,crud,
+access_hr_employee_document_hr_user,access.hr.employee.document.hr.user,hr.employee.document,hr.group_hr_user,cru,
+access_document_type_hr_manager,access.document.type.hr.manager,document.type,hr.group_hr_manager,crud,
+access_document_renew_wizard_hr_manager,access.document.renew.wizard.hr.manager,document.renew.wizard,hr.group_hr_manager,crud,
+access_document_renew_wizard_hr_user,access.document.renew.wizard.hr.user,document.renew.wizard,hr.group_hr_user,crud,
+access_hr_employee_document_history_manager,access.hr.employee.document.history.manager,hr.employee.document.history,hr.group_hr_manager,cr,
+access_hr_employee_document_history_user,access.hr.employee.document.history.user,hr.employee.document.history,hr.group_hr_user,cr,

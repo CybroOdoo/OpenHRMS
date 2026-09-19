@@ -1,0 +1,13 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_job_user,access.hr.job.user,hr.job,base.group_user,cru
+access_hr_loan_line_user,access.hr.loan.line.user,hr.loan.line,base.group_user,ru
+access_hr_loan_officer,access.hr.loan.officer,hr.loan,hr.group_hr_user,crud
+access_hr_loan_line_officer,access.hr.loan.line.officer,hr.loan.line,hr.group_hr_user,crud
+access_hr_loan_manager,access.hr.loan.manager,hr.loan,hr.group_hr_manager,crud
+access_hr_loan_line_manager,access.hr.loan.line.manager,hr.loan.line,hr.group_hr_manager,crud
+access_hr_loan_early_settlement_user,access.hr.loan.early.settlement.user,hr.loan.early.settlement,base.group_user,crud
+access_hr_loan_deferment_user,access.hr.loan.deferment.user,hr.loan.deferment,base.group_user,crud
+access_hr_loan_topup_user,access.hr.loan.topup.user,hr.loan.topup,base.group_user,crud
+hr_loan_rule_company,Loan Request Multi Company,hr.loan,,crud,"['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]"
+hr_loan_rule_user,Loan Forms Modification Accounts and Hr,hr.loan,hr.group_hr_manager,crud,
+hr_loan_rule_employee,User: Modify own loan only,hr.loan,base.group_user,crud,"[('employee_id.user_id','=',user.id)]"

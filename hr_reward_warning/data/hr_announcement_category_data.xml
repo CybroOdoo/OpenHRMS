@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Announcement Categories -->
+        <record id="category_general" model="hr.announcement.category">
+            <field name="name">General</field>
+            <field name="color">1</field> <!-- E.g., Red -->
+        </record>
+        <record id="category_reward" model="hr.announcement.category">
+            <field name="name">Reward</field>
+            <field name="color">10</field> <!-- E.g., Green -->
+        </record>
+        <record id="category_warning" model="hr.announcement.category">
+            <field name="name">Warning</field>
+            <field name="color">3</field> <!-- E.g., Yellow -->
+        </record>
+    </data>
+</odoo>

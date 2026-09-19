@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_employee_family_employee_user,access.hr.employee.family.employee.user,hr.employee.family,base.group_user,r,
+access_hr_employee_family_hr_manager,access.hr.employee.family.manager.user,hr.employee.family,hr.group_hr_manager,crud,
+access_hr_employee_family_hr_user,access.hr.employee.family.user,hr.employee.family,hr.group_hr_user,crud,
+access_hr_employee_relation_user,access.hr.employee.relation.user,hr.employee.relation,base.group_user,crud,

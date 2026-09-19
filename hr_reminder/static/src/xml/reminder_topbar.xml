@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <!--    Template of the remainder menu in systray-->
+    <t t-name="owl.reminder_menu">
+        <Dropdown position="'bottom-end'" state="this.dropdown" t-if="this.state.isHRUser" menuClass="'reminder-dropdown shadow-lg p-0'">
+            <button class="o_reminder_navbar_item dropdown-toggle d-flex align-items-center justify-content-center no-caret"
+               t-on-click.prevent="(ev) => this.showReminder(ev)"
+               title="Reminders" tabindex="0">
+                <div class="position-relative d-flex align-items-center justify-content-center">
+                    <i class="oi fs-4" data-icon="notifications" role="img" aria-label="Reminders"></i>
+                    <t t-if="this.state.all_remainders and this.state.all_remainders.length > 0">
+                        <span class="o-mail-MessagingMenu-counter badge rounded-pill text-bg-success position-absolute top-0 start-100 translate-middle mt-1 ms-n1" style="font-size: 0.65rem; padding: 0.25em 0.4em;">
+                            <t t-out="this.state.all_remainders.length"/>
+                        </span>
+                    </t>
+                </div>
+            </button>
+            <t t-set-slot="content">
+                <div class="d-flex justify-content-end align-items-center px-3 pt-1 pb-1 border-bottom bg-white rounded-top">
+                    <span class="text-primary fw-bold" style="font-size: 13px; cursor: default;">Reminders</span>
+                </div>
+                <div class="reminder-list list-group list-group-flush" style="max-height: 350px; overflow-y: auto; border-radius: 0 0 1rem 1rem;">
+                    <t t-if="this.state.all_remainders.length === 0">
+                        <div class="p-4 text-center text-muted">
+                            <i class="oi fs-4 mb-2" data-icon="notifications_off"></i>
+                            <p class="mb-0 small">No Reminders</p>
+                        </div>
+                    </t>
+                    <t t-foreach='this.state.all_remainders' t-as='val' t-key="val.id">
+                        <div class="list-group-item d-flex align-items-center px-3 py-2 border-0 border-bottom bg-white" style="cursor: default;" t-on-click.prevent.stop="">
+                            <div class="d-flex align-items-center justify-content-center bg-light text-primary rounded" style="width: 36px; height: 36px; flex-shrink: 0;">
+                                <i class="oi" data-icon="notifications"></i>
+                            </div>
+                            <div class="flex-grow-1 overflow-hidden ms-3">
+                                <div class="d-flex fw-bold text-dark text-truncate" style="font-size: 13px;">
+                                    <t t-out="val.name"/>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <span class="text-muted text-truncate" style="font-size: 12px;">
+                                        System Reminder
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ms-2 flex-shrink-0">
+                                <button class="btn btn-sm btn-primary rounded-pill px-3 py-1" style="font-size: 12px; transition: all 0.2s ease;" t-on-click.prevent.stop="(ev) => this.reminderActive(ev, val.id, val.name)">
+                                    View
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </Dropdown>
+    </t>
+</templates>

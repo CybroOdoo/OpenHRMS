@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--   Adding document details as smart button in employee.-->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.oh.employee.documents.expiry</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button class="oe_stat_button" name="action_document_view"
+                        type="object" icon="description">
+                    <field string="Documents" name="document_count"
+                           widget="statinfo"/>
+                </button>
+            </div>
+        </field>
+    </record>
+    <!--    Form view of hr_employee_document model-->
+    <record id='hr_employee_document_view_form' model='ir.ui.view'>
+        <field name="name">hr.employee.document.view.form</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_active" type="object" string="Validate" invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_renew" type="object" string="Renew" invisible="state != 'expired'" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,expired"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_employee" type="object" class="oe_stat_button" icon="person">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Employee</span>
+                                <span class="o_stat_text">Profile</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" invisible="name == '/'"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_ref_id" string="Employee"/>
+                            <field name="document_type_id"/>
+                        </group>
+                        <group>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="remaining_days" invisible="not expiry_date or state == 'expired'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="General">
+                            <group>
+                                <field name="notification_type"/>
+                                <field name="before_days" string="Days Before" help="Number of days before the expiry date to send the advance notification." invisible="notification_type != 'multi'"/>
+                                <field name="before_days" string="Start Days Before" help="Number of days before the expiry date to start sending daily notifications." invisible="notification_type != 'everyday'"/>
+                                <field name="before_days" string="Days After" help="How many days after the expiry date to continue notifying." invisible="notification_type != 'everyday_after'"/>
+                                <field name="description"/>
+                            </group>
+                        </page>
+                        <page string="Attachments">
+                            <group>
+                                <field name="doc_attachment_ids" widget="many2many_binary" class="oe_inline" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Renewal History">
+                            <field name="history_ids" readonly="1">
+                                <list>
+                                    <field name="renewed_on" string="Renewal Date"/>
+                                    <field name="issue_date"/>
+                                    <field name="expiry_date"/>
+                                    <field name="attachment_ids" widget="many2many_tags" string="Attachment"/>
+                                    <field name="renewed_by"/>
+                                    <field name="renewal_reason" string="Reason"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id='hr_employee_document_view_tree' model='ir.ui.view'>
+        <field name="name">hr.employee.document.view.tree</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <list default_order="expiry_date asc">
+                <field name="name"/>
+                <field name="employee_ref_id" string="Employee"/>
+                <field name="document_type_id"/>
+                <field name="expiry_date"/>
+                <field name="expiry_status" string="Days Left" decoration-danger="remaining_days &lt; 0 or state == 'expired'" decoration-warning="remaining_days &gt;= 0 and remaining_days &lt;= 7 and state == 'active'" decoration-success="remaining_days &gt; 7 and state == 'active'"/>
+                <field name="state" widget="badge" decoration-success="state == 'active'" decoration-info="state == 'draft'" decoration-danger="state == 'expired'"/>
+                <field name="remaining_days" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view for hr_employee_document -->
+    <record id="hr_employee_document_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.document.view.search</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="employee_ref_id"/>
+                <field name="document_type_id"/>
+                <separator/>
+                <filter string="Active" name="state_active" domain="[('state', '=', 'active')]"/>
+                <filter string="Expired" name="state_expired" domain="[('state', '=', 'expired')]"/>
+                <filter string="Draft" name="state_draft" domain="[('state', '=', 'draft')]"/>
+                <separator/>
+                <filter string="Expiring in 7 Days" name="expiring_7_days" 
+                        domain="[('remaining_days', '&lt;=', 7), ('remaining_days', '&gt;=', 0), ('state', '=', 'active')]"/>
+                <filter string="Expiring in 30 Days" name="expiring_30_days" 
+                        domain="[('remaining_days', '&lt;=', 30), ('remaining_days', '&gt;=', 0), ('state', '=', 'active')]"/>
+                <separator/>
+                <filter string="Late Activities" name="activities_overdue"
+                        domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                        help="Show all records which has next action date is before today"/>
+                <filter string="Today Activities" name="activities_today"
+                        domain="[('my_activity_date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Future Activities" name="activities_upcoming_all"
+                        domain="[('my_activity_date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+                
+                <separator/>
+                <filter string="Employee" name="group_employee" context="{'group_by': 'employee_ref_id'}"/>
+                <filter string="Document Type" name="group_document_type" context="{'group_by': 'document_type_id'}"/>
+                <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!--    Configures an action window for HR Employee Documents.-->
+    <record id="hr_employee_document_action" model="ir.actions.act_window">
+        <field name="name">Employee Documents</field>
+        <field name="res_model">hr.employee.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="hr_employee_document_view_tree"/>
+        <field name="search_view_id" ref="hr_employee_document_view_search"/>
+        <field name="context">{'search_default_state_active': 1}</field>
+    </record>
+    <!--    Creates a menu item for HR Employee Documents.-->
+    <menuitem id="hr_employee_menu"
+              name="Employees"
+              parent="hr.menu_hr_employee_payroll"
+              action="hr.open_view_employee_list_my"
+              groups="hr.group_hr_manager"/>
+
+    <menuitem id="hr_employee_document_menu"
+              name="Documents"
+              parent="hr.menu_hr_employee_payroll"
+              action="hr_employee_document_action"
+              groups="hr.group_hr_manager"/>
+
+</odoo>

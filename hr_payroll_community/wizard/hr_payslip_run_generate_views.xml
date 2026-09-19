@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_run_generate_form" model="ir.ui.view">
+        <field name="name">hr.payslip.run.generate.form</field>
+        <field name="model">hr.payslip.run.generate</field>
+        <field name="arch" type="xml">
+            <form string="New Pay Run">
+                <group>
+                    <field name="payslip_run_id" invisible="1"/>
+                    <field name="name"/>
+                    <label for="date_start" string="Period"/>
+                    <div>
+                        <field name="date_start" class="oe_inline"/> - <field name="date_end" class="oe_inline"/>
+                    </div>
+                    <field name="struct_id"/>
+                </group>
+                <footer>
+                    <button name="action_continue" string="Continue" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Discard" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_payslip_run_generate" model="ir.actions.act_window">
+        <field name="name">New Pay Run</field>
+        <field name="res_model">hr.payslip.run.generate</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

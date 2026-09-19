@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_hr_employee_updation" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.employee.updation</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='employees_setting_container']" position="inside">
+                <setting id="id_expiry_setting" string="ID Expiry Notification" help="Number of days before expiry to send ID notification">
+                    <field name="id_expiry_days"/>
+                </setting>
+                <setting id="passport_expiry_setting" string="Passport Expiry Notification" help="Number of days before expiry to send Passport notification">
+                    <field name="passport_expiry_days"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

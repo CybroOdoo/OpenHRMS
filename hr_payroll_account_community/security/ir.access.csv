@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_batch_payment_wizard,access.hr.batch.payment.wizard,hr.batch.payment.wizard,hr_payroll_community.group_hr_payroll_community_user,crud,

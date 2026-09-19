@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Custody Return mail Scheduler-->
+    <data>
+        <record id="hr_custody_data_reminders" model="ir.cron">
+            <field name="name">HR Custody Return Notification</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="model_id" ref="model_hr_custody"/>
+            <field name="state">code</field>
+            <field name="code">model.mail_reminder()</field>
+        </record>
+    </data>
+</odoo>

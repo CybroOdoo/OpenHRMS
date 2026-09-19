@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--   Form View of hr_announcement model  -->
+    <record id="hr_announcement_view_form" model="ir.ui.view">
+        <field name="name">hr.announcement.view.form</field>
+        <field name="model">hr.announcement</field>
+        <field name="arch" type="xml">
+            <form string="Announcements">
+                <header>
+                    <button string="Acknowledge" class="btn-success"
+                            type="object" name="action_acknowledge"
+                            invisible="has_acknowledged == True or state != 'approved'"/>
+                    <button string="Send For Approval" class="btn-primary"
+                            type="object" name="action_sent_announcement"
+                            groups="hr.group_hr_user"
+                            invisible="state != 'draft'"/>
+                    <button string="Approve" class="btn-primary"
+                            groups="hr.group_hr_manager" type="object"
+                            name="action_approve_announcement"
+                            invisible="state != 'to_approve'"/>
+                    <button string="Refuse" groups="hr.group_hr_manager"
+                            type="object"
+                            name="action_reject_announcement" invisible="state != 'to_approve'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,to_approve,approved"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Approved" bg_color="text-bg-success" invisible="state != 'approved'"/>
+                    <widget name="web_ribbon" title="Refused" bg_color="text-bg-danger" invisible="state != 'rejected'"/>
+                    <widget name="web_ribbon" title="Expired" bg_color="text-bg-warning" invisible="state != 'expired'"/>
+                    <field name="has_acknowledged" invisible="1"/>
+                    
+                    <div class="oe_title">
+                        <h2>
+                            <field name="name" class="oe_inline text-muted" readonly="1" invisible="name == False"/>
+                        </h2>
+                        <h1>
+                            <field name="announcement_reason" placeholder="e.g., Upcoming Holiday, Promotion..." readonly="state != 'draft'"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group name="details_group" string="Details">
+                            <field name="category_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="priority" widget="priority" readonly="state != 'draft'"/>
+                            <field name="date_start" readonly="state != 'draft'"/>
+                            <field name="date_end" readonly="state != 'draft'"/>
+                            <field name="requested_date" readonly="1"/>
+                            <field name="company_id"
+                                   options="{'no_create': True}"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                        <group name="audience_group" string="Target Audience">
+                            <field name="is_announcement" readonly="state != 'draft'"/>
+                            <field name="announcement_type"
+                                   invisible="is_announcement != False" readonly="state != 'draft'"/>
+                            
+                            <field name="employee_ids" widget="many2many_avatar_employee"
+                                   invisible="is_announcement != False or announcement_type != 'employee'" readonly="state != 'draft'"/>
+                            <field name="department_ids" widget="many2many_tags"
+                                   invisible="is_announcement != False or announcement_type != 'department'" readonly="state != 'draft'"/>
+                            <field name="position_ids" widget="many2many_tags"
+                                   invisible="is_announcement != False or announcement_type != 'job_position'" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="announcement" string="Letter">
+                            <field name="announcement" readonly="state != 'draft'"/>
+                        </page>
+                        <page name="attachments" string="Attachments">
+                            <group>
+                                <field name="attachment_id" widget="many2many_binary"/>
+                            </group>
+                        </page>
+                        <page name="acknowledgments" string="Acknowledgments" groups="hr.group_hr_manager" invisible="state != 'approved'">
+                            <field name="acknowledged_employee_ids" widget="many2many_avatar_employee" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <!--  Tree View of hr_announcement model -->
+    <record id="hr_announcement_view_tree" model="ir.ui.view">
+        <field name="name">hr.announcement.view.tree</field>
+        <field name="model">hr.announcement</field>
+        <field name="arch" type="xml">
+            <list string="Announcements">
+                <field name="name"/>
+                <field name="announcement_reason"/>
+                <field name="category_id"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="state" widget="badge" decoration-success="state == 'approved'" decoration-warning="state == 'to_approve'" decoration-danger="state in ('rejected', 'expired')"/>
+            </list>
+        </field>
+    </record>
+    <!--  Search View of hr_announcement model -->
+    <record id="hr_announcement_view_search" model="ir.ui.view">
+        <field name="name">hr.announcement.view.search</field>
+        <field name="model">hr.announcement</field>
+        <field name="arch" type="xml">
+            <search string="Announcements">
+                <field name="name" string="Name"/>
+                <field name="announcement_reason" string="Announcement Reason"/>
+                <field name="category_id"/>
+                <field name="priority"/>
+                <field name="state" string="State"/>
+                <separator/>
+                <filter name="approved_rewards" string="Approved Letters"
+                        domain="[('state', '=', 'approved')]"/>
+                <filter name="general_announcements"
+                        string="General Announcements"
+                        domain="[('is_announcement', '=',True)]"/>
+                <filter string="Urgent" name="urgent_priority" domain="[('priority', '=', '3')]"/>
+                <filter string="Category" name="groupby_category" domain="[]"
+                        context="{'group_by':'category_id'}"/>
+                <filter string="Status" name="Status" domain="[]"
+                        context="{'group_by':'state'}"/>
+            </search>
+        </field>
+    </record>
+    <!--  Action of hr_announcement model  -->
+    <record id="hr_announcement_action" model="ir.actions.act_window">
+        <field name="name">Announcements</field>
+        <field name="res_model">hr.announcement</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="hr_announcement_view_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to Create a New Announcement.
+            </p>
+        </field>
+    </record>
+
+    <!-- Categories Action and View -->
+    <record id="hr_announcement_category_action" model="ir.actions.act_window">
+        <field name="name">Announcement Categories</field>
+        <field name="res_model">hr.announcement.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="hr_announcement_category_view_tree" model="ir.ui.view">
+        <field name="name">hr.announcement.category.view.tree</field>
+        <field name="model">hr.announcement.category</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </list>
+        </field>
+    </record>
+</odoo>

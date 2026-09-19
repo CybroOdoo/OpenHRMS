@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Window action for Payroll-->
+    <record id="action_open_payroll" model="ir.actions.act_window">
+        <field name="name">Payroll</field>
+        <field name="res_model">ir.module.module</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context"
+               eval="{'search_default_category_id': ref('base.module_category_accounting_localizations'), 'search_default_name': 'Payroll'}"/>
+        <field name="search_view_id" ref="base.view_module_filter"/>
+    </record>
+<!--    Form view of Settings-->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.payroll
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="45"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Payroll" string="Payroll"
+                     name="hr_payroll_community"
+                     groups="hr_payroll_community.group_hr_payroll_community_manager">
+                    <field name="module_l10n_fr_hr_payroll" invisible="1"/>
+                    <field name="module_l10n_be_hr_payroll" invisible="1"/>
+                    <field name="module_l10n_in_hr_payroll" invisible="1"/>
+                    <block title="Payroll" name="hr_payroll_localization_setting_container">
+                        <setting id="hr_payroll_localization" string="Payroll Rules"
+                                 help="Payroll rules that apply to your country">
+                            <button name="%(action_open_payroll)d"
+                                    icon="arrow_forward" type="action"
+                                    string="Choose a Payroll Localization"
+                                    class="btn-link"/>
+                        </setting>
+                    </block>
+                    <block title="Email Integration" name="hr_payroll_mail_setting_container">
+                        <setting id="hr_payroll_mail" string="Payroll Email Notification"
+                                 help="Automatically send Email with Payslip details On
+                                    Confirmation of Payslip.">
+                            <field name="send_payslip_by_email"/>
+                        </setting>
+                    </block>
+                    <block title="Accounting" name="hr_payroll_accountant_setting_container">
+                        <setting id="hr_payroll_accountant" string="Payroll Entries"
+                                 help="Post payroll slips in accounting">
+                            <field name="module_account_accountant"
+                                   widget="upgrade_boolean"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+<!--    Window action for Settings-->
+    <record id="res_config_settings_action"
+            model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'hr_payroll_community'}</field>
+    </record>
+    <menuitem id="menu_hr_payroll_global_settings" name="Settings"
+              parent="menu_hr_payroll_community_configuration"
+              sequence="10"
+              action="res_config_settings_action"
+              groups="base.group_system"/>
+</odoo>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--Tree view for the 'hr.resignation' model.-->
+    <record id="hr_resignation_view_tree" model="ir.ui.view">
+        <field name="name">hr.resignation.view.tree</field>
+        <field name="model">hr.resignation</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Employee Resignation">
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="joined_date" readonly="1"/>
+                <field name="expected_revealing_date"/>
+                <field name="approved_revealing_date"/>
+                <field name="reason_category_id" string="Type"/>
+                <field name="notice_period"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+    <!--Form view for the 'hr.resignation' model.-->
+    <record id="hr_resignation_view_form" model="ir.ui.view">
+        <field name="name">hr.resignation.view.form</field>
+        <field name="model">hr.resignation</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Employee Resignation">
+                <header>
+                    <button string="Confirm" type="object"
+                            name="action_confirm_resignation"
+                            invisible="state != 'draft'"
+                            class="oe_highlight"/>
+                    <button string="Cancel" type="object"
+                            name="action_cancel_resignation"
+                            invisible="state != 'draft'"/>
+                    <button string="Manager Approve" type="object"
+                            name="action_manager_approve"
+                            invisible="state != 'confirm' or not is_manager"/>
+                    <button string="HR Approve" type="object"
+                            groups="hr.group_hr_user"
+                            name="action_approve_resignation"
+                            invisible="state != 'manager_approved'"
+                            class="oe_highlight"/>
+                    <button string="Compute Settlement" type="object"
+                            groups="hr.group_hr_user"
+                            name="action_compute_settlement"
+                            invisible="state != 'clearance' or clearance_progress &lt; 100 or settlement_state == 'computed'"
+                            class="oe_highlight"/>
+                    <button string="Recompute Settlement" type="object"
+                            groups="hr.group_hr_user"
+                            name="action_compute_settlement"
+                            invisible="state != 'clearance' or settlement_state != 'computed'"/>
+                    <button string="Approve Settlement" type="object"
+                            groups="hr.group_hr_manager"
+                            name="action_approve_settlement"
+                            invisible="state != 'clearance' or settlement_state != 'computed'"
+                            class="oe_highlight"/>
+                    <button string="Relieve Employee" type="object"
+                            groups="hr.group_hr_manager"
+                            name="action_relieve"
+                            invisible="state != 'settlement'"/>
+                    <button string="Withdraw" type="object"
+                            name="action_withdraw"
+                            invisible="state not in ['confirm', 'manager_approved']"/>
+                    <button string="Reject" type="object"
+                            groups="hr.group_hr_user"
+                            name="action_reject_resignation"
+                            invisible="state not in ['confirm', 'manager_approved', 'approved']"/>
+                    <button string="Set to Draft" type="object"
+                            groups="hr.group_hr_manager"
+                            name="action_reset_to_draft"
+                            invisible="state != 'cancel'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirm,approved"/>
+                </header>
+                <sheet>
+                    <field name="is_manager" invisible="1"/>
+                    <field name="is_settlement_date_reached" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Employee Details">
+                            <field name="change_employee" invisible="1"/>
+                            <field name="employee_id"
+                                   readonly="change_employee == False or state == 'approved'"/>
+                            <field name="department_id"/>
+                        </group>
+                        <group string="Dates">
+                            <field name="joined_date"/>
+                            <field name="resign_confirm_date"
+                                   readonly="1"
+                                   invisible="resign_confirm_date == False"/>
+                            <field name="expected_revealing_date"
+                                   readonly="state == 'approved'"/>
+                            <field name="approved_revealing_date" readonly="1"
+                                   groups="hr.group_hr_user"/>
+                            <field name="notice_period"/>
+                        </group>
+                        <group string="Resignation Details">
+                            <field name="reason_category_id" string="Type"
+                                   groups="hr.group_hr_user" required="1"
+                                   readonly="state == 'relieved'"/>
+                            <field name="reason"
+                                   readonly="state == 'relieved'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Clearance Checklist" name="clearance_page" invisible="state in ('draft', 'confirm', 'manager_approved', 'approved', 'cancel')">
+                            <group>
+                                <field name="clearance_progress" widget="progressbar"/>
+                            </group>
+                            <field name="clearance_line_ids">
+                                <list editable="bottom">
+                                    <field name="clearance_type_id" readonly="1"/>
+                                    <field name="department_id" readonly="1"/>
+                                    <field name="responsible_user_id"/>
+                                    <field name="has_dues" column_invisible="1"/>
+                                    <field name="due_amount"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'cleared'" decoration-danger="state == 'blocked'"/>
+                                    <field name="cleared_date" readonly="1"/>
+                                    <field name="remarks"/>
+                                    <field name="is_responsible" column_invisible="1"/>
+                                    <button name="action_mark_cleared" type="object" icon="check" string="Clear" invisible="state == 'cleared' or not is_responsible"/>
+                                    <button name="action_mark_blocked" type="object" icon="close" string="Block" invisible="state == 'blocked' or not is_responsible"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Settlement (F&amp;F)" name="settlement_page" invisible="state in ('draft', 'confirm', 'manager_approved', 'approved', 'cancel')">
+                            <group>
+                                <group>
+                                    <field name="settlement_state" readonly="1"/>
+                                    <field name="settlement_date" readonly="settlement_state == 'approved'"/>
+                                    <field name="pending_salary" readonly="settlement_state == 'approved'"/>
+                                </group>
+                                <group>
+                                    <field name="loan_recovery" readonly="settlement_state == 'approved'"/>
+                                    <field name="advance_recovery" readonly="settlement_state == 'approved'"/>
+                                    <field name="asset_recovery" readonly="1"/>
+                                    <field name="net_settlement" readonly="1"/>
+                                    <field name="payslip_id" readonly="1" invisible="payslip_id == False"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Exit Interview &amp; Handover" name="analytics_page" groups="hr.group_hr_user" invisible="state in ('draft', 'confirm', 'manager_approved', 'cancel')">
+                            <group>
+                                <group>
+                                    <field name="replacement_employee_id" domain="[('id', '!=', employee_id)]" readonly="state == 'relieved'"/>
+                                    <field name="survey_id" invisible="exit_interview_id != False" readonly="state == 'relieved'"/>
+                                    <field name="exit_interview_id" invisible="exit_interview_id == False" readonly="state == 'relieved'"/>
+                                    <button name="action_send_exit_interview" type="object" string="Send Exit Interview" class="btn-link" invisible="state == 'relieved'"/>
+                                </group>
+                                <field name="handover_notes" placeholder="Handover notes..." readonly="state == 'relieved'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                 <chatter/>
+            </form>
+        </field>
+    </record>
+    
+    <!--Search view for the 'hr.resignation' model.-->
+    <record id="hr_resignation_view_search" model="ir.ui.view">
+        <field name="name">hr.resignation.view.search</field>
+        <field name="model">hr.resignation</field>
+        <field name="arch" type="xml">
+            <search string="Employee Resignation">
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="name"/>
+                
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirm" domain="[('state', '=', 'confirm')]"/>
+                <filter string="Manager Approved" name="manager_approved" domain="[('state', '=', 'manager_approved')]"/>
+                <filter string="HR Approved" name="approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Clearance" name="clearance" domain="[('state', '=', 'clearance')]"/>
+                <filter string="Settlement" name="settlement" domain="[('state', '=', 'settlement')]"/>
+                <filter string="Relieved" name="relieved" domain="[('state', '=', 'relieved')]"/>
+                <filter string="Rejected" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                <group>
+                    <filter string="Employee" name="group_employee" context="{'group_by':'employee_id'}"/>
+                    <filter string="Department" name="group_department" context="{'group_by':'department_id'}"/>
+                    <filter string="Status" name="group_status" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Action for the 'hr.resignation' model.-->
+    <record id="hr_resignation_action" model="ir.actions.act_window">
+        <field name="name">Employee Resignation</field>
+        <field name="res_model">hr.resignation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', 'in', ('draft', 'confirm', 'manager_approved'))]</field>
+
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the First Resignation
+            </p>
+        </field>
+    </record>
+    <!--Action for the 'hr.resignation' model, specifically for viewing approved resignations.-->
+    <record id="hr_resignation_approved_action" model="ir.actions.act_window">
+        <field name="name">Approved Resignation</field>
+        <field name="res_model">hr.resignation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', 'in', ('approved', 'clearance', 'settlement', 'relieved'))]</field>
+        <field name="context">{'search_default_approved': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Approved Resignation
+            </p>
+        </field>
+    </record>
+    <!-- Root menu item for Resignation -->
+    <menuitem id="hr_resignation_menu_root" name="Resignation"
+              groups="base.group_user"
+              web_icon="hr_resignation,static/description/icon.png"
+              sequence="21"/>
+    <!-- Menu item for Resignation Request -->
+    <menuitem id="hr_resignation_menu_request"
+              parent="hr_resignation_menu_root" name="Resignation Request"
+              action="hr_resignation_action" groups="base.group_user"
+              sequence="4"/>
+    <!-- Menu item for Approved Resignation -->
+    <menuitem id="hr_resignation_menu_approved_request"
+              parent="hr_resignation_menu_root"
+              name="Approved Resignation"
+              action="hr_resignation_approved_action"
+              groups="hr.group_hr_user"
+              sequence="4"/>
+</odoo>

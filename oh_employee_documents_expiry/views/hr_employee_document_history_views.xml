@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_employee_document_history_view_tree" model="ir.ui.view">
+        <field name="name">hr.employee.document.history.view.tree</field>
+        <field name="model">hr.employee.document.history</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="renewed_on"/>
+                <field name="issue_date"/>
+                <field name="expiry_date"/>
+                <field name="attachment_ids" widget="many2many_tags"/>
+                <field name="renewed_by"/>
+                <field name="renewal_reason"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="hr_employee_document_history_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.document.history.view.form</field>
+        <field name="model">hr.employee.document.history</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="document_id"/>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                        </group>
+                        <group>
+                            <field name="renewed_on"/>
+                            <field name="renewed_by"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="renewal_reason"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

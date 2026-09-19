@@ -1,0 +1,691 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_custody
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-12 06:59+0000\n"
+"PO-Revision-Date: 2020-02-12 06:59+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_custody
+#: model:mail.template,body_html:hr_custody.custody_email_notification_template
+msgid ""
+"\n"
+"                    \n"
+"                          <p>Dear <t t-out="object.employee_id.name"></t>,<br/><br/>
+                          You are in possession of the company asset
+                          <strong><t t-out="object.custody_property_id.name"></t></strong>
+                          since <strong><t t-out="object.return_date"></t>.</strong><br/><br/>
+                          Please kindly return the property as soon as possible.<br/><br/></p>
+                          Regards,<br/><br/>
+                          <t t-out="object.company_id.name"></t>\n"
+"            "
+msgstr ""
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_employee__custody_count
+msgid "# Custody"
+msgstr "عهدة #"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_employee__equipment_count
+msgid "# Equipments"
+msgstr "المعدات #"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/custody.py:0
+#, python-format
+msgid "/web#id=%s&view_type=form&model=hr.custody&menu_id="
+msgstr ""
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_needaction
+msgid "Action Needed"
+msgstr "الإجراءات اللازمة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_ids
+msgid "Activities"
+msgstr "أنشطة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "نشاط استثناء الديكور"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Approve"
+msgstr "يوافق"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__hr_custody__state__approved
+#: model:ir.model.fields.selection,name:hr_custody.selection__report_custody__state__approved
+msgid "Approved"
+msgstr "وافق"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__asset_true
+msgid "Asset Exists"
+msgstr "الأصول موجود"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__asset_id
+#: model:ir.model.fields.selection,name:hr_custody.selection__custody_property__property_selection__asset
+msgid "Assets"
+msgstr "الأصول"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_reason_form
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_return_date_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: hr_custody
+#: model_terms:ir.actions.act_window,help:hr_custody.action_hr_custody
+#: model_terms:ir.actions.act_window,help:hr_custody.action_hr_property
+msgid "Click to Create a New Record."
+msgstr ".انقر لإنشاء سجل جديد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__name
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__name
+msgid "Code"
+msgstr "الشفرة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__company_id
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__create_uid
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__create_uid
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__create_uid
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__create_date
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__create_date
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__create_date
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/hr_employee.py:0
+#: code:addons/hr_custody/models/hr_employee.py:0
+#: model:ir.actions.act_window,name:hr_custody.action_hr_custody
+#: model:ir.ui.menu,name:hr_custody.hr_custody_main_menu
+#: model_terms:ir.ui.view,arch_db:hr_custody.custody_hr_employee_inherit_form_view
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_search_view
+#, python-format
+msgid "Custody"
+msgstr "عهدة"
+
+#. module: hr_custody
+#: model:ir.actions.act_window,name:hr_custody.action_report_custody
+#: model:ir.model,name:hr_custody.model_report_custody
+#: model:ir.ui.menu,name:hr_custody.custody_report_menu_custody_analysis
+msgid "Custody Analysis"
+msgstr "تحليل الحراسة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_search_view
+msgid "Custody Name"
+msgstr "اسم الحراسة"
+
+#. module: hr_custody
+#: model:ir.actions.act_window,name:hr_custody.wizard_return_date_act
+#: model:ir.ui.menu,name:hr_custody.hr_custody_menu
+msgid "Custody Request"
+msgstr "طلب حضانة"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/custody.py:0
+#: code:addons/hr_custody/models/custody.py:0
+#: code:addons/hr_custody/models/custody.py:0
+#, python-format
+msgid "Custody is not available now"
+msgstr "الحراسة غير متوفرة الآن"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__desc
+#: model_terms:ir.ui.view,arch_db:hr_custody.custody_custody_form_view
+msgid "Description"
+msgstr "وصف"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__display_name
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__display_name
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__display_name
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__display_name
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__hr_custody__state__draft
+#: model:ir.model.fields.selection,name:hr_custody.selection__report_custody__state__draft
+msgid "Draft"
+msgstr "مشروع"
+
+#. module: hr_custody
+#: model:ir.model,name:hr_custody.model_hr_employee
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__employee
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__employee
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_search_view
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/hr_employee.py:0
+#: code:addons/hr_custody/models/hr_employee.py:0
+#: model_terms:ir.ui.view,arch_db:hr_custody.custody_custody_form_view
+#: model_terms:ir.ui.view,arch_db:hr_custody.custody_hr_employee_inherit_form_view
+#, python-format
+msgid "Equipments"
+msgstr "المعدات"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_follower_ids
+msgid "Followers"
+msgstr "متابعون"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "(المتابعون (القنوات"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "(المتابعون (الشركاء"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_search_view
+msgid "Group By"
+msgstr "مجموعة من"
+
+#. module: hr_custody
+#: model:ir.actions.server,name:hr_custody.hr_custody_data_reminders_ir_actions_server
+#: model:ir.cron,cron_name:hr_custody.hr_custody_data_reminders
+#: model:ir.cron,name:hr_custody.hr_custody_data_reminders
+msgid "HR Custody Return Notification"
+msgstr "الموارد البشرية إشعار عودة الحفظ"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/custody.py:0
+#, python-format
+msgid ""
+"Hi %s,<br>As per the %s you took %s on %s for the reason of %s. S0 here we "
+"remind you that you have to return that on or before %s. Otherwise, you can "
+"renew the reference number(%s) by extending the return date through "
+"following link.<br> <div style = \"text-align: center; margin-top: "
+"16px;\"><a href = \"%s\"style = \"padding: 5px 10px; font-size: 12px; line-"
+"height: 18px; color: #FFFFFF; border-color:#875A7B;text-decoration: none; "
+"display: inline-block; margin-bottom: 0px; font-weight: 400;text-align: "
+"center; vertical-align: middle; cursor: pointer; white-space: nowrap; "
+"background-image: none; background-color: #875A7B; border: 1px solid "
+"#875A7B; border-radius:3px;\">Renew %s</a></div>"
+msgstr ""
+
+#. module: hr_custody
+#: model:ir.model,name:hr_custody.model_hr_custody
+msgid "Hr Custody Management"
+msgstr "إدارة حراسة الموارد البشرية"
+
+#. module: hr_custody
+#: model:ir.model,name:hr_custody.model_wizard_return_date
+msgid "Hr Custody Name"
+msgstr "اسم حراسة الموارد البشرية"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__id
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__id
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__id
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__id
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ".أيقونة للإشارة إلى نشاط استثناء"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_needaction
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ".إذا تم تحديد ذلك ، فإن الرسائل الجديدة تتطلب اهتمامك"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_has_error
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ".إذا تم التحقق ، فبعض الرسائل بها خطأ في التسليم"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__image
+msgid "Image"
+msgstr "صورة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_is_follower
+msgid "Is Follower"
+msgstr "هو تابع"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property____last_update
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody____last_update
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody____last_update
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason____last_update
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__write_uid
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__write_uid
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__write_uid
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__write_date
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__write_date
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__write_date
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__is_mail_send
+msgid "Mail Send"
+msgstr "إرسال البريد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "المرفق الرئيسي"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__image_medium
+msgid "Medium-sized image"
+msgstr "صورة متوسطة الحجم"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_custody_property__image_medium
+msgid ""
+"Medium-sized image of this provider. It is automatically resized as a "
+"128x128px image, with aspect ratio preserved. Use this field in form views "
+"or some kanban views."
+msgstr ""
+"صورة متوسطة الحجم لهذا المزود. يتم تغيير حجمها تلقائيًا ك"
+"صورة بحجم 128 × 128 بكسل ، مع الحفاظ على نسبة العرض إلى الارتفاع. استخدم هذا الحقل في طرق عرض النماذج"
+"أو بعض وجهات النظر kanban"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_ids
+msgid "Messages"
+msgstr "رسائل"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.custody_custody_form_view
+msgid "Name"
+msgstr "اسم"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "آخر نشاط الموعد النهائي"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__custody_property__property_selection__empty
+msgid "No Connection"
+msgstr "لا يوجد اتصال"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/custody.py:0
+#, python-format
+msgid "No asset module found. Kindly install the asset module."
+msgstr ".لم يتم العثور على وحدة الأصول. يرجى تثبيت وحدة الأصول"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__notes
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: hr_custody
+#: model:mail.template,subject:hr_custody.custody_email_notification_template
+msgid "Notification to return company asset-${object.custody_property_id.name}"
+msgstr " ${object.custody_property_id.name}-إشعار للعودة أصول الشركة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الاخطاء"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تتطلب إجراء"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل مع خطأ التسليم"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل غير المقروءة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_reason_form
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_return_date_form
+msgid "Proceed"
+msgstr "تقدم"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__custody_property__property_selection__product
+msgid "Products"
+msgstr "منتجات"
+
+#. module: hr_custody
+#: model:ir.actions.act_window,name:hr_custody.action_hr_property
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__custody_property_id
+#: model:ir.ui.menu,name:hr_custody.hr_property_menu
+msgid "Property"
+msgstr "خاصية"
+
+#. module: hr_custody
+#: model:ir.model,name:hr_custody.model_custody_property
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__name
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__custody_property_id
+msgid "Property Name"
+msgstr "اسم الخاصية"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__property_selection
+msgid "Property from"
+msgstr "الملكية من"
+
+#. module: hr_custody
+#: code:addons/hr_custody/models/custody.py:0
+#, python-format
+msgid "REMINDER On %s"
+msgstr "%s تذكير في"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__purpose
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__purpose
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_reason__reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Refuse"
+msgstr "رفض"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__hr_custody__state__rejected
+#: model:ir.model.fields.selection,name:hr_custody.selection__report_custody__state__rejected
+msgid "Refused"
+msgstr "رفض"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__rejected_reason
+msgid "Rejected Reason"
+msgstr "رفض السبب"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Renew"
+msgstr "جدد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__is_renew_reject
+msgid "Renew Reject"
+msgstr "تجديد رفض"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__renew_rejected_reason
+msgid "Renew Rejected Reason"
+msgstr "تجديد رفض السبب"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__is_renew_return_date
+msgid "Renew Return Date"
+msgstr "تجديد تاريخ العودة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Renewal Approval"
+msgstr "موافقة التجديد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_wizard_return_date__returned_date
+msgid "Renewal Date"
+msgstr "تاريخ التجديد"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_return_date_form
+msgid "Renewal Request"
+msgstr "طلب تجديد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__renew_date
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__renew_date
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__is_renew_return_date
+msgid "Renewal Return Date"
+msgstr "تاريخ العودة التجديد"
+
+#. module: hr_custody
+#: model:ir.ui.menu,name:hr_custody.custody_report_menu
+msgid "Report"
+msgstr "نقل"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__date_request
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__date_request
+msgid "Requested Date"
+msgstr "التاريخ المطلوب"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Return"
+msgstr "إرجاع"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__return_date
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__return_date
+msgid "Return Date"
+msgstr "تاريخ العودة"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__hr_custody__state__returned
+#: model:ir.model.fields.selection,name:hr_custody.selection__report_custody__state__returned
+msgid "Returned"
+msgstr "عاد"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Send For Approval"
+msgstr "إرسال للموافقة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Send Mail"
+msgstr "ارسل بريد"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_form_view
+msgid "Set to Draft"
+msgstr "تعيين إلى مشروع"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_custody_property__image_small
+msgid "Small-sized image"
+msgstr "صورة صغيرة الحجم"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_custody_property__image_small
+msgid ""
+"Small-sized image of this provider. It is automatically resized as a 64x64px"
+" image, with aspect ratio preserved. Use this field anywhere a small image "
+"is required."
+msgstr ""
+"صورة صغيرة الحجم لهذا المزود. يتم تغيير حجمها تلقائيًا على أنها 64 × 64 بكسل"
+"الصورة ، مع الحفاظ على نسبة العرض إلى الارتفاع. استخدم هذا الحقل في أي مكان صورة صغيرة"
+"مطلوب."
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__state
+#: model:ir.model.fields,field_description:hr_custody.field_report_custody__state
+#: model_terms:ir.ui.view,arch_db:hr_custody.hr_custody_search_view
+msgid "Status"
+msgstr "الحالة"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة على أساس الأنشطة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_custody_property__image
+msgid ""
+"This field holds the image used for this provider, limited to 1024x1024px"
+msgstr ""
+"يحتفظ هذا الحقل بالصورة المستخدمة لهذا الموفر ، مقيدًا بدقة 1024 × 1024 بكسل"
+
+#. module: hr_custody
+#: model_terms:ir.actions.act_window,help:hr_custody.action_report_custody
+msgid "This report allows you to analyse all Custody Requests."
+msgstr ".يسمح لك هذا التقرير بتحليل جميع طلبات الحراسة"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.view_report_custody
+msgid "Ticket Analysis"
+msgstr "تحليل التذاكر"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ".نوع نشاط الاستثناء في السجل"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_unread
+msgid "Unread Messages"
+msgstr "رسائل غير مقروءة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عداد الرسائل غير المقروءة"
+
+#. module: hr_custody
+#: model:ir.actions.act_window,name:hr_custody.wizard_reason_act
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_reason_form
+msgid "Update Reason"
+msgstr "تحديث السبب"
+
+#. module: hr_custody
+#: model:ir.model.fields.selection,name:hr_custody.selection__hr_custody__state__to_approve
+#: model:ir.model.fields.selection,name:hr_custody.selection__report_custody__state__to_approve
+msgid "Waiting For Approval"
+msgstr "بانتظار الموافقة"
+
+#. module: hr_custody
+#: model:ir.model.fields,field_description:hr_custody.field_hr_custody__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: hr_custody
+#: model:ir.model.fields,help:hr_custody.field_hr_custody__website_message_ids
+msgid "Website communication history"
+msgstr "سجل اتصالات الموقع"
+
+#. module: hr_custody
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_reason_form
+#: model_terms:ir.ui.view,arch_db:hr_custody.wizard_return_date_form
+msgid "or"
+msgstr "أو"
+
+#. module: hr_custody
+#: model:ir.model,name:hr_custody.model_wizard_reason
+msgid "return.reason"
+msgstr ""
