@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2024-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -20,4 +20,12 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from . import test_hr_payroll_account
+from odoo import fields, models
+
+class HrPayslipRunGenerate(models.TransientModel):
+    """
+    Extends the hr.payslip.run.generate wizard to display the active salary journal.
+    """
+    _inherit = 'hr.payslip.run.generate'
+
+    journal_id = fields.Many2one(related='payslip_run_id.journal_id', string='Salary Journal', readonly=True)

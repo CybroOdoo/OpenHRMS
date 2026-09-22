@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_batch_payment_wizard_view_form" model="ir.ui.view">
+        <field name="name">hr.batch.payment.wizard.view.form</field>
+        <field name="model">hr.batch.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Register Payment">
+                <group>
+                    <group>
+                        <field name="journal_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="payment_method_line_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="partner_bank_id" options="{'no_create': True, 'no_open': True}" invisible="not partner_bank_id"/>
+                    </group>
+                    <group>
+                        <field name="amount" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="payment_date"/>
+                        <field name="memo" readonly="1"/>
+                        <field name="payslip_ids" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Create Payment" name="action_create_payment" type="object" class="oe_highlight" data-hotkey="q"/>
+                    <button string="Discard" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hr_batch_payment_wizard" model="ir.actions.act_window">
+        <field name="name">Register Payment</field>
+        <field name="res_model">hr.batch.payment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="hr_payroll_community.model_hr_payslip"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

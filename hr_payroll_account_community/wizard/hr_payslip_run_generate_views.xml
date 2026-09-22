@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_run_generate_form_inherit_account" model="ir.ui.view">
+        <field name="name">hr.payslip.run.generate.form.inherit.account</field>
+        <field name="model">hr.payslip.run.generate</field>
+        <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_run_generate_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div" position="after">
+                <field name="journal_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

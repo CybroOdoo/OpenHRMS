@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Odoo19 Payroll Accounting',
-    'version': '19.0.1.0.1',
+    'version': '19.0.2.0.0',
     'category': 'Human Resources',
     'summary': """Helps you to manage payroll and 
      accounting""",
@@ -33,10 +33,13 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
     'depends': ['hr_payroll_community', 'account'],
-    'data': ['views/hr_contract_views.xml',
+    'data': ['security/ir.model.access.csv',
+             'views/hr_contract_views.xml',
+             'wizard/hr_batch_payment_wizard_views.xml',
              'views/hr_payslip_run_views.xml',
              'views/hr_payslip_views.xml',
-             'views/hr_salary_rule_views.xml', ],
+             'views/hr_salary_rule_views.xml',
+             'wizard/hr_payslip_run_generate_views.xml',],
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,

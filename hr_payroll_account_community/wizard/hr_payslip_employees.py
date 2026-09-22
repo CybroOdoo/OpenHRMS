@@ -4,7 +4,7 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
 #    You can modify it under the terms of the GNU LESSER
@@ -24,6 +24,9 @@ from odoo import models
 
 
 class HrPayslipEmployees(models.TransientModel):
+    """
+    Extends the hr.payslip.employees wizard to pass the active journal to the batch context.
+    """
     _inherit = 'hr.payslip.employees'
 
     def action_compute_sheet(self):
