@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Explicit wizard view definition -->
+    <record id="hr_shift_generate_view_form" model="ir.ui.view">
+        <field name="name">hr.shift.generate.view.form</field>
+        <field name="model">hr.shift.generate</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hr_department"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Generate" name="action_schedule_shift"
+                                type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"
+                                class="oe_link"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window"
+            id="generate_schedule_action_window">
+        <field name="name">Employee Shift</field>
+        <field name="res_model">hr.shift.generate</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

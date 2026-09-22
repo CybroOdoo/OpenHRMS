@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_inherit_hr_employee_shift" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.hr.employee.shift</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Shift Schedule" name="shift_schedule">
+                    <div class="alert alert-info" role="alert" invisible="not shift_schedule">
+                        <strong>Note:</strong> This employee is on a rotating shift schedule. The default working hours set on their contract will only be used for payroll if no specific shift is scheduled for the period.
+                    </div>
+                    <field name="shift_schedule">
+                        <list editable="bottom">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="hr_shift"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

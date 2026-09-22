@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- hr employee form view-->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.hr.employee.shift</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='payroll_information']//field[@name='resource_calendar_id']" position="after">
+                <field name="resource_calendar_ids"/>
+            </xpath>
+            <xpath expr="//page[@name='payroll_information']//field[@name='resource_calendar_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- Resource calendar form view-->
+    <record id="resource_calendar_form" model="ir.ui.view">
+        <field name="name">resource.calendar.view.form.inherit.hr.employee.shift</field>
+        <field name="model">resource.calendar</field>
+        <field name="inherit_id" ref="resource.resource_calendar_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='schedule_type']" position="before">
+                <field name="hr_department"/>
+                <field name="sequence"/>
+                <field name="color" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='attendance_ids']" position="attributes">
+                <attribute name="widget"/>
+            </xpath>
+            <xpath expr="//field[@name='attendance_ids_1st_week']" position="attributes">
+                <attribute name="widget"/>
+            </xpath>
+            <xpath expr="//field[@name='attendance_ids_2nd_week']" position="attributes">
+                <attribute name="widget"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Resource calendar kanban view-->
+    <record id="resource_calendar_view_kanban" model="ir.ui.view">
+        <field name="name">resource.calendar.view.kanban</field>
+        <field name="model">resource.calendar</field>
+        <field name="arch" type="xml">
+            <kanban js_class="shift_kanban" class="oe_background_grey o_kanban_dashboard o_shift_kanban" highlight_color="color">
+                <field name="color"/>
+                <field name="hr_department"/>
+                <field name="company_id"/>
+                <templates>
+                    <t t-name="menu">
+                        <a t-if="widget.editable" role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                        <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                        <field name="color" widget="kanban_color_picker"/>
+                    </t>
+                    <t t-name="card">
+                            <div class="oe_kanban_content">
+                                <div class="row">
+                                    <div class="o_primary style_shift">
+                                        <div class="text-center">
+                                            <span style="margin-left:25px;">
+                                                <strong>
+                                                    <field name="name"/>
+                                                </strong>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <div class="text-center">
+                                        <span t-if="record.hr_department.value">[<field name="hr_department"/>]</span>
+                                    </div>
+                                    <div class="text-center text-muted mt-1" t-if="record.company_id.value">
+                                        <i class="fa fa-building-o me-1"/>
+                                        <field name="company_id"/>
+                                    </div>
+                                </strong>
+                            </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="resource_calendar_view_tree_shift" model="ir.ui.view">
+        <field name="name">resource.calendar.view.tree.shift</field>
+        <field name="model">resource.calendar</field>
+        <field name="inherit_id" ref="resource.view_resource_calendar_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="%(hr_employee_shift.generate_schedule_action_window)d" string="Generate Schedule"
+                            type="action" class="btn-secondary" display="always"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+    <!-- Resource calendar action -->
+    <record id="action_hr_shift_working_time" model="ir.actions.act_window">
+        <field name="name">Shift Working Time</field>
+        <field name="res_model">resource.calendar</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="search_view_id" ref="resource.view_resource_calendar_search"/>
+        <field name="domain">['|', ('company_id', '=', False), ('company_id', 'in', allowed_company_ids)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Define working hours and timetable that could be scheduled to your project members
+            </p>
+        </field>
+    </record>
+    <!-- Menu Items -->
+    <menuitem name="Shifts" id="menu_shift"
+              groups="hr.group_hr_manager"
+              web_icon="hr_employee_shift,static/description/icon.png"/>
+    <menuitem name="Shifts" id="menu_conf_shift" parent="hr_employee_shift.menu_shift"
+              action="action_hr_shift_working_time" sequence="10"/>
+</odoo>
