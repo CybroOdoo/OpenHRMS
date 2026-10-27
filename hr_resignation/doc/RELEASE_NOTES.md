@@ -1,7 +1,8 @@
 ## Module <hr_resignation>
 
-#### 18.09.2026
+#### 27.10.2026
 #### Version 20.0.1.0.0
-##### ADD
-- Initial commit for Open HRMS Resignation
+#### ADD
 
+- Initial release of Open HRMS Resignation.
+- Manages the resignation process of the employees

@@ -31,6 +31,7 @@
         'views/res_users_views.xml'
     ],
     'license': 'LGPL-3',
+    'images': ['static/description/banner.jpg'],
     'installable': True,
     'auto_install': False,
     'application': False,

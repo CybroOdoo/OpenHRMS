@@ -22,7 +22,7 @@
     'description': """Provides a dashboard to view key HR information such as attendance, leaves, payroll, and more. Helps HR teams track activities in one place.""",
     'category': 'Generic Modules/Human Resources',
     'live_test_url': 'https://youtu.be/XwGGvZbv6sc',
-    'author': 'Cybrosys Techno solutions,Open HRMS',
+    'author': 'Cybrosys Techno Solutions, Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
@@ -50,5 +50,6 @@
     'images': ["static/description/banner.jpg"],
     'license': 'LGPL-3',
     'installable': True,
+    'auto_install': False,
     'application': True,
 }

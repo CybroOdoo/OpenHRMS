@@ -18,7 +18,7 @@
                 <field name="state"/>
                 <field name="company_id" groups="base.group_multi_company"
                        options="{'no_create': True}"/>
-                <field name="payslip_run_id" invisible="1"/>
+                <field name="payslip_run_id" column_invisible="True"/>
             </list>
         </field>
     </record>

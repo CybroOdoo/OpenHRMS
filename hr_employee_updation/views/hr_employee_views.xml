@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='personal_information']/group" position="after">
-                <group name="family_info_ids" colspan="4" string="Dependence Details" groups="hr.group_hr_user">
+                <group name="family_info_ids" colspan="4" string="Dependent Details" groups="hr.group_hr_user">
                     <field name="family_info_ids">
                         <list editable="bottom">
                             <field name="member_name" required="1"/>
@@ -28,16 +28,20 @@
                 <group name="identification_id" string="Identification ID" groups="hr.group_hr_user">
                     <field name="identification_id"/>
                     <field name="id_expiry_date" groups="hr.group_hr_user"
-                           invisible="identification_id in [None,False]"/>
+                           invisible="not identification_id"/>
                     <field name="identification_attachment_ids" groups="hr.group_hr_user" widget="many2many_binary"
-                           class="oe_inline" invisible="identification_id in [None,False]"/>
+                           class="oe_inline" invisible="not identification_id"/>
+                    <button name="action_send_manual_reminder_id" string="Send Expiry Reminder" type="object"
+                            class="btn btn-sm btn-link" invisible="not id_expiry_date"/>
                 </group>
                 <group name="passport_id" string="Passport ID" groups="hr.group_hr_user">
                     <field name="passport_id"/>
                     <field name="passport_expiration_date" groups="hr.group_hr_user" string="Expires on"
-                           invisible="passport_id in [None,False]"/>
+                           invisible="not passport_id"/>
                     <field name="passport_attachment_ids" groups="hr.group_hr_user" widget="many2many_binary"
-                           class="oe_inline" invisible="passport_id in [None,False]"/>
+                           class="oe_inline" invisible="not passport_id"/>
+                    <button name="action_send_manual_reminder_pass" string="Send Expiry Reminder" type="object"
+                            class="btn btn-sm btn-link" invisible="not passport_expiration_date"/>
                 </group>
             </xpath>
         </field>

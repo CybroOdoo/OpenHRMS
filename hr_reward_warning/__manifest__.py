@@ -22,10 +22,10 @@
     'summary': """Manages Official Announcements""",
     'description': 'This module helps you to manage HR official announcements',
     'live_test_url': 'https://youtu.be/VPh1A9-jM5Q',
-    'author': 'Cybrosys Techno solutions,Open HRMS',
+    'author': 'Cybrosys Techno Solutions, Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
-    'website': " https://cybrosys.com, https://www.openhrms.com",
+    'website': 'https://www.openhrms.com',
     'depends': ['hr', 'mail'],
     'data': [
         'security/ir.access.csv',

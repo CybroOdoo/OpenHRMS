@@ -23,11 +23,11 @@
     'description': """This module facilitates the creation and management of 
      employee loan requests. The loan amount is automatically deducted from the 
      salary""",
-    'author': "Cybrosys Techno Solutions,Open HRMS",
+    'author': 'Cybrosys Techno Solutions, Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'live_test_url': 'https://youtu.be/lAT5cqVZTZI',
-    'website': "https://cybrosys.com, https://www.openhrms.com",
+    'website': 'https://www.openhrms.com',
     'depends': ['hr', 'account', 'hr_payroll_community'],
     'data': [
         'security/ir.access.csv',

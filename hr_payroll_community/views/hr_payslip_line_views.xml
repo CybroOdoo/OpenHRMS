@@ -154,11 +154,11 @@
                                            sum="Total Working Days"/>
                                     <field name="number_of_hours"/>
                                     <field name="amount" sum="Total Amount"/>
-                                    <field name="currency_id" invisible="1"/>
+                                    <field name="currency_id" column_invisible="True"/>
                                     <field name="contract_id"
                                            domain="[('employee_id','=',parent.employee_id)]"
                                            context="{'default_employee_id': parent.employee_id}"/>
-                                    <field name="sequence" invisible="True"/>
+                                    <field name="sequence" column_invisible="True"/>
                                 </list>
                                 <form string="Worked Day">
                                     <group col="4">
@@ -185,7 +185,7 @@
                                     <field name="contract_id"
                                            domain="[('employee_id','=',parent.employee_id)]"
                                            context="{'default_employee_id': parent.employee_id}"/>
-                                    <field name="sequence" invisible="True"/>
+                                    <field name="sequence" column_invisible="True"/>
                                 </list>
                                 <form string="Payslip Line">
                                     <group col="4">
@@ -209,7 +209,7 @@
                                     <field name="name"/>
                                     <field name="code"/>
                                     <field name="category_id"/>
-                                    <field name="sequence" invisible="1"/>
+                                    <field name="sequence" column_invisible="True"/>
                                     <field name="quantity"/>
                                     <field name="rate"/>
                                     <field name="salary_rule_id"/>

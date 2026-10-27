@@ -75,6 +75,7 @@
             'ohrms_core/static/src/css/home_menu_theme.css',
             'ohrms_core/static/src/js/appMenu.js',
             'ohrms_core/static/src/js/ohrms_core_systray.js',
+            'ohrms_core/static/src/js/employee_form_patch.js',
             'ohrms_core/static/src/xml/ohrms_core_systray.xml',
             'ohrms_core/static/templates/side_bar.xml',
         ],

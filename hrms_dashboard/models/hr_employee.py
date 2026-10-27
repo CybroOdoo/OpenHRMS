@@ -36,7 +36,8 @@ class HrEmployee(models.Model):
     birthday = fields.Date(string='Date of Birth', groups="base.group_user",
                            help="Birthday of employee")
 
-    def attendance_manual(self):
+    @api.model
+    def attendance_manual(self, employee_ids=None):
         """Create and update an attendance for the user employee"""
         employee = request.env['hr.employee'].sudo().browse(
             self.env.user.sudo().employee_id.id)
@@ -290,14 +291,16 @@ class HrEmployee(models.Model):
             else:
                 experience = False
             if employee:
-                payslip_domain = []
-                if not self.env.user.has_group('hr.group_hr_manager'):
-                    payslip_domain.append(('employee_id', '=', employee[0]['id']))
-                if date_from:
-                    payslip_domain.append(('date_to', '>=', date_from))
-                if date_to:
-                    payslip_domain.append(('date_from', '<=', date_to))
-                payslip_count = self.env['hr.payslip'].sudo().search_count(payslip_domain)
+                payslip_count = 0
+                if self.env.user.has_group('hr_payroll_community.group_hr_payroll_community_user') or self.env.user.has_group('hr.group_hr_manager'):
+                    payslip_domain = []
+                    if not self.env.user.has_group('hr.group_hr_manager'):
+                        payslip_domain.append(('employee_id', '=', employee[0]['id']))
+                    if date_from:
+                        payslip_domain.append(('date_to', '>=', date_from))
+                    if date_to:
+                        payslip_domain.append(('date_from', '<=', date_to))
+                    payslip_count = self.env['hr.payslip'].sudo().search_count(payslip_domain)
 
                 data = {
                     'broad_factor': broad_factor if broad_factor else 0,

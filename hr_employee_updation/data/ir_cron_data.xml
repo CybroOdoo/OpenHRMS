@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!-- Scheduled action for Employee data expiration -->
-        <record id="ir_con_employee_data_reminder" model="ir.cron">
+        <record id="ir_cron_employee_data_reminder" model="ir.cron">
             <field name="name">HR Employee Data Expiration</field>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>

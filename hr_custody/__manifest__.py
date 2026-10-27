@@ -22,7 +22,7 @@
     'summary': """Manage the company properties""",
     'description': 'Manage the company properties when it is in '
                    'the custody of an employee',
-    'author': 'Cybrosys Techno solutions',
+    'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",

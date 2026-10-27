@@ -13,7 +13,6 @@ import { patch } from "@web/core/utils/patch";
 import { rpc } from "@web/core/network/rpc";
 export class HrDashboard extends Component{
     static template = 'HrDashboardMain';
-    static props = ["*"];
     setup() {
         this.effect = useService("effect");
         this.action = useService("action");
@@ -108,7 +107,6 @@ export class HrDashboard extends Component{
         });
     }
     add_project_task() {
-            console.log("add_project_task:", user)
                 this.action.doAction({
                     name: _t("Project Task"),
                     type: 'ir.actions.act_window',
@@ -331,15 +329,21 @@ export class HrDashboard extends Component{
         let doc_id_str = ev.currentTarget.dataset.id;
         let result = false;
         
-        if (doc_id_str.startsWith('emp_id_')) {
+        if (doc_id_str && doc_id_str.startsWith('emp_id_')) {
             let emp_id = parseInt(doc_id_str.replace('emp_id_', ''));
-            result = await this.orm.call('hr.employee', 'action_send_manual_reminder_id', [[emp_id]]);
-        } else if (doc_id_str.startsWith('emp_pass_')) {
+            if (emp_id) {
+                result = await this.orm.call('hr.employee', 'action_send_manual_reminder_id', [[emp_id]]);
+            }
+        } else if (doc_id_str && doc_id_str.startsWith('emp_pass_')) {
             let emp_id = parseInt(doc_id_str.replace('emp_pass_', ''));
-            result = await this.orm.call('hr.employee', 'action_send_manual_reminder_pass', [[emp_id]]);
-        } else {
+            if (emp_id) {
+                result = await this.orm.call('hr.employee', 'action_send_manual_reminder_pass', [[emp_id]]);
+            }
+        } else if (doc_id_str) {
             let doc_id = parseInt(doc_id_str);
-            result = await this.orm.call('hr.employee.document', 'action_send_manual_reminder', [[doc_id]]);
+            if (doc_id) {
+                result = await this.orm.call('hr.employee.document', 'action_send_manual_reminder', [[doc_id]]);
+            }
         }
 
         if (result) {
@@ -1501,7 +1505,7 @@ export class HrDashboard extends Component{
     }
     hr_payslip() {
         let domain = [];
-        if (!this.state.is_manager) {
+        if (!this.state.is_manager && this.state.login_employee?.id) {
             domain.push(['employee_id','=', this.state.login_employee.id]);
         }
         let [dFrom, dTo] = this.getDateRange();
@@ -1522,7 +1526,6 @@ export class HrDashboard extends Component{
         });
     }
    async hr_contract() {
-        console.log("this:", this)
         if (true) {
 
             // Call the Python function to get the view ID
@@ -1550,7 +1553,7 @@ export class HrDashboard extends Component{
                     var filter_end = dFrom || today;
                     
                     var dom = ['&', ['date_start', '<=', filter_start], '|', ['date_end', '=', false], ['date_end', '>=', filter_end]];
-                    if (!this.state.is_manager) {
+                    if (!this.state.is_manager && this.state.login_employee?.id) {
                         dom.unshift('&'); // Add another AND for the employee_id
                         dom.push(['employee_id', '=', this.state.login_employee.id]);
                     }
@@ -1564,7 +1567,7 @@ export class HrDashboard extends Component{
     hr_timesheets() {
         let [dFrom, dTo] = this.getDateRange();
         let domainStr = `[('project_id', '!=', False)`;
-        if (!this.state.is_manager) {
+        if (!this.state.is_manager && this.state.login_employee?.id) {
             domainStr += `, ('employee_id', '=', ${this.state.login_employee.id})`;
             domainStr += `, ('task_id.user_ids', 'in', ${user.userId})`;
         }
@@ -1604,7 +1607,7 @@ export class HrDashboard extends Component{
             domain.push(['date_to', '<=', todayStr]);
         }
 
-        if (!this.state.is_manager) {
+        if (!this.state.is_manager && this.state.login_employee?.id) {
             domain.push(['employee_id', '=', this.state.login_employee.id]);
         }
         this.action.doAction({
@@ -1619,6 +1622,10 @@ export class HrDashboard extends Component{
         })
     }
     async attendance_sign_in_out() {
+        if (!this.state.login_employee || !this.state.login_employee.id) {
+            this.showCustomToast(_t("You must be linked to an employee to record attendance.").toString(), "warning");
+            return;
+        }
         try {
             var result = await this.orm.call('hr.employee', 'attendance_manual', [[this.state.login_employee.id]]);
             if (result) {

@@ -60,29 +60,31 @@
             <field name="name">hr.payroll.structure.view.form</field>
             <field name="model">hr.payroll.structure</field>
             <field name="arch" type="xml">
-                <form string="Employee Function">
-                    <group col="4">
-                        <field name="name"/>
-                        <field name="code"/>
-                        <field name="parent_id"/>
-                        <field name="company_id"
-                               groups="base.group_multi_company"
-                               options="{'no_create': True}"/>
-                    </group>
-                    <notebook colspan="4">
-                        <page string="Salary Rules">
-                            <field name="rule_ids"
-                                   domain="[('parent_rule_id','=',False)]">
-                                <list>
-                                    <field name="name"/>
-                                    <field name="code"/>
-                                    <field name="category_id"/>
-                                    <field name="sequence" invisible="1"/>
-                                    <field name="register_id"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
+                <form string="Salary Structure">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="parent_id"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Salary Rules">
+                                <field name="rule_ids"
+                                       domain="[('parent_rule_id','=',False)]">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="category_id"/>
+                                        <field name="sequence" column_invisible="True"/>
+                                        <field name="register_id"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
                 </form>
             </field>
         </record>

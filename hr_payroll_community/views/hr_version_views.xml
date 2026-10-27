@@ -2,7 +2,8 @@
 <odoo>
     <!-- Root Menus -->
     <menuitem id="menu_hr_payroll_community_root" name="Payroll" sequence="5"
-              web_icon="hr_payroll_community,static/description/icon.png"/>
+              web_icon="hr_payroll_community,static/description/icon.png"
+              groups="hr_payroll_community.group_hr_payroll_community_user"/>
 
     <menuitem id="menu_hr_payroll_community_configuration" name="Configuration"
               parent="menu_hr_payroll_community_root"

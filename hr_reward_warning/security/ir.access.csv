@@ -5,4 +5,4 @@ access_hr_announcement_category_admin,access.hr.announcement.category.admin,hr.a
 access_hr_announcement_category_user,access.hr.announcement.category.user,hr.announcement.category,base.group_user,r,
 hr_announcement_manager_rule_hr_manager,All Announcements for HR Manager,hr.announcement,hr.group_hr_manager,crud,"[(1, '=', 1)]"
 hr_announcement_manager_rule_hr_user,All Announcements for HR Manager,hr.announcement,hr.group_hr_user,crud,"[(1, '=', 1)]"
-hr_announcement_employee_rule,Relevant Announcements for Employee,hr.announcement,base.group_user,ru,"['&', ('state', 'in', ['approved', 'expired']), '|', '|', '|', ('is_announcement', '=', True), ('employee_ids.user_id', '=', user.id), ('department_ids.member_ids.user_id', '=', user.id), ('position_ids.employee_ids.user_id', '=', user.id)]"
+hr_announcement_employee_rule,Relevant Announcements for Employee,hr.announcement,base.group_user,r,"['&', ('state', 'in', ['approved', 'expired']), '|', '|', '|', ('is_announcement', '=', True), ('employee_ids.user_id', '=', user.id), ('department_ids.member_ids.user_id', '=', user.id), ('position_ids.employee_ids.user_id', '=', user.id)]"

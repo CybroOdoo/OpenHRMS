@@ -31,7 +31,7 @@ class HrVersion(models.Model):
         help="Number of days required for notice before termination."
     )
 
-    @api.depends_context('uid')
+    @api.depends('company_id.contract_expiration_notice_period')
     def _compute_notice_days(self):
         """Compute notice period from company's setting"""
         for record in self:

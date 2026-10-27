@@ -15,7 +15,7 @@
 #    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
 #
 #############################################################################
-from odoo import fields, models, _
+from odoo import fields, models
 
 
 class HrEmployeeFamily(models.Model):
@@ -24,9 +24,9 @@ class HrEmployeeFamily(models.Model):
     _description = 'HR Employee Family Info'
     _rec_name = 'member_name'
 
-    employee_id = fields.Many2one('hr.employee', string="Employee",
+    employee_id = fields.Many2one('hr.employee',
                                   help='Select corresponding Employee')
-    relation_id = fields.Many2one('hr.employee.relation', string="Relation",
+    relation_id = fields.Many2one('hr.employee.relation',
                                   help="Relationship with the employee")
     member_name = fields.Char(string='Name', help='Name of the family member')
     member_contact = fields.Char(string='Contact No',

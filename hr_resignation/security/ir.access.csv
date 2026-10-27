@@ -9,6 +9,6 @@ rule_hr_clearance_template_multi_company,HR Clearance Template Multi Company,hr.
 access_hr_clearance_template_user,hr.clearance.template.user,hr.clearance.template,base.group_user,r,
 access_hr_clearance_template_officer,hr.clearance.template.officer,hr.clearance.template,hr.group_hr_user,crud,
 access_hr_clearance_template_manager,hr.clearance.template.manager,hr.clearance.template,hr.group_hr_manager,crud,
-access_hr_resignation_clearance_line_user,hr.resignation.clearance.line.user,hr.resignation.clearance.line,base.group_user,ru,
+access_hr_resignation_clearance_line_user,hr.resignation.clearance.line.user,hr.resignation.clearance.line,base.group_user,ru,"[('responsible_user_id', '=', user.id)]"
 access_hr_resignation_clearance_line_officer,hr.resignation.clearance.line.officer,hr.resignation.clearance.line,hr.group_hr_user,crud,
-access_hr_resignation_clearance_line_manager,hr.resignation.clearance.line.manager,hr.resignation.clearance.line,hr.group_hr_manager,crud
+access_hr_resignation_clearance_line_manager,hr.resignation.clearance.line.manager,hr.resignation.clearance.line,hr.group_hr_manager,crud,

@@ -4,7 +4,7 @@
         <!--    Mail Alias for Leave-->
         <record id="mail_alias_hr_leave" model="mail.alias">
             <field name="alias_name">leave</field>
-            <field name="alias_model_id" ref="model_hr_leave"/>
+            <field name="alias_model_id" ref="hr_holidays.model_hr_leave"/>
             <field name="alias_contact">employees</field>
         </record>
     </data>
