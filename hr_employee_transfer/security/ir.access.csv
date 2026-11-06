@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_employee_transfer_user,access.employee.transfer.user,employee.transfer,hr.group_hr_user,ru,
+access_employee_transfer_manager_user,access.employee.transfer.manager.user,employee.transfer,hr.group_hr_manager,crud,
+access_employee_transfer_employee,access.employee.transfer.employee,employee.transfer,base.group_user,r,"[('employee_id.user_id', '=', user.id)]"
+access_employee_transfer_company_user,access.employee.company.manager.user,res.company,hr.group_hr_manager,cru,
+hr_employee_rule_company,Employee Multi Company Rule,hr.employee,,crud,"['|',('company_id','=',False),('company_id','in', company_ids)]"
