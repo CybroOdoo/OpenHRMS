@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gosi_hr_user,access_gosi_hr_user,model_gosi_payslip,hr.group_hr_user,1,1,1,0
+access_gosi_hr_manager,access_gosi_hr_manager,model_gosi_payslip,hr.group_hr_manager,1,1,1,1
+access_gosi_payroll_user,access_gosi_payroll_user,model_gosi_payslip,hr_payroll_community.group_hr_payroll_community_user,1,1,1,0
+access_gosi_payroll_manager,access_gosi_payroll_manager,model_gosi_payslip,hr_payroll_community.group_hr_payroll_community_manager,1,1,1,1
+

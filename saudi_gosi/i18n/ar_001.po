@@ -1,0 +1,1080 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* saudi_gosi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0
+"
+"Report-Msgid-Bugs-To: 
+"
+"POT-Creation-Date: 2026-10-31 00:00+0000
+"
+"PO-Revision-Date: 2026-10-31 00:00+0000
+"
+"Last-Translator: 
+"
+"Language-Team: 
+"
+"MIME-Version: 1.0
+"
+"Content-Type: text/plain; charset=UTF-8
+"
+"Content-Transfer-Encoding: 
+"
+"Plural-Forms: 
+"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_employee__age
+msgid "AGE"
+msgstr "عمر"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_needaction
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_needaction
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_needaction
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_needaction
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_needaction
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_needaction
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_needaction
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_needaction
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_needaction
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_needaction
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_needaction
+msgid "Action Needed"
+msgstr "الإجراءات اللازمة"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_ids
+msgid "Activities"
+msgstr "أنشطة"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_exception_decoration
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_exception_decoration
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_exception_decoration
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_exception_decoration
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_exception_decoration
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_exception_decoration
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_exception_decoration
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_exception_decoration
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_exception_decoration
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "نشاط استثناء الديكور"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_state
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_state
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_state
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_state
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_state
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_state
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_state
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_state
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_state
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_attachment_count
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_attachment_count
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_attachment_count
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_attachment_count
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_attachment_count
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_attachment_count
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_attachment_count
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_attachment_count
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_attachment_count
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_attachment_count
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. modules: ohrms_service_request, saudi_gosi
+#: model_terms:ir.actions.act_window,help:ohrms_service_request.action_view_service_approve
+#: model_terms:ir.actions.act_window,help:ohrms_service_request.action_view_service_check
+#: model_terms:ir.actions.act_window,help:saudi_gosi.action_view_employee_gosi
+msgid "Create new record"
+msgstr "إنشاء سجل جديد"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__create_uid
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__create_uid
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__create_uid
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__create_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__create_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__create_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__create_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__create_uid
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__create_uid
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__create_uid
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__create_uid
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__create_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__create_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__create_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__create_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__create_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__create_uid
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__create_uid
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__create_uid
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__create_uid
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__create_uid
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__create_uid
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__create_uid
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__create_uid
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__create_uid
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__create_uid
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__create_uid
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__create_uid
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__create_uid
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__create_uid
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__create_uid
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__create_date
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__create_date
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__create_date
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__create_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__create_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__create_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__create_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__create_date
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__create_date
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__create_date
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__create_date
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__create_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__create_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__create_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__create_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__create_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__create_date
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__create_date
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__create_date
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__create_date
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__create_date
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__create_date
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__create_date
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__create_date
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__create_date
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__create_date
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__create_date
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__create_date
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__create_date
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__create_date
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__create_date
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__dob
+msgid "Date Of Birth"
+msgstr "تاريخ الولادة"
+
+#. modules: ohrms_salary_advance, oh_hr_zk_attendance, hr_vacation_mngmt,
+#. ohrms_loan, hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_contract__department_id
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__hr_department
+#: model:ir.model.fields,field_description:hr_employee_shift.field_resource_calendar__hr_department
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__dept_id
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__department_id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__department_id
+#: model_terms:ir.ui.view,arch_db:ohrms_loan.view_loan_request_search_form
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__department
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__department
+msgid "Department"
+msgstr "القسم"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__display_name
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__display_name
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__display_name
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__display_name
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__display_name
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__display_name
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__display_name
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__display_name
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__display_name
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__display_name
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__display_name
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__display_name
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__display_name
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__display_name
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__display_name
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__display_name
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__display_name
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__display_name
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__display_name
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__display_name
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__display_name
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__display_name
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__display_name
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_report_daily_attendance__display_name
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__display_name
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__display_name
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__display_name
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__display_name
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__display_name
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__display_name
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__display_name
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__display_name
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_employee__limit
+msgid "Eligible For GOSI"
+msgstr "GOSI مؤهلة للحصول على"
+
+#. modules: hr_gratuity_settlement, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, hr_reward_warning,
+#. hr_vacation_mngmt, oh_employee_check_list, oh_hr_lawsuit_management,
+#. hr_insurance, hr_employee_transfer, ohrms_loan, hr_employee_shift,
+#. saudi_gosi
+#: model:ir.model,name:hr_employee_shift.model_hr_employee
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__employee_id
+#: model_terms:ir.ui.view,arch_db:hr_employee_transfer.view_employee_transfer_filter
+#: model:ir.model,name:hr_gratuity_settlement.model_hr_employee
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__employee_id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__employee_id
+#: model_terms:ir.ui.view,arch_db:hr_gratuity_settlement.employee_gratuity_form
+#: model:ir.model,name:hr_insurance.model_hr_employee
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__employee_id
+#: model:ir.model,name:hr_reward_warning.model_hr_employee
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__employee_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__emp_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__hr_emp
+#: model:res.groups,name:oh_appraisal.group_appraisal_employee
+#: model:ir.model,name:oh_employee_check_list.model_hr_employee
+#: model:ir.model,name:oh_employee_documents_expiry.model_hr_employee
+#: model_terms:ir.ui.view,arch_db:oh_employee_documents_expiry.employee_document_form_view
+#: model_terms:ir.ui.view,arch_db:oh_employee_documents_expiry.employee_documents_tree_view
+#: model_terms:ir.ui.view,arch_db:oh_employee_documents_expiry.search_employee_documents
+#: model:ir.model,name:oh_hr_lawsuit_management.model_hr_employee
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__employee_id
+#: model:ir.model.fields.selection,name:oh_hr_lawsuit_management.selection__hr_lawsuit__party2__employee
+#: model_terms:ir.ui.view,arch_db:oh_hr_lawsuit_management.hr_lawsuit_search_view
+#: model:ir.model,name:oh_hr_zk_attendance.model_hr_employee
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__employee_id
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_report_daily_attendance__name
+#: model:ir.model,name:ohrms_loan.model_hr_employee
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__employee_id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__employee_id
+#: model_terms:ir.ui.view,arch_db:ohrms_loan.view_loan_request_search_form
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__employee_id
+#: model_terms:ir.ui.view,arch_db:ohrms_salary_advance.view_salary_advance_filter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__employee_id
+#: model:ir.model,name:saudi_gosi.model_hr_employee
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__employee_id
+#: model:ir.model,name:uae_wps_report.model_hr_employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. modules: hr_gratuity_settlement, saudi_gosi
+#: model_terms:ir.ui.view,arch_db:hr_gratuity_settlement.employee_gratuity_form
+#: model_terms:ir.ui.view,arch_db:saudi_gosi.gosi_payslip3
+msgid "Employee Details"
+msgstr "تفاصيل الموظف"
+
+#. module: saudi_gosi
+#: model:ir.actions.act_window,name:saudi_gosi.action_view_employee_gosi
+msgid "Employee GOSI"
+msgstr "GOSI موظف"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_follower_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_follower_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_follower_ids
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_follower_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_follower_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_follower_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_follower_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_follower_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_follower_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_follower_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_follower_ids
+msgid "Followers"
+msgstr "متابعون"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_channel_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_channel_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_channel_ids
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_channel_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_channel_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_channel_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_channel_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_channel_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_channel_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_channel_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "(المتابعون (القنوات"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_partner_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_partner_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_partner_ids
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_partner_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_partner_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_partner_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_partner_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_partner_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_partner_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_partner_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "(المتابعون (الشركاء"
+
+#. module: saudi_gosi
+#: model:hr.salary.rule.category,name:saudi_gosi.GOSI
+msgid "GOSI"
+msgstr "GOSI"
+
+#. module: saudi_gosi
+#: model:hr.salary.rule,name:saudi_gosi.hr_rule_gosi_comp
+msgid "GOSI Company Contribution For Saudi Employee"
+msgstr ""
+
+#. module: saudi_gosi
+#: model:hr.salary.rule,name:saudi_gosi.hr_rule_gosi
+msgid "GOSI Contribution For Saudi Employee"
+msgstr "مساهمة الموظف السعودي GOSI"
+
+#. module: saudi_gosi
+#: model_terms:ir.ui.view,arch_db:saudi_gosi.gosi_payslip3
+msgid "GOSI Details"
+msgstr "تفاصيل GOSI"
+
+#. module: saudi_gosi
+#: model_terms:ir.ui.view,arch_db:saudi_gosi.hr_employee_inherited_form_view
+msgid "GOSI Information"
+msgstr "المعلومات GOSI"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__gos_number
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_employee__gosi_number
+msgid "GOSI Number"
+msgstr "رقم GOSI"
+
+#. module: saudi_gosi
+#: model:ir.model,name:saudi_gosi.model_gosi_payslip
+msgid "GOSI Record"
+msgstr "سجل GOSI"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_payslip__gosi_no
+msgid "GOSI Reference"
+msgstr ""
+
+#. module: saudi_gosi
+#: model:ir.ui.menu,name:saudi_gosi.gosi_employee
+msgid "GOSI Register"
+msgstr "تسجيل GOSI"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__id
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__id
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__id
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__id
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__id
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__id
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__id
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__id
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__id
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__id
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__id
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__id
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__id
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__id
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__id
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__id
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__id
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_report_daily_attendance__id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__id
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__id
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__id
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__id
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__id
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_exception_icon
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_exception_icon
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_exception_icon
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_exception_icon
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_exception_icon
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_exception_icon
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_exception_icon
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_exception_icon
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_exception_icon
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__activity_exception_icon
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__activity_exception_icon
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_exception_icon
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__activity_exception_icon
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__activity_exception_icon
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__activity_exception_icon
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__activity_exception_icon
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__activity_exception_icon
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__activity_exception_icon
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ".أيقونة للإشارة إلى نشاط استثناء"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_needaction
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_unread
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_needaction
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_unread
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_needaction
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_unread
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_needaction
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_unread
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_needaction
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_unread
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_needaction
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_unread
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_needaction
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_unread
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_needaction
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_unread
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_needaction
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_unread
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_needaction
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_unread
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_needaction
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ".إذا تم تحديد ذلك ، فإن الرسائل الجديدة تتطلب اهتمامك"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_has_error
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_has_sms_error
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_has_error
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_has_sms_error
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_error
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_sms_error
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_error
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_sms_error
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_has_error
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_has_sms_error
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_error
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_sms_error
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_has_error
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_has_sms_error
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_has_error
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_has_sms_error
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_has_error
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_has_sms_error
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_has_error
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_has_sms_error
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_has_error
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ".إذا تم التحقق ، فبعض الرسائل بها خطأ في التسليم"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_is_follower
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_is_follower
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_is_follower
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_is_follower
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_is_follower
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_is_follower
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_is_follower
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_is_follower
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_is_follower
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_is_follower
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_is_follower
+msgid "Is Follower"
+msgstr "هو تابع"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__issued_date
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_employee__issue_date
+msgid "Issued Date"
+msgstr "تاريخ الإصدار"
+
+#. modules: ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__job_position
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__position
+msgid "Job Position"
+msgstr "وظيفه"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate____last_update
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule____last_update
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer____last_update
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company____last_update
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration____last_update
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity____last_update
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration____last_update
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training____last_update
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance____last_update
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy____last_update
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder____last_update
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement____last_update
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket____last_update
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task____last_update
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign____last_update
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal____last_update
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages____last_update
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist____last_update
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type____last_update
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document____last_update
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit____last_update
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine____last_update
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance____last_update
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_report_daily_attendance____last_update
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan____last_update
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line____last_update
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance____last_update
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute____last_update
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request____last_update
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators____last_update
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status____last_update
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip____last_update
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__write_uid
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__write_uid
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__write_uid
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__write_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__write_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__write_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__write_uid
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__write_uid
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__write_uid
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__write_uid
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__write_uid
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__write_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__write_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__write_uid
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__write_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__write_uid
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__write_uid
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__write_uid
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__write_uid
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__write_uid
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__write_uid
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__write_uid
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__write_uid
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__write_uid
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__write_uid
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__write_uid
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__write_uid
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__write_uid
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__write_uid
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__write_uid
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__write_uid
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. modules: hr_gratuity_settlement, ohrms_loan, oh_appraisal,
+#. oh_employee_documents_expiry, ohrms_salary_advance, oh_hr_zk_attendance,
+#. uae_wps_report, ohrms_service_request, ohrmspro_holidays_approval,
+#. hr_reward_warning, hr_vacation_mngmt, oh_employee_check_list,
+#. oh_hr_lawsuit_management, hr_insurance, hr_employee_transfer, hr_reminder,
+#. hr_employee_shift, saudi_gosi
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_generate__write_date
+#: model:ir.model.fields,field_description:hr_employee_shift.field_hr_shift_schedule__write_date
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_employee_transfer__write_date
+#: model:ir.model.fields,field_description:hr_employee_transfer.field_transfer_company__write_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__write_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__write_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity_accounting_configuration__write_date
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_training__write_date
+#: model:ir.model.fields,field_description:hr_insurance.field_hr_insurance__write_date
+#: model:ir.model.fields,field_description:hr_insurance.field_insurance_policy__write_date
+#: model:ir.model.fields,field_description:hr_reminder.field_hr_reminder__write_date
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__write_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_hr_flight_ticket__write_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_pending_task__write_date
+#: model:ir.model.fields,field_description:hr_vacation_mngmt.field_task_reassign__write_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__write_date
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal_stages__write_date
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__write_date
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_document_type__write_date
+#: model:ir.model.fields,field_description:oh_employee_documents_expiry.field_hr_employee_document__write_date
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__write_date
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine__write_date
+#: model:ir.model.fields,field_description:oh_hr_zk_attendance.field_zk_machine_attendance__write_date
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__write_date
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan_line__write_date
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__write_date
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__write_date
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__write_date
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_hr_holidays_validators__write_date
+#: model:ir.model.fields,field_description:ohrmspro_holidays_approval.field_leave_validation_status__write_date
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__write_date
+#: model:ir.model.fields,field_description:uae_wps_report.field_wps_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_main_attachment_id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_main_attachment_id
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_main_attachment_id
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_main_attachment_id
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_main_attachment_id
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_main_attachment_id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_main_attachment_id
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_main_attachment_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_main_attachment_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_main_attachment_id
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "المرفق الرئيسي"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_has_error
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_has_error
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_has_error
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_error
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_has_error
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_error
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_has_error
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_has_error
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_has_error
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_has_error
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسالة"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_ids
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_ids
+msgid "Messages"
+msgstr "رسائل"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__nationality
+msgid "Nationality"
+msgstr "جنسية"
+
+#. modules: hr_employee_transfer, ohrms_service_request, saudi_gosi,
+#. hr_gratuity_settlement
+#: model:ir.model.fields.selection,name:hr_employee_transfer.selection__employee_transfer__state__draft
+#: code:addons/hr_gratuity_settlement/models/hr_gratuity.py:0
+#: model:ir.model.fields.selection,name:hr_gratuity_settlement.selection__hr_contract__state__draft
+#: model:ir.model.fields.selection,name:hr_gratuity_settlement.selection__hr_training__state__new
+#: code:addons/ohrms_service_request/models/service.py:0
+#: code:addons/saudi_gosi/models/gosi.py:0
+#, python-format
+msgid "New"
+msgstr "جديد"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_date_deadline
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_date_deadline
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_date_deadline
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_date_deadline
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_date_deadline
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_date_deadline
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_date_deadline
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_date_deadline
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_date_deadline
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "آخر نشاط الموعد النهائي"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_summary
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_summary
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_summary
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_summary
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_summary
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_summary
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_summary
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_summary
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_summary
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_type_id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_type_id
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_type_id
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_type_id
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_type_id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_type_id
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_type_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_type_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_type_id
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_needaction_counter
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_needaction_counter
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_needaction_counter
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_needaction_counter
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_needaction_counter
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_needaction_counter
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_needaction_counter
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_needaction_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_needaction_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_needaction_counter
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_has_error_counter
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_has_error_counter
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_has_error_counter
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_error_counter
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_has_error_counter
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_error_counter
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_has_error_counter
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_has_error_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_has_error_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_has_error_counter
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الاخطاء"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_needaction_counter
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_needaction_counter
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_needaction_counter
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_needaction_counter
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_needaction_counter
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_needaction_counter
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_needaction_counter
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_needaction_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_needaction_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_needaction_counter
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تتطلب إجراء"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_has_error_counter
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_has_error_counter
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_has_error_counter
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_has_error_counter
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_has_error_counter
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_error_counter
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_has_error_counter
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_has_error_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_has_error_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_has_error_counter
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل مع خطأ التسليم"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__message_unread_counter
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__message_unread_counter
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__message_unread_counter
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__message_unread_counter
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__message_unread_counter
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__message_unread_counter
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__message_unread_counter
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__message_unread_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__message_unread_counter
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__message_unread_counter
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل غير المقروءة"
+
+#. modules: ohrms_salary_advance, ohrms_loan_accounting, hr_vacation_mngmt,
+#. hr_insurance, ohrms_loan, hr_employee_shift, saudi_gosi
+#: model:ir.model,name:hr_employee_shift.model_hr_payslip
+#: model:ir.model,name:hr_insurance.model_hr_payslip
+#: model:ir.model,name:hr_vacation_mngmt.model_hr_payslip
+#: model:ir.model,name:ohrms_loan.model_hr_payslip
+#: model:ir.model,name:ohrms_loan_accounting.model_hr_payslip
+#: model:ir.model,name:ohrms_salary_advance.model_hr_payslip
+#: model:ir.model,name:saudi_gosi.model_hr_payslip
+msgid "Pay Slip"
+msgstr "قسيمة المرتب"
+
+#. modules: hr_gratuity_settlement, ohrms_service_request, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__name
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__name
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__name
+msgid "Reference"
+msgstr "مرجع"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__activity_user_id
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__activity_user_id
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__activity_user_id
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__activity_user_id
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__activity_user_id
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__activity_user_id
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__activity_user_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__activity_user_id
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__activity_user_id
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_has_sms_error
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_has_sms_error
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_has_sms_error
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_has_sms_error
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_has_sms_error
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_has_sms_error
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_has_sms_error
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_has_sms_error
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_has_sms_error
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_has_sms_error
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: saudi_gosi
+#: model:ir.model.fields.selection,name:saudi_gosi.selection__hr_employee__type__saudi
+msgid "Saudi"
+msgstr "سعودي"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__activity_state
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__activity_state
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_state
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__activity_state
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__activity_state
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__activity_state
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__activity_state
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__activity_state
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__activity_state
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الوضع القائم على الأنشطة\n"
+"متأخر: تاريخ الاستحقاق مرت بالفعل\n"
+"اليوم: تاريخ النشاط اليوم\n"
+"تنظيم: الأنشطة المستقبلية."
+#. module: hr_gratuity_settlement
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_contract__state
+msgid "Status of the contract"
+msgstr "حالة العقد"
+
+#. module: saudi_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__type_gosi
+#: model:ir.model.fields,field_description:saudi_gosi.field_hr_employee__type
+msgid "Type"
+msgstr "اكتب"
+
+#. modules: hr_gratuity_settlement, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__activity_exception_decoration
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__activity_exception_decoration
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__activity_exception_decoration
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__activity_exception_decoration
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__activity_exception_decoration
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__activity_exception_decoration
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__activity_exception_decoration
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__activity_exception_decoration
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__activity_exception_decoration
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ".نوع نشاط الاستثناء في السجل"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_unread
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_unread
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_unread
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_unread
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_unread
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_unread
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_unread
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_unread
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_unread
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_unread
+msgid "Unread Messages"
+msgstr "رسائل غير مقروءة"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__message_unread_counter
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__message_unread_counter
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__message_unread_counter
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__message_unread_counter
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__message_unread_counter
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__message_unread_counter
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__message_unread_counter
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__message_unread_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__message_unread_counter
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__message_unread_counter
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عداد الرسائل غير المقروءة"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_gratuity_configuration__website_message_ids
+#: model:ir.model.fields,field_description:hr_gratuity_settlement.field_hr_gratuity__website_message_ids
+#: model:ir.model.fields,field_description:hr_reward_warning.field_hr_announcement__website_message_ids
+#: model:ir.model.fields,field_description:oh_appraisal.field_hr_appraisal__website_message_ids
+#: model:ir.model.fields,field_description:oh_employee_check_list.field_employee_checklist__website_message_ids
+#: model:ir.model.fields,field_description:oh_hr_lawsuit_management.field_hr_lawsuit__website_message_ids
+#: model:ir.model.fields,field_description:ohrms_loan.field_hr_loan__website_message_ids
+#: model:ir.model.fields,field_description:ohrms_salary_advance.field_salary_advance__website_message_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_execute__website_message_ids
+#: model:ir.model.fields,field_description:ohrms_service_request.field_service_request__website_message_ids
+#: model:ir.model.fields,field_description:saudi_gosi.field_gosi_payslip__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. modules: hr_gratuity_settlement, oh_appraisal, ohrms_salary_advance,
+#. ohrms_service_request, hr_reward_warning, oh_hr_lawsuit_management,
+#. oh_employee_check_list, ohrms_loan, saudi_gosi
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_gratuity_configuration__website_message_ids
+#: model:ir.model.fields,help:hr_gratuity_settlement.field_hr_gratuity__website_message_ids
+#: model:ir.model.fields,help:hr_reward_warning.field_hr_announcement__website_message_ids
+#: model:ir.model.fields,help:oh_appraisal.field_hr_appraisal__website_message_ids
+#: model:ir.model.fields,help:oh_employee_check_list.field_employee_checklist__website_message_ids
+#: model:ir.model.fields,help:oh_hr_lawsuit_management.field_hr_lawsuit__website_message_ids
+#: model:ir.model.fields,help:ohrms_loan.field_hr_loan__website_message_ids
+#: model:ir.model.fields,help:ohrms_salary_advance.field_salary_advance__website_message_ids
+#: model:ir.model.fields,help:ohrms_service_request.field_service_execute__website_message_ids
+#: model:ir.model.fields,help:ohrms_service_request.field_service_request__website_message_ids
+#: model:ir.model.fields,help:saudi_gosi.field_gosi_payslip__website_message_ids
+msgid "Website communication history"
+msgstr "سجل اتصالات الموقع"

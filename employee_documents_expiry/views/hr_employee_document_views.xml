@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Form view of hr_employee_document model-->
+    <record id="hr_employee_document_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.document.view.form</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="document_id"/>
+                            <field name="doc_attachment_ids"
+                                   widget="many2many_binary" class="oe_inline"/>
+                            <field name="employee_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--List view of hr_employee_document model-->
+    <record id="hr_employee_document_view_list" model="ir.ui.view">
+        <field name="name">hr.employee.document.view.list</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <list string="Employee Documents">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="document_id"/>
+                <field name="issue_date"/>
+                <field name="expiry_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!--Search view of hr_employee_document model-->
+    <record id="hr_employee_document_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.document.view.search</field>
+        <field name="model">hr.employee.document</field>
+        <field name="arch" type="xml">
+            <search string="Search Employee Documents">
+                <field name="name" string="Document"/>
+                <field name="document_id"/>
+                <separator/>
+                <filter name="expiring_soon" string="Expiring Soon"
+                        domain="[('expiry_date', '&gt;=', context_today()), ('expiry_date', '&lt;=', (context_today() + datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <filter name="expired" string="Expired"
+                        domain="[('expiry_date', '&lt;', context_today())]"/>
+                <group>
+                    <filter name="group_employee" string="Employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_document_type" string="Checklist Type" domain="[]" context="{'group_by': 'document_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

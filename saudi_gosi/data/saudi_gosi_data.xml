@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This file is used to create rules for calculation for GOSI contribution-->
+<odoo>
+    <data noupdate="1">
+        <!--
+       Create a contribution register for employee GOSI contribution.
+       This register will track the employee's contribution towards GOSI (General Organization for Social Insurance).
+       -->
+        <record id="contribution_register_gosi" model="hr.contribution.register">
+            <field name="name">GOSI Contribution For Saudi Employee</field>
+            <field name="partner_id" eval="False"/>
+        </record>
+        <!--
+       Create a contribution register for company GOSI contribution.
+       This register will track the company's contribution towards GOSI for Saudi employees.
+       -->
+        <record id="contribution_register_gosicompany" model="hr.contribution.register">
+            <field name="name">GOSI Company Contribution For Saudi Employee</field>
+            <field name="partner_id" eval="False"/>
+        </record>
+        <!--
+       Create a salary rule category for GOSI.
+       This category groups salary rules related to GOSI under the same label.
+       -->
+        <record id="GOSI" model="hr.salary.rule.category">
+            <field name="name">GOSI</field>
+            <field name="code">GOSI</field>
+        </record>
+        <!--
+      Define the salary rule for employee GOSI contribution.
+      This rule calculates the amount the employee needs to contribute towards GOSI,
+      which is 9% of the employee's wage and additional elements.
+      -->
+        <record id="hr_rule_gosi" model="hr.salary.rule">
+            <field name="name">GOSI Contribution For Saudi Employee</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">GOSI</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -((contract.wage+(contract.wage*3/12))*9/100)</field>
+            <field name="register_id" ref="contribution_register_gosi"/>
+        </record>
+        <!--
+      Define the salary rule for company GOSI contribution.
+      This rule calculates the amount the company needs to contribute towards GOSI for the employee,
+      which includes both 9% of the employee's wage and 2% for occupational hazard insurance.
+      -->
+        <record id="hr_rule_gosi_comp" model="hr.salary.rule">
+            <field name="name">GOSI Company Contribution For Saudi Employee</field>
+            <field name="sequence" eval="99"/>
+            <field name="code">GOSI_COMP</field>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (((contract.wage+(contract.wage*3/12))*9/100)+(contract.wage*2/100))
+            </field>
+            <field name="register_id" ref="contribution_register_gosicompany"/>
+        </record>
+        <!--
+       Modify the base salary structure for Saudi workers.
+       This structure includes GOSI contribution rules, as well as basic, net, and taxable salary rules.
+       -->
+        <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">
+            <field name="code">BASE</field>
+            <field name="name">Base Salary Structure For Saudi Workers</field>
+            <field eval="[(6, 0, [ref('hr_rule_gosi'),ref('hr_payroll_community.hr_rule_basic'),ref('hr_payroll_community.hr_rule_net')
+            ,ref('hr_payroll_community.hr_rule_taxable'),ref('hr_rule_gosi_comp')])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <!--
+        Define a salary structure for overseas workers.
+        This structure excludes GOSI rules, but includes the basic, net, and taxable salary rules.
+        -->
+        <record id="structure_1717" model="hr.payroll.structure">
+            <field name="code">BSOW</field>
+            <field name="name">Base Salary For Overseas Workers</field>
+            <field eval="[(6, 0, [ref('hr_payroll_community.hr_rule_basic'), ref('hr_payroll_community.hr_rule_net'),ref('hr_payroll_community.hr_rule_taxable')])]"
+                   name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="parent_id" ref="hr_payroll_community.structure_base"/>
+        </record>
+    </data>
+</odoo>
