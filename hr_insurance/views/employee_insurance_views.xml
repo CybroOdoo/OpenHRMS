@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- hr insurance form view-->
+    <record id="hr_insurance_view_form" model="ir.ui.view">
+        <field name="name">hr.insurance.view.form</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <form string="Employee Insurance">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_renewal" string="Renewal" type="object" class="oe_highlight"
+                            invisible="state != 'expired'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,active,expired"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" readonly="state != 'draft'"/>
+                            <field name="policy_id" readonly="state != 'draft'"/>
+                            <field name="insurer_id"/>
+                            <field name="group_policy_number"/>
+                            <field name="policy_coverage" readonly="state != 'draft'"/>
+                            <label for="date_from" string="Policy Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline" readonly="state != 'draft'"/>
+                                -
+                                <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="sum_insured" readonly="state != 'draft'"/>
+                            <field name="amount" readonly="state != 'draft'"/>
+                            <label for="company_percentage"/>
+                            <div class="d-flex align-items-center">
+                                <field name="company_percentage" class="oe_inline" style="max-width: 100px;"
+                                       readonly="state != 'draft'"/>
+                                <span class="ms-2">%</span>
+                            </div>
+                            <field name="deducted_amount"/>
+                            <field name="company_id" readonly="state != 'draft'" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!--hr insurance tree view-->
+    <record id="hr_insurance_view_tree" model="ir.ui.view">
+        <field name="name">hr.insurance.view.list</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <list string="Employee Insurance">
+                <field name="employee_id"/>
+                <field name="policy_id"/>
+                <field name="insurer_id"/>
+                <field name="group_policy_number"/>
+                <field name="policy_coverage"/>
+                <field name="sum_insured"/>
+                <field name="amount"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-success="state == 'active'" decoration-danger="state == 'expired'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- hr insurance search view -->
+    <record id="hr_insurance_view_search" model="ir.ui.view">
+        <field name="name">hr.insurance.view.search</field>
+        <field name="model">hr.insurance</field>
+        <field name="arch" type="xml">
+            <search string="Search Employee Insurance">
+                <field name="employee_id"/>
+                <field name="policy_id"/>
+                <field name="insurer_id"/>
+                <field name="group_policy_number"/>
+                <separator/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Active" name="active" domain="[('state', '=', 'active')]"/>
+                <filter string="Expired" name="expired" domain="[('state', '=', 'expired')]"/>
+                <separator/>
+                <filter name="group_employee" string="Employee" domain="[]" context="{'group_by': 'employee_id'}"/>
+                <filter name="group_policy" string="Policy" domain="[]" context="{'group_by': 'policy_id'}"/>
+                <filter name="group_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
+                <filter name="group_company" string="Company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- hr insurance action-->
+    <record id="hr_insurance_action"
+            model="ir.actions.act_window">
+        <field name="name">Employee Insurance</field>
+        <field name="res_model">hr.insurance</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="hr_insurance_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new employee insurance record!
+            </p>
+        </field>
+    </record>
+
+    <!-- hr insurance menu-->
+    <menuitem
+            id="hr_insurance_menu"
+            name="Insurance"
+            parent="hr.menu_hr_root"
+            action="hr_insurance_action"/>
+</odoo>

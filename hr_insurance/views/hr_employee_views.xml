@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- hr employee form view inherited-->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherited.hr.insurance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="insurance_ids" string="Insurance" groups="hr.group_hr_user">
+                    <field name="insurance_ids" context="{'default_employee_id': id}">
+                        <list string="Insurances">
+                            <field name="policy_id"/>
+                            <field name="insurer_id"/>
+                            <field name="group_policy_number"/>
+                            <field name="policy_coverage"/>
+                            <field name="amount"/>
+                            <field name="sum_insured"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="state" widget="badge" decoration-info="state == 'draft'"
+                                   decoration-success="state == 'active'" decoration-danger="state == 'expired'"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

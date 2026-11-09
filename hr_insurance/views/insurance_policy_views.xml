@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Insurance policy form view-->
+    <record id="insurance_policy_view_form" model="ir.ui.view">
+        <field name="name">insurance.policy.view.form</field>
+        <field name="model">insurance.policy</field>
+        <field name="arch" type="xml">
+            <form string="Policy Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="insurer_id"/>
+                            <field name="group_policy_number"/>
+                            <field name="policy_coverage"/>
+                        </group>
+                        <group>
+                            <field name="sum_insured"/>
+                            <field name="amount"/>
+                            <field name="company_percentage"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Extra Notes">
+                            <field name="note_field"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Insurance policy tree view-->
+    <record id="insurance_policy_view_tree" model="ir.ui.view">
+        <field name="name">insurance.policy.view.list</field>
+        <field name="model">insurance.policy</field>
+        <field name="arch" type="xml">
+            <list string="Policy Details">
+                <field name="name"/>
+                <field name="insurer_id"/>
+                <field name="group_policy_number"/>
+                <field name="policy_coverage"/>
+                <field name="sum_insured"/>
+                <field name="amount"/>
+                <field name="company_percentage"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Insurance policy search view -->
+    <record id="insurance_policy_view_search" model="ir.ui.view">
+        <field name="name">insurance.policy.view.search</field>
+        <field name="model">insurance.policy</field>
+        <field name="arch" type="xml">
+            <search string="Search Insurance Policies">
+                <field name="name" string="Policy"/>
+                <field name="insurer_id"/>
+                <field name="group_policy_number"/>
+                <separator/>
+                <filter name="group_insurer" string="Insurance Provider" domain="[]" context="{'group_by': 'insurer_id'}"/>
+                <filter name="group_coverage" string="Policy Coverage" domain="[]" context="{'group_by': 'policy_coverage'}"/>
+                <filter name="group_company" string="Company" domain="[]" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Insurance policy menu action-->
+    <record id="insurance_policy_action" model="ir.actions.act_window">
+        <field name="name">Insurance Policy</field>
+        <field name="res_model">insurance.policy</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="insurance_policy_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new insurance policy!
+            </p>
+        </field>
+    </record>
+
+    <!-- Main Menu for Insurance -->
+    <menuitem id="menu_hr_insurance" name="Insurance" parent="hr.menu_human_resources_configuration"/>
+    <!-- Submenu for Insurance Policy Management -->
+    <menuitem
+            id="policy_management_menu"
+            name="Insurance Policy"
+            parent="menu_hr_insurance"
+            action="insurance_policy_action"/>
+</odoo>

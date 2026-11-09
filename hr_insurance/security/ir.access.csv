@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_insurance_policy_user,insurance.policy.user,insurance.policy,base.group_user,r,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_insurance_policy_officer,insurance.policy.officer,insurance.policy,hr.group_hr_user,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_insurance_policy_manager,insurance.policy.manager,insurance.policy,hr.group_hr_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_insurance_user,hr.insurance.user,hr.insurance,base.group_user,r,"['&', '|', ('company_id', '=', False), ('company_id', 'in', company_ids), ('employee_id.user_id', '=', user.id)]"
+access_hr_insurance_officer,hr.insurance.officer,hr.insurance,hr.group_hr_user,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_hr_insurance_manager,hr.insurance.manager,hr.insurance,hr.group_hr_manager,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

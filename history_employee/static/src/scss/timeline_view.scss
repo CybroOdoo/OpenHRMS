@@ -1,0 +1,41 @@
+.o_history_timeline_wrapper {
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    .btn-white {
+        background-color: white;
+        color: #495057;
+        border-color: #dee2e6;
+        &:hover {
+            background-color: #f8f9fa;
+        }
+    }
+    
+    .btn-primary {
+        background-color: #e3f2fd !important;
+        color: #0d6efd !important;
+        border-color: #0d6efd !important;
+        box-shadow: none !important;
+    }
+    
+    .timeline {
+        padding-top: 15px;
+        
+        .timeline-item {
+            .timeline-vertical-line {
+                top: 0;
+                bottom: -1rem !important; /* Bridge the mb-3 gap */
+            }
+            &:first-child .timeline-vertical-line {
+                top: 50% !important;
+            }
+            &:last-child .timeline-vertical-line {
+                bottom: 50% !important;
+                display: block !important;
+            }
+            &:first-child:last-child .timeline-vertical-line {
+                display: none !important;
+            }
+        }
+    }
+}
