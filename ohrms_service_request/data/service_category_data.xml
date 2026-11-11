@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Service Categories Data -->
+        <record id="service_category_repair" model="service.category">
+            <field name="name">Repair</field>
+            <field name="description">For repairing broken or malfunctioning assets.</field>
+        </record>
+        <record id="service_category_replace" model="service.category">
+            <field name="name">Replace</field>
+            <field name="description">For replacing assets that cannot be repaired.</field>
+        </record>
+        <record id="service_category_updating" model="service.category">
+            <field name="name">Updating</field>
+            <field name="description">For software updates or general updations.</field>
+        </record>
+        <record id="service_category_checking" model="service.category">
+            <field name="name">Checking</field>
+            <field name="description">For routine inspections and checks.</field>
+        </record>
+        <record id="service_category_adjustment" model="service.category">
+            <field name="name">Adjustment</field>
+            <field name="description">For minor adjustments and tweaks.</field>
+        </record>
+        <record id="service_category_other" model="service.category">
+            <field name="name">Other</field>
+            <field name="description">For other uncategorized service requests.</field>
+        </record>
+    </data>
+</odoo>

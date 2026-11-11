@@ -1,0 +1,12 @@
+id,name,model_id,group_id/id,operation,domain
+hr_appraisal_comp_rule,HR Appraisal multi company rule,hr.appraisal,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+hr_appraisal_rule_employee,HR Appraisal Employee Rule,hr.appraisal,oh_appraisal.oh_appraisal_group_employee,cru,"[('creater_id', '=', user.id)]"
+hr_appraisal_rule_manager,HR Appraisal Manager Rule,hr.appraisal,oh_appraisal.oh_appraisal_group_manager,crud,
+access_hr_appraisal_stages_user,access.hr.appraisal.stages.user,hr.appraisal.stages,base.group_user,r,
+access_hr_appraisal_stages_manager,access.hr.appraisal.stages.manager,hr.appraisal.stages,oh_appraisal.oh_appraisal_group_manager,crud,
+access_survey_user_input_appraisal_user,access.survey.user_input.appraisal.user,survey.user_input,oh_appraisal.oh_appraisal_group_employee,r,"[('appraisal_id', '!=', False)]"
+access_survey_user_input_line_appraisal_user,access.survey.user_input.line.appraisal.user,survey.user_input.line,oh_appraisal.oh_appraisal_group_employee,r,"[('user_input_id.appraisal_id', '!=', False)]"
+access_survey_user_input_appraisal_manager,access.survey.user_input.appraisal.manager,survey.user_input,oh_appraisal.oh_appraisal_group_manager,crud,"[('appraisal_id', '!=', False)]"
+access_survey_user_input_line_appraisal_manager,access.survey.user_input.line.appraisal.manager,survey.user_input.line,oh_appraisal.oh_appraisal_group_manager,crud,"[('user_input_id.appraisal_id', '!=', False)]"
+access_hr_employee_appraisal_user,access.hr.employee.appraisal.user,hr.employee,oh_appraisal.oh_appraisal_group_employee,r,
+access_survey_survey_appraisal_user,access.survey.survey.appraisal.user,survey.survey,oh_appraisal.oh_appraisal_group_employee,r,

@@ -15,5 +15,4 @@
 #    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
 #
 #############################################################################
-from . import hr_leave
-from . import res_config_settings
+from . import hr_leave, res_config_settings

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odoo 20 Open HRMS Service Request</title>
+    <meta name="description"
+        content="Open HRMS Service Request for Odoo 20 Community edition. Comprehensive employee service and technical maintenance management with role-based assignment, execution tracking, automated notifications, and multi-stage approval." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <!-- Bootstrap 5.0.2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #ohrms-core .nav-pills .nav-link {
+            color: #526082;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+        }
+
+        #ohrms-core .nav-pills .nav-link.active {
+            color: #fff;
+            background: #00438B;
+        }
+
+        #ohrms-core .accordion-button:not(.collapsed) {
+            background-color: #f5f8fc;
+            color: #0f1729;
+            box-shadow: none;
+        }
+
+        #ohrms-core .accordion-button:focus {
+            box-shadow: none;
+            border-color: #e6eaf2;
+        }
+
+        #ohrms-core .card:hover,
+        #ohrms-core .ohrms-hover:hover {
+            box-shadow: 0 10px 28px -12px rgba(18, 39, 84, .18) !important;
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0;">
+    <div id="ohrms-core"
+        style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background-color:#ffffff; color:#0f1729; -webkit-font-smoothing:antialiased;">
+        <div class="container" style="max-width:1160px; padding-top:20px; padding-bottom:96px;">
+
+            <!-- ═══════════════ 1. HEADER ═══════════════ -->
+            <div class="row align-items-center justify-content-between py-3" style="row-gap:12px;">
+                <div class="col-auto">
+                    <a href="https://www.cybrosys.com" target="_blank" rel="noopener">
+                        <img src="https://apps.odoocdn.com/apps/assets/17.0/theme_boec/images/Cybrosys.png?fcdde35"
+                            alt="Cybrosys Technologies" style="height:45px; width:auto;"
+                            onerror="this.onerror=null; this.src='https://www.cybrosys.com/images/logo.png';" />
+                    </a>
+                </div>
+                <div class="col-auto d-flex flex-wrap" style="gap:10px;">
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-2px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z" />
+                        </svg>
+                        Online</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-2px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z" />
+                        </svg>
+                        Odoo.sh</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" />
+                        </svg>
+                        On-Premise</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;">
+                        <svg class="flex-shrink-0"
+                            style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" />
+                        </svg>
+                        Community</span>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 2. HERO ═══════════════ -->
+            <div class="p-4 p-md-5 mt-2 text-center text-white position-relative"
+                style="border-radius:28px; background-image: radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%);">
+                <h1 class="fw-bold mb-0"
+                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:44px; letter-spacing:-0.02em; line-height:1.12;">
+                    Open HRMS Service Request
+                </h1>
+                <p class="mx-auto mt-3 mb-0"
+                    style="max-width:680px; font-size:18px; line-height:1.65; color:rgba(255,255,255,.82);">
+                    A comprehensive technical and administrative service request management solution for Odoo 20. Empower employees to submit maintenance orders, assign dedicated service executors, track execution progress, and streamline manager approvals.
+                </p>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:14px;">
+                    <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="background-color:#ffffff; color:#103564; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" class="me-2" aria-hidden="true">
+                            <path
+                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" />
+                        </svg>
+                        Email Us
+                    </a>
+                    <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="border:1px solid rgba(255,255,255,.45); color:#ffffff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor" class="me-2" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967s-.47-.148-.669.15c-.198.297-.767.966-.94 1.164c-.174.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.019-.458.13-.606c.134-.133.297-.347.446-.52s.198-.298.297-.497c.1-.198.05-.371-.025-.52c-.074-.149-.668-1.612-.916-2.207c-.241-.579-.486-.5-.668-.51c-.174-.008-.372-.01-.57-.01s-.52.074-.792.372c-.273.297-1.04 1.016-1.04 2.479c0 1.462 1.064 2.875 1.213 3.074s2.095 3.2 5.076 4.487c.71.306 1.263.489 1.694.625c.712.227 1.36.195 1.872.118c.57-.085 1.758-.719 2.006-1.413s.247-1.289.173-1.413s-.272-.198-.57-.347m-5.422 7.403h-.004a9.87 9.87 0 0 1-5.032-1.378l-.36-.214l-3.742.982l.999-3.648l-.235-.374a9.86 9.86 0 0 1-1.511-5.26c.002-5.45 4.436-9.884 9.889-9.884a9.8 9.8 0 0 1 6.988 2.899a9.82 9.82 0 0 1 2.892 6.992c-.002 5.45-4.436 9.885-9.884 9.885m8.412-18.297A11.82 11.82 0 0 0 11.992 0C5.438 0 .102 5.335.1 11.892a11.86 11.86 0 0 0 1.587 5.945L0 24l6.304-1.654a11.9 11.9 0 0 0 5.684 1.448h.005c6.554 0 11.89-5.335 11.892-11.893a11.82 11.82 0 0 0-3.48-8.413"
+                                clip-rule="evenodd" />
+                        </svg>
+                        WhatsApp
+                    </a>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:10px;">
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                        </svg>
+                        IT &amp; Maintenance Requests
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        </svg>
+                        Service Executor Role
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                        Asset &amp; Product Linking
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        Smart Execution Tracking
+                    </span>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 4. KEY HIGHLIGHTS ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Key
+                        highlights</h2>
+                    <p class="mx-auto mt-2 mb-0" style="max-width:620px; font-size:14.5px; color:#526082;">
+                        Accelerate workplace issue resolution with structured ticketing, technician assignment, and full managerial accountability.
+                    </p>
+                </div>
+                <div class="row g-3">
+                    <!-- Highlight 1: Complete Service Lifecycle -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">End-to-End Service Lifecycle</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Clear multi-stage progression from Draft and Requested through Assignment, Execution Verification (Checked), and Final Approval or Rejection.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 2: Dedicated Service Executor Role -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#e4f7f5; color:#0d9c92;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Dedicated Service Executor Role</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Specialized "Service Executor" security group enabling technicians to view assigned tasks, update execution records, and sign off with the "Checked" action.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 3: Automatic Execution Generation -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#fdf3e3; color:#b9791a;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Synchronized Service Executions</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Assigning an executor instantly initializes a linked Service Execution record accessible via smart button, keeping requests and tasks in perfect sync.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 4: Asset & Category Association -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#fce8e6; color:#c53929;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Asset &amp; Category Association</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Categorize services under Repair, Replace, Updating, Checking, or Adjustment, and link maintenance directly to company hardware/inventory assets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 5: Automated Alerts & Chatter -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Automated Alerts &amp; Chatter</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Full audit trails with automated chatter messages dispatched to technicians upon task assignment and to managers upon completion.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 6: Priority & Deadline Tracking -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#e4f7f5; color:#0d9c92;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Priority &amp; Deadline Tracking</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Set visual priority ratings (Normal, Low, High, Very High) and enforce target deadlines with dynamic red alert highlighting for overdue tasks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 5. TABS (Bootstrap nav-pills + tab-content) ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <ul class="nav nav-pills justify-content-center mb-4 p-1 d-flex" role="tablist"
+                    style="display:inline-flex; background:#f5f8fc; border-radius:999px; gap:4px; width: max-content; margin: auto;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active rounded-pill px-4 py-3" id="tab-shots" data-bs-toggle="tab"
+                            data-bs-target="#pane-shots" type="button" role="tab">Screenshots</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-matrix" data-bs-toggle="tab"
+                            data-bs-target="#pane-matrix" type="button" role="tab">Feature Matrix</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-faq" data-bs-toggle="tab"
+                            data-bs-target="#pane-faq" type="button" role="tab">Frequent Questions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-releases" data-bs-toggle="tab"
+                            data-bs-target="#pane-releases" type="button" role="tab">Release Notes</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <!-- SCREENSHOTS PANE -->
+                    <div class="tab-pane fade show active" id="pane-shots" role="tabpanel">
+
+                        <!-- Screenshot 1 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Configure User Access Rights - Service Executor Role</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                Under Settings &gt; Users &amp; Companies &gt; Users, assign the "Service Executor" security privilege to technicians or administrators. This role grants specialized access to the Service Execution workflow and task verification.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se1.0.png"
+                                    alt="Configure User Access Rights - Service Executor Role" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 2 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Centralized Services Navigation in Open HRMS</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                Inside the Employees module, the dedicated "Services" top-bar menu provides direct navigation to "Request Service" for creating and managing requests, and "Service Execution" for technicians to monitor their active assignments.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se2.png"
+                                    alt="Centralized Services Navigation in Open HRMS" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 3 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Service Request Creation &amp; Instant Submission</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                Employees fill in the service subject, service category (e.g. Repair, Replace, Updating), product/asset item, service date, deadline, and priority. Clicking the "Submit" button submits the ticket for manager assignment.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se3.0.png"
+                                    alt="Service Request Creation and Instant Submission" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 4 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Executor Assignment &amp; Automatic Execution Record Generation</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                In the "Requested" stage, an authorized HR or service manager designates the technician under "Assigned To" and clicks "Assign". This transitions the ticket to "Assigned" and automatically generates a synchronized Service Execution record.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se4.0.png"
+                                    alt="Executor Assignment and Automatic Execution Record Generation" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 5 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Service Execution &amp; Technical Verification (Checked)</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                The assigned executor opens the task under Services &gt; Service Execution, documents diagnostic observations in internal notes, finishes the maintenance work, and clicks "Checked" to complete execution and alert the manager.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se5.png"
+                                    alt="Service Execution and Technical Verification (Checked)" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 6 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Manager Final Review: Approval or Rejection</h3>
+                            <p class="mb-3" style="max-width: 720px; margin: auto; text-align: center; font-size:14.5px; color:#526082;">
+                                Once verified as "Checked", the manager reviews execution details, accesses execution records via the "Executions" smart button, reviews chatter logs, and clicks "Approve" to close the ticket or "Reject" if further action is required.
+                            </p>
+                            <div class="border rounded-4 overflow-hidden"
+                                style="border-radius: 10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2"
+                                    style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshots/se6.png"
+                                    alt="Manager Final Review: Approval or Rejection" class="img-fluid w-100" loading="lazy" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- FEATURE MATRIX PANE -->
+                    <div class="tab-pane fade" id="pane-matrix" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        01</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Multi-Stage Workflow Pipeline</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Structured ticket progression across Draft, Requested, Assigned, Checked, Approved, and Rejected states.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        02</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Dedicated Service Executor Role</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Specialized security group separating technician execution controls from HR managerial assignment rights.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        03</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Asset &amp; Product Integration</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Link requests directly to company products or hardware assets from your Odoo inventory catalog.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        04</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Configurable Service Categories</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Pre-loaded with Repair, Replace, Updating, Checking, and Adjustment with full support for custom categories.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        05</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Smart Executions Stat Button</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Direct stat counter button on service requests displaying the number of executions and opening related tasks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        06</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Automated Technician Alerts</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Automated email notifications and chatter postings sent to designated technicians upon task assignment.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        07</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Technician "Checked" Action</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Assigned executors can sign off on finished maintenance directly from their execution view or request form.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        08</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Managerial Approval &amp; Rejection</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Rigorous oversight allowing managers to evaluate results and finalize with Approve or Reject buttons.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        09</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Visual Priority &amp; Deadlines</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Interactive priority stars (Normal to Very High) and dynamic red-highlighting for overdue requests.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        10</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Internal Technical Notes</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Dedicated diagnostic remark tabs in execution forms for technicians to document findings and replacement parts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        11</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Service Reporting &amp; Pivot Analytics</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Interactive Pivot analysis under HR Reporting to evaluate maintenance workload, response times, and volume.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">
+                                        12</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Native Open HRMS Integration</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Seamlessly cooperates with the Open HRMS ecosystem, employee directory, and department workflows.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FREQUENT QUESTIONS PANE -->
+                    <div class="tab-pane fade" id="pane-faq" role="tabpanel">
+                        <div class="accordion" id="ohrmsFaq">
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        What is Open HRMS Service Request and what does it do?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        Open HRMS Service Request is an internal ticketing and maintenance management module for Odoo 20. It empowers employees to submit IT support, equipment repairs, software updates, or administrative service requests. Managers can review requests, assign dedicated technicians, track completion through linked execution records, and grant final approval.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How does the service assignment and execution workflow operate?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        Once a service request is submitted, it moves to the <strong>Requested</strong> stage. An authorized manager designates a technician in the <em>Assigned To</em> field and clicks <strong>Assign</strong>. This moves the ticket to <strong>Assigned</strong> and automatically creates a corresponding <strong>Service Execution</strong> record for that technician. The technician inspects the asset, completes the required work, and clicks <strong>Checked</strong>. Finally, the manager reviews the execution and clicks <strong>Approve</strong> or <strong>Reject</strong>.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq3"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        What permissions are provided by the "Service Executor" security role?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        Under <strong>Settings &rarr; Users &amp; Companies &rarr; Users</strong>, users granted the <strong>Service Executor</strong> role receive access to the <em>Service Execution</em> menu item under <em>Employees &rarr; Services</em>. They can view their assigned service tasks, record diagnostic notes, and click the <strong>Checked</strong> button without requiring full HR manager permissions.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq4"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        Can an administrator or manager also be assigned as a service executor?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        Yes. If an administrator or manager has been assigned the <strong>Service Executor</strong> privilege, they can be selected as the executor for any service request. They will have full ability to open the execution record, mark it as <strong>Checked</strong> upon completing the task, and subsequently approve the final request.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq5"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How are service categories configured and customized?
+                                    </button>
+                                </h2>
+                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        Managers can navigate to <strong>Employees &rarr; Configuration &rarr; Services &rarr; Service Categories</strong>. The system comes pre-loaded with standard categories (Repair, Replace, Updating, Checking, Adjustment, and Other). You can create custom categories, archive unused categories, and provide descriptive guidelines for your team.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq6"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How are deadline dates and overdue tasks tracked?
+                                    </button>
+                                </h2>
+                                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body"
+                                        style="font-size:14.5px; color:#526082; line-height:1.75;">
+                                        When creating a request, users define the <strong>Service Date</strong> and <strong>Deadline Date</strong> with automatic validation preventing the deadline from preceding the service date. In both Service Request and Service Execution list views, any open ticket whose deadline has passed is dynamically highlighted with a red alert decoration.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELEASE NOTES PANE -->
+                    <div class="tab-pane fade" id="pane-releases" role="tabpanel">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4"
+                            style="row-gap:12px;">
+                            <div>
+                                <h3 class="fw-bold mb-1"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Changelog &amp;
+                                    Version History</h3>
+                                <p class="mb-0" style="font-size:14.5px; color:#526082;">Continuous updates, performance
+                                    optimizations, and official compatibility releases.</p>
+                            </div>
+                            <span class="badge rounded-pill"
+                                style="background:#00438B; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; padding:8px 16px;">Current:
+                                v20.0.1.0.0</span>
+                        </div>
+
+                        <div class="d-flex p-3 mb-3 border rounded-3"
+                            style="gap:20px; border-color:#e6eaf2 !important;">
+                            <div class="rounded-3"
+                                style="width:4px; background:linear-gradient(180deg,#00438B,#0d9c92);"></div>
+                            <div>
+                                <div class="d-flex flex-wrap align-items-center mb-2" style="gap:10px;">
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:17px;">v20.0.1.0.0</span>
+                                    <span style="font-size:13px; color:#8b96ad;">September 2026</span>
+                                    <span class="badge rounded-pill"
+                                        style="background:#fdf3e3; color:#b9791a; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700;">Release</span>
+                                </div>
+                                <p class="mb-0" style="font-size:14.5px; color:#526082;">Initial commit for Open HRMS Service Request</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══════════════ 6. SERVICES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Certified
+                        Odoo Implementation &amp; Support</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M0 416c0 17.7 14.3 32 32 32h54.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H233.3c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32m128 0a32 32 0 1 1 64 0a32 32 0 1 1-64 0m192-160a32 32 0 1 1 64 0a32 32 0 1 1-64 0m32-80c-32.8 0-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h246.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32h-54.7c-12.3-28.3-40.5-48-73.3-48m-160-48a32 32 0 1 1 0-64a32 32 0 1 1 0 64m73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48H32C14.3 64 0 78.3 0 96s14.3 32 32 32h86.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Customization</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="m11.5 20l4.86-9.73H13V4l-5 9.73h3.5zM12 2c2.75 0 5.1 1 7.05 2.95S22 9.25 22 12s-1 5.1-2.95 7.05S14.75 22 12 2s-5.1-1-7.05-2.95S2 14.75 2 12s1-5.1 2.95-7.05S9.25 2 12 2" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M256 48C141.1 48 48 141.1 48 256v40c0 13.3-10.7 24-24 24S0 309.3 0 296v-40C0 114.6 114.6 0 256 0s256 114.6 256 256v144.1c0 48.6-39.4 88-88.1 88l-110.3-.1c-8.3 14.3-23.8 24-41.6 24h-32c-26.5 0-48-21.5-48-48s21.5-48 48-48h32c17.8 0 33.3 9.7 41.6 24l110.4.1c22.1 0 40-17.9 40-40V256c0-114.9-93.1-208-208-208M144 208h16c17.7 0 32 14.3 32 32v112c0 17.7-14.3 32-32 32h-16c-35.3 0-64-28.7-64-64v-48c0-35.3 28.7-64 64-64m224 0c35.3 0 64 28.7 64 64v48c0 35.3-28.7 64-64 64h-16c-17.7 0-32-14.3-32-32V240c0-17.7 14.3-32 32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#fce8e6;color:#c53929;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Migration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#f1eafc;color:#6b3ba6;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Consultancy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Licensing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Hire
+                                    Odoo Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Training</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 7. RELATED MODULES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Related HR
+                        Modules</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/hr_payroll_community" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Odoo 20 HR Payroll</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">Complete payroll management suite for Odoo Community covering salary rules, structures, payslips, and batch pay runs.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_loan" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS
+                                        Loan Management</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">Employee loan processing
+                                        with EMI computation, approval hierarchies, and payroll deductions.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_core" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS Core</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">All-in-one HR management suite integrating smart HR dashboards, employee lifecycle tracking, and core workflows.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 8. FOOTER CTA ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="p-4 p-md-5 rounded-4" style="background:#f5f8fc; border-radius: 15px;">
+                    <div class="row align-items-center" style="row-gap:28px;">
+                        <div class="col-12 col-md-8">
+                            <h3 class="fw-bold mb-2"
+                                style="font-family:'Plus Jakarta Sans',sans-serif; font-size:27px;">Need Customization
+                                or Migration Assistance?</h3>
+                            <p class="mb-4" style="color:#526082; max-width:600px;">Our certified team of 150+ Odoo
+                                professionals is ready to assist with deployment, service request customizations, and
+                                seamless enterprise migrations.</p>
+                            <div class="d-flex flex-wrap" style="gap:12px;">
+                                <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank"
+                                    rel="noopener"
+                                    style="background:#00438B; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                                    <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" class="me-2" aria-hidden="true">
+                                        <path
+                                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" />
+                                    </svg>
+                                    Get Support
+                                </a>
+                                <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank"
+                                    rel="noopener"
+                                    style="border:1px solid #e6eaf2; color:#0f1729; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 text-center text-white p-4"
+                                style="border-radius: 20px; background:radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%); box-shadow:0 10px 28px -12px rgba(18,39,84,.18);">
+                                <div class="fw-bold"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:42px; line-height:1;">
+                                    100%</div>
+                                <div class="fw-bold mt-2"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14.5px;">Bug Fix
+                                    Commitment</div>
+                                <div class="mt-2"
+                                    style="font-size:12.5px; color:rgba(255,255,255,.75); line-height:1.55;">Guaranteed
+                                    fixes for any issue reported during the support window.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.0.2 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

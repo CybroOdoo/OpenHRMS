@@ -17,14 +17,15 @@
 #############################################################################
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
 class ReportHrPayrollCommunityReportContributionRegister(models.AbstractModel):
     """Create new model for getting Contribution Register Report"""
-    _name = 'report.hr_payroll_community.report_contributionregister'
-    _description = 'Payroll Contribution Register Report'
+
+    _name = "report.hr_payroll_community.report_contributionregister"
+    _description = "Payroll Contribution Register Report"
 
     def _get_payslip_lines(self, register_ids, date_from, date_to):
         """Function for getting Payslip Lines to Contribution Register Report.
@@ -40,17 +41,25 @@ class ReportHrPayrollCommunityReportContributionRegister(models.AbstractModel):
         cover every employee's payslips in the period.
         """
         result = {}
-        for register in self.env['hr.contribution.register'].browse(register_ids):
+        for register in self.env["hr.contribution.register"].browse(
+            register_ids
+        ):
             domain = [
-                ('slip_id.date_from', '>=', date_from),
-                ('slip_id.date_to', '<=', date_to),
-                ('slip_id.state', 'in', ('done', 'paid')),
+                ("slip_id.date_from", ">=", date_from),
+                ("slip_id.date_to", "<=", date_to),
+                ("slip_id.state", "in", ("done", "paid")),
             ]
             if register.partner_id:
                 domain.append(
-                    ('slip_id.employee_id.work_contact_id', '=', register.partner_id.id))
-            result[register.id] = self.env['hr.payslip.line'].search(
-                domain, order='slip_id, sequence')
+                    (
+                        "slip_id.employee_id.work_contact_id",
+                        "=",
+                        register.partner_id.id,
+                    )
+                )
+            result[register.id] = self.env["hr.payslip.line"].search(
+                domain, order="slip_id, sequence"
+            )
         return result
 
     def _build_display_items(self, lines):
@@ -64,43 +73,56 @@ class ReportHrPayrollCommunityReportContributionRegister(models.AbstractModel):
         for line in lines:
             if line.slip_id.id != current_slip_id:
                 current_slip_id = line.slip_id.id
-                items.append({
-                    'is_header': True,
-                    'payslip_name': line.slip_id.name,
-                })
-            items.append({
-                'code': line.code,
-                'name': line.name,
-                'quantity': line.quantity,
-                'amount': line.amount,
-                'total': line.total,
-            })
+                items.append(
+                    {
+                        "is_header": True,
+                        "payslip_name": line.slip_id.name,
+                    }
+                )
+            items.append(
+                {
+                    "code": line.code,
+                    "name": line.name,
+                    "quantity": line.quantity,
+                    "amount": line.amount,
+                    "total": line.total,
+                }
+            )
         return items
 
     @api.model
     def _get_report_values(self, docids, data=None):
         """Function for getting Contribution Register Values"""
-        if not data.get('form'):
+        if not data.get("form"):
             raise UserError(
-                _("Form content is missing, this report cannot be printed."))
-        register_ids = self.env.context.get('active_ids', [])
-        contrib_registers = self.env['hr.contribution.register'].browse(
-            register_ids)
-        date_from = data['form'].get('date_from', fields.Date.today())
-        date_to = data['form'].get('date_to',
-                                   str(datetime.now() + relativedelta(months=+1,
-                                                                      day=1,
-                                                                      days=-1))[
-                                   :10])
-        lines_by_register = self._get_payslip_lines(register_ids, date_from, date_to)
+                self.env._(
+                    "Form content is missing, this report cannot be printed."
+                )
+            )
+        register_ids = self.env.context.get("active_ids", [])
+        contrib_registers = self.env["hr.contribution.register"].browse(
+            register_ids
+        )
+        date_from = data["form"].get("date_from", fields.Date.today())
+        date_to = data["form"].get(
+            "date_to",
+            str(datetime.now() + relativedelta(months=+1, day=1, days=-1))[
+                :10
+            ],
+        )
+        lines_by_register = self._get_payslip_lines(
+            register_ids, date_from, date_to
+        )
         lines_data = {}
         for register in contrib_registers:
             lines = lines_by_register.get(register.id)
-            lines_data[register.id] = self._build_display_items(lines) if lines else []
+            lines_data[register.id] = (
+                self._build_display_items(lines) if lines else []
+            )
         return {
-            'doc_ids': docids,
-            'doc_model': 'hr.contribution.register',
-            'docs': contrib_registers,
-            'data': data,
-            'lines_data': lines_data,
+            "doc_ids": docids,
+            "doc_model": "hr.contribution.register",
+            "docs": contrib_registers,
+            "data": data,
+            "lines_data": lines_data,
         }

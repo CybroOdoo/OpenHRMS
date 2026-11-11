@@ -107,6 +107,7 @@ export class HrDashboard extends Component{
         });
     }
     add_project_task() {
+            console.log("add_project_task:", user)
                 this.action.doAction({
                     name: _t("Project Task"),
                     type: 'ir.actions.act_window',
@@ -1526,6 +1527,7 @@ export class HrDashboard extends Component{
         });
     }
    async hr_contract() {
+        console.log("this:", this)
         if (true) {
 
             // Call the Python function to get the view ID

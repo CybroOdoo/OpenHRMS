@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_overtime_user,hr.overtime.user,hr.overtime,base.group_user,crud,
+access_overtime_type_user,overtime.type_user,overtime.type,base.group_user,crud,
+access_overtime_type_rule_user,overtime.type_user.rule,overtime.type.rule,base.group_user,crud,

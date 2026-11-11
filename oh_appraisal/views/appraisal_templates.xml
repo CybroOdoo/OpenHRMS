@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Template to show when the appraisal has been cancelled-->
+    <template id="appraisal_canceled" name="Survey: Canceled">
+        <t t-call="survey.layout">
+            <div class="wrap">
+                <div class="container">
+                    <div class="jumbotron mt32">
+                        <h1>
+                            <span t-field="survey.title"/>
+                            survey has been cancelled!
+                        </h1>
+                        <p>This appraisal has been cancelled.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!--Template to show when the survey is completed-->
+    <template id="appraisal_done" name="Survey: Done">
+        <t t-call="survey.layout">
+            <div class="wrap">
+                <div class="container">
+                    <div class="jumbotron mt32">
+                        <h1>
+                            <span t-field="survey.title"/>
+                            survey is finished!
+                        </h1>
+                        <p>This appraisal has finished.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!--Template to show when the survey is not started-->
+    <template id="appraisal_draft" name="Survey: Draft">
+        <t t-call="survey.layout">
+            <div class="wrap">
+                <div class="container">
+                    <div class="jumbotron mt32">
+                        <h1>
+                            <span t-field="survey.title"/>
+                            survey is not started!
+                        </h1>
+                        <p>This appraisal is not started finished.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

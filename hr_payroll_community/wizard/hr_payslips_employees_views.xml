@@ -15,8 +15,7 @@
                         and credit note specified on Payslips Run.
                     </span>
                     <separator string="Employees"/>
-                    <newline/>
-                    <field name="line_ids" nolabel="1" >
+                    <field name="line_ids" nolabel="1">
                         <list editable="bottom" create="false" delete="false">
                             <field name="is_selected"/>
                             <field name="employee_id" readonly="1" force_save="1"/>
@@ -33,13 +32,5 @@
                 </footer>
             </form>
         </field>
-    </record>
-    <!--Action Payslip Employees views-->
-    <record id="hr_payslip_by_employees_action" model="ir.actions.act_window">
-        <field name="name">Generate Payslips</field>
-        <field name="res_model">hr.payslip.employees</field>
-        <field name="view_mode">list,form</field>
-        <field name="view_id" ref="hr_payslip_employees_view_form"/>
-        <field name="target">new</field>
     </record>
 </odoo>

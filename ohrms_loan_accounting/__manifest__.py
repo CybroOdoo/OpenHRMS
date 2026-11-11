@@ -21,7 +21,7 @@
     'category': 'Human Resources',
     'summary': 'Open HRMS Loan Accounting',
     'description': """Create accounting entries for loan requests.""",
-    'author': 'Cybrosys Techno Solutions, Open HRMS',
+    'author': "Cybrosys Techno Solutions,Open HRMS",
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'live_test_url': 'https://youtu.be/NFZfiHyn0-0',

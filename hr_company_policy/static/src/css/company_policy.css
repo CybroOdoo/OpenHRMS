@@ -1,0 +1,25 @@
+.company-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+.oe_company_policy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 18px;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.oe_company_policy:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}

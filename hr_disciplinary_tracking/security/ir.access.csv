@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_disciplinary_action_manager,disciplinary.action.manager,disciplinary.action,hr.group_hr_manager,crud,
+access_disciplinary_action_user,disciplinary.action.user,disciplinary.action,hr.group_hr_user,crud,
+access_disciplinary_action_employee,disciplinary.action.employee,disciplinary.action,base.group_user,ru,"[('employee_id.user_id', '=', user.id)]"
+ir_rule_disciplinary_action_multi_company,Disciplinary Action: multi company,disciplinary.action,,crud,"[('company_id', 'in', company_ids + [False])]"
+access_discipline_category_manager,discipline.category.manager,discipline.category,hr.group_hr_manager,crud,
+access_discipline_category_user,discipline.category.user,discipline.category,hr.group_hr_user,r,
+access_discipline_category_employee,discipline.category.employee,discipline.category,base.group_user,r,

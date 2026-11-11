@@ -19,7 +19,7 @@
     'name': 'Open HRMS Leave Request Aliasing',
     'version': '20.0.1.0.0',
     'category': 'Human Resources',
-    'summary': """Automated Leave Request generation from Incoming Emails.""",
+    'summary': """Automated Leave Request generation from incoming emails.""",
     'description': """This module simplifies leave request creation by
      seamlessly generating requests from incoming emails, making the process
      efficient, saving time, and enhancing employee experience.""",
@@ -28,7 +28,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.openhrms.com",
-    'depends': ['hr_holidays'],
+    'depends': ['hr', 'hr_holidays'],
     'data': [
         'data/mail_alias_data.xml',
         'views/res_config_settings_views.xml',
@@ -36,6 +36,4 @@
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,
-    'auto_install': False,
-    'application': False,
 }

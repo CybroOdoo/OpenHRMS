@@ -20,10 +20,10 @@ from odoo import models, fields
 
 class HrWorkEntryType(models.Model):
     """Inherit hr.work.entry.type to add payroll specific fields."""
-    _inherit = 'hr.work.entry.type'
+
+    _inherit = "hr.work.entry.type"
 
     is_paid = fields.Boolean(
-        string='Is Paid',
         default=True,
-        help="If unchecked, this worked day will not contribute to the paid amount in payroll."
+        help="If unchecked, this worked day will not contribute to the paid amount in payroll.",
     )

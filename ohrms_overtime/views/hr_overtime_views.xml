@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View of the overtime request-->
+    <record id="hr_overtime_view_form" model="ir.ui.view">
+        <field name="name">hr.overtime.view.form</field>
+        <field name="model">hr.overtime</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Request">
+                <header>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="f_approve,approved"/>
+                    <button name="action_submit_to_finance" string="Submit To Finance"
+                            type="object" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_approve" string="Approve" type="object"
+                            class="btn-primary"
+                            invisible="state != 'f_approve'"
+                            groups="hr_holidays.group_hr_holidays_user"/>
+                    <button name="action_reject" string="Refuse" type="object"
+                            class="btn-primary"
+                            invisible="state != 'f_approve' or is_current_user"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Paid in Payslip" bg_color="text-bg-success" invisible="not is_payslip_paid"/>
+                    
+                    <!-- Alert if Public Holiday -->
+                    <div class="alert alert-warning mb-3 d-flex align-items-center" role="alert" invisible="not public_holiday">
+                        <i class="fa fa-exclamation-triangle fa-lg me-2"/>
+                        <field name="public_holiday" readonly="1" class="fw-bold"/>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Employee Details">
+                            <field name="employee_id"
+                                   options="{'no_quick_create': True, 'no_create_edit' : True}"
+                                   readonly="state != 'draft'"/>
+                            <field name="contract_id" readonly="state != 'draft'"/>
+                            <field name="department_id"/>
+                            <field name="job_id"/>
+                            <field name="manager_id"/>
+                            <field name="project_id" readonly="state != 'draft'"/>
+                            <field name="project_manager_id" invisible="not project_id"/>
+                            <field name="is_current_user" invisible="1"/>
+                            <field name="current_user_id" invisible="1"/>
+                        </group>
+                        <group string="Overtime Details">
+                            <field name="type" widget="radio" options="{'horizontal': true}" readonly="state != 'draft'"/>
+                            <field name="duration_type" widget="radio" options="{'horizontal': true}" readonly="state != 'draft'"/>
+                            <field name="overtime_type_id"
+                                   readonly="state in ['approved', 'refused']"
+                                   required="state == 'f_approve'"/>
+                            <label for="date_from" string="Period"/>
+                            <div class="o_row">
+                                <field name="date_from" required="1" class="oe_inline" readonly="state != 'draft'"/>
+                                <span class="oe_inline mx-2 text-muted fw-bold">to</span>
+                                <field name="date_to" required="1" class="oe_inline" readonly="state != 'draft'"/>
+                            </div>
+                            <label for="days_no_tmp" string="Duration"/>
+                            <div class="o_row">
+                                <field name="days_no_tmp" class="oe_inline fw-bold"/>
+                                <span class="oe_inline ms-1" invisible="duration_type != 'hours'">Hours</span>
+                                <span class="oe_inline ms-1" invisible="duration_type != 'days'">Days</span>
+                            </div>
+                            <field name="cash_hrs_amount" string="Overtime Amount" force_save="1"
+                                   invisible="type != 'cash' or duration_type != 'hours'"
+                                   class="fw-bold text-success fs-5"/>
+                            <field name="cash_day_amount" string="Overtime Amount" force_save="1"
+                                   invisible="type != 'cash' or duration_type != 'days'"
+                                   class="fw-bold text-success fs-5"/>
+                            <field name="leave_id" string="Allocated Leave"
+                                   invisible="not leave_id" readonly="1"/>
+                            <field name="attchd_copy" filename="attchd_copy_name" readonly="state != 'draft'"/>
+                            <field name="attchd_copy_name" invisible="1"/>
+                            <field name="is_payslip_paid" invisible="1"/>
+                            <field name="days_no" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Work Description" name="work_description">
+                            <field name="desc" placeholder="Describe the reason or tasks performed during overtime..."
+                                   readonly="state != 'draft'"/>
+                        </page>
+                        <page string="Attendance Logs" name="attendance" invisible="not attendance_ids">
+                            <field name="attendance_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <!-- List View of Overtime request -->
+    <record id="hr_overtime_view_tree" model="ir.ui.view">
+        <field name="name">hr.overtime.view.list</field>
+        <field name="model">hr.overtime</field>
+        <field name="arch" type="xml">
+            <list string="Overtime Request" decoration-info="state == 'draft'" decoration-warning="state == 'f_approve'" decoration-success="state == 'approved'" decoration-muted="state == 'refused'">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="type"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="days_no_tmp" string="Duration"/>
+                <field name="cash_hrs_amount" string="Amount" optional="show" invisible="type != 'cash'"/>
+                <field name="cash_day_amount" string="Amount" optional="hide" invisible="type != 'cash'"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'f_approve'" decoration-success="state == 'approved'" decoration-muted="state == 'refused'"/>
+                <field name="is_payslip_paid" widget="boolean_toggle" groups="hr.group_hr_manager" readonly="1" invisible="type != 'cash'"/>
+            </list>
+        </field>
+    </record>
+    <!-- Actions -->
+    <!-- overtime -->
+    <record id="hr_overtime_action" model="ir.actions.act_window">
+        <field name="name">Overtime Request</field>
+        <field name="res_model">hr.overtime</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create new Pre Approval Overtime Request.
+            </p>
+        </field>
+    </record>
+    <!-- MenuItems -->
+    <menuitem id="hr_overtime_menu_root" name="Overtime Request"
+              groups="base.group_user"
+              web_icon="ohrms_overtime,static/description/icon.png"/>
+    <menuitem id="hr_overtime_menu" name="Overtime Request"
+              parent="hr_overtime_menu_root"
+              action="hr_overtime_action"
+              groups="base.group_user"/>
+</odoo>

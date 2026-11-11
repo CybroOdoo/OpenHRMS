@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    Service request form view-->
+    <record id="service_request_view_tree" model="ir.ui.view">
+        <field name="name">service.request.view.list</field>
+        <field name="model">service.request</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Service Request" decoration-danger="deadline_date &lt; current_date and state not in ('check', 'approved', 'reject')">
+                <field name="name"/>
+                <field name="service_name"/>
+                <field name="employee_id" widget="many2one_avatar"/>
+                <field name="service_executor_id" widget="many2one_avatar"/>
+                <field name="priority" widget="priority" optional="show"/>
+                <field name="deadline_date" optional="show"/>
+                <field name="state" widget="badge" decoration-info="state in ('draft', 'requested')" decoration-warning="state == 'assign'" decoration-primary="state == 'check'" decoration-success="state == 'approved'"/>
+                <field name="service_date"/>
+            </list>
+        </field>
+    </record>
+    <!--    Service request form view-->
+    <record id="service_request_view_form" model="ir.ui.view">
+        <field name="name">service.request.view.form</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <form string="Service Request">
+                <header>
+                    <button name="action_submit_reg" string="Submit"
+                            type="object"
+                            class="btn-primary" invisible="state != 'draft'"
+                            groups="base.group_user"/>
+                    <button name="action_assign_executor" type="object"
+                            string="Assign"
+                            class="oe_highlight"
+                            invisible="state != 'requested' or not is_service_manager"
+                            groups="hr_attendance.group_hr_attendance_manager,hr.group_hr_manager"/>
+                    <button name="action_service_check" type="object"
+                            string="Checked" class="oe_highlight"
+                            invisible="state != 'assign'"
+                            groups="ohrms_service_request.service_group_executor"/>
+                    <button name="action_service_approval" type="object"
+                            string="Approve" class="oe_highlight"
+                            groups="hr_attendance.group_hr_attendance_manager,hr.group_hr_manager"
+                            invisible="state != 'check' or not is_service_manager"/>
+                    <button name="action_service_rejection" type="object"
+                            string="Reject" class="btn-secondary"
+                            groups="hr_attendance.group_hr_attendance_manager,hr.group_hr_manager"
+                            invisible="state != 'check' or not is_service_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,requested,assign,check"/>
+                </header>
+                <sheet>
+                    <field name="is_service_manager" invisible="1"/>
+                    <field name="is_service_executor" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_executions" type="object" class="oe_stat_button" icon="build" invisible="execution_count == 0">
+                            <field name="execution_count" widget="statinfo" string="Executions"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1 class="d-flex flex-row">
+                            <field name="priority" widget="priority" class="me-3"/>
+                            <field name="service_name" placeholder="Subject..." readonly="state != 'draft'"/>
+                        </h1>
+                        <h3>
+                            <field name="name" readonly="1"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Request Information">
+                            <field name="employee_id" widget="many2one_avatar" readonly="state != 'draft' or not read_only"/>
+                            <field name="service_type" readonly="state != 'draft'"/>
+                            <field name="service_product_id" readonly="state != 'draft'"/>
+                            <field name="service_date" readonly="state != 'draft'"/>
+                            <field name="deadline_date" readonly="state != 'draft'" decoration-danger="deadline_date &lt; current_date"/>
+                        </group>
+                        <group string="Assignment &amp; Details">
+                            <field name="service_executor_id" widget="many2one_avatar" readonly="not read_only"/>
+                            <field name="read_only" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="internal_note" nolabel="1" placeholder="Provide a detailed description of the issue..."/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <!--    Service Request Search View-->
+    <record id="service_request_view_search" model="ir.ui.view">
+        <field name="name">service.request.view.search</field>
+        <field name="model">service.request</field>
+        <field name="arch" type="xml">
+            <search string="Search Service Requests">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="service_executor_id"/>
+                <field name="state"/>
+                <separator/>
+                <filter string="My Requests" name="my_requests" domain="[('employee_id.user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="To Approve" name="to_approve" domain="[('state', '=', 'requested')]"/>
+                <group>
+                    <filter string="Employee" name="groupby_employee" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Assigned To" name="groupby_executor" context="{'group_by': 'service_executor_id'}"/>
+                    <filter string="State" name="groupby_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!--        Service request pivot view-->
+    <record id="service_request_view_pivot" model="ir.ui.view">
+        <field name="name">service.request.view.pivot</field>
+        <field name="model">service.request</field>
+        <field name="type">pivot</field>
+        <field name="arch" type="xml">
+            <pivot string="Service Requests Analysis" sample="1">
+                <field name="service_product_id" type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+    <!--        Service Request window action-->
+    <record model="ir.actions.act_window" id="action_view_service_requests">
+        <field name="name">Service Request</field>
+        <field name="res_model">service.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_my_requests': 1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_no_content_create">Create new Request
+            </p>
+        </field>
+    </record>
+
+    <!--    Pivot view action-->
+    <record id="action_view_pivot" model="ir.actions.act_window">
+        <field name="name">View Pivot</field>
+        <field name="res_model">service.request</field>
+        <field name="view_mode">pivot</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Enter the target
+            </p>
+        </field>
+    </record>
+    <!--    Services menu-->
+    <menuitem id="service_root" name="Services" parent="hr.menu_hr_root"/>
+    <!--    Request Service menu-->
+    <menuitem id="service_requests" name="Request Service" parent="service_root"
+              action="action_view_service_requests" groups="base.group_user" sequence="10"/>
+
+    <!--    Service Reporting menu-->
+    <menuitem id="service_pivot" name="Service Reporting"
+              parent="hr.hr_menu_hr_reports"
+              action="action_view_pivot"
+              groups="project.group_project_manager" sequence="10"/>
+
+    <!-- Category Views -->
+    <record id="view_service_category_list" model="ir.ui.view">
+        <field name="name">service.category.list</field>
+        <field name="model">service.category</field>
+        <field name="arch" type="xml">
+            <list string="Service Categories">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_service_category_form" model="ir.ui.view">
+        <field name="name">service.category.form</field>
+        <field name="model">service.category</field>
+        <field name="arch" type="xml">
+            <form string="Service Category">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Category Name"/>
+                        <h1><field name="name" placeholder="e.g. Software Installation"/></h1>
+                    </div>
+                    <group>
+                        <field name="active" invisible="1"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Category Action -->
+    <record id="action_service_category" model="ir.actions.act_window">
+        <field name="name">Service Categories</field>
+        <field name="res_model">service.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new service category
+            </p>
+        </field>
+    </record>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_service_configuration_main" name="Services" parent="hr.menu_human_resources_configuration" sequence="40"/>
+    <menuitem id="menu_service_category" name="Service Categories" parent="menu_service_configuration_main" action="action_service_category" sequence="10"/>
+
+</odoo>

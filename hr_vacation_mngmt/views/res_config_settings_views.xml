@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Adding fields in settings.-->
+    <record id="res_config_settings_view_form_payroll" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.view.form.inherit.hr.vacation.mngmt
+        </field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id"
+               ref="hr_leave_request_aliasing.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='hr_leaves']" position="inside">
+                <setting id="default_expense_account"
+                         string="Flight Ticket"
+                         help="Choose the expense account to post the flight tickets accounting entries">
+                    <label for="expense_id"
+                           string="Expense Account"
+                           class="col-lg-4 o_light_label"/>
+                    <field name="expense_id" options="{'no_create': True, 'no_open': True}"/>
+                </setting>
+                <setting id="hr_leave_salary"
+                         help="Leave salary calculation">
+                    <field name="default_leave_salary"
+                           widget="radio"/>
+                </setting>
+                <setting id="hr_leave_reminder_setting"
+                         string="Leave Reminder Email"
+                         help="Enable to send leave reminder emails to HR managers">
+                    <field name="leave_reminder"/>
+                    <div class="content-group" invisible="not leave_reminder">
+                        <div class="mt16">
+                            <label for="reminder_day_before" string="Reminder Day Before" class="col-lg-4 o_light_label"/>
+                            <field name="reminder_day_before" class="w-25"/>
+                            <span>Days</span>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

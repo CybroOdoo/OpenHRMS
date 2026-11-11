@@ -24,10 +24,8 @@
                                groups="base.group_multi_company"
                                options="{'no_create': True}" class="oe_inline"/>
                     </group>
-                    <newline/>
                     <group>
                         <separator string="Description"/>
-                        <newline/>
                         <field name="note" nolabel="1"/>
                     </group>
                 </form>

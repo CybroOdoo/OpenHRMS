@@ -18,13 +18,14 @@
 Open HRMS Employees From User
 =============================
 
-This module supports Addon for Open HRMS, Creates Employee While Creating User
+This module is an addon for Open HRMS that automatically creates an employee record when a new user is created.
 
 Key Features
 ------------
 
-* Automatic Creation of Employee.
-* This will simplify the HR process.
+* Automatic creation of an employee record upon user creation.
+* Seamless linking of user accounts with employee profiles.
+* Eliminates redundant manual employee creation.
 
 Installation
 ------------
@@ -57,6 +58,3 @@ Maintainer
 This module is maintained by Cybrosys Technologies.
 
 For support and more information, please visit `Our Website <https://cybrosys.com/>`__
-
-
-

@@ -73,9 +73,9 @@
                                 <tr>
                                     <th>Code</th>
                                     <th>Name</th>
-                                    <th class="text-right">Quantity/Rate</th>
-                                    <th class="text-right">Amount</th>
-                                    <th class="text-right">Total</th>
+                                    <th class="text-end">Quantity/Rate</th>
+                                    <th class="text-end">Amount</th>
+                                    <th class="text-end">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,13 +86,13 @@
                                     <td>
                                         <span t-field="line.name"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-out="line.quantity"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-out="line.amount" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <span t-out="line.total" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                     </td>
                                 </tr>
@@ -117,7 +117,7 @@
                                             <span t-out="p.get('register_name', '')"/>
                                         </td>
                                         <td/>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-out="p.get('total', 0)"
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                         </td>
@@ -136,7 +136,7 @@
                                             <span t-out="p.get('amount', 0)"
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-out="p.get('total', 0)"
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                         </td>
@@ -144,7 +144,7 @@
                                 </t>
                             </tbody>
                         </table>
-                        <p class="text-right">
+                        <p class="text-end">
                             <strong>Authorized signature</strong>
                         </p>
                     </div>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo Verification Agency Partner -->
+    <record id="partner_verification_agency" model="res.partner">
+        <field name="name">First Check Screening Agency</field>
+        <field name="email">agency@example.com</field>
+        <field name="verification_agent" eval="True"/>
+    </record>
+
+    <!-- Demo Employee -->
+    <record id="employee_demo_verification" model="hr.employee">
+        <field name="name">Arthur Dent</field>
+        <field name="work_email">arthur.dent@example.com</field>
+        <field name="private_street">42 Galaxy Way</field>
+        <field name="private_city">London</field>
+        <field name="private_country_id" ref="base.uk"/>
+    </record>
+
+    <!-- Demo Employee Verification Record -->
+    <record id="employee_verification_demo_one" model="employee.verification">
+        <field name="employee_id" ref="employee_demo_verification"/>
+        <field name="agency_id" ref="partner_verification_agency"/>
+        <field name="state">draft</field>
+        <field name="assigned_date">2026-09-01</field>
+        <field name="expected_date">2026-12-31</field>
+    </record>
+</odoo>

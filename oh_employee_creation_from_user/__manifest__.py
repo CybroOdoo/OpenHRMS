@@ -9,7 +9,7 @@
 #    You can modify it under the terms of the GNU LESSER
 #    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
 #
-#    This program is distributed in the hope that it will be useful,
+#    This program is distributed in the hope it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
@@ -19,20 +19,17 @@
     'name': 'Open HRMS Employees From User',
     'version': '20.0.1.0.0',
     'category': 'Human Resources',
-    'summary': 'Automatically creates employee while creating user',
-    'description': "This module facilitates the automatic creation of "
-                   "employee records when users are being created.",
+    'summary': "Automatic creation of an employee upon user creation",
+    'description': "This module facilitates the automatic creation of an "
+                   "employee record when a new user is created.",
     'author': 'Cybrosys Techno Solutions, Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',
     'depends': ['hr'],
     'data': [
-        'views/res_users_views.xml'
+        'views/res_users_views.xml',
     ],
-    'license': 'LGPL-3',
     'images': ['static/description/banner.jpg'],
-    'installable': True,
-    'auto_install': False,
-    'application': False,
+    'license': 'LGPL-3',
 }

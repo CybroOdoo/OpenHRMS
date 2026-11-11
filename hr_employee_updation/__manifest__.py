@@ -23,7 +23,7 @@
     'description': 'This module helps you to add more information '
                    'in employee records.',
     'live_test_url': 'https://youtu.be/eEecchfl-Q4',
-    'author': 'Cybrosys Techno Solutions, Open HRMS',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",

@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_employee_shift_schedule,hr.shift.schedule,hr.shift.schedule,hr.group_hr_manager,crud,
+access_hr_employee_shift_schedule_user,hr.shift.schedule.user,hr.shift.schedule,hr.group_hr_user,r,
+access_hr_employee_shift_schedule_base_user,hr.shift.schedule.base.user,hr.shift.schedule,base.group_user,r,"[('employee_id.user_id', '=', user.id)]"
+access_hr_employee_shift_generate,hr.shift.generate,hr.shift.generate,hr.group_hr_manager,crud,
+property_rule_hr_shift,Hr Shift Multi Company,hr.shift.schedule,,crud,"[('company_id', 'in', company_ids + [False])]"
+property_rule_hr_shift_generate,Hr Shift Generate Multi Company,hr.shift.generate,,crud,"[('company_id', 'in', company_ids + [False])]"
+

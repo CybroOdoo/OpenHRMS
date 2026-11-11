@@ -19,7 +19,7 @@ from datetime import date
 
 from odoo import Command
 from odoo.exceptions import UserError
-from odoo.tests import tagged, TransactionCase
+from odoo.tests import TransactionCase, tagged
 
 
 @tagged('post_install', '-at_install')
@@ -162,3 +162,15 @@ class TestHrLeaveAliasing(TransactionCase):
         }
         with self.assertRaises(UserError):
             self.env['hr.leave'].message_new(msg_dict)
+
+    def test_07_leave_creation_labeled_dates(self):
+        """Test leave creation with 'Date From:' and 'Date To:' labels in body."""
+        msg_dict = {
+            'subject': 'Leave Request',
+            'email_from': 'john.doe@example.com',
+            'body': '<p>Date From: 01/12/2026 and Date To: 05/12/2026</p>',
+        }
+        leave = self.env['hr.leave'].message_new(msg_dict)
+        self.assertTrue(leave)
+        self.assertEqual(leave.request_date_from, date(2026, 12, 1))
+        self.assertEqual(leave.request_date_to, date(2026, 12, 5))

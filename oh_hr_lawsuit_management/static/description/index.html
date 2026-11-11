@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open HRMS Legal Actions</title>
+    <meta name="description"
+        content="Open HRMS Legal Actions for Odoo 20— manage corporate lawsuits, employee disputes, court hearings, legal counsel, and verdicts with end-to-end case lifecycle tracking." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <!-- Bootstrap 5.0.2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #ohrms-core .nav-pills .nav-link {
+            color: #526082;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+        }
+
+        #ohrms-core .nav-pills .nav-link.active {
+            color: #fff;
+            background: #00438B;
+        }
+
+        #ohrms-core .accordion-button:not(.collapsed) {
+            background-color: #f5f8fc;
+            color: #0f1729;
+            box-shadow: none;
+        }
+
+        #ohrms-core .accordion-button:focus {
+            box-shadow: none;
+            border-color: #e6eaf2;
+        }
+
+        #ohrms-core .card:hover,
+        #ohrms-core .ohrms-hover:hover {
+            box-shadow: 0 10px 28px -12px rgba(18, 39, 84, .18) !important;
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0;">
+    <div id="ohrms-core"
+        style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background-color:#ffffff; color:#0f1729; -webkit-font-smoothing:antialiased;">
+        <div class="container" style="max-width:1160px; padding-top:20px; padding-bottom:96px;">
+
+            <!-- ═══════════════ 1. HEADER ═══════════════ -->
+            <div class="row align-items-center justify-content-between py-3" style="row-gap:12px;">
+                <div class="col-auto">
+                    <a href="https://www.cybrosys.com" target="_blank" rel="noopener">
+                        <img src="https://apps.odoocdn.com/apps/assets/17.0/theme_boec/images/Cybrosys.png?fcdde35"
+                            alt="Cybrosys Technologies" style="height:45px; width:auto;"
+                            onerror="this.onerror=null; this.src='https://www.cybrosys.com/images/logo.png';" />
+                    </a>
+                </div>
+                <div class="col-auto d-flex flex-wrap" style="gap:10px;">
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-2px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z" />
+                        </svg>
+                        Online</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-2px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z" />
+                        </svg>
+                        Odoo.sh</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" />
+                        </svg>
+                        On-Premise</span>
+                    <span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;">
+                        <svg class="flex-shrink-0"
+                            style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" />
+                        </svg>
+                        Community</span>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 2. HERO ═══════════════ -->
+            <div class="p-4 p-md-5 mt-2 text-center text-white position-relative"
+                style="border-radius:28px; background-image: radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%);">
+                <h1 class="fw-bold mb-0"
+                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:44px; letter-spacing:-0.02em; line-height:1.12;">
+                    Open HRMS Legal Actions
+                </h1>
+                <p class="mx-auto mt-3 mb-0"
+                    style="max-width:680px; font-size:18px; line-height:1.65; color:rgba(255,255,255,.82);">
+                    A centralized legal proceedings and litigation management suite for Odoo 20. Track lawsuits, register judicial courts and judges, schedule hearings, assign defense attorneys, and record case verdicts with precision.
+                </p>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:14px;">
+                    <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="background-color:#ffffff; color:#103564; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" class="me-2" aria-hidden="true">
+                            <path
+                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" />
+                        </svg>
+                        Email Us
+                    </a>
+                    <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="border:1px solid rgba(255,255,255,.45); color:#ffffff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor" class="me-2" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967s-.47-.148-.669.15c-.198.297-.767.966-.94 1.164c-.174.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.019-.458.13-.606c.134-.133.297-.347.446-.52s.198-.298.297-.497c.1-.198.05-.371-.025-.52c-.074-.149-.668-1.612-.916-2.207c-.241-.579-.486-.5-.668-.51c-.174-.008-.372-.01-.57-.01s-.52.074-.792.372c-.273.297-1.04 1.016-1.04 2.479c0 1.462 1.064 2.875 1.213 3.074s2.095 3.2 5.076 4.487c.71.306 1.263.489 1.694.625c.712.227 1.36.195 1.872.118c.57-.085 1.758-.719 2.006-1.413s.247-1.289.173-1.413s-.272-.198-.57-.347m-5.422 7.403h-.004a9.87 9.87 0 0 1-5.032-1.378l-.36-.214l-3.742.982l.999-3.648l-.235-.374a9.86 9.86 0 0 1-1.511-5.26c.002-5.45 4.436-9.884 9.889-9.884a9.8 9.8 0 0 1 6.988 2.899a9.82 9.82 0 0 1 2.892 6.992c-.002 5.45-4.436 9.885-9.884 9.885m8.412-18.297A11.82 11.82 0 0 0 11.992 0C5.438 0 .102 5.335.1 11.892a11.86 11.86 0 0 0 1.587 5.945L0 24l6.304-1.654a11.9 11.9 0 0 0 5.684 1.448h.005c6.554 0 11.89-5.335 11.892-11.893a11.82 11.82 0 0 0-3.48-8.413"
+                                clip-rule="evenodd" />
+                        </svg>
+                        WhatsApp
+                    </a>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:10px;">
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10h2v4h-2zm0 6h2v2h-2z"/>
+                        </svg>
+                        Court &amp; Judge Registry
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        Employee &amp; Partner Cases
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                        </svg>
+                        Hearing Date Tracking
+                    </span>
+
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2"
+                        style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        Verdict Lifecycle (Won / Loss / Cancel)
+                    </span>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 4. KEY HIGHLIGHTS ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Key
+                        highlights</h2>
+                    <p class="mx-auto mt-2 mb-0" style="max-width:620px; font-size:14.5px; color:#526082;">
+                        A robust, integrated legal management platform to record corporate litigation, track court hearings, and preserve verdicts.
+                    </p>
+                </div>
+                <div class="row g-3">
+                    <!-- Highlight 1: Centralized Legal Action Registry -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm4 18H6V4h7v5h5zM8 12h8v2H8zm0 4h8v2H8z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Centralized
+                                        Case Registry</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Register and organize legal disputes with automated LC sequence codes, connecting internal company parties with opposing parties.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 2: Court & Judge Master -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#e4f7f5; color:#0d9c92;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Court &amp;
+                                        Judge Management</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Maintain a dedicated registry of judicial courts and assign verified judges with automatic contact-level judge validation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 3: Flexible Opposing Parties -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#fdf3e3; color:#b9791a;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Multi-Party
+                                        Dispute Handling</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Classify cases seamlessly against employees, external business partners (vendors/clients), or third-party entities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 4: Hearing Date Tracking -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7zm3-4H7v-2h10zm0-4H7V7h10z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Hearing &amp;
+                                        Timeline Tracking</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Track original filing dates alongside scheduled court appearances to ensure legal defense teams meet every judicial deadline.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 5: Multi-Stage Workflow & Verdicts -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#fce8e6; color:#c53929;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Litigation
+                                        Stages &amp; Verdicts</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Manage litigation from Draft to Running, with single-click actions to record final outcomes: Won, Loss (Failed), or Cancelled.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Highlight 6: Smart Button Integration -->
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                    style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Employee
+                                        &amp; Partner Smart Counters</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Instantly review lawsuit counts and navigate directly to case histories via dedicated smart buttons on employee and partner views.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 5. TABS (Bootstrap nav-pills + tab-content) ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <ul class="nav nav-pills justify-content-center mb-4 p-1 d-flex" role="tablist"
+                    style="display:inline-flex; background:#f5f8fc; border-radius:999px; gap:4px; width: max-content; margin: auto;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill active" id="tab-shots" data-bs-toggle="pill"
+                            data-bs-target="#pane-shots" type="button" role="tab"
+                            style="padding:8px 22px;">Screenshots</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill" id="tab-matrix" data-bs-toggle="pill"
+                            data-bs-target="#pane-matrix" type="button" role="tab" style="padding:8px 22px;">Feature
+                            Matrix</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill" id="tab-faq" data-bs-toggle="pill"
+                            data-bs-target="#pane-faq" type="button" role="tab" style="padding:8px 22px;">Frequent
+                            Questions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill" id="tab-releases" data-bs-toggle="pill"
+                            data-bs-target="#pane-releases" type="button" role="tab" style="padding:8px 22px;">Release
+                            Notes</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <!-- SCREENSHOTS PANE -->
+                    <div class="tab-pane fade show active" id="pane-shots" role="tabpanel">
+
+                        <!-- Screenshot 1 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Configuring Lawsuit Manager Access Rights
+                            </h3>
+                            <p class="mb-3" style="text-align: center; font-size:14px; color:#526082;">
+                                Assign the Lawsuit Manager role under Settings &gt; Users &amp; Companies &gt; Users to authorize HR officers to oversee legal actions and court setups.
+                            </p>
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius:18px; overflow:hidden; border:1px solid #e6eaf2 !important;">
+                                <div class="p-2 px-3 border-bottom d-flex align-items-center"
+                                    style="background:#f5f8fc; border-color:#e6eaf2 !important; gap:6px;">
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f0938a; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f4c26b; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#8fd3a8; display:inline-block;"></span>
+                                </div>
+                                <div class="p-2 text-center" style="background:#fcfdff;">
+                                    <img src="./assets/screenshots/lw1.png" alt="Lawsuit Manager Access Rights"
+                                        class="img-fluid rounded" style="max-width:100%; height:auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 2 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Judicial Court &amp; Presiding Judge Configuration
+                            </h3>
+                            <p class="mb-3" style="text-align: center; font-size:14px; color:#526082;">
+                                Configure court institutions and map vetted judges directly from Employees &gt; Configuration &gt; Legal Management &gt; Court.
+                            </p>
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius:18px; overflow:hidden; border:1px solid #e6eaf2 !important;">
+                                <div class="p-2 px-3 border-bottom d-flex align-items-center"
+                                    style="background:#f5f8fc; border-color:#e6eaf2 !important; gap:6px;">
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f0938a; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f4c26b; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#8fd3a8; display:inline-block;"></span>
+                                </div>
+                                <div class="p-2 text-center" style="background:#fcfdff;">
+                                    <img src="./assets/screenshots/lw2.png" alt="Court and Judge Configuration"
+                                        class="img-fluid rounded" style="max-width:100%; height:auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 3 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Initiating &amp; Drafting Legal Actions
+                            </h3>
+                            <p class="mb-3" style="text-align: center; font-size:14px; color:#526082;">
+                                File legal disputes with automated LC sequence numbering, specify opposing parties (Employee, Partner, or Others), link courts, judges, and lawyers, and set scheduled hearing dates.
+                            </p>
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius:18px; overflow:hidden; border:1px solid #e6eaf2 !important;">
+                                <div class="p-2 px-3 border-bottom d-flex align-items-center"
+                                    style="background:#f5f8fc; border-color:#e6eaf2 !important; gap:6px;">
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f0938a; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f4c26b; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#8fd3a8; display:inline-block;"></span>
+                                </div>
+                                <div class="p-2 text-center" style="background:#fcfdff;">
+                                    <img src="./assets/screenshots/lw3.png" alt="Drafting Legal Actions"
+                                        class="img-fluid rounded" style="max-width:100%; height:auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 4 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Active Litigation &amp; Verdict Processing
+                            </h3>
+                            <p class="mb-3" style="text-align: center; font-size:14px; color:#526082;">
+                                Transition cases into the Running state as courtroom litigation progresses, and record final judgments easily using Won, Loss, or Cancel controls.
+                            </p>
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius:18px; overflow:hidden; border:1px solid #e6eaf2 !important;">
+                                <div class="p-2 px-3 border-bottom d-flex align-items-center"
+                                    style="background:#f5f8fc; border-color:#e6eaf2 !important; gap:6px;">
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f0938a; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f4c26b; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#8fd3a8; display:inline-block;"></span>
+                                </div>
+                                <div class="p-2 text-center" style="background:#fcfdff;">
+                                    <img src="./assets/screenshots/lw4.png" alt="Lawsuit Progression and Verdicts"
+                                        class="img-fluid rounded" style="max-width:100%; height:auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Screenshot 5 -->
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1"
+                                style="text-align: center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">
+                                Employee Profile Smart Button Integration
+                            </h3>
+                            <p class="mb-3" style="text-align: center; font-size:14px; color:#526082;">
+                                Quickly access all historical and pending lawsuits associated with an employee directly from the gavel smart button on their Employee profile.
+                            </p>
+                            <div class="card border-0 shadow-sm"
+                                style="border-radius:18px; overflow:hidden; border:1px solid #e6eaf2 !important;">
+                                <div class="p-2 px-3 border-bottom d-flex align-items-center"
+                                    style="background:#f5f8fc; border-color:#e6eaf2 !important; gap:6px;">
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f0938a; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#f4c26b; display:inline-block;"></span>
+                                    <span class="rounded-circle"
+                                        style="width:10px; height:10px; background:#8fd3a8; display:inline-block;"></span>
+                                </div>
+                                <div class="p-2 text-center" style="background:#fcfdff;">
+                                    <img src="./assets/screenshots/lw5.png" alt="Employee Legal Actions Smart Button"
+                                        class="img-fluid rounded" style="max-width:100%; height:auto;" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- FEATURES PANE -->
+                    <div class="tab-pane fade" id="pane-matrix" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        01</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Automated
+                                            Sequence Numbering</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Generates unique sequential lawsuit codes (e.g., LC0001, LC0002) for consistent legal recordkeeping.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        02</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Flexible
+                                            Opposing Party Selection</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">File legal actions against internal employees, external partners (customers/suppliers), or arbitrary third parties.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        03</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Court
+                                            &amp; Judicial Master</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Maintain a structured court directory with assigned presiding judges verified via contact-level validation checks.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        04</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Legal
+                                            Counsel &amp; Attorney Assignment</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Assign internal defense attorneys or external law firms directly to oversee case filings and court appearances.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        05</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Hearing
+                                            Date Tracking</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Log scheduled court hearing dates alongside filing dates to ensure timely courtroom attendance and evidence submissions.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        06</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Rich
+                                            Case Details Notebook</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Document comprehensive case summaries, legal pleadings, hearing minutes, and evidentiary references in rich HTML format.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        07</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Multi-Stage
+                                            Litigation Workflow</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Track case progression cleanly from Draft into active Running status with full statusbar visualization.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        08</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Verdict
+                                        Outcome Processing</h4>
+                                    <p class="mb-0" style="font-size:13px; color:#526082;">Record court outcomes using dedicated one-click action buttons: Won (favorable judgment), Loss (Failed), or Cancelled.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        09</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Employee
+                                            Profile Smart Button</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Integrated gavel stat-button on employee profiles reveals active lawsuit count and opens direct filtered dispute lists.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        10</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Partner
+                                            &amp; Contact Integration</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Smart button on partner contacts links cases filed against external entities as well as linked employee work contacts.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        11</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Integrated
+                                            Audit Chatter</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Schedule hearing activities, attach legal briefs or court affidavits, and log internal lawyer notes with full chatter auditability.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100"
+                                    style="gap:16px; border-color:#e6eaf2 !important; border-radius: 15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0"
+                                        style="width:40px;height:40px;background:#eaf1fc;color:#123b6d;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;">
+                                        12</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1"
+                                            style="font-family:'Plus Jakarta Sans',sans-serif; font-size:15px;">Multi-Company
+                                            Compliance</h4>
+                                        <p class="mb-0" style="font-size:13px; color:#526082;">Fully compatible with multi-company Odoo setups, keeping legal proceedings strictly partitioned by operating branch.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ PANE (Bootstrap accordion) -->
+                    <div class="tab-pane fade" id="pane-faq" role="tabpanel">
+                        <div class="accordion" id="ohrmsFaq">
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-1"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How do I assign legal management permissions to an HR user?
+                                    </button>
+                                </h2>
+                                <div id="faq-1" class="accordion-collapse collapse show" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Navigate to Settings &gt; Users &amp; Companies &gt; Users, select the user, and go to the Access Rights tab. In the Lawsuit category, assign the user to the "Manager" group. This grants complete access to the Legal Actions menu and Court settings.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        Can I record legal cases filed against external parties or vendors?
+                                    </button>
+                                </h2>
+                                <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Yes. On the lawsuit form, set Party 2 to "Partner" to select any vendor, customer, or business partner from your contacts database. Alternatively, set Party 2 to "Others" to enter custom third-party names directly.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-3"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How are judges validated when creating a court record?
+                                    </button>
+                                </h2>
+                                <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Only contacts with the "Judge" checkbox enabled on their partner card can be assigned as court judges. The module enforces both a domain filter in the UI and a Python-level model constraint to ensure accurate judicial data integrity.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-4"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How does the lawsuit statusbar workflow operate?
+                                    </button>
+                                </h2>
+                                <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Lawsuits start in the "Draft" stage upon creation. Clicking the "Process" button transitions the record into "Running" when court hearings begin. When the lawsuit concludes, managers can click "Won", "Loss", or "Cancel" to permanently log the judicial verdict.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-5"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        How do managers view disputes from an employee's profile?
+                                    </button>
+                                </h2>
+                                <div id="faq-5" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Open any employee record in the Employees app and check the smart button header. The "Legal Actions" smart button displays the total count of lawsuits associated with that employee; clicking it opens the filtered list and form views.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item"
+                                style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faq-6"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">
+                                        Can I attach court notices, evidence files, and affidavits?
+                                    </button>
+                                </h2>
+                                <div id="faq-6" class="accordion-collapse collapse" data-bs-parent="#ohrmsFaq">
+                                    <div class="accordion-body" style="font-size:14px; color:#526082; line-height:1.65;">
+                                        Yes. Utilizing Odoo's native chatter attached to each lawsuit record, legal managers can upload court documents, scan summons, write confidential log notes, and schedule upcoming hearing activities directly.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELEASE NOTES PANE -->
+                    <div class="tab-pane fade" id="pane-releases" role="tabpanel">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4"
+                            style="row-gap:12px;">
+                            <div>
+                                <h3 class="fw-bold mb-1"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Changelog &amp;
+                                    Version History</h3>
+                                <p class="mb-0" style="font-size:14px; color:#526082;">Track new features, upgrades,
+                                    and fixes in Open HRMS Legal Actions.</p>
+                            </div>
+                            <span class="badge rounded-pill"
+                                style="background:#2557a7; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; padding:8px 16px;">Current:
+                                v20.0.1.0.0</span>
+                        </div>
+
+                        <div class="d-flex p-3 mb-3 border rounded-3"
+                            style="gap:20px; border-color:#e6eaf2 !important;">
+                            <div class="rounded-3"
+                                style="width:4px; background:linear-gradient(180deg,#2557a7,#0d9c92);"></div>
+                            <div>
+                                <div class="d-flex flex-wrap align-items-center mb-2" style="gap:10px;">
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:17px;">v20.0.1.0.0</span>
+                                    <span style="font-size:13px; color:#8b96ad;">September 2026</span>
+                                    <span class="badge rounded-pill"
+                                        style="background:#fdf3e3; color:#b9791a; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700;">Release</span>
+                                </div>
+                                <p class="mb-0" style="font-size:14.5px; color:#526082;">Initial commit for Open HRMS Legal Actions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══════════════ 6. SERVICES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Certified
+                        Odoo Implementation &amp; Support</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M0 416c0 17.7 14.3 32 32 32h54.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H233.3c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32m128 0a32 32 0 1 1 64 0a32 32 0 1 1-64 0m192-160a32 32 0 1 1 64 0a32 32 0 1 1-64 0m32-80c-32.8 0-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h246.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32h-54.7c-12.3-28.3-40.5-48-73.3-48m-160-48a32 32 0 1 1 0-64a32 32 0 1 1 0 64m73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48H32C14.3 64 0 78.3 0 96s14.3 32 32 32h86.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Customization</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="m11.5 20l4.86-9.73H13V4l-5 9.73h3.5zM12 2c2.75 0 5.1 1 7.05 2.95S22 9.25 22 12s-1 5.1-2.95 7.05S14.75 22 12 2s-5.1-1-7.05-2.95S2 14.75 2 12s1-5.1 2.95-7.05S9.25 2 12 2" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M256 48C141.1 48 48 141.1 48 256v40c0 13.3-10.7 24-24 24S0 309.3 0 296v-40C0 114.6 114.6 0 256 0s256 114.6 256 256v144.1c0 48.6-39.4 88-88.1 88l-110.3-.1c-8.3 14.3-23.8 24-41.6 24h-32c-26.5 0-48-21.5-48-48s21.5-48 48-48h32c17.8 0 33.3 9.7 41.6 24l110.4.1c22.1 0 40-17.9 40-40V256c0-114.9-93.1-208-208-208M144 208h16c17.7 0 32 14.3 32 32v112c0 17.7-14.3 32-32 32h-16c-35.3 0-64-28.7-64-64v-48c0-35.3 28.7-64 64-64m224 0c35.3 0 64 28.7 64 64v48c0 35.3-28.7 64-64 64h-16c-17.7 0-32-14.3-32-32V240c0-17.7 14.3-32 32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eef2fb;color:#123b6d;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M32 96h320V32c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l96 96c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-96 96c-9.2 9.2-22.9 11.9-34.9 6.9S352 236.8 352 223.8v-64L32 160c-17.7 0-32-14.3-32-32s14.3-32 32-32m448 256c17.7 0 32 14.3 32 32s-14.3 32-32 32H160v64c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-96-96c-6-6-9.4-14.1-9.4-22.6s3.4-16.6 9.4-22.6l96-96c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6v64h320z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Migration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M96 0C78.3 0 64 14.3 64 32v96h64V32c0-17.7-14.3-32-32-32m192 0c-17.7 0-32 14.3-32 32v96h64V32c0-17.7-14.3-32-32-32M32 160c-17.7 0-32 14.3-32 32s14.3 32 32 32v32c0 77.4 55 142 128 156.8V480c0 17.7 14.3 32 32 32s32-14.3 32-32v-67.2C297 398 352 333.4 352 256v-32c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Consultancy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0zm192 0v128h128zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16m0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16m54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16h-64c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo
+                                    Licensing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover"
+                            style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2"
+                                    style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M96 128a128 128 0 1 0 256 0a128 128 0 1 0-256 0m94.5 200.2l18.6 31l-33.3 123.9l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7h386.6c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9l-33.3-123.9l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2h-39.5c-12.4 0-20.1 13.6-13.7 24.2z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Hire
+                                    Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 7. RELATED MODULES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Related HR
+                        Modules</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/hr_payroll_community" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Odoo 20 HR Payroll</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">Complete payroll management suite for Odoo Community covering salary rules, structures, payslips, and batch pay runs.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_loan" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS
+                                        Loan Management</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">Employee loan processing
+                                        with EMI computation, approval hierarchies, and payroll deductions.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_core" target="_blank"
+                            rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover"
+                                style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 mb-3"
+                                        style="width:44px;height:44px;background:#eef2fb;color:#123b6d;">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56" fill="currentColor">
+                                            <path
+                                                d="m7.586 42.742l18.398 10.453c1.36.774 2.625.797 4.032 0l18.398-10.453c2.18-1.242 3.375-2.508 3.375-5.906V18.273c0-2.601-1.031-4.078-2.953-5.18l-16.57-9.421c-2.883-1.664-5.696-1.64-8.532 0l-16.57 9.422c-1.922 1.101-2.953 2.578-2.953 5.18v18.562c0 3.398 1.195 4.664 3.375 5.906M28 26.032L10.14 15.93l15.258-8.72c1.782-1.007 3.375-1.03 5.204 0l15.257 8.72ZM9.79 39.46c-1.337-.75-1.782-1.477-1.782-2.742V19.234l18.023 10.29v19.171Zm36.421 0l-16.242 9.234V29.523l18.023-10.289V36.72c0 1.265-.445 1.992-1.781 2.742" />
+                                        </svg>
+                                    </div>
+                                    <h4 class="fw-bold mb-2"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS Core</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">All-in-one HR management suite integrating smart HR dashboards, employee lifecycle tracking, and core workflows.</p>
+                                    <span class="fw-bold"
+                                        style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore
+                                        App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 8. FOOTER CTA ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="p-4 p-md-5 rounded-4" style="background:#f5f8fc; border-radius: 15px;">
+                    <div class="row align-items-center" style="row-gap:28px;">
+                        <div class="col-12 col-md-8">
+                            <h3 class="fw-bold mb-2"
+                                style="font-family:'Plus Jakarta Sans',sans-serif; font-size:27px;">Need Customization
+                                or Migration Assistance?</h3>
+                            <p class="mb-4" style="color:#526082; max-width:600px;">Our certified team of 150+ Odoo
+                                professionals is ready to assist with deployment, legal case customizations, and
+                                seamless enterprise migrations.</p>
+                            <div class="d-flex flex-wrap" style="gap:12px;">
+                                <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank"
+                                    rel="noopener"
+                                    style="background:#00438B; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                                    <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" class="me-2" aria-hidden="true">
+                                        <path
+                                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" />
+                                    </svg>
+                                    Get Support
+                                </a>
+                                <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank"
+                                    rel="noopener"
+                                    style="border:1px solid #e6eaf2; color:#0f1729; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 text-center text-white p-4"
+                                style="border-radius: 20px; background:radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%); box-shadow:0 10px 28px -12px rgba(18,39,84,.18);">
+                                <div class="fw-bold"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:42px; line-height:1;">
+                                    100%</div>
+                                <div class="fw-bold mt-2"
+                                    style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14.5px;">Bug Fix
+                                    Commitment</div>
+                                <div class="mt-2"
+                                    style="font-size:12.5px; color:rgba(255,255,255,.75); line-height:1.55;">Guaranteed
+                                    fixes for any issue reported during the support window.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.0.2 JS Bundle (powers the tabs + accordion) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

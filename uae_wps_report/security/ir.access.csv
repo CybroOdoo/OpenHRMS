@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_wps_report_user,WPS Report User,wps.report,base.group_user,crud,
+access_wps_agent_user,WPS Agent User,wps.agent,base.group_user,crud,

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="portal_employee_verification" model="portal.entry">
+            <field name="name">Employee Verification</field>
+            <field name="description">Complete the verification of employees</field>
+            <field name="url">/my/records</field>
+            <field name="image" type="bytes" file="employee_background/static/img/verified_check.svg"/>
+            <field name="placeholder_count">verification_count</field>
+            <field name="category">client_category</field>
+            <field name="sequence" eval="45"/>
+        </record>
+    </data>
+</odoo>

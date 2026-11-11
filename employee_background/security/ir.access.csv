@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_employee_verification_officer,access.employee.verification.officer,employee.verification,hr.group_hr_user,r,
+access_employee_verification_manager,access.employee.verification.manager,employee.verification,hr.group_hr_manager,crud,
+access_res_partner_officer,access.res.partner.officer,res.partner,hr.group_hr_user,ru,
+access_res_partner_manager,access.res.partner.manager,res.partner,hr.group_hr_manager,crud,
+access_portal_entry_officer,access.portal.entry.officer,portal.entry,hr.group_hr_user,r,
+access_portal_entry_manager,access.portal.entry.manager,portal.entry,hr.group_hr_manager,crud,

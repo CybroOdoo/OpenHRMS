@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- List View -->
+    <record id="wps_agent_view_tree" model="ir.ui.view">
+        <field name="name">wps.agent.view.list</field>
+        <field name="model">wps.agent</field>
+        <field name="arch" type="xml">
+            <list string="WPS Agents / Banks" editable="bottom">
+                <field name="name" placeholder="e.g. Emirates NBD or Al Ansari Exchange"/>
+                <field name="routing_code" placeholder="9-digit Routing Code"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="wps_agent_view_form" model="ir.ui.view">
+        <field name="name">wps.agent.view.form</field>
+        <field name="model">wps.agent</field>
+        <field name="arch" type="xml">
+            <form string="WPS Agent / Bank">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Agent / Bank Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Emirates NBD, ADCB, Al Ansari Exchange..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="routing_code" placeholder="e.g. 026000000"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="wps_agent_view_search" model="ir.ui.view">
+        <field name="name">wps.agent.view.search</field>
+        <field name="model">wps.agent</field>
+        <field name="arch" type="xml">
+            <search string="Search WPS Agents">
+                <field name="name" string="Agent / Bank Name"/>
+                <field name="routing_code" string="Routing Code"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Window Action -->
+    <record id="wps_agent_action" model="ir.actions.act_window">
+        <field name="name">WPS Agents / Banks</field>
+        <field name="res_model">wps.agent</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new WPS Agent or Bank!
+            </p>
+            <p>
+                Create and manage UAE Banks and Exchange Houses with their 9-digit Central Bank Routing Codes.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item under SIF -->
+    <menuitem
+        id="wps_agent_menu"
+        name="WPS Agents"
+        parent="wps_report_menu_sif"
+        action="wps_agent_action"
+        sequence="20"/>
+</odoo>

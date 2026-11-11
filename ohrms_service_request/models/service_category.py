@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+#############################################################################
+#
+#    Cybrosys Technologies Pvt. Ltd.
+#
+#    Copyright (C) 2026-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
+#
+#    You can modify it under the terms of the GNU LESSER
+#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
+#
+#############################################################################
+from odoo import fields, models
+
+
+class ServiceCategory(models.Model):
+    """ Model representing a service request category """
+    _name = 'service.category'
+    _description = "Service Category"
+    _order = 'name'
+
+    name = fields.Char(string='Category Name', required=True, translate=True)
+    active = fields.Boolean(default=True, help="Set active to false to hide the category without removing it.")
+    description = fields.Text(string='Description', help="Guidelines or details about this category.")

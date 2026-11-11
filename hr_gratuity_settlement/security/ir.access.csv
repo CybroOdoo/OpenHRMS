@@ -1,0 +1,10 @@
+id,name,model_id,group_id/id,operation,domain
+access_hr_gratuity_manager,access.hr.gratuity.manager,hr.gratuity,hr.group_hr_manager,crud,
+access_hr_gratuity_user,access.hr.gratuity.user,hr.gratuity,hr.group_hr_user,crud,
+access_hr_gratuity_accounting_configuration_manager,access.hr.gratuity.accounting.configuration.manager,hr.gratuity.accounting.configuration,hr.group_hr_manager,crud,
+access_hr_gratuity_accounting_configuration_user,access.hr.gratuity.accounting.configuration.user,hr.gratuity.accounting.configuration,hr.group_hr_user,r,
+access_gratuity_configuration_user,access.gratuity.configuration.user,gratuity.configuration,hr.group_hr_user,r,
+access_gratuity_configuration_manager,access.gratuity.configuration.manager,gratuity.configuration,hr.group_hr_manager,crud,
+access_hr_training_user,access.hr.training.user,hr.training,base.group_user,crud,
+access_settlement_reason_user,access.settlement.reason.user,settlement.reason,hr.group_hr_user,r,
+access_settlement_reason_manager,access.settlement.reason.manager,settlement.reason,hr.group_hr_manager,crud,

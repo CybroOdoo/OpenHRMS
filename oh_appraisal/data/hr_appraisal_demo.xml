@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--Demo HR Appraisal Data-->
+        <record id="appraisal" model="hr.appraisal">
+            <field name="employee_id" ref="employee_appraisal"/>
+            <field name="stage_id" ref="hr_appraisal_start"/>
+            <field name="appraisal_deadline" eval="(datetime.now() + relativedelta(months=1)).date()"/>
+            <field name="hr_emp">True</field>
+        </record>
+    </data>
+</odoo>

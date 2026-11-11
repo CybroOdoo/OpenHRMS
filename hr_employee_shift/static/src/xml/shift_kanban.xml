@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="hr_employee_shift.ShiftKanbanView.Buttons" t-inherit="web.KanbanView.Buttons" t-inherit-mode="primary">
+        <xpath expr="//button[hasclass('o-kanban-button-new')]" position="after">
+            <button type="button" class="btn btn-secondary ms-1" t-on-click="() => this.onGenerateSchedule()">
+                Generate Schedule
+            </button>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_gosi_payslip_manager,GOSI Manager,gosi.payslip,hr.group_hr_manager,crud,
+access_gosi_payslip_user,GOSI Officer,gosi.payslip,hr.group_hr_user,crud,
+access_gosi_payslip_employee,GOSI Employee Read,gosi.payslip,base.group_user,r,"[('employee_id.user_id', '=', user.id)]"

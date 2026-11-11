@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_leave_validation_status_hr_holidays_manager,access.leave.validation.status.hr.holidays.manager,leave.validation.status,hr_holidays.group_hr_holidays_manager,crud,
+access_leave_validation_status_hr_holidays_user,access.leave.validation.status.hr.holidays.user,leave.validation.status,hr_holidays.group_hr_holidays_user,crud,
+access_leave_validation_status_user,access.leave.validation.status.user,leave.validation.status,base.group_user,r,
+access_hr_holidays_validators_hr_holidays_manager,access.hr.holidays.validators.hr.holidays.manager,hr.holidays.validators,hr_holidays.group_hr_holidays_manager,crud,
+access_hr_holidays_validators_hr_holidays_user,access.hr.holidays.validators.hr.holidays.user,hr.holidays.validators,hr_holidays.group_hr_holidays_user,crud,
+access_hr_holidays_validators_user,access.hr.holidays.validators.user,hr.holidays.validators,base.group_user,r,
+hr_leave_rule_validator_read,Time Off Validator read,hr.leave,base.group_user,r,"[('validation_status_ids.user_id', '=', user.id)]"
+hr_leave_rule_validator_write,Time Off Validator write,hr.leave,base.group_user,u,"[('validation_status_ids.user_id', '=', user.id)]"

@@ -15,7 +15,7 @@
 #    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
 #
 #############################################################################
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -26,52 +26,58 @@ class HrPayrollStructure(models.Model):
     - Allowances
     - Deductions
     """
-    _name = 'hr.payroll.structure'
-    _description = 'Salary Structure'
+
+    _name = "hr.payroll.structure"
+    _description = "Salary Structure"
 
     @api.model
     def _get_parent(self):
         """Function for return parent."""
-        return self.env.ref('hr_payroll_community.structure_base', False)
+        return self.env.ref("hr_payroll_community.structure_base", False)
 
-    name = fields.Char(required=True, string="Name",
-                       help="Name for Payroll Structure")
-    code = fields.Char(string='Reference', required=True,
-                       help="Code for Payroll Structure")
-    company_id = fields.Many2one(
-        'res.company',
-        string='Company',
-        required=True,
-        default=lambda self: self.env.company.id
+    name = fields.Char(required=True, help="Name of the salary structure.")
+    code = fields.Char(
+        string="Reference", required=True, help="Code of the salary structure."
     )
-    note = fields.Text(string='Description',
-                       help="Description for Payroll Structure")
-    parent_id = fields.Many2one('hr.payroll.structure',
-                                string='Parent',
-                                default=_get_parent,
-                                help="Choose Payroll Structure")
-    children_ids = fields.One2many('hr.payroll.structure',
-                                   'parent_id',
-                                   string='Children', copy=True,
-                                   help="Choose Payroll Structure")
-    rule_ids = fields.Many2many('hr.salary.rule',
-                                'hr_structure_salary_rule_rel',
-                                'struct_id',
-                                'rule_id', string='Salary Rules',
-                                help="Choose Salary Rule")
+    company_id = fields.Many2one(
+        "res.company", required=True, default=lambda self: self.env.company.id
+    )
+    note = fields.Text(
+        string="Description", help="Description of the salary structure."
+    )
+    parent_id = fields.Many2one(
+        "hr.payroll.structure",
+        default=lambda self: self._get_parent(),
+        help="Parent salary structure.",
+    )
+    children_ids = fields.One2many(
+        "hr.payroll.structure",
+        "parent_id",
+        copy=True,
+        help="Child salary structures.",
+    )
+    rule_ids = fields.Many2many(
+        "hr.salary.rule",
+        "hr_structure_salary_rule_rel",
+        "struct_id",
+        "rule_id",
+        string="Salary Rules",
+        help="Salary rules included in this structure.",
+    )
 
-    @api.constrains('parent_id')
+    @api.constrains("parent_id")
     def _check_parent_id(self):
         """Function _has_cycle for check parent in Payroll Structure"""
         if self._has_cycle():
             raise ValidationError(
-                _('You cannot create a recursive salary structure.'))
+                self.env._("You cannot create a recursive salary structure.")
+            )
 
     def copy(self, default=None):
         """Function for return Payroll Structure"""
         self.ensure_one()
-        default = dict(default or {}, code=_("%s (copy)") % (self.code))
-        return super(HrPayrollStructure, self).copy(default)
+        default = dict(default or {}, code=self.env._("%s (copy)", self.code))
+        return super().copy(default)
 
     def get_all_rules(self):
         """
@@ -85,7 +91,7 @@ class HrPayrollStructure(models.Model):
 
     def _get_parent_structure(self):
         """Function for getting Parent Structure"""
-        parent = self.mapped('parent_id')
+        parent = self.mapped("parent_id")
         if parent:
             parent = parent._get_parent_structure()
         return parent + self

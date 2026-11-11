@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open HRMS Gratuity Settlement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <!-- Bootstrap 5.0.2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Only what Bootstrap classes truly cannot do inline: active-state pseudo-classes. */
+        #ohrms-gratuity .nav-pills .nav-link {
+            color: #526082;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+        }
+
+        #ohrms-gratuity .nav-pills .nav-link.active {
+            color: #fff;
+            background: #00438B;
+        }
+
+        #ohrms-gratuity .accordion-button:not(.collapsed) {
+            background-color: #f5f8fc;
+            color: #0f1729;
+            box-shadow: none;
+        }
+
+        #ohrms-gratuity .accordion-button:focus {
+            box-shadow: none;
+            border-color: #e6eaf2;
+        }
+
+        #ohrms-gratuity .card:hover,
+        #ohrms-gratuity .ohrms-hover:hover {
+            box-shadow: 0 10px 28px -12px rgba(18, 39, 84, .18) !important;
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0;">
+    <div id="ohrms-gratuity"
+        style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background-color:#ffffff; color:#0f1729; -webkit-font-smoothing:antialiased;">
+        <div class="container" style="max-width:1160px; padding-top:20px; padding-bottom:96px;">
+
+            <!-- ═══════════════ 1. HEADER ═══════════════ -->
+            <div class="row align-items-center justify-content-between py-3" style="row-gap:12px;">
+                <div class="col-auto">
+                    <a href="https://www.cybrosys.com" target="_blank" rel="noopener" style="margin-right:12px;">
+                        <img src="https://apps.odoocdn.com/apps/assets/17.0/theme_boec/images/Cybrosys.png?fcdde35"
+                            alt="Cybrosys Technologies" style="height:45px; width:auto;"
+                            onerror="this.onerror=null; this.src='https://www.cybrosys.com/images/logo.png';" />
+                    </a>
+                </div>
+                <div class="col-auto d-flex flex-wrap" style="gap:10px;">
+                    <span class="badge rounded-pill" style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg class="flex-shrink-0" style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Community</span>
+                    <span class="badge rounded-pill" style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg class="flex-shrink-0" style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Enterprise</span>
+                    <span class="badge rounded-pill" style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg class="flex-shrink-0" style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Odoo.sh</span>
+                    <span class="badge rounded-pill" style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg class="flex-shrink-0" style="position:relative;top:-1px; width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:3px;" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>On-Premise</span>
+<span class="badge rounded-pill"
+                        style="background-color:#eaf1fc; color:#123b6d; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:12.5px; padding:10px 14px;"><svg
+                            class="flex-shrink-0"
+                            style="position:relative;top:-2px; width:13px; height:13px; display:inline-block; vertical-align:middle;  margin-right: 3px;"
+                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7L86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256L41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3l105.4 105.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256z" />
+                        </svg>
+                        Online</span>                </div>
+            </div>
+
+            <!-- ═══════════════ 2. HERO ═══════════════ -->
+            <div class="p-4 p-md-5 mt-2 text-center text-white position-relative"
+                style="border-radius:28px; background-image: radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%);">
+                <h1 class="fw-bold mb-0" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:44px; letter-spacing:-0.02em; line-height:1.12;">
+                    Open HRMS Gratuity Settlement
+                </h1>
+                <p class="mx-auto mt-3 mb-0" style="max-width:620px; font-size:18px; line-height:1.65; color:rgba(255,255,255,.82);">
+                    Create Gratuity Settlements for Employees During Resignation.
+                </p>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:14px;">
+                    <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="background-color:#ffffff; color:#103564; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="me-2" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" /></svg>
+                        Email Us
+                    </a>
+                    <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                        style="border:1px solid rgba(255,255,255,.45); color:#ffffff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor" class="me-2" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M17.415 14.382c-.298-.149-1.759-.867-2.031-.967s-.47-.148-.669.15c-.198.297-.767.966-.94 1.164c-.174.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.019-.458.13-.606c.134-.133.297-.347.446-.52s.198-.298.297-.497c.1-.198.05-.371-.025-.52c-.074-.149-.668-1.612-.916-2.207c-.241-.579-.486-.5-.668-.51c-.174-.008-.372-.01-.57-.01s-.52.074-.792.372c-.273.297-1.04 1.016-1.04 2.479c0 1.462 1.064 2.875 1.213 3.074s2.095 3.2 5.076 4.487c.71.306 1.263.489 1.694.625c.712.227 1.36.195 1.872.118c.57-.085 1.758-.719 2.006-1.413s.247-1.289.173-1.413s-.272-.198-.57-.347m-5.422 7.403h-.004a9.87 9.87 0 0 1-5.032-1.378l-.36-.214l-3.742.982l.999-3.648l-.235-.374a9.86 9.86 0 0 1-1.511-5.26c.002-5.45 4.436-9.884 9.889-9.884a9.8 9.8 0 0 1 6.988 2.899a9.82 9.82 0 0 1 2.892 6.992c-.002 5.45-4.436 9.885-9.884 9.885m8.412-18.297A11.82 11.82 0 0 0 11.992 0C5.438 0 .102 5.335.1 11.892a11.86 11.86 0 0 0 1.587 5.945L0 24l6.304-1.654a11.9 11.9 0 0 0 5.684 1.448h.005c6.554 0 11.89-5.335 11.892-11.893a11.82 11.82 0 0 0-3.48-8.413"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Whatsapp
+                    </a>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center mt-4" style="gap:10px;">
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2" style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Gratuity Configuration</span>
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2" style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Running Contract Check</span>
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2" style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Hourly &amp; Monthly Wages</span>
+                    <span class="rounded-pill d-inline-flex align-items-center gap-2" style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:8px 16px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600;"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7l233.4-233.3c12.5-12.5 32.8-12.5 45.3 0z" /></svg>Automated Equation</span>
+                </div>
+            </div>
+
+
+
+            <!-- ═══════════════ 4. KEY HIGHLIGHTS ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Key highlights</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 18v1c0 1.1-.9 2-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v1h-9a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2zm-9-2h10V8H12zm4-2.5a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Employee Gratuity Settlements</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Managers can create Gratuity Settlements of Employees upon resignation or service completion.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#e4f7f5; color:#0d9c92;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Running Contract Required</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">A settlement can be created only if the employee has an active running contract in the system.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#fdf3e3; color:#b9791a;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.48.48 0 0 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Gratuity Configurations</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">Managers can create and customize different Gratuity Configurations suited for specific contract types.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#eaf1fc; color:#2557a7;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 4H6v2l6.5 6L6 18v2h12v-3h-7l5-5l-5-5h7z" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Predefined Equation</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">The Gratuity Amount is calculated systematically based on a predefined equation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#e4f7f5; color:#0d9c92;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8m.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Hourly Wage Equation</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">If wage type is hourly: basic salary &times; Employee Daily Wage Days &times; rule percentage &times; calculation years.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="card h-100 border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-4 d-flex" style="gap:16px;">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:44px; height:44px; background:#fdf3e3; color:#b9791a;">
+                                    <svg width="21" height="21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8h16zm0-10H4V7a1 1 0 0 1 1-1h1v2h2V6h8v2h2V6h1a1 1 0 0 1 1 1z" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Monthly Wage Equation</h4>
+                                    <p class="mb-0" style="font-size:13.5px; color:#526082;">If wage type is monthly: basic salary &times; (Working Days / Employee Daily Wage Days) &times; rule percentage &times; calculation years.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 4. TABS (Bootstrap nav-pills + tab-content) ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <ul class="nav nav-pills justify-content-center mb-4 p-1 d-flex" role="tablist"
+                    style="display:inline-flex; background:#f5f8fc; border-radius:999px; gap:4px; width:max-content; max-width:100%; flex-wrap:wrap; margin:auto;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active rounded-pill px-4 py-3" id="tab-shots" data-bs-toggle="tab" data-bs-target="#pane-shots" type="button" role="tab">Screenshots</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-matrix" data-bs-toggle="tab" data-bs-target="#pane-matrix" type="button" role="tab">Feature Matrix</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-faq" data-bs-toggle="tab" data-bs-target="#pane-faq" type="button" role="tab">Frequent Questions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4 py-3" id="tab-releases" data-bs-toggle="tab" data-bs-target="#pane-releases" type="button" role="tab">Release Notes</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <!-- SCREENSHOTS -->
+                    <div class="tab-pane fade show active" id="pane-shots" role="tabpanel">
+
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1" style="text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Gratuity Configuration</h3>
+                            <p class="mb-3" style="max-width:700px; margin:auto; text-align:center; font-size:14.5px; color:#526082;">You can create a Gratuity Settlement from payroll configuration: Payroll &rarr; Configuration &rarr; Gratuity Configuration. Set up the gratuity configuration and specify the contract type. If the contract type is limited, and you have not specified an end date for the contract, the limited type gratuity configuration will be applied during the gratuity settlement.</p>
+                            <div class="border rounded-4 overflow-hidden" style="border-radius:10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2" style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshot/1.png" alt="Gratuity Configuration" class="img-fluid" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1" style="text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Employee Contract</h3>
+                            <p class="mb-3" style="max-width:700px; margin:auto; text-align:center; font-size:14.5px; color:#526082;">Now create a contract for the employee and set up the wage type.</p>
+                            <div class="border rounded-4 overflow-hidden" style="border-radius:10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2" style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshot/2.png" alt="Employee Contract" class="img-fluid" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h3 class="fw-bold mb-1" style="text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Gratuity Settlement</h3>
+                            <p class="mb-3" style="max-width:700px; margin:auto; text-align:center; font-size:14.5px; color:#526082;">You can create a gratuity settlement from the 'End of service' menu: Payroll &rarr; End of service.</p>
+                            <div class="border rounded-4 overflow-hidden" style="border-radius:10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2" style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshot/3.png" alt="Gratuity Settlement" class="img-fluid" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="mb-0">
+                            <h3 class="fw-bold mb-1" style="text-align:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Gratuity Amount Calculation</h3>
+                            <p class="mb-3" style="max-width:700px; margin:auto; text-align:center; font-size:14.5px; color:#526082;">By selecting the employee, if the employee has a running contract, a contract type of employee gets selected, and gratuity amount gets calculated. Gratuity payment is calculated based on a wage type in the contract form. If a wage type is hourly, then gratuity payment is calculated as employee salary * Total number of days employee worked * gratuity configuration rule percentage * employee gratuity years. If wage type is monthly, then gratuity payment is calculated as (employee salary/Total number of employee wage days) * Total number of days employee worked * gratuity configuration rule percentage * employee gratuity years.</p>
+                            <div class="border rounded-4 overflow-hidden" style="border-radius:10px; border-color:#e6eaf2 !important; box-shadow:0 24px 56px -20px rgba(18,39,84,.28);">
+                                <div class="d-flex p-2" style="gap:6px; background:#f5f8fc; border-bottom:1px solid #e6eaf2;">
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f0938a;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#f4c26b;display:inline-block;"></span>
+                                    <span class="rounded-circle" style="width:9px;height:9px;background:#8fd3a8;display:inline-block;"></span>
+                                </div>
+                                <img src="./assets/screenshot/4.png" alt="Gratuity Amount Calculation" class="img-fluid" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FEATURE MATRIX -->
+                    <div class="tab-pane fade" id="pane-matrix" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">01</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Employee Gratuity Settlements</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Managers can create Gratuity Settlements of Employees upon resignation or service completion.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">02</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Running Contract Validation</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">A settlement can be created only if the employee has an active running contract.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">03</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Multiple Gratuity Configurations</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">Manager can create and customize different Gratuity Configurations suited for specific contract types.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">04</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Equation-Based Calculation</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">The Gratuity Amount is calculated systematically based on a predefined equation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">05</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Hourly Wage Formula</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">If wage type is hourly: basic salary &times; Employee Daily Wage Days &times; rule percentage &times; calculation years.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="d-flex p-3 border rounded-4 h-100" style="gap:16px; border-color:#e6eaf2 !important; border-radius:15px;">
+                                    <div class="d-flex align-items-center justify-content-center rounded-3 flex-shrink-0" style="width:34px;height:34px;background:#eef2fb;color:#2557a7;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;">06</div>
+                                    <div>
+                                        <h4 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Monthly Wage Formula</h4>
+                                        <p class="mb-0" style="font-size:13.5px; color:#526082;">If wage type is monthly: basic salary &times; (Working Days / Employee Daily Wage Days) &times; rule percentage &times; calculation years.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ (Bootstrap accordion) -->
+                    <div class="tab-pane fade" id="pane-faq" role="tabpanel">
+                        <div class="accordion" id="gratuityFaq">
+                            <div class="accordion-item" style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">What happens if an employee has no active contract?</button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#gratuityFaq">
+                                    <div class="accordion-body" style="font-size:14.5px; color:#526082; line-height:1.75;">If the employee does not have an active contract, the gratuity settlement cannot be created. An employee must have a running contract in order for the settlement process to proceed.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color:#e6eaf2; border-radius:14px; overflow:hidden; margin-bottom:12px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">How is the gratuity payment calculated for hourly wage employees?</button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#gratuityFaq">
+                                    <div class="accordion-body" style="font-size:14.5px; color:#526082; line-height:1.75;">For employees with an hourly wage, the gratuity payment is calculated as follows:<br/><strong style="color:#0f1729;">Gratuity Payment = Basic Salary &times; Employee Daily Wage Days &times; Gratuity Configuration Rule Percentage &times; Gratuity Calculation Years</strong></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item" style="border-color:#e6eaf2; border-radius:14px; overflow:hidden;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px;">How is the gratuity payment calculated for monthly wage employees?</button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#gratuityFaq">
+                                    <div class="accordion-body" style="font-size:14.5px; color:#526082; line-height:1.75;">For employees with a monthly wage, the gratuity payment is calculated as follows:<br/><strong style="color:#0f1729;">Gratuity Payment = Basic Salary &times; (Working Days / Employee Daily Wage Days) &times; Gratuity Configuration Rule Percentage &times; Gratuity Calculation Years</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RELEASE NOTES -->
+                    <div class="tab-pane fade" id="pane-releases" role="tabpanel">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4" style="row-gap:12px;">
+                            <div>
+                                <h3 class="fw-bold mb-1" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:21px;">Changelog &amp; Version History</h3>
+                                <p class="mb-0" style="font-size:14.5px; color:#526082;">Release notes and compatibility updates for Open HRMS Gratuity Settlement.</p>
+                            </div>
+                            <span class="badge rounded-pill" style="background:#2557a7; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; padding:8px 16px;">Current: v20.0.1.0.0</span>
+                        </div>
+
+                        <div class="d-flex p-3 mb-3 border rounded-3" style="gap:20px; border-color:#e6eaf2 !important;">
+                            <div class="rounded-3" style="width:4px; background:linear-gradient(180deg,#2557a7,#0d9c92);"></div>
+                            <div>
+                                <div class="d-flex flex-wrap align-items-center mb-2" style="gap:10px;">
+                                    <span class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:17px;">v20.0.1.0.0</span>
+                                    <span style="font-size:13px; color:#8b96ad;">October 2026</span>
+                                    <span class="badge rounded-pill" style="background:#fdf3e3; color:#b9791a; font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:700;">Release</span>
+                                </div>
+                                <p class="mb-0" style="font-size:14.5px; color:#526082;">Initial release for Odoo 20. Certified for Odoo 20 Community and Enterprise.</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══════════════ 5. SERVICES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Certified Odoo Implementation &amp; Support</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M0 416c0 17.7 14.3 32 32 32h54.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H233.3c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32m128 0a32 32 0 1 1 64 0a32 32 0 1 1-64 0m192-160a32 32 0 1 1 64 0a32 32 0 1 1-64 0m32-80c-32.8 0-61 19.7-73.3 48H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h246.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32h-54.7c-12.3-28.3-40.5-48-73.3-48m-160-48a32 32 0 1 1 0-64a32 32 0 1 1 0 64m73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48H32C14.3 64 0 78.3 0 96s14.3 32 32 32h86.7c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48H480c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Customization</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"/> viewBox="0 0 24 24"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="m11.5 20l4.86-9.73H13V4l-5 9.73h3.5zM12 2c2.75 0 5.1 1 7.05 2.95S22 9.25 22 12s-1 5.1-2.95 7.05S14.75 22 12 22s-5.1-1-7.05-2.95S2 14.75 2 12s1-5.1 2.95-7.05S9.25 2 12 2" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Implementation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M256 48C141.1 48 48 141.1 48 256v40c0 13.3-10.7 24-24 24S0 309.3 0 296v-40C0 114.6 114.6 0 256 0s256 114.6 256 256v144.1c0 48.6-39.4 88-88.1 88l-110.3-.1c-8.3 14.3-23.8 24-41.6 24h-32c-26.5 0-48-21.5-48-48s21.5-48 48-48h32c17.8 0 33.3 9.7 41.6 24l110.4.1c22.1 0 40-17.9 40-40V256c0-114.9-93.1-208-208-208M144 208h16c17.7 0 32 14.3 32 32v112c0 17.7-14.3 32-32 32h-16c-35.3 0-64-28.7-64-64v-48c0-35.3 28.7-64 64-64m224 0c35.3 0 64 28.7 64 64v48c0 35.3-28.7 64-64 64h-16c-17.7 0-32-14.3-32-32V240c0-17.7 14.3-32 32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Support</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#eef2fb;color:#123b6d;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M32 96h320V32c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l96 96c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-96 96c-9.2 9.2-22.9 11.9-34.9 6.9S352 236.8 352 223.8v-64L32 160c-17.7 0-32-14.3-32-32s14.3-32 32-32m448 256c17.7 0 32 14.3 32 32s-14.3 32-32 32H160v64c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-96-96c-6-6-9.4-14.1-9.4-22.6s3.4-16.6 9.4-22.6l96-96c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6v64h320z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Migration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M96 0C78.3 0 64 14.3 64 32v96h64V32c0-17.7-14.3-32-32-32m192 0c-17.7 0-32 14.3-32 32v96h64V32c0-17.7-14.3-32-32-32M32 160c-17.7 0-32 14.3-32 32s14.3 32 32 32v32c0 77.4 55 142 128 156.8V480c0 17.7 14.3 32 32 32s32-14.3 32-32v-67.2C297 398 352 333.4 352 256v-32c17.7 0 32-14.3 32-32s-14.3-32-32-32z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#e4f7f5;color:#0d9c92;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Consultancy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#fdf3e3;color:#b9791a;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0zm192 0v128h128zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16m0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16m54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16h-64c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Odoo Licensing</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card h-100 text-center border ohrms-hover" style="border-color:#e6eaf2 !important; border-radius:14px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-center rounded-3 mx-auto mb-2" style="width:46px;height:46px;background:#eaf1fc;color:#2557a7;">
+                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        fill="currentColor" aria-hidden="true">
+                                        <path
+                                            d="M96 128a128 128 0 1 0 256 0a128 128 0 1 0-256 0m94.5 200.2l18.6 31l-33.3 123.9l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7h386.6c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9l-33.3-123.9l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2h-39.5c-12.4 0-20.1 13.6-13.7 24.2z" />
+                                    </svg>
+                                </div>
+                                <span class="fw-bold d-block" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13.5px;">Hire Developer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ 6. RELATED MODULES ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:28px;">Related Modules</h2>
+                    <a href="https://apps.odoo.com/apps/modules/browse?search=openhrms" target="_blank" rel="noopener" class="fw-bold text-decoration-none" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">All Open HRMS apps &rarr;</a>
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_core/" target="_blank" rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover overflow-hidden" style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <img src="./assets/modules/11.jpg" alt="Open HRMS Core" class="img-fluid" style="width:100%; display:block;" loading="lazy" />
+                                <div class="card-body p-4">
+                                    <h4 class="fw-bold mb-2" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS Core</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">The backbone of the Open HRMS suite, offering centralized HR operations and employee management.</p>
+                                    <span class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/hrms_dashboard" target="_blank" rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover overflow-hidden" style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <img src="./assets/modules/12.jpg" alt="Open HRMS HR Dashboard" class="img-fluid" style="width:100%; display:block;" loading="lazy" />
+                                <div class="card-body p-4">
+                                    <h4 class="fw-bold mb-2" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS HR Dashboard</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">An intuitive dashboard offering real-time insights, metrics, and workforce performance statistics.</p>
+                                    <span class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="https://apps.odoo.com/apps/modules/20.0/ohrms_loan" target="_blank" rel="noopener" class="text-decoration-none text-reset">
+                            <div class="card h-100 border ohrms-hover overflow-hidden" style="border-color:#e6eaf2 !important; border-radius:20px; box-shadow:0 1px 2px rgba(15,23,41,.05); transition:box-shadow .2s ease;">
+                                <img src="./assets/modules/13.jpg" alt="Open HRMS Loan Management" class="img-fluid" style="width:100%; display:block;" loading="lazy" />
+                                <div class="card-body p-4">
+                                    <h4 class="fw-bold mb-2" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:16px;">Open HRMS Loan Management</h4>
+                                    <p class="mb-3" style="font-size:13.5px; color:#526082;">Manage employee loan requests, approval workflows, and automated payroll installment deductions.</p>
+                                    <span class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:#2557a7;">Explore App</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ═══════════════ 7. FOOTER CTA ═══════════════ -->
+            <div class="mt-5 pt-5">
+                <div class="p-4 p-md-5 rounded-4" style="background:#f5f8fc; border-radius:15px;">
+                    <div class="row align-items-center" style="row-gap:28px;">
+                        <div class="col-12 col-md-8">
+                            <h3 class="fw-bold mb-2" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:27px;">Need Customization or Migration Assistance?</h3>
+                            <p class="mb-4" style="color:#526082; max-width:600px;">Our certified team of 150+ Odoo professionals is ready to assist with deployment, custom HR configurations, and system migrations.</p>
+                            <div class="d-flex flex-wrap" style="gap:12px;">
+                                <a href="mailto:odoo@cybrosys.com" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                                    style="background:#00438B; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">
+                                    <svg width="16" height="16" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="me-2" aria-hidden="true"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4l217.6 163.2c11.4 8.5 27 8.5 38.4 0l217.6-163.2c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48zM0 176v208c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V176L294.4 339.2a63.9 63.9 0 0 1-76.8 0z" /></svg>
+                                    Get Support
+                                </a>
+                                <a href="https://wa.me/919074270811" class="btn rounded-pill fw-bold" target="_blank" rel="noopener"
+                                    style="border:1px solid #e6eaf2; color:#0f1729; font-family:'Plus Jakarta Sans',sans-serif; padding:12px 26px; font-size:14px;">WhatsApp</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="rounded-4 text-center text-white p-4"
+                                style="border-radius:20px; background:radial-gradient(circle at 90% -10%, rgba(255,255,255,.18), transparent 45%), radial-gradient(120% 140% at 100% 0%, #0b2a52 0%, #123b6d 46%, #0b2a52 100%); box-shadow:0 10px 28px -12px rgba(18,39,84,.18);">
+                                <div class="fw-bold" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:42px; line-height:1;">100%</div>
+                                <div class="fw-bold mt-2" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:14.5px;">Bug Fix Commitment</div>
+                                <div class="mt-2" style="font-size:12.5px; color:rgba(255,255,255,.75); line-height:1.55;">Guaranteed fixes for any issue reported during the support window.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.0.2 JS Bundle (powers the tabs + accordion) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

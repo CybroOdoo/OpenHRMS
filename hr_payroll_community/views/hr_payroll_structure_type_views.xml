@@ -3,7 +3,6 @@
     <record id="view_hr_payroll_structure_type_form_inherit_payroll" model="ir.ui.view">
         <field name="name">hr.payroll.structure.type.form.inherit.payroll</field>
         <field name="model">hr.payroll.structure.type</field>
-        <!-- Inherit if there's a base form, else we define one or just use standard fields. -->
         <field name="arch" type="xml">
             <form string="Salary Structure Type">
                 <sheet>

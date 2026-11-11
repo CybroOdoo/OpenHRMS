@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_inherit_wage_type" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.wage.type</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='wage']" position="before">
+                <field name="wage_type"/>
+            </xpath>
+            <xpath expr="//label[@for='wage']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//div[@name='wage']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//div[@name='wage']/field[@name='wage']" position="after">
+                <span class="ms-1">/ month</span>
+            </xpath>
+            <xpath expr="//div[@name='wage']" position="after">
+                <label for="hourly_wage" invisible="wage_type != 'hourly'"/>
+                <div class="o_row" name="hourly_wage" invisible="wage_type != 'hourly'">
+                    <field name="hourly_wage" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                    <span class="ms-1">/ hour</span>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='payroll_group']" position="inside">
+                <group string="Monthly Advantages in Cash" name="allowances" invisible="wage_type == 'hourly'">
+                    <label for="hra"/>
+                    <div class="o_row">
+                        <field name="hra" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                    <label for="da"/>
+                    <div class="o_row">
+                        <field name="da" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                    <label for="travel_allowance"/>
+                    <div class="o_row">
+                        <field name="travel_allowance" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                    <label for="meal_allowance"/>
+                    <div class="o_row">
+                        <field name="meal_allowance" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                    <label for="medical_allowance"/>
+                    <div class="o_row">
+                        <field name="medical_allowance" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                    <label for="other_allowance"/>
+                    <div class="o_row">
+                        <field name="other_allowance" class="oe_inline o_hr_narrow_field" nolabel="1"/>
+                        <span class="ms-1">/ month</span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

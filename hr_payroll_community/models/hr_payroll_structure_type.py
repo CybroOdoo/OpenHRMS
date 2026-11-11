@@ -20,10 +20,11 @@ from odoo import fields, models
 
 class HrPayrollStructureType(models.Model):
     """Inherit hr.payroll.structure.type to set a default structure."""
-    _inherit = 'hr.payroll.structure.type'
+
+    _inherit = "hr.payroll.structure.type"
 
     default_struct_id = fields.Many2one(
-        'hr.payroll.structure',
+        "hr.payroll.structure",
         string="Pay Structure",
-        help="Default structure for this pay category"
+        help="Default structure for this pay category",
     )

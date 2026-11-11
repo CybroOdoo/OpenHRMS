@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_res_company_policy_manager,res.company.policy manager,res.company.policy,hr.group_hr_manager,crud,
+access_res_company_policy_user,res.company.policy user,res.company.policy,base.group_user,crud,

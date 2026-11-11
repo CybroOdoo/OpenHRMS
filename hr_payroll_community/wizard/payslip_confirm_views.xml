@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form string="Confirm Payslip">
                 <p class="oe_grey">
-                    Do you want to confirm these Payslips?.
+                    Do you want to confirm these Payslips?
                 </p>
                 <footer>
                     <button name="confirm_payslip"
@@ -19,7 +19,7 @@
             </form>
         </field>
     </record>
-    <!--    Window action for getting Wizard-->
+    <!-- Window action for getting Wizard -->
     <record id="payslip_confirm_action" model="ir.actions.act_window">
         <field name="name">Confirm Payslip</field>
         <field name="type">ir.actions.act_window</field>

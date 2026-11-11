@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--  Inherited form view of hr.version to add fields  -->
+    <record model="ir.ui.view" id="hr_contract_view_form">
+        <field name="name">hr.version.view.form.inherit.ohrms.overtime</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='allowances']" position="after">
+                <group string="Overtime">
+                    <label for="over_day"/>
+                    <div class="o_row" name="day_wage">
+                        <field name="over_day"/>
+                        <span>/day</span>
+                    </div>
+                    <label for="over_hour"/>
+                    <div class="o_row" name="hour_wage">
+                        <field name="over_hour"/>
+                        <span>/hour</span>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherited form view of hr.employee to show Overtime Wage in Payroll tab -->
+    <record model="ir.ui.view" id="hr_employee_view_form_inherit_overtime">
+        <field name="name">hr.employee.view.form.inherit.ohrms.overtime</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='contract']" position="inside">
+                <label for="over_day"/>
+                <div class="o_row" name="day_wage">
+                    <field name="over_day"/>
+                    <span>/day</span>
+                </div>
+                <label for="over_hour"/>
+                <div class="o_row" name="hour_wage">
+                    <field name="over_hour"/>
+                    <span>/hour</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

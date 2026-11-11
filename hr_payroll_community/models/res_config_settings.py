@@ -20,35 +20,45 @@ from odoo import api, fields, models
 
 class ResConfigSettings(models.TransientModel):
     """Inherit res_config_settings model for adding some fields in Settings"""
-    _inherit = 'res.config.settings'
 
-    module_account_accountant = fields.Boolean(string='Account Accountant',
-                                               help="Is Account Accountant")
-    module_l10n_fr_hr_payroll = fields.Boolean(string='French Payroll',
-                                               help="Is French Payroll")
-    module_l10n_be_hr_payroll = fields.Boolean(string='Belgium Payroll',
-                                               help="Is Belgium Payroll")
-    module_l10n_in_hr_payroll = fields.Boolean(string='Indian Payroll',
-                                               help="Is Indian Payroll")
+    _inherit = "res.config.settings"
+
+    module_account_accountant = fields.Boolean(
+        string="Account Accountant",
+        help="Enable accountant features and accounting integration.",
+    )
+    module_l10n_fr_hr_payroll = fields.Boolean(
+        string="French Payroll",
+        help="Install the French Payroll localization module.",
+    )
+    module_l10n_be_hr_payroll = fields.Boolean(
+        string="Belgium Payroll",
+        help="Install the Belgian Payroll localization module.",
+    )
+    module_l10n_in_hr_payroll = fields.Boolean(
+        string="Indian Payroll",
+        help="Install the Indian Payroll localization module.",
+    )
     send_payslip_by_email = fields.Boolean(
         string="Automatic Send Payslip By Mail",
-        help="Is needed for automatic send mail")
+        help="Automatically send confirmed payslips to employees via email.",
+    )
 
     @api.model
     def get_values(self):
         """Function for getting boolean"""
-        res = super(ResConfigSettings, self).get_values()
-        params = self.env['ir.config_parameter'].sudo()
-        send_payslip_by_email = params.get_bool('send_payslip_by_email',
-                                                default=False)
-        res.update(
-            send_payslip_by_email=send_payslip_by_email
+        res = super().get_values()
+        params = self.env["ir.config_parameter"].sudo()
+        send_payslip_by_email = params.get_bool(
+            "send_payslip_by_email", default=False
         )
+        res.update(send_payslip_by_email=send_payslip_by_email)
         return res
 
     def set_values(self):
         """Function for setting boolean"""
-        super(ResConfigSettings, self).set_values()
-        self.env['ir.config_parameter'].sudo().set_bool(
-            "send_payslip_by_email",
-            self.send_payslip_by_email)
+        res = super().set_values()
+        self.env["ir.config_parameter"].sudo().set_bool(
+            "send_payslip_by_email", self.send_payslip_by_email
+        )
+        return res

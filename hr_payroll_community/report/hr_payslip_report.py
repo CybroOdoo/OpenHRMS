@@ -20,65 +20,94 @@ from odoo import fields, models, tools
 
 class HrPayslipReport(models.Model):
     """Create a new model for getting monthly report"""
-    _name = 'hr.payslip.report'
-    _description = 'Payslip Monthly Report'
+
+    _name = "hr.payslip.report"
+    _description = "Payslip Monthly Report"
     _auto = False
 
-    name = fields.Many2one('hr.employee', string='Employee',
-                           help="Choose Employee")
-    date_from = fields.Date(string='From', help="Starting Date for Report")
-    date_to = fields.Date(string='To', help="Ending Date for Report")
+    name = fields.Many2one(
+        "hr.employee", string="Employee", help="Choose Employee"
+    )
+    date_from = fields.Date(string="From", help="Starting Date for Report")
+    date_to = fields.Date(string="To", help="Ending Date for Report")
     state = fields.Selection(
-        [('draft', 'Draft'), ('done', 'Validated'), ('paid', 'Paid'),
-         ('cancel', 'Canceled')],
-        string='Status', help="Select Status for Report")
-    job_id = fields.Many2one('hr.job', string='Job Title',
-                             help="Choose Hr Job")
-    company_id = fields.Many2one('res.company', string='Company',
-                                 help="Choose Company")
-    department_id = fields.Many2one('hr.department',
-                                    string='Department',
-                                    help="Choose Hr Department")
-    rule_name_id = fields.Many2one('hr.salary.rule.category',
-                                string="Rule Category",
-                                help="Choose Salary Rule Category")
+        [
+            ("draft", "Draft"),
+            ("done", "Validated"),
+            ("paid", "Paid"),
+            ("cancel", "Canceled"),
+        ],
+        string="Status",
+        help="Select Status for Report",
+    )
+    job_id = fields.Many2one(
+        "hr.job", string="Job Title", help="Choose Hr Job"
+    )
+    company_id = fields.Many2one("res.company", help="Choose Company")
+    department_id = fields.Many2one(
+        "hr.department", help="Choose Hr Department"
+    )
+    rule_name_id = fields.Many2one(
+        "hr.salary.rule.category",
+        string="Rule Category",
+        help="Choose Salary Rule Category",
+    )
     rule_amount = fields.Float(
-        string="Amount", aggregator=None,
+        string="Amount",
+        aggregator=None,
         help="Amount of a single payslip line. Not summable as a pivot "
-             "measure: since this report has one row per rule line, "
-             "summing it across an employee/period mixes raw components "
-             "with rollup lines like Gross/Net and double- or "
-             "triple-counts the same money. Use Basic/Gross/Net Salary "
-             "instead for meaningful totals.")
-    basic_wage = fields.Float(string="Basic Salary",
-                              help="Amount of the BASIC salary rule line")
-    gross_wage = fields.Float(string="Gross Salary",
-                              help="Amount of the GROSS salary rule line")
-    net_wage = fields.Float(string="Net Salary",
-                            help="Amount of the NET salary rule line")
-    travel_wage = fields.Float(string="Travel Allowance",
-                               help="Amount of the Travel salary rule line")
-    other_wage = fields.Float(string="Other Allowance",
-                              help="Amount of the Other salary rule line")
-    medical_wage = fields.Float(string="Medical Allowance",
-                                help="Amount of the Medical salary rule line")
-    meal_wage = fields.Float(string="Meal Allowance",
-                             help="Amount of the Meal salary rule line")
-    da_wage = fields.Float(string="Dearness Allowance",
-                           help="Amount of the DA salary rule line")
-    ca_wage = fields.Float(string="Conveyance Allowance",
-                           help="Amount of the CA salary rule line")
-    cagg_wage = fields.Float(string="Conveyance Allowance For Gravie",
-                             help="Amount of the CAGG salary rule line")
-    ma_wage = fields.Float(string="Meal Voucher",
-                           help="Amount of the MA salary rule line")
-    sale_wage = fields.Float(string="Sales Commission",
-                             help="Amount of the SALE salary rule line")
-    struct_id = fields.Many2one('hr.payroll.structure',
-                                string="Salary Structure",
-                                help="Choose Hr Payroll Structure")
-    rule_id = fields.Many2one('hr.salary.rule',
-                              string="Salary Rule", help="Choose Salary Rule")
+        "measure: since this report has one row per rule line, "
+        "summing it across an employee/period mixes raw components "
+        "with rollup lines like Gross/Net and double- or "
+        "triple-counts the same money. Use Basic/Gross/Net Salary "
+        "instead for meaningful totals.",
+    )
+    basic_wage = fields.Float(
+        string="Basic Salary", help="Amount of the BASIC salary rule line"
+    )
+    gross_wage = fields.Float(
+        string="Gross Salary", help="Amount of the GROSS salary rule line"
+    )
+    net_wage = fields.Float(
+        string="Net Salary", help="Amount of the NET salary rule line"
+    )
+    travel_wage = fields.Float(
+        string="Travel Allowance", help="Amount of the Travel salary rule line"
+    )
+    other_wage = fields.Float(
+        string="Other Allowance", help="Amount of the Other salary rule line"
+    )
+    medical_wage = fields.Float(
+        string="Medical Allowance",
+        help="Amount of the Medical salary rule line",
+    )
+    meal_wage = fields.Float(
+        string="Meal Allowance", help="Amount of the Meal salary rule line"
+    )
+    da_wage = fields.Float(
+        string="Dearness Allowance", help="Amount of the DA salary rule line"
+    )
+    ca_wage = fields.Float(
+        string="Conveyance Allowance", help="Amount of the CA salary rule line"
+    )
+    cagg_wage = fields.Float(
+        string="Conveyance Allowance For Gravie",
+        help="Amount of the CAGG salary rule line",
+    )
+    ma_wage = fields.Float(
+        string="Meal Voucher", help="Amount of the MA salary rule line"
+    )
+    sale_wage = fields.Float(
+        string="Sales Commission", help="Amount of the SALE salary rule line"
+    )
+    struct_id = fields.Many2one(
+        "hr.payroll.structure",
+        string="Salary Structure",
+        help="Choose Hr Payroll Structure",
+    )
+    rule_id = fields.Many2one(
+        "hr.salary.rule", string="Salary Rule", help="Choose Salary Rule"
+    )
 
     def _select(self):
         """Construct the SELECT clause for the report view.
@@ -144,10 +173,18 @@ class HrPayslipReport(models.Model):
     def init(self):
         """Initialize the view by executing the SQL query to create it."""
         tools.drop_view_if_exists(self.env.cr, self._table)
-        self.env.cr.execute("""CREATE or REPLACE VIEW %s as ( SELECT
+        self.env.cr.execute(
+            """CREATE or REPLACE VIEW %s as ( SELECT
                    %s
                    FROM %s
                    %s
                    %s
-                   )""" % (
-            self._table, self._select(), self._from(), self._where(), self._group_by()))
+                   )"""
+            % (
+                self._table,
+                self._select(),
+                self._from(),
+                self._where(),
+                self._group_by(),
+            )
+        )

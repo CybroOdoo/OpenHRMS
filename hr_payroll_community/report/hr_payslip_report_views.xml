@@ -98,13 +98,13 @@
             name="Reports"
             id="menu_hr_payslip_reports"
             parent="hr_payroll_community.menu_hr_payroll_community_root"
-            groups="hr_payroll_community.group_hr_payroll_community_user"
+            groups="hr_payroll_community.group_hr_payroll_community_manager"
             sequence="45"/>
     <menuitem
             id="menu_hr_payslip_view_report"
             name="Payslip Report"
             parent="menu_hr_payslip_reports"
             action="action_hr_payslip_monthly_report"
-            groups="hr_payroll_community.group_hr_payroll_community_user"
+            groups="hr_payroll_community.group_hr_payroll_community_manager"
             sequence="10"/>
 </odoo>

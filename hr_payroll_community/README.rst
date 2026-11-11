@@ -15,17 +15,19 @@
 
 |license| |odoo| |edition| |maintainer|
 
-Odoo 20 HR Payroll
-==================
+HR Payroll Community
+====================
 
-Manage your employee payroll records.
+Manage your employee payroll records, salary structures, rules, and payslips.
 
 Key Features
 ------------
 
-* Can set Salary Rule for each Employee.
-* Can set Salary Structure for each Employee.
-* Payslips available for each Employee.
+* Configure Salary Rules and Salary Structures.
+* Compute and manage Employee Payslips automatically.
+* Process Payslip Batches for bulk payroll runs.
+* Generate Contribution Register and Payslip Details PDF reports.
+* Dedicated Payslip Analysis and Reporting.
 
 Installation
 ------------

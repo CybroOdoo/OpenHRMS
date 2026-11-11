@@ -1,0 +1,12 @@
+id,name,model_id,group_id/id,operation,domain
+access_service_category_user,access.service.category.user,service.category,base.group_user,r,
+access_service_category_manager,access.service.category.manager,service.category,hr_attendance.group_hr_attendance_manager,crud,
+access_service_category_hr_manager,access.service.category.hr.manager,service.category,hr.group_hr_manager,crud,
+access_service_request_user,access.service.request.user,service.request,base.group_user,crud,"['|',('employee_id.user_id','=',user.id),('employee_id','=',False)]"
+access_service_request_executor,access.service.request.executor,service.request,ohrms_service_request.service_group_executor,crud,"['|',('service_executor_id.user_id','=',user.id),('service_executor_id','=',False)]"
+access_service_request_manager,access.service.request.manager,service.request,hr_attendance.group_hr_attendance_manager,crud,
+access_service_request_hr_manager,access.service.request.hr.manager,service.request,hr.group_hr_manager,crud,
+access_service_execute_user,access.service.execute.user,service.execute,base.group_user,r,"['|',('client_id.user_id','=',user.id),('client_id','=',False)]"
+access_service_execute_executor,access.service.execute.executor,service.execute,ohrms_service_request.service_group_executor,crud,"['|',('executor_id.user_id','=',user.id),('executor_id','=',False)]"
+access_service_execute_manager,access.service.execute.manager,service.execute,hr_attendance.group_hr_attendance_manager,crud,
+access_service_execute_hr_manager,access.service.execute.hr.manager,service.execute,hr.group_hr_manager,crud,

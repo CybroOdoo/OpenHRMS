@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inheriting hr.version form view -->
+    <record id="hr_contract_view_form" model="ir.ui.view">
+        <field name="name">hr.version.view.form.inherit.hr.gratuity.settlement</field>
+        <field name="model">hr.version</field>
+        <field name="inherit_id" ref="hr.hr_contract_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_approve" string="Approve"
+                            class="oe_highlight" type="object"
+                            invisible="state != 'probation'"
+                            groups="hr.group_hr_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,probation,open,close"/>
+                </header>
+            </xpath>
+            <xpath expr="//label[@for='wage']" position="before">
+                <field name="wage_type"/>
+            </xpath>
+            <xpath expr="//label[@for='wage']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//div[@name='wage']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//div[@name='wage']" position="after">
+                <label for="hourly_wage" invisible="wage_type != 'hourly'"/>
+                <div class="o_row" name="hourly_wage" invisible="wage_type != 'hourly'">
+                    <field name="hourly_wage" class="o_hr_narrow_field" nolabel="1"/>
+                    <div name="hourly_wage_period_label">/ hour</div>
+                </div>
+            </xpath>
+            <xpath expr="//group[@name='contract']" position="after">
+                <group name="training_amount_group">
+                    <field name="training_amount"/>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='allowances']" position="attributes">
+                <attribute name="invisible">wage_type == 'hourly'</attribute>
+            </xpath>
+            <xpath expr="//page[@name='information']" position="after">
+                <page string="Probationary Details" name="probation"
+                      invisible="not trial_date_end">
+                    <group string="Probationary Details" name="training_info">
+                        <field name="training_info"
+                               placeholder="Probationary Details"/>
+                        <field name="waiting_for_approval" invisible="1"/>
+                        <field name="is_approve" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- hr.version contract approvals action -->
+    <record id="action_contract_approvals" model="ir.actions.act_window">
+        <field name="name">Contracts For Approvals</field>
+        <field name="res_model">hr.version</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'probation'), ('trial_date_end', '&lt;=',
+            context_today().strftime('%Y-%m-%d'))]
+        </field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- Approvals menu -->
+    <menuitem
+            id="menu_hr_contract_approvals"
+            name="Approvals"
+            action="action_contract_approvals"
+            groups="hr.group_hr_manager"
+            parent="hr.menu_hr_employee_payroll"/>
+</odoo>

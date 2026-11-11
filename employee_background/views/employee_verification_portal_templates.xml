@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Breadcrumb entries for Employee Verification -->
+    <template id="portal_my_home_menu_employee"
+              name="Portal layout : employee menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'employee'" class="breadcrumb-item active">
+                <span>Employee Verification</span>
+            </li>
+            <li t-if="page_name == 'employee_details' or page_name == 'employee_submit'" class="breadcrumb-item">
+                <a t-attf-href="/my/records?{{ keep_query() }}">Employee Verification</a>
+            </li>
+            <li t-if="page_name == 'employee_details'" class="breadcrumb-item active">
+                <t t-out="records[0].employee_id.name if records else ''"/>
+            </li>
+            <li t-if="page_name == 'employee_submit'" class="breadcrumb-item active">
+                <span>Report Submitted</span>
+            </li>
+        </xpath>
+    </template>
+
+    <!-- Template for list of assigned verification records -->
+    <template id="portal_my_records" name="Employee Verification Records">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <div class="o_portal_my_doc_table">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="my-0 fw-bold text-dark">Employee Verification Requests</h3>
+                </div>
+                <t t-if="not records">
+                    <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+                        <i class="fa fa-info-circle fa-lg"/>
+                        <span>There are currently no verification requests assigned to your account.</span>
+                    </div>
+                </t>
+                <div t-if="records" class="card shadow-sm border-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-4">Reference</th>
+                                    <th>Candidate Name</th>
+                                    <th>Assigned Date</th>
+                                    <th>Expected Date</th>
+                                    <th>Address</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-end pe-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="records" t-as="record">
+                                    <tr>
+                                        <td class="ps-4 fw-bold">
+                                            <a t-attf-href="/my/details/#{record.id}?#{keep_query()}" class="text-decoration-none text-primary">
+                                                <t t-out="record.name"/>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="fw-semibold text-dark"><t t-out="record.employee_id.name"/></span>
+                                        </td>
+                                        <td>
+                                            <span t-field="record.assigned_date" t-options='{"widget": "date"}'/>
+                                        </td>
+                                        <td>
+                                            <span t-field="record.expected_date" t-options='{"widget": "date"}'/>
+                                        </td>
+                                        <td>
+                                            <t t-if="record.has_candidate_address">
+                                                <span class="text-muted small">
+                                                    <t t-out="record.candidate_city or ''"/><t t-if="record.candidate_city and record.candidate_state_id">, </t><t t-out="record.candidate_state_id.name or ''"/>
+                                                </span>
+                                            </t>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-if="record.state == 'assign'" class="badge rounded-pill bg-info text-dark px-3 py-2">Assigned</span>
+                                            <span t-elif="record.state == 'submit'" class="badge rounded-pill bg-success px-3 py-2">Submitted</span>
+                                            <span t-else="" class="badge rounded-pill bg-secondary px-3 py-2"><t t-out="record.state"/></span>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <a t-attf-href="/my/details/#{record.id}?#{keep_query()}" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                                                View Details <i class="fa fa-chevron-right"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div t-if="pager" class="card-footer bg-white border-top-0 d-flex justify-content-center py-3">
+                        <t t-call="portal.pager"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Template for detailed view of an employee verification record -->
+    <template id="portal_record_page" name="My Employee Details">
+        <t t-call="portal.portal_layout">
+            <t t-if="not records">
+                <div class="alert alert-warning" role="alert">
+                    There are no details available for this verification record.
+                </div>
+            </t>
+            <t t-if="records">
+                <t t-foreach="records" t-as="record">
+                    <div class="container-fluid px-0 mb-5">
+                        <!-- Page Header Card -->
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                                    <div>
+                                        <div class="d-flex align-items-center gap-2 mb-1">
+                                            <span class="badge bg-primary px-2 py-1"><t t-out="record.name"/></span>
+                                            <span t-if="record.state == 'assign'" class="badge rounded-pill bg-info text-dark px-3 py-1">Assigned for Verification</span>
+                                            <span t-elif="record.state == 'submit'" class="badge rounded-pill bg-success px-3 py-1">Report Submitted</span>
+                                            <span t-else="" class="badge rounded-pill bg-secondary px-3 py-1"><t t-out="record.state"/></span>
+                                        </div>
+                                        <h2 class="fw-bold mb-0 text-dark"><t t-out="record.employee_id.name"/></h2>
+                                        <p class="text-muted mb-0 small">Background Verification Request</p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="/my/records" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                            <i class="fa fa-arrow-left"/> Back to Requests
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="row g-4">
+                        <!-- Left Column: Candidate Details & Attached Resumes -->
+                        <div class="col-12 col-lg-7">
+                            <div class="card shadow-sm border-0 mb-4 h-100">
+                                <div class="card-header bg-white py-3 border-bottom">
+                                    <h5 class="card-title mb-0 fw-bold text-dark d-flex align-items-center gap-2">
+                                        <i class="fa fa-id-card-o text-primary"/> Candidate Information
+                                    </h5>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="row g-3">
+                                        <div class="col-sm-6">
+                                            <div class="p-3 rounded bg-light border">
+                                                <small class="text-muted d-block text-uppercase fw-semibold mb-1">Candidate Name</small>
+                                                <div class="fw-bold text-dark fs-6 d-flex align-items-center gap-2">
+                                                    <i class="fa fa-user text-primary"/>
+                                                    <t t-out="record.employee_id.name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="p-3 rounded bg-light border">
+                                                <small class="text-muted d-block text-uppercase fw-semibold mb-1">Verification Agency</small>
+                                                <div class="fw-bold text-dark fs-6 d-flex align-items-center gap-2">
+                                                    <i class="fa fa-building text-info"/>
+                                                    <t t-out="record.agency_id.name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="p-3 rounded bg-light border">
+                                                <small class="text-muted d-block text-uppercase fw-semibold mb-1">Assigned Date</small>
+                                                <div class="fw-semibold text-dark d-flex align-items-center gap-2">
+                                                    <i class="fa fa-calendar-check-o text-success"/>
+                                                    <span t-field="record.assigned_date" t-options='{"widget": "date"}'/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="p-3 rounded bg-light border">
+                                                <small class="text-muted d-block text-uppercase fw-semibold mb-1">Expected Completion</small>
+                                                <div class="fw-semibold text-dark d-flex align-items-center gap-2">
+                                                    <i class="fa fa-clock-o text-warning"/>
+                                                    <span t-field="record.expected_date" t-options='{"widget": "date"}'/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12" t-if="record.has_candidate_address">
+                                            <div class="p-3 rounded bg-light border">
+                                                <small class="text-muted d-block text-uppercase fw-semibold mb-1">Candidate Address</small>
+                                                <div class="text-dark d-flex align-items-start gap-2">
+                                                    <i class="fa fa-map-marker text-danger mt-1"/>
+                                                    <div>
+                                                        <t t-if="record.candidate_street"><t t-out="record.candidate_street"/><br/></t>
+                                                        <t t-if="record.candidate_street2"><t t-out="record.candidate_street2"/><br/></t>
+                                                        <span>
+                                                            <t t-out="record.candidate_city or ''"/>
+                                                            <t t-if="record.candidate_city and record.candidate_state_id">, </t>
+                                                            <t t-out="record.candidate_state_id.name or ''"/>
+                                                            <t t-if="record.candidate_zip"> <t t-out="record.candidate_zip"/></t>
+                                                        </span>
+                                                        <t t-if="record.candidate_country_id"><br/><t t-out="record.candidate_country_id.name"/></t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Candidate Resume / Documents -->
+                                    <div class="mt-4" t-if="record.resume_ids">
+                                        <h6 class="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
+                                            <i class="fa fa-paperclip text-secondary"/> Provided Documents / Resume
+                                        </h6>
+                                        <div class="d-flex flex-column gap-2">
+                                            <t t-foreach="record.resume_ids" t-as="resume">
+                                                <div class="d-flex align-items-center justify-content-between p-3 border rounded bg-white">
+                                                    <div class="d-flex align-items-center gap-3 overflow-hidden">
+                                                        <div class="p-2 bg-primary-subtle text-primary rounded flex-shrink-0">
+                                                            <i class="fa fa-file-text-o fa-lg"/>
+                                                        </div>
+                                                        <div class="text-truncate">
+                                                            <span class="fw-semibold text-dark d-block text-truncate" t-att-title="resume.name">
+                                                                <t t-out="resume.name"/>
+                                                            </span>
+                                                            <small class="text-muted">Candidate Document</small>
+                                                        </div>
+                                                    </div>
+                                                    <a class="btn btn-outline-primary btn-sm flex-shrink-0 ms-2 d-flex align-items-center gap-1"
+                                                       target="_blank" t-attf-href="/web/content/#{resume.id}?download=true">
+                                                        <i class="fa fa-download"/> Download
+                                                    </a>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Verification Submission Form or Completed Summary -->
+                        <div class="col-12 col-lg-5">
+                            
+                            <!-- If already submitted: show submission summary -->
+                            <t t-if="record.state == 'submit'">
+                                <div class="card shadow-sm border-0 border-top border-success border-3 h-100">
+                                    <div class="card-header bg-white py-3 border-bottom">
+                                        <h5 class="card-title mb-0 fw-bold text-success d-flex align-items-center gap-2">
+                                            <i class="fa fa-check-circle"/> Verification Report Submitted
+                                        </h5>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="alert alert-success mb-3" role="alert">
+                                            Your background check report has been successfully submitted to HR.
+                                        </div>
+                                        <div class="mb-3" t-if="record.description_by_agency">
+                                            <label class="fw-semibold text-muted small text-uppercase mb-1">Submitted Findings</label>
+                                            <div class="p-3 bg-light rounded border text-dark">
+                                                <t t-out="record.description_by_agency"/>
+                                            </div>
+                                        </div>
+                                        <div t-if="record.agency_attachment_ids">
+                                            <label class="fw-semibold text-muted small text-uppercase mb-2">Attached Reports</label>
+                                            <t t-foreach="record.agency_attachment_ids" t-as="att">
+                                                <div class="d-flex align-items-center justify-content-between p-2 border rounded bg-light mb-2">
+                                                    <span class="text-truncate small fw-semibold"><t t-out="att.name"/></span>
+                                                    <a class="btn btn-sm btn-link" target="_blank" t-attf-href="/web/content/#{att.id}?download=true">
+                                                        <i class="fa fa-download"/>
+                                                    </a>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- If assigned: show submission form -->
+                            <t t-else="">
+                                <div class="card shadow-sm border-0 border-top border-primary border-3">
+                                    <div class="card-header bg-white py-3 border-bottom">
+                                        <h5 class="card-title mb-0 fw-bold text-primary d-flex align-items-center gap-2">
+                                            <i class="fa fa-upload"/> Submit Verification Report
+                                        </h5>
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <form role="form" t-att-action="submit_url or '/my/verification/submit'" action="/my/verification/submit" id="employee_verification_form"
+                                              method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="employee_token" t-att-value="record.id"/>
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label fw-semibold text-dark" for="description">
+                                                    Verification Findings / Description <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea class="form-control" name="description" id="description"
+                                                          rows="4" placeholder="Enter findings, verification notes, or agency remarks..." required="required"></textarea>
+                                                <div class="form-text">Summarize the verification results for the HR team.</div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label fw-semibold text-dark" for="attachment">
+                                                    Attach Report File (Optional)
+                                                </label>
+                                                <input type="file" name="attachment" id="attachment"
+                                                       class="form-control" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"/>
+                                                <div class="form-text">Attach formal report, certificates, or verified documentation.</div>
+                                            </div>
+
+                                            <button type="submit" name="Upload" class="btn btn-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-semibold">
+                                                <i class="fa fa-paper-plane"/> Submit Verification Report
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Template for submission completion confirmation -->
+    <template id="portal_record_completed" name="Employee Verification Completed">
+        <t t-call="portal.portal_layout">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 text-center">
+                        <div class="card shadow-sm border-0 p-5">
+                            <div class="mb-4">
+                                <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex p-4 text-success">
+                                    <i class="fa fa-check-circle fa-4x"/>
+                                </div>
+                            </div>
+                            <h3 class="fw-bold text-dark mb-2">Report Submitted Successfully</h3>
+                            <p class="text-muted mb-4">
+                                Your employee verification report has been completed and forwarded to the HR department.
+                            </p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="/my/records" class="btn btn-primary px-4 py-2 d-flex align-items-center gap-2">
+                                    <i class="fa fa-list"/> View All Requests
+                                </a>
+                                <a href="/my" class="btn btn-outline-secondary px-4 py-2">
+                                    Portal Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

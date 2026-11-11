@@ -18,13 +18,13 @@
 Open HRMS Leave Request Aliasing
 ================================
 
-Automated Leave Request generation from incoming Emails.
+Automated Leave Request generation from incoming emails.
 
 Key Features
 ------------
 
 * Customize aliasing prefixes and domains for tailored leave request configurations.
-* Automates leave requests creation directly from incoming emails for efficiency.
+* Automates leave request creation directly from incoming emails for efficiency.
 
 Installation
 ------------
@@ -32,7 +32,9 @@ No external dependencies.
 
 Configuration
 -------------
-No additional configuration is required.
+1. Configure an incoming mail server in General Settings.
+2. Go to Settings -> Time Off and specify the leave email alias Prefix and Domain.
+3. Employees can send emails with the subject starting with the configured prefix to automatically generate leave requests.
 
 Company
 -------

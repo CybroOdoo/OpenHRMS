@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--View customization for the 'Leave Request' form.-->
+    <record id="hr_leave_view_form" model="ir.ui.view">
+        <field name="name">hr.leave.view.form.inherit.hr.vacation.mngmt</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_approve'][1]" position="before">
+                <field name="flight_ticket_ids" invisible="1"/>
+                <button string="Book Flight Ticket" name="action_book_ticket"
+                        type="object"
+                        groups="hr_holidays.group_hr_holidays_manager"
+                        class="oe_highlight"
+                        invisible="state != 'validate' or flight_ticket_ids"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object" icon="flight"
+                        name="action_view_flight_ticket"
+                        string="Flight Ticket" class="oe_stat_button"
+                        groups="hr_holidays.group_hr_holidays_manager"
+                        invisible="not flight_ticket_ids"
+                />
+            </xpath>
+            <xpath expr="//field[@name='name']/parent::div" position="after">
+                <div class="d-flex gap-2"
+                     invisible="state in ['validate', 'refuse']"
+                     groups="hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_manager">
+                    <i class="oi oi-lg oi-filled align-self-center" data-icon="calendar_today" title="Remaining Legal Leaves"/>
+                    <label for="remaining_leaves" string="Remaining Legal Leaves"/>
+                </div>
+                <div invisible="state in ['validate', 'refuse']"
+                     groups="hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_manager">
+                    <field name="remaining_leaves" readonly="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Pending Works">
+                        <field name="pending_task_ids"
+                               readonly="state in ['validate', 'validate1','refuse']">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="project_id"/>
+                                <field name="description"/>
+                                <field name="leave_id" invisible="1"/>
+                                <field name="dept_id" invisible="1"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Overlapping Leaves"
+                          invisible="state in ['validate', 'refuse'] or not overlapping_leaves_ids"
+                          groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user">
+                        <field name="overlapping_leaves_ids"/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

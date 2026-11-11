@@ -49,11 +49,11 @@
                                         <td>
                                             <span t-out="line.get('quantity', '')"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-out="line.get('amount', 0)"
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                             <span t-out="line.get('total', 0)"
                                                   t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                         </td>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template of the Stopwatch widget -->
+<templates id="template" xml:space="preserve">
+    <t t-name="StopwatchTemplate">
+        <span t-if="this.props.readonly" t-out="this.durationFormatted" class="disable"/>
+        <input t-else="" t-att-id="this.props.id" t-ref="this.numpadDecimalRef"
+               t-att-value="this.durationFormatted"
+               t-att-placeholder="this.props.placeholder" inputmode="numeric"
+               class="o_input timer" readonly="1"/>
+    </t>
+</templates>

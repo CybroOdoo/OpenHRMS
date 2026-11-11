@@ -22,7 +22,7 @@
     'summary': 'Manages the resignation process of the employees',
     'description': """This module helps to create and approve/reject employee
      resignation requests""",
-    'author': 'Cybrosys Techno Solutions, Open HRMS',
+    'author': 'Cybrosys Techno solutions,Open HRMS',
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.openhrms.com',

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_work_entry_type_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.work.entry.type.view.form.inherit.ohrms.holidays.approval</field>
+        <field name="model">hr.work.entry.type</field>
+        <field name="inherit_id" ref="hr_holidays.hr_work_entry_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='leave_validation_type']" position="after">
+                <field name="multi_level_validation" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[@name='leave_validation']" position="after">
+                <group string="Multi Level Approval" invisible="leave_validation_type != 'multi'">
+                    <field name="validator_ids" widget="many2many_tags" placeholder="Select Leave Validators..."/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

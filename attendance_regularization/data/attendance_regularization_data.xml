@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Regularization Categories -->
+        <record id="regularization_category_onsite" model="reg.categories">
+            <field name="type">Onsite</field>
+        </record>
+        <record id="regularization_category_business_trip" model="reg.categories">
+            <field name="type">Business Trip</field>
+        </record>
+        <record id="regularization_category_client_meeting" model="reg.categories">
+            <field name="type">Client Meeting</field>
+        </record>
+    </data>
+</odoo>

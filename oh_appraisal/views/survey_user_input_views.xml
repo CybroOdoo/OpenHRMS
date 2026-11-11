@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Inherits the form view of the model Survey User Input-->
+    <record model="ir.ui.view" id="survey_user_input_view_form">
+        <field name="name">survey.user_input.view.form.inherit.oh.appraisal
+        </field>
+        <field name="model">survey.user_input</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="appraisal_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    Inherits the list view of the model Survey User Input-->
+    <record id="survey_user_input_view_tree" model="ir.ui.view">
+        <field name="name">survey.user_input.view.list.inherit.oh.appraisal</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="appraisal_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    Inherits the search view of the model Survey User Input-->
+    <record id="survey_user_input_view_search" model="ir.ui.view">
+        <field name="name">survey.user_input.view.search.inherit.oh.appraisal</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="appraisal_id"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Appraisal" name="group_by_appraisal" domain="[]" context="{'group_by': 'appraisal_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action of the model Survey User Input for Appraisal Answers -->
+    <record id="action_survey_user_input_appraisal" model="ir.actions.act_window">
+        <field name="name">Answers</field>
+        <field name="res_model">survey.user_input</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="view_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="search_view_id" ref="survey.survey_user_input_view_search"/>
+        <field name="domain">[('appraisal_id', '!=', False)]</field>
+        <field name="context">{'search_default_group_by_survey': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No answers yet!
+            </p><p>
+                Answers will appear here once appraisal surveys are sent.
+            </p>
+        </field>
+    </record>
+</odoo>
