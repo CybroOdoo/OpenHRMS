@@ -49,6 +49,17 @@ class HrPayslip(models.Model):
     paid = fields.Boolean(string='Made Payment Order', compute='_compute_paid', store=True, copy=False,
                           help="Automatically checked when the associated journal entry is paid.")
     payment_count = fields.Integer(compute='_compute_payment_count')
+    net_wage = fields.Float(string='Net Wage', compute='_compute_net_wage',
+                            digits='Account',
+                            help="Total of the NET salary rule lines of the "
+                                 "payslip, used as the amount to pay.")
+
+    @api.depends('line_ids.code', 'line_ids.total')
+    def _compute_net_wage(self):
+        """Compute the net wage from the NET salary rule lines."""
+        for slip in self:
+            slip.net_wage = sum(slip.line_ids.filtered(
+                lambda line: line.code == 'NET').mapped('total'))
 
     def _compute_payment_count(self):
         """Compute the total number of payments linked to this payslip."""
@@ -58,11 +69,18 @@ class HrPayslip(models.Model):
             else:
                 slip.payment_count = 0
 
-    @api.depends('move_id.payment_state')
+    @api.depends('move_id.state', 'move_id.line_ids.reconciled')
     def _compute_paid(self):
-        """Compute whether the payslip's associated journal entry is marked as paid."""
+        """Compute whether the payslip's journal entry is paid.
+
+        The payslip entry is a miscellaneous entry, for which Odoo does not
+        compute a payment state, so the payslip is paid once all the
+        reconcilable credit lines (the amounts to pay) are reconciled."""
         for slip in self:
-            slip.paid = slip.move_id and slip.move_id.payment_state in ('paid', 'in_payment', 'reversed') or False
+            to_pay = slip.move_id.line_ids.filtered(
+                lambda line: line.account_id.reconcile and line.credit > 0)
+            slip.paid = bool(slip.move_id.state == 'posted' and to_pay
+                             and all(to_pay.mapped('reconciled')))
 
     def action_open_journal_entry(self):
         """Open the corresponding accounting journal entry (move) for this payslip."""

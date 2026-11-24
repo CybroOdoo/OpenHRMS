@@ -22,4 +22,3 @@
 #############################################################################
 from . import hr_batch_payment_wizard
 from . import hr_payslip_employees
-from . import hr_payslip_run_generate

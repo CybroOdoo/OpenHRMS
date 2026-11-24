@@ -22,7 +22,7 @@
 #############################################################################
 {
     'name': 'Odoo19 Payroll Accounting',
-    'version': '19.0.2.0.0',
+    'version': '19.0.2.1.1',
     'category': 'Human Resources',
     'summary': """Helps you to manage payroll and 
      accounting""",
@@ -38,8 +38,7 @@
              'wizard/hr_batch_payment_wizard_views.xml',
              'views/hr_payslip_run_views.xml',
              'views/hr_payslip_views.xml',
-             'views/hr_salary_rule_views.xml',
-             'wizard/hr_payslip_run_generate_views.xml',],
+             'views/hr_salary_rule_views.xml'],
     'images': ['static/description/banner.jpg'],
     'license': 'LGPL-3',
     'installable': True,

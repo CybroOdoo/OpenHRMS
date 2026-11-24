@@ -28,13 +28,10 @@
                     </div>
                 </button>
             </div>
-            <xpath expr="//button[@name='action_mark_as_paid']" position="before">
+            <xpath expr="//header/button[@name='action_payslip_done']" position="after">
                 <button string="Pay" name="action_open_payment_wizard"
                         type="object" class="oe_highlight"
                         invisible="not move_id or payment_count &gt; 0"/>
-            </xpath>
-            <xpath expr="//button[@name='action_mark_as_paid']" position="attributes">
-                <attribute name="invisible">state != 'done' or payment_count == 0</attribute>
             </xpath>
             <field name="paid" position="after">
                 <field name="date" readonly="state != 'draft'"/>
@@ -61,8 +58,10 @@
                     </div>
                 </button>
             </div>
+            <!-- Payslip payments keep the Validate button after posting;
+                 other payments keep the standard condition. -->
             <xpath expr="//button[@name='action_validate']" position="attributes">
-                <attribute name="invisible">state != 'in_process'</attribute>
+                <attribute name="invisible">state != 'in_process' or (move_id and payslip_count == 0)</attribute>
             </xpath>
         </field>
     </record>

@@ -53,11 +53,11 @@
                     </button>
                 </div>
             </xpath>
-            <!-- Add Pay button in the header before the Mark as Paid button (or anywhere in the header) -->
+            <!-- Pay button for the confirmed (closed) payslip batches -->
             <xpath expr="//header" position="inside">
                 <button string="Pay" name="action_open_payment_wizard"
                         type="object" class="oe_highlight"
-                        invisible="state != 'done' or payment_count &gt; 0"/>
+                        invisible="state != 'close' or payment_count &gt; 0"/>
             </xpath>
             <field name="credit_note" position="before">
                 <field name="journal_id" readonly="state != 'draft'"/>

@@ -14,3 +14,8 @@
 #### Version 19.0.2.0.0
 #### UPDT
 - Enhanced the Open HRMS Payroll Accounting module features.
+
+#### 11.11.2026
+#### Version 19.0.2.1.1
+#### FIX
+- Fixed the wizard extension by removing the reference to an unavailable wizard and repositioned the payslip Pay button after Confirm, removing the invalid XPaths referencing action_mark_as_paid.
